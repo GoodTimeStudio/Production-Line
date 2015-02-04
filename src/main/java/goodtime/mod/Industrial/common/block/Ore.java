@@ -1,27 +1,24 @@
-package goodtime.mod.Industrial.core;
+package goodtime.mod.Industrial.common.block;
 
-import goodtime.mod.Industrial.CreativeTabGTI;
-import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
 
 public class Ore extends Block {
 
-	public static Block IR = new Ore(Material.rock).setBlockName("ҿ��ʯ");
+	public static Block IR = new Ore(Material.rock).setBlockName("ҿ��ʯ");
 	
 	protected Ore(Material str) {
 		super(str);
 	}
 
 
-    @EventHandler 
+    @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-    	 GameRegistry.registerBlock(IR, "IROre");
+    	 GameRegistry.registerBlock(IR, "iridiumore");
     	 
 	}
 	
@@ -29,7 +26,7 @@ public class Ore extends Block {
     	Block.blockRegistry.addObject(1000, "IROre", IR);
     	IR.setCreativeTab(CreativeTabGTI.tab);
     	IR.setBlockTextureName("gti:blockOreIR");
-    	LanguageRegistry.addName(IR, "ҿ��ʯ");
+    	LanguageRegistry.addName(IR, "ҿ��ʯ");
     }
 	
 }
