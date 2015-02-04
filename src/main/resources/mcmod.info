@@ -1,0 +1,16 @@
+[
+{
+  "modid": "GoodTime-Industrial",
+  "name": "GoodTime-Industrial",
+  "description": "A mod used by Minecraft-GoodTime server.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://goodti.wicp.net/",
+  "updateUrl": "",
+  "authorList": ["Su Hao"],["liach"]
+  "credits": "Minecraft-GoodTime",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": [IndustrialCraft 2]
+}
+]

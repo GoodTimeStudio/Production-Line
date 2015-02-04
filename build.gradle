@@ -1,0 +1,65 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+group= "goodtime.industrial"
+
+ext.apiRailcraft = "./api/railcraft"
+ext.apiForestry = "./api/forestry"
+ext.apiRedstoneFlux = "./api/redstoneflux"
+ext.apiThaumcraft = "./api/thaumcraft"
+
+version = "1.0"
+
+archivesBaseName = "modid"
+
+minecraft {
+    version = "1.7.10-10.13.2.1291"
+    runDir = "run"
+}
+
+repositories {
+	maven {
+		name = "ic2"
+		url = "http://maven.ic2.player.to/"
+	}
+}
+
+configurations{
+	api
+	compile.extendsFrom api
+}
+
+dependencies {
+    api 'net.industrial-craft:industrialcraft-2:2.2.668-experimental:api'
+	api 'com.mod-buildcraft:buildcraft:6.3.4:dev'
+}
+
+processResources
+{
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+		exclude '**/*.md'
+    }
+}

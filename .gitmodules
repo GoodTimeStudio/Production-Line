@@ -1,0 +1,13 @@
+[submodule "api/railcraft"]
+	path = api/railcraft
+	url = git@github.com:CovertJaguar/Railcraft-API.git
+[submodule "api/forestry"]
+	path = api/forestry
+	url = git@github.com:ForestryMC/ForestryAPI.git
+[submodule "api/redstoneflux"]
+	path = api/redstoneflux
+	url = git@github.com:CoFH/RedstoneFlux-API.git
+[submodule "api/thaumcraft/thaumcraft/api"]
+	path = api/thaumcraft/thaumcraft/api
+	url = git@github.com:Azanor/thaumcraft-api.git
+
