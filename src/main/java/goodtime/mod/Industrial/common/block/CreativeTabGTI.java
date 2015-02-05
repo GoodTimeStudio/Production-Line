@@ -1,9 +1,6 @@
-package goodtime.mod.Industrial;
+package goodtime.mod.Industrial.common.block;
 
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,11 +25,11 @@ public class CreativeTabGTI extends CreativeTabs {
 	
 	@Override
 	public Item getTabIconItem() {
-		return null;
+		return Item.getItemFromBlock(Ore.IR);
 	}
-	
+	/*
 	static {
 		//LanguageRegistry.addName(CreativeTabGTI.tab, "GoodTime Industrial");
-	}
+	}*/
 }
 
