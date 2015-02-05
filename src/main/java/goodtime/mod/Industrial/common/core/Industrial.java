@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import goodtime.mod.Industrial.common.Items.Food;
 import goodtime.mod.Industrial.common.Items.OreItem;
 import goodtime.mod.Industrial.common.WorldGenerator.WorldGenerator;
 import goodtime.mod.Industrial.common.block.Ore;
@@ -22,6 +23,8 @@ public final class Industrial {
     	CreativeTabGTI.tab = new CreativeTabGTI(0, "GoodTime Industrial");
     	Ore.preInit(event);
     	OreItem.preInit(event);
+    	Food.preInit(event);
     }
+    
 
 }
