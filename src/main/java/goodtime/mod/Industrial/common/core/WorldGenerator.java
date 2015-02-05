@@ -1,4 +1,4 @@
-package goodtime.mod.Industrial.core;
+package goodtime.mod.Industrial.common.core;
 
 import java.util.Random;
 
@@ -9,6 +9,8 @@ import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import goodtime.mod.Industrial.common.block.Ore;
+
 
 public class WorldGenerator  implements IWorldGenerator{
 
