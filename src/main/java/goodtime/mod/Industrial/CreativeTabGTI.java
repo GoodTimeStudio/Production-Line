@@ -35,3 +35,4 @@ public class CreativeTabGTI extends CreativeTabs {
 		//LanguageRegistry.addName(CreativeTabGTI.tab, "GoodTime Industrial");
 	}
 }
+
