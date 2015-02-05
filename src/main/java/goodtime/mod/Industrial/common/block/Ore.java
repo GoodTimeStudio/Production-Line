@@ -18,7 +18,7 @@ public class Ore extends Block {
 
 	public static Block IR = new Ore(Material.rock)
 	.setBlockName("Ò¿ï¿½ï¿½Ê¯")
-	.setHardness(5)
+	.setHardness(10)
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setBlockTextureName("gti:blockOreIR")
 	.setResistance(20);
@@ -30,21 +30,23 @@ public class Ore extends Block {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-    	 GameRegistry.registerBlock(IR, "iridiumore");	 
+    	GameRegistry.registerBlock(IR, "iridiumore");	 
 	}
 	
 
     static {//×¢²á·½¿é
-    	Block.blockRegistry.addObject(1000, "IROre", IR);	
+    	Block.blockRegistry.addObject(1000, "iridiumore", IR);	
     }
     
     static {//×¢²áÓïÑÔ
-    	LanguageRegistry.addName(IR, "Ò¿¿óÊ¯");
+    	LanguageRegistry.addName(IR, "Ò¿ï¿½ï¿½Ê¯");
     }
 
     
     static {//×¢²áÆäËûÊôÐÔ
     	IR.setHarvestLevel("pickaxe" , 3);
     }
+    
+    
 	
 }

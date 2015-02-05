@@ -1,4 +1,4 @@
-package goodtime.mod.Industrial.common.core;
+package goodtime.mod.Industrial.common.WorldGenerator;
 
 import java.util.Random;
 
@@ -14,20 +14,24 @@ import goodtime.mod.Industrial.common.block.Ore;
 
 public class WorldGenerator  implements IWorldGenerator{
 
-	private WorldGenMinable IRGenerator;
-	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		
 	}
 	
-	public void generateSurface(World world, java.util.Random rand, int chunkX, int chunkZ){
-		for(int i = 0; i < 2; i++){
-			int randPosX = chunkX + rand.nextInt(16);
-			int randPosY = rand.nextInt(40)+7;
-			int randPosZ = chunkZ + rand.nextInt(16);
-			(new WorldGenMinable(Ore.IR, 32)).generate(world, rand, randPosX, randPosY, randPosZ);
+	public static void generateSurface(World world, Random random, int chunkX, int chunkZ)
+	{  
+
+		for(int i = 0; i < 50; i++) {
+			int randPosX = chunkX + random.nextInt(16);
+			int randPosY = random.nextInt(128);
+			int randPosZ = chunkZ + random.nextInt(16);
+			new WorldGenMinable(Ore.IR , 50).generate(world, random, randPosX, randPosY, randPosZ);
 		}
+
+	}
+
+	public static void preInit(FMLPreInitializationEvent event) { 
+		GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
 	}
 }
