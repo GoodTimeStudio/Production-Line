@@ -1,6 +1,8 @@
 package goodtime.mod.Industrial.common.block;
 
 
+import goodtime.mod.Industrial.common.core.CreativeTabGTI;
+
 import javax.tools.Tool;
 
 import cpw.mods.fml.common.Mod.EventHandler;

@@ -7,7 +7,6 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import goodtime.mod.Industrial.common.Items.OreItem;
 import goodtime.mod.Industrial.common.WorldGenerator.WorldGenerator;
-import goodtime.mod.Industrial.common.block.CreativeTabGTI;
 import goodtime.mod.Industrial.common.block.Ore;
 
 

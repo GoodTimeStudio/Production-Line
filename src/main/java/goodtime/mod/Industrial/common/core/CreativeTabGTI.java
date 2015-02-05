@@ -1,5 +1,6 @@
-package goodtime.mod.Industrial.common.block;
+package goodtime.mod.Industrial.common.core;
 
+import goodtime.mod.Industrial.common.block.Ore;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
