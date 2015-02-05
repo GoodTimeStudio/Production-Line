@@ -6,7 +6,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import goodtime.mod.Industrial.common.core.CreativeTabGTI;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -23,11 +22,14 @@ public class Food extends Item {
 		GameRegistry.registerItem(DimApple, "DiamondApple");
 	}
 	
+	
+	
 	static {
 		LanguageRegistry.addName(DimApple, "×êÊ¯Æ»¹û");
 	}
 	
 	static {
 		GameRegistry.addRecipe(new ItemStack(DimApple , 1) , new Object[] {"XXX" , "XAX" , "XXX" , 'X' , Block.getBlockById(57) , 'A' , Item.getItemById(260)});
+		GameRegistry.addShapelessRecipe(new ItemStack(Block.getBlockById(57) , 8) , DimApple );
 	}
 }

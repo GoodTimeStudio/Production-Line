@@ -19,18 +19,19 @@ public class CreativeTabGTI extends CreativeTabs {
 	@Override 
 	public ItemStack getIconItemStack() {
 		Item iconItem;
-		iconItem = GameRegistry.findItem("minecraft", "stone");
+		iconItem = GameRegistry.findItem("GTI", "DiamondApple");
 		return new ItemStack(iconItem);
 	}
 
-	
+	@Override
+	public String getTranslatedTabLabel() {
+		return new String("GoodTime Industrial");
+	}
+
 	@Override
 	public Item getTabIconItem() {
-		return Item.getItemFromBlock(Ore.IR);
+		return null;
 	}
-	/*
-	static {
-		//LanguageRegistry.addName(CreativeTabGTI.tab, "GoodTime Industrial");
-	}*/
+	
 }
 
