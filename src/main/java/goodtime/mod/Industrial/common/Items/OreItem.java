@@ -4,26 +4,30 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import goodtime.mod.Industrial.common.block.Ore;
 import goodtime.mod.Industrial.common.core.CreativeTabGTI;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+
 public class OreItem extends Item {
 	
 	public static Item CrushedIR = new Item()
-	.setUnlocalizedName("·ÛËéµÄÒ¿ï¿½ï¿½Ê¯")
+	.setUnlocalizedName("CrushedIR")
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setTextureName("gti:itemCrushedIR");
 	public static Item DustIR = new Item()
-	.setUnlocalizedName("Ò¿ï¿½ï¿½Ê¯·Û")
+	.setUnlocalizedName("DustIR")
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setTextureName("gti:itemDustIR");
 	public static Item IngotIR = new Item()
-	.setUnlocalizedName("Ò¿¶§")
+	.setUnlocalizedName("IngotIR")
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setTextureName("gti:itemIngotIR")
 	.setMaxStackSize(64);
 	
+	public static ItemStack CrushedIRs = new ItemStack(CrushedIR); 
+	public static ItemStack DustIRs = new ItemStack(DustIR);
 	public static ItemStack IngotIRs = new ItemStack(IngotIR);
 	
 	@Mod.EventHandler
@@ -39,8 +43,9 @@ public class OreItem extends Item {
 		LanguageRegistry.addName(IngotIR, "Ò¿¶§");
 	}
 	static float xp;
-	static {
+	static { //Á¶ÖÆ
+		GameRegistry.addSmelting(CrushedIR, IngotIRs, xp);
 		GameRegistry.addSmelting(DustIR, IngotIRs, xp);
 	}
-	
+
 }

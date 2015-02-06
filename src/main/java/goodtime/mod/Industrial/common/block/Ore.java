@@ -1,6 +1,7 @@
 package goodtime.mod.Industrial.common.block;
 
-
+import ic2.api.recipe.IRecipeInput;
+import ic2.api.recipe.RecipeInputOreDict;
 import goodtime.mod.Industrial.common.core.CreativeTabGTI;
 
 import javax.tools.Tool;
@@ -14,16 +15,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 
 public class Ore extends Block {
 
 	public static Block IR = new Ore(Material.rock)
-	.setBlockName("Ò¿ï¿½ï¿½Ê¯")
+	.setBlockName("iridiumore")
 	.setHardness(10)
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setBlockTextureName("gti:blockOreIR")
 	.setResistance(20);
+	
+	public static ItemStack IRs;
 	
 	protected Ore(Material str) {
 		super(str);
@@ -43,8 +46,7 @@ public class Ore extends Block {
     static {//×¢²áÓïÑÔ
     	LanguageRegistry.addName(IR, "Ò¿ï¿½ï¿½Ê¯");
     }
-
-    
+ 
     static {//×¢²áÆäËûÊôÐÔ
     	IR.setHarvestLevel("pickaxe" , 3);
     }

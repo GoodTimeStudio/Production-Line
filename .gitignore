@@ -21,4 +21,5 @@ private/
 *.iws
 out/
 bin/
+src/ic2
 
