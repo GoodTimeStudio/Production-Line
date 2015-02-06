@@ -5,7 +5,14 @@ jdk:
   - openjdk7
   - oraclejdk7
   - oraclejdk8
-install: gradle setupCIWorkspace
+before_install: 
+  - git clone https://github.com/CovertJaguar/Railcraft-API.git ../api/railcraft
+  - git clone https://github.com/ForestryMC/ForestryAPI.git ../api/forestry
+  - git clone https://github.com/Azanor/thaumcraft-api.git ../api/thaumcraft
+install: gradle setupCIWorkspace -S
 script: gradle build
 notifications:
   email: false
+env:
+  global:
+    TERM=dumb
