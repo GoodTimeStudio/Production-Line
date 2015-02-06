@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 public class Food extends Item {
 	
 	public static Item DimApple = new ItemFood(1005, 10 , false)
-	.setUnlocalizedName("钻石苹果")
+	.setUnlocalizedName("DiamondApple")
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setTextureName("gti:itemDiamondApple");
 	
@@ -25,7 +25,7 @@ public class Food extends Item {
 	
 	
 	static {
-		LanguageRegistry.addName(DimApple, "钻石苹果");
+		LanguageRegistry.addName(DimApple, "脳锚脢炉脝禄鹿没");
 	}
 	
 	static {
