@@ -13,39 +13,26 @@ import net.minecraft.item.ItemStack;
 public class OreItem extends Item {
 	
 	public static Item CrushedIR = new Item()
-	.setUnlocalizedName("CrushedIR")
+	.setUnlocalizedName("CrushedIriridium")
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setTextureName("gti:itemCrushedIR");
 	public static Item DustIR = new Item()
-	.setUnlocalizedName("DustIR")
+	.setUnlocalizedName("DustIriridium")
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setTextureName("gti:itemDustIR");
 	public static Item IngotIR = new Item()
-	.setUnlocalizedName("IngotIR")
+	.setUnlocalizedName("IngotIriridium")
 	.setCreativeTab(CreativeTabGTI.tab)
-	.setTextureName("gti:itemIngotIR")
-	.setMaxStackSize(64);
+	.setTextureName("gti:itemIngotIR");
 	
 	public static ItemStack CrushedIRs = new ItemStack(CrushedIR); 
 	public static ItemStack DustIRs = new ItemStack(DustIR);
 	public static ItemStack IngotIRs = new ItemStack(IngotIR);
 	
-	@Mod.EventHandler
-    public static void preInit(FMLPreInitializationEvent event) {
+    public static void preInit() {
     	GameRegistry.registerItem(CrushedIR, "CrushedIriridium" );	 
     	GameRegistry.registerItem(DustIR, "PowderIriridium");
     	GameRegistry.registerItem(IngotIR, "IngotIriridium");
 	}
 	
-	static {
-		LanguageRegistry.addName(CrushedIR, "·ÛËéµÄÒ¿ï¿½ï¿½Ê¯");
-		LanguageRegistry.addName(DustIR, "Ò¿ï¿½ï¿½Ê¯·Û");
-		LanguageRegistry.addName(IngotIR, "Ò¿¶§");
-	}
-	static float xp;
-	static { //Á¶ÖÆ
-		GameRegistry.addSmelting(CrushedIR, IngotIRs, xp);
-		GameRegistry.addSmelting(DustIR, IngotIRs, xp);
-	}
-
 }

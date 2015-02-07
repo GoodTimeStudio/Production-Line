@@ -1,17 +1,13 @@
 package goodtime.mod.Industrial.common.core;
 
-import java.util.Random;
-
+import goodtime.mod.Industrial.common.Items.ItemLoader;
+import goodtime.mod.Industrial.common.block.BlockLoader;
+import goodtime.mod.Industrial.common.core.Crafting.CraftingLoader;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import goodtime.mod.Industrial.common.Items.Food;
-import goodtime.mod.Industrial.common.Items.OreItem;
-import goodtime.mod.Industrial.common.Machine.ic2.MachineRecipes;
-import goodtime.mod.Industrial.common.WorldGenerator.WorldGenerator;
-import goodtime.mod.Industrial.common.block.Ore;
-
 
 @Mod (
 	modid = Industrial.MODID ,
@@ -19,22 +15,29 @@ import goodtime.mod.Industrial.common.block.Ore;
 	dependencies = "required-after:Forge@[10.13.0.1230,);"
 					+ "after:Buildcraft|Core@[6.3.0,);"
 					+ "after:IC2@[2.2.660,);"
+					+ "after:Forestry@[3.4.0.7,);"
 	)
 
 
 public final class Industrial {
 	public static final String MODID = "GTI";
-    public static final String VERSION = "Dev 0.0.1";
+    public static final String VERSION = "Dev 0.0.3";
     
     
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { 
     	
     	CreativeTabGTI.tab = new CreativeTabGTI(0, "GoodTime Industrial");	
-    	Ore.preInit(event);
-    	OreItem.preInit(event);
-    	Food.preInit(event);
-    	MachineRecipes.initRecipes();
+    	
+    	BlockLoader.Loader();
+    	ItemLoader.Loader();
+    	CraftingLoader.Loader();
+    }
+    
+    @Mod.EventHandler
+    public void Init(FMLInitializationEvent event) {
+    	
+    	
     }
     
 

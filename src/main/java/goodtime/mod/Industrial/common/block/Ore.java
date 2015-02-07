@@ -32,22 +32,17 @@ public class Ore extends Block {
 		super(str);
 	}
 
-
-    @Mod.EventHandler
-    public static void preInit(FMLPreInitializationEvent event) {
+    public static void preInit() {
     	GameRegistry.registerBlock(IR, "iridiumore");	 
 	}
 	
 
-    static {//×¢²á·½¿é
+    static {//æ³¨å†Œæ–¹å—
     	Block.blockRegistry.addObject(1000, "iridiumore", IR);	
     }
     
-    static {//×¢²áÓïÑÔ
-    	LanguageRegistry.addName(IR, "Ò¿ï¿½ï¿½Ê¯");
-    }
  
-    static {//×¢²áÆäËûÊôĞÔ
+    static {//å…¶ä»–
     	IR.setHarvestLevel("pickaxe" , 3);
     }
     

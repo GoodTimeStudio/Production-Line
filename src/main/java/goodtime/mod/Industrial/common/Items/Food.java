@@ -17,19 +17,8 @@ public class Food extends Item {
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setTextureName("gti:itemDiamondApple");
 	
-	@Mod.EventHandler
-    public static void preInit(FMLPreInitializationEvent event) {
+    public static void preInit() {
 		GameRegistry.registerItem(DimApple, "DiamondApple");
 	}
-	
-	
-	
-	static {
-		LanguageRegistry.addName(DimApple, "×êÊ¯Æ»¹û");
-	}
-	
-	static {
-		GameRegistry.addRecipe(new ItemStack(DimApple , 1) , new Object[] {"XXX" , "XAX" , "XXX" , 'X' , Block.getBlockById(57) , 'A' , Item.getItemById(260)});
-		GameRegistry.addShapelessRecipe(new ItemStack(Block.getBlockById(57) , 8) , DimApple );
-	}
+		
 }

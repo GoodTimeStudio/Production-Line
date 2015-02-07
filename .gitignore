@@ -22,4 +22,5 @@ private/
 out/
 bin/
 src/ic2
+src/main/resources/assets/gti/lang/
 

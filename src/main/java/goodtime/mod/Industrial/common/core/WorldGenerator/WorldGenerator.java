@@ -1,4 +1,4 @@
-package goodtime.mod.Industrial.common.WorldGenerator;
+package goodtime.mod.Industrial.common.core.WorldGenerator;
 
 import java.util.Random;
 
