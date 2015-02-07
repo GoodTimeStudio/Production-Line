@@ -46,10 +46,10 @@ dependencies {
     //compile "some.group:artifact:version"
       
     // real examples
-    api 'com.mod-buildcraft:buildcraft:6.3.4:api'  // adds buildcraft to the api env
-    api 'net.sengir.forestry:forestry_1.7.10:3.5.0.458-unstable:api' // adds forestry to the api env
+    api 'com.mod-buildcraft:buildcraft:6.3.1:api'  // adds buildcraft to the api env
+    api 'net.sengir.forestry:forestry_1.7.10:3.4.0.7:api' // adds forestry to the api env
     compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-    compile 'net.industrial-craft:industrialcraft-2:2.2.673-experimental:dev' //adds newest ic2 to the dev env
+    compile 'net.industrial-craft:industrialcraft-2:2.2.660-experimental:dev' //adds newest ic2 to the dev env
 
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
