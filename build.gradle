@@ -18,9 +18,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.0.2"
+version = "0.0.3"
 group= "goodtime.mod.Industrial" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "GTI"
+archivesBaseName = "GoodTimeIndustrial"
 
 minecraft {
     version = "1.7.10-10.13.2.1291"

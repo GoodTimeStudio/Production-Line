@@ -1,11 +1,14 @@
 package goodtime.mod.Industrial.common.core;
 
 import goodtime.mod.Industrial.common.Items.ItemLoader;
+import goodtime.mod.Industrial.common.Machine.MachineLoader;
 import goodtime.mod.Industrial.common.block.BlockLoader;
 import goodtime.mod.Industrial.common.core.Crafting.CraftingLoader;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -20,10 +23,15 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 public final class Industrial {
+	/*@SidedProxy 
+    (
+        clientSide = "goodtime.mod.Industrial.common.core.ClientProxy",
+        serverSide = "goodtime.mod.Industrial.common.core.CommonProxy"
+    )*/
+	
 	public static final String MODID = "GTI";
-    public static final String VERSION = "Dev 0.0.3";
-    
-    
+    public static final String VERSION = "Dev 0.0.3"; 
+   
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { 
     	
@@ -31,14 +39,18 @@ public final class Industrial {
     	
     	BlockLoader.Loader();
     	ItemLoader.Loader();
+    	MachineLoader.Loader();
     	CraftingLoader.Loader();
+    	
     }
     
     @Mod.EventHandler
-    public void Init(FMLInitializationEvent event) {
-    	
-    	
+    public void init(FMLInitializationEvent event) {
+    		
     }
     
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
 
+    }
 }

@@ -1,11 +1,7 @@
 package goodtime.mod.Industrial.common.block;
 
-import ic2.api.recipe.IRecipeInput;
-import ic2.api.recipe.RecipeInputOreDict;
+
 import goodtime.mod.Industrial.common.core.CreativeTabGTI;
-
-import javax.tools.Tool;
-
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -40,12 +36,10 @@ public class Ore extends Block {
     static {//注册方块
     	Block.blockRegistry.addObject(1000, "iridiumore", IR);	
     }
-    
- 
-    static {//其他
+
+    {//其他
     	IR.setHarvestLevel("pickaxe" , 3);
     }
-    
-    
+
 	
 }
