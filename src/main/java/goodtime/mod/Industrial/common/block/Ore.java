@@ -31,13 +31,8 @@ public class Ore extends Block {
     public static void preInit() {
     	GameRegistry.registerBlock(IR, "iridiumore");	 
 	}
-	
 
-    static {//注册方块
-    	Block.blockRegistry.addObject(1000, "iridiumore", IR);	
-    }
-
-    {//其他
+    static {//其他
     	IR.setHarvestLevel("pickaxe" , 3);
     }
 
