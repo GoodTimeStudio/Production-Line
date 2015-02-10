@@ -3,15 +3,20 @@ package goodtime.mod.Industrial.common.Machine.ic2;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import goodtime.mod.Industrial.common.TileEntity.TileEntityGenGasKU;
 import goodtime.mod.Industrial.common.core.CreativeTabGTI;
 import goodtime.mod.Industrial.common.core.Industrial;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
 
-public class Generator extends Block{
+public class Generator extends BlockContainer{
 
 	public static Block GasKU = new Generator(Material.iron)
 	.setBlockName("GasKineticGen")
@@ -26,11 +31,25 @@ public class Generator extends Block{
 		GameRegistry.registerBlock(GasKU, "GasKineticGen");
 	}
 	
+	public static void init() {
+		GameRegistry.registerTileEntity(TileEntityGenGasKU.class, Industrial.MODID);
+	}
+	
+	
+	//========================================================
+	
 	@Override
-	public int onBlockPlaced(net.minecraft.world.World world, int x, int y, int z, int p_149660_5_, float p_149660_6_, float p_149660_7_, float p_149660_8_, int p_149660_9_) {
-		return p_149660_9_;
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+		player.openGui(Industrial.modInstance, 0, world, x, y, z);
+		return true;
 	};
 	
+	
+	
+	
+	
+	
+ 	
 	@SideOnly(Side.CLIENT)	private static IIcon front;
 	@SideOnly(Side.CLIENT)	private static IIcon back;
 	/*@SideOnly(Side.CLIENT)	private static IIcon left;
@@ -66,5 +85,10 @@ public class Generator extends Block{
 	this.blockIcon = iicr.registerIcon("gti:GenGasKU");
 	this.front = iicr.registerIcon("gti:GenGasKU_front");
 	this.back = iicr.registerIcon("gti:GenGasKU_back");
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+		return new TileEntityGenGasKU();
 	}
 }

@@ -6,6 +6,7 @@ import goodtime.mod.Industrial.common.block.BlockLoader;
 import goodtime.mod.Industrial.common.core.Crafting.CraftingLoader;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -21,32 +22,30 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 					+ "after:Forestry@[3.4.0.7,);"
 	)
 
-
 public final class Industrial {
-	/*@SidedProxy 
-    (
-        clientSide = "goodtime.mod.Industrial.common.core.ClientProxy",
-        serverSide = "goodtime.mod.Industrial.common.core.CommonProxy"
-    )*/
-	
+	@SidedProxy (serverSide = "goodtime.mod.Industrial.common.core.CommonProxy",clientSide = "goodtime.mod.Industrial.client.ClientProxy")
+	public static CommonProxy proxy;
 	public static final String MODID = "GTI";
     public static final String VERSION = "Dev 0.0.3"; 
+    
+    @Instance(Industrial.MODID)
+    public static Industrial modInstance;
    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { 
     	
     	CreativeTabGTI.tab = new CreativeTabGTI(0, "GoodTime Industrial");	
     	
-    	BlockLoader.Loader();
-    	ItemLoader.Loader();
-    	MachineLoader.Loader();
-    	CraftingLoader.Loader();
+    	BlockLoader.preInit();
+    	ItemLoader.preInit();
+    	MachineLoader.preInit();
+    	CraftingLoader.preInit();
     	
     }
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-    		
+    	MachineLoader.init();
     }
     
     @Mod.EventHandler
