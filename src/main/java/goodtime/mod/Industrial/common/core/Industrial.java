@@ -45,7 +45,7 @@ public final class Industrial {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-    	MachineLoader.init();
+    	//MachineLoader.init();
     }
     
     @Mod.EventHandler

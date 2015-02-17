@@ -1,13 +1,10 @@
 package goodtime.mod.Industrial.common.Machine;
 
-import goodtime.mod.Industrial.common.Machine.ic2.Generator;
+import goodtime.mod.Industrial.common.Machine.ic2.GenGasKU;
 
 public class MachineLoader {
 	public static void preInit() {
-		Generator.preInit();
+		GenGasKU.preInit();
 	}
-	
-	public static void init() {
-		Generator.init();
-	}
+
 }

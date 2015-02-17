@@ -1,42 +1,41 @@
 package goodtime.mod.Industrial.common.core.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import goodtime.mod.Industrial.common.TileEntity.TileEntityGenGasKU;
-import goodtime.mod.Industrial.common.inventory.ContainerGenGasKU;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class GuiGenGasKU extends GuiContainer {
+public class GUIGenGasKU extends GuiScreen {
 
-	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("textures/gui/KineticGenerator/GUIGasGenerator.png");
-	private TileEntityGenGasKU tileGenGasKU;
+	private GuiScreen parScreen;
 	
-	public GuiGenGasKU(InventoryPlayer invPlayer, TileEntityGenGasKU tile) {
-		super(new ContainerGenGasKU(invPlayer, tile));
-		this.tileGenGasKU = tile;
+	public GUIGenGasKU(GuiScreen par) {
+		parScreen = par;//记录哪个界面打开了它
+		//在这里初始化与界面无关的数据
+		
+	}
+	
+	@Override
+	public void initGui() {
+		//每当界面打开时调用——部署控件
+		super.initGui();
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int var1,int var2) {
-		String string = this.tileGenGasKU.hasCustomInventoryName() ? this.tileGenGasKU.getInventoryName() : I18n.format(this.tileGenGasKU.getInventoryName(), new Object[0]);
-		this.fontRendererObj.drawString(string, this.xSize / 2 - this.fontRendererObj.getStringWidth(string), 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 94, 4210752);
+	public void drawScreen(int x, int y, float v) {
+		//绘制文本等非控件内容，会被控件覆盖
+		mc.renderEngine.bindTexture(new ResourceLocation("gti", "textures/gui/GUIGenGasKU.png"));
+		drawTexturedModalRect(50, 50, 0, 0, 165, 178);//绘制材质
+		drawCenteredString(fontRendererObj, "燃气动能发生机", 100, 20, 0xFFFFFF);//绘制标题
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(furnaceGuiTextures);
-        int k = (this.width - this.xSize) / 2;
-        int l = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+	public boolean doesGuiPauseGame() {
+		return false;
 	}
-
+	
+	
+	
 }
