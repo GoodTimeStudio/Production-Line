@@ -1,7 +1,7 @@
 package goodtime.mod.Industrial.common.Machine.ic2;
 
+import goodtime.mod.Industrial.client.gui.GUIGenGasKU;
 import goodtime.mod.Industrial.common.core.CreativeTabGTI;
-import goodtime.mod.Industrial.common.core.gui.GUIGenGasKU;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GenGasKU extends BlockContainer{
 
 	public static Block GenGasKU = new GenGasKU(Material.iron)
-	.setBlockName("git.GenGasKU")
+	.setBlockName("gti.GenGasKU")
 	.setCreativeTab(CreativeTabGTI.tab)
 	.setHardness(2.0f);
 
@@ -67,7 +67,7 @@ public class GenGasKU extends BlockContainer{
 		this.front = icon.registerIcon("gti:GenGasKU_front");
 		this.back = icon.registerIcon("gti:GenGasKU_back");
 	}
-
+	
 	@Override
 	public IIcon getIcon(int side, int v2) {
 		if (side == 3) {
