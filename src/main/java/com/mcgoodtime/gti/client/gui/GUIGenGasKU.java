@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class GUIGenGasKU extends GuiContainer implements IGuiHandler {
+public class GUIGenGasKU extends GuiContainer {
 
 	private Container parScreen;
     private TileEntityGenGasKU tile;
@@ -71,13 +71,4 @@ public class GUIGenGasKU extends GuiContainer implements IGuiHandler {
 		Keyboard.enableRepeatEvents(false);
 	}
 
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
-    }
-
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
-    }
 }

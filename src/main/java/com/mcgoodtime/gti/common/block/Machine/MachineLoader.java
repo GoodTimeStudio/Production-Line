@@ -6,8 +6,4 @@ public class MachineLoader {
 	public static void preInit() {
 		GenGasKU.preInit();
 	}
-
-    public static void init() {
-        new GenGasKU(Material.iron).init();
-    }
 }

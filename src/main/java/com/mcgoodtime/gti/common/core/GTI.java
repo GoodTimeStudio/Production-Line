@@ -1,6 +1,9 @@
 package com.mcgoodtime.gti.common.core;
 
+import com.mcgoodtime.gti.client.gui.GUIGenGasKU;
+import com.mcgoodtime.gti.common.TileEntity.TileEntityGenGasKU;
 import com.mcgoodtime.gti.common.block.BlockLoader;
+import com.mcgoodtime.gti.common.container.ContainerGenGasKU;
 import com.mcgoodtime.gti.common.core.Crafting.CraftingLoader;
 import com.mcgoodtime.gti.common.Items.ItemLoader;
 import com.mcgoodtime.gti.common.block.Machine.MachineLoader;
@@ -10,7 +13,10 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
 @Mod (
 	modid = GTI.MODID ,
@@ -21,7 +27,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 					+ "after:Forestry@[3.4.0.7,);"
 	)
 
-public final class GTI {
+public final class GTI implements IGuiHandler {
 	//@SidedProxy (serverSide = "com.mcgoodtime.gti.common.core.CommonProxy", clientSide = "com.mcgoodtime.gti.client.ClientProxy")
 
     public static final String MODID = "gti";
@@ -33,7 +39,7 @@ public final class GTI {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { 
     	
-    	CreativeTabGTI.tab = new CreativeTabGTI(0, "GoodTime Industrial");	
+    	CreativeTabGTI.tab = new CreativeTabGTI("GoodTime Industrial");
     	
     	BlockLoader.preInit();
     	ItemLoader.preInit();
@@ -44,11 +50,25 @@ public final class GTI {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-    	MachineLoader.init();
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, this);
     }
     
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 
+    }
+
+    @Override
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+        //switch (ID) {
+        //    case 10:
+        //        return new GUIGenGasKU((ContainerGenGasKU)player.inventoryContainer, (TileEntityGenGasKU)player.getEntityWorld().getTileEntity(x, y, z));
+        //}
+        return null;
+    }
+
+    @Override
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+        return null;
     }
 }

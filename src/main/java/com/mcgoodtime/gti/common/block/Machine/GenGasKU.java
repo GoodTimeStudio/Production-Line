@@ -20,7 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class GenGasKU extends BlockContainer implements IGuiHandler{
+public class GenGasKU extends BlockContainer {
 
     public static Block GenGasKU = new GenGasKU(Material.iron)
 	.setBlockName("gti.GenGasKU")
@@ -35,38 +35,20 @@ public class GenGasKU extends BlockContainer implements IGuiHandler{
 		GameRegistry.registerBlock(GenGasKU, "GenGasKU");
 	}
 
-    public void init() {
-        NetworkRegistry.INSTANCE.registerGuiHandler(com.mcgoodtime.gti.common.core.GTI.class, this);
-    }
-
-	@Override
     //创建一个新的TileEntity
+    @Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityGenGasKU();
 	}
-	
-	@Override
+
     //当方块被激活时（右键）
+    @Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player,
 			int s, float p1, float p2, float p3) {
-		player.openGui(GTI.modInstance, 10, world, x, y, z);
+		//player.openGui(GTI.modInstance, 10, world, x, y, z);
 		return true;
 	}
 
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        switch (ID) {
-            case 10:
-                return new GUIGenGasKU((ContainerGenGasKU)player.inventoryContainer, (TileEntityGenGasKU)player.getEntityWorld().getTileEntity(x, y, z));
-        }
-        return null;
-    }
-
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
-    }
-	
 //************************************************************
 //***************注册材质*************************************
 	

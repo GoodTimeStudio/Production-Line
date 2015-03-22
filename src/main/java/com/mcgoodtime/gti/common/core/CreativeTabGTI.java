@@ -10,12 +10,11 @@ public class CreativeTabGTI extends CreativeTabs {
 	private int icon;
 	public static CreativeTabGTI tab ;
 	
-	public CreativeTabGTI(int icon, String label) { 
-		 super(label); 
-		 this.icon = icon; 
+	public CreativeTabGTI(String label) {
+		 super(label);
 	} 
 
-	@Override 
+	@Override
 	public ItemStack getIconItemStack() {
 		Item iconItem;
 		iconItem = GameRegistry.findItem("GTI", "DiamondApple");
