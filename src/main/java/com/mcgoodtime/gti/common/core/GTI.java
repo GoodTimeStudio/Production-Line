@@ -4,12 +4,13 @@ import com.mcgoodtime.gti.common.block.BlockLoader;
 import com.mcgoodtime.gti.common.core.Crafting.CraftingLoader;
 import com.mcgoodtime.gti.common.Items.ItemLoader;
 import com.mcgoodtime.gti.common.block.Machine.MachineLoader;
-import goodtime.mod.Industrial.common.core.TileEntity.TELoader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod (
 	modid = GTI.MODID ,
@@ -21,11 +22,13 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 	)
 
 public final class GTI {
-	@SidedProxy (serverSide = "goodtime.mod.Industrial.common.core.CommonProxy"CommonProxylientProxy"ClientProxyc static final String MODID = "GTI";
+	//@SidedProxy (serverSide = "com.mcgoodtime.gti.common.core.CommonProxy", clientSide = "com.mcgoodtime.gti.client.ClientProxy")
+
+    public static final String MODID = "gti";
     public static final String VERSION = "Dev 0.0.4";
     
     @Instance(GTI.MODID)
-    public static Industrial modInstance;
+    public static GTI modInstance;
    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { 
@@ -41,11 +44,11 @@ public final class GTI {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-    	//MachineLoader.init();
+    	MachineLoader.init();
     }
     
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        TELoader.init();
+
     }
 }
