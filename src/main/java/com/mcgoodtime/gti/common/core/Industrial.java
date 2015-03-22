@@ -3,7 +3,7 @@ package com.mcgoodtime.gti.common.core;
 import com.mcgoodtime.gti.common.block.BlockLoader;
 import com.mcgoodtime.gti.common.core.Crafting.CraftingLoader;
 import com.mcgoodtime.gti.common.Items.ItemLoader;
-import com.mcgoodtime.gti.common.Machine.MachineLoader;
+import com.mcgoodtime.gti.common.block.Machine.MachineLoader;
 import goodtime.mod.Industrial.common.core.TileEntity.TELoader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;

@@ -1,4 +1,4 @@
-package com.mcgoodtime.gti.common.Machine.ic2;
+package com.mcgoodtime.gti.common.block.Machine;
 
 import com.mcgoodtime.gti.client.gui.GUIGenGasKU;
 import com.mcgoodtime.gti.common.core.CreativeTabGTI;
