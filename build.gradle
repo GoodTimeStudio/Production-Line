@@ -23,7 +23,7 @@ group= "goodtime.mod.Industrial" // http://maven.apache.org/guides/mini/guide-na
 archivesBaseName = "GoodTimeIndustrial"
 
 minecraft {
-    version = "1.7.10-10.13.2.1291"
+    version = "1.7.10-10.13.2.1230"
     runDir = "eclipse"
 }
 
