@@ -27,30 +27,28 @@ import net.minecraft.world.World;
 					+ "after:Forestry@[3.4.0.7,);"
 	)
 
-public final class GTI implements IGuiHandler {
+public final class GTI {
 	//@SidedProxy (serverSide = "com.mcgoodtime.gti.common.core.CommonProxy", clientSide = "com.mcgoodtime.gti.client.ClientProxy")
 
     public static final String MODID = "gti";
     public static final String VERSION = "Dev 0.0.4";
+
+    public static CreativeTabGTI creativeTabGTI = new CreativeTabGTI("GTI");
     
     @Instance(GTI.MODID)
-    public static GTI modInstance;
+    public static GTI gtiInstance;
    
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) { 
-    	
-    	CreativeTabGTI.tab = new CreativeTabGTI("GoodTime Industrial");
-    	
+    public void preInit(FMLPreInitializationEvent event) {
     	BlockLoader.preInit();
     	ItemLoader.preInit();
     	MachineLoader.preInit();
     	CraftingLoader.preInit();
-    	
     }
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, this);
+        NetworkRegistry.INSTANCE.registerGuiHandler(gtiInstance, new GuiHandler());
     }
     
     @Mod.EventHandler
@@ -58,17 +56,4 @@ public final class GTI implements IGuiHandler {
 
     }
 
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        //switch (ID) {
-        //    case 10:
-        //        return new GUIGenGasKU((ContainerGenGasKU)player.inventoryContainer, (TileEntityGenGasKU)player.getEntityWorld().getTileEntity(x, y, z));
-        //}
-        return null;
-    }
-
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
-    }
 }

@@ -2,11 +2,16 @@ package com.mcgoodtime.gti.client.gui;
 
 import com.mcgoodtime.gti.common.TileEntity.TileEntityGenGasKU;
 import com.mcgoodtime.gti.common.container.ContainerGenGasKU;
+import com.mcgoodtime.gti.common.core.GTI;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.relauncher.Side;
@@ -18,13 +23,17 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class GUIGenGasKU extends GuiContainer {
 
-	private Container parScreen;
+    private ResourceLocation background = new ResourceLocation(GTI.MODID.toLowerCase() + ":" + "textures/client/gui/GUIGenGasKU.png");
+
+    private int xSize, ySize;
+    private int x, y;
     private TileEntityGenGasKU tile;
 
-	public GUIGenGasKU(ContainerGenGasKU container, TileEntityGenGasKU tileEntity) {
-        super(container);
+	public GUIGenGasKU(InventoryPlayer inventoryPlayer, TileEntityGenGasKU tileEntity) {
+        super(new ContainerGenGasKU(inventoryPlayer, tileEntity));
         this.tile = tileEntity;
-        this.doesGuiPauseGame();
+        xSize = 176;
+        ySize = 166;
 	}
 
 	@Override
@@ -34,23 +43,25 @@ public class GUIGenGasKU extends GuiContainer {
 		Keyboard.enableRepeatEvents(true);
 	}
 
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-        mc.renderEngine.bindTexture(new ResourceLocation("gti", "textures/gui/GUIGenGasKU.png"));
-        drawTexturedModalRect(this.width / 2 - 175 / 2 , this.height / 2 - 175 / 2, 0, 0, 175, 175);//绘制材质
-    }
-
+    //绘制文字，控件等
     @Override
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        super.drawGuiContainerForegroundLayer(p_146979_1_, p_146979_2_);
+        String s = this.tile.getInventoryName();
+        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
+        this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
     }
 
+    //绘制背景
     @Override
-	public void drawScreen(int x, int y, float v) {
-		//绘制文本等非控件内容，会被控件覆盖
-	}
+    protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+        //绘制文本等非控件内容，会被控件覆盖
+        this.mc.getTextureManager().bindTexture(background);
+        this.x = (this.width - xSize) / 2;
+        this.y = (this.height - ySize) / 2;
+        drawTexturedModalRect(this.x ,this.y, 0, 0, xSize, ySize);//绘制材质
+    }
 
-	//键盘按钮事件
+    //键盘按钮事件
 	@Override
 	protected void keyTyped(char p1, int p2) {
 		super.keyTyped(p1, p2);

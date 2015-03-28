@@ -1,7 +1,8 @@
 package com.mcgoodtime.gti.common.Items;
 
-import com.mcgoodtime.gti.common.core.CreativeTabGTI;
+//import com.mcgoodtime.gti.common.core.CreativeTabGTI;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -10,15 +11,15 @@ public class OreItem extends Item {
 	
 	public static Item CrushedIR = new Item()
 	.setUnlocalizedName("CrushedIriridium")
-	.setCreativeTab(CreativeTabGTI.tab)
+	.setCreativeTab(CreativeTabs.tabFood)
 	.setTextureName("gti:itemCrushedIR");
 	public static Item DustIR = new Item()
 	.setUnlocalizedName("DustIriridium")
-	.setCreativeTab(CreativeTabGTI.tab)
+	.setCreativeTab(CreativeTabs.tabFood)
 	.setTextureName("gti:itemDustIR");
 	public static Item IngotIR = new Item()
 	.setUnlocalizedName("IngotIriridium")
-	.setCreativeTab(CreativeTabGTI.tab)
+	.setCreativeTab(CreativeTabs.tabFood)
 	.setTextureName("gti:itemIngotIR");
 	
 	public static ItemStack CrushedIRs = new ItemStack(CrushedIR); 

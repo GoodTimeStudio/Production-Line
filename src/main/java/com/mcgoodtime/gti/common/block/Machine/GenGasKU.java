@@ -3,8 +3,8 @@ package com.mcgoodtime.gti.common.block.Machine;
 import com.mcgoodtime.gti.client.gui.GUIGenGasKU;
 import com.mcgoodtime.gti.common.TileEntity.TileEntityGenGasKU;
 import com.mcgoodtime.gti.common.container.ContainerGenGasKU;
-import com.mcgoodtime.gti.common.core.CreativeTabGTI;
 import com.mcgoodtime.gti.common.core.GTI;
+import com.mcgoodtime.gti.common.core.GuiHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
@@ -12,6 +12,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -22,9 +23,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class GenGasKU extends BlockContainer {
 
+    private IIcon[] icons = new IIcon[6];
+
     public static Block GenGasKU = new GenGasKU(Material.iron)
 	.setBlockName("gti.GenGasKU")
-	.setCreativeTab(CreativeTabGTI.tab)
+	.setCreativeTab(CreativeTabs.tabFood)
 	.setHardness(2.0f);
 
 	protected GenGasKU(Material str) {
@@ -45,9 +48,14 @@ public class GenGasKU extends BlockContainer {
     @Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player,
 			int s, float p1, float p2, float p3) {
-		//player.openGui(GTI.modInstance, 10, world, x, y, z);
-		return true;
+        if(world.isRemote) {
+            if (world.getTileEntity(x, y, z) != null)
+                player.openGui(GTI.gtiInstance, GuiHandler.GUIs.GenGasKU.ordinal(), world, x, y, z);
+            return true;
+        }
+        return true;
 	}
+
 
 //************************************************************
 //***************注册材质*************************************
@@ -58,15 +66,7 @@ public class GenGasKU extends BlockContainer {
 	@SideOnly(Side.CLIENT)	private static IIcon right;
 	@SideOnly(Side.CLIENT)	private static IIcon top;
 	@SideOnly(Side.CLIENT)	private static IIcon low;*/
-	
-	/**
-	 *  side:
-	 *  0 is null
-	 *	2 is North(back)	3 is South(front)
-	 *	5 is East(left)	4 is West(right)
-	 *	1 is top(top)	6 is low(low)
-	 *	main:3-4
-	 */
+
 	@Override
 	public void registerBlockIcons(IIconRegister icon) {
 		super.registerBlockIcons(icon);
@@ -74,9 +74,16 @@ public class GenGasKU extends BlockContainer {
 		this.front = icon.registerIcon("gti:GenGasKU_front");
 		this.back = icon.registerIcon("gti:GenGasKU_back");
 	}
-	
+
+    /**
+     *  side:
+     *	2 is North(back)	3 is South(front)
+     *	5 is East(left)	4 is West(right)
+     *	1 is up(top)	0 is down(low)
+     *	main:3-4
+     */
 	@Override
-	public IIcon getIcon(int side, int v2) {
+	public IIcon getIcon(int side, int meta) {
 		if (side == 3) {
 			return this.front;
 		} else if (side == 2) {

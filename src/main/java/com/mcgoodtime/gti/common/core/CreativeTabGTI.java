@@ -1,35 +1,17 @@
 package com.mcgoodtime.gti.common.core;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import com.mcgoodtime.gti.common.Items.Food;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class CreativeTabGTI extends CreativeTabs {
-	
-	private int icon;
-	public static CreativeTabGTI tab ;
-	
-	public CreativeTabGTI(String label) {
-		 super(label);
-	} 
 
-	@Override
-	public ItemStack getIconItemStack() {
-		Item iconItem;
-		iconItem = GameRegistry.findItem("GTI", "DiamondApple");
-		return new ItemStack(iconItem);
-	}
+    public CreativeTabGTI(String lable) {
+        super(lable);
+    }
 
-	@Override
-	public String getTranslatedTabLabel() {
-		return new String("GoodTime Industrial");
-	}
-
-	@Override
-	public Item getTabIconItem() {
-		return null;
-	}
-	
+    @Override
+    public Item getTabIconItem() {
+        return Food.DimApple;
+    }
 }
-
