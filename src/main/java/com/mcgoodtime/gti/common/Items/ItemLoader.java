@@ -1,13 +1,13 @@
-package com.mcgoodtime.gti.common.Items;
+package com.mcgoodtime.gti.common.items;
 
-import com.mcgoodtime.gti.common.Items.tools.IRPix;
+import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 
 public class ItemLoader {
 	public static void preInit() {
 		Food.preInit();
-		OreItem.preInit();
+		ItemIridium.preInit();
 		Plate.preInit();
 
-        IRPix.preInit();
+        IridiumPickaxe.preInit();
 	}
 }

@@ -1,18 +1,17 @@
-package com.mcgoodtime.gti.common.TileEntity;
+package com.mcgoodtime.gti.common.tiles;
 
-import com.mcgoodtime.gti.common.block.Machine.GenGasKU;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityGenGasKU extends TileEntity implements ISidedInventory {
+public class TileGenGasKu extends TileEntity implements ISidedInventory {
 
     private ItemStack GenGasKUStack[] = new ItemStack[3];
 
     /**
      * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
-     * block.
+     * blocks.
      */
     @Override
     public int[] getAccessibleSlotsFromSide(int p_94128_1_) {

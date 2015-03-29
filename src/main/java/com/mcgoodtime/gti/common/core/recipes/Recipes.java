@@ -1,7 +1,7 @@
-package com.mcgoodtime.gti.common.core.Crafting;
+package com.mcgoodtime.gti.common.core.recipes;
 
-import com.mcgoodtime.gti.common.Items.Food;
-import com.mcgoodtime.gti.common.Items.Plate;
+import com.mcgoodtime.gti.common.items.Food;
+import com.mcgoodtime.gti.common.items.Plate;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

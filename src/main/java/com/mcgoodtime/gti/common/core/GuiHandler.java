@@ -2,10 +2,8 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.client.gui.GUIGenGasKU;
 import com.mcgoodtime.gti.common.TileEntity.TileEntityGenGasKU;
-import com.mcgoodtime.gti.common.block.Machine.GenGasKU;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler {

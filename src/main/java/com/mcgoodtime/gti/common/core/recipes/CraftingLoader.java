@@ -1,4 +1,4 @@
-package com.mcgoodtime.gti.common.core.Crafting;
+package com.mcgoodtime.gti.common.core.recipes;
 
 public class CraftingLoader {
 	public static void preInit() {

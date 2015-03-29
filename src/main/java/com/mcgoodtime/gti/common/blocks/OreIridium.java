@@ -1,4 +1,4 @@
-package com.mcgoodtime.gti.common.block;
+package com.mcgoodtime.gti.common.blocks;
 
 
 //import com.mcgoodtime.gti.common.core.CreativeTabGTI;
@@ -8,9 +8,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-public class Ore extends Block {
+public class OreIridium extends Block {
 
-	public static Block IR = new Ore(Material.rock)
+	public static Block IR = new OreIridium(Material.rock)
 	.setBlockName("iridiumore")
 	.setHardness(10)
 	.setCreativeTab(CreativeTabs.tabFood)
@@ -19,7 +19,7 @@ public class Ore extends Block {
 	
 	public static ItemStack IRs;
 	
-	protected Ore(Material str) {
+	protected OreIridium(Material str) {
 		super(str);
 	}
 

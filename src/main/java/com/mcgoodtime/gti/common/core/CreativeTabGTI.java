@@ -4,9 +4,9 @@ import com.mcgoodtime.gti.common.Items.Food;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class CreativeTabGTI extends CreativeTabs {
+public class CreativeTabGti extends CreativeTabs {
 
-    public CreativeTabGTI(String lable) {
+    public CreativeTabGti(String lable) {
         super(lable);
     }
 

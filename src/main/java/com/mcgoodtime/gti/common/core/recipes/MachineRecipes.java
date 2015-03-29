@@ -1,8 +1,8 @@
-package com.mcgoodtime.gti.common.core.Crafting;
+package com.mcgoodtime.gti.common.core.recipes;
 
-import com.mcgoodtime.gti.common.Items.OreItem;
-import com.mcgoodtime.gti.common.block.Ore;
-import com.mcgoodtime.gti.common.Items.Plate;
+import com.mcgoodtime.gti.common.blocks.OreIridium;
+import com.mcgoodtime.gti.common.items.ItemIridium;
+import com.mcgoodtime.gti.common.items.Plate;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
 import net.minecraft.item.Item;
@@ -16,15 +16,15 @@ public class MachineRecipes {
 	}
 	
 	public static void maceratorRecipes() {
-		Ore.IRs = new ItemStack(Ore.IR);
+		OreIridium.IRs = new ItemStack(OreIridium.IR);
 		//-------------------------------------------
 		
-		//----Ore
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(Ore.IRs) ,null , new ItemStack(OreItem.CrushedIR , 2));
+		//----OreIridium
+		Recipes.macerator.addRecipe(new RecipeInputItemStack(OreIridium.IRs) ,null , new ItemStack(ItemIridium.CrushedIR , 2));
 		
 		//----OreItem
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(OreItem.CrushedIRs), null, OreItem.DustIRs);
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(OreItem.IngotIRs, 1), null, OreItem.DustIRs);
+		Recipes.macerator.addRecipe(new RecipeInputItemStack(ItemIridium.CrushedIRs), null, ItemIridium.DustIRs);
+		Recipes.macerator.addRecipe(new RecipeInputItemStack(ItemIridium.IngotIRs, 1), null, ItemIridium.DustIRs);
 	}
 	
 	public static void compressorRecipes() {

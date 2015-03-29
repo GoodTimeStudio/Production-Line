@@ -1,7 +1,7 @@
-package com.mcgoodtime.gti.common.block.Machine;
+package com.mcgoodtime.gti.common.blocks.machines;
 
-import com.mcgoodtime.gti.common.TileEntity.TileEntityGenGasKU;
-import com.mcgoodtime.gti.common.core.GTI;
+import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
+import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -16,24 +16,24 @@ public class GenGasKU extends BlockContainer {
 
     protected GenGasKU(Material meta) {
         super(Material.rock);
-        setCreativeTab(GTI.creativeTabGTI);
+        setCreativeTab(Gti.creativeTabGTI);
         setBlockName("GenGasKU");
         setBlockTextureName("gti:GenGasKU");
     }
 
     /**
-     * Called upon block activation (right click on the block.)
+     * Called upon blocks activation (right click on the blocks.)
      */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p1, float p2, float p3, float p4) {
         if (world.isRemote) {
-            entityPlayer.openGui(GTI.gtiInstance, GuiHandler.GUIs.GenGasKU.ordinal(), world, x, y, z);
+            entityPlayer.openGui(Gti.gtiInstance, GuiHandler.GUIs.GenGasKU.ordinal(), world, x, y, z);
         }
         return true;
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int var2) {
-        return new TileEntityGenGasKU();
+        return new TileGenGasKu();
     }
 }

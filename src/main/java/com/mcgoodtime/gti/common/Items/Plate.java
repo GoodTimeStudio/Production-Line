@@ -1,6 +1,6 @@
-package com.mcgoodtime.gti.common.Items;
+package com.mcgoodtime.gti.common.items;
 
-//import com.mcgoodtime.gti.common.core.CreativeTabGTI;
+//import com.mcgoodtime.gti.common.core.CreativeTabGti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

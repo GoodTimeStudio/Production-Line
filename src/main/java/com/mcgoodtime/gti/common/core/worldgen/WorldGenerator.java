@@ -1,8 +1,8 @@
-package com.mcgoodtime.gti.common.core.WorldGenerator;
+package com.mcgoodtime.gti.common.core.worldgen;
 
 import java.util.Random;
 
-import com.mcgoodtime.gti.common.block.Ore;
+import com.mcgoodtime.gti.common.blocks.OreIridium;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -16,16 +16,16 @@ public class WorldGenerator  implements IWorldGenerator{
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		generateSurface(world, random, chunkX, chunkZ);
 	}
 	
 	public static void generateSurface(World world, Random random, int chunkX, int chunkZ)
-	{  
-
-		for(int i = 0; i < 50; i++) {
-			int randPosX = chunkX + random.nextInt(16);
-			int randPosY = random.nextInt(128);
-			int randPosZ = chunkZ + random.nextInt(16);
-			new WorldGenMinable(Ore.IR , 50).generate(world, random, randPosX, randPosY, randPosZ);
+	{
+		for (int i = 0; i < 5; i++) {
+			int randPosX = chunkX * 16 + random.nextInt(16);
+			int randPosY = random.nextInt(16);
+			int randPosZ = chunkZ * 16 + random.nextInt(16);
+			new WorldGenMinable(OreIridium.IR , 50).generate(world, random, randPosX, randPosY, randPosZ);
 		}
 
 	}
