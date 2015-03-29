@@ -1,50 +1,83 @@
 package com.mcgoodtime.gti.common.TileEntity;
 
+import com.mcgoodtime.gti.common.block.Machine.GenGasKU;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityGenGasKU extends TileEntity implements ISidedInventory {
 
-    private ItemStack stack[] = new ItemStack[3];
+    private ItemStack GenGasKUStack[] = new ItemStack[3];
 
+    /**
+     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+     * block.
+     */
     @Override
-    public void updateEntity() {
-        //System.out.println("Test TileEntity");
+    public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
+        return new int[0];
     }
 
+    /**
+     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    @Override
+    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
+        return false;
+    }
+
+    /**
+     * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    @Override
+    public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
+        return false;
+    }
+
+    /**
+     * Returns the number of slots in the inventory.
+     */
     @Override
     public int getSizeInventory() {
-        return stack.length;
+        return 0;
     }
 
-    //获取库存物品栈
+    /**
+     * Returns the stack in slot i
+     * 取得槽（库存）中的物品栈
+     */
     @Override
     public ItemStack getStackInSlot(int p_70301_1_) {
-        return stack[p_70301_1_];
+        return GenGasKUStack[p_70301_1_];
     }
 
+    /**
+     * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
+     * new stack.
+     * 玩家取走物品时
+     */
     @Override
-    public ItemStack decrStackSize(int par1, int par2) {
-        if (this.stack[par1] != null)
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
+        if (this.GenGasKUStack[p_70298_1_] != null)
         {
             ItemStack itemstack;
 
-            if (this.stack[par1].stackSize <= par2)
+            if (this.GenGasKUStack[p_70298_1_].stackSize <= p_70298_2_)
             {
-                itemstack = this.stack[par1];
-                this.stack[par1] = null;
+                itemstack = this.GenGasKUStack[p_70298_1_];
+                this.GenGasKUStack[p_70298_1_] = null;
                 return itemstack;
             }
             else
             {
-                itemstack = this.stack[par1].splitStack(par2);
+                itemstack = this.GenGasKUStack[p_70298_1_].splitStack(p_70298_2_);
 
-                if (this.stack[par1].stackSize == 0)
+                if (this.GenGasKUStack[p_70298_1_].stackSize == 0)
                 {
-                    this.stack[par1] = null;
+                    this.GenGasKUStack[p_70298_1_] = null;
                 }
 
                 return itemstack;
@@ -56,38 +89,58 @@ public class TileEntityGenGasKU extends TileEntity implements ISidedInventory {
         }
     }
 
-    //关闭时调用
+    /**
+     * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
+     * like when you close a workbench GUI.
+     */
     @Override
     public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
         return null;
     }
 
-    //设置库存中的内容（物品栈）
+    /**
+     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+     * 设置槽（库存）中的内容（物品栈），
+     */
     @Override
-    public void setInventorySlotContents(int var1, ItemStack var2) {
-        this.stack[var1] = var2;
-        if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
-            var2.stackSize = this.getInventoryStackLimit();
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
+        this.GenGasKUStack[p_70299_1_] = p_70299_2_;
+
+        if (p_70299_2_ != null && p_70299_2_.stackSize > this.getInventoryStackLimit())
+        {
+            p_70299_2_.stackSize = this.getInventoryStackLimit();
         }
     }
 
-    //获取Inv名称
+    /**
+     * Returns the name of the inventory
+     */
     @Override
     public String getInventoryName() {
-        return new String ("container.GenGasKU");
+        return new String("container.GenGasKU");
     }
 
+    /**
+     * Returns if the inventory is named
+     */
     @Override
     public boolean hasCustomInventoryName() {
-        return true;
+        return false;
     }
 
-    //获取库存单个物品最大堆叠
+    /**
+     * Returns the maximum stack size for a inventory slot.
+     * 物品栈最大堆叠
+     */
     @Override
     public int getInventoryStackLimit() {
         return 64;
     }
 
+    /**
+     * Do not make give this method the name canInteractWith because it clashes with Container
+     * 使它的gui默认能被任何人打开
+     */
     @Override
     public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
         return true;
@@ -103,23 +156,14 @@ public class TileEntityGenGasKU extends TileEntity implements ISidedInventory {
 
     }
 
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     *
+     * @param p_94041_1_
+     * @param p_94041_2_
+     */
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
         return false;
-    }
-
-    @Override
-    public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
-        return new int[0];
-    }
-
-    @Override
-    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
-        return true;
-    }
-
-    @Override
-    public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
-        return true;
     }
 }

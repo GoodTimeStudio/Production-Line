@@ -70,11 +70,6 @@ public class GUIGenGasKU extends GuiContainer {
 		} 
 	}
 
-	//设置游戏是否暂停
-	@Override
-	public boolean doesGuiPauseGame() {
-		return false;
-	}
 	
 	//GUI关闭时调用
 	@Override
