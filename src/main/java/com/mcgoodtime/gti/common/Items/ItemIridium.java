@@ -4,8 +4,8 @@ package com.mcgoodtime.gti.common.items;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-
 
 public class ItemIridium extends Item {
 	
@@ -27,8 +27,8 @@ public class ItemIridium extends Item {
 	public static ItemStack IngotIRs = new ItemStack(IngotIR);
 	
     public static void preInit() {
-    	GameRegistry.registerItem(CrushedIR, "CrushedIriridium" );	 
-    	GameRegistry.registerItem(DustIR, "PowderIriridium");
+    	GameRegistry.registerItem(CrushedIR, "CrushedIriridium");
+    	GameRegistry.registerItem(DustIR, "DustIriridium");
     	GameRegistry.registerItem(IngotIR, "IngotIriridium");
 	}
 	

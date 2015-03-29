@@ -1,35 +1,26 @@
 package com.mcgoodtime.gti.client.gui;
 
-import com.mcgoodtime.gti.common.TileEntity.TileEntityGenGasKU;
+import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 import com.mcgoodtime.gti.common.container.ContainerGenGasKU;
-import com.mcgoodtime.gti.common.core.GTI;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import com.mcgoodtime.gti.common.core.Gti;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class GUIGenGasKU extends GuiContainer {
 
-    private ResourceLocation background = new ResourceLocation(GTI.MODID.toLowerCase() + ":" + "textures/client/gui/GUIGenGasKU.png");
+    private ResourceLocation background = new ResourceLocation(Gti.MODID.toLowerCase() + ":" + "textures/client/gui/GUIGenGasKU.png");
 
     private int xSize, ySize;
     private int x, y;
-    private TileEntityGenGasKU tile;
+    private TileGenGasKu tile;
 
-	public GUIGenGasKU(InventoryPlayer inventoryPlayer, TileEntityGenGasKU tileEntity) {
+	public GUIGenGasKU(InventoryPlayer inventoryPlayer, TileGenGasKu tileEntity) {
         super(new ContainerGenGasKU(inventoryPlayer, tileEntity));
         this.tile = tileEntity;
         xSize = 176;

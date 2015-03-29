@@ -1,12 +1,13 @@
 package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.blocks.BlockLoader;
-import com.mcgoodtime.gti.common.core.recipes.CraftingLoader;
+import com.mcgoodtime.gti.common.recipes.CraftingLoader;
 import com.mcgoodtime.gti.common.items.ItemLoader;
 import com.mcgoodtime.gti.common.blocks.machines.MachineLoader;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -27,10 +28,13 @@ public final class Gti {
     public static final String MODID = "gti";
     public static final String VERSION = "Dev 0.0.4";
 
-    public static CreativeTabGti creativeTabGTI = new CreativeTabGti("Gti");
+    public static CreativeTabGti creativeTabGTI = new CreativeTabGti();
     
     @Instance(Gti.MODID)
     public static Gti instance;
+
+    @SidedProxy(serverSide = "com.mcgoodtime.gti.common.core.CommonProxy", clientSide = "com.mcgoodtime.gti.client.ClientProxy")
+    public static CommonProxy commonProxy;
    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
