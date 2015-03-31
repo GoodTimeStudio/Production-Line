@@ -21,6 +21,10 @@ public class ItemIridium extends Item {
 	.setUnlocalizedName("IngotIriridium")
 	.setCreativeTab(CreativeTabs.tabFood)
 	.setTextureName("gti:itemIngotIR");
+	public static Item CleanedIridium = new Item()
+	.setUnlocalizedName("IngotIriridium")
+	.setCreativeTab(CreativeTabs.tabFood)
+	.setTextureName("gti:itemWashedIridium");
 	
 	public static ItemStack CrushedIRs = new ItemStack(CrushedIR); 
 	public static ItemStack DustIRs = new ItemStack(DustIR);

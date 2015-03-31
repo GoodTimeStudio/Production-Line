@@ -8,11 +8,14 @@ import net.minecraft.item.ItemStack;
 public class CreativeTabGti extends CreativeTabs {
     private ItemStack display;
 
+    public CreativeTabGti creativeTabGti = new CreativeTabGti();
+
     public CreativeTabGti() {
         super("GoodTime Industrial");
     }
+
     public Item getTabIconItem(){
-        return null;
+        return Food.DimApple;
     }
 
     public ItemStack getIconItemStack() {

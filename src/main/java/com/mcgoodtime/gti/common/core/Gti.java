@@ -17,14 +17,10 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 	modid = Gti.MODID ,
 	version = Gti.VERSION ,
 	dependencies = "required-after:Forge@[10.13.0.1230,);"
-					+ "after:Buildcraft|Core@[6.3.0,);"
 					+ "after:IC2@[2.2.660,);"
-					+ "after:Forestry@[3.4.0.7,);"
 	)
 
 public final class Gti {
-	//@SidedProxy (serverSide = "com.mcgoodtime.gti.common.core.CommonProxy", clientSide = "com.mcgoodtime.gti.client.ClientProxy")
-
     public static final String MODID = "gti";
     public static final String VERSION = "Dev 0.0.4";
 

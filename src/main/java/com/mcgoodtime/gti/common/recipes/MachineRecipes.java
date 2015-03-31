@@ -3,8 +3,10 @@ package com.mcgoodtime.gti.common.recipes;
 import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.items.ItemIridium;
 import com.mcgoodtime.gti.common.items.Plate;
+
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -29,7 +31,14 @@ public class MachineRecipes {
 	
 	public static void compressorRecipes() {
 		//----Plate
-		Recipes.compressor.addRecipe(new RecipeInputItemStack(new ItemStack(Item.getItemById(264))), null, new ItemStack(Plate.DimPlate));
+		Recipes.compressor.addRecipe(new RecipeInputItemStack(new ItemStack(Items.diamond)), null, new ItemStack(Plate.DimPlate));
 		Recipes.compressor.addRecipe(new RecipeInputItemStack(new ItemStack(Plate.DimPlate , 9)), null, new ItemStack(Plate.DenseDimPlate));
+	}
+
+	/**
+	 *
+	 */
+	public static void oreWashingRecipes() {
+		Recipes.oreWashing.addRecipe(new RecipeInputItemStack(new ItemStack(ItemIridium.CrushedIR)), null, null);
 	}
 }
