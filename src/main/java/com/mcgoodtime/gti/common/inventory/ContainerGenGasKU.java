@@ -1,15 +1,10 @@
-package com.mcgoodtime.gti.common.container;
+package com.mcgoodtime.gti.common.inventory;
 
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.tileentity.TileEntityFurnace;
 
 public class ContainerGenGasKU extends Container {
 
