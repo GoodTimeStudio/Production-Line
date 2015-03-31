@@ -8,8 +8,6 @@ import net.minecraft.item.ItemStack;
 public class CreativeTabGti extends CreativeTabs {
     private ItemStack display;
 
-    public CreativeTabGti creativeTabGti = new CreativeTabGti();
-
     public CreativeTabGti() {
         super("GoodTime Industrial");
     }

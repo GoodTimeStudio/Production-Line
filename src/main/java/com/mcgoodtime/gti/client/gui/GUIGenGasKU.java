@@ -1,7 +1,7 @@
 package com.mcgoodtime.gti.client.gui;
 
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
-import com.mcgoodtime.gti.common.container.ContainerGenGasKU;
+import com.mcgoodtime.gti.common.inventory.ContainerGenGasKU;
 import com.mcgoodtime.gti.common.core.Gti;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
