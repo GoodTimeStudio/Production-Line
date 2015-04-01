@@ -1,6 +1,6 @@
 package com.mcgoodtime.gti.common.blocks;
 
-import com.mcgoodtime.gti.common.core.Gti;
+import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -12,7 +12,7 @@ public class OreIridium extends Block {
 
 	public OreIridium() {
 		super(Material.rock);
-		this.setCreativeTab(Gti.creativeTabGTI);
+		this.setCreativeTab(creativeTabGti);
 		this.setHardness(10);
 		this.setBlockName("iridiumore");
 		this.setResistance(20);

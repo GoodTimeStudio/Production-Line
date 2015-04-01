@@ -25,7 +25,7 @@ public final class Gti {
     public static final String VERSION = "Dev 0.0.4";
 
     public static CreativeTabGti creativeTabGTI = new CreativeTabGti();
-    
+
     @Instance(Gti.MODID)
     public static Gti instance;
 

@@ -1,5 +1,7 @@
 package com.mcgoodtime.gti.common.blocks.machines;
 
+import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
+
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GuiHandler;
@@ -15,10 +17,10 @@ public class GenGasKU extends BlockContainer {
     public static Block GenGasKU = new GenGasKU(Material.rock);
 
     protected GenGasKU(Material meta) {
-        super(Material.rock);
-        setCreativeTab(Gti.creativeTabGTI);
-        setBlockName("GenGasKU");
-        setBlockTextureName("gti:GenGasKU");
+        super(meta);
+        this.setCreativeTab(creativeTabGti);
+        this.setBlockName("GenGasKU");
+        this.setBlockTextureName("gti:GenGasKU");
     }
 
     /**
@@ -26,8 +28,10 @@ public class GenGasKU extends BlockContainer {
      */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p1, float p2, float p3, float p4) {
-        if (!world.isRemote) {
+        if (world.isRemote) {
             entityPlayer.openGui(Gti.instance, GuiHandler.GUIs.GenGasKU.ordinal(), world, x, y, z);
+        } else {
+
         }
         return true;
     }
