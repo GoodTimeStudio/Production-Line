@@ -1,6 +1,7 @@
 package com.mcgoodtime.gti.common.items;
 
 //import com.mcgoodtime.gti.common.core.CreativeTabGti;
+import com.mcgoodtime.gti.common.core.CreativeTabGti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -11,19 +12,19 @@ public class ItemIridium extends Item {
 	
 	public static Item CrushedIR = new Item()
 	.setUnlocalizedName("CrushedIriridium")
-	.setCreativeTab(CreativeTabs.tabFood)
-	.setTextureName("gti:itemCrushedIR");
+	.setCreativeTab(CreativeTabGti.creativeTabGti)
+    .setTextureName("gti:itemCrushedIR");
 	public static Item DustIR = new Item()
 	.setUnlocalizedName("DustIriridium")
-	.setCreativeTab(CreativeTabs.tabFood)
+	.setCreativeTab(CreativeTabGti.creativeTabGti)
 	.setTextureName("gti:itemDustIR");
 	public static Item IngotIR = new Item()
 	.setUnlocalizedName("IngotIriridium")
-	.setCreativeTab(CreativeTabs.tabFood)
+	.setCreativeTab(CreativeTabGti.creativeTabGti)
 	.setTextureName("gti:itemIngotIR");
 	public static Item CleanedIridium = new Item()
 	.setUnlocalizedName("IngotIriridium")
-	.setCreativeTab(CreativeTabs.tabFood)
+	.setCreativeTab(CreativeTabGti.creativeTabGti)
 	.setTextureName("gti:itemWashedIridium");
 	
 	public static ItemStack CrushedIRs = new ItemStack(CrushedIR); 
