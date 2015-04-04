@@ -49,7 +49,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public final class Gti {
     public static final String MODID = "gti";
     public static final String VERSION = "Dev 0.0.4";
-
+    public static final String RESOURCE_DOMAIN = "gti";
+    public static final String GUI_PREFIX = "gui.gti.";
 
     @Instance(Gti.MODID)
     public static Gti instance;
