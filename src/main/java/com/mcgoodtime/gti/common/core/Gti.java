@@ -40,14 +40,16 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod (
-	modid = Gti.MODID ,
-	version = Gti.VERSION ,
+	modid = this.MODID ,
+    name = this.MODNAME,
+	version = this.VERSION ,
 	dependencies = "required-after:Forge@[10.13.0.1230,);"
 					+ "after:IC2@[2.2.660,);"
 	)
 
 public final class Gti {
     public static final String MODID = "gti";
+    public static final String MODNAME = "GoodTime Industrial";
     public static final String VERSION = "Dev 0.0.4";
     public static final String RESOURCE_DOMAIN = "gti";
     public static final String GUI_PREFIX = "gui.gti.";
