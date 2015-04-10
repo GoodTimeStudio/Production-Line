@@ -40,25 +40,22 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod (
-	modid = this.MODID ,
-    name = this.MODNAME,
-	version = this.VERSION ,
+	modid = Gti.MOD_ID ,
+    name = Gti.MOD_NAME ,
+	version = Gti.VERSION ,
 	dependencies = "required-after:Forge@[10.13.0.1230,);"
 					+ "after:IC2@[2.2.660,);"
 	)
 
 public final class Gti {
-    public static final String MODID = "gti";
-    public static final String MODNAME = "GoodTime Industrial";
+    public static final String MOD_ID = "gti";
+    public static final String MOD_NAME = "GoodTime Industrial";
     public static final String VERSION = "Dev 0.0.4";
     public static final String RESOURCE_DOMAIN = "gti";
     public static final String GUI_PREFIX = "gui.gti.";
 
-    @Instance(Gti.MODID)
+    @Instance(Gti.MOD_ID)
     public static Gti instance;
-
-    @SidedProxy(serverSide = "com.mcgoodtime.gti.common.core.CommonProxy", clientSide = "com.mcgoodtime.gti.client.ClientProxy")
-    public static CommonProxy commonProxy;
    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
