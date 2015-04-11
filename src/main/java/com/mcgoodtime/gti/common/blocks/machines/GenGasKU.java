@@ -65,4 +65,5 @@ public class GenGasKU extends BlockContainer {
     public TileEntity createNewTileEntity(World world, int var2) {
         return new TileGenGasKu();
     }
+
 }
