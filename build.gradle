@@ -19,11 +19,11 @@ buildscript {
 apply plugin: 'forge'
 
 version = "0.0.3"
-group= "com.mcgoodtime" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "com.mcgoodtime"
 archivesBaseName = "gti"
 
 minecraft {
-    version = "1.7.10-10.13.2.1230"
+    version = "1.7.10-10.13.3.1366-1.7.10"
     runDir = "eclipse"
 }
 
@@ -39,40 +39,19 @@ configurations {
  	compile.extendsFrom api 
 } 
 
-dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    // real examples
-    // api 'com.mod-buildcraft:buildcraft:6.4.6:api'  // adds buildcraft to the api env
-    // api 'net.sengir.forestry:forestry_1.7.10:3.4.0.7:api' // adds forestry to the api env
-    compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-    compile 'net.industrial-craft:industrialcraft-2:2.2.706-experimental:dev' //adds newest ic2 to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+dependencies {  
+    compile 'com.googlecode.efficient-java-matrix-library:ejml:0.26' // adds ejml to the dev env
+    compile 'net.industrial-craft:industrialcraft-2:2.2.713-experimental:dev' //adds newest ic2 to the dev env
 }
 
 processResources
 {
-    // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
-        // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
-    // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
