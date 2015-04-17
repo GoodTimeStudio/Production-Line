@@ -23,7 +23,7 @@ group= "com.mcgoodtime"
 archivesBaseName = "gti"
 
 minecraft {
-    version = "1.7.10-10.13.3.1366-1.7.10"
+    version = "1.7.10-10.13.3.1370-1.7.10"
     runDir = "eclipse"
 }
 
@@ -40,8 +40,7 @@ configurations {
 } 
 
 dependencies {  
-    compile 'com.googlecode.efficient-java-matrix-library:ejml:0.26' // adds ejml to the dev env
-    compile 'net.industrial-craft:industrialcraft-2:2.2.713-experimental:dev' //adds newest ic2 to the dev env
+    compile 'net.industrial-craft:industrialcraft-2:2.2.717-experimental:dev' //adds newest ic2 to the dev env
 }
 
 processResources
