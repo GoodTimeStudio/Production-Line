@@ -28,8 +28,6 @@ import com.mcgoodtime.gti.common.blocks.BlockWaterHyacinth;
 import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.blocks.machines.GenGasKU;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 /**
  * @author liach
  */

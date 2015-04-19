@@ -27,20 +27,12 @@ package com.mcgoodtime.gti.common.blocks;
 import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 
 import com.mcgoodtime.gti.common.core.Gti;
+
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLilyPad;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -49,14 +41,9 @@ import java.util.Random;
 public class BlockWaterHyacinth extends BlockLilyPad {
 
     public BlockWaterHyacinth() {
-        super();
-        float var1 = 0.5F;
-        float var2 = 0.015625F;
         this.setBlockName("gti.WaterHyacinth");
-        this.setBlockBounds(0.5F - var1, 0.0F, 0.5F - var1, 0.5F + var1, var2, 0.5F + var1);
         this.setCreativeTab(creativeTabGti);
         this.setBlockTextureName(Gti.RESOURCE_DOMAIN + ":" + "BlockWaterHyacinth");
-        this.setTickRandomly(true);
         GameRegistry.registerBlock(this, "gti.WaterHyacinth");
     }
 
@@ -67,43 +54,4 @@ public class BlockWaterHyacinth extends BlockLilyPad {
             world.setBlock(x + changedX, y, z + changedZ, this);
         }
     }
-
-    protected boolean canPlaceBlockOn(Block block) {
-        return block == Blocks.water;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int getBlockColor() {
-        return 2129968;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int getRenderColor(int renderColor) {
-        return 2129968;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-        return 2129968;
-    }
-
-    public boolean canBlockStay(World world, int x, int y, int z) {
-        return y >= 0 && y < 256 ? world.getBlock(x, y - 1, z).getMaterial() == Material.water && world.getBlockMetadata(x, y - 1, z) == 0 : false;
-    }
-
-    public int getRenderType() {
-        return 23;
-    }
-
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List intersectList, Entity collisionEntity) {
-        if (collisionEntity == null || !(collisionEntity instanceof EntityBoat)) {
-            super.addCollisionBoxesToList(world, x, y, z, aabb, intersectList, collisionEntity);
-        }
-
-    }
-
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_getCollisionBoundingBoxFromPool_1_, int p_getCollisionBoundingBoxFromPool_2_, int p_getCollisionBoundingBoxFromPool_3_, int p_getCollisionBoundingBoxFromPool_4_) {
-        return AxisAlignedBB.getBoundingBox((double)p_getCollisionBoundingBoxFromPool_2_ + this.minX, (double)p_getCollisionBoundingBoxFromPool_3_ + this.minY, (double)p_getCollisionBoundingBoxFromPool_4_ + this.minZ, (double)p_getCollisionBoundingBoxFromPool_2_ + this.maxX, (double)p_getCollisionBoundingBoxFromPool_3_ + this.maxY, (double)p_getCollisionBoundingBoxFromPool_4_ + this.maxZ);
-    }
-
 }
