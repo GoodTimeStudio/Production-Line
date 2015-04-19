@@ -23,7 +23,7 @@ group= "com.mcgoodtime"
 archivesBaseName = "gti"
 
 minecraft {
-    version = "1.7.10-10.13.3.1370-1.7.10"
+    version = "1.7.10-10.13.3.1378-1.7.10"
     runDir = "eclipse"
 }
 
@@ -37,7 +37,26 @@ repositories {
 configurations { 
 	api 
  	compile.extendsFrom api 
-} 
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+            def localization = file('../GoodTime-Industrial-Localization')
+            if (localization.exists())
+                srcDir localization
+        }
+    }
+    api {
+        java {
+            srcDir 'api'
+        }
+    }
+}
 
 dependencies {  
     compile 'net.industrial-craft:industrialcraft-2:2.2.717-experimental:dev' //adds newest ic2 to the dev env

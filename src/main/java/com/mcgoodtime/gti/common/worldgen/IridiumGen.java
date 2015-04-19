@@ -27,6 +27,7 @@ package com.mcgoodtime.gti.common.worldgen;
 
 import com.mcgoodtime.gti.common.blocks.OreIridium;
 
+import com.mcgoodtime.gti.common.init.GtiBlocks;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.world.World;
@@ -49,12 +50,12 @@ public class IridiumGen implements IWorldGenerator{
 			int randPosX = chunkX * 16 + random.nextInt(16);
 			int randPosY = random.nextInt(16);
 			int randPosZ = chunkZ * 16 + random.nextInt(16);
-			new WorldGenMinable(OreIridium.IR , 50).generate(world, random, randPosX, randPosY, randPosZ);
+			new WorldGenMinable(GtiBlocks.oreIridium, 50).generate(world, random, randPosX, randPosY, randPosZ);
 		}
 
 	}
-
+/*
 	public static void preInit(FMLPreInitializationEvent event) {
-		//MinecraftForge.ORE_GEN_BUS.register();
-	}
+		MinecraftForge.ORE_GEN_BUS.register(this);
+	}*/
 }

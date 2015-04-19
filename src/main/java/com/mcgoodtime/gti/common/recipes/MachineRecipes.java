@@ -26,6 +26,7 @@
 package com.mcgoodtime.gti.common.recipes;
 
 import com.mcgoodtime.gti.common.blocks.OreIridium;
+import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.items.ItemIridium;
 import com.mcgoodtime.gti.common.items.Plate;
 
@@ -43,7 +44,7 @@ public class MachineRecipes {
 	}
 	
 	public static void maceratorRecipes() {
-		OreIridium.IRs = new ItemStack(OreIridium.IR);
+		OreIridium.IRs = new ItemStack(GtiBlocks.oreIridium);
 		//-------------------------------------------
 		
 		//----OreIridium

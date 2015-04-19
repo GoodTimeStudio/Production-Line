@@ -22,31 +22,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package com.mcgoodtime.gti.common.init;
 
-package com.mcgoodtime.gti.common.blocks;
+import com.mcgoodtime.gti.common.blocks.BlockWaterHyacinth;
+import com.mcgoodtime.gti.common.blocks.OreIridium;
+import com.mcgoodtime.gti.common.blocks.machines.GenGasKU;
 
-import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
-
-import com.mcgoodtime.gti.common.init.GtiBlocks;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
-public class OreIridium extends Block {
+/**
+ * @author liach
+ */
+public class GtiBlocks {
 
-	public OreIridium() {
-		super(Material.rock);
-		this.setCreativeTab(creativeTabGti);
-		this.setHardness(10);
-		this.setBlockName("iridiumore");
-		this.setResistance(20);
-		this.setBlockTextureName("gti:blockOreIridium");
-		this.setHarvestLevel("pickaxe", 3);
-		GameRegistry.registerBlock(this, "iridiumore");
-	}
-	
-	public static ItemStack IRs = new ItemStack(Item.getItemFromBlock(GtiBlocks.oreIridium));
+    public static BlockWaterHyacinth waterHyacinth;
+    public static GenGasKU genGasKU;
+    public static OreIridium oreIridium;
 
+    public static void init() {
+       waterHyacinth = new BlockWaterHyacinth();
+       genGasKU = new GenGasKU();
+       oreIridium = new OreIridium();
+    }
 }
