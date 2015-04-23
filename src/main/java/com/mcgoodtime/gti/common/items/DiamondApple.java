@@ -28,24 +28,14 @@ package com.mcgoodtime.gti.common.items;
 import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 
 public class DiamondApple extends ItemFood {
-
-	private DiamondApple() {
+	public DiamondApple() {
 		super(1005, 10, false);
 		this.setUnlocalizedName("DiamondApple");
 		this.setCreativeTab(creativeTabGti);
 		this.setTextureName("gti:itemDiamondApple");
+		GameRegistry.registerItem(this, "DiamondApple");
 	}
-	
-	public static Item DimApple = new ItemFood(1005, 10 , false)
-	.setUnlocalizedName("DiamondApple")
-	.setTextureName("gti:itemDiamondApple");
-	
-    public static void preInit() {
-		GameRegistry.registerItem(DimApple, "DiamondApple");
-	}
-		
 }

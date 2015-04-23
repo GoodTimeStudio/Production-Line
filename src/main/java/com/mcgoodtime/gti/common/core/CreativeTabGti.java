@@ -25,7 +25,7 @@
 
 package com.mcgoodtime.gti.common.core;
 
-import com.mcgoodtime.gti.common.items.Food;
+import com.mcgoodtime.gti.common.items.DiamondApple;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -57,7 +57,7 @@ public class CreativeTabGti extends CreativeTabs {
     @SideOnly(Side.CLIENT)
     public ItemStack getIconItemStack() {
         if (display == null) {
-            display = new ItemStack(Food.DimApple).copy();
+            display = new ItemStack(DiamondApple.DimApple).copy();
         }
         return display;
     }

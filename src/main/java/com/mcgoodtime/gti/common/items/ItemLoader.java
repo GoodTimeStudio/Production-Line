@@ -29,7 +29,7 @@ import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 
 public class ItemLoader {
 	public static void preInit() {
-		Food.preInit();
+		DiamondApple.preInit();
 		ItemIridium.preInit();
 		Plate.preInit();
 

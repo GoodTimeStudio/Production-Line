@@ -25,6 +25,10 @@
 
 package com.mcgoodtime.gti.common.init;
 
+import com.mcgoodtime.gti.common.items.DiamondApple;
+import com.mcgoodtime.gti.common.items.ItemIridium;
+import com.mcgoodtime.gti.common.items.Plate;
+import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPickaxe;
@@ -36,9 +40,16 @@ public class GtiItems {
     public static Item oreIridium;
     public static Item dustIridium;
     public static Item smallPileDustIridium;
-    public static Item unWashedIridium;
+    public static Item unwashedIridium;
     public static Item denseDiamondPlate;
     public static Item diamondPlate;
     public static ItemFood diamondApple;
     public static ItemPickaxe iridiumPickaxe;
+
+    public static void init() {
+        diamondApple = new DiamondApple();
+        ItemIridium.preInit();
+        Plate.preInit();
+        IridiumPickaxe.preInit();
+    }
 }
