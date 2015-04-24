@@ -10,7 +10,6 @@ private/
 push/
 run/
 src/ic2
-src/main/resources/assets/gti/lang/
 out/
 
 /gradle.properties

@@ -1,0 +1,23 @@
+//GoodTime Industrial
+//Language file
+//en_US
+
+//gui
+gui.gti.GenGasKu=GenGasKu
+
+//----Food
+item.DiamondApple.name=Diamond Apple
+
+//----OreItem
+item.CrushedIriridium.name=Crushed Iriridium Ore
+
+item.DustIriridium.name=Iriridium Dust
+
+item.IngotIriridium.name=Iriridium Ingot
+
+//----Plate
+item.DiamondPlate.name=Diamond Plate
+item.DenseDiamondPlate.name= Dense Diamond Plate
+
+//----Ore
+tile.iridiumore.name=Iridium Ore

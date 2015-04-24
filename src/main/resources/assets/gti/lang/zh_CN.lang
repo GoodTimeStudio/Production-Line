@@ -1,0 +1,23 @@
+//GoodTime Industrial
+//Language file
+//zh_CN
+
+//gui
+gui.gti.GenGasKu=燃气动能发生机
+
+//----Ore
+tile.iridiumore.name=铱矿石
+
+//----Food
+item.DiamondApple.name=钻石苹果
+
+//----OreItem
+item.CrushedIriridium.name=粉碎的铱矿石
+
+item.DustIriridium.name=铱矿石粉
+
+item.IngotIriridium.name=铱锭
+
+//----Plate
+item.DiamondPlate.name=钻石板
+item.DenseDiamondPlate.name= 致密钻石板
