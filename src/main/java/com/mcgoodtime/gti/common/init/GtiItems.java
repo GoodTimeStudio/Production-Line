@@ -26,8 +26,12 @@
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.items.DiamondApple;
-import com.mcgoodtime.gti.common.items.ItemIridium;
-import com.mcgoodtime.gti.common.items.Plate;
+import com.mcgoodtime.gti.common.items.crashed.CrushedIridium;
+import com.mcgoodtime.gti.common.items.crashed.cleaned.CleanedCrushedIridium;
+import com.mcgoodtime.gti.common.items.dust.DustIridium;
+import com.mcgoodtime.gti.common.items.dust.cleaned.CleanedDustIridium;
+import com.mcgoodtime.gti.common.items.plate.DenseDiamondPlate;
+import com.mcgoodtime.gti.common.items.plate.DiamondPlate;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -37,19 +41,39 @@ import net.minecraft.item.ItemPickaxe;
  * The list of all those items in GoodTime-Industrial.
  */
 public class GtiItems {
-    public static Item oreIridium;
+
+    /* crushed ======================== */
+    public static Item crushedIridium;
+
+    public static Item cleanedCrushedIridium;
+     /* =============================== */
+
+    /* dust ========================= */
     public static Item dustIridium;
-    public static Item smallPileDustIridium;
-    public static Item unwashedIridium;
+
+    public static Item cleanedDustIridium;
+    /* ============================== */
+
+    /* ingot ======================== */
+    public static Item ingotIridium;
+    /* ============================== */
+
+    /* plate ===================== */
     public static Item denseDiamondPlate;
     public static Item diamondPlate;
+    /* =========================== */
+
     public static ItemFood diamondApple;
-    public static ItemPickaxe iridiumPickaxe;
+    
 
     public static void init() {
         diamondApple = new DiamondApple();
-        ItemIridium.preInit();
-        Plate.preInit();
+        diamondPlate = new DiamondPlate();
+        denseDiamondPlate = new DenseDiamondPlate();
+        crushedIridium = new CrushedIridium();
+        cleanedCrushedIridium = new CleanedCrushedIridium();
+        dustIridium = new DustIridium();
+        cleanedDustIridium = new CleanedDustIridium();
         IridiumPickaxe.preInit();
     }
 }

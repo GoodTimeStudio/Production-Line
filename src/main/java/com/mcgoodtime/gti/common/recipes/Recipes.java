@@ -26,11 +26,8 @@
 package com.mcgoodtime.gti.common.recipes;
 
 import com.mcgoodtime.gti.common.init.GtiItems;
-import com.mcgoodtime.gti.common.items.DiamondApple;
 import com.mcgoodtime.gti.common.items.Plate;
-import net.minecraft.block.Block;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 

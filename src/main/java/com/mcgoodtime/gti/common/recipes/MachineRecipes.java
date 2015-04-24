@@ -33,7 +33,6 @@ import com.mcgoodtime.gti.common.items.Plate;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class MachineRecipes {
