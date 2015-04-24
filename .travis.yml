@@ -1,9 +1,9 @@
 language: java
 jdk:
-  - openjdk6
+   # - openjdk6 -not supporting checkstyle
   - openjdk7
   - oraclejdk7
-  # - oraclejdk8
+  - oraclejdk8
 install: gradle setupCIWorkspace -S
 script: gradle build -S
 notifications:
