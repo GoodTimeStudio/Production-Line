@@ -25,9 +25,11 @@
 
 package com.mcgoodtime.gti.common.recipes;
 
+import com.mcgoodtime.gti.common.init.GtiItems;
 import com.mcgoodtime.gti.common.items.DiamondApple;
 import com.mcgoodtime.gti.common.items.Plate;
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -36,8 +38,6 @@ public class Recipes {
 
 	public static void initRecipes() {
 		//----DiamondApple
-		GameRegistry.addRecipe(new ItemStack(DiamondApple.DimApple , 1) , new Object[] {"XXX" , "XAX" , "XXX" , 'X' , Plate.DenseDimPlate , 'A' , Item.getItemById(260)});
-		GameRegistry.addShapelessRecipe(new ItemStack(Block.getBlockById(57) , 8) , DiamondApple.DimApple );
-	
+		GameRegistry.addRecipe(new ItemStack(GtiItems.diamondApple, 1), "XXX", "XAX", "XXX", 'X', Plate.DenseDimPlate, 'A', Items.apple);
 	}
 }

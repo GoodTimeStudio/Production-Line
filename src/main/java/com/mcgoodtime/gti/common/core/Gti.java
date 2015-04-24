@@ -26,6 +26,7 @@
 package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.init.GtiBlocks;
+import com.mcgoodtime.gti.common.init.GtiItems;
 import com.mcgoodtime.gti.common.recipes.CraftingLoader;
 import com.mcgoodtime.gti.common.items.ItemLoader;
 
@@ -57,6 +58,7 @@ public final class Gti {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         GtiBlocks.init();
+        GtiItems.init();
     	ItemLoader.preInit();
     	CraftingLoader.preInit();
     }
