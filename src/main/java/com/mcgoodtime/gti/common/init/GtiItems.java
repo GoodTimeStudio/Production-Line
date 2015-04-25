@@ -29,6 +29,7 @@ import com.mcgoodtime.gti.common.items.crashed.CrushedIridium;
 import com.mcgoodtime.gti.common.items.crashed.cleaned.CleanedCrushedIridium;
 import com.mcgoodtime.gti.common.items.dust.DustIridium;
 import com.mcgoodtime.gti.common.items.dust.cleaned.CleanedDustIridium;
+import com.mcgoodtime.gti.common.items.ingot.IngotIridium;
 import com.mcgoodtime.gti.common.items.plate.DenseDiamondPlate;
 import com.mcgoodtime.gti.common.items.plate.DiamondPlate;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
@@ -74,5 +75,6 @@ public class GtiItems {
         dustIridium = new DustIridium();
         cleanedDustIridium = new CleanedDustIridium();
         iridiumPickaxe = new IridiumPickaxe();
+        ingotIridium = new IngotIridium();
     }
 }
