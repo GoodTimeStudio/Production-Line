@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.gti.common.init;
 
-import com.mcgoodtime.gti.common.items.DiamondApple;
+import com.mcgoodtime.gti.common.items.food.DiamondApple;
 import com.mcgoodtime.gti.common.items.crashed.CrushedIridium;
 import com.mcgoodtime.gti.common.items.crashed.cleaned.CleanedCrushedIridium;
 import com.mcgoodtime.gti.common.items.dust.DustIridium;
