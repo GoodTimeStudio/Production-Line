@@ -22,17 +22,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.common.recipes;
 
-import com.mcgoodtime.gti.common.items.ItemIridium;
+import com.mcgoodtime.gti.common.init.GtiBlocks;
+import com.mcgoodtime.gti.common.init.GtiItems;
+
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.ItemStack;
 
 public class Smelting {
-	public static float xp;
+	public static float xp = 1;
 	public static void initSmelting() {
-		//----ItemIridium
-		GameRegistry.addSmelting(ItemIridium.CrushedIR, ItemIridium.IngotIRs, xp);
-		GameRegistry.addSmelting(ItemIridium.DustIR, ItemIridium.IngotIRs, xp);
+		GameRegistry.addSmelting(GtiBlocks.oreIridium, new ItemStack(GtiItems.ingotIridium), xp);
+		GameRegistry.addSmelting(GtiItems.dustIridium, new ItemStack(GtiItems.ingotIridium), xp);
+		GameRegistry.addSmelting(GtiItems.crushedIridium, new ItemStack(GtiItems.ingotIridium), xp);
+		GameRegistry.addSmelting(GtiItems.cleanedCrushedIridium, new ItemStack(GtiItems.ingotIridium), xp);
 	}
 }

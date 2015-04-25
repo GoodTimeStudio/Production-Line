@@ -29,10 +29,11 @@ import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 
 public class DiamondApple extends ItemFood {
 	public DiamondApple() {
-		super(1005, 10, false);
+		super(1005, 10F, false);
 		this.setUnlocalizedName("DiamondApple");
 		this.setCreativeTab(creativeTabGti);
 		this.setTextureName("gti:itemDiamondApple");

@@ -22,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.items.DiamondApple;
@@ -41,7 +40,6 @@ import net.minecraft.item.ItemPickaxe;
  * The list of all those items in GoodTime-Industrial.
  */
 public class GtiItems {
-
     /* crushed ======================== */
     public static Item crushedIridium;
 
@@ -61,6 +59,7 @@ public class GtiItems {
     /* plate ===================== */
     public static Item denseDiamondPlate;
     public static Item diamondPlate;
+    public static ItemPickaxe iridiumPickaxe;
     /* =========================== */
 
     public static ItemFood diamondApple;
@@ -74,6 +73,6 @@ public class GtiItems {
         cleanedCrushedIridium = new CleanedCrushedIridium();
         dustIridium = new DustIridium();
         cleanedDustIridium = new CleanedDustIridium();
-        IridiumPickaxe.preInit();
+        iridiumPickaxe = new IridiumPickaxe();
     }
 }

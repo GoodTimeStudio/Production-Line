@@ -22,19 +22,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.common.recipes;
 
 import com.mcgoodtime.gti.common.init.GtiItems;
-import com.mcgoodtime.gti.common.items.Plate;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes {
-
 	public static void initRecipes() {
 		//----DiamondApple
-		GameRegistry.addRecipe(new ItemStack(GtiItems.diamondApple, 1), "XXX", "XAX", "XXX", 'X', Plate.DenseDimPlate, 'A', Items.apple);
+		GameRegistry.addRecipe(new ItemStack(GtiItems.diamondApple),
+				"XXX",
+				"XAX",
+				"XXX",
+				'X', GtiItems.denseDiamondPlate,
+				'A', Items.apple
+		);
 	}
 }

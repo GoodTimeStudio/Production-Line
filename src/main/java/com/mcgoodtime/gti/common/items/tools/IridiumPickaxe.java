@@ -22,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.common.items.tools;
 
 import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
@@ -33,16 +32,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 
 public class IridiumPickaxe extends ItemPickaxe {
-
-    protected IridiumPickaxe(ToolMaterial meta) {
-        super(meta);
-        //GtiItems.iridiumPickaxe = new ItemPickaxe(ToolMaterial.IRON);
-        setCreativeTab(creativeTabGti);
-        setUnlocalizedName("iridiumPickaxe");
-        setTextureName("gti:iridiumPickaxe");
-    }
-
-    public static void preInit() {
-        //GameRegistry.registerItem(GtiItems.iridiumPickaxe, "irPix");
+    public IridiumPickaxe() {
+        super(ToolMaterial.IRON);
+        this.setCreativeTab(creativeTabGti);
+        this.setUnlocalizedName("iridiumPickaxe");
+        this.setTextureName("gti:iridiumPickaxe");
+        GameRegistry.registerItem(GtiItems.iridiumPickaxe, "gti.iridiumPickaxe");
     }
 }

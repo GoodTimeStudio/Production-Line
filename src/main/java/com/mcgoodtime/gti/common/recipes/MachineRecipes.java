@@ -22,21 +22,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.common.recipes;
 
 import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
-import com.mcgoodtime.gti.common.items.ItemIridium;
-import com.mcgoodtime.gti.common.items.Plate;
+import com.mcgoodtime.gti.common.init.GtiItems;
 
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class MachineRecipes {
-	
 	public static void InitMachineRecipes() {
 		maceratorRecipes();
 		compressorRecipes();
@@ -45,25 +43,27 @@ public class MachineRecipes {
 	public static void maceratorRecipes() {
 		OreIridium.IRs = new ItemStack(GtiBlocks.oreIridium);
 		//-------------------------------------------
-		
-		//----OreIridium
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(OreIridium.IRs) ,null , new ItemStack(ItemIridium.CrushedIR , 2));
-		
-		//----OreItem
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(ItemIridium.CrushedIRs), null, ItemIridium.DustIRs);
-		Recipes.macerator.addRecipe(new RecipeInputItemStack(ItemIridium.IngotIRs, 1), null, ItemIridium.DustIRs);
+		Recipes.macerator.addRecipe(new RecipeInputItemStack(OreIridium.IRs),
+				null, new ItemStack(GtiItems.crushedIridium, 2));
+		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(GtiItems.crushedIridium)),
+				null, new ItemStack(GtiItems.cleanedCrushedIridium));
+		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(GtiItems.ingotIridium)),
+				null, new ItemStack(GtiItems.dustIridium));
 	}
 	
 	public static void compressorRecipes() {
 		//----Plate
-		Recipes.compressor.addRecipe(new RecipeInputItemStack(new ItemStack(Items.diamond)), null, new ItemStack(Plate.DimPlate));
-		Recipes.compressor.addRecipe(new RecipeInputItemStack(new ItemStack(Plate.DimPlate , 9)), null, new ItemStack(Plate.DenseDimPlate));
+		Recipes.compressor.addRecipe(new RecipeInputItemStack(new ItemStack(Items.diamond)),
+				null, new ItemStack(GtiItems.diamondPlate));
+		Recipes.compressor.addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.diamond_block)),
+				null, new ItemStack(GtiItems.denseDiamondPlate));
 	}
 
 	/**
 	 *
 	 */
 	public static void oreWashingRecipes() {
-		Recipes.oreWashing.addRecipe(new RecipeInputItemStack(new ItemStack(ItemIridium.CrushedIR)), null, null);
+		Recipes.oreWashing.addRecipe(new RecipeInputItemStack(new ItemStack(GtiItems.crushedIridium)),
+				null, new ItemStack(GtiItems.cleanedCrushedIridium));
 	}
 }
