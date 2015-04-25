@@ -11,7 +11,7 @@ import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 public class DenseDiamondPlate extends Item {
 
     public DenseDiamondPlate() {
-        setUnlocalizedName("DenseDiamondPlate");
+        setUnlocalizedName("gti.DenseDiamondPlate");
         setCreativeTab(creativeTabGti);
         setTextureName("gti:itemDenseDiamondPlate");
         GameRegistry.registerItem(this, "DenseDiamondPlate");

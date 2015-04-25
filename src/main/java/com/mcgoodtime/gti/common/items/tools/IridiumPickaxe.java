@@ -35,7 +35,7 @@ public class IridiumPickaxe extends ItemPickaxe {
     public IridiumPickaxe() {
         super(ToolMaterial.IRON);
         this.setCreativeTab(creativeTabGti);
-        this.setUnlocalizedName("iridiumPickaxe");
+        this.setUnlocalizedName("gti.iridiumPickaxe");
         this.setTextureName("gti:iridiumPickaxe");
         GameRegistry.registerItem(this, "gti.iridiumPickaxe");
     }

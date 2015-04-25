@@ -5,19 +5,25 @@
 //gui
 gui.gti.GenGasKu=燃气动能发生机
 
-//----Ore
-tile.iridiumore.name=铱矿石
+//blocks
+tile.gti.iridiumore.name=铱矿石
+tile.gti.WaterHyacinth.name=水葫芦
+tile.gti.gti.GenGasKU.name=燃气动能发生机
 
-//----Food
-item.DiamondApple.name=钻石苹果
+//items
+tile.gti.CrushedIridium.name=粉碎的铱矿石
+tile.gti.CleanedCrushedIridium=纯净的粉碎的铱矿石
 
-//----OreItem
-item.CrushedIriridium.name=粉碎的铱矿石
+tile.gti.DustIridium.name=铱矿石粉
+tile.gti.CleanedDustIridium.name=纯净的铱矿石粉
 
-item.DustIriridium.name=铱矿石粉
+tile.gti.DiamondApple.name=钻石苹果
 
-item.IngotIriridium.name=铱锭
+tile.gti.IngotIridium.name=铱锭
 
-//----Plate
-item.DiamondPlate.name=钻石板
-item.DenseDiamondPlate.name= 致密钻石板
+tile.gti.DenseDiamondPlate.name=致密钻石板
+tile.gti.DiamondPlate.name=钻石板
+
+tile.gti.iridiumPickaxe.name=铱镐
+
+

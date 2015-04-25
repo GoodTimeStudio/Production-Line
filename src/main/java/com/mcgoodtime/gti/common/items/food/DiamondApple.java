@@ -34,7 +34,7 @@ import net.minecraft.item.ItemStack;
 public class DiamondApple extends ItemFood {
 	public DiamondApple() {
 		super(1005, 10F, false);
-		this.setUnlocalizedName("DiamondApple");
+		this.setUnlocalizedName("gti.DiamondApple");
 		this.setCreativeTab(creativeTabGti);
 		this.setTextureName("gti:itemDiamondApple");
 		GameRegistry.registerItem(this, "DiamondApple");

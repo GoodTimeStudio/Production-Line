@@ -10,7 +10,7 @@ import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
  */
 public class DiamondPlate extends Item {
     public DiamondPlate() {
-        setUnlocalizedName("DiamondPlate");
+        setUnlocalizedName("gti.DiamondPlate");
         setCreativeTab(creativeTabGti);
         setTextureName("gti:itemDiamondPlate");
         GameRegistry.registerItem(this, "DiamondPlate");

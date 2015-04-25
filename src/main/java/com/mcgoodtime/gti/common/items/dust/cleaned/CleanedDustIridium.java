@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
  */
 public class CleanedDustIridium extends Item {
     public CleanedDustIridium() {
-        setUnlocalizedName("CleanedDustIridium");
+        setUnlocalizedName("gti.CleanedDustIridium");
         setCreativeTab(CreativeTabGti.creativeTabGti);
         setTextureName("gti:itemWashedDustIridium");
         GameRegistry.registerItem(this, "CleanedDustIridium");

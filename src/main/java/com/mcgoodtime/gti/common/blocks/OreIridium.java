@@ -40,7 +40,7 @@ public class OreIridium extends Block {
 		super(Material.rock);
 		this.setCreativeTab(creativeTabGti);
 		this.setHardness(10);
-		this.setBlockName("iridiumore");
+		this.setBlockName("gti.iridiumore");
 		this.setResistance(20);
 		this.setBlockTextureName("gti:blockOreIridium");
 		this.setHarvestLevel("pickaxe", 3);
