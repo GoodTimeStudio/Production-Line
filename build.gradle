@@ -9,10 +9,10 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-	}
+    }
 		
     dependencies {
-		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+	classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
 
@@ -41,8 +41,8 @@ minecraft {
 }
 
 configurations { 
-	api 
- 	compile.extendsFrom api 
+     api 
+     compile.extendsFrom api 
 }
 
 sourceSets {
@@ -52,14 +52,6 @@ sourceSets {
         }
         resources {
             srcDir 'src/main/resources'
-            def localization = file('../GoodTime-Industrial-Localization')
-            if (localization.exists())
-                srcDir localization
-        }
-    }
-    api {
-        java {
-            srcDir 'api'
         }
     }
 }
@@ -68,11 +60,11 @@ processResources
 {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
-    from(sourceSets.main.resources.srcDirs) {
+    from (sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version' : project.version, 'mcversion' : project.minecraft.version
     }
-    from(sourceSets.main.resources.srcDirs) {
+    from (sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
