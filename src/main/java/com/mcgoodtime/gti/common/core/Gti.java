@@ -27,26 +27,23 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.init.GtiItems;
-import com.mcgoodtime.gti.common.recipes.CraftingLoader;
+import com.mcgoodtime.gti.common.init.Recipes;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(
-	modid = Gti.MOD_ID ,
-    name = Gti.MOD_NAME ,
-	version = Gti.VERSION ,
-	dependencies = "required-after:Forge@[10.13.0.1230,);"
-            + "after:IC2@[2.2.660,);"
-	)
-
+        modid = Gti.MOD_ID,
+        name = Gti.MOD_NAME,
+        version = Gti.VERSION,
+        dependencies = "required-after:" + "Forge@[10.13.2.1230,);" + "after:" + "IC2@[2.2.660,);"
+)
 public final class Gti {
     public static final String MOD_ID = "gti";
-    public static final String MOD_NAME = "GoodTime Industrial";
+    public static final String MOD_NAME = "GoodTime-Industrial";
     public static final String VERSION = "Dev 0.0.4";
     public static final String RESOURCE_DOMAIN = "gti";
     public static final String GUI_PREFIX = "gui.gti.";
@@ -58,7 +55,7 @@ public final class Gti {
     public void preInit(FMLPreInitializationEvent event) {
         GtiBlocks.init();
         GtiItems.init();
-    	CraftingLoader.preInit();
+    	Recipes.init();
     }
     
     @Mod.EventHandler

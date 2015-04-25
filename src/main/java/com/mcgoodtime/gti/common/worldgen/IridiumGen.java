@@ -48,6 +48,7 @@ public class IridiumGen implements IWorldGenerator {
                          IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         generateIridium(random, world, chunkX, chunkZ);
     }
+
     public static void generateIridium(Random random, World world, int chunkX, int chunkZ) {
         for (int i = 0; i < TICKET; i++) {
             int x = chunkX * 16 + random.nextInt(16);
