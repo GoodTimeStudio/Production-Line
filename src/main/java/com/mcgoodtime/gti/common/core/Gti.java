@@ -36,12 +36,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod (
+@Mod(
 	modid = Gti.MOD_ID ,
     name = Gti.MOD_NAME ,
 	version = Gti.VERSION ,
 	dependencies = "required-after:Forge@[10.13.0.1230,);"
-					+ "after:IC2@[2.2.660,);"
+            + "after:IC2@[2.2.660,);"
 	)
 
 public final class Gti {
@@ -65,10 +65,4 @@ public final class Gti {
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     }
-    
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-
-    }
-
 }
