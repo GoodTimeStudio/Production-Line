@@ -22,12 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.client.gui;
 
-import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
-import com.mcgoodtime.gti.common.inventory.ContainerGenGasKU;
 import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.inventory.ContainerGenGasKU;
+import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,62 +37,73 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Keyboard;
 
+/**
+ * The Gui.
+ *
+ * @author liach
+ */
 @SideOnly(Side.CLIENT)
-public class GUIGenGasKU extends GuiContainer {
-
+public class GuiGenGasKu extends GuiContainer {
     private static final ResourceLocation background;
 
-    private int xSize, ySize;
-    private int x, y;
+    private int ySize;
+    private int xSize;
+    private int x;
+    private int y;
+
     private TileGenGasKu tile;
 
-	public GUIGenGasKU(InventoryPlayer inventoryPlayer, TileGenGasKu tileEntity) {
-        super(new ContainerGenGasKU(inventoryPlayer, tileEntity));
-        this.tile = tileEntity;
+    public GuiGenGasKu(InventoryPlayer inventoryPlayer, TileGenGasKu tile) {
+        super(new ContainerGenGasKU(inventoryPlayer, tile));
+        this.tile = tile;
         xSize = 176;
         ySize = 166;
-	}
-
-	public void initGui() {
-		//每当界面打开时调用——部署控件
-		super.initGui();
-		Keyboard.enableRepeatEvents(true);
-	}
-
-    //绘制文字，控件等
-    protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        //String s = this.tile.getInventoryName();
-        //this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
     }
 
-    //绘制背景
-    protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-        //绘制文本等非控件内容，会被控件覆盖
+    public void initGui() {
+        super.initGui();
+    }
+
+    protected void drawGuiContainerForegroundLayer(int x, int y) {
+        this.fontRendererObj.drawString(
+                I18n.format(
+                        "container.inventory",
+                        new Object[0]
+                ),
+                8,
+                this.ySize - 96 + 2,
+                4210752
+        );
+    }
+
+    protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
         this.mc.getTextureManager().bindTexture(background);
-        this.mc.fontRenderer.drawString(StatCollector.translateToLocal(Gti.GUI_PREFIX + "GenGasKu"), 100, 10, 16777215);
+        this.mc.fontRenderer.drawString(
+                StatCollector.translateToLocal(
+                        Gti.GUI_PREFIX + "GenGasKu"
+                ),
+                100,
+                10,
+                16777215
+        );
         this.x = (this.width - xSize) / 2;
         this.y = (this.height - ySize) / 2;
-        drawTexturedModalRect(this.x ,this.y, 0, 0, xSize, ySize);//绘制材质
+        drawTexturedModalRect(this.x, this.y, 0, 0, xSize, ySize);
     }
 
-    //键盘按钮事件
-	protected void keyTyped(char p1, int p2) {
-		super.keyTyped(p1, p2);
-		if (p2 == Keyboard.KEY_E) {
-			mc.displayGuiScreen(null);
-		} 
-	}
+    protected void keyTyped(char c, int i) {
+        super.keyTyped(c, i);
+        if (i == Keyboard.KEY_E) {
+            this.mc.displayGuiScreen(null);
+        }
+    }
 
-	
-	//GUI关闭时调用
-	public void onGuiClosed() {
+    public void onGuiClosed() {
         super.onGuiClosed();
-		Keyboard.enableRepeatEvents(false);
-	}
+        Keyboard.enableRepeatEvents(false);
+    }
 
     static {
         background = new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/client/gui/GUIGenGasKU.png");
     }
-
 }
