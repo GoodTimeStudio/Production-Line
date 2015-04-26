@@ -19,7 +19,7 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'checkstyle'
 
-version = "0.0.3"
+version = "dev 0.0.4"
 group= "com.mcgoodtime"
 archivesBaseName = "gti"
 
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    compile 'net.industrial-craft:industrialcraft-2:2.2.717-experimental:dev' //adds newest ic2 to the dev env
+    compile 'net.industrial-craft:industrialcraft-2:2.2.718-experimental:dev' //adds newest ic2 to the dev env
     checkstyle 'com.puppycrawl.tools:checkstyle:6.5'
 }
 

@@ -56,8 +56,8 @@ public class GuiGenGasKu extends GuiContainer {
     public GuiGenGasKu(InventoryPlayer inventoryPlayer, TileGenGasKu tile) {
         super(new ContainerGenGasKU(inventoryPlayer, tile));
         this.tile = tile;
-        xSize = 176;
-        ySize = 166;
+        this.xSize = 176;
+        this.ySize = 166;
     }
 
     public void initGui() {
@@ -86,8 +86,8 @@ public class GuiGenGasKu extends GuiContainer {
                 10,
                 16777215
         );
-        this.x = (this.width - xSize) / 2;
-        this.y = (this.height - ySize) / 2;
+        this.x = (this.width - this.xSize) / 2;
+        this.y = (this.height - this.ySize) / 2;
         drawTexturedModalRect(this.x, this.y, 0, 0, xSize, ySize);
     }
 

@@ -22,26 +22,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.init;
+package com.mcgoodtime.gti.common.core;
 
-import com.mcgoodtime.gti.common.blocks.BlockWaterHyacinth;
-import com.mcgoodtime.gti.common.blocks.OreIridium;
-import com.mcgoodtime.gti.common.blocks.machines.GenGasKU;
+import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.File;
 
 /**
- * Gti blocks.
+ * Config loader in GoodTime-Industrial.
  *
  * @author liach
  */
-public class GtiBlocks {
-
-    public static BlockWaterHyacinth waterHyacinth;
-    public static GenGasKU genGasKU;
-    public static OreIridium oreIridium;
+public class GtiConfig {
+    public static Logger gtiLogger = LogManager.getLogger(Gti.MOD_ID);
+    public static Configuration gtiConfig;
+    public static File configFile;
 
     public static void init() {
-        waterHyacinth = new BlockWaterHyacinth();
-        genGasKU = new GenGasKU();
-        oreIridium = new OreIridium();
+        configFile = new File("config", Gti.MOD_NAME + ".cfg");
+        gtiConfig = new Configuration(configFile);
+        gtiConfig.load();
+        gtiLogger.log(Level.INFO, "Gti logger loaded");
     }
 }

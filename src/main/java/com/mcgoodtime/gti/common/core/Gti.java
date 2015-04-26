@@ -22,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.init.GtiBlocks;
@@ -53,6 +52,7 @@ public final class Gti {
    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        GtiConfig.init();
         GtiBlocks.init();
         GtiItems.init();
     	Recipes.init();
