@@ -38,7 +38,7 @@ import net.minecraft.item.ItemStack;
 public class Recipes {
     private static final float XP = 2F;
 
-    /** Load recipes of GoodTime-Industrial */
+    /** Load recipes of GoodTime-Industrial.*/
     public static void init() {
         //vanilla recipe registery
         GameRegistry.addRecipe(

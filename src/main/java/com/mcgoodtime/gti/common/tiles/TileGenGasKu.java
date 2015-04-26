@@ -30,6 +30,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
 /**
+ * The GenGasKu tile.
+ *
  * @author liach
  */
 public class TileGenGasKu extends TileEntity {

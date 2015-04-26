@@ -29,6 +29,8 @@ import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.blocks.machines.GenGasKU;
 
 /**
+ * Gti blocks.
+ *
  * @author liach
  */
 public class GtiBlocks {

@@ -36,6 +36,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 /**
+ * Yeah the water hyacinth... For fun.
+ *
  * @author liach
  */
 public class BlockWaterHyacinth extends BlockLilyPad {

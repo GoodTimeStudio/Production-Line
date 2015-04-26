@@ -50,15 +50,15 @@ public class CreativeTabGti extends CreativeTabs {
     }
 
     @SideOnly(Side.CLIENT)
-    public Item getTabIconItem(){
+    public Item getTabIconItem() {
         return null;
     }
 
     @SideOnly(Side.CLIENT)
     public ItemStack getIconItemStack() {
-        if (display == null) {
-            display = new ItemStack(GtiItems.diamondApple).copy();
+        if (this.display == null) {
+            this.display = new ItemStack(GtiItems.diamondApple).copy();
         }
-        return display;
+        return this.display;
     }
 }
