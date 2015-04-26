@@ -28,32 +28,90 @@ import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 
 import com.mcgoodtime.gti.common.core.Gti;
 
+import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.BlockLilyPad;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Random;
 
 /**
- * Yeah the water hyacinth... For fun.
+ * Yeah the water hyacinth block... For fun.
  *
  * @author liach
  */
-public class BlockWaterHyacinth extends BlockLilyPad {
+public class BlockWaterHyacinth extends BlockBush {
 
     public BlockWaterHyacinth() {
-        this.setBlockName("gti.WaterHyacinth");
+        super(Material.plants);
+        this.setBlockName("WaterHyacinth");
         this.setCreativeTab(creativeTabGti);
         this.setBlockTextureName(Gti.RESOURCE_DOMAIN + ":" + "BlockWaterHyacinth");
-        GameRegistry.registerBlock(this, "gti.WaterHyacinth");
+        this.setHardness(0.0F);
+        this.setResistance(0.0F);
+        this.setStepSound(soundTypeGrass);
+        this.setTickRandomly(true);
+        float f = 0.5F;
+        float f1 = 0.015625F;
+        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
+        GameRegistry.registerBlock(this, ItemWaterHyacinth.class, "WaterHyacinth");
+    }
+
+    public int getRenderType() {
+        return 23;
     }
 
     public void updateTick(World world, int x, int y, int z, Random rand) {
-        int changedX = rand.nextInt(5) - 3;
-        int changedZ = rand.nextInt(5) - 3;
-        if (world.getBlock(x + changedX, y - 1, z + changedZ) == Blocks.water) {
+        int changedX = rand.nextInt(5) - 3 + x;
+        int changedZ = rand.nextInt(5) - 3 + z;
+        if ((world.isAirBlock(changedX, y, changedZ)) && (canPlaceBlockOn(world.getBlock(changedX, y - 1, changedZ)))) {
             world.setBlock(x + changedX, y, z + changedZ, this);
         }
+        world.setBlock(changedX, y, changedZ, this);
+    }
+
+    protected boolean canPlaceBlockOn(Block placedOn) {
+        return placedOn == Blocks.water;
+    }
+
+    @Override
+    public boolean canBlockStay(World world, int x, int y, int z) {
+        return y >= 0 && y < 256 ? world.getBlock(x, y - 1, z).getMaterial() == Material.water && world.getBlockMetadata(x, y - 1, z) == 0 : false;
+    }
+    
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+        return AxisAlignedBB.getBoundingBox((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)y + this.maxY, (double)z + this.maxZ);
+    }
+
+    public void addCollisionBoxesToList(World p_149743_1_, int p_149743_2_, int p_149743_3_, int p_149743_4_, AxisAlignedBB p_149743_5_, List p_149743_6_, Entity p_149743_7_) {
+        if (p_149743_7_ == null || !(p_149743_7_ instanceof EntityBoat))
+        {
+            super.addCollisionBoxesToList(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_, p_149743_5_, p_149743_6_, p_149743_7_);
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBlockColor() {
+        return 2129968;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getRenderColor(int p_149741_1_) {
+        return 2129968;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_) {
+        return 2129968;
     }
 }

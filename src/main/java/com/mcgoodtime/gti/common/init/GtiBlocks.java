@@ -27,6 +27,11 @@ package com.mcgoodtime.gti.common.init;
 import com.mcgoodtime.gti.common.blocks.BlockWaterHyacinth;
 import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.blocks.machines.GenGasKU;
+import com.mcgoodtime.gti.common.core.GtiConfig;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import org.apache.logging.log4j.Level;
 
 /**
  * Gti blocks.
@@ -35,13 +40,16 @@ import com.mcgoodtime.gti.common.blocks.machines.GenGasKU;
  */
 public class GtiBlocks {
 
-    public static BlockWaterHyacinth waterHyacinth;
-    public static GenGasKU genGasKU;
-    public static OreIridium oreIridium;
+    public static Block waterHyacinth;
+    public static BlockContainer genGasKU;
+    public static Block oreIridium;
 
     public static void init() {
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKU();
         oreIridium = new OreIridium();
+        GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
+        GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
+        GtiConfig.gtiLogger.log(Level.INFO, "oreiridium" + Integer.toString(Block.getIdFromBlock(oreIridium)));
     }
 }
