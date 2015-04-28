@@ -26,9 +26,9 @@ package com.mcgoodtime.gti.common.blocks.machines;
 
 import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 
-import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GuiHandler;
+import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.BlockContainer;

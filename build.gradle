@@ -19,8 +19,8 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'checkstyle'
 
-version = "dev 0.0.4"
-group= "com.mcgoodtime"
+version = "dev 0.0.5"
+group= "com.mcgoodtime.gti"
 archivesBaseName = "gti"
 
 repositories {

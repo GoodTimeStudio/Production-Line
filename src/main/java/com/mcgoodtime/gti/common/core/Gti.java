@@ -43,7 +43,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 public final class Gti {
     public static final String MOD_ID = "gti";
     public static final String MOD_NAME = "GoodTime-Industrial";
-    public static final String VERSION = "Dev 0.0.4";
+    public static final String VERSION = "Dev 0.0.5";
     public static final String RESOURCE_DOMAIN = "gti";
     public static final String GUI_PREFIX = "gui.gti.";
 
