@@ -31,13 +31,23 @@ import com.mcgoodtime.gti.common.core.GuiHandler;
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class GenGasKu extends BlockContainer {
+
+    @SideOnly(Side.CLIENT)
+    private IIcon front;
+    @SideOnly(Side.CLIENT)
+    private IIcon back;
+
     public GenGasKu() {
         super(Material.rock);
         this.setCreativeTab(creativeTabGti);
@@ -64,4 +74,17 @@ public class GenGasKu extends BlockContainer {
         return new TileGenGasKu();
     }
 
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int var) {
+        if (side == 2) return front;
+        else if (side == 3) return back;
+        else return null;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister iir) {
+        this.front = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU_front");
+        this.back = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU_back");
+        this.blockIcon = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU");
+    }
 }
