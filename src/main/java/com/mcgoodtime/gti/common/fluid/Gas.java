@@ -29,7 +29,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class Gas extends Fluid {
     public static Fluid gasNatural = new Gas("Natural Gas")
-    .setGaseous(true);
+        .setGaseous(true);
 
     public Gas(String fluidName) {
         super(fluidName);

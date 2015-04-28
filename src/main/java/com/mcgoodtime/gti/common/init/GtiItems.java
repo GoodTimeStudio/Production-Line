@@ -25,8 +25,8 @@
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.items.food.DiamondApple;
-import com.mcgoodtime.gti.common.items.crushed.CrushedIridium;
 import com.mcgoodtime.gti.common.items.crushed.cleaned.CleanedCrushedIridium;
+import com.mcgoodtime.gti.common.items.crushed.CrushedIridium;
 import com.mcgoodtime.gti.common.items.dust.DustIridium;
 import com.mcgoodtime.gti.common.items.ingot.IngotIridium;
 import com.mcgoodtime.gti.common.items.plate.DenseDiamondPlate;
