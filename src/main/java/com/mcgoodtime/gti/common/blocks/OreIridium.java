@@ -22,28 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.common.blocks;
 
 import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 
-import com.mcgoodtime.gti.common.init.GtiBlocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
+/**
+ * The block of iridium ore.
+ *
+ * @author liach
+ */
 public class OreIridium extends Block {
-
-	public OreIridium() {
-		super(Material.rock);
-		this.setCreativeTab(creativeTabGti);
-		this.setHardness(10);
-		this.setBlockName("gti.OreIridium");
-		this.setResistance(20);
-		this.setBlockTextureName("gti:blockOreIridium");
-		this.setHarvestLevel("pickaxe", 3);
-		GameRegistry.registerBlock(this, "OreIridium");
-	}
+    public OreIridium() {
+        super(Material.rock);
+        this.setCreativeTab(creativeTabGti);
+        this.setHardness(10);
+        this.setBlockName("gti.OreIridium");
+        this.setResistance(20);
+        this.setBlockTextureName("gti:blockOreIridium");
+        this.setHarvestLevel("pickaxe", 3);
+        GameRegistry.registerBlock(this, "OreIridium");
+    }
 }

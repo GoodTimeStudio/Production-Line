@@ -26,7 +26,7 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.blocks.BlockWaterHyacinth;
 import com.mcgoodtime.gti.common.blocks.OreIridium;
-import com.mcgoodtime.gti.common.blocks.machines.GenGasKU;
+import com.mcgoodtime.gti.common.blocks.machines.GenGasKu;
 import com.mcgoodtime.gti.common.core.GtiConfig;
 
 import net.minecraft.block.Block;
@@ -46,7 +46,7 @@ public class GtiBlocks {
 
     public static void init() {
         waterHyacinth = new BlockWaterHyacinth();
-        genGasKU = new GenGasKU();
+        genGasKU = new GenGasKu();
         oreIridium = new OreIridium();
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
         GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));

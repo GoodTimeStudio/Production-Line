@@ -29,6 +29,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 
 /**
+ * The iridium dust item.
+ *
  * @author Su Hao
  */
 public class DustIridium extends Item {

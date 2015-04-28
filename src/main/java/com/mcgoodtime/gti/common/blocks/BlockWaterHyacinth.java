@@ -86,17 +86,20 @@ public class BlockWaterHyacinth extends BlockBush {
 
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
-        return y >= 0 && y < 256 ? world.getBlock(x, y - 1, z).getMaterial() == Material.water && world.getBlockMetadata(x, y - 1, z) == 0 : false;
+        return y >= 0 && y < 256 ? world.getBlock(x, y - 1, z).getMaterial() == Material.water &&
+                world.getBlockMetadata(x, y - 1, z) == 0 : false;
     }
     
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        return AxisAlignedBB.getBoundingBox((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)y + this.maxY, (double)z + this.maxZ);
+        return AxisAlignedBB.getBoundingBox((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ,
+                (double)x + this.maxX, (double)y + this.maxY, (double)z + this.maxZ);
     }
 
-    public void addCollisionBoxesToList(World p_149743_1_, int p_149743_2_, int p_149743_3_, int p_149743_4_, AxisAlignedBB p_149743_5_, List p_149743_6_, Entity p_149743_7_) {
-        if (p_149743_7_ == null || !(p_149743_7_ instanceof EntityBoat))
-        {
-            super.addCollisionBoxesToList(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_, p_149743_5_, p_149743_6_, p_149743_7_);
+    public void addCollisionBoxesToList(World p_149743_1_, int p_149743_2_, int p_149743_3_, int p_149743_4_,
+                                        AxisAlignedBB p_149743_5_, List p_149743_6_, Entity p_149743_7_) {
+        if (p_149743_7_ == null || !(p_149743_7_ instanceof EntityBoat)) {
+            super.addCollisionBoxesToList(p_149743_1_, p_149743_2_, p_149743_3_,
+                    p_149743_4_, p_149743_5_, p_149743_6_, p_149743_7_);
         }
     }
 

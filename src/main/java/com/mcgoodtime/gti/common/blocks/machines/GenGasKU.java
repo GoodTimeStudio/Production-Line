@@ -22,30 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.common.blocks.machines;
 
 import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
-import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GuiHandler;
+import com.mcgoodtime.gti.common.core.Gti;
+
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class GenGasKU extends BlockContainer {
-
-    public GenGasKU() {
+public class GenGasKu extends BlockContainer {
+    public GenGasKu() {
         super(Material.rock);
         this.setCreativeTab(creativeTabGti);
-        this.setBlockName("gti.GenGasKU");
-        this.setBlockTextureName("gti:GenGasKU");
-        GameRegistry.registerBlock(this, "GenGasKU");
+        this.setBlockName("gti.GenGasKu");
+        this.setBlockTextureName("gti:GenGasKu");
+        GameRegistry.registerBlock(this, "GenGasKu");
     }
 
     /**

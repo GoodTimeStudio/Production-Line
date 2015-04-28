@@ -34,13 +34,13 @@ import net.minecraft.world.World;
 public class GuiHandler implements IGuiHandler {
 
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getServerGuiElement(int Id, EntityPlayer player, World world, int x, int y, int z) {
         return null;
     }
 
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if (ID == Guis.GenGasKu.ordinal()) {
+    public Object getClientGuiElement(int Id, EntityPlayer player, World world, int x, int y, int z) {
+        if (Id == Guis.GenGasKu.ordinal()) {
             return new GuiGenGasKu(player.inventory, (TileGenGasKu)world.getTileEntity(x, y, z));
         }
         return null;

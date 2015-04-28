@@ -25,7 +25,7 @@
 package com.mcgoodtime.gti.client.gui;
 
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.inventory.ContainerGenGasKU;
+import com.mcgoodtime.gti.common.inventory.ContainerGenGasKu;
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 
 import cpw.mods.fml.relauncher.Side;
@@ -54,7 +54,7 @@ public class GuiGenGasKu extends GuiContainer {
     private TileGenGasKu tile;
 
     public GuiGenGasKu(InventoryPlayer inventoryPlayer, TileGenGasKu tile) {
-        super(new ContainerGenGasKU(inventoryPlayer, tile));
+        super(new ContainerGenGasKu(inventoryPlayer, tile));
         this.tile = tile;
         this.xSize = 176;
         this.ySize = 166;
@@ -88,7 +88,7 @@ public class GuiGenGasKu extends GuiContainer {
         );
         this.x = (this.width - this.xSize) / 2;
         this.y = (this.height - this.ySize) / 2;
-        drawTexturedModalRect(this.x, this.y, 0, 0, xSize, ySize);
+        drawTexturedModalRect(this.x, this.y, 0, 0, this.xSize, this.ySize);
     }
 
     protected void keyTyped(char c, int i) {

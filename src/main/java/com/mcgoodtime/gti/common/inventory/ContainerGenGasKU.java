@@ -31,27 +31,22 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 
-public class ContainerGenGasKU extends Container {
+public class ContainerGenGasKu extends Container {
 
     private TileGenGasKu tileEntity;
 
-    public ContainerGenGasKU(InventoryPlayer inventoryPlayer, TileGenGasKu tileEntity) {
+    public ContainerGenGasKu(InventoryPlayer inventoryPlayer, TileGenGasKu tileEntity) {
         this.tileEntity = tileEntity;
         /*this.addSlotToContainer(new Slot(tileEntity, 0, 56, 17));
         this.addSlotToContainer(new Slot(tileEntity, 1, 56, 53));
         this.addSlotToContainer(new Slot(tileEntity, 2, 116, 35));*/
-        int i;
-
-        for (i = 0; i < 3; ++i)
-        {
-            for (int j = 0; j < 9; ++j)
-            {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
-        for (i = 0; i < 9; ++i)
-        {
+        for (int i = 0; i < 9; ++i) {
             this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
         }
     }

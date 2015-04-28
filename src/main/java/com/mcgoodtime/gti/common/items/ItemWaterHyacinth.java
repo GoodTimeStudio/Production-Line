@@ -48,8 +48,7 @@ public class ItemWaterHyacinth extends ItemColored {
     }
 
     @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack itemStack, int damage)
-    {
+    public int getColorFromItemStack(ItemStack itemStack, int damage) {
         return GtiBlocks.waterHyacinth.getRenderColor(itemStack.getItemDamage());
     }
 
@@ -71,11 +70,14 @@ public class ItemWaterHyacinth extends ItemColored {
                     return itemStack;
                 }
 
-                if (world.getBlock(i, j, k).getMaterial() == Material.water && world.getBlockMetadata(i, j, k) == 0 && world.isAirBlock(i, j + 1, k)) {
+                if (world.getBlock(i, j, k).getMaterial() == Material.water && world.getBlockMetadata(i, j, k) == 0 &&
+                        world.isAirBlock(i, j + 1, k)) {
                     // special case for handling block placement with water lilies, moved to water hyacinth
-                    net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(world, i, j + 1, k);
+                    net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.
+                            BlockSnapshot.getBlockSnapshot(world, i, j + 1, k);
                     world.setBlock(i, j + 1, k, GtiBlocks.waterHyacinth);
-                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(player, blocksnapshot, net.minecraftforge.common.util.ForgeDirection.UP).isCanceled()) {
+                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(player, blocksnapshot,
+                            net.minecraftforge.common.util.ForgeDirection.UP).isCanceled()) {
                         blocksnapshot.restore(true, false);
                         return itemStack;
                     }
