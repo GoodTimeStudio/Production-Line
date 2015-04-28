@@ -33,7 +33,7 @@ import net.minecraft.item.Item;
  */
 public class CleanedCrushedIridium extends Item {
     public CleanedCrushedIridium() {
-        setUnlocalizedName("gti.CleanedCrushedIridium");
+        setUnlocalizedName("gti.item.crushed.CleanedCrushedIridium");
         setCreativeTab(CreativeTabGti.creativeTabGti);
         setTextureName("gti:itemWashedCrushedIridium");
         GameRegistry.registerItem(this, "CleanedCrushedIridium");

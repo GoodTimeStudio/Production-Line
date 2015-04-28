@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.init;
 
+import com.mcgoodtime.gti.common.items.ItemAirBrake;
 import com.mcgoodtime.gti.common.items.crushed.CrushedIridium;
 import com.mcgoodtime.gti.common.items.crushed.cleaned.CleanedCrushedIridium;
 import com.mcgoodtime.gti.common.items.dust.DustIridium;
@@ -63,7 +64,8 @@ public class GtiItems {
     /* =========================== */
 
     public static ItemFood diamondApple;
-    
+    public static Item airBrakeUnit;
+    public static Item airBrakeCasing;
 
     public static void init() {
         diamondApple = new DiamondApple();
@@ -75,5 +77,7 @@ public class GtiItems {
         smallDustIridium = new DustIridium.DustIridiumSmall();
         iridiumPickaxe = new IridiumPickaxe();
         ingotIridium = new IngotIridium();
+        airBrakeUnit = new ItemAirBrake.ItemAirBrakeUnit();
+        airBrakeCasing = new ItemAirBrake.ItemAirBrakeCasing();
     }
 }

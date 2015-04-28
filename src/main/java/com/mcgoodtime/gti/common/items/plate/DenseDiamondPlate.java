@@ -35,7 +35,7 @@ import net.minecraft.item.Item;
 public class DenseDiamondPlate extends Item {
 
     public DenseDiamondPlate() {
-        setUnlocalizedName("gti.DenseDiamondPlate");
+        setUnlocalizedName("gti.item.plate.DenseDiamondPlate");
         setCreativeTab(creativeTabGti);
         setTextureName("gti:itemDenseDiamondPlate");
         GameRegistry.registerItem(this, "DenseDiamondPlate");

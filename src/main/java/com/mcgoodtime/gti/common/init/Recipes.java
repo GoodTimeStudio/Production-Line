@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.init;
 
+import com.mcgoodtime.gti.common.core.Gti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.core.Ic2Items;
@@ -40,7 +41,24 @@ public class Recipes {
 
     /** Load recipes of GoodTime-Industrial.*/
     public static void init() {
-        //vanilla recipe registery
+        //vanilla recipe registry
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.airBrakeCasing),
+                "AAA",
+                "BBB",
+                "ACA",
+                'A', ic2.api.item.IC2Items.getItem("plateiron"),
+                'B', GtiItems.airBrakeUnit,
+                'C', Items.bucket
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.airBrakeUnit),
+                "XY#",
+                "YY#",
+                "#YY",
+                'X', ic2.api.item.IC2Items.getItem("advIronIngot"),
+                'Y', ic2.api.item.IC2Items.getItem("rubber")
+        );
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.diamondApple),
                 "DDD",

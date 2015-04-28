@@ -44,7 +44,7 @@ import net.minecraft.world.World;
 public class ItemWaterHyacinth extends ItemColored {
     public ItemWaterHyacinth(Block block) {
         super(block, false);
-        this.setUnlocalizedName("WaterHyacinth");
+        this.setUnlocalizedName("gti.item.WaterHyacinth");
     }
 
     @SideOnly(Side.CLIENT)

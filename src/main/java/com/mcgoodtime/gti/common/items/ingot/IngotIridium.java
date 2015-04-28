@@ -33,7 +33,7 @@ import net.minecraft.item.Item;
  */
 public class IngotIridium extends Item {
     public IngotIridium() {
-        setUnlocalizedName("gti.IngotIridium");
+        setUnlocalizedName("gti.item.ingot.IngotIridium");
         setCreativeTab(CreativeTabGti.creativeTabGti);
         setTextureName("gti:itemIngotIR");
         GameRegistry.registerItem(this, "IngotIridium");

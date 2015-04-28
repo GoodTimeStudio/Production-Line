@@ -34,7 +34,7 @@ import net.minecraft.item.Item;
  */
 public class DiamondPlate extends Item {
     public DiamondPlate() {
-        setUnlocalizedName("gti.DiamondPlate");
+        setUnlocalizedName("gti.item.plate.DiamondPlate");
         setCreativeTab(creativeTabGti);
         setTextureName("gti:itemDiamondPlate");
         GameRegistry.registerItem(this, "DiamondPlate");

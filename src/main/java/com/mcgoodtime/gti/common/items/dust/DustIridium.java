@@ -35,7 +35,7 @@ import net.minecraft.item.Item;
  */
 public class DustIridium extends Item {
     public DustIridium() {
-        setUnlocalizedName("gti.DustIridium");
+        setUnlocalizedName("gti.item.dust.DustIridium");
         setCreativeTab(CreativeTabGti.creativeTabGti);
         setTextureName("gti:itemDustIriridium");
         GameRegistry.registerItem(this, "DustIridium");
@@ -43,7 +43,7 @@ public class DustIridium extends Item {
 
     public static class DustIridiumSmall extends Item {
         public DustIridiumSmall() {
-            setUnlocalizedName("gti.DustIridiumSmall");
+            setUnlocalizedName("gti.item.dust.DustIridiumSmall");
             setCreativeTab(CreativeTabGti.creativeTabGti);
             setTextureName("gti:itemDustIriridiumSmall");
             GameRegistry.registerItem(this, "DustIridiumSmall");
