@@ -77,7 +77,6 @@ public class BlockWaterHyacinth extends BlockBush {
         if ((world.isAirBlock(changedX, y, changedZ)) && (canPlaceBlockOn(world.getBlock(changedX, y - 1, changedZ)))) {
             world.setBlock(x + changedX, y, z + changedZ, this);
         }
-        world.setBlock(changedX, y, changedZ, this);
     }
 
     protected boolean canPlaceBlockOn(Block placedOn) {
