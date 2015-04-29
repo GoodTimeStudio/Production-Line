@@ -80,7 +80,7 @@ public class GenGasKu extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iir) {
-        this.blockIcon = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU_0");
+        this.blockIcon = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU");
         for (int i = 0; i < icons.length; i++) {
             icons[i] = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU_" + i);
         }
