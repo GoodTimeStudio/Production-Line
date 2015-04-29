@@ -27,7 +27,7 @@ package com.mcgoodtime.gti.common.init;
 import com.mcgoodtime.gti.common.blocks.BlockWaterHyacinth;
 import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.blocks.machines.GenGasKu;
-import com.mcgoodtime.gti.common.core.GtiConfig;
+import com.mcgoodtime.gti.common.core.config.GtiConfig;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

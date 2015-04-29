@@ -126,4 +126,8 @@ public class Recipes {
                 new ItemStack(GtiItems.smallDustIridium, 2)
         );
     }
+
+    public static void disableRecipes() {
+
+    }
 }

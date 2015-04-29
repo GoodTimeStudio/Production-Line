@@ -40,19 +40,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class GenGasKu extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
-    private IIcon front;
-    @SideOnly(Side.CLIENT)
-    private IIcon back;
+    private IIcon[] icons = new IIcon[6];
 
     public GenGasKu() {
         super(Material.rock);
         this.setCreativeTab(creativeTabGti);
         this.setBlockName("gti.GenGasKu");
-        this.setBlockTextureName("gti:GenGasKu");
+        this.setBlockTextureName("gti:GenGasKu_0");
         GameRegistry.registerBlock(this, "GenGasKu");
     }
 
@@ -76,15 +75,14 @@ public class GenGasKu extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int var) {
-        if (side == 2) return front;
-        else if (side == 3) return back;
-        else return null;
+        return icons[side];
     }
 
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iir) {
-        this.front = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU_front");
-        this.back = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU_back");
-        this.blockIcon = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU");
+        this.blockIcon = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU_0");
+        for (int i = 0; i < icons.length; i++) {
+            icons[i] = iir.registerIcon(Gti.MOD_ID + ":" + "GenGasKU_" + i);
+        }
     }
 }
