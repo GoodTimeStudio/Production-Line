@@ -29,7 +29,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.core.Ic2Items;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.crafting.IRecipe;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * The class for loading all the recipes of GoodTime-Industrial. Migrated from old loaders.
@@ -127,7 +134,19 @@ public class Recipes {
         );
     }
 
-    public static void disableRecipes() {
+    public static void disableRecipes(ItemStack itemStack) {
+        List<IRecipe> recipeList = CraftingManager.getInstance().getRecipeList();
+        for (int i = 0; i < recipeList.size(); i++) {
+            IRecipe iRecipe = recipeList.get(i);
+            ItemStack recipesResult = iRecipe.getRecipeOutput();
+            if (ItemStack.areItemStacksEqual(itemStack, recipesResult)) {
+                recipeList.remove(i--);
+            }
+        }
+    }
 
+    public static void disableSmelting(ItemStack itemStack) {
+        Map<List<Integer>, ItemStack> smelting = FurnaceRecipes.smelting().getSmeltingList();
+        smelting.remove(itemStack);
     }
 }
