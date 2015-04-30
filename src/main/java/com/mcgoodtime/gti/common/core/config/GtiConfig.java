@@ -46,13 +46,8 @@ public class GtiConfig {
 
     public static void init() {
         configFile = new File("config", Gti.MOD_NAME + ".cfg");
-
-        // if configFile doesn't exists
-        if (!configFile.exists()) {
-
-        }
-
         gtiConfig = new Configuration(configFile);
+        
         if (!configFile.exists()) {
             gtiLogger.log(Level.ERROR, "Cannot create Gti config file");
             gtiLogger.log(Level.INFO, "Skipping config load");
