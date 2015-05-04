@@ -35,12 +35,6 @@ import net.minecraft.tileentity.TileEntity;
  * @author liach
  */
 public class TileGenGasKu extends TileEntity {
-    public class ContainerGenGasKu extends Container {
-        public boolean canInteractWith(EntityPlayer player) {
-            return true;
-        }
-
-    }
 
     public TileGenGasKu() {
 

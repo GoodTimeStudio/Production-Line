@@ -9,21 +9,22 @@ gui.gti.GenGasKu=燃气动能发生机
 tile.gti.iridiumore.name=铱矿石
 tile.gti.WaterHyacinth.name=水葫芦
 tile.gti.GenGasKU.name=燃气动能发生机
+tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
 
 //items
-item.gti.CrushedIridium.name=粉碎的铱矿石
-item.gti.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
+item.gti.item.CrushedIridium.name=粉碎的铱矿石
+item.gti.item.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
 
-item.gti.DustIridium.name=铱矿石粉
-item.gti.CleanedDustIridium.name=纯净的铱矿石粉
+item.gti.item.DustIridium.name=铱矿石粉
+item.gti.item.CleanedDustIridium.name=纯净的铱矿石粉
 
-item.gti.DiamondApple.name=钻石苹果
+item.gti.item.DiamondApple.name=钻石苹果
 
-item.gti.IngotIridium.name=铱锭
+item.gti.item.IngotIridium.name=铱锭
 
-item.gti.DenseDiamondPlate.name=致密钻石板
-item.gti.DiamondPlate.name=钻石板
+item.gti.item.DenseDiamondPlate.name=致密钻石板
+item.gti.item.DiamondPlate.name=钻石板
 
-item.gti.iridiumPickaxe.name=铱镐
+item.gti.item.iridiumPickaxe.name=铱镐
 
 
