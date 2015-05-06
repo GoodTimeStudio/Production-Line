@@ -25,7 +25,7 @@
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.blocks.BlockWaterHyacinth;
-import com.mcgoodtime.gti.common.blocks.CarbonizeFurnace;
+import com.mcgoodtime.gti.common.blocks.BlockCarbonizeFurnace;
 import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.blocks.GenGasKu;
 import com.mcgoodtime.gti.common.core.config.GtiConfig;
@@ -50,7 +50,7 @@ public class GtiBlocks {
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
         oreIridium = new OreIridium();
-        carbonizeFurnace = new CarbonizeFurnace();
+        carbonizeFurnace = new BlockCarbonizeFurnace(false);
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
         GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
         GtiConfig.gtiLogger.log(Level.INFO, "oreiridium" + Integer.toString(Block.getIdFromBlock(oreIridium)));

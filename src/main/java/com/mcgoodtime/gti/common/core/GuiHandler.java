@@ -25,9 +25,12 @@
 
 package com.mcgoodtime.gti.common.core;
 
+import com.mcgoodtime.gti.client.gui.GuiCarbonizeFurnace;
 import com.mcgoodtime.gti.client.gui.GuiGenGasKu;
+import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -39,14 +42,18 @@ public class GuiHandler implements IGuiHandler {
     }
 
     @Override
-    public Object getClientGuiElement(int Id, EntityPlayer player, World world, int x, int y, int z) {
-        if (Id == Guis.GenGasKu.ordinal()) {
+    public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+        if (id == Guis.GenGasKu.ordinal()) {
             return new GuiGenGasKu(player.inventory, (TileGenGasKu)world.getTileEntity(x, y, z));
+        }
+        if (id == Guis.CarbonizeFurnace.ordinal()) {
+            return new GuiCarbonizeFurnace(player.inventory, (TileCarbonizeFurnace)world.getTileEntity(x, y, z));
         }
         return null;
     }
 
     public enum Guis {
-        GenGasKu
+        GenGasKu,
+        CarbonizeFurnace
     }
 }
