@@ -27,6 +27,7 @@ package com.mcgoodtime.gti.common.worldgen;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 
 import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -42,6 +43,7 @@ public class IridiumGen implements IWorldGenerator {
 
     private static final int TICKET = 5;
     private static final int MAX_HEIGHT = 16;
+    private static final int GEN_SIZE = 3;
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world,
@@ -54,7 +56,7 @@ public class IridiumGen implements IWorldGenerator {
             int x = chunkX * 16 + random.nextInt(16);
             int z = chunkZ * 16 + random.nextInt(16);
             int y = random.nextInt(MAX_HEIGHT);
-            new WorldGenMinable(GtiBlocks.oreIridium, 50).generate(world, random, x, y, z);
+            new WorldGenMinable(GtiBlocks.oreIridium, GEN_SIZE, Blocks.stone).generate(world, random, x, y, z);
         }
     }
 }
