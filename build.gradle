@@ -31,12 +31,12 @@ repositories {
 }
 
 dependencies {
-    compile 'net.industrial-craft:industrialcraft-2:2.2.718-experimental:dev' //adds newest ic2 to the dev env
+    compile 'net.industrial-craft:industrialcraft-2:2.2.719-experimental:dev' //adds newest ic2 to the dev env
     checkstyle 'com.puppycrawl.tools:checkstyle:6.5'
 }
 
 minecraft {
-    version = "1.7.10-10.13.2.1230"
+    version = "1.7.10-10.13.3.1401-1.7.10"
     runDir = "eclipse"
 }
 
