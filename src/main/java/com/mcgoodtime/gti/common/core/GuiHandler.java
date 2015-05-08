@@ -36,6 +36,23 @@ import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler {
 
+    private static GuiHandler instance;
+
+    /**
+     * Instantiate or get the default GuiHandler
+     * @return The only instance of the GuiHandler
+     */
+    public static GuiHandler getInstance() {
+        if (instance == null) {
+            instance = new GuiHandler();
+        }
+        return instance;
+    }
+
+    private GuiHandler() {
+
+    }
+
     @Override
     public Object getServerGuiElement(int Id, EntityPlayer player, World world, int x, int y, int z) {
         return null;

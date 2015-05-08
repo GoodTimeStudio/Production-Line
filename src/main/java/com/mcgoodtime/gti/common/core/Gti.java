@@ -61,6 +61,6 @@ public final class Gti {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance());
     }
 }

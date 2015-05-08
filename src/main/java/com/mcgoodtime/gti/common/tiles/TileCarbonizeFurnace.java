@@ -185,12 +185,12 @@ public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory
      * item, where 0 means that the item is exhausted and the passed value means that the item is fresh
      */
     @SideOnly(Side.CLIENT)
-    public int getBurnTimeRemainingScaled(int p_145955_1_) {
+    public int getBurnTimeRemainingScaled(int totalLength) {
         if (this.currentItemBurnTime == 0) {
             this.currentItemBurnTime = 200;
         }
 
-        return this.furnaceBurnTime * p_145955_1_ / this.currentItemBurnTime;
+        return this.furnaceBurnTime * totalLength / this.currentItemBurnTime;
     }
 
     /**
@@ -293,12 +293,12 @@ public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory
      * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't
      * fuel
      */
-    public static int getItemBurnTime(ItemStack p_145952_0_)
+    public static int getItemBurnTime(ItemStack fuel)
     {
-        if (p_145952_0_ == null) {
+        if (fuel == null) {
             return 0;
         } else {
-            Item item = p_145952_0_.getItem();
+            Item item = fuel.getItem();
             if (item == Items.coal) {
                 return 1600;
             } else {
