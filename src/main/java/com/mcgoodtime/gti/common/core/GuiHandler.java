@@ -27,6 +27,8 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.client.gui.GuiCarbonizeFurnace;
 import com.mcgoodtime.gti.client.gui.GuiGenGasKu;
+import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
+import com.mcgoodtime.gti.common.inventory.ContainerGenGasKu;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -54,7 +56,13 @@ public class GuiHandler implements IGuiHandler {
     }
 
     @Override
-    public Object getServerGuiElement(int Id, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+        if (id == Guis.GenGasKu.ordinal()) {
+            return new ContainerGenGasKu(player.inventory, (TileGenGasKu)world.getTileEntity(x, y, z));
+        }
+        if (id == Guis.CarbonizeFurnace.ordinal()) {
+            return new ContainerCarbonizeFurnace(player.inventory, (TileCarbonizeFurnace)world.getTileEntity(x, y, z));
+        }
         return null;
     }
 
