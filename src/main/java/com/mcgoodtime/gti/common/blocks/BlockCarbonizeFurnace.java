@@ -63,9 +63,9 @@ public class BlockCarbonizeFurnace extends BlockContainer {
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase p_149689_5_, ItemStack p_149689_6_)
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack originalStack)
     {
-        int l = MathHelper.floor_double((double)(p_149689_5_.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int l = MathHelper.floor_double((double)(placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (l == 0) {
             world.setBlockMetadataWithNotify(x, y, z, 2, 2);
@@ -83,16 +83,18 @@ public class BlockCarbonizeFurnace extends BlockContainer {
             world.setBlockMetadataWithNotify(x, y, z, 4, 2);
         }
 
-        if (p_149689_6_.hasDisplayName()) {
-            ((TileCarbonizeFurnace)world.getTileEntity(x, y, z)).func_145951_a(p_149689_6_.getDisplayName());
+        if (originalStack.hasDisplayName()) {
+            ((TileCarbonizeFurnace)world.getTileEntity(x, y, z)).func_145951_a(originalStack.getDisplayName());
         }
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister iir) {
-        this.sideFront = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "blockCarbonizeFurnace_front_" + (isBurn ? "on" : "off"));
-        this.sideTop = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "blockCarbonizeFurnace_top_" + (isBurn ? "on" : "off"));
+        this.sideFront = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":"
+                + "blockCarbonizeFurnace_front_" + (isBurn ? "on" : "off"));
+        this.sideTop = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":"
+                + "blockCarbonizeFurnace_top_" + (isBurn ? "on" : "off"));
         this.sideLow = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "blockCarbonizeFurnace_low");
         this.blockIcon = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "blockCarbonizeFurnace_side");
     }
