@@ -28,6 +28,7 @@ import com.mcgoodtime.gti.common.core.Gti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.core.Ic2Items;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -86,10 +87,13 @@ public class Recipes {
                 new ItemStack(GtiItems.smallDustIridium),
                 new ItemStack(GtiItems.smallDustIridium)
         );
+
+        //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, new ItemStack(GtiItems.ingotIridium), XP);
         GameRegistry.addSmelting(GtiItems.cleanedCrushedIridium, new ItemStack(GtiItems.ingotIridium), XP);
         GameRegistry.addSmelting(GtiItems.dustIridium, new ItemStack(GtiItems.ingotIridium), XP);
         GameRegistry.addSmelting(GtiItems.crushedIridium, new ItemStack(GtiItems.ingotIridium), XP);
+        GameRegistry.addSmelting(Blocks.reeds, new ItemStack(GtiItems.bambooCharcoal), XP);
 
         //ic2 recipe registry
         ic2.api.recipe.Recipes.metalformerRolling.addRecipe(

@@ -36,7 +36,7 @@ import net.minecraft.item.Item;
 public class ItemBambooCharcoal extends Item {
     public ItemBambooCharcoal() {
         this.setUnlocalizedName("gti.item.BambooCharcoal");
-        this.setTextureName(Gti.RESOURCE_DOMAIN + ":" + "itemBambooCharcoal.png");
+        this.setTextureName(Gti.RESOURCE_DOMAIN + ":" + "itemBambooCharcoal");
         this.setCreativeTab(CreativeTabGti.creativeTabGti);
         GameRegistry.registerItem(this, "BambooCharcoal");
     }
