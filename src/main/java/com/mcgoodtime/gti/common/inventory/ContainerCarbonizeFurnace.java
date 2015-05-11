@@ -26,7 +26,7 @@ public class ContainerCarbonizeFurnace extends Container {
         this.tileFurnace = carbonizeFurnace;
         this.addSlotToContainer(new Slot(carbonizeFurnace, 0, 56, 17));
         this.addSlotToContainer(new Slot(carbonizeFurnace, 1, 56, 53));
-        this.addSlotToContainer(new SlotFurnace(playerInv.player, carbonizeFurnace, 2, 116, 35));
+        this.addSlotToContainer(new SlotCarbonizeFurnace(playerInv.player, carbonizeFurnace, 2, 116, 35));
 
         int i;
         for (i = 0; i < 3; ++i) {
