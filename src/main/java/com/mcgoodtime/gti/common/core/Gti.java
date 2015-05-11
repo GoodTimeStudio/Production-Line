@@ -29,11 +29,13 @@ import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.init.GtiItems;
 import com.mcgoodtime.gti.common.init.Recipes;
 
+import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(
         modid = Gti.MOD_ID,
@@ -62,5 +64,6 @@ public final class Gti {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance());
+        GameRegistry.registerTileEntity(TileCarbonizeFurnace.class, "TileEntityCarbonizeFurnace");
     }
 }
