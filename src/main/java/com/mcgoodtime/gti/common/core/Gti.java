@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.core.config.GtiConfig;
+import com.mcgoodtime.gti.common.gxy.GXYMod;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.init.GtiItems;
 import com.mcgoodtime.gti.common.init.Recipes;
@@ -59,6 +60,7 @@ public final class Gti {
         GtiBlocks.init();
         GtiItems.init();
         Recipes.init();
+        GXYMod.init();
     }
     
     @Mod.EventHandler

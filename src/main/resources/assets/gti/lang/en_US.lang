@@ -21,3 +21,6 @@ item.DenseDiamondPlate.name= Dense Diamond Plate
 
 //----Ore
 tile.iridiumore.name=Iridium Ore
+
+//----Gxy
+tile.gxyBlock.name=gxy Block
