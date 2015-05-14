@@ -26,7 +26,6 @@ package com.mcgoodtime.gti.common.core.config;
 
 import com.mcgoodtime.gti.common.core.Gti;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -39,20 +38,23 @@ import java.io.File;
  *
  * @author liach, SuHao
  */
-public class GtiConfig {
+public class GtiConfig extends Configuration {
     public static Logger gtiLogger = LogManager.getLogger(Gti.MOD_ID);
-    public static Configuration gtiConfig;
+    public static GtiConfig instance;
     public static File configFile;
 
+    private GtiConfig(File configFile) {
+        super(configFile);
+    }
+
     public static void init() {
-        configFile = new File("config", Gti.MOD_NAME + ".cfg");
-        gtiConfig = new Configuration(configFile);
+        instance = new GtiConfig(configFile);
         
         if (!configFile.exists()) {
             gtiLogger.log(Level.ERROR, "Cannot create Gti config file");
             gtiLogger.log(Level.INFO, "Skipping config load");
         } else {
-            gtiConfig.load();
+            instance.load();
         }
         gtiLogger.log(Level.INFO, "Gti config loaded");
     }

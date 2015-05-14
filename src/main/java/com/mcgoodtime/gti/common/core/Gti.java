@@ -56,6 +56,7 @@ public final class Gti {
    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        GtiConfig.configFile = event.getSuggestedConfigurationFile();
         GtiConfig.init();
         GtiBlocks.init();
         GtiItems.init();
