@@ -6,8 +6,8 @@ jdk:
 before_install: 
   - chmod +x gradlew
   - ./gradlew clean cleanCache
-install: ./gradlew setupCIWorkspace -S
-script: ./gradlew build -S
+install: ./gradlew setupCIWorkspace -S -i
+script: ./gradlew build -S -i
 notifications:
   email: false
 env:
