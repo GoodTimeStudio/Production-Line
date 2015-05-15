@@ -30,6 +30,7 @@ import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.blocks.GenGasKu;
 import com.mcgoodtime.gti.common.core.config.GtiConfig;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import org.apache.logging.log4j.Level;
@@ -45,12 +46,18 @@ public class GtiBlocks {
     public static BlockContainer genGasKU;
     public static Block oreIridium;
     public static Block carbonizeFurnace;
+    public static Block litCarbonizeFurnace;
 
     public static void init() {
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
         oreIridium = new OreIridium();
         carbonizeFurnace = new BlockCarbonizeFurnace(false);
+        litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(true);
+
+        GameRegistry.registerBlock(carbonizeFurnace, "CarbonizeFurnace");
+        GameRegistry.registerBlock(litCarbonizeFurnace, "lit_CarbonizeFurnace");
+
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
         GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
         GtiConfig.gtiLogger.log(Level.INFO, "oreiridium" + Integer.toString(Block.getIdFromBlock(oreIridium)));
