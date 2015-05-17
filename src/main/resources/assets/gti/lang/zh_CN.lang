@@ -29,3 +29,6 @@ item.gti.item.iridiumPickaxe.name=铱镐
 
 tile.gxyBlock.name=gxy方块
 
+achievement.CarbonizeFurnace=缺氧燃烧技术
+achievement.CarbonizeFurnace.desc=制作一个碳化燃烧炉
+

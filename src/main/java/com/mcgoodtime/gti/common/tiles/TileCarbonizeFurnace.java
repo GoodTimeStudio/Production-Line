@@ -1,7 +1,9 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import com.mcgoodtime.gti.common.blocks.BlockCarbonizeFurnace;
+import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -251,7 +253,7 @@ public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory
         if (this.furnaceItemStacks[0] == null) {
             return false;
         } else {
-            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0]);
+            ItemStack itemstack = CarbonizeFurnaceRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0]);
             if (itemstack == null) return false;
             if (this.furnaceItemStacks[2] == null) return true;
             if (!this.furnaceItemStacks[2].isItemEqual(itemstack)) return false;

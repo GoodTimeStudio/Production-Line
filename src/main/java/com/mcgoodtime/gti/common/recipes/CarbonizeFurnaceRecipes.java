@@ -30,15 +30,16 @@ public class CarbonizeFurnaceRecipes
 
     private CarbonizeFurnaceRecipes()
     {
-        this.func_151396_a(Items.redstone, new ItemStack(GtiItems.diamondApple), 0.2F);
+        this.registerBlock(Blocks.log, new ItemStack(Items.coal, 1, 1), 0.15F);
+        this.registerBlock(Blocks.log2, new ItemStack(Items.coal, 1, 1), 0.15F);
     }
 
-    public void func_151393_a(Block p_151393_1_, ItemStack p_151393_2_, float p_151393_3_)
+    public void registerBlock(Block p_151393_1_, ItemStack p_151393_2_, float p_151393_3_)
     {
-        this.func_151396_a(Item.getItemFromBlock(p_151393_1_), p_151393_2_, p_151393_3_);
+        this.registerItem(Item.getItemFromBlock(p_151393_1_), p_151393_2_, p_151393_3_);
     }
 
-    public void func_151396_a(Item p_151396_1_, ItemStack p_151396_2_, float p_151396_3_)
+    public void registerItem(Item p_151396_1_, ItemStack p_151396_2_, float p_151396_3_)
     {
         this.func_151394_a(new ItemStack(p_151396_1_, 1, 32767), p_151396_2_, p_151396_3_);
     }

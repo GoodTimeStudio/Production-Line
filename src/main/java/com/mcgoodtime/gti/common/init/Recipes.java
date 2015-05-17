@@ -51,6 +51,17 @@ public class Recipes {
     public static void init() {
         //vanilla recipe registry
         GameRegistry.addRecipe(
+                new ItemStack(GtiBlocks.carbonizeFurnace),
+                "ABA",
+                "CDC",
+                "EEE",
+                'A', ic2.api.item.IC2Items.getItem("electronicCircuit"),
+                'B', GtiItems.airBrakeCasing,
+                'C', GtiItems.airBrakeUnit,
+                'D', ic2.api.item.IC2Items.getItem("electroFurnace"),
+                'E', ic2.api.item.IC2Items.getItem("plateiron")
+        );
+        GameRegistry.addRecipe(
                 new ItemStack(GtiItems.airBrakeCasing),
                 "AAA",
                 "BBB",

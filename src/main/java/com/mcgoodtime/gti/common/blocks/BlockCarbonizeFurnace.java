@@ -102,15 +102,15 @@ public class BlockCarbonizeFurnace extends BlockContainer
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int p_149691_1_, int p_149691_2_)
     {
-        return p_149691_1_ == 1 ? this.sideTop : (p_149691_1_ == 0 ? this.sideLow : (p_149691_1_ != p_149691_2_ ? this.blockIcon : this.sideFront));
+        return p_149691_1_ == 1 ? this.sideTop : (p_149691_1_ == 0 ? this.sideLow : (p_149691_1_ == 3 ? this.sideFront : (p_149691_1_ != p_149691_2_ ? this.blockIcon : this.sideFront)));
     }
 
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister p_149651_1_)
     {
-        this.blockIcon = p_149651_1_.registerIcon("furnace_side");
-        this.sideFront = p_149651_1_.registerIcon(this.ifBurn ? "furnace_front_on" : "furnace_front_off");
-        this.sideTop = p_149651_1_.registerIcon("furnace_top");
+        this.blockIcon = p_149651_1_.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "blockCarbonizeFurnace_side");
+        this.sideFront = p_149651_1_.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "blockCarbonizeFurnace_front_" + (this.ifBurn ? "on" : "off"));
+        this.sideTop = p_149651_1_.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "blockCarbonizeFurnace_top_" + (this.ifBurn ? "on" : "off"));
     }
 
     /**
