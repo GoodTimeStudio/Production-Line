@@ -28,10 +28,10 @@ public class GtiAchievement {
     public static List achievementList = new ArrayList();
 
     /** Is the 'getting CarbonizeFurnace' achievement. */
-    public static Achievement carbonizeFurnace = (new Achievement("achievement.CarbonizeFurnace", "CarbonizeFurnace", 0, 1, GtiBlocks.carbonizeFurnace, AchievementList.openInventory)).initIndependentStat().registerStat();
+    public static Achievement carbonizeFurnace = (new Achievement("achievement.CarbonizeFurnace", "CarbonizeFurnace", 0, 1, new ItemStack(GtiBlocks.carbonizeFurnace), (Achievement)null)).initIndependentStat().registerStat();
 
     /** Is the AchievementPage for Gti */
-    public static AchievementPage pageGti = new AchievementPage("GoodTime Industrial", carbonizeFurnace);
+    public static AchievementPage pageGti = new AchievementPage("GoodTime Industrial", new Achievement[]{carbonizeFurnace});
     /**
      * A stub functions called to make the static initializer for this class run.
      */

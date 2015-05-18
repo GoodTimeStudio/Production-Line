@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.worldgen;
 
+import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -46,17 +47,21 @@ public class IridiumGen implements IWorldGenerator {
     private static final int GEN_SIZE = 3;
 
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world,
-                         IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        generateIridium(random, world, chunkX, chunkZ);
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+        switch(world.provider.dimensionId){
+            case 0:
+                generateSurface(world, random, chunkX * 16, chunkZ * 16);
+                break;
+        }
     }
 
-    public static void generateIridium(Random random, World world, int chunkX, int chunkZ) {
-        for (int i = 0; i < TICKET; i++) {
-            int x = chunkX * 16 + random.nextInt(16);
-            int z = chunkZ * 16 + random.nextInt(16);
-            int y = random.nextInt(MAX_HEIGHT);
-            new WorldGenMinable(GtiBlocks.oreIridium, GEN_SIZE, Blocks.stone).generate(world, random, x, y, z);
+    private void generateSurface(World world, Random rand, int chunkX, int chunkZ) {
+        for(int k = 0; k < this.TICKET; k++){
+            int x = chunkX + rand.nextInt(16);
+            int y = rand.nextInt(64);
+            int z = chunkZ + rand.nextInt(this.MAX_HEIGHT);
+
+            (new WorldGenMinable(GtiBlocks.oreIridium, this.GEN_SIZE)).generate(world, rand, x, y, z);
         }
     }
 }

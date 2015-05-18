@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.core;
 
+import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.core.config.GtiConfig;
 import com.mcgoodtime.gti.common.gxy.GXYMod;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
@@ -31,6 +32,7 @@ import com.mcgoodtime.gti.common.init.GtiItems;
 import com.mcgoodtime.gti.common.init.Recipes;
 
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
+import com.mcgoodtime.gti.common.worldgen.IridiumGen;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -44,7 +46,7 @@ import net.minecraftforge.common.AchievementPage;
         modid = Gti.MOD_ID,
         name = Gti.MOD_NAME,
         version = Gti.VERSION,
-        dependencies = "required-after:" + "Forge@[10.13.2.1230,);" + "after:" + "IC2@[2.2.660,);"
+        dependencies = "required-after:" + "Forge@[10.13.2.1291,);" + "after:" + "IC2@[2.2.660,);"
     )
 public final class Gti {
     public static final String MOD_ID = "gti";
@@ -60,18 +62,19 @@ public final class Gti {
     public void preInit(FMLPreInitializationEvent event) {
         GtiConfig.configFile = event.getSuggestedConfigurationFile();
         GtiConfig.init();
-        GtiBlocks.init();
-        GtiItems.init();
-        Recipes.init();
+        GtiBlocks.init(); //register blocks
+        GtiItems.init(); //register items
+        Recipes.init(); //register recipes
         GXYMod.init();
     }
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance());
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance()); //register gui handler
         GameRegistry.registerTileEntity(TileCarbonizeFurnace.class, "TileEntityCarbonizeFurnace");
-        GtiAchievement.init();
-        AchievementPage.registerAchievementPage(GtiAchievement.pageGti);
-        FMLCommonHandler.instance().bus().register(new GtiEvent());
+        GtiAchievement.init(); //register achievement
+        AchievementPage.registerAchievementPage(GtiAchievement.pageGti); //register achievement page
+        FMLCommonHandler.instance().bus().register(new GtiEvent()); //register event bus
+        GameRegistry.registerWorldGenerator(new IridiumGen(), 1);
     }
 }
