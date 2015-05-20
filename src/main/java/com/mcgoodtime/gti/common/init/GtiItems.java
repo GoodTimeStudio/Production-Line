@@ -31,7 +31,6 @@ import com.mcgoodtime.gti.common.items.crushed.cleaned.CleanedCrushedIridium;
 import com.mcgoodtime.gti.common.items.dust.DustIridium;
 import com.mcgoodtime.gti.common.items.food.DiamondApple;
 import com.mcgoodtime.gti.common.items.ingot.IngotIridium;
-import com.mcgoodtime.gti.common.items.plate.DenseDiamondPlate;
 import com.mcgoodtime.gti.common.items.plate.DiamondPlate;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 import net.minecraft.item.Item;
@@ -72,7 +71,7 @@ public class GtiItems {
     public static void init() {
         diamondApple = new DiamondApple();
         diamondPlate = new DiamondPlate();
-        denseDiamondPlate = new DenseDiamondPlate();
+        denseDiamondPlate = new DiamondPlate.DenseDiamondPlate();
         crushedIridium = new CrushedIridium();
         cleanedCrushedIridium = new CleanedCrushedIridium();
         dustIridium = new DustIridium();

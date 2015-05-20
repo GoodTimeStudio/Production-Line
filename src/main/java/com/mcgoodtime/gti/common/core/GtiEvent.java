@@ -1,5 +1,6 @@
 package com.mcgoodtime.gti.common.core;
 
+import com.mcgoodtime.gti.common.GtiAchievement;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -14,14 +15,14 @@ public class GtiEvent {
     @SubscribeEvent
     public void onPlayerCrafting(PlayerEvent.ItemCraftedEvent event) {
         if (event.crafting.getItem().equals(Item.getItemFromBlock(GtiBlocks.carbonizeFurnace))) {
-            event.player.addStat(GtiAchievement.carbonizeFurnace, 1);
+            event.player.addStat(GtiAchievement.getCarbonizeFurnace, 1);
         }
     }
 
-    /*@SubscribeEvent
+    @SubscribeEvent
     public void onPlayerPickup(PlayerEvent.ItemPickupEvent event) {
-        if (event.pickedUp.getEntityItem().isItemEqual(new ItemStack(GtiBlocks.carbonizeFurnace))) {
-            event.player.addStat(GtiAchievement.carbonizeFurnace, 1);
+        if (event.pickedUp.getEntityItem().isItemEqual(new ItemStack(GtiBlocks.oreIridium))) {
+            event.player.addStat(GtiAchievement.getIrOre, 1);
         }
-    }*/
+    }
 }

@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.gti.common.core;
 
-import com.mcgoodtime.gti.common.blocks.OreIridium;
+import com.mcgoodtime.gti.common.GtiAchievement;
 import com.mcgoodtime.gti.common.core.config.GtiConfig;
 import com.mcgoodtime.gti.common.gxy.GXYMod;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
@@ -51,7 +51,7 @@ import net.minecraftforge.common.AchievementPage;
 public final class Gti {
     public static final String MOD_ID = "gti";
     public static final String MOD_NAME = "GoodTime-Industrial";
-    public static final String VERSION = "Dev 0.0.5";
+    public static final String VERSION = "dev.0.1";
     public static final String RESOURCE_DOMAIN = "gti";
     public static final String GUI_PREFIX = "gui.gti.";
 

@@ -37,7 +37,7 @@ import net.minecraft.item.Item;
 public class ItemAirBrake {
     public static class ItemAirBrakeUnit extends Item {
         public ItemAirBrakeUnit() {
-            this.setUnlocalizedName("gti.item.AirBrakeUnit");
+            this.setUnlocalizedName("gti.AirBrakeUnit");
             this.setTextureName(Gti.MOD_ID + ":" + "itemAirBrakeUnit");
             this.setCreativeTab(CreativeTabGti.creativeTabGti);
             GameRegistry.registerItem(this, "AirBrakeUnit");
@@ -46,7 +46,7 @@ public class ItemAirBrake {
 
     public static class ItemAirBrakeCasing extends Item {
         public ItemAirBrakeCasing() {
-            this.setUnlocalizedName("gti.item.AirBrakeCasing");
+            this.setUnlocalizedName("gti.AirBrakeCasing");
             this.setTextureName(Gti.MOD_ID + ":" + "itemAirBrakeCasing");
             this.setCreativeTab(CreativeTabGti.creativeTabGti);
             GameRegistry.registerItem(this, "AirBrakeCasing");

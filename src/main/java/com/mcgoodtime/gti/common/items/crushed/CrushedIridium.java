@@ -33,7 +33,7 @@ import net.minecraft.item.Item;
  */
 public class CrushedIridium extends Item {
     public CrushedIridium() {
-        setUnlocalizedName("gti.item.crushed.CrushedIridium");
+        setUnlocalizedName("gti.crushed.CrushedIridium");
         setCreativeTab(CreativeTabGti.creativeTabGti);
         setTextureName("gti:itemCrushedIriridium");
         GameRegistry.registerItem(this, "CrushedIridium");

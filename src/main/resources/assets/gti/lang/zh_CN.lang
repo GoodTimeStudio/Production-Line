@@ -4,31 +4,39 @@
 
 //gui
 gui.gti.GenGasKu=燃气动能发生机
+gui.gti.CarbonizeFurnace=碳化燃烧炉
 
 //blocks
-tile.gti.iridiumore.name=铱矿石
-tile.gti.WaterHyacinth.name=水葫芦
-tile.gti.GenGasKU.name=燃气动能发生机
+tile.gti.block.oreIridium.name=铱矿石
+tile.gti.block.WaterHyacinth.name=水葫芦
+tile.gti.block.GenGasKu.name=燃气动能发生机
 tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
-
-//items
-item.gti.item.CrushedIridium.name=粉碎的铱矿石
-item.gti.item.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
-
-item.gti.item.DustIridium.name=铱矿石粉
-item.gti.item.CleanedDustIridium.name=纯净的铱矿石粉
-
-item.gti.item.DiamondApple.name=钻石苹果
-
-item.gti.item.IngotIridium.name=铱锭
-
-item.gti.item.DenseDiamondPlate.name=致密钻石板
-item.gti.item.DiamondPlate.name=钻石板
-
-item.gti.item.iridiumPickaxe.name=铱镐
 
 tile.gxyBlock.name=gxy方块
 
+//items
+item.gti.crushed.CrushedIridium.name=粉碎的铱矿石
+item.gti.crushed.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
+
+item.gti.dust.DustIridium.name=铱矿石粉
+item.gti.dust.DustIridiumSmall.name=小搓铱矿石粉
+
+item.gti.food.DiamondApple.name=钻石苹果
+
+item.gti.ingot.IngotIridium.name=铱锭
+
+item.gti.plate.DenseDiamondPlate.name=致密钻石板
+item.gti.plate.DiamondPlate.name=钻石板
+
+item.gti.tool.iridiumPickaxe.name=铱镐
+
+item.gti.BambooCharcoal.name=竹炭
+item.gti.AirBrakeUnit.name=气闸单元
+item.gti.AirBrakeCasing.name=气闸外壳
+
+//achievement
 achievement.CarbonizeFurnace=缺氧燃烧技术
 achievement.CarbonizeFurnace.desc=制作一个碳化燃烧炉
+achievement.getIrOre=比钻石更好
+achievement.getIrOre.desc=挖到一个铱矿石
 

@@ -34,9 +34,19 @@ import net.minecraft.item.Item;
  */
 public class DiamondPlate extends Item {
     public DiamondPlate() {
-        setUnlocalizedName("gti.item.plate.DiamondPlate");
+        setUnlocalizedName("gti.plate.DiamondPlate");
         setCreativeTab(creativeTabGti);
         setTextureName("gti:itemDiamondPlate");
         GameRegistry.registerItem(this, "DiamondPlate");
+    }
+
+    public static class DenseDiamondPlate extends Item {
+        public DenseDiamondPlate() {
+            setUnlocalizedName("gti.plate.DenseDiamondPlate");
+            setCreativeTab(creativeTabGti);
+            setTextureName("gti:itemDenseDiamondPlate");
+            GameRegistry.registerItem(this, "DenseDiamondPlate");
+        }
+
     }
 }

@@ -44,7 +44,6 @@ public class BlockCarbonizeFurnace extends BlockContainer
         this.setBlockName("gti.block.CarbonizeFurnace");
         this.setHardness(3.5F);
         this.setStepSound(soundTypePiston);
-        this.setBlockName("furnace");
         this.setCreativeTab(CreativeTabGti.creativeTabGti);
     }
 
@@ -320,6 +319,7 @@ public class BlockCarbonizeFurnace extends BlockContainer
         public BlockLitCarbonizeFurnace(boolean p_i45407_1_) {
             super(p_i45407_1_);
             this.setBlockName("gti.block.lit_CarbonizeFurnace");
+            this.setCreativeTab(null);
             this.setLightLevel(0.875F);
         }
     }
