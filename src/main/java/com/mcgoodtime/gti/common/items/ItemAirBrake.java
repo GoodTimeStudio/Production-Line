@@ -40,7 +40,6 @@ public class ItemAirBrake {
             this.setUnlocalizedName("gti.AirBrakeUnit");
             this.setTextureName(Gti.MOD_ID + ":" + "itemAirBrakeUnit");
             this.setCreativeTab(CreativeTabGti.creativeTabGti);
-            GameRegistry.registerItem(this, "AirBrakeUnit");
         }
     }
 
@@ -49,7 +48,6 @@ public class ItemAirBrake {
             this.setUnlocalizedName("gti.AirBrakeCasing");
             this.setTextureName(Gti.MOD_ID + ":" + "itemAirBrakeCasing");
             this.setCreativeTab(CreativeTabGti.creativeTabGti);
-            GameRegistry.registerItem(this, "AirBrakeCasing");
         }
     }
 }

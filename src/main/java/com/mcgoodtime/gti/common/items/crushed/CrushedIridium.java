@@ -36,6 +36,5 @@ public class CrushedIridium extends Item {
         setUnlocalizedName("gti.crushed.CrushedIridium");
         setCreativeTab(CreativeTabGti.creativeTabGti);
         setTextureName("gti:itemCrushedIriridium");
-        GameRegistry.registerItem(this, "CrushedIridium");
     }
 }

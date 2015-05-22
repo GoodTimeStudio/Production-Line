@@ -36,6 +36,5 @@ public class IngotIridium extends Item {
         setUnlocalizedName("gti.ingot.IngotIridium");
         setCreativeTab(CreativeTabGti.creativeTabGti);
         setTextureName("gti:itemIngotIR");
-        GameRegistry.registerItem(this, "IngotIridium");
     }
 }

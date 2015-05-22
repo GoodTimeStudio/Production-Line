@@ -30,6 +30,7 @@ import com.mcgoodtime.gti.common.blocks.OreIridium;
 import com.mcgoodtime.gti.common.blocks.GenGasKu;
 import com.mcgoodtime.gti.common.core.config.GtiConfig;
 
+import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -55,6 +56,9 @@ public class GtiBlocks {
         carbonizeFurnace = new BlockCarbonizeFurnace(false);
         litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(true);
 
+        GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
+        GameRegistry.registerBlock(genGasKU, "GenGasKu");
+        GameRegistry.registerBlock(oreIridium, "oreIridium");
         GameRegistry.registerBlock(carbonizeFurnace, "CarbonizeFurnace");
         GameRegistry.registerBlock(litCarbonizeFurnace, "lit_CarbonizeFurnace");
 

@@ -38,6 +38,5 @@ public class ItemBambooCharcoal extends Item {
         this.setUnlocalizedName("gti.BambooCharcoal");
         this.setTextureName(Gti.RESOURCE_DOMAIN + ":" + "itemBambooCharcoal");
         this.setCreativeTab(CreativeTabGti.creativeTabGti);
-        GameRegistry.registerItem(this, "BambooCharcoal");
     }
 }

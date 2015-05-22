@@ -44,6 +44,5 @@ public class OreIridium extends Block {
         this.setResistance(20);
         this.setBlockTextureName("gti:blockOreIridium");
         this.setHarvestLevel("pickaxe", 3);
-        GameRegistry.registerBlock(this, "oreIridium");
     }
 }

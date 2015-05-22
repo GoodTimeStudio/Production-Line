@@ -64,7 +64,6 @@ public class BlockWaterHyacinth extends BlockBush {
         float f = 0.5F;
         float f1 = 0.015625F;
         this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
-        GameRegistry.registerBlock(this, ItemWaterHyacinth.class, "WaterHyacinth");
     }
 
     public int getRenderType() {

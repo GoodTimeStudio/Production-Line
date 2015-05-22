@@ -43,7 +43,6 @@ public class GenGasKu extends BlockContainer {
         this.setCreativeTab(creativeTabGti);
         this.setBlockName("gti.block.GenGasKu");
         this.setBlockTextureName("gti:GenGasKu");
-        GameRegistry.registerBlock(this, "GenGasKu");
     }
 
     /**

@@ -33,6 +33,7 @@ import com.mcgoodtime.gti.common.items.food.DiamondApple;
 import com.mcgoodtime.gti.common.items.ingot.IngotIridium;
 import com.mcgoodtime.gti.common.items.plate.DiamondPlate;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPickaxe;
@@ -81,5 +82,18 @@ public class GtiItems {
         airBrakeUnit = new ItemAirBrake.ItemAirBrakeUnit();
         airBrakeCasing = new ItemAirBrake.ItemAirBrakeCasing();
         bambooCharcoal = new ItemBambooCharcoal();
+
+        GameRegistry.registerItem(diamondApple, "DiamondApple");
+        GameRegistry.registerItem(diamondPlate, "DiamondPlate");
+        GameRegistry.registerItem(denseDiamondPlate, "DenseDiamondPlate");
+        GameRegistry.registerItem(crushedIridium, "CrushedIridium");
+        GameRegistry.registerItem(cleanedCrushedIridium, "CleanedCrushedIridium");
+        GameRegistry.registerItem(dustIridium, "DustIridium");
+        GameRegistry.registerItem(smallDustIridium, "DustIridiumSmall");
+        GameRegistry.registerItem(iridiumPickaxe, "gti.iridiumPickaxe");
+        GameRegistry.registerItem(ingotIridium, "IngotIridium");
+        GameRegistry.registerItem(airBrakeUnit, "AirBrakeUnit");
+        GameRegistry.registerItem(airBrakeCasing, "AirBrakeCasing");
+        GameRegistry.registerItem(bambooCharcoal, "BambooCharcoal");
     }
 }

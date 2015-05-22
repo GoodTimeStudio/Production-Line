@@ -38,7 +38,6 @@ public class DustIridium extends Item {
         setUnlocalizedName("gti.dust.DustIridium");
         setCreativeTab(CreativeTabGti.creativeTabGti);
         setTextureName("gti:itemDustIriridium");
-        GameRegistry.registerItem(this, "DustIridium");
     }
 
     public static class DustIridiumSmall extends Item {
@@ -46,7 +45,6 @@ public class DustIridium extends Item {
             setUnlocalizedName("gti.dust.DustIridiumSmall");
             setCreativeTab(CreativeTabGti.creativeTabGti);
             setTextureName("gti:itemDustIriridiumSmall");
-            GameRegistry.registerItem(this, "DustIridiumSmall");
         }
     }
 }

@@ -35,6 +35,5 @@ public class DiamondApple extends ItemFood {
         this.setUnlocalizedName("gti.food.DiamondApple");
         this.setCreativeTab(creativeTabGti);
         this.setTextureName("gti:itemDiamondApple");
-        GameRegistry.registerItem(this, "DiamondApple");
     }
 }

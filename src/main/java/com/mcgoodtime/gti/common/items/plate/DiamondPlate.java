@@ -37,7 +37,6 @@ public class DiamondPlate extends Item {
         setUnlocalizedName("gti.plate.DiamondPlate");
         setCreativeTab(creativeTabGti);
         setTextureName("gti:itemDiamondPlate");
-        GameRegistry.registerItem(this, "DiamondPlate");
     }
 
     public static class DenseDiamondPlate extends Item {
@@ -45,7 +44,6 @@ public class DiamondPlate extends Item {
             setUnlocalizedName("gti.plate.DenseDiamondPlate");
             setCreativeTab(creativeTabGti);
             setTextureName("gti:itemDenseDiamondPlate");
-            GameRegistry.registerItem(this, "DenseDiamondPlate");
         }
 
     }
