@@ -24,9 +24,8 @@
  */
 package com.mcgoodtime.gti.common.items.tools;
 
-import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
+import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemPickaxe;
 
 public class IridiumPickaxe extends ItemPickaxe {

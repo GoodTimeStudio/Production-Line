@@ -24,12 +24,10 @@
  */
 package com.mcgoodtime.gti.common.blocks;
 
-import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
+import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
 import com.mcgoodtime.gti.common.core.Gti;
 
-import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

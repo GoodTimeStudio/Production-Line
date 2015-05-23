@@ -25,8 +25,9 @@
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.blocks.*;
-import com.mcgoodtime.gti.common.core.config.GtiConfig;
+import com.mcgoodtime.gti.common.core.GtiConfig;
 
+import com.mcgoodtime.gti.common.items.ItemCarbonizeFurnace;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -56,7 +57,7 @@ public class GtiBlocks {
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(genGasKU, "GenGasKu");
         GameRegistry.registerBlock(oreIridium, "oreIridium");
-        GameRegistry.registerBlock(carbonizeFurnace, ItemBlockCarbonizeFurnace.class, "CarbonizeFurnace");
+        GameRegistry.registerBlock(carbonizeFurnace, ItemCarbonizeFurnace.class, "CarbonizeFurnace");
         GameRegistry.registerBlock(litCarbonizeFurnace, "lit_CarbonizeFurnace");
 
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));

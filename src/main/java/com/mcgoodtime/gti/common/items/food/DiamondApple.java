@@ -24,12 +24,10 @@
  */
 package com.mcgoodtime.gti.common.items.food;
 
-import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
+import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAppleGold;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;

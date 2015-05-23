@@ -22,43 +22,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.mcgoodtime.gti.common.core;
 
-import com.mcgoodtime.gti.common.init.GtiItems;
+import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import java.io.File;
 
 /**
- * The class of GoodTime-Industrial's creative tab.
+ * Config loader in GoodTime-Industrial.
  *
- * @author liach
+ * @author liach, SuHao
  */
-public class CreativeTabGti extends CreativeTabs {
+public class GtiConfig extends Configuration {
+    public static Logger gtiLogger = LogManager.getLogger(Gti.MOD_ID);
+    public static GtiConfig instance;
+    public static File configFile;
 
-    /** The CreativeTab. */
-    public static final CreativeTabGti creativeTabGti = new CreativeTabGti();
-
-    private ItemStack display;
-
-    private CreativeTabGti() {
-        super("GoodTime Industrial");
+    private GtiConfig(File configFile) {
+        super(configFile);
     }
 
-    @SideOnly(Side.CLIENT)
-    public Item getTabIconItem() {
-        return null;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public ItemStack getIconItemStack() {
-        if (this.display == null) {
-            this.display = new ItemStack(GtiItems.diamondApple).copy();
+    public static void init() {
+        instance = new GtiConfig(configFile);
+        
+        if (!configFile.exists()) {
+            gtiLogger.log(Level.ERROR, "Cannot create Gti config file");
+            gtiLogger.log(Level.INFO, "Skipping config load");
+        } else {
+            instance.load();
         }
-        return this.display;
+        gtiLogger.log(Level.INFO, "Gti config loaded");
     }
 }

@@ -24,14 +24,9 @@
  */
 package com.mcgoodtime.gti.common.core;
 
-import com.mcgoodtime.gti.common.GtiAchievement;
-import com.mcgoodtime.gti.common.core.config.GtiConfig;
+import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
-import com.mcgoodtime.gti.common.init.GtiBlocks;
-import com.mcgoodtime.gti.common.init.GtiItems;
-import com.mcgoodtime.gti.common.init.Recipes;
 
-import com.mcgoodtime.gti.common.init.GtiTiles;
 import com.mcgoodtime.gti.common.worldgen.IridiumGen;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -40,6 +35,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -55,6 +55,19 @@ public final class Gti {
     public static final String VERSION = "dev.0.1";
     public static final String RESOURCE_DOMAIN = "gti";
     public static final String GUI_PREFIX = "gui.gti.";
+    public static final CreativeTabs creativeTabGti = new CreativeTabs(MOD_NAME) {
+        @SideOnly(Side.CLIENT)
+        @Override
+        public Item getTabIconItem() {
+            return null;
+        }
+
+        @SideOnly(Side.CLIENT)
+        @Override
+        public ItemStack getIconItemStack() {
+            return new ItemStack(GtiItems.diamondApple).copy();
+        }
+    };
 
     @Instance(Gti.MOD_ID)
     public static Gti instance;

@@ -1,6 +1,6 @@
 package com.mcgoodtime.gti.common.core;
 
-import com.mcgoodtime.gti.common.GtiAchievement;
+import com.mcgoodtime.gti.common.init.GtiAchievement;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;

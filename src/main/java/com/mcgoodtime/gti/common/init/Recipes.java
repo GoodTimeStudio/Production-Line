@@ -72,10 +72,10 @@ public class Recipes {
         );
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.airBrakeUnit),
-                "XY#",
-                "YY#",
-                "#YY",
-                'X', ic2.api.item.IC2Items.getItem("advIronIngot"),
+                "AY ",
+                "YY ",
+                " YY",
+                'A', ic2.api.item.IC2Items.getItem("advIronIngot"),
                 'Y', ic2.api.item.IC2Items.getItem("rubber")
         );
         GameRegistry.addRecipe(

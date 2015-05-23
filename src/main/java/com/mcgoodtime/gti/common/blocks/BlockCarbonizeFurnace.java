@@ -1,6 +1,5 @@
 package com.mcgoodtime.gti.common.blocks;
 
-import com.mcgoodtime.gti.common.core.CreativeTabGti;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GuiHandler;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
@@ -37,38 +36,35 @@ public class BlockCarbonizeFurnace extends BlockContainer
     @SideOnly(Side.CLIENT)
     private IIcon sideFront;
 
-    public BlockCarbonizeFurnace(boolean p_i45407_1_)
-    {
+    public BlockCarbonizeFurnace(boolean p_i45407_1_) {
         super(Material.rock);
         this.ifBurn = p_i45407_1_;
         this.setBlockName("gti.block.CarbonizeFurnace");
         this.setHardness(3.5F);
         this.setStepSound(soundTypePiston);
-        this.setCreativeTab(CreativeTabGti.creativeTabGti);
+        this.setCreativeTab(Gti.creativeTabGti);
     }
 
-    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
-    {
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
         return Item.getItemFromBlock(GtiBlocks.carbonizeFurnace);
     }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World p_149726_1_, int p_149726_2_, int p_149726_3_, int p_149726_4_)
-    {
-        super.onBlockAdded(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_);
-        this.func_149930_e(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_);
+    public void onBlockAdded(World world, int x, int y, int z) {
+        super.onBlockAdded(world, x, y, z);
+        this.func_149930_e(world, x, y, z);
     }
 
-    private void func_149930_e(World p_149930_1_, int p_149930_2_, int p_149930_3_, int p_149930_4_)
+    private void func_149930_e(World world, int x, int y, int z)
     {
-        if (!p_149930_1_.isRemote)
+        if (!world.isRemote)
         {
-            Block block = p_149930_1_.getBlock(p_149930_2_, p_149930_3_, p_149930_4_ - 1);
-            Block block1 = p_149930_1_.getBlock(p_149930_2_, p_149930_3_, p_149930_4_ + 1);
-            Block block2 = p_149930_1_.getBlock(p_149930_2_ - 1, p_149930_3_, p_149930_4_);
-            Block block3 = p_149930_1_.getBlock(p_149930_2_ + 1, p_149930_3_, p_149930_4_);
+            Block block = world.getBlock(x, y, z - 1);
+            Block block1 = world.getBlock(x, y, z + 1);
+            Block block2 = world.getBlock(x - 1, y, z);
+            Block block3 = world.getBlock(x + 1, y, z);
             byte b0 = 3;
 
             if (block.func_149730_j() && !block1.func_149730_j())
@@ -91,7 +87,7 @@ public class BlockCarbonizeFurnace extends BlockContainer
                 b0 = 4;
             }
 
-            p_149930_1_.setBlockMetadataWithNotify(p_149930_2_, p_149930_3_, p_149930_4_, b0, 2);
+            world.setBlockMetadataWithNotify(x, y, z, b0, 2);
         }
     }
 

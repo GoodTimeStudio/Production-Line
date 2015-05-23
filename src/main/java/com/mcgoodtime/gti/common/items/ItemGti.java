@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.gti.common.items;
 
-import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
+import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
 import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
