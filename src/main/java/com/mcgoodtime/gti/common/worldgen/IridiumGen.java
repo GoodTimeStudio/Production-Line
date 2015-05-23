@@ -47,21 +47,20 @@ public class IridiumGen implements IWorldGenerator {
     private static final int GEN_SIZE = 3;
 
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        switch(world.provider.dimensionId){
-            case 0:
-                generateSurface(world, random, chunkX * 16, chunkZ * 16);
-                break;
+    public void generate(Random random, int chunkX, int chunkZ, World world,
+                         IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+        if ((!world.provider.isHellWorld) && (!world.provider.hasNoSky)) {
+            generateOre(world, random, chunkX, chunkZ);
         }
     }
 
-    private void generateSurface(World world, Random rand, int chunkX, int chunkZ) {
-        for(int k = 0; k < this.TICKET; k++){
-            int x = chunkX + rand.nextInt(16);
-            int y = rand.nextInt(64);
-            int z = chunkZ + rand.nextInt(this.MAX_HEIGHT);
+    private void generateOre(World world, Random rand, int chunkX, int chunkZ) {
+        for (int k = 0; k < this.TICKET; k++) {
+            int x = chunkX * 16 + rand.nextInt(16);
+            int y = rand.nextInt(this.MAX_HEIGHT);
+            int z = chunkZ * 16 + rand.nextInt(16);
 
-            (new WorldGenMinable(GtiBlocks.oreIridium, this.GEN_SIZE)).generate(world, rand, x, y, z);
+            new WorldGenMinable(GtiBlocks.oreIridium, this.GEN_SIZE).generate(world, rand, x, y, z);
         }
     }
 }

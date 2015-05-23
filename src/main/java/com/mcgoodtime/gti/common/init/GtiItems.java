@@ -28,6 +28,7 @@ import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 
+import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -41,7 +42,7 @@ import net.minecraft.world.World;
 /**
  * The list of all those items in GoodTime-Industrial.
  */
-public class GtiItems {
+public class GtiItems implements IFuelHandler {
     public static Item crushedIridium;
     public static Item cleanedCrushedIridium;
     public static Item dustIridium;
@@ -90,5 +91,15 @@ public class GtiItems {
         // TODO: Better registry system
         GameRegistry.registerItem(diamondApple, "DiamondApple");
         GameRegistry.registerItem(iridiumPickaxe, "gti.iridiumPickaxe");
+
+        GameRegistry.registerFuelHandler(new GtiItems());
+    }
+
+    @Override
+    public int getBurnTime(ItemStack fuel) {
+        if (fuel.getItem() == bambooCharcoal) {
+            return 800;
+        }
+        return 0;
     }
 }

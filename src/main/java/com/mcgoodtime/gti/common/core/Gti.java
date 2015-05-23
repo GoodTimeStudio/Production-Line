@@ -31,6 +31,7 @@ import com.mcgoodtime.gti.common.worldgen.IridiumGen;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -43,11 +44,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import java.util.ArrayList;
+
 @Mod(
         modid = Gti.MOD_ID,
         name = Gti.MOD_NAME,
         version = Gti.VERSION,
-        dependencies = "required-after:" + "Forge@[10.13.2.1291,);" + "required-after:" + "IC2@[2.2.660,);"
+        dependencies = "required-after:"
+                + "Forge@[10.13.2.1291,);"
+                + "required-after:"
+                + "IC2@[2.2.660,);",
+        useMetadata = true
     )
 public final class Gti {
     public static final String MOD_ID = "gti";
@@ -59,36 +66,47 @@ public final class Gti {
         @SideOnly(Side.CLIENT)
         @Override
         public Item getTabIconItem() {
-            return null;
-        }
-
-        @SideOnly(Side.CLIENT)
-        @Override
-        public ItemStack getIconItemStack() {
-            return new ItemStack(GtiItems.diamondApple).copy();
+            return GtiItems.diamondApple;
         }
     };
-
+    @Mod.Metadata
+    public ModMetadata meta = new ModMetadata();
     @Instance(Gti.MOD_ID)
     public static Gti instance;
    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        setupMeta();
+        FMLCommonHandler.instance().bus().register(new GtiEvent());
         GtiConfig.configFile = event.getSuggestedConfigurationFile();
         GtiConfig.init();
         GtiBlocks.init(); //register blocks
+        FluidRegistry.registerFluid(Gas.gasNatural);
         GtiItems.init(); //register items
         Recipes.init(); //register recipes
-        FluidRegistry.registerFluid(Gas.gasNatural);
+        GtiTiles.init();
     }
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        GtiTiles.init(); //register TileEntity
+         //register TileEntity
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance()); //register gui handler
-        GtiAchievement.init(); //register achievement
+         //register achievement
+        GtiAchievement.init();
         AchievementPage.registerAchievementPage(GtiAchievement.pageGti); //register achievement page
-        FMLCommonHandler.instance().bus().register(new GtiEvent()); //register event bus
+         //register event bus
         GameRegistry.registerWorldGenerator(new IridiumGen(), 1);
+    }
+
+    private void setupMeta() {
+        this.meta.modId = MOD_ID;
+        this.meta.name = MOD_NAME;
+        this.meta.version = "dev 0.0.6";
+        this.meta.url = "https://github.com/Minecraft-GoodTime/GoodTime-Industrial";
+        this.meta.updateUrl = this.meta.url;
+        this.meta.authorList.add("_JAVA7");
+        this.meta.authorList.add("liach");
+        this.meta.authorList.add("GoodTime Studio");
+        this.meta.credits = "GoodTime Studio";
     }
 }

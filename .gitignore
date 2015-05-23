@@ -11,6 +11,10 @@ push/
 run/
 src/ic2
 out/
+config/
+mods/
+saves/
+logs/
 
 /gradle.properties
 

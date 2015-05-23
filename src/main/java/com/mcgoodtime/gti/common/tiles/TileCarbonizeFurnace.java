@@ -28,7 +28,7 @@ public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory
     public int currentItemBurnTime;
     /** The number of ticks that the current item has been cooking for */
     public int furnaceCookTime;
-    private String field_145958_o;
+    private String customName;
 
     /**
      * Returns the number of slots in the inventory.
@@ -48,19 +48,19 @@ public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-        if (this.furnaceItemStacks[p_70298_1_] != null) {
+    public ItemStack decrStackSize(int stackId, int size) {
+        if (this.furnaceItemStacks[stackId] != null) {
             ItemStack itemstack;
 
-            if (this.furnaceItemStacks[p_70298_1_].stackSize <= p_70298_2_) {
-                itemstack = this.furnaceItemStacks[p_70298_1_];
-                this.furnaceItemStacks[p_70298_1_] = null;
+            if (this.furnaceItemStacks[stackId].stackSize <= size) {
+                itemstack = this.furnaceItemStacks[stackId];
+                this.furnaceItemStacks[stackId] = null;
                 return itemstack;
             } else {
-                itemstack = this.furnaceItemStacks[p_70298_1_].splitStack(p_70298_2_);
+                itemstack = this.furnaceItemStacks[stackId].splitStack(size);
 
-                if (this.furnaceItemStacks[p_70298_1_].stackSize == 0) {
-                    this.furnaceItemStacks[p_70298_1_] = null;
+                if (this.furnaceItemStacks[stackId].stackSize == 0) {
+                    this.furnaceItemStacks[stackId] = null;
                 }
 
                 return itemstack;
@@ -99,18 +99,18 @@ public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory
      * Returns the name of the inventory
      */
     public String getInventoryName() {
-        return this.hasCustomInventoryName() ? this.field_145958_o : "gti.container.CarbonizeFurnace";
+        return this.hasCustomInventoryName() ? this.customName : "gti.container.CarbonizeFurnace";
     }
 
     /**
      * Returns if the inventory is named
      */
     public boolean hasCustomInventoryName() {
-        return this.field_145958_o != null && this.field_145958_o.length() > 0;
+        return this.customName != null && this.customName.length() > 0;
     }
 
-    public void func_145951_a(String p_145951_1_) {
-        this.field_145958_o = p_145951_1_;
+    public void setName(String name) {
+        this.customName = name;
     }
 
     public void readFromNBT(NBTTagCompound p_145839_1_) {
@@ -132,7 +132,7 @@ public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory
         this.currentItemBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
 
         if (p_145839_1_.hasKey("CustomName", 8)) {
-            this.field_145958_o = p_145839_1_.getString("CustomName");
+            this.customName = p_145839_1_.getString("CustomName");
         }
     }
 
@@ -154,7 +154,7 @@ public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory
         p_145841_1_.setTag("Items", nbttaglist);
 
         if (this.hasCustomInventoryName()) {
-            p_145841_1_.setString("CustomName", this.field_145958_o);
+            p_145841_1_.setString("CustomName", this.customName);
         }
     }
 

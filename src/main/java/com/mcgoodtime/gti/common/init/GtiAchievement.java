@@ -1,5 +1,6 @@
 package com.mcgoodtime.gti.common.init;
 
+import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.init.GtiItems;
 import net.minecraft.init.Blocks;
@@ -18,19 +19,23 @@ import java.util.List;
  */
 public class GtiAchievement {
     /** Is the 'ir ore' achievement. */
-    public static Achievement getIrOre = (new Achievement("achievement.getIrOre", "getIrOre", 0, 0,
-            GtiBlocks.oreIridium, AchievementList.diamonds)).registerStat();
+    public static Achievement getIrOre = new Achievement("achievement.getIrOre", "getIrOre", 0, 0,
+            GtiBlocks.oreIridium, AchievementList.acquireIron).registerStat();
 
     /** Is the 'getting CarbonizeFurnace' achievement. */
-    public static Achievement getCarbonizeFurnace = (new Achievement("achievement.getCarbonizeFurnace",
-            "getCarbonizeFurnace", 0, 1, GtiBlocks.carbonizeFurnace, AchievementList.buildFurnace)).registerStat();
+    public static Achievement getCarbonizeFurnace = new Achievement(
+            "achievement.getCarbonizeFurnace",
+            "getCarbonizeFurnace", 0, 1, GtiBlocks.carbonizeFurnace, AchievementList.buildFurnace
+    ).registerStat();
 
     /** Is the AchievementPage for Gti */
-    public static AchievementPage pageGti = new AchievementPage("GoodTime Industrial",
+    public static AchievementPage pageGti = new AchievementPage(
+            Gti.MOD_NAME,
             new Achievement[]{
                     getIrOre,
                     getCarbonizeFurnace
-            });
+            }
+    );
 
     /**
      * A stub functions called to make the static initializer for this class run.
