@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 Minecraft-GoodTime <http://mcgoodtime.com>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,30 +24,23 @@
  */
 package com.mcgoodtime.gti.common.items;
 
-import com.mcgoodtime.gti.common.core.CreativeTabGti;
-import com.mcgoodtime.gti.common.core.Gti;
+import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
+
+import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
+import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 
 /**
- * The air brake unit and its casing.
- * 
- * @author Su Hao
+ * Created by liach on 5/22/2015.
+ *
+ * @author liach
  */
-public class ItemAirBrake {
-    public static class ItemAirBrakeUnit extends Item {
-        public ItemAirBrakeUnit() {
-            this.setUnlocalizedName("gti.AirBrakeUnit");
-            this.setTextureName(Gti.MOD_ID + ":" + "itemAirBrakeUnit");
-            this.setCreativeTab(CreativeTabGti.creativeTabGti);
-        }
-    }
-
-    public static class ItemAirBrakeCasing extends Item {
-        public ItemAirBrakeCasing() {
-            this.setUnlocalizedName("gti.AirBrakeCasing");
-            this.setTextureName(Gti.MOD_ID + ":" + "itemAirBrakeCasing");
-            this.setCreativeTab(CreativeTabGti.creativeTabGti);
-        }
+public class ItemGti extends Item {
+    public ItemGti(String name) {
+        this.setUnlocalizedName(MOD_ID + "." + name);
+        this.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
+        this.setCreativeTab(creativeTabGti);
+        GameRegistry.registerItem(this, name, MOD_ID);
     }
 }

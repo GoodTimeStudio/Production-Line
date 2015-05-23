@@ -26,7 +26,7 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.GtiAchievement;
 import com.mcgoodtime.gti.common.core.config.GtiConfig;
-import com.mcgoodtime.gti.common.gxy.GXYMod;
+import com.mcgoodtime.gti.common.blocks.fluid.Gas;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.init.GtiItems;
 import com.mcgoodtime.gti.common.init.Recipes;
@@ -41,6 +41,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.fluids.FluidRegistry;
 
 @Mod(
         modid = Gti.MOD_ID,
@@ -65,7 +66,7 @@ public final class Gti {
         GtiBlocks.init(); //register blocks
         GtiItems.init(); //register items
         Recipes.init(); //register recipes
-        GXYMod.init();
+        FluidRegistry.registerFluid(Gas.gasNatural);
     }
     
     @Mod.EventHandler

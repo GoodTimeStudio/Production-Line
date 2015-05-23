@@ -35,7 +35,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class DiamondApple extends ItemAppleGold{
+public class DiamondApple extends ItemAppleGold {
     public DiamondApple() {
         super(1005, 10F, false);
         this.setUnlocalizedName("gti.food.DiamondApple");
@@ -43,6 +43,7 @@ public class DiamondApple extends ItemAppleGold{
         this.setTextureName("gti:itemDiamondApple");
     }
 
+    @Override
     protected void onFoodEaten(ItemStack p_77849_1_, World p_77849_2_, EntityPlayer p_77849_3_)
     {
         if (!p_77849_2_.isRemote)

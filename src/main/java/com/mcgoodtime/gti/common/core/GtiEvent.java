@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
  * Created by suhao on 2015/5/17.
  */
 public class GtiEvent {
-
     @SubscribeEvent
     public void onPlayerCrafting(PlayerEvent.ItemCraftedEvent event) {
         if (event.crafting.getItem().equals(Item.getItemFromBlock(GtiBlocks.carbonizeFurnace))) {

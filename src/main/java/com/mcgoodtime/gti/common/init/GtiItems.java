@@ -24,14 +24,8 @@
  */
 package com.mcgoodtime.gti.common.init;
 
-import com.mcgoodtime.gti.common.items.ItemAirBrake;
-import com.mcgoodtime.gti.common.items.ItemBambooCharcoal;
-import com.mcgoodtime.gti.common.items.crushed.CrushedIridium;
-import com.mcgoodtime.gti.common.items.crushed.cleaned.CleanedCrushedIridium;
-import com.mcgoodtime.gti.common.items.dust.DustIridium;
+import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.food.DiamondApple;
-import com.mcgoodtime.gti.common.items.ingot.IngotIridium;
-import com.mcgoodtime.gti.common.items.plate.DiamondPlate;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
@@ -42,58 +36,37 @@ import net.minecraft.item.ItemPickaxe;
  * The list of all those items in GoodTime-Industrial.
  */
 public class GtiItems {
-    /* crushed ======================== */
     public static Item crushedIridium;
-
     public static Item cleanedCrushedIridium;
-     /* =============================== */
-
-    /* dust ========================= */
     public static Item dustIridium;
     public static Item smallDustIridium;
-
-    /* ============================== */
-
-    /* ingot ======================== */
     public static Item ingotIridium;
-    /* ============================== */
-
-    /* plate ===================== */
     public static Item denseDiamondPlate;
     public static Item diamondPlate;
-    public static ItemPickaxe iridiumPickaxe;
-    /* =========================== */
-
-    public static ItemFood diamondApple;
     public static Item airBrakeUnit;
     public static Item airBrakeCasing;
     public static Item bambooCharcoal;
+    public static ItemFood diamondApple;
+    public static ItemPickaxe iridiumPickaxe;
 
     public static void init() {
-        diamondApple = new DiamondApple();
-        diamondPlate = new DiamondPlate();
-        denseDiamondPlate = new DiamondPlate.DenseDiamondPlate();
-        crushedIridium = new CrushedIridium();
-        cleanedCrushedIridium = new CleanedCrushedIridium();
-        dustIridium = new DustIridium();
-        smallDustIridium = new DustIridium.DustIridiumSmall();
-        iridiumPickaxe = new IridiumPickaxe();
-        ingotIridium = new IngotIridium();
-        airBrakeUnit = new ItemAirBrake.ItemAirBrakeUnit();
-        airBrakeCasing = new ItemAirBrake.ItemAirBrakeCasing();
-        bambooCharcoal = new ItemBambooCharcoal();
+        diamondPlate = new ItemGti("DiamondPlate");
+        denseDiamondPlate = new ItemGti("DenseDiamondPlate");
+        crushedIridium = new ItemGti("CrushedIridium");
+        cleanedCrushedIridium = new ItemGti("CleanedCrushedIridium");
+        dustIridium = new ItemGti("DustIridium");
+        smallDustIridium = new ItemGti("SmallDustIridium");
+        ingotIridium = new ItemGti("IngotIridium");
+        airBrakeUnit = new ItemGti("AirBrakeUnit");
+        airBrakeCasing = new ItemGti("AirBrakeCasing");
+        bambooCharcoal = new ItemGti("BambooCharcoal");
 
+        // special registy TODO: Better registry system
+        diamondApple = new DiamondApple();
+        iridiumPickaxe = new IridiumPickaxe();
+
+        // TODO: Better registry system
         GameRegistry.registerItem(diamondApple, "DiamondApple");
-        GameRegistry.registerItem(diamondPlate, "DiamondPlate");
-        GameRegistry.registerItem(denseDiamondPlate, "DenseDiamondPlate");
-        GameRegistry.registerItem(crushedIridium, "CrushedIridium");
-        GameRegistry.registerItem(cleanedCrushedIridium, "CleanedCrushedIridium");
-        GameRegistry.registerItem(dustIridium, "DustIridium");
-        GameRegistry.registerItem(smallDustIridium, "DustIridiumSmall");
         GameRegistry.registerItem(iridiumPickaxe, "gti.iridiumPickaxe");
-        GameRegistry.registerItem(ingotIridium, "IngotIridium");
-        GameRegistry.registerItem(airBrakeUnit, "AirBrakeUnit");
-        GameRegistry.registerItem(airBrakeCasing, "AirBrakeCasing");
-        GameRegistry.registerItem(bambooCharcoal, "BambooCharcoal");
     }
 }

@@ -22,10 +22,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.fluid;
+package com.mcgoodtime.gti.common.blocks.fluid;
 
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 
 public class Gas extends Fluid {
     public static Fluid gasNatural = new Gas("Natural Gas")
@@ -33,9 +32,5 @@ public class Gas extends Fluid {
 
     public Gas(String fluidName) {
         super(fluidName);
-    }
-
-    static {
-        FluidRegistry.registerFluid(gasNatural);
     }
 }

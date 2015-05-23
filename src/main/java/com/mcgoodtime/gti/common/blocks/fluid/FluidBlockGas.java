@@ -22,19 +22,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.items.crushed.cleaned;
+package com.mcgoodtime.gti.common.blocks.fluid;
 
-import com.mcgoodtime.gti.common.core.CreativeTabGti;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.Fluid;
 
-/**
- * Created by suhao on 2015-04-24-0024.
- */
-public class CleanedCrushedIridium extends Item {
-    public CleanedCrushedIridium() {
-        setUnlocalizedName("gti.crushed.CleanedCrushedIridium");
-        setCreativeTab(CreativeTabGti.creativeTabGti);
-        setTextureName("gti:itemWashedCrushedIridium");
+public class FluidBlockGas extends BlockFluidClassic {
+    public FluidBlockGas(Fluid fluid, Material material) {
+       super(fluid, material);
     }
 }
