@@ -24,13 +24,19 @@
  */
 package com.mcgoodtime.gti.common.init;
 
+import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
-import com.mcgoodtime.gti.common.items.food.DiamondApple;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
+
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
 
 /**
  * The list of all those items in GoodTime-Industrial.
@@ -46,7 +52,7 @@ public class GtiItems {
     public static Item airBrakeUnit;
     public static Item airBrakeCasing;
     public static Item bambooCharcoal;
-    public static ItemFood diamondApple;
+    public static Item diamondApple;
     public static ItemPickaxe iridiumPickaxe;
 
     public static void init() {
@@ -62,7 +68,23 @@ public class GtiItems {
         bambooCharcoal = new ItemGti("BambooCharcoal");
 
         // special registy TODO: Better registry system
-        diamondApple = new DiamondApple();
+        diamondApple = new ItemFood(1005, 10F, false) {
+            @Override
+            protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) {
+                if (!world.isRemote) {
+                    player.addPotionEffect(new PotionEffect(Potion.field_76434_w.id, 12000, 0));
+                    player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 6000, 4));
+                    player.addPotionEffect(new PotionEffect(Potion.resistance.id, 6000, 4));
+                    player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 0));
+                }
+                super.onFoodEaten(itemStack, world, player);
+            }
+        };
+
+        diamondApple = diamondApple
+                .setUnlocalizedName("gti.food.DiamondApple")
+                .setCreativeTab(Gti.creativeTabGti)
+                .setTextureName("gti:itemDiamondApple");
         iridiumPickaxe = new IridiumPickaxe();
 
         // TODO: Better registry system
