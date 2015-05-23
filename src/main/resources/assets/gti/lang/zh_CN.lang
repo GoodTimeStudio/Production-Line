@@ -49,3 +49,6 @@ achievement.CarbonizeFurnace.desc=制作一个碳化燃烧炉
 achievement.getIrOre=比钻石更好
 achievement.getIrOre.desc=挖到一个铱矿石
 
+//tooltip
+gti.tooltip.CarbonizeFurnace=缺氧燃烧，燃烧能力有限
+

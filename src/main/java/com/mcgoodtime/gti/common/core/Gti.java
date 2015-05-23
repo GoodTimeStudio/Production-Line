@@ -47,7 +47,7 @@ import net.minecraftforge.fluids.FluidRegistry;
         modid = Gti.MOD_ID,
         name = Gti.MOD_NAME,
         version = Gti.VERSION,
-        dependencies = "required-after:" + "Forge@[10.13.2.1291,);" + "after:" + "IC2@[2.2.660,);"
+        dependencies = "required-after:" + "Forge@[10.13.2.1291,);" + "required-after:" + "IC2@[2.2.660,);"
     )
 public final class Gti {
     public static final String MOD_ID = "gti";
