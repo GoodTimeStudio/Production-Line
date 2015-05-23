@@ -25,10 +25,10 @@
 package com.mcgoodtime.gti.common.blocks.fluid;
 
 import net.minecraft.block.material.Material;
-import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
 
-public class FluidBlockGas extends BlockFluidClassic {
+public class FluidBlockGas extends BlockFluidFinite {
     public FluidBlockGas(Fluid fluid, Material material) {
        super(fluid, material);
     }
