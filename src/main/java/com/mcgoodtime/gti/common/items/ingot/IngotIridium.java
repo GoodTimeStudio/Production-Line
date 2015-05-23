@@ -35,6 +35,6 @@ public class IngotIridium extends Item {
     public IngotIridium() {
         setUnlocalizedName("gti.ingot.IngotIridium");
         setCreativeTab(CreativeTabGti.creativeTabGti);
-        setTextureName("gti:itemIngotIR");
+        setTextureName("gti:itemIngotIriridium");
     }
 }
