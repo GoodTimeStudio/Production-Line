@@ -31,7 +31,7 @@ import net.minecraft.item.ItemPickaxe;
 
 public class IridiumPickaxe extends ItemPickaxe {
     public IridiumPickaxe() {
-        super(ToolMaterial.IRON);
+        super(ToolMaterial.EMERALD);
         this.setCreativeTab(creativeTabGti);
         this.setUnlocalizedName("gti.tool.iridiumPickaxe");
         this.setTextureName("gti:itemIridiumPickaxe");

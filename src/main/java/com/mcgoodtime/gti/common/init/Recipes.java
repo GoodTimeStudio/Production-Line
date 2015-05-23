@@ -79,7 +79,15 @@ public class Recipes {
                 'Y', ic2.api.item.IC2Items.getItem("rubber")
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.diamondApple),
+                new ItemStack(GtiItems.diamondApple, 1, 0),
+                "DDD",
+                "DAD",
+                "DDD",
+                'D', GtiItems.diamondPlate,
+                'A', Items.apple
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.diamondApple, 1, 1),
                 "DDD",
                 "DAD",
                 "DDD",

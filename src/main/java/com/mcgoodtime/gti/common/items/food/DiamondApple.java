@@ -27,13 +27,41 @@ package com.mcgoodtime.gti.common.items.food;
 import static com.mcgoodtime.gti.common.core.CreativeTabGti.creativeTabGti;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemAppleGold;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
 
-public class DiamondApple extends ItemFood {
+public class DiamondApple extends ItemAppleGold{
     public DiamondApple() {
         super(1005, 10F, false);
         this.setUnlocalizedName("gti.food.DiamondApple");
         this.setCreativeTab(creativeTabGti);
         this.setTextureName("gti:itemDiamondApple");
+    }
+
+    protected void onFoodEaten(ItemStack p_77849_1_, World p_77849_2_, EntityPlayer p_77849_3_)
+    {
+        if (!p_77849_2_.isRemote)
+        {
+            p_77849_3_.addPotionEffect(new PotionEffect(Potion.field_76444_x.id, 2400, 0));
+        }
+
+        if (p_77849_1_.getItemDamage() > 0)
+        {
+            if (!p_77849_2_.isRemote)
+            {
+                p_77849_3_.addPotionEffect(new PotionEffect(Potion.regeneration.id, 6000, 4));
+                p_77849_3_.addPotionEffect(new PotionEffect(Potion.resistance.id, 6000, 0));
+                p_77849_3_.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 0));
+            }
+        }
+        else
+        {
+            super.onFoodEaten(p_77849_1_, p_77849_2_, p_77849_3_);
+        }
     }
 }
