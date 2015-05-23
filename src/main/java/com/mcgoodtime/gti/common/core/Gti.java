@@ -31,8 +31,7 @@ import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.init.GtiItems;
 import com.mcgoodtime.gti.common.init.Recipes;
 
-import com.mcgoodtime.gti.common.init.Tile;
-import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
+import com.mcgoodtime.gti.common.init.GtiTiles;
 import com.mcgoodtime.gti.common.worldgen.IridiumGen;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -71,7 +70,7 @@ public final class Gti {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Tile.init(); //register TileEntity
+        GtiTiles.init(); //register TileEntity
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance()); //register gui handler
         GtiAchievement.init(); //register achievement
         AchievementPage.registerAchievementPage(GtiAchievement.pageGti); //register achievement page
