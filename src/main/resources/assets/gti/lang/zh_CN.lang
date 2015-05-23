@@ -2,6 +2,9 @@
 //Language file
 //zh_CN
 
+//itemGroup
+itemGroup.GoodTime Industrial
+
 //gui
 gui.gti.GenGasKu=燃气动能发生机
 gui.gti.CarbonizeFurnace=碳化燃烧炉
@@ -14,20 +17,26 @@ tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
 
 tile.gxyBlock.name=gxy方块
 
-//items
-item.gti.crushed.CrushedIridium.name=粉碎的铱矿石
-item.gti.crushed.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
+// === items ===
 
-item.gti.dust.DustIridium.name=铱矿石粉
-item.gti.dust.DustIridiumSmall.name=小搓铱矿石粉
+//crushed
+item.gti.CrushedIridium.name=粉碎的铱矿石
+item.gti.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
+
+//dust
+item.gti.DustIridium.name=铱矿石粉
+item.gti.SmallDustIridium.name=小撮铱矿石粉
 
 item.gti.food.DiamondApple.name=钻石苹果
 
-item.gti.ingot.IngotIridium.name=铱锭
+//ingot
+item.gti.IngotIridium.name=铱锭
 
-item.gti.plate.DenseDiamondPlate.name=致密钻石板
-item.gti.plate.DiamondPlate.name=钻石板
+//plate
+item.gti.DenseDiamondPlate.name=致密钻石板
+item.gti.DiamondPlate.name=钻石板
 
+//tool
 item.gti.tool.iridiumPickaxe.name=铱镐
 
 item.gti.BambooCharcoal.name=竹炭
