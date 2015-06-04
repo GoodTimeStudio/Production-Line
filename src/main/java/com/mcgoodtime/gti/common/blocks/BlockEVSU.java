@@ -12,7 +12,7 @@ import net.minecraft.world.World;
  */
 public class BlockEVSU extends BlockContainer {
 
-    protected BlockEVSU() {
+    public BlockEVSU() {
         super(Material.iron);
         this.setCreativeTab(Gti.creativeTabGti);
         this.setHardness(1.5f);

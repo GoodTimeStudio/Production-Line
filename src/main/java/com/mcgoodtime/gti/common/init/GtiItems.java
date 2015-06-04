@@ -26,6 +26,7 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
+import com.mcgoodtime.gti.common.items.ItemGtiTreetap;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 
 import cpw.mods.fml.common.IFuelHandler;
@@ -55,6 +56,7 @@ public class GtiItems implements IFuelHandler {
     public static Item bambooCharcoal;
     public static Item diamondApple;
     public static ItemPickaxe iridiumPickaxe;
+    public static Item ironTreetap;
 
     public static void init() {
         diamondPlate = new ItemGti("DiamondPlate");
@@ -67,6 +69,7 @@ public class GtiItems implements IFuelHandler {
         airBrakeUnit = new ItemGti("AirBrakeUnit");
         airBrakeCasing = new ItemGti("AirBrakeCasing");
         bambooCharcoal = new ItemGti("BambooCharcoal");
+        ironTreetap = new ItemGtiTreetap.IronTreetap();
 
         // special registy TODO: Better registry system
         diamondApple = new ItemFood(1005, 10F, false) {

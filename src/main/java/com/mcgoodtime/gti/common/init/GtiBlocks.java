@@ -54,6 +54,7 @@ public class GtiBlocks {
         oreIridium = new OreIridium();
         carbonizeFurnace = new BlockCarbonizeFurnace(false);
         litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(true);
+        evsu = new BlockEVSU();
 
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(genGasKU, "GenGasKu");
