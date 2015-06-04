@@ -46,6 +46,7 @@ public class GtiBlocks {
     public static Block oreIridium;
     public static Block carbonizeFurnace;
     public static Block litCarbonizeFurnace;
+    public static BlockContainer evsu;
 
     public static void init() {
         waterHyacinth = new BlockWaterHyacinth();
@@ -59,6 +60,7 @@ public class GtiBlocks {
         GameRegistry.registerBlock(oreIridium, "oreIridium");
         GameRegistry.registerBlock(carbonizeFurnace, ItemCarbonizeFurnace.class, "CarbonizeFurnace");
         GameRegistry.registerBlock(litCarbonizeFurnace, "lit_CarbonizeFurnace");
+        GameRegistry.registerBlock(evsu, "EVSU");
 
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
         GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
