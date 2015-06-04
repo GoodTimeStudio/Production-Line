@@ -106,6 +106,13 @@ public class Recipes {
                 new ItemStack(GtiItems.smallDustIridium),
                 new ItemStack(GtiItems.smallDustIridium)
         );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.ironTreetap),
+                " X ",
+                "XXX",
+                "X  ",
+                'X', Items.iron_ingot
+        );
 
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, new ItemStack(GtiItems.ingotIridium), XP);

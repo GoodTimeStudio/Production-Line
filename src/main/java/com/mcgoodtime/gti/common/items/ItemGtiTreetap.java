@@ -26,6 +26,8 @@ public class ItemGtiTreetap {
 
         public IronTreetap() {
             super("IronTreetap");
+            this.setMaxDamage(50);
+            this.setMaxStackSize(1);
         }
 
         @Override
