@@ -26,7 +26,7 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
-import com.mcgoodtime.gti.common.items.ItemGtiTreetap;
+import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 
 import cpw.mods.fml.common.IFuelHandler;

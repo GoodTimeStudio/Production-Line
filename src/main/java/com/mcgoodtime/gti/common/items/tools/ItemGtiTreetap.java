@@ -1,5 +1,6 @@
-package com.mcgoodtime.gti.common.items;
+package com.mcgoodtime.gti.common.items.tools;
 
+import com.mcgoodtime.gti.common.items.ItemGti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IBoxable;
 import ic2.core.IC2;
