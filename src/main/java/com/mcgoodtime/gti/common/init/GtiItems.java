@@ -69,7 +69,9 @@ public class GtiItems implements IFuelHandler {
         airBrakeUnit = new ItemGti("AirBrakeUnit");
         airBrakeCasing = new ItemGti("AirBrakeCasing");
         bambooCharcoal = new ItemGti("BambooCharcoal");
-        ironTreetap = new ItemGtiTreetap.IronTreetap();
+        ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
+        ironTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
+        ironTreetap = new ItemGtiTreetap("RefinedIronTreetap", 64);
 
         // special registy TODO: Better registry system
         diamondApple = new ItemFood(1005, 10F, false) {
