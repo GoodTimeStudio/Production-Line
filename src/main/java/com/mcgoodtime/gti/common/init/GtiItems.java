@@ -57,6 +57,11 @@ public class GtiItems implements IFuelHandler {
     public static Item diamondApple;
     public static ItemPickaxe iridiumPickaxe;
     public static Item ironTreetap;
+    public static Item bronzeTreetap;
+    public static Item leadTreetap;
+    public static Item refinedIronTreetap;
+    public static Item advancedAlloyTreetap;
+    public static Item carbonTreetap;
 
     public static void init() {
         diamondPlate = new ItemGti("DiamondPlate");
@@ -70,8 +75,11 @@ public class GtiItems implements IFuelHandler {
         airBrakeCasing = new ItemGti("AirBrakeCasing");
         bambooCharcoal = new ItemGti("BambooCharcoal");
         ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
-        ironTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
-        ironTreetap = new ItemGtiTreetap("RefinedIronTreetap", 64);
+        bronzeTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
+        leadTreetap = new ItemGtiTreetap("LeadTreetap", 48);
+        refinedIronTreetap = new ItemGtiTreetap("RefinedIronTreetap", 64);
+        advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
+        carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
 
         // special registy TODO: Better registry system
         diamondApple = new ItemFood(1005, 10F, false) {

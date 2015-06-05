@@ -26,6 +26,7 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.core.Gti;
 import cpw.mods.fml.common.registry.GameRegistry;
+import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.core.Ic2Items;
 import net.minecraft.init.Blocks;
@@ -112,6 +113,42 @@ public class Recipes {
                 "XXX",
                 "X  ",
                 'X', Items.iron_ingot
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.bronzeTreetap),
+                " X ",
+                "XXX",
+                "X  ",
+                'X', IC2Items.getItem("bronzeIngot")
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.leadTreetap),
+                " X ",
+                "XXX",
+                "X  ",
+                'X', IC2Items.getItem("leadIngot")
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.refinedIronTreetap),
+                " X ",
+                "XXX",
+                "X  ",
+                'X', IC2Items.getItem("advIronIngot")
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.advancedAlloyTreetap),
+                " X ",
+                "XXX",
+                "X  ",
+                'X', IC2Items.getItem("advancedAlloy")
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.carbonTreetap),
+                " XY",
+                "XXX",
+                "XY ",
+                'X', IC2Items.getItem("carbonPlate"),
+                'Y', IC2Items.getItem("carbonMesh")
         );
 
         //smelting registry

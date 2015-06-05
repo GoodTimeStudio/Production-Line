@@ -19,21 +19,24 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
 import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
+
 /**
  * Created by suhao on 2015-6-4-0004.
  */
-public class ItemGtiTreetap extends ItemGti implements IBoxable {
+public class ItemGtiTreetap extends Item implements IBoxable {
 
     public ItemGtiTreetap(String name, int damage) {
-        super(name);
+        this.setUnlocalizedName(MOD_ID + ".tool." + name);
+        this.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
+        this.setCreativeTab(creativeTabGti);
         this.setMaxDamage(damage);
         this.setMaxStackSize(1);
+        GameRegistry.registerItem(this, name, MOD_ID);
     }
 
     @Override

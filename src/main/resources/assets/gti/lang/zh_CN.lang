@@ -38,6 +38,12 @@ item.gti.DiamondPlate.name=钻石板
 
 //tool
 item.gti.tool.iridiumPickaxe.name=铱镐
+item.gti.tool.IronTreetap.name=铁龙头
+item.gti.tool.BronzeTreetap.name=青铜龙头
+item.gti.tool.LeadTreetap.name=铅龙头
+item.gti.tool.RefinedIronTreetap.name=精炼铁龙头
+item.gti.tool.AdvancedAlloyTreetap.name=高级合金龙头
+item.gti.tool.CarbonTreetap.name=碳板龙头
 
 item.gti.BambooCharcoal.name=竹炭
 item.gti.AirBrakeUnit.name=气闸单元

@@ -27,10 +27,11 @@ package com.mcgoodtime.gti.common.items.tools;
 import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
 import net.minecraft.item.ItemPickaxe;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class IridiumPickaxe extends ItemPickaxe {
     public IridiumPickaxe() {
-        super(ToolMaterial.EMERALD);
+        super(EnumHelper.addToolMaterial("Iridium", 4, 2000, 10.0F, 4.0F, 30));
         this.setCreativeTab(creativeTabGti);
         this.setUnlocalizedName("gti.tool.iridiumPickaxe");
         this.setTextureName("gti:itemIridiumPickaxe");
