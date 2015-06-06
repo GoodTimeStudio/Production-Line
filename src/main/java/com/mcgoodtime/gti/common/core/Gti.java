@@ -59,7 +59,7 @@ import java.util.ArrayList;
 public final class Gti {
     public static final String MOD_ID = "gti";
     public static final String MOD_NAME = "GoodTime-Industrial";
-    public static final String VERSION = "dev.0.1";
+    public static final String VERSION = "Dev.0.1";
     public static final String RESOURCE_DOMAIN = "gti";
     public static final String GUI_PREFIX = "gui.gti.";
     public static final CreativeTabs creativeTabGti = new CreativeTabs(MOD_NAME) {
