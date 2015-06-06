@@ -82,8 +82,7 @@ checkstyle {
 }
 
 def getBuildNumber() {
-	//return "$System.env.BUILD_NUMBER" != "null" ? "$System.env.BUILD_NUMBER" : "0"
-	return 1
+	return "$System.env.BUILD_NUMBER" != "null" ? "$System.env.BUILD_NUMBER" : "0"
 }
 
 def changeBuildNumber() {
