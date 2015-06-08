@@ -26,6 +26,7 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.blocks.*;
 import com.mcgoodtime.gti.common.core.GtiConfig;
+
 import com.mcgoodtime.gti.common.items.ItemCarbonizeFurnace;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -39,7 +40,7 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
-	public static Block CompressionWaterHyacinth;
+
     public static Block waterHyacinth;
     public static BlockContainer genGasKU;
     public static Block oreIridium;
@@ -48,15 +49,13 @@ public class GtiBlocks {
     public static BlockContainer evsu;
 
     public static void init() {
-    	CompressionWaterHyacinth=new BlockCompressionWaterHyacinth();
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
         oreIridium = new OreIridium();
         carbonizeFurnace = new BlockCarbonizeFurnace(false);
         litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(true);
         evsu = new BlockEVSU();
-        
-        GameRegistry.registerBlock(CompressionWaterHyacinth,"CompressionWaterHyacinth");
+
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(genGasKU, "GenGasKu");
         GameRegistry.registerBlock(oreIridium, "oreIridium");
