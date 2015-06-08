@@ -48,7 +48,7 @@ public class GtiBlocks {
     public static BlockContainer evsu;
 
     public static void init() {
-    	CompressionWaterHyacinth=new BlockCompressionWaterHyacinth();
+    	CompressionWaterHyacinth = new BlockCompressionWaterHyacinth();
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
         oreIridium = new OreIridium();

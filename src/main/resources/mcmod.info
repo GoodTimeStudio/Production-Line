@@ -3,7 +3,7 @@
   "modid": "gti",
   "name": "GoodTime-Industrial",
   "description": "",
-  "version": "Dev.0.1.{BUILD_NUM}",
+  "version": "Dev.0.1.null",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",

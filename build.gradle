@@ -32,7 +32,6 @@ repositories {
 dependencies {
     compile 'net.industrial-craft:industrialcraft-2:2.2.719-experimental:dev' //adds newest ic2 to the dev env
     checkstyle 'com.puppycrawl.tools:checkstyle:6.5'
-	changeBuildNumber()
 }
 
 minecraft {
@@ -85,24 +84,28 @@ def getBuildNumber() {
 	return "$System.env.BUILD_NUMBER" != "null" ? "$System.env.BUILD_NUMBER" : "0"
 }
 
-def changeBuildNumber() {
-	File file = new File("./src/main/resources/mcmod.info");
-	String mcmodinfo = file.getText().replace("{BUILD_NUM}", getBuildNumber().toString());
-	System.out.println(mcmodinfo);
-	try {
-			FileOutputStream fos = new FileOutputStream(file);
-			OutputStreamWriter osw = new OutputStreamWriter(fos , "UTF-8");
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.write(mcmodinfo);
-			
-			bw.close();
-			osw.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	
-	
+class ChangeBuildNumTask extends DefaultTask {
+    @TaskAction
+    def changeBuildNumber() {
+        File file = new File("./src/main/resources/mcmod.info");
+        String num = "$System.env.BUILD_NUMBER"
+        if (num) {
+            String mcmodinfo = file.getText().replace("{BUILD_NUM}", num);
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                OutputStreamWriter osw = new OutputStreamWriter(fos , "UTF-8");
+                BufferedWriter bw = new BufferedWriter(osw);
+                bw.write(mcmodinfo);
+
+                bw.close();
+                osw.close();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 
+task changeBuildNum(type:ChangeBuildNumTask)
 tasks.jar.dependsOn "check"
