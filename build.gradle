@@ -18,6 +18,7 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'checkstyle'
 
+
 version = "dev.0.1." + getBuildNumber()
 group= "com.mcgoodtime.gti"
 archivesBaseName = "gti"
