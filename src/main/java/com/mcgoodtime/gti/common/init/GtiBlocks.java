@@ -39,7 +39,7 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
-	public static Block CompressionWaterHyacinth;
+	public static Block CompressedWaterHyacinth;
     public static Block waterHyacinth;
     public static BlockContainer genGasKU;
     public static Block oreIridium;
@@ -48,7 +48,7 @@ public class GtiBlocks {
     public static BlockContainer evsu;
 
     public static void init() {
-    	CompressionWaterHyacinth=new BlockCompressionWaterHyacinth();
+    	CompressedWaterHyacinth=new BlockCompressedWaterHyacinth();
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
         oreIridium = new OreIridium();
@@ -56,7 +56,7 @@ public class GtiBlocks {
         litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(true);
         evsu = new BlockEVSU();
         
-        GameRegistry.registerBlock(CompressionWaterHyacinth,"CompressionWaterHyacinth");
+        GameRegistry.registerBlock(CompressedWaterHyacinth,"CompressedWaterHyacinth");
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(genGasKU, "GenGasKu");
         GameRegistry.registerBlock(oreIridium, "oreIridium");

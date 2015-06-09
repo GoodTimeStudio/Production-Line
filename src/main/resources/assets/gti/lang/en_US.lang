@@ -24,3 +24,9 @@ tile.iridiumore.name=Iridium Ore
 
 //----Gxy
 tile.gxyBlock.name=gxy Block
+
+//----Block
+tile.CompressedWaterHyacinth.name=Compressed Water Hyacinth
+
+//---Item
+tile.SmallCompressedWaterHyacinth.name=Small Compressed Water Hyacinth

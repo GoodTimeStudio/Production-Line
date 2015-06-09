@@ -44,6 +44,7 @@ import net.minecraft.world.World;
  * The list of all those items in GoodTime-Industrial.
  */
 public class GtiItems implements IFuelHandler {
+	public static Item SmallCompressedWaterHyacinth;
     public static Item crushedIridium;
     public static Item cleanedCrushedIridium;
     public static Item dustIridium;
@@ -64,6 +65,7 @@ public class GtiItems implements IFuelHandler {
     public static Item carbonTreetap;
 
     public static void init() {
+    	SmallCompressedWaterHyacinth=new ItemGti("SmallCompressedWaterHyacinth");
         diamondPlate = new ItemGti("DiamondPlate");
         denseDiamondPlate = new ItemGti("DenseDiamondPlate");
         crushedIridium = new ItemGti("CrushedIridium");
@@ -81,7 +83,7 @@ public class GtiItems implements IFuelHandler {
         advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
         carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
 
-        // special registy TODO: Better registry system
+        // special registry TODO: Better registry system
         diamondApple = new ItemFood(1005, 10F, false) {
             @Override
             protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) {
@@ -102,9 +104,10 @@ public class GtiItems implements IFuelHandler {
         iridiumPickaxe = new IridiumPickaxe();
 
         // TODO: Better registry system
+        GameRegistry.registerItem(SmallCompressedWaterHyacinth, "SmallCompressedWaterHyacinth");
         GameRegistry.registerItem(diamondApple, "DiamondApple");
         GameRegistry.registerItem(iridiumPickaxe, "gti.iridiumPickaxe");
-
+        
         GameRegistry.registerFuelHandler(new GtiItems());
     }
 
