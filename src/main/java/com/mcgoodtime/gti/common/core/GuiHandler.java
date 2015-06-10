@@ -35,7 +35,6 @@ import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileEVSU;
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
 import cpw.mods.fml.common.network.IGuiHandler;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -67,7 +66,7 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerCarbonizeFurnace(player.inventory, (TileCarbonizeFurnace)world.getTileEntity(x, y, z));
         }
         if (id == Guis.EVSU.ordinal()) {
-            return new ContainerEVSU(player.inventory, (TileEVSU)world.getTileEntity(x, y, z));
+            return new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z));
         }
         return null;
     }
@@ -81,7 +80,7 @@ public class GuiHandler implements IGuiHandler {
             return new GuiCarbonizeFurnace(player.inventory, (TileCarbonizeFurnace)world.getTileEntity(x, y, z));
         }
         if (id == Guis.EVSU.ordinal()) {
-            return new GuiEVSU(player.inventory, (TileEVSU)world.getTileEntity(x, y, z));
+            return new GuiEVSU(new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z)));
         }
         return null;
     }
