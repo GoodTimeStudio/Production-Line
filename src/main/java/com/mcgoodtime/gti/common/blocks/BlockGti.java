@@ -25,23 +25,39 @@
 package com.mcgoodtime.gti.common.blocks;
 
 import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
+import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
+import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
 
+import com.mcgoodtime.gti.common.core.GtiConfig;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import org.apache.logging.log4j.Level;
 
 /**
- * The block of iridium ore.
+ * Created by suhao on 2015-6-10-0010.
  *
- * @author liach
+ * @author suhao
  */
-public class OreIridium extends Block {
-    public OreIridium() {
-        super(Material.rock);
+public class BlockGti extends Block {
+    public BlockGti(Material material, String name, float hardness, float resistance,
+                       String harvestLevelToolClass, int harvestLevel) {
+        super(material);
         this.setCreativeTab(creativeTabGti);
-        this.setHardness(10);
-        this.setBlockName("gti.block.oreIridium");
-        this.setResistance(20);
-        this.setBlockTextureName("gti:blockOreIridium");
-        this.setHarvestLevel("pickaxe", 3);
+        this.setBlockName(MOD_ID + "." + "block" + "." + name);
+        this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
+        this.setHardness(hardness);
+        this.setResistance(resistance);
+        this.setHarvestLevel(harvestLevelToolClass, harvestLevel);
+        GameRegistry.registerBlock(this, name);
+        GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
+    }
+
+    public BlockGti(Material material, String name) {
+        super(material);
+        this.setBlockName(MOD_ID + "." + "block" + "." + name);
+        this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
+        GameRegistry.registerBlock(this, name);
+        GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
     }
 }

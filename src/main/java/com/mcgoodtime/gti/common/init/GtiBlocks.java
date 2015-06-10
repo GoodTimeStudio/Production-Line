@@ -31,6 +31,7 @@ import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
 import org.apache.logging.log4j.Level;
 
 /**
@@ -39,7 +40,7 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
-	public static Block CompressedWaterHyacinth;
+	public static Block compressedWaterHyacinth;
     public static Block waterHyacinth;
     public static BlockContainer genGasKU;
     public static Block oreIridium;
@@ -48,25 +49,24 @@ public class GtiBlocks {
     public static BlockContainer evsu;
 
     public static void init() {
-    	CompressedWaterHyacinth=new BlockCompressedWaterHyacinth();
+        oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
+        compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5f, 0.3f, null, 0);
+
+        // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
-        oreIridium = new OreIridium();
         carbonizeFurnace = new BlockCarbonizeFurnace(false);
         litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(true);
         evsu = new BlockEVSU();
-        
-        GameRegistry.registerBlock(CompressedWaterHyacinth, "CompressedWaterHyacinth");
+
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
-        GameRegistry.registerBlock(genGasKU, "GenGasKu");
-        GameRegistry.registerBlock(oreIridium, "oreIridium");
+        GameRegistry.registerBlock(genGasKU, "GenGasKu");;
         GameRegistry.registerBlock(carbonizeFurnace, ItemCarbonizeFurnace.class, "CarbonizeFurnace");
         GameRegistry.registerBlock(litCarbonizeFurnace, "lit_CarbonizeFurnace");
         GameRegistry.registerBlock(evsu, "EVSU");
 
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
         GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
-        GtiConfig.gtiLogger.log(Level.INFO, "oreiridium" + Integer.toString(Block.getIdFromBlock(oreIridium)));
         GtiConfig.gtiLogger.log(Level.INFO, "carbonizefurnace" + Integer.toString(Block.getIdFromBlock(carbonizeFurnace)));
     }
 }

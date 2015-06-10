@@ -65,7 +65,7 @@ public class GtiItems implements IFuelHandler {
     public static Item carbonTreetap;
 
     public static void init() {
-    	SmallCompressedWaterHyacinth=new ItemGti("SmallCompressedWaterHyacinth");
+    	SmallCompressedWaterHyacinth = new ItemGti("SmallCompressedWaterHyacinth");
         diamondPlate = new ItemGti("DiamondPlate");
         denseDiamondPlate = new ItemGti("DenseDiamondPlate");
         crushedIridium = new ItemGti("CrushedIridium");
@@ -104,7 +104,6 @@ public class GtiItems implements IFuelHandler {
         iridiumPickaxe = new IridiumPickaxe();
 
         // TODO: Better registry system
-        GameRegistry.registerItem(SmallCompressedWaterHyacinth, "SmallCompressedWaterHyacinth");
         GameRegistry.registerItem(diamondApple, "DiamondApple");
         GameRegistry.registerItem(iridiumPickaxe, "gti.iridiumPickaxe");
         
