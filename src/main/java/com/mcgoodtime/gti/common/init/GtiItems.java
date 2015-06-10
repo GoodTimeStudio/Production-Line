@@ -44,7 +44,7 @@ import net.minecraft.world.World;
  * The list of all those items in GoodTime-Industrial.
  */
 public class GtiItems implements IFuelHandler {
-	public static Item SmallCompressedWaterHyacinth;
+	public static Item smallCompressedWaterHyacinth;
     public static Item crushedIridium;
     public static Item cleanedCrushedIridium;
     public static Item dustIridium;
@@ -65,7 +65,7 @@ public class GtiItems implements IFuelHandler {
     public static Item carbonTreetap;
 
     public static void init() {
-    	SmallCompressedWaterHyacinth = new ItemGti("SmallCompressedWaterHyacinth");
+    	smallCompressedWaterHyacinth = new ItemGti("SmallCompressedWaterHyacinth");
         diamondPlate = new ItemGti("DiamondPlate");
         denseDiamondPlate = new ItemGti("DenseDiamondPlate");
         crushedIridium = new ItemGti("CrushedIridium");
@@ -114,6 +114,15 @@ public class GtiItems implements IFuelHandler {
     public int getBurnTime(ItemStack fuel) {
         if (fuel.getItem() == bambooCharcoal) {
             return 800;
+        }
+        if (fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.waterHyacinth))) {
+            return 100;
+        }
+        if (fuel.getItem() == smallCompressedWaterHyacinth) {
+            return 400;
+        }
+        if (fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.compressedWaterHyacinth))) {
+            return 700;
         }
         return 0;
     }
