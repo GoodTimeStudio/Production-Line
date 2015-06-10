@@ -28,10 +28,14 @@ import com.mcgoodtime.gti.common.blocks.*;
 import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.items.ItemCarbonizeFurnace;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
 import org.apache.logging.log4j.Level;
 
 /**
@@ -40,6 +44,7 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
+	public static Block dehydratedWaterHyacinthblock;
 	public static Block compressedWaterHyacinth;
     public static Block waterHyacinth;
     public static BlockContainer genGasKU;
@@ -51,6 +56,7 @@ public class GtiBlocks {
     public static void init() {
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
         compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5f, 0.3f, null, 0);
+        dehydratedWaterHyacinthblock=new BlockGti(Material.rock,"DehydratedWaterHyacinthBlock",1.0f,0.3f,null,0);
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
@@ -68,5 +74,12 @@ public class GtiBlocks {
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
         GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
         GtiConfig.gtiLogger.log(Level.INFO, "carbonizefurnace" + Integer.toString(Block.getIdFromBlock(carbonizeFurnace)));
+    }
+
+    public int getBurnTime (ItemStack fuel) {
+        if (fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.dehydratedWaterHyacinthblock))) {
+            return 1000;
+        }
+        return 0;
     }
 }

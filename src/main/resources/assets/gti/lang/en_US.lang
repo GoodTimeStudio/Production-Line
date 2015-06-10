@@ -27,6 +27,7 @@ tile.gxyBlock.name=gxy Block
 
 //----Block
 tile.CompressedWaterHyacinth.name=Compressed Water Hyacinth
+tile.DehydratedWaterHyacinthBlock.name=Dehydrated Water Hyacinth Block
 
 //---Item
 tile.SmallCompressedWaterHyacinth.name=Small Compressed Water Hyacinth
