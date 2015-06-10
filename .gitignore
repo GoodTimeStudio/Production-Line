@@ -31,5 +31,4 @@ README.txt
 *.ipr
 *.iws
 
-src/main/resources/mcmod.info
 .metadata/
