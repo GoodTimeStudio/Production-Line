@@ -35,7 +35,7 @@ public class BsaltGen implements IWorldGenerator {
             int y = rand.nextInt(this.MAX_HEIGHT);
             int z = chunkZ * 16 + rand.nextInt(16);
 
-            new WorldGenMinable(IC2Items.getItem("Basalt")), this.GEN_SIZE).generate(world, rand, x, y, z);
+            new WorldGenMinable(IC2Items.getItem("Basalt"), this.GEN_SIZE).generate(world, rand, x, y, z);
         }
     }
 }
