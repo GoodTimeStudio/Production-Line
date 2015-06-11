@@ -10,7 +10,6 @@ gui.gti.GenGasKu=燃气动能发生机
 gui.gti.CarbonizeFurnace=碳化燃烧炉
 
 //blocks
-tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 tile.gti.block.CompressedWaterHyacinth.name=压缩水葫芦
 tile.gti.block.oreIridium.name=铱矿石
 tile.gti.block.WaterHyacinth.name=水葫芦

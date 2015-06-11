@@ -44,7 +44,7 @@ import net.minecraft.world.World;
  * The list of all those items in GoodTime-Industrial.
  */
 public class GtiItems implements IFuelHandler {
-	public static Item smallCompressedWaterHyacinth;
+	public static Item SmallCompressedWaterHyacinth;
     public static Item crushedIridium;
     public static Item cleanedCrushedIridium;
     public static Item dustIridium;
@@ -65,7 +65,7 @@ public class GtiItems implements IFuelHandler {
     public static Item carbonTreetap;
 
     public static void init() {
-    	smallCompressedWaterHyacinth = new ItemGti("SmallCompressedWaterHyacinth");
+    	SmallCompressedWaterHyacinth = new ItemGti("SmallCompressedWaterHyacinth");
         diamondPlate = new ItemGti("DiamondPlate");
         denseDiamondPlate = new ItemGti("DenseDiamondPlate");
         crushedIridium = new ItemGti("CrushedIridium");

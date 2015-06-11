@@ -160,14 +160,14 @@ public class Recipes {
 
         //ic2 recipe registry
         ic2.api.recipe.Recipes.compressor.addRecipe(
-        		new RecipeInputItemStack(new ItemStack(GtiItems.smallCompressedWaterHyacinth,8)),
+        		new RecipeInputItemStack(new ItemStack(GtiItems.SmallCompressedWaterHyacinth,8)),
         		null,
         		new ItemStack(GtiBlocks.compressedWaterHyacinth)
         );
         ic2.api.recipe.Recipes.compressor.addRecipe(
         		new RecipeInputItemStack(new ItemStack(GtiBlocks.waterHyacinth,8)),
         		null,
-        		new ItemStack(GtiItems.smallCompressedWaterHyacinth)
+        		new ItemStack(GtiItems.SmallCompressedWaterHyacinth)
         );
         ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
                 new RecipeInputItemStack(new ItemStack(Items.diamond)),
