@@ -40,6 +40,7 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
+	public static Block dehydratedWaterHyacinthblock;
 	public static Block compressedWaterHyacinth;
     public static Block waterHyacinth;
     public static BlockContainer genGasKU;
@@ -51,7 +52,8 @@ public class GtiBlocks {
     public static void init() {
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
         compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5f, 0.3f, null, 0);
-
+        dehydratedWaterHyacinthblock=new BlockGti(Material.rock,"DehydratedWaterHyacinthBlock",1.0f,0.3f,null,0);
+        
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();

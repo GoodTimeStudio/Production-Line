@@ -15,6 +15,7 @@ tile.gti.block.oreIridium.name=铱矿石
 tile.gti.block.WaterHyacinth.name=水葫芦
 tile.gti.block.GenGasKu.name=燃气动能发生机
 tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
+tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 
 tile.gxyBlock.name=gxy方块
 

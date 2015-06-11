@@ -115,6 +115,18 @@ public class GtiItems implements IFuelHandler {
         if (fuel.getItem() == bambooCharcoal) {
             return 800;
         }
+        if(fuel.getItem() == SmallCompressedWaterHyacinth){
+        	return 400;
+        }
+        if(fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.waterHyacinth))){
+        	return 100;
+        }
+        if(fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.compressedWaterHyacinth))){
+        	return 800;
+        }
+        if(fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.dehydratedWaterHyacinthblock))){
+        return 1000;	
+        }
         return 0;
     }
 }
