@@ -113,7 +113,7 @@ public class BlockCarbonizeFurnace extends BlockContainer {
         if (world.isRemote) {
             return true;
         } else {
-            entityPlayer.openGui(Gti.instance, GuiHandler.Guis.CarbonizeFurnace.ordinal(), world, x, y, z);
+            entityPlayer.openGui(Gti.instance, GuiHandler.EnumGui.CarbonizeFurnace.ordinal(), world, x, y, z);
             return true;
         }
     }

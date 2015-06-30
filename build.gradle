@@ -10,13 +10,13 @@ buildscript {
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
 		dependencies {
-		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+		    classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
 		}
     }
 }
 
 apply plugin: 'forge'
-apply plugin: 'checkstyle'
+//apply plugin: 'checkstyle'
 
 
 version = "dev.0.1." + getBuildNumber()
@@ -31,12 +31,12 @@ repositories {
 }
 
 dependencies {
-    compile 'net.industrial-craft:industrialcraft-2:2.2.719-experimental:dev' //adds newest ic2 to the dev env
-    checkstyle 'com.puppycrawl.tools:checkstyle:6.5'
+    compile 'net.industrial-craft:industrialcraft-2:2.2.742-experimental:dev' //adds newest ic2 to the dev env
+    //checkstyle 'com.puppycrawl.tools:checkstyle:6.5'
 }
 
 minecraft {
-    version = "1.7.10-10.13.3.1401-1710ls"
+    version = "1.7.10-10.13.4.1481-1.7.10"
     runDir = "eclipse"
 }
 
@@ -68,7 +68,7 @@ processResources
         exclude 'mcmod.info'
     }
 }
-
+/*
 checkstyle {
     configFile = file('checkstyle.xml')
     configProperties = [
@@ -80,7 +80,7 @@ checkstyle {
             "severity": 'warning'
     ]
 }
-
+*/
 def getBuildNumber() {
 	return "$System.env.BUILD_NUMBER" != "null" ? "$System.env.BUILD_NUMBER" : "0"
 }

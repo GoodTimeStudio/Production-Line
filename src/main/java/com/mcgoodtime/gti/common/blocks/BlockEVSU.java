@@ -150,12 +150,10 @@ public class BlockEVSU extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer,
                                     int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
-        if (world.isRemote) {
-            return true;
-        } else {
-            entityPlayer.openGui(Gti.instance, GuiHandler.Guis.EVSU.ordinal(), world, x, y, z);
-            return true;
+        if (!world.isRemote) {
+            entityPlayer.openGui(Gti.instance, GuiHandler.EnumGui.EVSU.ordinal(), world, x, y, z);
         }
+        return true;
     }
 
     @Override

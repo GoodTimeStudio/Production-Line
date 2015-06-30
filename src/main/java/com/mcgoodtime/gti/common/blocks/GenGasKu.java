@@ -49,8 +49,8 @@ public class GenGasKu extends BlockContainer {
      */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p1, float p2, float p3, float p4) {
-        if (world.isRemote) {
-            entityPlayer.openGui(Gti.instance, GuiHandler.Guis.GenGasKu.ordinal(), world, x, y, z);
+        if (!world.isRemote) {
+            entityPlayer.openGui(Gti.instance, GuiHandler.EnumGui.GenGasKu.ordinal(), world, x, y, z);
         } else {
             entityPlayer.isInvisibleToPlayer(entityPlayer);
         }

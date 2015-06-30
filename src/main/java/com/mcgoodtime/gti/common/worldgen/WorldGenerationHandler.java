@@ -24,50 +24,26 @@
  */
 package com.mcgoodtime.gti.common.worldgen;
 
-import com.mcgoodtime.gti.common.init.GtiBlocks;
-
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-
-import java.util.Random;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.OreGenEvent;
 
 /**
- * The class for Iridium WorldGen.
- *
- * @author Su Hao
+ * The world generation handler.
  */
-public class IridiumGen extends DummyWorldGenerator {
+public final class WorldGenerationHandler {
+    private static WorldGenerationHandler instance = new WorldGenerationHandler();
 
-    protected IridiumGen() {
-        super(3, 5, 16);
+    private WorldGenerationHandler() {
     }
 
-    private static IridiumGen instance = new IridiumGen();
-
-    public static IridiumGen getInstance() {
-        return instance;
+    public static void init() {
+        MinecraftForge.ORE_GEN_BUS.register(WorldGenerationHandler.instance);
     }
 
-    public static void setInstance(int size, int number, int maxHeight) {
-        instance.generationSize = size;
-        instance.generationNumber = number;
-        instance.maxHeight = maxHeight;
-    }
-
-    @Override
-    public boolean generate(World world, Random rand, int chunkX, int chunkZ) {
-        if (world.provider.isHellWorld || world.provider.hasNoSky) {
-            return true;
-        }
-        boolean ret = true;
-        for (int k = 0; k < this.generationNumber; k++) {
-            int x = chunkX * 16 + rand.nextInt(16);
-            int y = rand.nextInt(this.maxHeight);
-            int z = chunkZ * 16 + rand.nextInt(16);
-
-            ret = ret && new WorldGenMinable(GtiBlocks.oreIridium, this.generationSize)
-                    .generate(world, rand, x, y, z);
-        }
-        return ret;
+    @SubscribeEvent
+    public void generateOre(OreGenEvent.Post event) {
+        BasaltGen.getInstance().generate(event);
+        IridiumGen.getInstance().generate(event);
     }
 }

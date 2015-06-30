@@ -28,6 +28,7 @@ import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
 
 import com.mcgoodtime.gti.common.worldgen.IridiumGen;
+import com.mcgoodtime.gti.common.worldgen.WorldGenerationHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -94,8 +95,8 @@ public final class Gti {
          //register achievement
         GtiAchievement.init();
         AchievementPage.registerAchievementPage(GtiAchievement.pageGti); //register achievement page
-         //register event bus
-        GameRegistry.registerWorldGenerator(new IridiumGen(), 1);
+         //register ore gen bus
+        WorldGenerationHandler.init();
     }
 
     private void setupMeta() {

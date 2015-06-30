@@ -24,34 +24,36 @@
  */
 package com.mcgoodtime.gti.common.worldgen;
 
-import com.mcgoodtime.gti.common.init.GtiBlocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import ic2.api.item.IC2Items;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
 /**
- * The class for Iridium WorldGen.
+ * Basalt world generation.
  *
- * @author Su Hao
+ * @author JAVA10
  */
-public class IridiumGen extends DummyWorldGenerator {
 
-    protected IridiumGen() {
-        super(3, 5, 16);
+public class BasaltGen extends DummyWorldGenerator {
+    private static BasaltGen instance = new BasaltGen();
+
+    protected BasaltGen() {
+        super(5, 10, 27);
     }
 
-    private static IridiumGen instance = new IridiumGen();
-
-    public static IridiumGen getInstance() {
-        return instance;
-    }
-
-    public static void setInstance(int size, int number, int maxHeight) {
-        instance.generationSize = size;
+    public static void setInstance(int number, int height, int size) {
         instance.generationNumber = number;
-        instance.maxHeight = maxHeight;
+        instance.maxHeight = height;
+        instance.generationSize = size;
+    }
+
+    public static BasaltGen getInstance() {
+        return instance;
     }
 
     @Override
@@ -65,8 +67,9 @@ public class IridiumGen extends DummyWorldGenerator {
             int y = rand.nextInt(this.maxHeight);
             int z = chunkZ * 16 + rand.nextInt(16);
 
-            ret = ret && new WorldGenMinable(GtiBlocks.oreIridium, this.generationSize)
-                    .generate(world, rand, x, y, z);
+            ret = ret && new WorldGenMinable(
+                    Block.getBlockFromItem(IC2Items.getItem("Basalt").getItem()
+                    ), this.generationSize).generate(world, rand, x, y, z);
         }
         return ret;
     }

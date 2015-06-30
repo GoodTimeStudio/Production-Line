@@ -45,7 +45,7 @@ public class ItemGtiTreetap extends Item implements IBoxable {
         if(StackUtil.equals(block, Ic2Items.blockBarrel)) {
             return ((TileEntityBarrel)world.getTileEntity(x, y, z)).useTreetapOn(entityplayer, side);
         } else if(Ic2Items.rubberWood != null && StackUtil.equals(block, Ic2Items.rubberWood)) {
-            attemptExtract(entityplayer, world, x, y, z, side, (List)null);
+            attemptExtract(entityplayer, world, x, y, z, side, null);
             if(IC2.platform.isSimulating()) {
                 itemstack.damageItem(1, entityplayer);
             }
