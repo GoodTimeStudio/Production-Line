@@ -53,18 +53,15 @@ public class GtiBlocks {
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
         compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5f, 0.3f, null, 0);
         dehydratedWaterHyacinthblock=new BlockGti(Material.rock,"DehydratedWaterHyacinthBlock",1.0f,0.3f,null,0);
+        carbonizeFurnace = new BlockCarbonizeFurnace(Material.iron, "CarbonizeFurnace");
         
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
-        carbonizeFurnace = new BlockCarbonizeFurnace(false);
-        litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(true);
         evsu = new BlockEVSU();
 
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(genGasKU, "GenGasKu");;
-        GameRegistry.registerBlock(carbonizeFurnace, ItemCarbonizeFurnace.class, "CarbonizeFurnace");
-        GameRegistry.registerBlock(litCarbonizeFurnace, "lit_CarbonizeFurnace");
         GameRegistry.registerBlock(evsu, "EVSU");
 
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
