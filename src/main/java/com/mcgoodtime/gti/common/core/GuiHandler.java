@@ -60,7 +60,7 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerGenGasKu(player.inventory, (TileGenGasKu)world.getTileEntity(x, y, z));
         }
         if (id == EnumGui.EVSU.ordinal()) {
-            return new ContainerEVSU(player.inventory, (TileEVSU)world.getTileEntity(x, y, z));
+            return new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z));
         }
         return null;
     }
@@ -71,7 +71,7 @@ public class GuiHandler implements IGuiHandler {
             return new GuiGenGasKu(player.inventory, (TileGenGasKu)world.getTileEntity(x, y, z));
         }
         if (id == EnumGui.EVSU.ordinal()) {
-            return new GuiEVSU(player.inventory, (TileEVSU)world.getTileEntity(x, y, z));
+            return new GuiEVSU(new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z)));
         }
         return null;
     }
