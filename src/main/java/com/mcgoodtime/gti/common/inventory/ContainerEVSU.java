@@ -1,12 +1,10 @@
 package com.mcgoodtime.gti.common.inventory;
 
-import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileEVSU;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
 
 /**
  * Created by suhao on 2015-6-10-0010.

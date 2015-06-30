@@ -57,6 +57,7 @@ public class BlockGti extends Block {
         super(material);
         this.setBlockName(MOD_ID + "." + "block" + "." + name);
         this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
+        this.setCreativeTab(creativeTabGti);
         GameRegistry.registerBlock(this, name);
         GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
     }

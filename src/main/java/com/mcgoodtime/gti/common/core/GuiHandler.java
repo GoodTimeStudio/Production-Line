@@ -25,16 +25,12 @@
 
 package com.mcgoodtime.gti.common.core;
 
-import com.mcgoodtime.gti.client.gui.GuiCarbonizeFurnace;
 import com.mcgoodtime.gti.client.gui.GuiEVSU;
 import com.mcgoodtime.gti.client.gui.GuiGenGasKu;
-import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
 import com.mcgoodtime.gti.common.inventory.ContainerEVSU;
 import com.mcgoodtime.gti.common.inventory.ContainerGenGasKu;
-import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileEVSU;
 import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
-
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -63,9 +59,6 @@ public class GuiHandler implements IGuiHandler {
         if (id == EnumGui.GenGasKu.ordinal()) {
             return new ContainerGenGasKu(player.inventory, (TileGenGasKu)world.getTileEntity(x, y, z));
         }
-        if (id == EnumGui.CarbonizeFurnace.ordinal()) {
-            return new ContainerCarbonizeFurnace(player.inventory, (TileCarbonizeFurnace)world.getTileEntity(x, y, z));
-        }
         if (id == EnumGui.EVSU.ordinal()) {
             return new ContainerEVSU(player.inventory, (TileEVSU)world.getTileEntity(x, y, z));
         }
@@ -77,9 +70,6 @@ public class GuiHandler implements IGuiHandler {
         if (id == EnumGui.GenGasKu.ordinal()) {
             return new GuiGenGasKu(player.inventory, (TileGenGasKu)world.getTileEntity(x, y, z));
         }
-        if (id == EnumGui.CarbonizeFurnace.ordinal()) {
-            return new GuiCarbonizeFurnace(player.inventory, (TileCarbonizeFurnace)world.getTileEntity(x, y, z));
-        }
         if (id == EnumGui.EVSU.ordinal()) {
             return new GuiEVSU(player.inventory, (TileEVSU)world.getTileEntity(x, y, z));
         }
@@ -89,10 +79,6 @@ public class GuiHandler implements IGuiHandler {
     public enum EnumGui {
         GenGasKu,
         CarbonizeFurnace,
-        EVSU;
-        
-        EnumGui() {
-            
-        }
+        EVSU
     }
 }
