@@ -25,8 +25,13 @@
 package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.blocks.BlockContainerGti;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import ic2.core.block.TileEntityBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 /**
@@ -36,8 +41,44 @@ import net.minecraft.world.World;
  */
 public class BlockMechineGti extends BlockContainerGti {
 
-    public BlockMechineGti(Material material, String name) {
-        super(material, name);
+    @SideOnly(Side.CLIENT)
+    private IIcon top;
+    @SideOnly(Side.CLIENT)
+    private IIcon left;
+    @SideOnly(Side.CLIENT)
+    private IIcon front;
+    @SideOnly(Side.CLIENT)
+    private IIcon low;
+    @SideOnly(Side.CLIENT)
+    private IIcon side;
+
+    public BlockMechineGti(Material material, String name, TileEntity tileEntity) {
+        super(material, name, tileEntity);
     }
 
+    /**
+     * World only
+     */
+    @Override
+    public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
+        TileEntity tile = iBlockAccess.getTileEntity(x, y, z);
+        if (tile instanceof TileEntityBlock) {
+
+        }
+        return null;
+    }
+
+    /**
+     * Hand only
+     */
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        switch(side){
+            case 0: return this.top;
+            case 1: return this.low;
+            case 3: return this.front;
+            case 4: return this.left;
+            default: return this.side;
+        }
+    }
 }

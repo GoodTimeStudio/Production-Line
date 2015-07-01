@@ -28,6 +28,7 @@ import com.mcgoodtime.gti.common.blocks.*;
 import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.items.ItemCarbonizeFurnace;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
+import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -53,7 +54,7 @@ public class GtiBlocks {
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
         compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5f, 0.3f, null, 0);
         dehydratedWaterHyacinthblock=new BlockGti(Material.rock,"DehydratedWaterHyacinthBlock",1.0f,0.3f,null,0);
-        carbonizeFurnace = new BlockCarbonizeFurnace(Material.iron, "CarbonizeFurnace");
+        carbonizeFurnace = new BlockCarbonizeFurnace(Material.iron, "CarbonizeFurnace", new TileGti());
         
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();

@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.blocks;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * Created by suhao on 2015.6.23.
@@ -33,8 +34,8 @@ import net.minecraft.block.material.Material;
  */
 public class BlockCarbonizeFurnace extends BlockMechineGti {
 
-    public BlockCarbonizeFurnace(Material material, String name) {
-        super(material, name);
+    public BlockCarbonizeFurnace(Material material, String name, TileEntity tileEntity) {
+        super(material, name, tileEntity);
     }
 
 

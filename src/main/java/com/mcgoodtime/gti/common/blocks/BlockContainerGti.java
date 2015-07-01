@@ -38,13 +38,16 @@ import net.minecraft.world.World;
  */
 public class BlockContainerGti extends BlockGti implements ITileEntityProvider {
 
-    public BlockContainerGti(Material material, String name) {
+    private TileEntity tileEntityClass;
+
+    public BlockContainerGti(Material material, String name, TileEntity tileEntity) {
         super(material, name);
+        this.tileEntityClass = tileEntity;
     }
 
     @Override
     public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-        return null;
+        return tileEntityClass;
     }
 
 

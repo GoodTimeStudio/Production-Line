@@ -137,7 +137,7 @@ public class BlockEVSU extends BlockContainer {
     }
 
     /**
-     * Hand only (side- not west or east
+     * Hand only
      */
     @Override
     @SideOnly(Side.CLIENT)
