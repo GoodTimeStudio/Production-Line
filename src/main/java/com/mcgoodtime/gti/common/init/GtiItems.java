@@ -83,13 +83,7 @@ public class GtiItems implements IFuelHandler {
         carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
 
         // special registry TODO: Better registry system
-        record_theSaltWaterRoom = new ItemGtiRecord("TheSaltwaterRoom") {
-            @Override
-            public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
-                world.playSoundEffect(20, 70, 20, "gti:TheSaltwaterRoom", 1, 1);
-                return true;
-            }
-        };
+        record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
 
         diamondApple = new ItemFood(1005, 10F, false) {
             @Override
