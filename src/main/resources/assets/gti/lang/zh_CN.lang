@@ -17,8 +17,6 @@ tile.gti.block.GenGasKu.name=燃气动能发生机
 tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
 tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 
-tile.gxyBlock.name=gxy方块
-
 // === items ===
 
 //crushed
@@ -53,6 +51,10 @@ item.gti.AirBrakeCasing.name=气闸外壳
 
 item.gti.SmallCompressedWaterHyacinth.name=小块压缩水葫芦
 
+//record
+item.gti.record.record_TheSaltwaterRoom.name=TheSaltwaterRoom
+item.gti.record.record_TheSaltwaterRoom.desc=TheSaltwaterRoom -- Owl City
+
 //achievement
 achievement.CarbonizeFurnace=缺氧燃烧技术
 achievement.CarbonizeFurnace.desc=制作一个碳化燃烧炉
@@ -61,4 +63,6 @@ achievement.getIrOre.desc=挖到一个铱矿石
 
 //tooltip
 gti.tooltip.CarbonizeFurnace=缺氧燃烧，燃烧能力有限
+gti.tooltip.item.record.record_TheSaltwaterRoom.desc1=充满海水的房间
+gti.tooltip.item.record.record_TheSaltwaterRoom.desc2=By Owl City
 

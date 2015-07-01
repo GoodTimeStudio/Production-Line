@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
@@ -37,6 +38,7 @@ import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.Level;
 
 /**
  * The list of all those items in GoodTime-Industrial.
@@ -83,13 +85,7 @@ public class GtiItems implements IFuelHandler {
         carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
 
         // special registry TODO: Better registry system
-        record_theSaltWaterRoom = new ItemGtiRecord("TheSaltwaterRoom") {
-            @Override
-            public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
-                world.playSoundEffect(20, 70, 20, "gti:TheSaltwaterRoom", 1, 1);
-                return true;
-            }
-        };
+        record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
 
         diamondApple = new ItemFood(1005, 10F, false) {
             @Override
