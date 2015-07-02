@@ -60,6 +60,8 @@ item.gti.smallCompressedWaterHyacinth.name=小块压缩水葫芦
 //record
 item.gti.record.record_TheSaltwaterRoom.name=TheSaltwaterRoom
 item.gti.record.record_TheSaltwaterRoom.desc=TheSaltwaterRoom -- Owl City
+item.gti.record.record_MusicSpring.name=MusicSpring
+item.gti.record.record_MusicSpring.desc=MusicSpring -- Seedking
 
 //==========
 
@@ -73,4 +75,6 @@ achievement.getIrOre.desc=挖到一个铱矿石
 gti.tooltip.CarbonizeFurnace=缺氧燃烧，燃烧能力有限
 gti.tooltip.item.record.record_TheSaltwaterRoom.desc1=充满海水的房间
 gti.tooltip.item.record.record_TheSaltwaterRoom.desc2=Owl City
+gti.tooltip.item.record.record_MusicSpring.desc1=乐泉
+gti.tooltip.item.record.record_MusicSpring.desc2=Seedking
 

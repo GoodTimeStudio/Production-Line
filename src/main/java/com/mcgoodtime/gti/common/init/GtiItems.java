@@ -68,6 +68,7 @@ public class GtiItems implements IFuelHandler {
     public static Item salt;
     public static Item packagedSalt;
     public static Item carbonTube;
+    public static ItemRecord record_MusicSpring;
 
     public static void init() {
     	smallCompressedWaterHyacinth = new ItemGti("smallCompressedWaterHyacinth");
@@ -91,6 +92,7 @@ public class GtiItems implements IFuelHandler {
         salt = new ItemGti("Salt");
         packagedSalt = new ItemGti("PackagedSalt");
         carbonTube = new ItemGti("CarbonTube", true);
+        record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
 
         // special registry TODO: Better registry system
         diamondApple = new ItemFood(1005, 10F, false) {
