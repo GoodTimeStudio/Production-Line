@@ -42,7 +42,7 @@ import net.minecraft.world.World;
  * The list of all those items in GoodTime-Industrial.
  */
 public class GtiItems implements IFuelHandler {
-	public static Item SmallCompressedWaterHyacinth;
+	public static Item smallCompressedWaterHyacinth;
     public static Item crushedIridium;
     public static Item cleanedCrushedIridium;
     public static Item dustIridium;
@@ -63,9 +63,10 @@ public class GtiItems implements IFuelHandler {
     public static Item carbonTreetap;
     public static ItemRecord record_theSaltWaterRoom;
     public static Item salt;
+    public static Item packagedSalt;
 
     public static void init() {
-    	SmallCompressedWaterHyacinth = new ItemGti("SmallCompressedWaterHyacinth");
+    	smallCompressedWaterHyacinth = new ItemGti("smallCompressedWaterHyacinth");
         diamondPlate = new ItemGti("DiamondPlate");
         denseDiamondPlate = new ItemGti("DenseDiamondPlate");
         crushedIridium = new ItemGti("CrushedIridium");
@@ -84,6 +85,7 @@ public class GtiItems implements IFuelHandler {
         carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
         record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
         salt = new ItemGti("Salt");
+        packagedSalt = new ItemGti("PackagedSalt");
 
         // special registry TODO: Better registry system
         diamondApple = new ItemFood(1005, 10F, false) {
@@ -117,7 +119,7 @@ public class GtiItems implements IFuelHandler {
         if (fuel.getItem() == bambooCharcoal) {
             return 800;
         }
-        if(fuel.getItem() == SmallCompressedWaterHyacinth){
+        if(fuel.getItem() == smallCompressedWaterHyacinth){
         	return 400;
         }
         if(fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.waterHyacinth))){

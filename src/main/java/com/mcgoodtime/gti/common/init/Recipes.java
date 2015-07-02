@@ -24,14 +24,12 @@
  */
 package com.mcgoodtime.gti.common.init;
 
-import com.mcgoodtime.gti.common.core.Gti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.core.Ic2Items;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -160,14 +158,14 @@ public class Recipes {
 
         //ic2 recipe registry
         ic2.api.recipe.Recipes.compressor.addRecipe(
-        		new RecipeInputItemStack(new ItemStack(GtiItems.SmallCompressedWaterHyacinth,8)),
+        		new RecipeInputItemStack(new ItemStack(GtiItems.smallCompressedWaterHyacinth,8)),
         		null,
         		new ItemStack(GtiBlocks.compressedWaterHyacinth)
         );
         ic2.api.recipe.Recipes.compressor.addRecipe(
         		new RecipeInputItemStack(new ItemStack(GtiBlocks.waterHyacinth,8)),
         		null,
-        		new ItemStack(GtiItems.SmallCompressedWaterHyacinth)
+        		new ItemStack(GtiItems.smallCompressedWaterHyacinth)
         );
         ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
                 new RecipeInputItemStack(new ItemStack(Items.diamond)),

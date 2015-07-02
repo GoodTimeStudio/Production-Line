@@ -45,15 +45,20 @@ item.gti.tool.RefinedIronTreetap.name=精炼铁龙头
 item.gti.tool.AdvancedAlloyTreetap.name=高级合金龙头
 item.gti.tool.CarbonTreetap.name=碳板龙头
 
+//
 item.gti.BambooCharcoal.name=竹炭
 item.gti.AirBrakeUnit.name=气闸单元
 item.gti.AirBrakeCasing.name=气闸外壳
+item.gti.Salt.name=盐
+item.gti.PackagedSalt.name=袋装盐
 
 item.gti.SmallCompressedWaterHyacinth.name=小块压缩水葫芦
 
 //record
 item.gti.record.record_TheSaltwaterRoom.name=TheSaltwaterRoom
 item.gti.record.record_TheSaltwaterRoom.desc=TheSaltwaterRoom -- Owl City
+
+//==========
 
 //achievement
 achievement.CarbonizeFurnace=缺氧燃烧技术
