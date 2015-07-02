@@ -54,7 +54,7 @@ public class ItemGti extends Item {
     }
 
     public ItemGti(String name, boolean hasInfo) {
-        this.hasInfo = true;
+        this.hasInfo = (hasInfo ? true : false);
         this.setUnlocalizedName(MOD_ID + "." + name);
         this.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
         this.setCreativeTab(creativeTabGti);
