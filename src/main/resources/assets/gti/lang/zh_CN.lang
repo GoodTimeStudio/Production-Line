@@ -51,6 +51,9 @@ item.gti.AirBrakeUnit.name=气闸单元
 item.gti.AirBrakeCasing.name=气闸外壳
 item.gti.Salt.name=盐
 item.gti.PackagedSalt.name=袋装盐
+item.gti.CarbonTube.name=碳管
+item.gti.CarbonTube.desc1=一条黑色而坚韧的细线
+item.gti.CarbonTube.desc2=
 
 item.gti.SmallCompressedWaterHyacinth.name=小块压缩水葫芦
 
