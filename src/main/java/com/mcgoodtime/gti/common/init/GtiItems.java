@@ -32,11 +32,14 @@ import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 /**
  * The list of all those items in GoodTime-Industrial.
@@ -64,6 +67,7 @@ public class GtiItems implements IFuelHandler {
     public static ItemRecord record_theSaltWaterRoom;
     public static Item salt;
     public static Item packagedSalt;
+    public static Item carbonTube;
 
     public static void init() {
     	smallCompressedWaterHyacinth = new ItemGti("smallCompressedWaterHyacinth");
@@ -86,6 +90,7 @@ public class GtiItems implements IFuelHandler {
         record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
         salt = new ItemGti("Salt");
         packagedSalt = new ItemGti("PackagedSalt");
+        carbonTube = new ItemGti("CarbonTube", new String[] {I18n.format("")});
 
         // special registry TODO: Better registry system
         diamondApple = new ItemFood(1005, 10F, false) {

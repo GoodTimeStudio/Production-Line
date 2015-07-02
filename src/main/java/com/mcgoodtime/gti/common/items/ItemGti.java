@@ -29,7 +29,11 @@ import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 /**
  * Created by liach on 5/22/2015.
@@ -37,10 +41,28 @@ import net.minecraft.item.Item;
  * @author liach
  */
 public class ItemGti extends Item {
+
+    private String[] info;
+
     public ItemGti(String name) {
         this.setUnlocalizedName(MOD_ID + "." + name);
         this.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
         this.setCreativeTab(creativeTabGti);
         GameRegistry.registerItem(this, name, MOD_ID);
+    }
+
+    public ItemGti(String name, String[] info) {
+        this.info = info;
+        this.setUnlocalizedName(MOD_ID + "." + name);
+        this.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
+        this.setCreativeTab(creativeTabGti);
+        GameRegistry.registerItem(this, name, MOD_ID);
+    }
+
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
+        for (String s : this.info) {
+            list.add(s);
+        }
     }
 }
