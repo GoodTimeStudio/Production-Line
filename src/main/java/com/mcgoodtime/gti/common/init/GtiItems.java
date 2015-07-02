@@ -62,6 +62,7 @@ public class GtiItems implements IFuelHandler {
     public static Item advancedAlloyTreetap;
     public static Item carbonTreetap;
     public static ItemRecord record_theSaltWaterRoom;
+    public static Item salt;
 
     public static void init() {
     	SmallCompressedWaterHyacinth = new ItemGti("SmallCompressedWaterHyacinth");
@@ -81,10 +82,10 @@ public class GtiItems implements IFuelHandler {
         refinedIronTreetap = new ItemGtiTreetap("RefinedIronTreetap", 64);
         advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
         carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
+        record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
+        salt = new ItemGti("Salt");
 
         // special registry TODO: Better registry system
-        record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
-
         diamondApple = new ItemFood(1005, 10F, false) {
             @Override
             protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) {
