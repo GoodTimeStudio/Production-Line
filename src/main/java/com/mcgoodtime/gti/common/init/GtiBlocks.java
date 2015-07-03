@@ -54,7 +54,7 @@ public class GtiBlocks {
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
         compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5f, 0.3f, null, 0);
         dehydratedWaterHyacinthblock=new BlockGti(Material.rock,"DehydratedWaterHyacinthBlock",1.0f,0.3f,null,0);
-        carbonizeFurnace = new BlockCarbonizeFurnace(Material.iron, "CarbonizeFurnace", new TileGti());
+        carbonizeFurnace = new BlockCarbonizeFurnace(Material.iron, "CarbonizeFurnace");
         
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();

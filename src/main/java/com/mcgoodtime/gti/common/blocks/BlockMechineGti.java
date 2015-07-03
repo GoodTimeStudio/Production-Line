@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.blocks.BlockContainerGti;
+import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.block.TileEntityBlock;
@@ -53,7 +54,7 @@ public class BlockMechineGti extends BlockContainerGti {
     private IIcon side;
 
     public BlockMechineGti(Material material, String name, TileEntity tileEntity) {
-        super(material, name, tileEntity);
+        super(material, name);
     }
 
     /**
@@ -80,5 +81,10 @@ public class BlockMechineGti extends BlockContainerGti {
             case 4: return this.left;
             default: return this.side;
         }
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+        return new TileGti();
     }
 }

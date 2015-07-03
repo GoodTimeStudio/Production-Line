@@ -25,40 +25,61 @@
 package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
+import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.block.TileEntityBlock;
+import ic2.core.block.wiring.TileEntityElectricBlock;
+import ic2.core.util.StackUtil;
+import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 /**
  * Created by suhao on 2015.6.23.
  *
  * @author suhao
  */
-public class BlockCarbonizeFurnace extends BlockMechineGti {
+public class BlockCarbonizeFurnace extends BlockContainerGti {
 
     private String name;
+    private boolean isBurn;
 
     @SideOnly(Side.CLIENT)
-    private IIcon top, low, front, left;
+    private IIcon top;
+    private IIcon low;
+    private IIcon front;
+    private IIcon left;
+    private IIcon test;
 
-    public BlockCarbonizeFurnace(Material material, String name, TileEntity tileEntity) {
-        super(material, name, tileEntity);
+    public BlockCarbonizeFurnace(Material material, String name) {
+        super(material, name);
         this.name = name;
     }
 
     /**
      * Hand only
+     *
+     * side:
+     * 1:top  5:east  3:south
+     * 0:low  4:west  2:north
+     *
      */
+    @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
         switch(side){
-            case 0: return this.top;
-            case 1: return this.low;
+            case 0: return this.low;
+            case 1: return this.top;
             case 3: return this.front;
             case 4: return this.left;
             default: return this.blockIcon;
@@ -67,7 +88,13 @@ public class BlockCarbonizeFurnace extends BlockMechineGti {
 
     /**
      * World only
+     *
+     * side:
+     * 1:top  5:east  3:south
+     * 0:low  4:west  2:north
+     *
      */
+    @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
         TileEntity tile = iBlockAccess.getTileEntity(x, y, z);
@@ -75,61 +102,73 @@ public class BlockCarbonizeFurnace extends BlockMechineGti {
             switch (new Short(((TileEntityBlock)tile).getFacing()).intValue()) {
                 case 2://South
                     switch (side) {
-                        case 0:
-                            return this.top;
-                        case 1:
-                            return this.top;
-                        case 2:
-                            return this.output;
-                        default:
-                            return this.input;
+                        case 0: return this.low;
+                        case 1: return this.top;
+                        case 2: return this.front;
+                        case 5: return this.left;
+                        default: return this.blockIcon;
                     }
                 case 3://North
                     switch (side) {
-                        case 0:
-                            return this.top;
-                        case 1:
-                            return this.top;
-                        case 3:
-                            return this.output;
-                        default:
-                            return this.input;
+                        case 0: return this.low;
+                        case 1: return this.top;
+                        case 3: return this.front;
+                        case 4: return this.left;
+                        default: return this.blockIcon;
                     }
                 case 4://East
                     switch (side) {
-                        case 0:
-                            return this.top;
-                        case 1:
-                            return this.top;
-                        case 4:
-                            return this.output;
-                        default:
-                            return this.input;
+                        case 0: return this.low;
+                        case 1: return this.top;
+                        case 4: return this.front;
+                        case 2: return this.left;
+                        default: return this.blockIcon;
                     }
                 case 5://West
                     switch (side) {
-                        case 0:
-                            return this.top;
-                        case 1:
-                            return this.top;
-                        case 5:
-                            return this.output;
-                        default:
-                            return this.input;
+                        case 0: return this.low;
+                        case 1: return this.top;
+                        case 5: return this.front;
+                        case 3: return this.left;
+                        default: return this.blockIcon;
                     }
                 default://Unknown
-                    return input;
+                    return this.blockIcon;
             }
         }
         return null;
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iir) {
-        this.top = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_top");
+        this.top = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_top_" + (isBurn ? "on" : "off"));
         this.low = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_low");
-        this.front = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_top");
-        this.left = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_top");
+        this.front = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_front_" + (isBurn ? "on" : "off"));
+        this.left = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_left_"  + (isBurn ? "on" : "off"));
         this.blockIcon = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name);
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+        return new TileCarbonizeFurnace();
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemStack){
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile instanceof TileCarbonizeFurnace) {
+            TileCarbonizeFurnace furnace = (TileCarbonizeFurnace)tile;
+            NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
+            if (entityliving == null) {
+                furnace.setFacing(convertIntegerToShort(1));
+            } else {
+                furnace.setFacing(convertIntegerToShort(BlockPistonBase.determineOrientation(world, x, y, z, entityliving)));
+            }
+        }
+    }
+
+    private static short convertIntegerToShort(int integer_n) {
+        return new Integer(integer_n).shortValue();
     }
 }
