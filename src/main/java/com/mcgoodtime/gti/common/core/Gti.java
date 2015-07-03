@@ -84,12 +84,12 @@ public final class Gti {
         GtiBlocks.init(); //register blocks
         FluidRegistry.registerFluid(Gas.gasNatural);
         GtiItems.init(); //register items
-        Recipes.init(); //register recipes
         GtiTiles.init();
     }
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        Recipes.init(); //register recipes
          //register TileEntity
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance()); //register gui handler
          //register achievement

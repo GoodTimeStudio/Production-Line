@@ -24,8 +24,15 @@
  */
 package com.mcgoodtime.gti.common.blocks;
 
+import com.mcgoodtime.gti.common.core.Gti;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import ic2.core.block.TileEntityBlock;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 
 /**
  * Created by suhao on 2015.6.23.
@@ -34,9 +41,95 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class BlockCarbonizeFurnace extends BlockMechineGti {
 
+    private String name;
+
+    @SideOnly(Side.CLIENT)
+    private IIcon top, low, front, left;
+
     public BlockCarbonizeFurnace(Material material, String name, TileEntity tileEntity) {
         super(material, name, tileEntity);
+        this.name = name;
     }
 
+    /**
+     * Hand only
+     */
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        switch(side){
+            case 0: return this.top;
+            case 1: return this.low;
+            case 3: return this.front;
+            case 4: return this.left;
+            default: return this.blockIcon;
+        }
+    }
 
+    /**
+     * World only
+     */
+    @Override
+    public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
+        TileEntity tile = iBlockAccess.getTileEntity(x, y, z);
+        if (tile instanceof TileEntityBlock) {
+            switch (new Short(((TileEntityBlock)tile).getFacing()).intValue()) {
+                case 2://South
+                    switch (side) {
+                        case 0:
+                            return this.top;
+                        case 1:
+                            return this.top;
+                        case 2:
+                            return this.output;
+                        default:
+                            return this.input;
+                    }
+                case 3://North
+                    switch (side) {
+                        case 0:
+                            return this.top;
+                        case 1:
+                            return this.top;
+                        case 3:
+                            return this.output;
+                        default:
+                            return this.input;
+                    }
+                case 4://East
+                    switch (side) {
+                        case 0:
+                            return this.top;
+                        case 1:
+                            return this.top;
+                        case 4:
+                            return this.output;
+                        default:
+                            return this.input;
+                    }
+                case 5://West
+                    switch (side) {
+                        case 0:
+                            return this.top;
+                        case 1:
+                            return this.top;
+                        case 5:
+                            return this.output;
+                        default:
+                            return this.input;
+                    }
+                default://Unknown
+                    return input;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void registerBlockIcons(IIconRegister iir) {
+        this.top = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_top");
+        this.low = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_low");
+        this.front = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_top");
+        this.left = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name + "_top");
+        this.blockIcon = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + this.name);
+    }
 }
