@@ -25,7 +25,6 @@
 package com.mcgoodtime.gti.common.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -61,7 +60,7 @@ public abstract class BlockContainerGti extends BlockGti implements ITileEntityP
     {
         super.onBlockEventReceived(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_5_, p_149696_6_);
         TileEntity tileentity = p_149696_1_.getTileEntity(p_149696_2_, p_149696_3_, p_149696_4_);
-        return tileentity != null ? tileentity.receiveClientEvent(p_149696_5_, p_149696_6_) : false;
+        return tileentity != null && tileentity.receiveClientEvent(p_149696_5_, p_149696_6_);
     }
 
 }

@@ -82,8 +82,8 @@ public class BlockWaterHyacinth extends BlockBush {
 
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
-        return y >= 0 && y < 256 ? world.getBlock(x, y - 1, z).getMaterial() == Material.water
-                && world.getBlockMetadata(x, y - 1, z) == 0 : false;
+        return y >= 0 && y < 256 && world.getBlock(x, y - 1, z).getMaterial() == Material.water
+                && world.getBlockMetadata(x, y - 1, z) == 0;
     }
     
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {

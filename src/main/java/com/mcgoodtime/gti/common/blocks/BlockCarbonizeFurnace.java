@@ -26,11 +26,9 @@ package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
-import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.block.TileEntityBlock;
-import ic2.core.block.wiring.TileEntityElectricBlock;
 import ic2.core.util.StackUtil;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
@@ -39,7 +37,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -59,7 +56,6 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
     private IIcon low;
     private IIcon front;
     private IIcon left;
-    private IIcon test;
 
     public BlockCarbonizeFurnace(Material material, String name) {
         super(material, name);
