@@ -24,10 +24,9 @@
  */
 package com.mcgoodtime.gti.common.items.tools;
 
-import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
-
 import net.minecraft.item.ItemPickaxe;
-import net.minecraftforge.common.util.EnumHelper;
+
+import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
 public class IridiumPickaxe extends ItemPickaxe {
     public IridiumPickaxe() {

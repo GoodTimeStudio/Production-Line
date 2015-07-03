@@ -25,11 +25,10 @@
 package com.mcgoodtime.gti.common.worldgen;
 
 
+import ic2.api.item.IC2Items;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import ic2.api.item.IC2Items;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 

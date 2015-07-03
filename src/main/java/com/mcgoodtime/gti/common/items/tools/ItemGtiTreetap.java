@@ -1,31 +1,48 @@
+/*
+ * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ *
+ * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.mcgoodtime.gti.common.items.tools;
 
-import com.mcgoodtime.gti.common.items.ItemGti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IBoxable;
 import ic2.core.IC2;
 import ic2.core.Ic2Items;
 import ic2.core.audio.PositionSpec;
 import ic2.core.block.TileEntityBarrel;
-import ic2.core.init.InternalName;
-import ic2.core.item.tool.ItemTreetap;
 import ic2.core.util.StackUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
-import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
-import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
+import static com.mcgoodtime.gti.common.core.Gti.*;
 
-
-/**
+/*
  * Created by suhao on 2015-6-4-0004.
  */
 public class ItemGtiTreetap extends Item implements IBoxable {

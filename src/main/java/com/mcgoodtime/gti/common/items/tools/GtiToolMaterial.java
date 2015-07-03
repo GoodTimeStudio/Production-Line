@@ -27,7 +27,7 @@ package com.mcgoodtime.gti.common.items.tools;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.util.EnumHelper;
 
-/**
+/*
  * Created by suhao on 2015-6-10-0010.
  */
 public class GtiToolMaterial {
