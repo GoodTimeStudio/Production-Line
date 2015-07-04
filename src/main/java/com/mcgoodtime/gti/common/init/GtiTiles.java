@@ -24,6 +24,9 @@
  */
 package com.mcgoodtime.gti.common.init;
 
+import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
+import com.mcgoodtime.gti.common.tiles.TileEVSU;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.tileentity.TileEntity;
 
 /*
@@ -31,9 +34,9 @@ import net.minecraft.tileentity.TileEntity;
  */
 
 public class GtiTiles {
-    public static TileEntity carbonizeFurnace;
 
     public static void init() {
-
+        GameRegistry.registerTileEntity(TileEVSU.class, "EVSU");
+        GameRegistry.registerTileEntity(TileCarbonizeFurnace.class, "CarbonizeFurnace");
     }
 }
