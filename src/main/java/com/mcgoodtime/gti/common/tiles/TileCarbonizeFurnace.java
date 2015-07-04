@@ -25,11 +25,23 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import ic2.core.block.TileEntityInventory;
+import ic2.core.block.invslot.InvSlotConsumableFuel;
+import ic2.core.block.invslot.InvSlotOutput;
+import ic2.core.block.invslot.InvSlotProcessable;
+import ic2.core.block.invslot.InvSlotProcessableSmelting;
 
 /*
  * Created by suhao on 2015.7.3.
  */
 public class TileCarbonizeFurnace extends TileEntityInventory {
+
+    public int fuel = 0;
+    public int maxFuel = 0;
+    public short progress = 0;
+    public final short operationLength = 160;
+    public final InvSlotProcessable inputSlot = new InvSlotProcessableSmelting(this, "input", 0, 1);
+    public final InvSlotOutput outputSlot = new InvSlotOutput(this, "output", 2, 1);
+    public final InvSlotConsumableFuel fuelSlot = new InvSlotConsumableFuel(this, "fuel", 1, 1, true);
 
     @Override
     public String getInventoryName() {
@@ -39,5 +51,20 @@ public class TileCarbonizeFurnace extends TileEntityInventory {
     @Override
     public void setFacing(short facing) {
         super.setFacing(facing);
+    }
+
+    public int gaugeProgressScaled(int i) {
+        return this.progress * i / 160;
+    }
+
+    public int gaugeFuelScaled(int i) {
+        if(this.maxFuel == 0) {
+            this.maxFuel = this.fuel;
+            if(this.maxFuel == 0) {
+                this.maxFuel = 160;
+            }
+        }
+
+        return this.fuel * i / this.maxFuel;
     }
 }

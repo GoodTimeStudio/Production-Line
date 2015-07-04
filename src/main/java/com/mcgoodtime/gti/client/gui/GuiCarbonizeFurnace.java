@@ -24,11 +24,18 @@
  */
 package com.mcgoodtime.gti.client.gui;
 
+import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
+import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.core.IC2;
+import ic2.core.block.machine.tileentity.TileEntityIronFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import org.lwjgl.opengl.GL11;
 
 import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 
@@ -40,16 +47,33 @@ import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 public class GuiCarbonizeFurnace extends GuiContainer {
 
     private static final ResourceLocation BACKGROUND = new ResourceLocation(RESOURCE_DOMAIN + ":" + "textures/client/gui/GuiCarbonizeFurnace.png");
+    private ContainerCarbonizeFurnace container;
+    private String name;
 
     public GuiCarbonizeFurnace(ContainerCarbonizeFurnace container) {
         super(container);
+        this.container = container;
+        this.name = StatCollector.translateToLocal(Gti.GUI_PREFIX + "CarbonizeFurnace");
+    }
+
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        this.fontRendererObj.drawString(this.name, (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(BACKGROUND);
-        int j = (this.width - this.xSize) / 2; //Good here
-        int k = (this.height - this.ySize) / 2; //good here
-        this.drawTexturedModalRect(j, k, 0, 0, this.xSize, this.ySize);//Renders the actual gui texture.
+        int j = (this.width - this.xSize) / 2;
+        int k = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(j, k, 0, 0, this.xSize, this.ySize);
+        int i1;
+        if(((TileCarbonizeFurnace)this.container.base).fuel > 0) {
+            i1 = ((TileCarbonizeFurnace)this.container.base).gaugeFuelScaled(12);
+            this.drawTexturedModalRect(j + 56, k + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);
+        }
+
+        i1 = ((TileCarbonizeFurnace)this.container.base).gaugeProgressScaled(24);
+        this.drawTexturedModalRect(j + 79, k + 34, 176, 14, i1 + 1, 16);
     }
 }
