@@ -25,8 +25,10 @@
 
 package com.mcgoodtime.gti.common.core;
 
+import com.mcgoodtime.gti.client.gui.GuiCarbonizeFurnace;
 import com.mcgoodtime.gti.client.gui.GuiEVSU;
 import com.mcgoodtime.gti.client.gui.GuiGenGasKu;
+import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
 import com.mcgoodtime.gti.common.inventory.ContainerEVSU;
 import com.mcgoodtime.gti.common.inventory.ContainerGenGasKu;
 import com.mcgoodtime.gti.common.tiles.TileEVSU;
@@ -59,6 +61,9 @@ public class GuiHandler implements IGuiHandler {
         if (id == EnumGui.GenGasKu.ordinal()) {
             return new ContainerGenGasKu(player.inventory, (TileGenGasKu)world.getTileEntity(x, y, z));
         }
+        if (id == EnumGui.CarbonizeFurnace.ordinal()) {
+            return new ContainerCarbonizeFurnace();
+        }
         if (id == EnumGui.EVSU.ordinal()) {
             return new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z));
         }
@@ -69,6 +74,9 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         if (id == EnumGui.GenGasKu.ordinal()) {
             return new GuiGenGasKu(player.inventory, (TileGenGasKu)world.getTileEntity(x, y, z));
+        }
+        if (id == EnumGui.CarbonizeFurnace.ordinal()) {
+            return new GuiCarbonizeFurnace(new ContainerCarbonizeFurnace());
         }
         if (id == EnumGui.EVSU.ordinal()) {
             return new GuiEVSU(new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z)));

@@ -44,7 +44,7 @@ import org.lwjgl.input.Keyboard;
  */
 @SideOnly(Side.CLIENT)
 public class GuiGenGasKu extends GuiContainer {
-    private static final ResourceLocation background;
+    private static final ResourceLocation background = new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/client/gui/GUIGenGasKU.png");;
 
     private int ySize;
     private int xSize;
@@ -101,9 +101,5 @@ public class GuiGenGasKu extends GuiContainer {
     public void onGuiClosed() {
         super.onGuiClosed();
         Keyboard.enableRepeatEvents(false);
-    }
-
-    static {
-        background = new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/client/gui/GUIGenGasKU.png");
     }
 }
