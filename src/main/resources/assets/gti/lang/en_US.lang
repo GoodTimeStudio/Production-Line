@@ -13,11 +13,16 @@ item.CrushedIriridium.name=Crushed Iriridium Ore
 
 item.DustIriridium.name=Iriridium Dust
 
+item.Roller.name=Roller
+
+//----Ingot
 item.IngotIriridium.name=Iriridium Ingot
+item.ThermalInsulationMaterial=Thermal Insulation Material
 
 //----Plate
 item.DiamondPlate.name=Diamond Plate
-item.DenseDiamondPlate.name= Dense Diamond Plate
+item.DenseDiamondPlate.name=Dense Diamond Plate
+item.HeatInsulationBoard.name=Heat Insulation Board
 
 //----Ore
 tile.iridiumore.name=Iridium Ore

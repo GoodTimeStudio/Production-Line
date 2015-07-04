@@ -29,10 +29,14 @@ item.gti.SmallDustIridium.name=小撮铱矿石粉
 
 item.gti.food.DiamondApple.name=钻石苹果
 
+item.gti.Roller.name=滚轴
+
 //ingot
 item.gti.IngotIridium.name=铱锭
+item.gti.ThermalInsulationMaterial.name=隔热材料
 
 //plate
+item.gti.HeatInsulationBoard.name=隔热板 
 item.gti.DenseDiamondPlate.name=致密钻石板
 item.gti.DiamondPlate.name=钻石板
 
@@ -77,4 +81,13 @@ gti.tooltip.item.record.record_TheSaltwaterRoom.desc1=充满海水的房间
 gti.tooltip.item.record.record_TheSaltwaterRoom.desc2=Owl City
 gti.tooltip.item.record.record_MusicSpring.desc1=乐泉
 gti.tooltip.item.record.record_MusicSpring.desc2=Seedking
+
+gti.tooltip.item.roller.desc1=看起来并没有什么卵用
+gti.tooltip.item.heatInsulationBoard.desc1=有了这个，妈妈再也不用担心岩浆桶烫手了
+gti.tooltip.item.thermalInsulationMaterial.desc1=制作隔热板的唯一原料
+gti.tooltip.item.demondPlate.desc1=纯钻石打造，闪瞎你的钛合金狗眼
+gti.tooltip.item.denseDiamondPlate。desc1=更闪，更硬，装逼的不二首选
+gti.tooltip.item.iridiumPickaxe.desc1=拿着这把斧头砍树，想想就倍有儿面子
+gti.tooltip.item.diamondApple.desc1=你确定你敢吃这玩意儿？
+gti.tooltip.item.bambooCharcoal.desc1=散发着诡异的绿色
 

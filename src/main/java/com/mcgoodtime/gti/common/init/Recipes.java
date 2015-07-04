@@ -61,6 +61,21 @@ public class Recipes {
                 'E', ic2.api.item.IC2Items.getItem("plateiron")
         );
         GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.roller),
+        		"A",
+        		"ABA",
+        		"A",
+        		'A',Items.iron_ingot,
+        		'B',ic2.api.item.IC2Items.getItem("hardcore"));
+        GameRegistry.addRecipe(
+    			new ItemStack(GtiItems.thermalInsulationMaterial),
+    			"AAA",
+    			"AAA",
+    			"BBB",
+    			'A',ic2.api.item.IC2Items.getItem("rubber"),
+    			'B',Items.iron_ingot);
+
+        GameRegistry.addRecipe(
                 new ItemStack(GtiItems.airBrakeCasing),
                 "AAA",
                 "BBB",
@@ -172,6 +187,10 @@ public class Recipes {
                 null,
                 new ItemStack(GtiItems.diamondPlate)
         );
+        ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
+               		new RecipeInputItemStack(new ItemStack(GtiItems.thermalInsulationMaterial)),
+               		null,
+               		new ItemStack (GtiItems.heatInsulationBoard));
         ic2.api.recipe.Recipes.compressor.addRecipe(
                 new RecipeInputItemStack(new ItemStack(GtiItems.diamondPlate, 9)),
                 null,

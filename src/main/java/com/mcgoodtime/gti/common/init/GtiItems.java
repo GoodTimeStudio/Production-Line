@@ -24,13 +24,17 @@
  */
 package com.mcgoodtime.gti.common.init;
 
+import java.util.List;
+
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
 import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
+
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
@@ -41,6 +45,9 @@ import net.minecraft.world.World;
  * The list of all those items in GoodTime-Industrial.
  */
 public class GtiItems implements IFuelHandler {
+	public static Item roller;
+	public static Item heatInsulationBoard;
+	public static Item thermalInsulationMaterial;
 	public static Item smallCompressedWaterHyacinth;
     public static Item crushedIridium;
     public static Item cleanedCrushedIridium;
@@ -67,6 +74,9 @@ public class GtiItems implements IFuelHandler {
     public static ItemRecord record_MusicSpring;
 
     public static void init() {
+    	roller = new ItemGti("Roller");
+    	heatInsulationBoard = new ItemGti("HeatInsulationBoard");
+    	thermalInsulationMaterial = new ItemGti("ThermalInsulationMaterial");
     	smallCompressedWaterHyacinth = new ItemGti("smallCompressedWaterHyacinth");
         diamondPlate = new ItemGti("DiamondPlate");
         denseDiamondPlate = new ItemGti("DenseDiamondPlate");
@@ -115,6 +125,18 @@ public class GtiItems implements IFuelHandler {
         GameRegistry.registerItem(iridiumPickaxe, "gti.iridiumPickaxe");
         
         GameRegistry.registerFuelHandler(new GtiItems());
+    }
+
+    public void addInformation(ItemStack stack, EntityPlayer player, List tooltipList, boolean boo){
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.roller+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.heatInsulationBoard+"."+"desc1" ));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.thermalInsulationMaterial+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.diamondPlate+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.denseDiamondPlate+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.diamondApple+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.iridiumPickaxe+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.bambooCharcoal+"."+"desc1"));
+    	
     }
 
     @Override
