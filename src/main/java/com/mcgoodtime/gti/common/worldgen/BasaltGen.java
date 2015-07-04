@@ -67,7 +67,7 @@ public class BasaltGen extends DummyWorldGenerator {
             int z = chunkZ * 16 + rand.nextInt(16);
 
             ret = ret && new WorldGenMinable(
-                    Block.getBlockFromItem(IC2Items.getItem("Basalt").getItem()
+                    Block.getBlockFromItem(IC2Items.getItem("blockBasalt").getItem()
                     ), this.generationSize).generate(world, rand, x, y, z);
         }
         return ret;
