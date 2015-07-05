@@ -29,10 +29,7 @@ import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ic2.core.IC2;
-import ic2.core.block.machine.tileentity.TileEntityIronFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
@@ -56,6 +53,7 @@ public class GuiCarbonizeFurnace extends GuiContainer {
         this.name = StatCollector.translateToLocal(Gti.GUI_PREFIX + "CarbonizeFurnace");
     }
 
+    @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         this.fontRendererObj.drawString(this.name, (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
     }
@@ -67,6 +65,7 @@ public class GuiCarbonizeFurnace extends GuiContainer {
         int j = (this.width - this.xSize) / 2;
         int k = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(j, k, 0, 0, this.xSize, this.ySize);
+        /*
         int i1;
         if(((TileCarbonizeFurnace)this.container.base).fuel > 0) {
             i1 = ((TileCarbonizeFurnace)this.container.base).gaugeFuelScaled(12);
@@ -74,6 +73,6 @@ public class GuiCarbonizeFurnace extends GuiContainer {
         }
 
         i1 = ((TileCarbonizeFurnace)this.container.base).gaugeProgressScaled(24);
-        this.drawTexturedModalRect(j + 79, k + 34, 176, 14, i1 + 1, 16);
+        this.drawTexturedModalRect(j + 79, k + 34, 176, 14, i1 + 1, 16);*/
     }
 }
