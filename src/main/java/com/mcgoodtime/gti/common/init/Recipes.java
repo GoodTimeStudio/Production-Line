@@ -62,18 +62,19 @@ public class Recipes {
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.roller),
-        		"A",
+        		" A",
         		"ABA",
-        		"A",
-        		'A',Items.iron_ingot,
-        		'B',ic2.api.item.IC2Items.getItem("hardcore"));
+        		" A",
+        		'A', Items.iron_ingot,
+        		'B', ic2.api.item.IC2Items.getItem("ironFence")
+        );
         GameRegistry.addRecipe(
     			new ItemStack(GtiItems.thermalInsulationMaterial),
     			"AAA",
     			"AAA",
     			"BBB",
-    			'A',ic2.api.item.IC2Items.getItem("rubber"),
-    			'B',Items.iron_ingot);
+    			'A', ic2.api.item.IC2Items.getItem("rubber"),
+    			'B', Items.iron_ingot);
 
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.airBrakeCasing),
