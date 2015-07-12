@@ -48,11 +48,11 @@ public class DummyWorldGenerator extends WorldGenerator {
     }
 
     public boolean generate(World world, Random random, int x, int y, int z) {
-        return generate(world, random, x << 2, z << 2);
+        return generate(world, random, x >> 2, z >> 2);
     }
 
     public boolean generate(OreGenEvent event) {
-        return generate(event.world, event.rand, event.worldX << 2, event.worldZ << 2);
+        return generate(event.world, event.rand, event.worldX >> 2, event.worldZ >> 2);
     }
 
     public boolean generate(World world, Random random, int chunkX, int chunkZ) {
