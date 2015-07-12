@@ -82,12 +82,17 @@ public class GuiHandler implements IGuiHandler {
         if (id == EnumGui.EVSU.ordinal()) {
             return new GuiEVSU(new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z)));
         }
+        /*
+        if (id == EnumGui.HeatDryer.ordinal()) {
+            return new
+        }*/
         return null;
     }
 
     public enum EnumGui {
         GenGasKu,
         CarbonizeFurnace,
-        EVSU
+        EVSU,
+        HeatDryer
     }
 }

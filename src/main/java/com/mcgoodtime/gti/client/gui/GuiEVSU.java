@@ -79,7 +79,7 @@ public class GuiEVSU extends GuiContainer {
         int k = (this.height - this.ySize) / 2; //good here
         this.drawTexturedModalRect(j, k, 0, 0, this.xSize, this.ySize);//Renders the actual gui texture.
         if (container.base.energy > 0.0D) {
-            int i1 = new Double(((176F * container.base.getChargeLevel()) / 1.6D) + 5.0D).intValue();//Calculates the current energy in afsu.
+            int i1 = new Double(((176F * container.base.getChargeLevel()) / 1.6D) + 5.0D).intValue();
             drawTexturedModalRect(j + 8, k + 73,
                     0, 251, i1 + 1, 5);//Renders the blue energy bar.
         }

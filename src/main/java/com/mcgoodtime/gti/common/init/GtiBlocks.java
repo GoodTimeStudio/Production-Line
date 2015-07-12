@@ -44,16 +44,18 @@ public class GtiBlocks {
     public static Block waterHyacinth;
     public static BlockContainer genGasKU;
     public static Block oreIridium;
-    public static Block carbonizeFurnace;
+    public static BlockContainerGti carbonizeFurnace;
     public static Block litCarbonizeFurnace;
     public static BlockContainer evsu;
+    public static BlockContainer heatDryer;
 
     public static void init() {
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
-        compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5f, 0.3f, null, 0);
-        dehydratedWaterHyacinthblock=new BlockGti(Material.rock,"DehydratedWaterHyacinthBlock",1.0f,0.3f,null,0);
-        carbonizeFurnace = new BlockCarbonizeFurnace(Material.iron, "CarbonizeFurnace");
-        
+        compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5F, 0.3F, null, 0);
+        dehydratedWaterHyacinthblock=new BlockGti(Material.rock, "DehydratedWaterHyacinthBlock", 1.0F, 0.3F, null, 0);
+        carbonizeFurnace = new BlockCarbonizeFurnace(Material.iron, "CarbonizeFurnace", false);
+        litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(Material.iron, "lit_CarbonizeFurnace", true);
+
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
