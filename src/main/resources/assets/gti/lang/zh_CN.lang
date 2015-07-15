@@ -16,6 +16,7 @@ tile.gti.block.WaterHyacinth.name=水葫芦
 tile.gti.block.GenGasKu.name=燃气动能发生机
 tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
 tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
+tile.gti.block.EVSU.name=EVSU
 
 // === items ===
 
@@ -53,8 +54,8 @@ item.gti.tool.CarbonTreetap.name=碳板龙头
 item.gti.BambooCharcoal.name=竹炭
 item.gti.AirBrakeUnit.name=气闸单元
 item.gti.AirBrakeCasing.name=气闸外壳
-item.gti.Salt.name=盐
-item.gti.PackagedSalt.name=袋装盐
+item.gti.Salt.name=食盐
+item.gti.PackagedSalt.name=一小袋盐
 item.gti.CarbonTube.name=碳管
 item.gti.CarbonTube.desc1=一条黑色而坚韧的细线
 item.gti.CarbonTube.desc2=
