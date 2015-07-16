@@ -27,6 +27,7 @@ package com.mcgoodtime.gti.common.init;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileEVSU;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.tileentity.TileEntity;
 
 /*

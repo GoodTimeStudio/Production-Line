@@ -35,35 +35,24 @@ import net.minecraft.world.World;
  *
  * @author suhao
  */
-public abstract class BlockContainerGti extends BlockGti implements ITileEntityProvider {
+public abstract class BlockContainerGti extends BlockMultiGti implements ITileEntityProvider {
 
     public BlockContainerGti(Material material, String name) {
         super(material, name);
         this.isBlockContainer = true;
     }
 
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
     @Override
-    public void onBlockAdded(World p_149726_1_, int p_149726_2_, int p_149726_3_, int p_149726_4_)
-    {
-        super.onBlockAdded(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_);
+    public void breakBlock(World world, int x, int y, int z, Block block, int var) {
+        super.breakBlock(world, x, y, z, block, var);
+        world.removeTileEntity(x, y, z);
     }
 
     @Override
-    public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_)
-    {
-        super.breakBlock(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_);
-        p_149749_1_.removeTileEntity(p_149749_2_, p_149749_3_, p_149749_4_);
-    }
-
-    @Override
-    public boolean onBlockEventReceived(World p_149696_1_, int p_149696_2_, int p_149696_3_, int p_149696_4_, int p_149696_5_, int p_149696_6_)
-    {
-        super.onBlockEventReceived(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_5_, p_149696_6_);
-        TileEntity tileentity = p_149696_1_.getTileEntity(p_149696_2_, p_149696_3_, p_149696_4_);
-        return tileentity != null && tileentity.receiveClientEvent(p_149696_5_, p_149696_6_);
+    public boolean onBlockEventReceived(World world, int x, int y, int z, int var1, int var2) {
+        super.onBlockEventReceived(world, x, y, z, var1, var2);
+        TileEntity tileentity = world.getTileEntity(x, y, z);
+        return tileentity != null && tileentity.receiveClientEvent(var1, var2);
     }
 
 }

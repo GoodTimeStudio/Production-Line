@@ -30,9 +30,7 @@ import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ic2.core.util.StackUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -40,10 +38,12 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -68,11 +68,47 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
     private IIcon front;
     private IIcon left;
 
-    private short facing;
-
     public BlockCarbonizeFurnace(Material material, String name, boolean isBurn) {
         super(material, name);
         this.isBurn = isBurn;
+    }
+
+    /**
+     * Called whenever the block is added into the world. Args: world, x, y, z
+     */
+    @Override
+    public void onBlockAdded(World world, int x, int y, int z)
+    {
+        super.onBlockAdded(world, x, y, z);
+        this.func_149930_e(world, x, y, z);
+    }
+
+    private void func_149930_e(World world, int x, int y, int z) {
+        if (!world.isRemote) {
+            Block block = world.getBlock(x, y, z - 1);
+            Block block1 = world.getBlock(x, y, z + 1);
+            Block block2 = world.getBlock(x - 1, y, z);
+            Block block3 = world.getBlock(x + 1, y, z);
+            byte b0 = 3;
+
+            if (block.func_149730_j() && !block1.func_149730_j()) {
+                b0 = 3;
+            }
+
+            if (block1.func_149730_j() && !block.func_149730_j()) {
+                b0 = 2;
+            }
+
+            if (block2.func_149730_j() && !block3.func_149730_j()) {
+                b0 = 5;
+            }
+
+            if (block3.func_149730_j() && !block2.func_149730_j()) {
+                b0 = 4;
+            }
+
+            world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+        }
     }
 
     /**
@@ -86,67 +122,17 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
-        switch(side){
-            case 0: return this.low;
-            case 1: return this.top;
-            case 3: return this.front;
-            case 4: return this.left;
-            default: return this.blockIcon;
+        if (meta != 0) {
+            return side == 1 ? this.top : (side == 0 ? this.low : (side != meta ? this.blockIcon : this.front));
         }
-    }
-
-    /**
-     * World only
-     *
-     * side:
-     * 1:top  5:east  3:south
-     * 0:low  4:west  2:north
-     *
-     */
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
-        TileEntity tile = iBlockAccess.getTileEntity(x, y, z);
-
-        if (tile instanceof TileCarbonizeFurnace) {
-            switch (this.facing) {
-                case 2://South
-                    switch (side) {
-                        case 0: return this.low;
-                        case 1: return this.top;
-                        case 2: return this.front;
-                        case 5: return this.left;
-                        default: return this.blockIcon;
-                    }
-                case 3://North
-                    switch (side) {
-                        case 0: return this.low;
-                        case 1: return this.top;
-                        case 3: return this.front;
-                        case 4: return this.left;
-                        default: return this.blockIcon;
-                    }
-                case 4://East
-                    switch (side) {
-                        case 0: return this.low;
-                        case 1: return this.top;
-                        case 4: return this.front;
-                        case 2: return this.left;
-                        default: return this.blockIcon;
-                    }
-                case 5://West
-                    switch (side) {
-                        case 0: return this.low;
-                        case 1: return this.top;
-                        case 5: return this.front;
-                        case 3: return this.left;
-                        default: return this.blockIcon;
-                    }
-                default://Unknown
-                    return this.blockIcon;
+        else {
+            switch (side) {
+                case 3: return this.front;
+                case 1: return this.top;
+                case 0: return this.low;
+                default: return this.blockIcon;
             }
         }
-        return null;
     }
 
     @Override
@@ -174,7 +160,7 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
      */
     public static void updateFurnaceBlockState(boolean isBurn, World world, int x, int y, int z)
     {
-
+        int l = world.getBlockMetadata(x, y, z);
         TileCarbonizeFurnace tileentity = (TileCarbonizeFurnace) world.getTileEntity(x, y, z);
         field_149934_M = true;
 
@@ -187,6 +173,7 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
         }
 
         field_149934_M = false;
+        world.setBlockMetadataWithNotify(x, y, z, l, 2);
 
 
         if (tileentity != null) {
@@ -197,35 +184,44 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+    public TileEntity createNewTileEntity(World world, int var) {
         return new TileCarbonizeFurnace();
     }
 
+    /**
+     * Called when the block is placed in the world.
+     */
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemStack){
-        TileEntity tile = world.getTileEntity(x, y, z);
-        if (tile instanceof TileCarbonizeFurnace) {
-            TileCarbonizeFurnace furnace = (TileCarbonizeFurnace)tile;
-            //NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
-            if (entityliving == null) {
-                this.facing = convertIntegerToShort(5);
-            } else {
-                this.facing = convertIntegerToShort(BlockPistonBase.determineOrientation(world, x, y, z, entityliving));
-            }
-            furnace.setFacing(this.facing);
+        int l = MathHelper.floor_double((double) (entityliving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+        if (l == 0) {
+            world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+        }
+
+        if (l == 1) {
+            world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+        }
+
+        if (l == 2) {
+            world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+        }
+
+        if (l == 3) {
+            world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+        }
+
+        if (itemStack.hasDisplayName()) {
+            ((TileCarbonizeFurnace)world.getTileEntity(x, y, z)).setInventoryName(itemStack.getDisplayName());
         }
     }
 
-    private static short convertIntegerToShort(int integer_n) {
-        return new Integer(integer_n).shortValue();
-    }
-
     @Override
-    public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_)
+    public void breakBlock(World world, int x, int y, int z, Block block, int var)
     {
         if (!field_149934_M)
         {
-            TileCarbonizeFurnace tileentity = (TileCarbonizeFurnace)p_149749_1_.getTileEntity(p_149749_2_, p_149749_3_, p_149749_4_);
+            TileCarbonizeFurnace tileentity = (TileCarbonizeFurnace) world.getTileEntity(x, y, z);
 
             if (tileentity != null)
             {
@@ -249,7 +245,7 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
                             }
 
                             itemstack.stackSize -= j1;
-                            EntityItem entityitem = new EntityItem(p_149749_1_, (double)((float)p_149749_2_ + f), (double)((float)p_149749_3_ + f1), (double)((float)p_149749_4_ + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+                            EntityItem entityitem = new EntityItem(world, (double)((float) x + f), (double)((float) y + f1), (double)((float) z + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
                             if (itemstack.hasTagCompound())
                             {
@@ -260,16 +256,16 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
                             entityitem.motionX = (double)((float)this.random.nextGaussian() * f3);
                             entityitem.motionY = (double)((float)this.random.nextGaussian() * f3 + 0.2F);
                             entityitem.motionZ = (double)((float)this.random.nextGaussian() * f3);
-                            p_149749_1_.spawnEntityInWorld(entityitem);
+                            world.spawnEntityInWorld(entityitem);
                         }
                     }
                 }
 
-                p_149749_1_.func_147453_f(p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_);
+                world.func_147453_f(x, y, z, block);
             }
         }
 
-        super.breakBlock(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_);
+        super.breakBlock(world, x, y, z, block, var);
     }
 
     /**
@@ -329,6 +325,14 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
     public int getComparatorInputOverride(World p_149736_1_, int p_149736_2_, int p_149736_3_, int p_149736_4_, int p_149736_5_)
     {
         return Container.calcRedstoneFromInventory((IInventory) p_149736_1_.getTileEntity(p_149736_2_, p_149736_3_, p_149736_4_));
+    }
+
+    /**
+     * Gets an item for the block being called on. Args: world, x, y, z
+     */
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World world, int x, int y, int z) {
+        return Item.getItemFromBlock(GtiBlocks.carbonizeFurnace);
     }
 
     public static class BlockLitCarbonizeFurnace extends BlockCarbonizeFurnace {
