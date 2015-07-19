@@ -30,7 +30,7 @@ import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
 import com.mcgoodtime.gti.common.items.tools.GtiToolMaterial;
-import com.mcgoodtime.gti.common.items.tools.GtiTools;
+import com.mcgoodtime.gti.common.items.tools.ToolGti;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
 
 import cpw.mods.fml.common.IFuelHandler;
@@ -122,10 +122,10 @@ public class GtiItems implements IFuelHandler {
                 .setUnlocalizedName("gti.food.DiamondApple")
                 .setCreativeTab(Gti.creativeTabGti)
                 .setTextureName("gti:itemDiamondApple");
-        iridiumPickaxe = GtiTools.registerPickaxe(GtiToolMaterial.iridium, "IridiumPickaxe");
-        iridiumAxe = GtiTools.registerAxe(GtiToolMaterial.iridium, "IridiumAxe");
-        iridiumSpade = GtiTools.registerSpade(GtiToolMaterial.iridium, "IridiumSpade");
-        iridiumSword = GtiTools.registerSword(GtiToolMaterial.iridium, "IridiumSword");
+        iridiumPickaxe = ToolGti.registerPickaxe(GtiToolMaterial.iridium, "IridiumPickaxe");
+        iridiumAxe = ToolGti.registerAxe(GtiToolMaterial.iridium, "IridiumAxe");
+        iridiumSpade = ToolGti.registerSpade(GtiToolMaterial.iridium, "IridiumSpade");
+        iridiumSword = ToolGti.registerSword(GtiToolMaterial.iridium, "IridiumSword");
 
         // TODO: Better registry system
         GameRegistry.registerItem(diamondApple, "DiamondApple");

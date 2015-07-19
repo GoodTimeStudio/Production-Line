@@ -30,7 +30,7 @@ import net.minecraft.item.*;
 /*
  * Created by suhao on 2015.7.19.
  */
-public class GtiTools extends ItemGti {
+public class ToolGti extends ItemGti {
 
     public static Item registerPickaxe(ToolMaterial toolMaterial, String name) {
         return new Pickaxe(toolMaterial, name);
@@ -48,35 +48,35 @@ public class GtiTools extends ItemGti {
         return new Sword(toolMaterial, name);
     }
 
-    private GtiTools(String name) {
+    private ToolGti(String name) {
         super(name);
     }
 
     private static class Pickaxe extends ItemPickaxe {
         private Pickaxe(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
-            new GtiTools(name);
+            new ToolGti(name);
         }
     }
 
     private static class Axe extends ItemAxe {
         private Axe(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
-            new GtiTools(name);
+            new ToolGti(name);
         }
     }
 
     private static class Spade extends ItemSpade {
         private Spade(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
-            new GtiTools(name);
+            new ToolGti(name);
         }
     }
 
     private static class Sword extends ItemSword {
         private Sword(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
-            new GtiTools(name);
+            new ToolGti(name);
         }
     }
 }
