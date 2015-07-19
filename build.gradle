@@ -56,6 +56,12 @@ sourceSets {
     }
 }
 
+idea { 
+    module {
+        inheritOutputDirs = true 
+    } 
+}
+
 processResources
 {
     inputs.property "version", project.version
