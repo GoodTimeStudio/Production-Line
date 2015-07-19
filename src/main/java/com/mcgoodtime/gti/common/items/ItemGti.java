@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.items;
 
+import com.mcgoodtime.gti.common.core.Gti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,7 +42,7 @@ import static com.mcgoodtime.gti.common.core.Gti.*;
  */
 public class ItemGti extends Item {
 
-    private boolean hasInfo = false;
+    private String[] strings;
 
     public ItemGti(String name) {
         this.setUnlocalizedName(MOD_ID + "." + name);
@@ -50,18 +51,15 @@ public class ItemGti extends Item {
         GameRegistry.registerItem(this, name, MOD_ID);
     }
 
-    public ItemGti(String name, boolean hasInfo) {
-        this.hasInfo = (hasInfo);
-        new ItemGti(name);
+    public ItemGti(String name, String... strings) {
+        this(name);
+        this.strings = strings;
     }
 
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
-        for (int i = 1; i < 2; i++) {
-            String s = I18n.format(this.getUnlocalizedName() + ".desc" + i);
-            if (this.hasInfo && !s.isEmpty()) {
-                list.add(s);
-            }
+        for (String s : this.strings) {
+            list.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ this.getUnlocalizedName() + "." + s));
         }
     }
 }

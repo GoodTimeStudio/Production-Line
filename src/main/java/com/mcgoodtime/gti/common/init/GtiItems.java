@@ -101,7 +101,7 @@ public class GtiItems implements IFuelHandler {
         record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
         salt = new ItemGti("Salt");
         packagedSalt = new ItemGti("PackagedSalt");
-        carbonTube = new ItemGti("CarbonTube", true);
+        carbonTube = new ItemGti("CarbonTube", "");
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
 
         // special registry TODO: Better registry system
