@@ -2,14 +2,14 @@
 //Language file
 //zh_CN
 
-//itemGroup
-itemGroup.GoodTime Industrial
+[ITEM_GROUP]
+itemGroup.GoodTime-Industrial=GoodTime Industrial
 
-//gui
+[GUI]
 gui.gti.GenGasKu=燃气动能发生机
 gui.gti.CarbonizeFurnace=碳化燃烧炉
 
-//blocks
+[BLOCKS]
 tile.gti.block.CompressedWaterHyacinth.name=压缩水葫芦
 tile.gti.block.oreIridium.name=铱矿石
 tile.gti.block.WaterHyacinth.name=水葫芦
@@ -18,8 +18,7 @@ tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
 tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 tile.gti.block.EVSU.name=EVSU
 
-// === items ===
-
+[ITEMS]
 //crushed
 item.gti.CrushedIridium.name=粉碎的铱矿石
 item.gti.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
@@ -27,10 +26,6 @@ item.gti.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
 //dust
 item.gti.DustIridium.name=铱矿石粉
 item.gti.SmallDustIridium.name=小撮铱矿石粉
-
-item.gti.food.DiamondApple.name=钻石苹果
-
-item.gti.Roller.name=滚轴
 
 //ingot
 item.gti.IngotIridium.name=铱锭
@@ -42,53 +37,54 @@ item.gti.DenseDiamondPlate.name=致密钻石板
 item.gti.DiamondPlate.name=钻石板
 
 //tool
-item.gti.tool.iridiumPickaxe.name=铱镐
-item.gti.tool.IronTreetap.name=铁龙头
-item.gti.tool.BronzeTreetap.name=青铜龙头
-item.gti.tool.LeadTreetap.name=铅龙头
-item.gti.tool.RefinedIronTreetap.name=精炼铁龙头
-item.gti.tool.AdvancedAlloyTreetap.name=高级合金龙头
-item.gti.tool.CarbonTreetap.name=碳板龙头
+item.gti.IridiumPickaxe.name=铱镐
+item.gti.IridiumAxe.name=铱斧
+item.gti.IridiumSpade.name=铱铲
+item.gti.IridiumSword.name=铱剑
+item.gti.IronTreetap.name=铁龙头
+item.gti.BronzeTreetap.name=青铜龙头
+item.gti.LeadTreetap.name=铅龙头
+item.gti.RefinedIronTreetap.name=精炼铁龙头
+item.gti.AdvancedAlloyTreetap.name=高级合金龙头
+item.gti.CarbonTreetap.name=碳板龙头
 
-//
 item.gti.BambooCharcoal.name=竹炭
 item.gti.AirBrakeUnit.name=气闸单元
 item.gti.AirBrakeCasing.name=气闸外壳
 item.gti.Salt.name=食盐
 item.gti.PackagedSalt.name=一小袋盐
 item.gti.CarbonTube.name=碳管
-item.gti.CarbonTube.desc1=一条黑色而坚韧的细线
-item.gti.CarbonTube.desc2=
-
 item.gti.smallCompressedWaterHyacinth.name=小块压缩水葫芦
+item.gti.Roller.name=滚轴
+item.gti.food.DiamondApple.name=钻石苹果
 
 //record
-item.gti.record.record_TheSaltwaterRoom.name=TheSaltwaterRoom
-item.gti.record.record_TheSaltwaterRoom.desc=TheSaltwaterRoom -- Owl City
-item.gti.record.record_MusicSpring.name=MusicSpring
-item.gti.record.record_MusicSpring.desc=MusicSpring -- Seedking
+item.gti.record_TheSaltwaterRoom.name=TheSaltwaterRoom
+item.gti.record_TheSaltwaterRoom.desc=TheSaltwaterRoom -- Owl City
+item.gti.record_MusicSpring.name=MusicSpring
+item.gti.record_MusicSpring.desc=MusicSpring -- Seedking
 
-//==========
-
-//achievement
+[achievement]
 achievement.CarbonizeFurnace=缺氧燃烧技术
 achievement.CarbonizeFurnace.desc=制作一个碳化燃烧炉
 achievement.getIrOre=比钻石更好
 achievement.getIrOre.desc=挖到一个铱矿石
 
-//tooltip
+[tooltip]
 gti.tooltip.CarbonizeFurnace=缺氧燃烧，燃烧能力有限
-gti.tooltip.item.record.record_TheSaltwaterRoom.desc1=充满海水的房间
-gti.tooltip.item.record.record_TheSaltwaterRoom.desc2=Owl City
-gti.tooltip.item.record.record_MusicSpring.desc1=乐泉
-gti.tooltip.item.record.record_MusicSpring.desc2=Seedking
 
-gti.tooltip.item.roller.desc1=看起来并没有什么卵用
-gti.tooltip.item.heatInsulationBoard.desc1=有了这个，妈妈再也不用担心岩浆桶烫手了
-gti.tooltip.item.thermalInsulationMaterial.desc1=制作隔热板的唯一原料
-gti.tooltip.item.demondPlate.desc1=纯钻石打造，闪瞎你的钛合金狗眼
-gti.tooltip.item.denseDiamondPlate。desc1=更闪，更硬，装逼的不二首选
-gti.tooltip.item.iridiumPickaxe.desc1=拿着这把斧头砍树，想想就倍有儿面子
-gti.tooltip.item.diamondApple.desc1=你确定你敢吃这玩意儿？
-gti.tooltip.item.bambooCharcoal.desc1=散发着诡异的绿色
+item.gti.record_TheSaltwaterRoom.desc1=充满海水的房间
+item.gti.record_TheSaltwaterRoom.desc2=Owl City
+item.gti.record_MusicSpring.desc1=乐泉
+item.gti.record_MusicSpring.desc2=Seedking
+
+item.gti.Roller.desc1=看起来并没有什么用
+item.gti.heatInsulationBoard.desc1=有了这个，妈妈再也不用担心岩浆桶烫手了
+item.gti.thermalInsulationMaterial.desc1=制作隔热板的唯一原料
+item.gti.DiamondPlate.desc1=纯钻石打造
+item.gti.DenseDiamondPlate.desc1=更闪，更硬
+item.gti.BambooCharcoal.desc1=散发着诡异的绿色
+item.gti.CarbonTube.desc1=一条黑色而坚韧的细线
+
+item.gti.food.DiamondApple.desc1=你确定你敢吃？
 
