@@ -24,13 +24,19 @@
  */
 package com.mcgoodtime.gti.common.items.tools;
 
-import com.mcgoodtime.gti.common.items.ItemGti;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.*;
+import net.minecraft.item.Item.ToolMaterial;
+
+import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
+import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
+import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
 /*
  * Created by suhao on 2015.7.19.
  */
-public class ToolGti extends ItemGti {
+public class ToolGti {
 
     public static Item registerPickaxe(ToolMaterial toolMaterial, String name) {
         return new Pickaxe(toolMaterial, name);
@@ -48,35 +54,38 @@ public class ToolGti extends ItemGti {
         return new Sword(toolMaterial, name);
     }
 
-    private ToolGti(String name) {
-        super(name);
+    private static void registerItem(String name, Item item) {
+        item.setUnlocalizedName(MOD_ID + "." + name);
+        item.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
+        item.setCreativeTab(creativeTabGti);
+        GameRegistry.registerItem(item, name, MOD_ID);
     }
 
     private static class Pickaxe extends ItemPickaxe {
         private Pickaxe(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
-            new ToolGti(name);
+            registerItem(name, this);
         }
     }
 
     private static class Axe extends ItemAxe {
         private Axe(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
-            new ToolGti(name);
+            registerItem(name, this);
         }
     }
 
     private static class Spade extends ItemSpade {
         private Spade(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
-            new ToolGti(name);
+            registerItem(name, this);
         }
     }
 
     private static class Sword extends ItemSword {
         private Sword(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
-            new ToolGti(name);
+            registerItem(name, this);
         }
     }
 }
