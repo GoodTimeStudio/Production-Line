@@ -29,7 +29,8 @@ import java.util.List;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
-import com.mcgoodtime.gti.common.items.tools.IridiumPickaxe;
+import com.mcgoodtime.gti.common.items.tools.GtiToolMaterial;
+import com.mcgoodtime.gti.common.items.tools.GtiTools;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
 
 import cpw.mods.fml.common.IFuelHandler;
@@ -60,18 +61,21 @@ public class GtiItems implements IFuelHandler {
     public static Item airBrakeCasing;
     public static Item bambooCharcoal;
     public static Item diamondApple;
-    public static ItemPickaxe iridiumPickaxe;
+    public static Item iridiumPickaxe;
     public static Item ironTreetap;
     public static Item bronzeTreetap;
     public static Item leadTreetap;
     public static Item refinedIronTreetap;
     public static Item advancedAlloyTreetap;
     public static Item carbonTreetap;
-    public static ItemRecord record_theSaltWaterRoom;
+    public static Item record_theSaltWaterRoom;
     public static Item salt;
     public static Item packagedSalt;
     public static Item carbonTube;
-    public static ItemRecord record_MusicSpring;
+    public static Item record_MusicSpring;
+    public static Item iridiumAxe;
+    public static Item iridiumSpade;
+    public static Item iridiumSword;
 
     public static void init() {
     	roller = new ItemGti("Roller");
@@ -118,24 +122,26 @@ public class GtiItems implements IFuelHandler {
                 .setUnlocalizedName("gti.food.DiamondApple")
                 .setCreativeTab(Gti.creativeTabGti)
                 .setTextureName("gti:itemDiamondApple");
-        iridiumPickaxe = new IridiumPickaxe();
+        iridiumPickaxe = GtiTools.registerPickaxe(GtiToolMaterial.iridium, "IridiumPickaxe");
+        iridiumAxe = GtiTools.registerAxe(GtiToolMaterial.iridium, "IridiumAxe");
+        iridiumSpade = GtiTools.registerSpade(GtiToolMaterial.iridium, "IridiumSpade");
+        iridiumSword = GtiTools.registerSword(GtiToolMaterial.iridium, "IridiumSword");
 
         // TODO: Better registry system
         GameRegistry.registerItem(diamondApple, "DiamondApple");
-        GameRegistry.registerItem(iridiumPickaxe, "gti.iridiumPickaxe");
         
         GameRegistry.registerFuelHandler(new GtiItems());
     }
 
-    public void addInformation(ItemStack stack, EntityPlayer player, List tooltipList, boolean boo){
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.roller+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.heatInsulationBoard+"."+"desc1" ));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.thermalInsulationMaterial+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.diamondPlate+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.denseDiamondPlate+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.diamondApple+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.iridiumPickaxe+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+this.bambooCharcoal+"."+"desc1"));
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltipList, boolean boo){
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ roller+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ heatInsulationBoard+"."+"desc1" ));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ thermalInsulationMaterial+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ diamondPlate+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ denseDiamondPlate+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ diamondApple+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ iridiumPickaxe+"."+"desc1"));
+    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ bambooCharcoal+"."+"desc1"));
     	
     }
 

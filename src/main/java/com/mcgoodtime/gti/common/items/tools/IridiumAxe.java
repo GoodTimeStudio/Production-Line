@@ -24,15 +24,18 @@
  */
 package com.mcgoodtime.gti.common.items.tools;
 
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemAxe;
 
 import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
-public class IridiumPickaxe extends ItemPickaxe {
-    public IridiumPickaxe() {
+/*
+ * Created by suhao on 2015.7.19.
+ */
+public class IridiumAxe extends ItemAxe {
+    public IridiumAxe() {
         super(GtiToolMaterial.iridium);
         this.setCreativeTab(creativeTabGti);
-        this.setUnlocalizedName("gti.tool.iridiumPickaxe");
-        this.setTextureName("gti:itemIridiumPickaxe");
+        this.setUnlocalizedName("gti.iridiumAxe");
+        this.setTextureName("gti:itemIridiumAxe");
     }
 }

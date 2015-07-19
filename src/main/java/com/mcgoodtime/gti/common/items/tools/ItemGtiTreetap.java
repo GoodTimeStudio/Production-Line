@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.gti.common.items.tools;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import com.mcgoodtime.gti.common.items.ItemGti;
 import ic2.api.item.IBoxable;
 import ic2.core.IC2;
 import ic2.core.Ic2Items;
@@ -34,26 +34,20 @@ import ic2.core.util.StackUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-import static com.mcgoodtime.gti.common.core.Gti.*;
-
 /*
  * Created by suhao on 2015-6-4-0004.
  */
-public class ItemGtiTreetap extends Item implements IBoxable {
+public class ItemGtiTreetap extends ItemGti implements IBoxable {
 
     public ItemGtiTreetap(String name, int damage) {
-        this.setUnlocalizedName(MOD_ID + ".tool." + name);
-        this.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
-        this.setCreativeTab(creativeTabGti);
+        super(name);
         this.setMaxDamage(damage);
         this.setMaxStackSize(1);
-        GameRegistry.registerItem(this, name, MOD_ID);
     }
 
     @Override
@@ -148,7 +142,6 @@ public class ItemGtiTreetap extends Item implements IBoxable {
             return false;
         }
     }
-
 
     @Override
     public boolean canBeStoredInToolbox(ItemStack itemstack) {
