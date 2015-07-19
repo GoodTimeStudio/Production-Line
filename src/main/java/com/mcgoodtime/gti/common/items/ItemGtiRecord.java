@@ -51,7 +51,7 @@ public class ItemGtiRecord extends ItemRecord {
         super(name);
         this.name = name;
         this.setCreativeTab(Gti.creativeTabGti);
-        this.setUnlocalizedName(MOD_ID + "." + "record" + "." + name);
+        this.setUnlocalizedName(MOD_ID + "." + name);
         this.setTextureName(Gti.RESOURCE_DOMAIN + ":" + name);
         GameRegistry.registerItem(this, name, MOD_ID);
     }
@@ -69,8 +69,8 @@ public class ItemGtiRecord extends ItemRecord {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List tooltipList, boolean boo) {
-        tooltipList.add(I18n.format(Gti.MOD_ID + ".tooltip.item.record" + "." + this.name + "." + "desc1"));
-        tooltipList.add(I18n.format(Gti.MOD_ID + ".tooltip.item.record" + "." + this.name + "." + "desc2"));
+        tooltipList.add(I18n.format(this.getUnlocalizedName() + "." + "desc1"));
+        tooltipList.add(I18n.format(this.getUnlocalizedName() + "." + "desc2"));
     }
 
 }

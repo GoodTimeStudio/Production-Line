@@ -78,12 +78,12 @@ public class GtiItems implements IFuelHandler {
     public static Item iridiumSword;
 
     public static void init() {
-    	roller = new ItemGti("Roller");
+    	roller = new ItemGti("Roller", true);
     	heatInsulationBoard = new ItemGti("HeatInsulationBoard");
     	thermalInsulationMaterial = new ItemGti("ThermalInsulationMaterial");
     	smallCompressedWaterHyacinth = new ItemGti("smallCompressedWaterHyacinth");
-        diamondPlate = new ItemGti("DiamondPlate");
-        denseDiamondPlate = new ItemGti("DenseDiamondPlate");
+        diamondPlate = new ItemGti("DiamondPlate", true);
+        denseDiamondPlate = new ItemGti("DenseDiamondPlate", true);
         crushedIridium = new ItemGti("CrushedIridium");
         cleanedCrushedIridium = new ItemGti("CleanedCrushedIridium");
         dustIridium = new ItemGti("DustIridium");
@@ -91,7 +91,7 @@ public class GtiItems implements IFuelHandler {
         ingotIridium = new ItemGti("IngotIridium");
         airBrakeUnit = new ItemGti("AirBrakeUnit");
         airBrakeCasing = new ItemGti("AirBrakeCasing");
-        bambooCharcoal = new ItemGti("BambooCharcoal");
+        bambooCharcoal = new ItemGti("BambooCharcoal", true);
         ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
         bronzeTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
         leadTreetap = new ItemGtiTreetap("LeadTreetap", 48);
@@ -101,7 +101,7 @@ public class GtiItems implements IFuelHandler {
         record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
         salt = new ItemGti("Salt");
         packagedSalt = new ItemGti("PackagedSalt");
-        carbonTube = new ItemGti("CarbonTube", "");
+        carbonTube = new ItemGti("CarbonTube", true);
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
 
         // special registry TODO: Better registry system
@@ -115,6 +115,12 @@ public class GtiItems implements IFuelHandler {
                     player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 0));
                 }
                 super.onFoodEaten(itemStack, world, player);
+            }
+
+            @Override
+            @SuppressWarnings("unchecked")
+            public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
+                list.add(I18n.format(diamondApple.getUnlocalizedName() + ".desc1"));
             }
         };
 
@@ -131,18 +137,6 @@ public class GtiItems implements IFuelHandler {
         GameRegistry.registerItem(diamondApple, "DiamondApple");
         
         GameRegistry.registerFuelHandler(new GtiItems());
-    }
-
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltipList, boolean boo){
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ roller+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ heatInsulationBoard+"."+"desc1" ));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ thermalInsulationMaterial+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ diamondPlate+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ denseDiamondPlate+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ diamondApple+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ iridiumPickaxe+"."+"desc1"));
-    	tooltipList.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ bambooCharcoal+"."+"desc1"));
-    	
     }
 
     @Override

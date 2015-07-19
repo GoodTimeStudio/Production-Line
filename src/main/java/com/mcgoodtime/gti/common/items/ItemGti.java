@@ -30,6 +30,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ import static com.mcgoodtime.gti.common.core.Gti.*;
 public class ItemGti extends Item {
 
     private String[] strings;
+    private boolean hasTooltip = false;
 
     public ItemGti(String name) {
         this.setUnlocalizedName(MOD_ID + "." + name);
@@ -56,10 +58,31 @@ public class ItemGti extends Item {
         this.strings = strings;
     }
 
+    public ItemGti(String name, boolean hasTooltip) {
+        this(name);
+        this.hasTooltip = hasTooltip;
+    }
+
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
-        for (String s : this.strings) {
-            list.add(I18n.format(Gti.MOD_ID+".tooltip.item"+"."+ this.getUnlocalizedName() + "." + s));
+        if (this.strings != null) {
+            for (String s : this.strings) {
+                System.out.println("for");
+                s = I18n.format(this.getUnlocalizedName() + ".desc" + s);
+            }
+        } else if (hasTooltip) {
+            addTooltip(list, this);
+        }
+    }
+
+    private void addTooltip(List<String> list, Item item) {
+        int i = 1;
+        String unLocal = item.getUnlocalizedName() + ".desc" + i;
+
+        while (StatCollector.canTranslate(unLocal)) {
+            list.add(StatCollector.translateToLocal(unLocal));
+            i++;
+            unLocal = item.getUnlocalizedName() + ".desc" + i;
         }
     }
 }
