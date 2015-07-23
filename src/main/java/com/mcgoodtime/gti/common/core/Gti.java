@@ -32,6 +32,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -72,7 +73,6 @@ public final class Gti {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         setupMeta();
-        FMLCommonHandler.instance().bus().register(new GtiEvent());
         GtiConfig.configFile = event.getSuggestedConfigurationFile();
         GtiConfig.init();
         GtiBlocks.init(); //register blocks
@@ -91,6 +91,11 @@ public final class Gti {
         AchievementPage.registerAchievementPage(GtiAchievement.pageGti); //register achievement page
          //register ore gen bus
         WorldGenerationHandler.init();
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        FMLCommonHandler.instance().bus().register(new GtiEvent());
     }
 
     private void setupMeta() {

@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.items.tools;
 
+import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import ic2.api.item.IBoxable;
 import ic2.core.IC2;
@@ -32,6 +33,7 @@ import ic2.core.audio.PositionSpec;
 import ic2.core.block.TileEntityBarrel;
 import ic2.core.util.StackUtil;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -147,4 +149,10 @@ public class ItemGtiTreetap extends ItemGti implements IBoxable {
     public boolean canBeStoredInToolbox(ItemStack itemstack) {
         return true;
     }
+
+    @Override
+    public String getTextureFolder() {
+        return"tools/";
+    }
+
 }

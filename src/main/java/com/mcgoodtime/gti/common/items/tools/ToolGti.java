@@ -25,18 +25,26 @@
 package com.mcgoodtime.gti.common.items.tools;
 
 
+import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.items.ItemGti;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.util.IIcon;
 
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
 import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
-/*
+/**
  * Created by suhao on 2015.7.19.
+ *
+ * @author suhao
  */
 public class ToolGti {
+
+    private String name;
 
     public static Item registerPickaxe(ToolMaterial toolMaterial, String name) {
         return new Pickaxe(toolMaterial, name);
@@ -61,10 +69,20 @@ public class ToolGti {
         GameRegistry.registerItem(item, name, MOD_ID);
     }
 
+    private static IIcon registerIcon(IIconRegister iconRegister, Item item) {
+        String unlocalizedName = item.getUnlocalizedName();
+        return iconRegister.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "tools/item" + unlocalizedName.substring(unlocalizedName.lastIndexOf(".") + 1));
+    }
+
     private static class Pickaxe extends ItemPickaxe {
         private Pickaxe(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
             registerItem(name, this);
+        }
+
+        @Override
+        public void registerIcons(IIconRegister iconRegister) {
+            this.itemIcon = registerIcon(iconRegister, this);
         }
     }
 
@@ -73,6 +91,11 @@ public class ToolGti {
             super(toolMaterial);
             registerItem(name, this);
         }
+
+        @Override
+        public void registerIcons(IIconRegister iconRegister) {
+            this.itemIcon = registerIcon(iconRegister, this);
+        }
     }
 
     private static class Spade extends ItemSpade {
@@ -80,12 +103,22 @@ public class ToolGti {
             super(toolMaterial);
             registerItem(name, this);
         }
+
+        @Override
+        public void registerIcons(IIconRegister iconRegister) {
+            this.itemIcon = registerIcon(iconRegister, this);
+        }
     }
 
     private static class Sword extends ItemSword {
         private Sword(ToolMaterial toolMaterial, String name) {
             super(toolMaterial);
             registerItem(name, this);
+        }
+
+        @Override
+        public void registerIcons(IIconRegister iconRegister) {
+            this.itemIcon = registerIcon(iconRegister, this);
         }
     }
 }

@@ -24,23 +24,24 @@
  */
 package com.mcgoodtime.gti.common.init;
 
-import java.util.List;
-
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
 import com.mcgoodtime.gti.common.items.tools.GtiToolMaterial;
-import com.mcgoodtime.gti.common.items.tools.ToolGti;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
-
+import com.mcgoodtime.gti.common.items.tools.ToolGti;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * The list of all those items in GoodTime-Industrial.

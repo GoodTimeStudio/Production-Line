@@ -24,8 +24,10 @@
  */
 package com.mcgoodtime.gti.common.items;
 
+import com.mcgoodtime.gti.ITextureFolder;
 import com.mcgoodtime.gti.common.core.Gti;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -41,18 +43,21 @@ import static com.mcgoodtime.gti.common.core.Gti.*;
  *
  * @author liach
  */
-public class ItemGti extends Item {
+public class ItemGti extends Item implements ITextureFolder {
 
     private String[] strings;
     private boolean hasTooltip = false;
+    private String itemName;
 
     public ItemGti(String name) {
         this.setUnlocalizedName(MOD_ID + "." + name);
-        this.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
+        this.setTextureName(Gti.RESOURCE_DOMAIN + ":" + "item" + name);
+        this.itemName = name;
         this.setCreativeTab(creativeTabGti);
         GameRegistry.registerItem(this, name, MOD_ID);
     }
 
+    @Deprecated
     public ItemGti(String name, String... strings) {
         this(name);
         this.strings = strings;
@@ -63,26 +68,40 @@ public class ItemGti extends Item {
         this.hasTooltip = hasTooltip;
     }
 
+
+
     @Override
+    @SuppressWarnings("unchecked")
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
-        if (this.strings != null) {
-            for (String s : this.strings) {
-                System.out.println("for");
-                s = I18n.format(this.getUnlocalizedName() + ".desc" + s);
+        if (hasTooltip) {
+            int i = 1;
+            String unLocal = this.getUnlocalizedName() + ".desc" + i;
+
+            while (StatCollector.canTranslate(unLocal)) {
+                list.add(StatCollector.translateToLocal(unLocal));
+                i++;
+                unLocal = this.getUnlocalizedName() + ".desc" + i;
             }
-        } else if (hasTooltip) {
-            addTooltip(list, this);
+        } else if (this.strings != null) {
+            for (String s : this.strings) {
+                s = I18n.format(this.getUnlocalizedName() + ".desc" + s);
+                list.add(s);
+            }
         }
     }
 
-    private void addTooltip(List<String> list, Item item) {
-        int i = 1;
-        String unLocal = item.getUnlocalizedName() + ".desc" + i;
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        this.itemIcon = iconRegister.registerIcon(Gti.RESOURCE_DOMAIN + ":" + this.getTextureFolder() + this.getIconName());
+    }
 
-        while (StatCollector.canTranslate(unLocal)) {
-            list.add(StatCollector.translateToLocal(unLocal));
-            i++;
-            unLocal = item.getUnlocalizedName() + ".desc" + i;
-        }
+    @Override
+    public String getTextureFolder() {
+        return "";
+    }
+
+    @Override
+    public String getIconName() {
+        return "item" + itemName;
     }
 }

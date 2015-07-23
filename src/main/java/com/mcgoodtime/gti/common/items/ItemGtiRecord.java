@@ -28,6 +28,7 @@ import com.mcgoodtime.gti.common.core.Gti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemRecord;
@@ -73,4 +74,8 @@ public class ItemGtiRecord extends ItemRecord {
         tooltipList.add(I18n.format(this.getUnlocalizedName() + "." + "desc2"));
     }
 
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        iconRegister.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "record/" + this.name);
+    }
 }
