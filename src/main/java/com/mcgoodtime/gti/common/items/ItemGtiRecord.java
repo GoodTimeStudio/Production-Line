@@ -76,6 +76,6 @@ public class ItemGtiRecord extends ItemRecord {
 
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        iconRegister.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "record/" + this.name);
+        this.itemIcon = iconRegister.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "record/" + this.name);
     }
 }
