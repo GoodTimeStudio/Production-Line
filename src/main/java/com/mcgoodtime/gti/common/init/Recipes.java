@@ -48,6 +48,9 @@ public class Recipes {
 
     /** Load recipes of GoodTime-Industrial.*/
     public static void init() {
+        //disable recipes
+        disable();
+
         //vanilla recipe registry
         GameRegistry.addRecipe(
                 new ItemStack(GtiBlocks.carbonizeFurnace),
@@ -164,6 +167,30 @@ public class Recipes {
                 'X', IC2Items.getItem("carbonPlate"),
                 'Y', IC2Items.getItem("carbonMesh")
         );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.redstoneModule, 6),
+                "ABA",
+                "BCB",
+                "ABA",
+                'A', Items.redstone,
+                'B', IC2Items.getItem("tinCableBlock"),
+                'C', IC2Items.getItem("plateiron")
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.electronicCircuitCore, 3),
+                ""
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.electronicCircuitControl, 2),
+                " A ",
+                "BCB",
+                'A', Blocks.lever,
+                'B', IC2Items.getItem("tinCableBlock"),
+                'C', Blocks.stone_button
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.lazuliModule)
+        );
 
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, new ItemStack(GtiItems.ingotIridium), XP);
@@ -174,12 +201,12 @@ public class Recipes {
 
         //ic2 recipe registry
         ic2.api.recipe.Recipes.compressor.addRecipe(
-        		new RecipeInputItemStack(new ItemStack(GtiItems.smallCompressedWaterHyacinth,8)),
+        		new RecipeInputItemStack(new ItemStack(GtiItems.smallCompressedWaterHyacinth, 8)),
         		null,
         		new ItemStack(GtiBlocks.compressedWaterHyacinth)
         );
         ic2.api.recipe.Recipes.compressor.addRecipe(
-        		new RecipeInputItemStack(new ItemStack(GtiBlocks.waterHyacinth,8)),
+        		new RecipeInputItemStack(new ItemStack(GtiBlocks.waterHyacinth, 8)),
         		null,
         		new ItemStack(GtiItems.smallCompressedWaterHyacinth)
         );
@@ -229,6 +256,14 @@ public class Recipes {
         );
     }
 
+    private static void disable() {
+        disableRecipes(Ic2Items.massFabricator);
+    }
+
+    /**
+     * Disable recipes.
+     * @param itemStack Disable all recipes of this item.
+     */
     public static void disableRecipes(ItemStack itemStack) {
         List<IRecipe> recipeList = CraftingManager.getInstance().getRecipeList();
         for (int i = 0; i < recipeList.size(); i++) {

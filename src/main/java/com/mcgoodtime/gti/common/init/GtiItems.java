@@ -77,6 +77,26 @@ public class GtiItems implements IFuelHandler {
     public static Item iridiumAxe;
     public static Item iridiumSpade;
     public static Item iridiumSword;
+    public static Item redstoneModule;
+    public static Item lazuliModule;
+    public static Item obsidianPlateGravityField;
+    public static Item electronicCircuitControl;
+    public static Item electronicCircuitCore;
+    public static Item pulseElectronicCircuitControl;
+    public static Item pulseElectronicCircuitCore;
+    public static Item cyclotronParticleAccelerator;
+    public static Item calculateUnit;
+    public static Item calculateChunk;
+    public static Item calculateArray;
+    public static Item floatPointCalculationsRegion;
+    public static Item parallelSpaceConverter;
+    public static Item uuMatterCore;
+    public static Item obsidianMechanicalFrame;
+    public static Item obsidianMechanicalCasing;
+    public static Item carbonCrystal;
+    public static Item enderCalculationCrystal;
+    public static Item millTeeth;
+    public static Item millWheel;
 
     public static void init() {
     	roller = new ItemGti("Roller", true);
@@ -104,6 +124,26 @@ public class GtiItems implements IFuelHandler {
         packagedSalt = new ItemGti("PackagedSalt");
         carbonTube = new ItemGti("CarbonTube", true);
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
+        redstoneModule = new ItemGti("RedstoneModule");
+        lazuliModule = new ItemGti("LazuliModule");
+        obsidianPlateGravityField = new ItemGti("ObsidianPlateGravityField");
+        electronicCircuitControl = new ItemGti("ElectronicCircuitControl");
+        electronicCircuitCore = new ItemGti("ElectronicCircuitCore");
+        pulseElectronicCircuitControl = new ItemGti("PulseElectronicCircuitControl");
+        pulseElectronicCircuitCore = new ItemGti("PulseElectronicCircuitCore");
+        cyclotronParticleAccelerator = new ItemGti("CyclotronParticleAccelerator");
+        calculateUnit = new ItemGti("CalculateUnit");
+        calculateChunk = new ItemGti("CalculateChunk");
+        calculateArray = new ItemGti("CalculateArray");
+        floatPointCalculationsRegion = new ItemGti("FloatPointCalculationsRegion");
+        parallelSpaceConverter = new ItemGti("ParallelSpaceConverter");
+        uuMatterCore = new ItemGti("UUMatterCore");
+        obsidianMechanicalFrame = new ItemGti("ObsidianMechanicalFrame");
+        obsidianMechanicalCasing = new ItemGti("ObsidianMechanicalCasing");
+        carbonCrystal = new ItemGti("CarbonCrystal");
+        enderCalculationCrystal = new ItemGti("EnderCalculationCrystal");
+        millTeeth = new ItemGti("MillTeeth");
+        millWheel = new ItemGti("MillWheel");
 
         // special registry TODO: Better registry system
         diamondApple = new ItemFood(1005, 10F, false) {

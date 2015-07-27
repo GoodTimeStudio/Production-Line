@@ -56,6 +56,27 @@ item.gti.PackagedSalt.name=一小袋盐
 item.gti.CarbonTube.name=碳管
 item.gti.smallCompressedWaterHyacinth.name=小块压缩水葫芦
 item.gti.Roller.name=滚轴
+item.gti.RedstoneModule.name=红石模块
+item.gti.LazuliModule.name=青金石模块
+item.gti.ObsidianPlateGravityField.name=重力场黑曜石板
+item.gti.ElectronicCircuitControl.name=控制电路
+item.gti.ElectronicCircuitCore.name=电路基座
+item.gti.PulseElectronicCircuitControl.name=脉冲控制电路
+item.gti.PulseElectronicCircuitCore.name=脉冲电路基座
+item.gti.CyclotronParticleAccelerator.name=等离子冲撞通道
+item.gti.CalculateUnit.name=运算单元
+item.gti.CalculateChunk.name=运算区块
+item.gti.CalculateArray.name=运算矩阵
+item.gti.FloatPointCalculationsRegion.name=浮点运算区
+item.gti.ParallelSpaceConverter.name=平行空间转换器
+item.gti.UUMatterCore.name=UU物质生成机核心
+item.gti.ObsidianMechanicalFrame.name=黑曜石机械框架
+item.gti.ObsidianMechanicalCasing.name=黑曜石机械外壳
+item.gti.CarbonCrystal.name=碳元素水晶
+item.gti.EnderCalculationCrystal.name=末影运算水晶
+item.gti.MillTeeth.name=磨齿
+item.gti.MillWheel.name=磨轮
+
 item.gti.food.DiamondApple.name=钻石苹果
 
 //record
