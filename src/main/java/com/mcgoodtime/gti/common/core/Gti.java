@@ -75,26 +75,33 @@ public final class Gti {
         setupMeta();
         GtiConfig.configFile = event.getSuggestedConfigurationFile();
         GtiConfig.init();
-        GtiBlocks.init(); //register blocks
+
+        //register Blocks. 注册方块
+        GtiBlocks.init();
         FluidRegistry.registerFluid(Gas.gasNatural);
-        GtiItems.init(); //register items
+        //register Items. 注册物品
+        GtiItems.init();
+        //register TileEntity
         GtiTiles.init();
     }
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Recipes.init(); //register recipes
-         //register TileEntity
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance()); //register gui handler
+        // register Recipes. 注册合成
+        Recipes.init();
+        //register gui handler
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance());
          //register achievement
         GtiAchievement.init();
-        AchievementPage.registerAchievementPage(GtiAchievement.pageGti); //register achievement page
-         //register ore gen bus
+        //register achievement page
+        AchievementPage.registerAchievementPage(GtiAchievement.pageGti);
+         //register ore gen bus. 注册矿石生成总线
         WorldGenerationHandler.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        //register Event. 注册事件
         FMLCommonHandler.instance().bus().register(new GtiEvent());
     }
 
@@ -104,7 +111,7 @@ public final class Gti {
         this.meta.version = "dev 0.0.6";
         this.meta.url = "https://github.com/Minecraft-GoodTime/GoodTime-Industrial";
         this.meta.updateUrl = this.meta.url;
-        this.meta.authorList.add("_JAVA7");
+        this.meta.authorList.add("BestOwl");
         this.meta.authorList.add("liach");
         this.meta.authorList.add("GoodTime Studio");
         this.meta.credits = "GoodTime Studio";

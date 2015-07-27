@@ -24,12 +24,12 @@
  */
 package com.mcgoodtime.gti.common.items.tools;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
 /*
  * Created by suhao on 2015-6-10-0010.
  */
 public class GtiToolMaterial {
-    public static Item.ToolMaterial iridium = EnumHelper.addToolMaterial("Iridium", 4, 2000, 10.0F, 4.0F, 30);
+    public static ToolMaterial iridium = EnumHelper.addToolMaterial("Iridium", 4, 2000, 10.0F, 4.0F, 30);
 }
