@@ -48,7 +48,7 @@ import java.util.List;
  */
 public class GtiItems implements IFuelHandler {
 	public static Item roller;
-	public static Item heatInsulationBoard;
+	public static Item heatInsulationPlate;
 	public static Item thermalInsulationMaterial;
 	public static Item smallCompressedWaterHyacinth;
     public static Item crushedIridium;
@@ -100,7 +100,7 @@ public class GtiItems implements IFuelHandler {
 
     public static void init() {
     	roller = new ItemGti("Roller", true);
-    	heatInsulationBoard = new ItemGti("HeatInsulationBoard");
+    	heatInsulationPlate = new ItemGti("HeatInsulationBoard");
     	thermalInsulationMaterial = new ItemGti("ThermalInsulationMaterial");
     	smallCompressedWaterHyacinth = new ItemGti("smallCompressedWaterHyacinth");
         diamondPlate = new ItemGti("DiamondPlate", true);
