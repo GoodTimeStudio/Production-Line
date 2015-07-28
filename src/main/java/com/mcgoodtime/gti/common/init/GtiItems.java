@@ -100,7 +100,7 @@ public class GtiItems implements IFuelHandler {
 
     public static void init() {
     	roller = new ItemGti("Roller", true);
-    	heatInsulationPlate = new ItemGti("HeatInsulationBoard");
+    	heatInsulationPlate = new ItemGti("HeatInsulationPlate");
     	thermalInsulationMaterial = new ItemGti("ThermalInsulationMaterial");
     	smallCompressedWaterHyacinth = new ItemGti("smallCompressedWaterHyacinth");
         diamondPlate = new ItemGti("DiamondPlate", true);
