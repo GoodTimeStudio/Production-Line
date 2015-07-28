@@ -173,20 +173,24 @@ public class Recipes {
                 "BCB",
                 "ABA",
                 'A', Items.redstone,
-                'B', IC2Items.getItem("tinCableBlock"),
+                'B', IC2Items.getItem("tinCableItem"),
                 'C', IC2Items.getItem("plateiron")
         );
-        /*
+
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.electronicCircuitCore, 3),
-                ""
-        );*/
+                "AAA",
+                "BBB",
+                "BBB",
+                'A', IC2Items.getItem("plateiron"),
+                'B', IC2Items.getItem("tinCableItem")
+        );
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.electronicCircuitControl, 2),
                 " A ",
                 "BCB",
                 'A', Blocks.lever,
-                'B', IC2Items.getItem("tinCableBlock"),
+                'B', IC2Items.getItem("tinCableItem"),
                 'C', Blocks.stone_button
         );
         GameRegistry.addRecipe(
@@ -194,10 +198,115 @@ public class Recipes {
                 "ABA",
                 "CDC",
                 "ABA",
-                'A', IC2Items.getItem("goldCableBlock"),
+                'A', IC2Items.getItem("goldCableItem"),
                 'B', GtiItems.heatInsulationPlate,
-                'C', Blocks.redstone_ore,
+                'C', Blocks.lapis_block,
                 'D', GtiItems.redstoneModule
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.pulseElectronicCircuitCore),
+                "AAA",
+                "AAA",
+                "BC ",
+                'A', GtiItems.redstoneModule,
+                'B', GtiItems.heatInsulationPlate,
+                'C', GtiItems.electronicCircuitCore
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.pulseElectronicCircuitControl),
+                "AAA",
+                "BAC",
+                "BDC",
+                'A', GtiItems.redstoneModule,
+                'B', GtiItems.pulseElectronicCircuitCore,
+                'C', GtiItems.heatInsulationPlate,
+                'D', GtiItems.electronicCircuitControl
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.cyclotronParticleAccelerator),
+                "A A",
+                "BCB",
+                "ADA",
+                'A', IC2Items.getItem("glassFiberCableItem"),
+                'B', GtiItems.redstoneModule,
+                'C', GtiItems.lazuliModule,
+                'D', IC2Items.getItem("teslaCoil")
+        );
+        GameRegistry.addShapelessRecipe(
+                new ItemStack(GtiItems.calculateUnit),
+                new ItemStack(Blocks.stone_button),
+                new ItemStack(Blocks.stone_button),
+                new ItemStack(Blocks.stone_button),
+                new ItemStack(Blocks.stone_button),
+                new ItemStack(Blocks.stone_button),
+                new ItemStack(Blocks.stone_button),
+                new ItemStack(Blocks.stone_button),
+                new ItemStack(Blocks.stone_button),
+                new ItemStack(Blocks.stone_button)
+        );
+        GameRegistry.addShapelessRecipe(
+                new ItemStack(GtiItems.calculateChunk),
+                new ItemStack(GtiItems.calculateUnit),
+                new ItemStack(GtiItems.calculateUnit),
+                new ItemStack(GtiItems.calculateUnit),
+                new ItemStack(GtiItems.calculateUnit),
+                new ItemStack(GtiItems.calculateUnit),
+                new ItemStack(GtiItems.calculateUnit),
+                new ItemStack(GtiItems.calculateUnit),
+                new ItemStack(GtiItems.calculateUnit),
+                new ItemStack(GtiItems.calculateUnit)
+        );
+        GameRegistry.addShapelessRecipe(
+                new ItemStack(GtiItems.calculateArray),
+                new ItemStack(GtiItems.calculateChunk),
+                new ItemStack(GtiItems.calculateChunk),
+                new ItemStack(GtiItems.calculateChunk),
+                new ItemStack(GtiItems.calculateChunk),
+                new ItemStack(GtiItems.calculateChunk),
+                new ItemStack(GtiItems.calculateChunk),
+                new ItemStack(GtiItems.calculateChunk),
+                new ItemStack(GtiItems.calculateChunk),
+                new ItemStack(GtiItems.calculateChunk)
+        );
+        GameRegistry.addShapelessRecipe(
+                new ItemStack(GtiItems.floatPointCalculationsRegion),
+                new ItemStack(GtiItems.calculateArray),
+                new ItemStack(GtiItems.calculateArray),
+                new ItemStack(GtiItems.calculateArray),
+                new ItemStack(GtiItems.calculateArray),
+                new ItemStack(GtiItems.calculateArray),
+                new ItemStack(GtiItems.calculateArray),
+                new ItemStack(GtiItems.calculateArray),
+                new ItemStack(GtiItems.calculateArray),
+                new ItemStack(GtiItems.calculateArray)
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.parallelSpaceConverter),
+                "A A",
+                " B ",
+                "A A",
+                'A', GtiItems.floatPointCalculationsRegion,
+                'B', GtiItems.enderCalculationCrystal
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.uuMatterCore),
+                "ABA",
+                "CDC",
+                "ABA",
+                'A', GtiItems.cyclotronParticleAccelerator,
+                'B', GtiItems.lazuliModule,
+                'C', GtiItems.pulseElectronicCircuitControl,
+                'D', GtiItems.parallelSpaceConverter
+        );
+        GameRegistry.addRecipe(
+                Ic2Items.massFabricator,
+                "ACA",
+                "BDB",
+                "ACA",
+                'A', GtiItems.lazuliModule,
+                'B', IC2Items.getItem("teleporter"),
+                'C', GtiItems.pulseElectronicCircuitControl,
+                'D', GtiItems.uuMatterCore
         );
 
         //smelting registry
