@@ -168,7 +168,7 @@ public class Recipes {
                 'Y', IC2Items.getItem("carbonMesh")
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.redstoneModule, 6),
+                new ItemStack(GtiItems.redstoneModule, 2),
                 "ABA",
                 "BCB",
                 "ABA",
@@ -176,10 +176,11 @@ public class Recipes {
                 'B', IC2Items.getItem("tinCableBlock"),
                 'C', IC2Items.getItem("plateiron")
         );
+        /*
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.electronicCircuitCore, 3),
                 ""
-        );
+        );*/
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.electronicCircuitControl, 2),
                 " A ",
@@ -189,7 +190,14 @@ public class Recipes {
                 'C', Blocks.stone_button
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.lazuliModule)
+                new ItemStack(GtiItems.lazuliModule),
+                "ABA",
+                "CDC",
+                "ABA",
+                'A', IC2Items.getItem("goldCableBlock"),
+                'B', GtiItems.heatInsulationPlate,
+                'C', Blocks.redstone_ore,
+                'D', GtiItems.redstoneModule
         );
 
         //smelting registry
@@ -218,7 +226,7 @@ public class Recipes {
         ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
                		new RecipeInputItemStack(new ItemStack(GtiItems.thermalInsulationMaterial)),
                		null,
-               		new ItemStack (GtiItems.heatInsulationBoard));
+               		new ItemStack (GtiItems.heatInsulationPlate));
         ic2.api.recipe.Recipes.compressor.addRecipe(
                 new RecipeInputItemStack(new ItemStack(GtiItems.diamondPlate, 9)),
                 null,

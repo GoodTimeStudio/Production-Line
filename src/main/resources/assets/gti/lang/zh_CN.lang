@@ -32,7 +32,7 @@ item.gti.IngotIridium.name=铱锭
 item.gti.ThermalInsulationMaterial.name=隔热材料
 
 //plate
-item.gti.HeatInsulationBoard.name=隔热板 
+item.gti.HeatInsulationPlate.name=隔热板
 item.gti.DenseDiamondPlate.name=致密钻石板
 item.gti.DiamondPlate.name=钻石板
 
