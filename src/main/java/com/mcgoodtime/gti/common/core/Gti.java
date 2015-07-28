@@ -26,7 +26,8 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
 import com.mcgoodtime.gti.common.init.*;
-import com.mcgoodtime.gti.common.worldgen.WorldGenerationHandler;
+import com.mcgoodtime.gti.common.worldgen.BasaltGen;
+import com.mcgoodtime.gti.common.worldgen.IridiumGen;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -35,6 +36,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
@@ -96,7 +98,8 @@ public final class Gti {
         //register achievement page
         AchievementPage.registerAchievementPage(GtiAchievement.pageGti);
          //register ore gen bus. 注册矿石生成总线
-        WorldGenerationHandler.init();
+        GameRegistry.registerWorldGenerator(new IridiumGen(), 1);
+        GameRegistry.registerWorldGenerator(new BasaltGen(), 2);
     }
 
     @Mod.EventHandler

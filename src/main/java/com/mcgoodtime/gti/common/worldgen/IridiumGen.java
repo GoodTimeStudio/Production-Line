@@ -25,8 +25,9 @@
 package com.mcgoodtime.gti.common.worldgen;
 
 import com.mcgoodtime.gti.common.init.GtiBlocks;
-
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import java.util.Random;
@@ -36,38 +37,27 @@ import java.util.Random;
  *
  * @author Su Hao
  */
-public class IridiumGen extends DummyWorldGenerator {
+public class IridiumGen implements IWorldGenerator {
 
-    protected IridiumGen() {
-        super(3, 5, 16);
-    }
-
-    private static IridiumGen instance = new IridiumGen();
-
-    public static IridiumGen getInstance() {
-        return instance;
-    }
-
-    public static void setInstance(int size, int number, int maxHeight) {
-        instance.generationSize = size;
-        instance.generationNumber = number;
-        instance.maxHeight = maxHeight;
-    }
+    private static final int TICKET = 5;
+    private static final int MAX_HEIGHT = 16;
+    private static final int GEN_SIZE = 3;
 
     @Override
-    public boolean generate(World world, Random rand, int chunkX, int chunkZ) {
-        if (world.provider.isHellWorld || world.provider.hasNoSky) {
-            return true;
+    public void generate(Random random, int chunkX, int chunkZ, World world,
+                         IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+        if ((!world.provider.isHellWorld) && (!world.provider.hasNoSky)) {
+            generateOre(world, random, chunkX, chunkZ);
         }
-        boolean ret = true;
-        for (int k = 0; k < this.generationNumber; k++) {
-            int x = chunkX << 4 + rand.nextInt(16);
-            int y = rand.nextInt(this.maxHeight);
-            int z = chunkZ << 4 + rand.nextInt(16);
+    }
 
-            ret = ret && new WorldGenMinable(GtiBlocks.oreIridium, this.generationSize)
-                    .generate(world, rand, x, y, z);
+    private void generateOre(World world, Random rand, int chunkX, int chunkZ) {
+        for (int k = 0; k < TICKET; k++) {
+            int x = chunkX * 16 + rand.nextInt(16);
+            int y = rand.nextInt(MAX_HEIGHT);
+            int z = chunkZ * 16 + rand.nextInt(16);
+
+            new WorldGenMinable(GtiBlocks.oreIridium, GEN_SIZE).generate(world, rand, x, y, z);
         }
-        return ret;
     }
 }

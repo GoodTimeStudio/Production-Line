@@ -24,52 +24,40 @@
  */
 package com.mcgoodtime.gti.common.worldgen;
 
-
-import ic2.api.item.IC2Items;
+import cpw.mods.fml.common.IWorldGenerator;
+import ic2.core.Ic2Items;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import java.util.Random;
 
 /**
- * Basalt world generation.
+ * Another world generator?
  *
  * @author JAVA10
  */
 
-public class BasaltGen extends DummyWorldGenerator {
-    private static BasaltGen instance = new BasaltGen();
-
-    protected BasaltGen() {
-        super(5, 10, 27);
-    }
-
-    public static void setInstance(int number, int height, int size) {
-        instance.generationNumber = number;
-        instance.maxHeight = height;
-        instance.generationSize = size;
-    }
-
-    public static BasaltGen getInstance() {
-        return instance;
-    }
+public class BasaltGen implements IWorldGenerator {
+    private static final int TICKET = 5;
+    private static final int MAX_HEIGHT = 27;
+    private static final int GEN_SIZE = 10;
 
     @Override
-    public boolean generate(World world, Random rand, int chunkX, int chunkZ) {
-        if (world.provider.isHellWorld || world.provider.hasNoSky) {
-            return true;
-        }
-        boolean ret = true;
-        for (int k = 0; k < this.generationNumber; k++) {
-            int x = chunkX << 4 + rand.nextInt(16);
-            int y = rand.nextInt(this.maxHeight);
-            int z = chunkZ << 4 + rand.nextInt(16);
+    public void generate(Random random, int chunkX, int chunkZ, World world,
+                         IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+        if (!world.provider.isHellWorld && !world.provider.hasNoSky)
+            generateOre(world, random, chunkX, chunkZ);
+    }
 
-            ret = ret && new WorldGenMinable(
-                    Block.getBlockFromItem(IC2Items.getItem("basaltBlock").getItem()
-                    ), this.generationSize).generate(world, rand, x, y, z);
+    private void generateOre(World world, Random rand, int chunkX, int chunkZ) {
+        for (int k = 0; k < TICKET; k++) {
+            int x = chunkX * 16 + rand.nextInt(16);
+            int y = rand.nextInt(MAX_HEIGHT);
+            int z = chunkZ * 16 + rand.nextInt(16);
+
+            new WorldGenMinable(Block.getBlockFromItem(Ic2Items.basaltBlock.getItem()), GEN_SIZE).generate(world, rand, x, y, z);
         }
-        return ret;
     }
 }
