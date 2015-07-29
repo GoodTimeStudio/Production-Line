@@ -64,20 +64,20 @@ public class Recipes {
                 'E', ic2.api.item.IC2Items.getItem("plateiron")
         );
         GameRegistry.addRecipe(
-        		new ItemStack(GtiItems.roller),
-        		" A",
-        		"ABA",
-        		" A",
-        		'A', Items.iron_ingot,
-        		'B', ic2.api.item.IC2Items.getItem("ironFence")
+                new ItemStack(GtiItems.roller),
+                " A",
+                "ABA",
+                " A",
+                'A', Items.iron_ingot,
+                'B', ic2.api.item.IC2Items.getItem("ironFence")
         );
         GameRegistry.addRecipe(
-    			new ItemStack(GtiItems.thermalInsulationMaterial),
-    			"AAA",
-    			"AAA",
-    			"BBB",
-    			'A', ic2.api.item.IC2Items.getItem("rubber"),
-    			'B', Items.iron_ingot);
+                new ItemStack(GtiItems.thermalInsulationMaterial),
+                "AAA",
+                "AAA",
+                "BBB",
+                'A', ic2.api.item.IC2Items.getItem("rubber"),
+                'B', Items.iron_ingot);
 
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.airBrakeCasing),
@@ -308,13 +308,62 @@ public class Recipes {
                 'C', GtiItems.pulseElectronicCircuitControl,
                 'D', GtiItems.uuMatterCore
         );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.obsidianMechanicalFrame),
+                "AAA",
+                "A A",
+                "AAA",
+                'A', GtiItems.obsidianPlateGravityField
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.obsidianMechanicalCasing),
+                "ABA",
+                "ACA",
+                'A', GtiItems.pulseElectronicCircuitCore,
+                'B', IC2Items.getItem("advancedMachine"),
+                'C', GtiItems.obsidianMechanicalFrame
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.enderCalculationCrystal),
+                "AAA",
+                "BCB",
+                "BCB",
+                'A', IC2Items.getItem("lapotronCrystal"),
+                'B', GtiItems.calculateArray,
+                'C', Items.ender_pearl
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.millTeeth),
+                "ABC",
+                'A', Items.flint,
+                'B', Blocks.stone,
+                'C', Blocks.brick_block
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(GtiItems.millWheel),
+                "AAA",
+                "ABA",
+                "AAA",
+                'A', GtiItems.millTeeth,
+                'B', IC2Items.getItem("plateiron")
+        );
+        GameRegistry.addRecipe(
+                IC2Items.getItem("iridiumPlate"),
+                "ABA",
+                "BCB",
+                "ABA",
+                'A', GtiItems.ingotIridium,
+                'B', IC2Items.getItem("advancedAlloy"),
+                'C', GtiItems.denseDiamondPlate
+        );
 
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, new ItemStack(GtiItems.ingotIridium), XP);
         GameRegistry.addSmelting(GtiItems.cleanedCrushedIridium, new ItemStack(GtiItems.ingotIridium), XP);
         GameRegistry.addSmelting(GtiItems.dustIridium, new ItemStack(GtiItems.ingotIridium), XP);
         GameRegistry.addSmelting(GtiItems.crushedIridium, new ItemStack(GtiItems.ingotIridium), XP);
-        GameRegistry.addSmelting(Blocks.reeds, new ItemStack(GtiItems.bambooCharcoal), XP);
+        GameRegistry.addSmelting(Blocks.log2, new ItemStack(GtiItems.bambooCharcoal), XP);
+        GameRegistry.addSmelting(IC2Items.getItem("iridiumOre"), new ItemStack(GtiItems.ingotIridium), XP);
 
         //ic2 recipe registry
         ic2.api.recipe.Recipes.compressor.addRecipe(
@@ -356,6 +405,16 @@ public class Recipes {
                 null,
                 new ItemStack(GtiItems.dustIridium)
         );
+        ic2.api.recipe.Recipes.compressor.addRecipe(
+                new RecipeInputItemStack(IC2Items.getItem("diamondDust"), 3),
+                null,
+                new ItemStack(GtiItems.carbonCrystal)
+        );
+        ic2.api.recipe.Recipes.compressor.addRecipe(
+                new RecipeInputItemStack(IC2Items.getItem("denseplateobsidian"), 8),
+                null,
+                new ItemStack(GtiItems.obsidianPlateGravityField)
+        );
 
         ItemStack doubleSmallTinDust = Ic2Items.smallTinDust.copy();
         doubleSmallTinDust.stackSize = 2;
@@ -375,11 +434,12 @@ public class Recipes {
 
     private static void disable() {
         disableRecipes(Ic2Items.massFabricator);
+        disableRecipes(IC2Items.getItem("iridiumPlate"));
     }
 
     /**
      * Disable recipes.
-     * @param itemStack Disable all recipes of this item.
+     * @param itemStack Disable all recipes of this item. 禁用这个物品的所有合成
      */
     public static void disableRecipes(ItemStack itemStack) {
         List<IRecipe> recipeList = CraftingManager.getInstance().getRecipeList();
