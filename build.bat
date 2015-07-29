@@ -1,2 +1,2 @@
-./gradlew setupCIWorkspace build
+./gradlew sCIW build
 pause

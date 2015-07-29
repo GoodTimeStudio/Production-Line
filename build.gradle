@@ -27,12 +27,12 @@ repositories {
 }
 
 dependencies {
-    compile 'net.industrial-craft:industrialcraft-2:2.2.742-experimental:dev' //adds newest ic2 to the dev env
-    checkstyle 'com.puppycrawl.tools:checkstyle:6.5'
+    compile 'net.industrial-craft:industrialcraft-2:2.2.748-experimental:dev' //adds newest ic2 to the dev env
+    checkstyle 'com.puppycrawl.tools:checkstyle:6.8.1'
 }
 
 minecraft {
-    version = "1.7.10-10.13.4.1481-1.7.10"
+    version = "1.7.10-10.13.4.1492-1.7.10"
     runDir = "eclipse"
 }
 
@@ -84,7 +84,7 @@ checkstyle {
             "url" : 'https://github.com/Minecraft-GoodTime/GoodTime-Industrial',
             "year" : '2015',
             "basedir": project.projectDir,
-            "severity": 'fatal'
+            "severity": 'error'
     ]
 }
 
