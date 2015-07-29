@@ -57,11 +57,11 @@ public class Recipes {
                 "ABA",
                 "CDC",
                 "EEE",
-                'A', ic2.api.item.IC2Items.getItem("electronicCircuit"),
+                'A', IC2Items.getItem("electronicCircuit"),
                 'B', GtiItems.airBrakeCasing,
                 'C', GtiItems.airBrakeUnit,
-                'D', ic2.api.item.IC2Items.getItem("electroFurnace"),
-                'E', ic2.api.item.IC2Items.getItem("plateiron")
+                'D', IC2Items.getItem("electroFurnace"),
+                'E', IC2Items.getItem("plateiron")
         );
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.roller),
@@ -69,22 +69,22 @@ public class Recipes {
                 "ABA",
                 " A",
                 'A', Items.iron_ingot,
-                'B', ic2.api.item.IC2Items.getItem("ironFence")
+                'B', IC2Items.getItem("ironFence")
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.thermalInsulationMaterial),
+                new ItemStack(GtiItems.heatInsulationMaterial),
                 "AAA",
                 "AAA",
                 "BBB",
-                'A', ic2.api.item.IC2Items.getItem("rubber"),
-                'B', Items.iron_ingot);
+                'A', IC2Items.getItem("rubber"),
+                'B', IC2Items.getItem("advIronIngot"));
 
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.airBrakeCasing),
                 "AAA",
                 "BBB",
                 "ACA",
-                'A', ic2.api.item.IC2Items.getItem("plateiron"),
+                'A', IC2Items.getItem("plateiron"),
                 'B', GtiItems.airBrakeUnit,
                 'C', Items.bucket
         );
@@ -93,8 +93,8 @@ public class Recipes {
                 "AY ",
                 "YY ",
                 " YY",
-                'A', ic2.api.item.IC2Items.getItem("advIronIngot"),
-                'Y', ic2.api.item.IC2Items.getItem("rubber")
+                'A', IC2Items.getItem("advIronIngot"),
+                'Y', IC2Items.getItem("rubber")
         );
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.diamondApple, 1, 0),
@@ -382,7 +382,7 @@ public class Recipes {
                 new ItemStack(GtiItems.diamondPlate)
         );
         ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
-               		new RecipeInputItemStack(new ItemStack(GtiItems.thermalInsulationMaterial)),
+               		new RecipeInputItemStack(new ItemStack(GtiItems.heatInsulationMaterial)),
                		null,
                		new ItemStack (GtiItems.heatInsulationPlate));
         ic2.api.recipe.Recipes.compressor.addRecipe(

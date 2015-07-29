@@ -29,7 +29,7 @@ item.gti.SmallDustIridium.name=小撮铱矿石粉
 
 //ingot
 item.gti.IngotIridium.name=铱锭
-item.gti.ThermalInsulationMaterial.name=隔热材料
+item.gti.HeatInsulationMaterial.name=隔热材料
 
 //plate
 item.gti.HeatInsulationPlate.name=隔热板
