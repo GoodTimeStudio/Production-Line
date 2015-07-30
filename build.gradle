@@ -28,13 +28,17 @@ repositories {
 
 dependencies {
     compile 'net.industrial-craft:industrialcraft-2:2.2.748-experimental:dev' //adds newest ic2 to the dev env
-    checkstyle 'com.puppycrawl.tools:checkstyle:6.8.1'
+    checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
 }
 
 minecraft {
     version = "1.7.10-10.13.4.1492-1.7.10"
     runDir = "eclipse"
 }
+
+checkstyle { 
+    toolVersion = "6.7" 
+} 
 
 configurations { 
      api 
