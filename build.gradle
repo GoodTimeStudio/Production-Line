@@ -88,7 +88,7 @@ checkstyle {
             "url" : 'https://github.com/Minecraft-GoodTime/GoodTime-Industrial',
             "year" : '2015',
             "basedir": project.projectDir,
-            "severity": 'error'
+            "severity": 'warning'
     ]
 }
 
