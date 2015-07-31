@@ -5,15 +5,14 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-	dependencies {
-	    classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-	}
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
 
 apply plugin: 'forge'
 apply plugin: 'checkstyle'
-
 
 version = "dev.0.1." + getBuildNumber()
 group= "com.mcgoodtime.gti"
@@ -44,6 +43,8 @@ configurations {
      api 
      compile.extendsFrom api 
 }
+
+compileJava.options.encoding = 'UTF-8'
 
 sourceSets {
     main {
