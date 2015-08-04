@@ -26,10 +26,12 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
+import com.mcgoodtime.gti.common.items.ItemGtiFood;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
 import com.mcgoodtime.gti.common.items.tools.GtiToolMaterial;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
 import com.mcgoodtime.gti.common.items.tools.ToolGti;
+
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.resources.I18n;
@@ -51,54 +53,131 @@ public class GtiItems implements IFuelHandler {
 	public static Item heatInsulationPlate;
 	public static Item heatInsulationMaterial;
 	public static Item smallCompressedWaterHyacinth;
-    public static Item crushedIridium;
-    public static Item cleanedCrushedIridium;
-    public static Item dustIridium;
-    public static Item smallDustIridium;
-    public static Item ingotIridium;
-    public static Item denseDiamondPlate;
-    public static Item diamondPlate;
-    public static Item airBrakeUnit;
-    public static Item airBrakeCasing;
-    public static Item bambooCharcoal;
-    public static Item diamondApple;
-    public static Item iridiumPickaxe;
-    public static Item ironTreetap;
-    public static Item bronzeTreetap;
-    public static Item leadTreetap;
-    public static Item refinedIronTreetap;
-    public static Item advancedAlloyTreetap;
-    public static Item carbonTreetap;
-    public static Item record_theSaltWaterRoom;
-    public static Item salt;
-    public static Item packagedSalt;
-    public static Item carbonTube;
-    public static Item record_MusicSpring;
-    public static Item iridiumAxe;
-    public static Item iridiumSpade;
-    public static Item iridiumSword;
-    public static Item redstoneModule;
-    public static Item lazuliModule;
-    public static Item obsidianPlateGravityField;
-    public static Item electronicCircuitControl;
-    public static Item electronicCircuitCore;
-    public static Item pulseElectronicCircuitControl;
-    public static Item pulseElectronicCircuitCore;
-    public static Item cyclotronParticleAccelerator;
-    public static Item calculateUnit;
-    public static Item calculateChunk;
-    public static Item calculateArray;
-    public static Item floatPointCalculationsRegion;
-    public static Item parallelSpaceConverter;
-    public static Item uuMatterCore;
-    public static Item obsidianMechanicalFrame;
-    public static Item obsidianMechanicalCasing;
-    public static Item carbonCrystal;
-    public static Item enderCalculationCrystal;
-    public static Item millTeeth;
-    public static Item millWheel;
+	public static Item crushedIridium;
+	public static Item cleanedCrushedIridium;
+	public static Item dustIridium;
+	public static Item smallDustIridium;
+	public static Item ingotIridium;
+	public static Item denseDiamondPlate;
+	public static Item diamondPlate;
+	public static Item airBrakeUnit;
+	public static Item airBrakeCasing;
+	public static Item bambooCharcoal;
+	public static Item diamondApple;
+	public static Item iridiumPickaxe;
+	public static Item ironTreetap;
+	public static Item bronzeTreetap;
+	public static Item leadTreetap;
+	public static Item refinedIronTreetap;
+	public static Item advancedAlloyTreetap;
+	public static Item carbonTreetap;
+	public static Item record_theSaltWaterRoom;
+	public static Item salt;
+	public static Item packagedSalt;
+	public static Item carbonTube;
+	public static Item record_MusicSpring;
+	public static Item iridiumAxe;
+	public static Item iridiumSpade;
+	public static Item iridiumSword;
+	public static Item redstoneModule;
+	public static Item lazuliModule;
+	public static Item obsidianPlateGravityField;
+	public static Item electronicCircuitControl;
+	public static Item electronicCircuitCore;
+	public static Item pulseElectronicCircuitControl;
+	public static Item pulseElectronicCircuitCore;
+	public static Item cyclotronParticleAccelerator;
+	public static Item calculateUnit;
+	public static Item calculateChunk;
+	public static Item calculateArray;
+	public static Item floatPointCalculationsRegion;
+	public static Item parallelSpaceConverter;
+	public static Item uuMatterCore;
+	public static Item obsidianMechanicalFrame;
+	public static Item obsidianMechanicalCasing;
+	public static Item carbonCrystal;
+	public static Item enderCalculationCrystal;
+	public static Item millTeeth;
+	public static Item millWheel;
 
-    public static void init() {
+	// Food
+
+	// Ingredients
+	public static Item saltyYolk;
+	public static Item saltyEgg;
+	public static Item celery;
+	public static Item redBean;
+	public static Item whiteSesame;
+	public static Item blackSesame;
+	public static Item stickyRice;
+	public static Item wheatFlour;
+
+	// Processed ingredients
+	public static Item dough;
+	public static Item stickyRiceFlour;
+	public static Item stickyRiceBalls;
+	public static Item redBeanPaste;
+	public static Item dumplingSkin;
+	public static Item bread;
+	public static Item thinSkinned;
+	public static Item pumpkinBlock;
+
+	// Dumplings
+	public static Item carrotDumplings;
+	public static Item celeryDumplings;
+	public static Item beefDumplings;
+	public static Item porkDumplings;
+	public static Item beefAndCeleryDumplings;
+	public static Item beefAndCarrotDumplings;
+	public static Item porkAndCeleryDumplings;
+	public static Item porkAndCarrotDumplings;
+	public static Item aBowlOfCarrotDumplings;
+	public static Item aBowlOfCeleryDumplings;
+	public static Item aBowlOfBeefDumplings;
+	public static Item aBowlOfPorkDumplings;
+	public static Item aBowlOfBeefAndCeleryDumplings;
+	public static Item aBowlOfBeefAndCarrotDumplings;
+	public static Item aBowlOfPorkAndCeleryDumplings;
+	public static Item aBowlOfPorkAndCarrotDumplings;
+
+	// Fried dumplings
+	public static Item beefFriedDumplings;
+	public static Item porkFriedDumplings;
+	public static Item carrotAndPorkFriedDumplings;
+	public static Item celeryAndPorkFriedDumplings;
+	public static Item carrotAndBeefFriedDumplings;
+	public static Item celeryAndBeefFriedDumplings;
+
+	//Sticky Rice balls
+	public static Item redBeanPasteGStickyRiceBalls;
+	public static Item writeSesameStickyRiceBalls;
+	public static Item blackSesameStickyRiceBalls;
+	public static Item sugerStickyRiceBalls;
+
+	// Flapjack
+	public static Item whiteFlapjack;
+	public static Item sweetFlapjack;
+	public static Item saltyFlapjack;
+	public static Item doubleFlapjack;
+	public static Item doubleWhiteFlapjack;
+	public static Item doubleSugerFlapjack;
+	public static Item doubleSaltyFlapjack;
+
+	// Chinese hamburger
+	public static Item porkChineseHamburger;
+	public static Item beefChineseHamburger;
+
+	// Wonton
+	public static Item beefWonton;
+	public static Item porkWonton;
+	public static Item aBowlOfBeefWonton;
+	public static Item aBowlOfPorkWonton;
+
+	// Moon cake
+	public static Item pumpkinMoonCake;
+	public static Item saltyYolkMoonCake;
+
+	public static void init() {
     	roller = new ItemGti("Roller", true);
     	heatInsulationPlate = new ItemGti("HeatInsulationPlate");
         heatInsulationMaterial = new ItemGti("HeatInsulationMaterial");
@@ -144,6 +223,69 @@ public class GtiItems implements IFuelHandler {
         enderCalculationCrystal = new ItemGti("EnderCalculationCrystal");
         millTeeth = new ItemGti("MillTeeth");
         millWheel = new ItemGti("MillWheel");
+        
+        //Food registry
+        saltyYolk = new ItemGtiFood("SaltYolk");
+        saltyEgg = new ItemGtiFood("SaltyEgg");
+        celery = new ItemGtiFood("Celery");
+        redBean = new ItemGtiFood("RedBean");
+        whiteSesame	= new ItemGtiFood("WhiteSesame");
+        blackSesame = new ItemGtiFood("BlackSesame");
+        stickyRice = new ItemGtiFood("StickyRice");
+        wheatFlour = new ItemGtiFood("WheatFlour");
+        dough = new ItemGtiFood("Dough");
+        stickyRiceFlour = new ItemGtiFood("StickyRiceFlour");
+        stickyRiceBalls = new ItemGtiFood("StickyRiceBalls");
+        redBeanPaste = new ItemGtiFood("RedBeanPaste");
+        dumplingSkin = new ItemGtiFood("DumplingSkin");
+        bread = new ItemGtiFood("Bread");
+        thinSkinned = new ItemGtiFood("ThinSkinned");
+        pumpkinBlock = new ItemGtiFood("PumpkinBlock");
+        carrotDumplings = new ItemGtiFood("CarrotDumplings");
+        celeryDumplings = new ItemGtiFood("CeleryDumlings");
+        beefDumplings = new ItemGtiFood("BeefDumplings");
+        porkDumplings = new ItemGtiFood("PorkDumplings");
+        beefAndCeleryDumplings = new ItemGtiFood("BeefAndCeleryDumplings");
+        beefAndCarrotDumplings = new ItemGtiFood("BeefAndCarrotDumplings");
+        porkAndCeleryDumplings = new ItemGtiFood("ProkAndCeleyDumplings");
+        porkAndCarrotDumplings = new ItemGtiFood("PorkAndCarrotDumplings");
+        aBowlOfCarrotDumplings = new ItemGtiFood("ABowlOfCarrotDumplings");
+        aBowlOfCeleryDumplings = new ItemGtiFood("ABowlOfCeleryDumplings");
+        aBowlOfBeefDumplings = new ItemGtiFood("ABowlOfBeefDumplings");
+        aBowlOfPorkDumplings = new ItemGtiFood("ABowlOfPorkDumplings");
+        aBowlOfBeefAndCeleryDumplings = new ItemGtiFood("ABowlOfBeefAndCeleryDumplings");
+        aBowlOfBeefAndCarrotDumplings = new ItemGtiFood("ABowlOfBeefAndCarrotDumplings");
+        aBowlOfPorkAndCeleryDumplings = new ItemGtiFood("ABowlOfPorkAndCeleryDumplings");
+        aBowlOfPorkAndCarrotDumplings = new ItemGtiFood("ABowlOfPorkAndCarrotDumplings");
+        beefFriedDumplings = new ItemGtiFood("BeefFriedDumplings");
+        porkFriedDumplings = new ItemGtiFood("");
+        carrotAndPorkFriedDumplings = new ItemGtiFood("CarrotAndPorkFriedDumplings");
+        celeryAndPorkFriedDumplings = new ItemGtiFood("CeleryAndPorkFriedDumplings");
+        carrotAndBeefFriedDumplings = new ItemGtiFood("CarrotAndBeefFriedDumplings");
+        celeryAndBeefFriedDumplings = new ItemGtiFood("CeleryAndBeefFriedDumplings");
+        redBeanPasteGStickyRiceBalls = new ItemGtiFood("RedBeanPasteGStickyRiceBalls");
+        writeSesameStickyRiceBalls = new ItemGtiFood("WriteSesameStickyRiceBalls");
+        blackSesameStickyRiceBalls = new ItemGtiFood("BlackSesameStickyRiceBalls");
+        sugerStickyRiceBalls = new ItemGtiFood("SugerStickyRiceBalls");
+        whiteFlapjack = new ItemGtiFood("WhiteFlapjack");
+        sweetFlapjack = new ItemGtiFood("SweetFlapjack");
+        saltyFlapjack = new ItemGtiFood("SaltyFlapjack");
+        doubleFlapjack = new ItemGtiFood("DoubleFlapjack");
+        doubleWhiteFlapjack = new ItemGtiFood("DoubleWhiteFlapjack");
+        doubleSugerFlapjack = new ItemGtiFood("DoubleSugerFlapjack");
+        doubleSaltyFlapjack = new ItemGtiFood("DoubleSaltyFlapjack");
+        porkChineseHamburger = new ItemGtiFood("PorkChineseHamburger");
+        beefChineseHamburger = new ItemGtiFood("BeefChineseHamburger");
+        beefWonton = new ItemGtiFood("BeefWonton");
+        porkWonton = new ItemGtiFood("PorkWonton");
+        aBowlOfBeefWonton = new ItemGtiFood("ABowlOfBeefWonton");
+        aBowlOfPorkWonton = new ItemGtiFood("ABowlOfPorkWonton");
+        pumpkinMoonCake = new ItemGtiFood("PumpkinMoonCake");
+        saltyYolkMoonCake = new ItemGtiFood("SaltyYolkMoonCake");
+        
+        
+        
+        
 
         // special registry TODO: Better registry system
         diamondApple = new ItemFood(1005, 10F, false) {
@@ -180,23 +322,26 @@ public class GtiItems implements IFuelHandler {
         GameRegistry.registerFuelHandler(new GtiItems());
     }
 
-    @Override
-    public int getBurnTime(ItemStack fuel) {
-        if (fuel.getItem() == bambooCharcoal) {
-            return 800;
-        }
-        if(fuel.getItem() == smallCompressedWaterHyacinth){
-        	return 400;
-        }
-        if(fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.waterHyacinth))){
-        	return 100;
-        }
-        if(fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.compressedWaterHyacinth))){
-        	return 800;
-        }
-        if(fuel.getItem().equals(Item.getItemFromBlock(GtiBlocks.dehydratedWaterHyacinthblock))){
-        return 1000;	
-        }
-        return 0;
-    }
+	@Override
+	public int getBurnTime(ItemStack fuel) {
+		if (fuel.getItem() == bambooCharcoal) {
+			return 800;
+		}
+		if (fuel.getItem() == smallCompressedWaterHyacinth) {
+			return 400;
+		}
+		if (fuel.getItem().equals(
+				Item.getItemFromBlock(GtiBlocks.waterHyacinth))) {
+			return 100;
+		}
+		if (fuel.getItem().equals(
+				Item.getItemFromBlock(GtiBlocks.compressedWaterHyacinth))) {
+			return 800;
+		}
+		if (fuel.getItem().equals(
+				Item.getItemFromBlock(GtiBlocks.dehydratedWaterHyacinthblock))) {
+			return 1000;
+		}
+		return 0;
+	}
 }
