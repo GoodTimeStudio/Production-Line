@@ -36,3 +36,62 @@ tile.DehydratedWaterHyacinthBlock.name=Dehydrated Water Hyacinth Block
 
 //---Item
 tile.SmallCompressedWaterHyacinth.name=Small Compressed Water Hyacinth
+
+//---Food
+tile.SaltyYolkSalty Yolk
+tile.SaltyEgg.name=Salty Egg  
+tile.RedBean.name=Red Bean
+tile.WhiteSesame.name=White Sesame
+tile.BlackSesame.name=Black Sesame
+tile.StickyRice.name=Sticky Rice
+tile.WheatFlour.name=Wheat Flour 
+tile.Dough.name=Dough
+tile.StickyRiceFlour.name=Sticky RiceFlour 
+tile.StickyRiceBalls.name=Sticky Rice Balls
+tile.RedBeanPaste.name=Red Bean Paste
+tile.DumplingSkin.name=Fumpling Skin
+tile.Bread.name=Bread
+tileThinSkinned.name=Thin Skinned
+tile.pumpkinBlock.name=Pumpkin Block
+tile.carrotDumplings.name=Carrot Dumplings
+tile.celeryDumplings.name=Celery Dumplings
+tile.beefDumplings.name=beef Dumplings
+tile.porkDumplings.name=Pork Dumplings
+tile.BeefAndCeleryDumplings.name=Beef And Celery Dumplings 
+tile.BeefAndCarrotDumplings.name=Beef And Carrot Dumplings 
+tile.PorkAndCeleryDumplings.name=Pork And Celery Dumplings
+tile.PorkAndCarrotDumplings.name=Pork And Carrot Dumplings 
+tile.ABowlOfCarrotDumplings.name=ABowl Of Carrot Dumplings 
+tile.ABowlOfCeleryDumplings.name=ABowl Of Celery Dumplings
+tile.ABowlOfBeefDumplings.name=ABowl Of Beef Dumplings
+tile.ABowlOfPorkDumplings.name=ABowl Of Pork Dumplings 
+tile.ABowlOfBeefAndCeleryDumplings.name=A Bowl Of Beef And Celery Dumplings
+tile.ABowlOfBeefAndCarrotDumplings.name=A Bowl Of Beef And Carrot Dumplings
+tile.ABowlOfPorkAndCeleryDumplings.name=A Bowl Of Pork And Celery Dumplings 
+tile.ABowlOfPorkAndCarrotDumplings.name=A Bowl Of Pork And Carrot Dumplings
+tile.BeefFriedDumplings.name=Beef Fried Dumplings 
+tile.PorkFriedDumplings.name=Pork Fried Dumplings
+tile.CarrotiletAndPorkFriedDumplings.name=Carrot And Pork Fried Dumplings  
+tile.CeleryAndPorkFriedDumplings.name=Celery And Pork Fried Dumplings
+tile.CarrotAndBeefFriedDumplings.name=Carrot And Beef Fried Dumplings 
+tile.CeleryAndBeefFriedDumplings.name=Celery And BeefFried Dumplings 
+tile.RedBeanPasteStickyRiceBalls.name=Red Bean PasteSticky Rice Balls  
+tile.WriteSesameStickyRiceBalls.name=Write Sesame Sticky Rice Balls
+tile.BlackSesameStickyRiceBalls.name=Black Sesame Sticky Rice Balls
+tile.SugerStickyRiceBalls.name=Suger Sticky RiceBalls
+tile.WhiteFlapjack.name=White Flapjack
+tile.SweetFlapjack.name=Sweet Flapjack
+tile.SaltyFlapjack.name=Salty Flapjack
+tile.DoubleFlapjack.name=Double Flapjack
+tile.DoubleWhiteFlapjack.name=Double White Flapjack
+tile.DoubleSugerFlapjack.name=Double Suger Flapjack
+tile.DoubleSaltyFlapjack.name=DoubleSalty Flapjack
+tile.PorkChineseHamburger.name=Pork Chinese Hamburger
+tile.BeefChineseHamburger.name=Beef Chinese Hamburger
+tile.BeefWonton.name=Beef Wonton
+tile.PorkWonton.name=Pork Wonton
+tile.ABowlOfBeefWonton.name=A Bowl Of Beef Wonton
+tile.ABowlOfPorkWonton.name=A Bowl Of Pork Wonton
+tile.PumpkinMoonCake.name=Pumpkin Moon Cake
+tile.SaltyYolkMoonCake.name=SaltyYolk MoonCake
+
