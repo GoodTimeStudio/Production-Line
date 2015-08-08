@@ -149,7 +149,7 @@ public class GtiItems implements IFuelHandler {
 	public static Item celeryAndBeefFriedDumplings;
 
 	//Sticky Rice balls
-	public static Item redBeanPasteGStickyRiceBalls;
+	public static Item redBeanPasteStickyRiceBalls;
 	public static Item writeSesameStickyRiceBalls;
 	public static Item blackSesameStickyRiceBalls;
 	public static Item sugerStickyRiceBalls;
