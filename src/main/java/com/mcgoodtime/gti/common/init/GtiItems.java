@@ -101,6 +101,11 @@ public class GtiItems implements IFuelHandler {
 	public static Item millWheel;
 
 	// Food
+	
+	
+	//tools
+	public static Item rollingPin;
+	
 
 	// Ingredients
 	public static Item saltyYolk;
@@ -178,6 +183,7 @@ public class GtiItems implements IFuelHandler {
 	public static Item saltyYolkMoonCake;
 
 	public static void init() {
+		
     	roller = new ItemGti("Roller", true);
     	heatInsulationPlate = new ItemGti("HeatInsulationPlate");
         heatInsulationMaterial = new ItemGti("HeatInsulationMaterial");
@@ -225,6 +231,7 @@ public class GtiItems implements IFuelHandler {
         millWheel = new ItemGti("MillWheel");
         
         //Food registry
+        rollingPin = new ItemGti("RollingPin");
         saltyYolk = new ItemGtiFood("SaltyYolk");
         saltyEgg = new ItemGtiFood("SaltyEgg");
         celery = new ItemGtiFood("Celery");

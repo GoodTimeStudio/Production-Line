@@ -38,7 +38,8 @@ tile.DehydratedWaterHyacinthBlock.name=Dehydrated Water Hyacinth Block
 tile.SmallCompressedWaterHyacinth.name=Small Compressed Water Hyacinth
 
 //---Food
-tile.SaltyYolkSalty Yolk
+tile.RollingPin.name=Rolling Pin
+tile.SaltyYolk.name=Salty Yolk
 tile.SaltyEgg.name=Salty Egg  
 tile.RedBean.name=Red Bean
 tile.WhiteSesame.name=White Sesame

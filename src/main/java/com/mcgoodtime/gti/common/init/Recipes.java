@@ -63,6 +63,21 @@ public class Recipes {
                 'D', IC2Items.getItem("electroFurnace"),
                 'E', IC2Items.getItem("plateiron")
         );
+        GameRegistry.addRecipe(new ItemStack(GtiItems.whiteSesame,64),
+        		"AB",
+        		'A',Items.milk_bucket,
+        		'B',new ItemStack(GtiItems.blackSesame,64));
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.saltyEgg),
+        		"AB",
+        		'A',Items.egg,
+        		'B',GtiItems.salt
+        );
+        GameRegistry.addRecipe(new ItemStack(GtiItems.saltyYolk),
+        		"A",
+        		'A',GtiItems.saltyEgg
+        );
+        
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.roller),
                 " A",
@@ -439,7 +454,7 @@ public class Recipes {
 
     /**
      * Disable recipes.
-     * @param itemStack Disable all recipes of this item. 禁用这个物品的所有合成
+     * @param itemStack Disable all recipes of this item. 绂佺敤杩欎釜鐗╁搧鐨勬墍鏈夊悎鎴�
      */
     public static void disableRecipes(ItemStack itemStack) {
         List<IRecipe> recipeList = CraftingManager.getInstance().getRecipeList();
