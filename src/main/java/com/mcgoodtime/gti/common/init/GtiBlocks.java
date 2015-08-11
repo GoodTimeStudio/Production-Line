@@ -26,11 +26,15 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.blocks.*;
 import com.mcgoodtime.gti.common.core.GtiConfig;
+import com.mcgoodtime.gti.common.items.ItemRedBean;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
+
 import org.apache.logging.log4j.Level;
 
 /**
@@ -39,6 +43,7 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
+	public static Block redBean;
 	public static Block dehydratedWaterHyacinthblock;
 	public static Block compressedWaterHyacinth;
     public static Block waterHyacinth;
@@ -57,14 +62,18 @@ public class GtiBlocks {
         litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(Material.iron, "lit_CarbonizeFurnace", true);
 
         // special registry TODO: Better registry system
+        redBean = new BlockRedBean(); 
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
         evsu = new BlockEVSU();
-
+        
+        
+        GameRegistry.registerBlock(redBean, ItemRedBean.class, "RedBean" );
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(genGasKU, "GenGasKu");
         GameRegistry.registerBlock(evsu, "EVSU");
-
+        
+        GtiConfig.gtiLogger.log(Level.INFO, "redbean" + Integer.toString(Block.getIdFromBlock(redBean)));
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
         GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
         GtiConfig.gtiLogger.log(Level.INFO, "carbonizefurnace" + Integer.toString(Block.getIdFromBlock(carbonizeFurnace)));

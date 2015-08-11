@@ -63,10 +63,16 @@ public class Recipes {
                 'D', IC2Items.getItem("electroFurnace"),
                 'E', IC2Items.getItem("plateiron")
         );
-        GameRegistry.addRecipe(new ItemStack(GtiItems.whiteSesame,64),
+        GameRegistry.addRecipe(new ItemStack(GtiItems.whiteSesame),
         		"AB",
-        		'A',Items.milk_bucket,
-        		'B',new ItemStack(GtiItems.blackSesame,64));
+        		'A',new ItemStack(Items.dye,1,0),
+        		'B',GtiItems.blackSesame
+        );
+        GameRegistry.addRecipe(new ItemStack(GtiItems.dough),
+        		"AB",
+        		'A',IC2Items.getItem("Flour"),
+        		'B',Items.water_bucket
+        );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.saltyEgg),
         		"AB",
