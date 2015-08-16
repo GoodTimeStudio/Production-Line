@@ -24,7 +24,6 @@
  */
 package com.mcgoodtime.gti.common.items.tools;
 
-import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import ic2.api.item.IBoxable;
 import ic2.core.IC2;
@@ -33,7 +32,6 @@ import ic2.core.audio.PositionSpec;
 import ic2.core.block.TileEntityBarrel;
 import ic2.core.util.StackUtil;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -55,11 +53,11 @@ public class ItemGtiTreetap extends ItemGti implements IBoxable {
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float xOffset, float yOffset, float zOffset) {
         Block block = world.getBlock(x, y, z);
-        if(StackUtil.equals(block, Ic2Items.blockBarrel)) {
+        if (StackUtil.equals(block, Ic2Items.blockBarrel)) {
             return ((TileEntityBarrel)world.getTileEntity(x, y, z)).useTreetapOn(entityplayer, side);
-        } else if(Ic2Items.rubberWood != null && StackUtil.equals(block, Ic2Items.rubberWood)) {
+        } else if (Ic2Items.rubberWood != null && StackUtil.equals(block, Ic2Items.rubberWood)) {
             attemptExtract(entityplayer, world, x, y, z, side, null);
-            if(IC2.platform.isSimulating()) {
+            if (IC2.platform.isSimulating()) {
                 itemstack.damageItem(1, entityplayer);
             }
 
@@ -152,7 +150,7 @@ public class ItemGtiTreetap extends ItemGti implements IBoxable {
 
     @Override
     public String getTextureFolder() {
-        return"tools/";
+        return "tools/";
     }
 
 }

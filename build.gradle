@@ -120,5 +120,5 @@ class ChangeBuildNumTask extends DefaultTask {
     }
 }
 
-task changeBuildNum(type:ChangeBuildNumTask)
+task changeBuildNum(type: ChangeBuildNumTask)
 tasks.jar.dependsOn "check"

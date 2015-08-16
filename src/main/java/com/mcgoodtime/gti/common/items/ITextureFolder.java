@@ -1,4 +1,4 @@
-package com.mcgoodtime.gti;
+package com.mcgoodtime.gti.common.items;
 
 /**
  * Created by suhao on 2015.7.23.

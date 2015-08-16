@@ -1,12 +1,17 @@
 package com.mcgoodtime.gti.common.items;
 
-import com.mcgoodtime.gti.ITextureFolder;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
-public class ItemGtiFood extends ItemGti implements ITextureFolder{
+public class ItemGtiFood extends ItemGti implements ITextureFolder {
 
 	public ItemGtiFood(String name) {
 		super(name);
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êý´æ¸ù
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 
+	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
+		return stack;
+	}
 }
