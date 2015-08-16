@@ -36,7 +36,7 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiCarbonizeFurnace<T extends TileCarbonizeFurnace> extends GuiContainer {
+public class GuiCarbonizeFurnace extends GuiContainer {
     public ContainerCarbonizeFurnace container;
     public String name;
     private static final ResourceLocation background = new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/client/gui/GuiCarbonizeFurnace.png");;

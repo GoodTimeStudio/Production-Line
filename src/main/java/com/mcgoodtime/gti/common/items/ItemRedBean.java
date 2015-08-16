@@ -14,52 +14,14 @@ import net.minecraft.world.World;
 
 public class ItemRedBean extends ItemColored {
 
-	public ItemRedBean(Block block) {
-		super(block, false);
-		this.setUnlocalizedName("gti.item.RedBean");
-	}
+    public ItemRedBean(Block block) {
+        super(block, true);
+        this.setUnlocalizedName("gti.item.RedBean");
+    }
 
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack itemStack, int damage) {
-		return GtiBlocks.redBean.getRenderColor(itemStack.getItemDamage());
-	}	
-		
-		 public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-		        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, player, true);
-		        if (movingobjectposition == null) {
-		            return itemStack;
-		        } else {
-		            if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-		                int i = movingobjectposition.blockX;
-		                int j = movingobjectposition.blockY;
-		                int k = movingobjectposition.blockZ;
-
-		                if (!world.canMineBlock(player, i, j, k)) {
-		                    return itemStack;
-		                }
-
-		                if (!player.canPlayerEdit(i, j, k, movingobjectposition.sideHit, itemStack)) {
-		                    return itemStack;
-		                }
-
-		                if (world.getBlock(i, j, k).getMaterial() == Material.clay && world.getBlockMetadata(i, j, k) == 0
-		                        && world.isAirBlock(i, j + 1, k)) {
-		                    // special case for handling block placement with water lilies, moved to water hyacinth
-		                    net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util
-		                            .BlockSnapshot.getBlockSnapshot(world, i, j + 1, k);
-		                    world.setBlock(i, j + 1, k, GtiBlocks.redBean);
-		                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(player, blocksnapshot,
-		                            net.minecraftforge.common.util.ForgeDirection.UP).isCanceled()) {
-		                        blocksnapshot.restore(true, false);
-		                        return itemStack;
-		                    }
-
-		                    if (!player.capabilities.isCreativeMode) {
-		                        itemStack.stackSize -- ;
-		                    }
-		                }
-		            }
-		            return itemStack;
-	      }
-	 }
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getColorFromItemStack(ItemStack itemStack, int damage) {
+        return GtiBlocks.redBean.getRenderColor(itemStack.getItemDamage());
+    }
 }

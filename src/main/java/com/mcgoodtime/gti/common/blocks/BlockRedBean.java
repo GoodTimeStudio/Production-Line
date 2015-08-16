@@ -38,14 +38,10 @@ public class BlockRedBean extends BlockBush {
 	}
 
 	public void updateTick(World world, int x, int y, int z, Random rand) {
-		int changedX = rand.nextInt(5) - 3 + x;
-		int changedZ = rand.nextInt(5) - 3 + z;
-		if ((world.isAirBlock(changedX, y, changedZ))
-				&& (canPlaceBlockOn(world.getBlock(changedX, y - 1, changedZ)))) {
-			world.setBlock(x + changedX, y, z + changedZ, this);
-		}
+		super.updateTick(world, x, y, z, rand);
 	}
 
+	@Override
 	protected boolean canPlaceBlockOn(Block placedOn) {
 		return placedOn == Blocks.clay;
 	}
@@ -57,6 +53,7 @@ public class BlockRedBean extends BlockBush {
 				&& world.getBlockMetadata(x, y - 1, z) == 0;
 	}
 
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x,
 			int y, int z) {
 		return AxisAlignedBB.getBoundingBox((double) x + this.minX, (double) y
