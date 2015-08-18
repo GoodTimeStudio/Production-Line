@@ -43,6 +43,7 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
+	public static Block whiteSesame;
 	public static Block redBean;
 	public static Block dehydratedWaterHyacinthblock;
 	public static Block compressedWaterHyacinth;
