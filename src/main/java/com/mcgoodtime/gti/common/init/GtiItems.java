@@ -111,10 +111,7 @@ public class GtiItems implements IFuelHandler {
 	public static Item saltyYolk;
 	public static Item saltyEgg;
 	public static Item celery;
-	public static Item redBean;
-	public static Item whiteSesame;
 	public static Item blackSesame;
-	public static Item stickyRice;
 	public static Item wheatFlour;
 
 	// Processed ingredients
@@ -155,7 +152,7 @@ public class GtiItems implements IFuelHandler {
 
 	//Sticky Rice balls
 	public static Item redBeanPasteStickyRiceBalls;
-	public static Item writeSesameStickyRiceBalls;
+	public static Item whiteSesameStickyRiceBalls;
 	public static Item blackSesameStickyRiceBalls;
 	public static Item sugerStickyRiceBalls;
 
@@ -235,10 +232,7 @@ public class GtiItems implements IFuelHandler {
         saltyYolk = new ItemGtiFood("SaltyYolk");
         saltyEgg = new ItemGtiFood("SaltyEgg");
         celery = new ItemGtiFood("Celery");
-        redBean = new ItemGtiFood("RedBean");
-        whiteSesame	= new ItemGtiFood("WhiteSesame");
         blackSesame = new ItemGtiFood("BlackSesame");
-        stickyRice = new ItemGtiFood("StickyRice");
         wheatFlour = new ItemGtiFood("WheatFlour");
         dough = new ItemGtiFood("Dough");
         stickyRiceFlour = new ItemGtiFood("StickyRiceFlour");
@@ -271,7 +265,7 @@ public class GtiItems implements IFuelHandler {
         carrotAndBeefFriedDumplings = new ItemGtiFood("CarrotAndBeefFriedDumplings");
         celeryAndBeefFriedDumplings = new ItemGtiFood("CeleryAndBeefFriedDumplings");
         redBeanPasteStickyRiceBalls = new ItemGtiFood("RedBeanPasteStickyRiceBalls");
-        writeSesameStickyRiceBalls = new ItemGtiFood("WriteSesameStickyRiceBalls");
+        whiteSesameStickyRiceBalls = new ItemGtiFood("WriteSesameStickyRiceBalls");
         blackSesameStickyRiceBalls = new ItemGtiFood("BlackSesameStickyRiceBalls");
         sugerStickyRiceBalls = new ItemGtiFood("SugerStickyRiceBalls");
         whiteFlapjack = new ItemGtiFood("WhiteFlapjack");
@@ -295,6 +289,7 @@ public class GtiItems implements IFuelHandler {
         
 
         // special registry TODO: Better registry system
+ 
         diamondApple = new ItemFood(1005, 10F, false) {
             @Override
             protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) {

@@ -27,7 +27,9 @@ package com.mcgoodtime.gti.common.init;
 import com.mcgoodtime.gti.common.blocks.*;
 import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.items.ItemRedBean;
+import com.mcgoodtime.gti.common.items.ItemStickyRice;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
+import com.mcgoodtime.gti.common.items.ItemWhiteSesame;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -43,6 +45,7 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
+	public static Block stickyRice;
 	public static Block whiteSesame;
 	public static Block redBean;
 	public static Block dehydratedWaterHyacinthblock;
@@ -63,17 +66,23 @@ public class GtiBlocks {
         litCarbonizeFurnace = new BlockCarbonizeFurnace.BlockLitCarbonizeFurnace(Material.iron, "lit_CarbonizeFurnace", true);
 
         // special registry TODO: Better registry system
+        
+        stickyRice = new BlockStickyRice();
+        whiteSesame = new BlockWhiteSesame();
         redBean = new BlockRedBean(); 
         waterHyacinth = new BlockWaterHyacinth();
         genGasKU = new GenGasKu();
         evsu = new BlockEVSU();
         
-        
+        GameRegistry.registerBlock(stickyRice, ItemStickyRice.class, "StickyRice");
+        GameRegistry.registerBlock(whiteSesame, ItemWhiteSesame.class, "WhiteSesame");
         GameRegistry.registerBlock(redBean, ItemRedBean.class, "RedBean" );
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(genGasKU, "GenGasKu");
         GameRegistry.registerBlock(evsu, "EVSU");
         
+        GtiConfig.gtiLogger.log(Level.INFO, "stickyRice" + Integer.toString(Block.getIdFromBlock(stickyRice)));
+        GtiConfig.gtiLogger.log(Level.INFO, "whiteSesame" + Integer.toString(Block.getIdFromBlock(whiteSesame)));
         GtiConfig.gtiLogger.log(Level.INFO, "redbean" + Integer.toString(Block.getIdFromBlock(redBean)));
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
         GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));

@@ -63,7 +63,7 @@ public class Recipes {
                 'D', IC2Items.getItem("electroFurnace"),
                 'E', IC2Items.getItem("plateiron")
         );
-        GameRegistry.addRecipe(new ItemStack(GtiItems.whiteSesame),
+        GameRegistry.addRecipe(new ItemStack(GtiBlocks.whiteSesame),
         		"AB",
         		'A',new ItemStack(Items.dye,1,0),
         		'B',GtiItems.blackSesame
@@ -83,7 +83,6 @@ public class Recipes {
         		"A",
         		'A',GtiItems.saltyEgg
         );
-        
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.roller),
                 " A",
@@ -396,6 +395,11 @@ public class Recipes {
         		new RecipeInputItemStack(new ItemStack(GtiBlocks.waterHyacinth, 8)),
         		null,
         		new ItemStack(GtiItems.smallCompressedWaterHyacinth)
+        );
+        ic2.api.recipe.Recipes.metalformerCutting.addRecipe(
+        		new RecipeInputItemStack(new ItemStack(GtiBlocks.stickyRice)), 
+        		null,
+        		new ItemStack(GtiItems.stickyRiceFlour)
         );
         ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
                 new RecipeInputItemStack(new ItemStack(Items.diamond)),
