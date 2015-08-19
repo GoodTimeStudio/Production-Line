@@ -63,13 +63,17 @@ public class Recipes {
                 'D', IC2Items.getItem("electroFurnace"),
                 'E', IC2Items.getItem("plateiron")
         );
-        GameRegistry.addRecipe(new ItemStack(GtiBlocks.whiteSesame),
-        		"AB",
+        GameRegistry.addRecipe(new ItemStack(GtiItems.whiteSesame,8),
+        		"BBB",
+        		"BAB",
+        		"BBB",
         		'A',new ItemStack(Items.dye,1,0),
-        		'B',GtiItems.blackSesame
+        		'B',GtiBlocks.blackSesame
         );
-        GameRegistry.addRecipe(new ItemStack(GtiItems.dough),
-        		"AB",
+        GameRegistry.addRecipe(new ItemStack(GtiItems.dough,4),
+        		"AAA",
+        		"ABA",
+        		"AAA",
         		'A',IC2Items.getItem("Flour"),
         		'B',Items.water_bucket
         );
@@ -79,10 +83,77 @@ public class Recipes {
         		'A',Items.egg,
         		'B',GtiItems.salt
         );
-        GameRegistry.addRecipe(new ItemStack(GtiItems.saltyYolk),
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.saltyYolk),
         		"A",
         		'A',GtiItems.saltyEgg
         );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.rollingPin),
+        		"A",
+        		'A',Items.stick
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.stickyRiceBalls,4),
+        		"BBB",
+        		"BAB",
+        		"BBB",
+                'A', Items.water_bucket,
+        		'B',GtiItems.stickyRiceFlour
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.redBeanPaste,2),
+        		"CCC",
+        		"CAB",
+        		"CCC",
+        		'A',Items.water_bucket,
+        		'B',Items.sugar,
+        		'C',GtiItems.redBeanPowder
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.bread),
+        		"AAB",
+        		'A',GtiItems.dough,
+        		'B',GtiItems.rollingPin
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.dumplingSkin,4),
+        		"AB",
+        		'A',GtiItems.bread,
+        		'B',GtiItems.rollingPin
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.thinSkinned,2), 
+        		"AB",
+        		'A',GtiItems.dumplingSkin,
+        		'B',GtiItems.rollingPin
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.pumpkinBlock,4), 
+        		"A",
+        		'A',Blocks.pumpkin
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.carrotDumplings,2),
+        		"AB",
+        		"A",
+        		'A',Items.carrot,
+        		'B',GtiItems.dumplingSkin
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.aBowlOfCarrotDumplings),
+        		"AAB",
+        		'A',GtiItems.carrotDumplings,
+        		'B',Items.bowl
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.celeryDumplings,2),
+        		"AB",
+        		"A",
+        		'A',GtiItems.celery,
+        		'B',GtiItems.dumplingSkin
+        );
+        
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.roller),
                 " A",
@@ -395,6 +466,11 @@ public class Recipes {
         		new RecipeInputItemStack(new ItemStack(GtiBlocks.waterHyacinth, 8)),
         		null,
         		new ItemStack(GtiItems.smallCompressedWaterHyacinth)
+        );
+        ic2.api.recipe.Recipes.metalformerCutting.addRecipe(
+        		new RecipeInputItemStack(new ItemStack(GtiBlocks.redBean)), 
+        		null,
+        		new ItemStack(GtiItems.redBeanPowder)
         );
         ic2.api.recipe.Recipes.metalformerCutting.addRecipe(
         		new RecipeInputItemStack(new ItemStack(GtiBlocks.stickyRice)), 

@@ -106,15 +106,14 @@ public class GtiItems implements IFuelHandler {
 	//tools
 	public static Item rollingPin;
 	
-
 	// Ingredients
 	public static Item saltyYolk;
 	public static Item saltyEgg;
-	public static Item celery;
-	public static Item blackSesame;
+	public static Item whiteSesame;
 	public static Item wheatFlour;
 
 	// Processed ingredients
+	public static Item redBeanPowder;
 	public static Item dough;
 	public static Item stickyRiceFlour;
 	public static Item stickyRiceBalls;
@@ -155,7 +154,12 @@ public class GtiItems implements IFuelHandler {
 	public static Item whiteSesameStickyRiceBalls;
 	public static Item blackSesameStickyRiceBalls;
 	public static Item sugerStickyRiceBalls;
-
+	public static Item aBowlOfRedBeanPasteStickyRiceBalls;
+	public static Item aBowlOfWhiteSesameStickyRiceBalls;
+	public static Item aBowlOfBlackSesameStickyRiceBalls;
+	public static Item aBowlOfSugerStickyRiceBalls;
+	
+	
 	// Flapjack
 	public static Item whiteFlapjack;
 	public static Item sweetFlapjack;
@@ -228,28 +232,28 @@ public class GtiItems implements IFuelHandler {
         millWheel = new ItemGti("MillWheel");
         
         //Food registry
-        rollingPin = new ItemGti("RollingPin");
+        rollingPin = new ItemGtiTreetap("RollingPin",64);
         saltyYolk = new ItemGtiFood("SaltyYolk");
         saltyEgg = new ItemGtiFood("SaltyEgg");
-        celery = new ItemGtiFood("Celery");
-        blackSesame = new ItemGtiFood("BlackSesame");
+        whiteSesame = new ItemGtiFood("BlackSesame");
         wheatFlour = new ItemGtiFood("WheatFlour");
-        dough = new ItemGtiFood("Dough");
-        stickyRiceFlour = new ItemGtiFood("StickyRiceFlour");
-        stickyRiceBalls = new ItemGtiFood("StickyRiceBalls");
+        dough = new ItemGti("Dough");
+        stickyRiceFlour = new ItemGti("StickyRiceFlour");
+        stickyRiceBalls = new ItemGti("StickyRiceBalls");
+        redBeanPowder = new ItemGti("RedBeanPowder");
         redBeanPaste = new ItemGtiFood("RedBeanPaste");
-        dumplingSkin = new ItemGtiFood("DumplingSkin");
-        bread = new ItemGtiFood("Bread");
-        thinSkinned = new ItemGtiFood("ThinSkinned");
-        pumpkinBlock = new ItemGtiFood("PumpkinBlock");
-        carrotDumplings = new ItemGtiFood("CarrotDumplings");
-        celeryDumplings = new ItemGtiFood("CeleryDumplings");
-        beefDumplings = new ItemGtiFood("BeefDumplings");
-        porkDumplings = new ItemGtiFood("PorkDumplings");
-        beefAndCeleryDumplings = new ItemGtiFood("BeefAndCeleryDumplings");
-        beefAndCarrotDumplings = new ItemGtiFood("BeefAndCarrotDumplings");
-        porkAndCeleryDumplings = new ItemGtiFood("PorkAndCeleryDumplings");
-        porkAndCarrotDumplings = new ItemGtiFood("PorkAndCarrotDumplings");
+        dumplingSkin = new ItemGti("DumplingSkin");
+        bread = new ItemGti("Bread");
+        thinSkinned = new ItemGti("ThinSkinned");
+        pumpkinBlock = new ItemGti("PumpkinBlock");
+        carrotDumplings = new ItemGti("CarrotDumplings");
+        celeryDumplings = new ItemGti("CeleryDumplings");
+        beefDumplings = new ItemGti("BeefDumplings");
+        porkDumplings = new ItemGti("PorkDumplings");
+        beefAndCeleryDumplings = new ItemGti("BeefAndCeleryDumplings");
+        beefAndCarrotDumplings = new ItemGti("BeefAndCarrotDumplings");
+        porkAndCeleryDumplings = new ItemGti("PorkAndCeleryDumplings");
+        porkAndCarrotDumplings = new ItemGti("PorkAndCarrotDumplings");
         aBowlOfCarrotDumplings = new ItemGtiFood("ABowlOfCarrotDumplings");
         aBowlOfCeleryDumplings = new ItemGtiFood("ABowlOfCeleryDumplings");
         aBowlOfBeefDumplings = new ItemGtiFood("ABowlOfBeefDumplings");
@@ -264,10 +268,14 @@ public class GtiItems implements IFuelHandler {
         celeryAndPorkFriedDumplings = new ItemGtiFood("CeleryAndPorkFriedDumplings");
         carrotAndBeefFriedDumplings = new ItemGtiFood("CarrotAndBeefFriedDumplings");
         celeryAndBeefFriedDumplings = new ItemGtiFood("CeleryAndBeefFriedDumplings");
-        redBeanPasteStickyRiceBalls = new ItemGtiFood("RedBeanPasteStickyRiceBalls");
-        whiteSesameStickyRiceBalls = new ItemGtiFood("WriteSesameStickyRiceBalls");
-        blackSesameStickyRiceBalls = new ItemGtiFood("BlackSesameStickyRiceBalls");
-        sugerStickyRiceBalls = new ItemGtiFood("SugerStickyRiceBalls");
+        redBeanPasteStickyRiceBalls = new ItemGti("RedBeanPasteStickyRiceBalls");
+        whiteSesameStickyRiceBalls = new ItemGti("WriteSesameStickyRiceBalls");
+        blackSesameStickyRiceBalls = new ItemGti("BlackSesameStickyRiceBalls");
+        sugerStickyRiceBalls = new ItemGti("SugerStickyRiceBalls");
+        aBowlOfRedBeanPasteStickyRiceBalls = new ItemGtiFood("ABowlOfRedBeanPasteStickyRiceBalls");
+        aBowlOfWhiteSesameStickyRiceBalls = new ItemGtiFood("ABowlOfWhiteSesameStickyRiceBalls");
+        aBowlOfBlackSesameStickyRiceBalls = new ItemGtiFood("ABowlOfBlackSesameStickyRiceBalls");
+        aBowlOfSugerStickyRiceBalls = new ItemGtiFood("ABowlOfSugerStickyRiceBalls");
         whiteFlapjack = new ItemGtiFood("WhiteFlapjack");
         sweetFlapjack = new ItemGtiFood("SweetFlapjack");
         saltyFlapjack = new ItemGtiFood("SaltyFlapjack");

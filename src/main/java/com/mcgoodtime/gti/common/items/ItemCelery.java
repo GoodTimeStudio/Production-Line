@@ -12,15 +12,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class ItemWhiteSesame extends ItemColored {
+public class ItemCelery extends ItemColored{
 
-	public ItemWhiteSesame(Block block) {
-		super(block, false);
+	public ItemCelery(Block block) {
+		super(block,false);
+		
 	}
-
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack itemStack, int damage) {
-		return GtiBlocks.whiteSesame.getRenderColor(itemStack.getItemDamage());
+		return GtiBlocks.celery.getRenderColor(itemStack.getItemDamage());
 	}
 
 	public ItemStack onItemRightClick(ItemStack itemStack, World world,
@@ -51,7 +51,7 @@ public class ItemWhiteSesame extends ItemColored {
 					// lilies, moved to water hyacinth
 					net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot
 							.getBlockSnapshot(world, i, j + 1, k);
-					world.setBlock(i, j + 1, k, GtiBlocks.whiteSesame);
+					world.setBlock(i, j + 1, k, GtiBlocks.celery);
 					if (net.minecraftforge.event.ForgeEventFactory
 							.onPlayerBlockPlace(
 									player,
@@ -71,3 +71,4 @@ public class ItemWhiteSesame extends ItemColored {
 		}
 	}
 }
+

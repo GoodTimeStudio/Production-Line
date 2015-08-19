@@ -19,8 +19,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockWhiteSesame extends BlockBush{
-	public BlockWhiteSesame() {
+public class BlockBlackSesame extends BlockBush{
+	public BlockBlackSesame() {
 		super(Material.plants);
 		this.setBlockName("Gti.Block.WhiteSesame");
 		this.setCreativeTab(creativeTabGti);
