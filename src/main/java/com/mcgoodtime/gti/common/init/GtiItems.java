@@ -105,6 +105,7 @@ public class GtiItems implements IFuelHandler {
 	
 	//tools
 	public static Item rollingPin;
+	public static Item fryingPan;
 	
 	// Ingredients
 	public static Item saltyYolk;
@@ -113,6 +114,7 @@ public class GtiItems implements IFuelHandler {
 	public static Item wheatFlour;
 
 	// Processed ingredients
+	public static Item seedOil;
 	public static Item redBeanPowder;
 	public static Item dough;
 	public static Item stickyRiceFlour;
@@ -126,24 +128,18 @@ public class GtiItems implements IFuelHandler {
 	// Dumplings
 	public static Item carrotDumplings;
 	public static Item celeryDumplings;
-	public static Item beefDumplings;
-	public static Item porkDumplings;
 	public static Item beefAndCeleryDumplings;
 	public static Item beefAndCarrotDumplings;
 	public static Item porkAndCeleryDumplings;
 	public static Item porkAndCarrotDumplings;
 	public static Item aBowlOfCarrotDumplings;
 	public static Item aBowlOfCeleryDumplings;
-	public static Item aBowlOfBeefDumplings;
-	public static Item aBowlOfPorkDumplings;
 	public static Item aBowlOfBeefAndCeleryDumplings;
 	public static Item aBowlOfBeefAndCarrotDumplings;
 	public static Item aBowlOfPorkAndCeleryDumplings;
 	public static Item aBowlOfPorkAndCarrotDumplings;
 
 	// Fried dumplings
-	public static Item beefFriedDumplings;
-	public static Item porkFriedDumplings;
 	public static Item carrotAndPorkFriedDumplings;
 	public static Item celeryAndPorkFriedDumplings;
 	public static Item carrotAndBeefFriedDumplings;
@@ -232,6 +228,8 @@ public class GtiItems implements IFuelHandler {
         millWheel = new ItemGti("MillWheel");
         
         //Food registry
+        seedOil = new ItemGti("SeedOil");
+        fryingPan = new ItemGtiTreetap("FryingPan",64);
         rollingPin = new ItemGtiTreetap("RollingPin",64);
         saltyYolk = new ItemGtiFood("SaltyYolk");
         saltyEgg = new ItemGtiFood("SaltyEgg");
@@ -248,22 +246,16 @@ public class GtiItems implements IFuelHandler {
         pumpkinBlock = new ItemGti("PumpkinBlock");
         carrotDumplings = new ItemGti("CarrotDumplings");
         celeryDumplings = new ItemGti("CeleryDumplings");
-        beefDumplings = new ItemGti("BeefDumplings");
-        porkDumplings = new ItemGti("PorkDumplings");
         beefAndCeleryDumplings = new ItemGti("BeefAndCeleryDumplings");
         beefAndCarrotDumplings = new ItemGti("BeefAndCarrotDumplings");
         porkAndCeleryDumplings = new ItemGti("PorkAndCeleryDumplings");
         porkAndCarrotDumplings = new ItemGti("PorkAndCarrotDumplings");
         aBowlOfCarrotDumplings = new ItemGtiFood("ABowlOfCarrotDumplings");
         aBowlOfCeleryDumplings = new ItemGtiFood("ABowlOfCeleryDumplings");
-        aBowlOfBeefDumplings = new ItemGtiFood("ABowlOfBeefDumplings");
-        aBowlOfPorkDumplings = new ItemGtiFood("ABowlOfPorkDumplings");
         aBowlOfBeefAndCeleryDumplings = new ItemGtiFood("ABowlOfBeefAndCeleryDumplings");
         aBowlOfBeefAndCarrotDumplings = new ItemGtiFood("ABowlOfBeefAndCarrotDumplings");
         aBowlOfPorkAndCeleryDumplings = new ItemGtiFood("ABowlOfPorkAndCeleryDumplings");
         aBowlOfPorkAndCarrotDumplings = new ItemGtiFood("ABowlOfPorkAndCarrotDumplings");
-        beefFriedDumplings = new ItemGtiFood("BeefFriedDumplings");
-        porkFriedDumplings = new ItemGtiFood("PorkFriedDumplings");
         carrotAndPorkFriedDumplings = new ItemGtiFood("CarrotAndPorkFriedDumplings");
         celeryAndPorkFriedDumplings = new ItemGtiFood("CeleryAndPorkFriedDumplings");
         carrotAndBeefFriedDumplings = new ItemGtiFood("CarrotAndBeefFriedDumplings");
