@@ -149,7 +149,7 @@ public class GtiItems implements IFuelHandler {
 	public static Item redBeanPasteStickyRiceBalls;
 	public static Item whiteSesameStickyRiceBalls;
 	public static Item blackSesameStickyRiceBalls;
-	public static Item sugerStickyRiceBalls;
+	public static Item sugarStickyRiceBalls;
 	public static Item aBowlOfRedBeanPasteStickyRiceBalls;
 	public static Item aBowlOfWhiteSesameStickyRiceBalls;
 	public static Item aBowlOfBlackSesameStickyRiceBalls;
@@ -263,7 +263,7 @@ public class GtiItems implements IFuelHandler {
         redBeanPasteStickyRiceBalls = new ItemGti("RedBeanPasteStickyRiceBalls");
         whiteSesameStickyRiceBalls = new ItemGti("WriteSesameStickyRiceBalls");
         blackSesameStickyRiceBalls = new ItemGti("BlackSesameStickyRiceBalls");
-        sugerStickyRiceBalls = new ItemGti("SugerStickyRiceBalls");
+        sugarStickyRiceBalls = new ItemGti("SugerStickyRiceBalls");
         aBowlOfRedBeanPasteStickyRiceBalls = new ItemGtiFood("ABowlOfRedBeanPasteStickyRiceBalls");
         aBowlOfWhiteSesameStickyRiceBalls = new ItemGtiFood("ABowlOfWhiteSesameStickyRiceBalls");
         aBowlOfBlackSesameStickyRiceBalls = new ItemGtiFood("ABowlOfBlackSesameStickyRiceBalls");

@@ -516,12 +516,95 @@ public class Recipes {
         		'A',Items.wheat_seeds
         );
         GameRegistry.addRecipe(
-        		new ItemStack(GtiItems.seedOil),
+        		new ItemStack(GtiItems.seedOil,2),
         		"AAA",
         		"AAA",
         		"AAA",
         		'A',Items.pumpkin_seeds
-);
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.fryingPan),
+        		"A",null,"A",
+        		"A",null,"A",
+        		null,"B",null,
+        		'A',Items.iron_ingot,
+        		'B',Items.stick
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.carrotAndBeefFriedDumplings),
+        		"ABC",
+        		'A',GtiItems.beefAndCarrotDumplings,
+        		'C',GtiItems.fryingPan,
+        		'B',GtiItems.seedOil
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.celeryAndBeefFriedDumplings), 
+        		"ABC",
+        		'A',GtiItems.beefAndCeleryDumplings,
+        		'C',GtiItems.fryingPan,
+        		'B',GtiItems.seedOil
+        );
+        GameRegistry.addRecipe(new ItemStack(GtiItems.carrotAndPorkFriedDumplings),
+        		"ABC",
+        		'A',GtiItems.porkAndCarrotDumplings,
+        		'B',GtiItems.seedOil,
+        		'C',GtiItems.fryingPan
+        );
+        GameRegistry.addRecipe(new ItemStack(GtiItems.celeryAndPorkFriedDumplings), 
+        		"ABC",
+        		'A',GtiItems.porkAndCeleryDumplings,
+        		'B',GtiItems.seedOil,
+        		'C',GtiItems.fryingPan
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.sugarStickyRiceBalls),
+        		"ABA",
+        		'A',GtiItems.stickyRiceBalls,
+        		'B',Items.sugar
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.redBeanPasteStickyRiceBalls), 
+        		"ABA",
+        		'A',GtiItems.stickyRiceBalls,
+        		'B',GtiItems.redBeanPaste
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.blackSesameStickyRiceBalls),
+        		"ABA",
+        		'A',GtiItems.stickyRiceBalls,
+        		'B',GtiBlocks.blackSesame
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.whiteSesameStickyRiceBalls), 
+        		"ABA",
+        		'A',GtiItems.stickyRiceBalls,
+        		'B',GtiItems.whiteSesame
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.aBowlOfBlackSesameStickyRiceBalls),
+        		"AAB",
+        		'A',GtiItems.blackSesameStickyRiceBalls,
+        		'B',Items.bowl
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.aBowlOfWhiteSesameStickyRiceBalls), 
+        		"AAB",
+        		'A',GtiItems.whiteSesameStickyRiceBalls,
+        		'B',Items.bowl
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.aBowlOfSugerStickyRiceBalls), 
+        		"AAB",
+        		'A',GtiItems.sugarStickyRiceBalls,
+        		'B',Items.bowl
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.aBowlOfRedBeanPasteStickyRiceBalls), 
+        		"AAB",
+        		'A',GtiItems.redBeanPasteStickyRiceBalls,
+        		'B',Items.bowl
+        );
+        
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, new ItemStack(GtiItems.ingotIridium), XP);
         GameRegistry.addSmelting(GtiItems.cleanedCrushedIridium, new ItemStack(GtiItems.ingotIridium), XP);
