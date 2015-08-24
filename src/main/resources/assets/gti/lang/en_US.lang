@@ -33,6 +33,10 @@ tile.gxyBlock.name=gxy Block
 //----Block
 tile.CompressedWaterHyacinth.name=Compressed Water Hyacinth
 tile.DehydratedWaterHyacinthBlock.name=Dehydrated Water Hyacinth Block
+tile.BlackSesame.name=Black Sesame
+tile.StickyRice.name=Sticky Rice
+tile.RedBean.name=Red Bean
+tile.Celery.name=Celery
 
 //---Item
 tile.SmallCompressedWaterHyacinth.name=Small Compressed Water Hyacinth
@@ -43,10 +47,7 @@ tile.FryingPan.name=Frying Pan
 tile.RollingPin.name=Rolling Pin
 tile.SaltyYolk.name=Salty Yolk
 tile.SaltyEgg.name=Salty Egg  
-tile.RedBean.name=Red Bean
 tile.WhiteSesame.name=White Sesame
-tile.BlackSesame.name=Black Sesame
-tile.StickyRice.name=Sticky Rice
 tile.WheatFlour.name=Wheat Flour 
 tile.Dough.name=Dough
 tile.StickyRiceFlour.name=Sticky RiceFlour 
@@ -85,8 +86,7 @@ tile.SweetFlapjack.name=Sweet Flapjack
 tile.SaltyFlapjack.name=Salty Flapjack
 tile.DoubleFlapjack.name=Double Flapjack
 tile.DoubleWhiteFlapjack.name=Double White Flapjack
-tile.DoubleSugerFlapjack.name=Double Suger Flapjack
-tile.DoubleSaltyFlapjack.name=DoubleSalty Flapjack
+tile.DoubleSaltyFlapjack.name=Double Salty Flapjack
 tile.PorkChineseHamburger.name=Pork Chinese Hamburger
 tile.BeefChineseHamburger.name=Beef Chinese Hamburger
 tile.BeefWonton.name=Beef Wonton

@@ -604,8 +604,80 @@ public class Recipes {
         		'A',GtiItems.redBeanPasteStickyRiceBalls,
         		'B',Items.bowl
         );
-        
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.sweetFlapjack),
+        		"AB",
+        		'A',GtiItems.whiteFlapjack,
+        		'B',Items.sugar
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.saltyFlapjack),
+        		"AB",
+        		'A',GtiItems.whiteFlapjack,
+        		'B',GtiItems.salt
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.doubleWhiteFlapjack),
+        		"AA",
+        		'A',GtiItems.whiteFlapjack
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.doubleSaltyFlapjack),
+        		"AA",
+        		'A',GtiItems.saltyFlapjack
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.beefChineseHamburger),
+        		"AB",
+        		'A',GtiItems.doubleSaltyFlapjack,
+        		'B',Items.cooked_beef
+        		
+        );
+        GameRegistry.addRecipe(new ItemStack(GtiItems.porkChineseHamburger),
+        		"AB",
+        		'A',GtiItems.doubleSaltyFlapjack,
+        		'B',Items.cooked_porkchop
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.beefWonton),
+        		"ABA",
+        		'A',GtiItems.thinSkinned,
+        		'B',Items.beef
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.aBowlOfBeefWonton),
+        		"AAB",
+        		'A',GtiItems.beefWonton,
+        		'B',Items.bowl
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.porkWonton),
+        		"ABA",
+        		'A',GtiItems.thinSkinned,
+        		'B',Items.porkchop
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.aBowlOfPorkWonton),
+        		"AAB",
+        		'A',GtiItems.porkWonton,
+        		'B',Items.bowl
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.saltyYolkMoonCake),
+        		"AAA",
+        		null,"B",null,
+        		'A',GtiItems.saltyYolk,
+        		'B',GtiItems.dough
+        );
+        GameRegistry.addRecipe(
+        		new ItemStack(GtiItems.pumpkinMoonCake),
+        		"AAA",
+        		null,"B",null,
+        		'A',GtiItems.pumpkinBlock,
+        		'B',GtiItems.dough
+        );
         //smelting registry
+        GameRegistry.addSmelting(GtiItems.bread, new ItemStack(GtiItems.whiteFlapjack), XP);
         GameRegistry.addSmelting(GtiBlocks.oreIridium, new ItemStack(GtiItems.ingotIridium), XP);
         GameRegistry.addSmelting(GtiItems.cleanedCrushedIridium, new ItemStack(GtiItems.ingotIridium), XP);
         GameRegistry.addSmelting(GtiItems.dustIridium, new ItemStack(GtiItems.ingotIridium), XP);

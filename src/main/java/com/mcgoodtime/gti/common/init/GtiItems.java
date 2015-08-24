@@ -162,7 +162,6 @@ public class GtiItems implements IFuelHandler {
 	public static Item saltyFlapjack;
 	public static Item doubleFlapjack;
 	public static Item doubleWhiteFlapjack;
-	public static Item doubleSugerFlapjack;
 	public static Item doubleSaltyFlapjack;
 
 	// Chinese hamburger
@@ -273,12 +272,11 @@ public class GtiItems implements IFuelHandler {
         saltyFlapjack = new ItemGtiFood("SaltyFlapjack");
         doubleFlapjack = new ItemGtiFood("DoubleFlapjack");
         doubleWhiteFlapjack = new ItemGtiFood("DoubleWhiteFlapjack");
-        doubleSugerFlapjack = new ItemGtiFood("DoubleSugerFlapjack");
         doubleSaltyFlapjack = new ItemGtiFood("DoubleSaltyFlapjack");
         porkChineseHamburger = new ItemGtiFood("PorkChineseHamburger");
         beefChineseHamburger = new ItemGtiFood("BeefChineseHamburger");
-        beefWonton = new ItemGtiFood("BeefWonton");
-        porkWonton = new ItemGtiFood("PorkWonton");
+        beefWonton = new ItemGti("BeefWonton");
+        porkWonton = new ItemGti("PorkWonton");
         aBowlOfBeefWonton = new ItemGtiFood("ABowlOfBeefWonton");
         aBowlOfPorkWonton = new ItemGtiFood("ABowlOfPorkWonton");
         pumpkinMoonCake = new ItemGtiFood("PumpkinMoonCake");
