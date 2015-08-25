@@ -1,4 +1,4 @@
-//GoodTime Industrial
+\//GoodTime Industrial
 //Language file
 //zh_CN
 
@@ -54,7 +54,7 @@ item.gti.AirBrakeCasing.name=气闸外壳
 item.gti.Salt.name=食盐
 item.gti.PackagedSalt.name=一小袋盐
 item.gti.CarbonTube.name=碳管
-item.gti.smallCompressedWaterHyacinth.name=小块压缩水葫芦
+item.gti.SmallCompressedWaterHyacinth.name=小块压缩水葫芦
 item.gti.Roller.name=滚轴
 item.gti.RedstoneModule.name=红石模块
 item.gti.LazuliModule.name=青金石模块
@@ -99,7 +99,11 @@ item.gti.record_TheSaltwaterRoom.desc2=Owl City
 item.gti.record_MusicSpring.desc1=乐泉
 item.gti.record_MusicSpring.desc2=Seedking
 
-item.gti.Roller.desc1=看起来并没有什么用
+
+item.gti.SmallCompressedWaterHyacinth.desc1=不敢想象如此小块居然融合了八棵水葫芦的精华
+item.gti.HeatInsulationMaterial.desc1=这货的唯一用处就是制作隔热板
+item.gti.HeatInsulationPlate.desc1=暖暖的，好贴心
+item.gti.Roller.desc1=看起来并没有什么卵用
 item.gti.heatInsulationBoard.desc1=有了这个，妈妈再也不用担心岩浆桶烫手了
 item.gti.thermalInsulationMaterial.desc1=制作隔热板的唯一原料
 item.gti.DiamondPlate.desc1=纯钻石打造
