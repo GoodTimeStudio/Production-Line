@@ -40,7 +40,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory {
+public class TileCarbonizeFurnace extends TileGti implements ISidedInventory {
 
     /** The ItemStacks that hold the items currently being used in the furnace */
     public ItemStack[] furnaceItemStacks = new ItemStack[3];
@@ -173,7 +173,7 @@ public class TileCarbonizeFurnace extends TileEntity implements ISidedInventory 
 
             if (flag != this.fuel > 0) {
                 flag1 = true;
-                BlockCarbonizeFurnace.updateFurnaceBlockState(this.fuel > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                isBurn = !isBurn;
             }
         }
 
