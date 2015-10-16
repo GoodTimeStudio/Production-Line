@@ -24,10 +24,26 @@
  */
 package com.mcgoodtime.gti.common.tiles;
 
-import ic2.core.block.TileEntityBlock;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 /*
  * Created by suhao on 2015.7.1.
  */
-public class TileGti extends TileEntityBlock {
+public class TileGti extends TileEntity {
+
+    public short facing;
+    public boolean isBurn;
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        facing = nbt.getShort("facing");
+        isBurn = nbt.getBoolean("isBurn");
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        nbt.setShort("facing", facing);
+        nbt.setBoolean("isBurn", isBurn);
+    }
 }
