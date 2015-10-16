@@ -19,7 +19,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBlackSesame extends BlockBush{
+public class BlockBlackSesame extends BlockBush {
 	public BlockBlackSesame() {
 		super(Material.plants);
 		this.setBlockName("Gti.Block.WhiteSesame");

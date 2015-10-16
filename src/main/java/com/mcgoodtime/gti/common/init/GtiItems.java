@@ -228,11 +228,11 @@ public class GtiItems implements IFuelHandler {
         
         //Food registry
         seedOil = new ItemGti("SeedOil");
-        fryingPan = new ItemGtiTreetap("FryingPan",64);
-        rollingPin = new ItemGtiTreetap("RollingPin",64);
+        fryingPan = new ItemGtiTreetap("FryingPan", 64);
+        rollingPin = new ItemGtiTreetap("RollingPin", 64);
         saltyYolk = new ItemGtiFood("SaltyYolk");
         saltyEgg = new ItemGtiFood("SaltyEgg");
-        whiteSesame = new ItemGtiFood("BlackSesame");
+        //whiteSesame = new ItemGtiFood("BlackSesame");
         wheatFlour = new ItemGtiFood("WheatFlour");
         dough = new ItemGti("Dough");
         stickyRiceFlour = new ItemGti("StickyRiceFlour");
@@ -281,10 +281,6 @@ public class GtiItems implements IFuelHandler {
         aBowlOfPorkWonton = new ItemGtiFood("ABowlOfPorkWonton");
         pumpkinMoonCake = new ItemGtiFood("PumpkinMoonCake");
         saltyYolkMoonCake = new ItemGtiFood("SaltyYolkMoonCake");
-        
-        
-        
-        
 
         // special registry TODO: Better registry system
  

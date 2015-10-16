@@ -366,24 +366,24 @@ public class Recipes {
         		"BBB",
         		'A',new ItemStack(Items.dye,1,0),
         		'B',GtiBlocks.blackSesame
-        );
-        GameRegistry.addRecipe(new ItemStack(GtiItems.dough,4),
+        );/*
+        GameRegistry.addRecipe(new ItemStack(GtiItems.dough, 4),
         		"AAA",
         		"ABA",
         		"AAA",
-        		'A',IC2Items.getItem("Flour"),
-        		'B',Items.water_bucket
-        );
+        		'A', IC2Items.getItem("Flour"),
+        		'B', Items.water_bucket
+        );*/
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.saltyEgg),
         		"AB",
-        		'A',Items.egg,
-        		'B',GtiItems.salt
+        		'A', Items.egg,
+        		'B', GtiItems.salt
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.saltyYolk),
         		"A",
-        		'A',GtiItems.saltyEgg
+        		'A', GtiItems.saltyEgg
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.rollingPin),
@@ -513,166 +513,166 @@ public class Recipes {
         		"AAA",
         		"AAA",
         		"AAA",
-        		'A',Items.wheat_seeds
+        		'A', Items.wheat_seeds
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.seedOil,2),
         		"AAA",
         		"AAA",
         		"AAA",
-        		'A',Items.pumpkin_seeds
+        		'A', Items.pumpkin_seeds
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.fryingPan),
-        		"A",null,"A",
-        		"A",null,"A",
-        		null,"B",null,
-        		'A',Items.iron_ingot,
-        		'B',Items.stick
+        		"A A",
+        		"A A",
+        		" B ",
+        		'A', Items.iron_ingot,
+        		'B', Items.stick
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.carrotAndBeefFriedDumplings),
         		"ABC",
-        		'A',GtiItems.beefAndCarrotDumplings,
-        		'C',GtiItems.fryingPan,
-        		'B',GtiItems.seedOil
+        		'A', GtiItems.beefAndCarrotDumplings,
+        		'C', GtiItems.fryingPan,
+        		'B', GtiItems.seedOil
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.celeryAndBeefFriedDumplings), 
         		"ABC",
-        		'A',GtiItems.beefAndCeleryDumplings,
-        		'C',GtiItems.fryingPan,
-        		'B',GtiItems.seedOil
+        		'A', GtiItems.beefAndCeleryDumplings,
+        		'C', GtiItems.fryingPan,
+        		'B', GtiItems.seedOil
         );
         GameRegistry.addRecipe(new ItemStack(GtiItems.carrotAndPorkFriedDumplings),
         		"ABC",
-        		'A',GtiItems.porkAndCarrotDumplings,
-        		'B',GtiItems.seedOil,
-        		'C',GtiItems.fryingPan
+        		'A', GtiItems.porkAndCarrotDumplings,
+        		'B', GtiItems.seedOil,
+        		'C', GtiItems.fryingPan
         );
         GameRegistry.addRecipe(new ItemStack(GtiItems.celeryAndPorkFriedDumplings), 
         		"ABC",
-        		'A',GtiItems.porkAndCeleryDumplings,
-        		'B',GtiItems.seedOil,
-        		'C',GtiItems.fryingPan
+        		'A', GtiItems.porkAndCeleryDumplings,
+        		'B', GtiItems.seedOil,
+        		'C', GtiItems.fryingPan
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.sugarStickyRiceBalls),
         		"ABA",
-        		'A',GtiItems.stickyRiceBalls,
-        		'B',Items.sugar
+        		'A', GtiItems.stickyRiceBalls,
+        		'B', Items.sugar
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.redBeanPasteStickyRiceBalls), 
         		"ABA",
-        		'A',GtiItems.stickyRiceBalls,
-        		'B',GtiItems.redBeanPaste
+        		'A', GtiItems.stickyRiceBalls,
+        		'B', GtiItems.redBeanPaste
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.blackSesameStickyRiceBalls),
         		"ABA",
-        		'A',GtiItems.stickyRiceBalls,
-        		'B',GtiBlocks.blackSesame
-        );
+        		'A', GtiItems.stickyRiceBalls,
+        		'B', GtiBlocks.blackSesame
+        );/*
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.whiteSesameStickyRiceBalls), 
         		"ABA",
-        		'A',GtiItems.stickyRiceBalls,
-        		'B',GtiItems.whiteSesame
-        );
+        		'A', GtiItems.stickyRiceBalls,
+        		'B', GtiItems.whiteSesame
+        );*/
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.aBowlOfBlackSesameStickyRiceBalls),
         		"AAB",
-        		'A',GtiItems.blackSesameStickyRiceBalls,
-        		'B',Items.bowl
+        		'A', GtiItems.blackSesameStickyRiceBalls,
+        		'B', Items.bowl
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.aBowlOfWhiteSesameStickyRiceBalls), 
         		"AAB",
-        		'A',GtiItems.whiteSesameStickyRiceBalls,
-        		'B',Items.bowl
+        		'A', GtiItems.whiteSesameStickyRiceBalls,
+        		'B', Items.bowl
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.aBowlOfSugerStickyRiceBalls), 
         		"AAB",
-        		'A',GtiItems.sugarStickyRiceBalls,
-        		'B',Items.bowl
+        		'A', GtiItems.sugarStickyRiceBalls,
+        		'B', Items.bowl
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.aBowlOfRedBeanPasteStickyRiceBalls), 
         		"AAB",
-        		'A',GtiItems.redBeanPasteStickyRiceBalls,
-        		'B',Items.bowl
+        		'A', GtiItems.redBeanPasteStickyRiceBalls,
+        		'B', Items.bowl
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.sweetFlapjack),
         		"AB",
-        		'A',GtiItems.whiteFlapjack,
-        		'B',Items.sugar
+        		'A', GtiItems.whiteFlapjack,
+        		'B', Items.sugar
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.saltyFlapjack),
         		"AB",
-        		'A',GtiItems.whiteFlapjack,
-        		'B',GtiItems.salt
+        		'A', GtiItems.whiteFlapjack,
+        		'B', GtiItems.salt
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.doubleWhiteFlapjack),
         		"AA",
-        		'A',GtiItems.whiteFlapjack
+        		'A', GtiItems.whiteFlapjack
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.doubleSaltyFlapjack),
         		"AA",
-        		'A',GtiItems.saltyFlapjack
+        		'A', GtiItems.saltyFlapjack
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.beefChineseHamburger),
         		"AB",
-        		'A',GtiItems.doubleSaltyFlapjack,
-        		'B',Items.cooked_beef
+        		'A', GtiItems.doubleSaltyFlapjack,
+        		'B', Items.cooked_beef
         		
         );
         GameRegistry.addRecipe(new ItemStack(GtiItems.porkChineseHamburger),
         		"AB",
-        		'A',GtiItems.doubleSaltyFlapjack,
-        		'B',Items.cooked_porkchop
+        		'A', GtiItems.doubleSaltyFlapjack,
+        		'B', Items.cooked_porkchop
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.beefWonton),
         		"ABA",
-        		'A',GtiItems.thinSkinned,
-        		'B',Items.beef
+        		'A', GtiItems.thinSkinned,
+        		'B', Items.beef
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.aBowlOfBeefWonton),
         		"AAB",
-        		'A',GtiItems.beefWonton,
-        		'B',Items.bowl
+        		'A', GtiItems.beefWonton,
+        		'B', Items.bowl
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.porkWonton),
         		"ABA",
-        		'A',GtiItems.thinSkinned,
-        		'B',Items.porkchop
+        		'A', GtiItems.thinSkinned,
+        		'B', Items.porkchop
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.aBowlOfPorkWonton),
         		"AAB",
-        		'A',GtiItems.porkWonton,
-        		'B',Items.bowl
+        		'A', GtiItems.porkWonton,
+        		'B', Items.bowl
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.saltyYolkMoonCake),
         		"AAA",
-        		null,"B",null,
+        		" B ",
         		'A',GtiItems.saltyYolk,
         		'B',GtiItems.dough
         );
         GameRegistry.addRecipe(
         		new ItemStack(GtiItems.pumpkinMoonCake),
         		"AAA",
-        		null,"B",null,
+        		 " B ",
         		'A',GtiItems.pumpkinBlock,
         		'B',GtiItems.dough
         );

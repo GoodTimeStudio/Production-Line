@@ -8,7 +8,6 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 
 	public ItemGtiFood(String name) {
 		super(name);
-		// TODO �Զ����ɵĹ��캯�����
 	}
 
 	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
