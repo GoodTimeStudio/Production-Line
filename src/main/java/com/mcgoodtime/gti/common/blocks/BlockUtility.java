@@ -24,39 +24,37 @@
  */
 package com.mcgoodtime.gti.common.blocks;
 
-import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
-import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
-import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
-
-import com.mcgoodtime.gti.common.core.GtiConfig;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
+import com.mcgoodtime.gti.common.tiles.TileGti;
 import net.minecraft.block.material.Material;
-import org.apache.logging.log4j.Level;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
- * Created by suhao on 2015-6-10-0010.
+ * Created by suhao on 2015.10.18.0018.
  *
  * @author suhao
  */
-public class BlockGti extends Block {
-    protected String blockName;
+public class BlockUtility extends BlockMultiGti {
 
-    public BlockGti(Material material, String name, float hardness, float resistance,
-                       String harvestLevelToolClass, int harvestLevel) {
-        this(material, name);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setHarvestLevel(harvestLevelToolClass, harvestLevel);
+    public BlockUtility(Material material, String name) {
+        super(material, name);
     }
 
-    public BlockGti(Material material, String name) {
-        super(material);
-        this.setBlockName(MOD_ID + "." + "block" + "." + name);
-        this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
-        this.setCreativeTab(creativeTabGti);
-        GameRegistry.registerBlock(this, name);
-        GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
-        this.blockName = name;
+    @Override
+    public void registerBlockIcons(IIconRegister iir) {
+        super.registerBlockIcons(iir);
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, int metadata) {
+        switch (metadata) {
+            case 0: return new TileGti();
+            default: return null;
+        }
     }
 }

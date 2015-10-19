@@ -26,6 +26,7 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
 import com.mcgoodtime.gti.common.init.*;
+import com.mcgoodtime.gti.common.network.BlockUpdateMessage;
 import com.mcgoodtime.gti.common.worldgen.BasaltGen;
 import com.mcgoodtime.gti.common.worldgen.IridiumGen;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -36,6 +37,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -71,7 +73,9 @@ public final class Gti {
     public ModMetadata meta = new ModMetadata();
     @Instance(Gti.MOD_ID)
     public static Gti instance;
-   
+
+    public static SimpleNetworkWrapper network;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         setupMeta();
@@ -100,6 +104,9 @@ public final class Gti {
          //register ore gen bus. 注册矿石生成总线
         GameRegistry.registerWorldGenerator(new IridiumGen(), 1);
         GameRegistry.registerWorldGenerator(new BasaltGen(), 2);
+
+        network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
+        network.registerMessage(BlockUpdateMessage.Handler.class, BlockUpdateMessage.class, 0, Side.CLIENT);
     }
 
     @Mod.EventHandler

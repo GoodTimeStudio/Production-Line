@@ -24,7 +24,8 @@
  */
 package com.mcgoodtime.gti.common.tiles;
 
-import com.mcgoodtime.gti.common.blocks.BlockCarbonizeFurnace;
+import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.network.BlockUpdateMessage;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,7 +39,6 @@ import net.minecraft.item.*;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 
 public class TileCarbonizeFurnace extends TileGti implements ISidedInventory {
 
@@ -171,9 +171,10 @@ public class TileCarbonizeFurnace extends TileGti implements ISidedInventory {
                 }
             }
 
-            if (flag != this.fuel > 0) {
+            if (flag != fuel > 0) {
                 flag1 = true;
-                isBurn = !isBurn;
+                setIsBurn(!isBurn());
+                Gti.network.sendToAll(new BlockUpdateMessage(xCoord, yCoord, zCoord));
             }
         }
 

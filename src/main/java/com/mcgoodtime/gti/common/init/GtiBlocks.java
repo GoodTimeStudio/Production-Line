@@ -53,10 +53,10 @@ public class GtiBlocks {
 	public static Block dehydratedWaterHyacinthblock;
 	public static Block compressedWaterHyacinth;
     public static Block waterHyacinth;
-    public static BlockContainer genGasKU;
+    public static Block genGasKU;
     public static Block oreIridium;
-    public static BlockContainerGti carbonizeFurnace;
-    public static Block litCarbonizeFurnace;
+    public static Block carbonizeFurnace;
+    public static Block airBrakeCasing;
     public static BlockContainer evsu;
     public static BlockContainer heatDryer;
 
@@ -65,6 +65,7 @@ public class GtiBlocks {
         compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5F, 0.3F, null, 0);
         dehydratedWaterHyacinthblock=new BlockGti(Material.rock, "DehydratedWaterHyacinthBlock", 1.0F, 0.3F, null, 0);
         carbonizeFurnace = new BlockCarbonizeFurnace(Material.iron, "CarbonizeFurnace");
+        airBrakeCasing = new BlockUtility(Material.iron, "AirBrakeCasing");
 
         // special registry TODO: Better registry system
         celery = new BlockCelery();

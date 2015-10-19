@@ -58,7 +58,7 @@ public class Recipes {
                 "CDC",
                 "EEE",
                 'A', IC2Items.getItem("electronicCircuit"),
-                'B', GtiItems.airBrakeCasing,
+                'B', GtiBlocks.airBrakeCasing,
                 'C', GtiItems.airBrakeUnit,
                 'D', IC2Items.getItem("electroFurnace"),
                 'E', IC2Items.getItem("plateiron")

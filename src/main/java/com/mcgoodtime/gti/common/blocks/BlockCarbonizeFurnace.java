@@ -33,10 +33,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -48,6 +51,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -56,36 +60,22 @@ import java.util.Random;
  * @author suhao
  */
 public class BlockCarbonizeFurnace extends BlockContainerGti {
-    public boolean isBurn = false;
 
     public BlockCarbonizeFurnace(Material material, String name) {
         super(material, name);
     }
 
-
-    /**
-     * Hand only
-     *
-     * side:
-     * 1:top  5:east  3:south
-     * 0:low  4:west  2:north
-     *
-     */
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        return null;
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iir) {
-        this.top = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + "CarbonizeFurnace" + "_top_" + (isBurn ? "on" : "off"));
-        this.low = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + "CarbonizeFurnace" + "_low");
-        this.front = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + "CarbonizeFurnace" + "_front_" + (isBurn ? "on" : "off"));
-        this.left = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + "CarbonizeFurnace" + "_left_"  + (isBurn ? "on" : "off"));
-        this.blockIcon = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + "CarbonizeFurnace");
+        for (int i = 0; i < normal.length; i++) {
+            normal[i] = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + "CarbonizeFurnace" + "-" + i);
+        }
+        for (int i = 0; i < burning.length; i++) {
+            burning[i] = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + "CarbonizeFurnace" + "-on-" + i);
+        }
     }
+
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
@@ -111,18 +101,14 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
         return Item.getItemFromBlock(GtiBlocks.carbonizeFurnace);
     }
 
-    public void updateState(boolean isBurn, World world, int x, int y, int z, Block block) {
-        TileEntity te = world.getTileEntity(x, y, z);
-        world.setBlock(x, y, z, this);
-
-        if (isBurn) {
-            block.setLightLevel(2.5F);
-        } else {
-            block.setLightLevel(0);
-        }
-
-
-        world.setTileEntity(x, y, z, te);
+    @Override
+    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+        list.add(new ItemStack(item, 1, 0));
+        list.add(new ItemStack(item, 1, 1));
     }
 
+    @Override
+    public boolean canBurn() {
+        return true;
+    }
 }

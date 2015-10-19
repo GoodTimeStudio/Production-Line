@@ -192,7 +192,7 @@ public class GtiItems implements IFuelHandler {
         smallDustIridium = new ItemGti("SmallDustIridium");
         ingotIridium = new ItemGti("IngotIridium");
         airBrakeUnit = new ItemGti("AirBrakeUnit");
-        airBrakeCasing = new ItemGti("AirBrakeCasing");
+        //airBrakeCasing = new ItemGti("AirBrakeCasing");
         bambooCharcoal = new ItemGti("BambooCharcoal", true);
         ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
         bronzeTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
