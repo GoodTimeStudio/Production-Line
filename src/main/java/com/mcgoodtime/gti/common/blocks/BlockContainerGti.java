@@ -35,7 +35,7 @@ import net.minecraft.world.World;
  *
  * @author suhao
  */
-public abstract class BlockContainerGti extends BlockMultiGti implements ITileEntityProvider {
+public abstract class BlockContainerGti extends BlockMultiTexture implements ITileEntityProvider {
 
     public BlockContainerGti(Material material, String name) {
         super(material, name);

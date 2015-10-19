@@ -61,8 +61,8 @@ import java.util.Random;
  */
 public class BlockCarbonizeFurnace extends BlockContainerGti {
 
-    public BlockCarbonizeFurnace(Material material, String name) {
-        super(material, name);
+    public BlockCarbonizeFurnace() {
+        super(Material.iron, "CarbonizeFurnace");
     }
 
     @Override
@@ -90,21 +90,6 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
     @Override
     public TileEntity createNewTileEntity(World world, int var) {
         return new TileCarbonizeFurnace();
-    }
-
-
-    /**
-     * Gets an item for the block being called on. Args: world, x, y, z
-     */
-    @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
-        return Item.getItemFromBlock(GtiBlocks.carbonizeFurnace);
-    }
-
-    @Override
-    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-        list.add(new ItemStack(item, 1, 0));
-        list.add(new ItemStack(item, 1, 1));
     }
 
     @Override

@@ -27,19 +27,15 @@ package com.mcgoodtime.gti.common.blocks;
 import com.mcgoodtime.gti.common.tiles.TileGti;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 /**
  * Created by suhao on 2015.10.18.0018.
  *
  * @author suhao
  */
-public class BlockUtility extends BlockMultiGti {
+public class BlockUtility extends BlockMultiTexture {
 
     public BlockUtility(Material material, String name) {
         super(material, name);

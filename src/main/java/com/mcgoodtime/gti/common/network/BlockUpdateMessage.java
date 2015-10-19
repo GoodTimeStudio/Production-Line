@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.network;
 
+import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -44,11 +45,12 @@ public class BlockUpdateMessage implements IMessage {
 
     public BlockUpdateMessage(){}
 
-    public BlockUpdateMessage(int x, int y, int z) {
+    public BlockUpdateMessage(int x, int y, int z, boolean isBurn) {
         nbt = new NBTTagCompound();
         nbt.setInteger("xPos", x);
         nbt.setInteger("yPos", y);
         nbt.setInteger("zPos", z);
+        nbt.setBoolean("isBurn", isBurn);
     }
 
     @Override
@@ -66,16 +68,12 @@ public class BlockUpdateMessage implements IMessage {
         @Override
         public IMessage onMessage(BlockUpdateMessage message, MessageContext ctx) {
             WorldClient client = Minecraft.getMinecraft().theWorld;
-            client.markBlockForUpdate(
-                    message.nbt.getInteger("xPos"),
-                    message.nbt.getInteger("yPos"),
-                    message.nbt.getInteger("zPos")
-            );
-            client.notifyBlockChange(
-                    message.nbt.getInteger("xPos"),
-                    message.nbt.getInteger("yPos"),
-                    message.nbt.getInteger("zPos"),
-                    client.getBlock(message.nbt.getInteger("xPos"), message.nbt.getInteger("yPos"), message.nbt.getInteger("zPos"))
+            int x = message.nbt.getInteger("xPos");
+            int y = message.nbt.getInteger("yPos");
+            int z = message.nbt.getInteger("zPos");
+            ((TileGti) client.getTileEntity(x, y, z)).setIsBurn(message.nbt.getBoolean("isBurn"));
+            client.markBlockForUpdate(x, y, z);
+            client.notifyBlockChange(x, y, z, client.getBlock(x, y, z)
             );
             return null;
         }

@@ -174,7 +174,7 @@ public class TileCarbonizeFurnace extends TileGti implements ISidedInventory {
             if (flag != fuel > 0) {
                 flag1 = true;
                 setIsBurn(!isBurn());
-                Gti.network.sendToAll(new BlockUpdateMessage(xCoord, yCoord, zCoord));
+                Gti.network.sendToAll(new BlockUpdateMessage(xCoord, yCoord, zCoord, isBurn()));
             }
         }
 
