@@ -123,6 +123,8 @@ public final class Gti {
         this.meta.updateUrl = this.meta.url;
         this.meta.authorList.add("BestOwl");
         this.meta.authorList.add("liach");
+        this.meta.authorList.add("Seedking");
+        this.meta.authorList.add("JAVA0");
         this.meta.authorList.add("GoodTime Studio");
         this.meta.credits = "GoodTime Studio";
     }
