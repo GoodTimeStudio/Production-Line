@@ -44,10 +44,7 @@ import net.minecraft.world.World;
 /*
  * Created by suhao on 2015.7.13.
  */
-public abstract class BlockMultiGti extends BlockGti {
-
-    @SideOnly(Side.CLIENT)
-    protected IIcon[][] textures;
+public abstract class BlockMultiTexture extends BlockGti {
 
     @SideOnly(Side.CLIENT)
     protected IIcon[] normal = new IIcon[6];
@@ -55,11 +52,11 @@ public abstract class BlockMultiGti extends BlockGti {
     protected IIcon[] burning = new IIcon[6];
     //top, low, front, back, left, right;
 
-    public BlockMultiGti(Material material, String name, float hardness, float resistance, String harvestLevelToolClass, int harvestLevel) {
+    public BlockMultiTexture(Material material, String name, float hardness, float resistance, String harvestLevelToolClass, int harvestLevel) {
         super(material, name, hardness, resistance, harvestLevelToolClass, harvestLevel);
     }
 
-    public BlockMultiGti(Material material, String name) {
+    public BlockMultiTexture(Material material, String name) {
         super(material, name);
     }
 
@@ -174,17 +171,6 @@ public abstract class BlockMultiGti extends BlockGti {
 
     public boolean canBurn() {
         return false;
-    }
-
-    protected String getTextureName(int index) {
-        Item item = Item.getItemFromBlock(this);
-        if(!item.getHasSubtypes()) {
-            return index == 0 ? this.getUnlocalizedName() : null;
-        } else {
-            ItemStack itemStack = new ItemStack(this, 1, index);
-            String ret = item.getUnlocalizedName(itemStack);
-            return ret == null ? null : ret.substring(4).replace("item", "block");
-        }
     }
 
 }
