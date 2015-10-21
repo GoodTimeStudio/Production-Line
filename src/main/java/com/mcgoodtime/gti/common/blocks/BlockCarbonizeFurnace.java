@@ -31,10 +31,12 @@ import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.core.block.BlockTextureStitched;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -66,19 +68,8 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iir) {
-        for (int i = 0; i < normal.length; i++) {
-            normal[i] = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + "CarbonizeFurnace" + "-" + i);
-        }
-        for (int i = 0; i < burning.length; i++) {
-            burning[i] = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + "CarbonizeFurnace" + "-on-" + i);
-        }
-    }
-
-
-    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+        int facing = ((TileGti) world.getTileEntity(x, y, z)).getFacing();
         if (!world.isRemote) {
             entityPlayer.openGui(Gti.instance, GuiHandler.EnumGui.CarbonizeFurnace.ordinal(), world, x, y, z);
         } else {
@@ -93,7 +84,8 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
     }
 
     @Override
-    public boolean canBurn() {
+    public boolean hasTileEntity(int meta) {
         return true;
     }
+
 }

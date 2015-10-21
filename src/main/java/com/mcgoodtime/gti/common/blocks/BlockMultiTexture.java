@@ -29,9 +29,11 @@ import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.core.block.BlockTextureStitched;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,10 +48,10 @@ import net.minecraft.world.World;
  */
 public abstract class BlockMultiTexture extends BlockGti {
 
+    private static final int[][] facingAndSideToSpriteOffset = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
+
     @SideOnly(Side.CLIENT)
-    protected IIcon[] normal = new IIcon[6];
-    @SideOnly(Side.CLIENT)
-    protected IIcon[] burning = new IIcon[6];
+    protected IIcon textures[] = new IIcon[12];
     //top, low, front, back, left, right;
 
     public BlockMultiTexture(Material material, String name, float hardness, float resistance, String harvestLevelToolClass, int harvestLevel) {
@@ -63,12 +65,13 @@ public abstract class BlockMultiTexture extends BlockGti {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iir) {
-        for (int i = 0; i < normal.length; ++i) {
-            normal[i] = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + blockName + "-" + i);
-        }
-        if (canBurn()) {
-            for (int i = 0; i < burning.length; ++i) {
-                burning[i] = iir.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "block" + blockName + "-on-" + i);
+        for(int burn = 0; burn < 2; ++burn) {
+            for(int side = 0; side < 6; ++side) {
+                int subIndex = burn * 6 + side;
+                String name = Gti.RESOURCE_DOMAIN + ":" + "block" + blockName + ":" + subIndex;
+                BlockTextureStitched texture = new BlockTextureStitched(name, subIndex);
+                this.textures[subIndex] = texture;
+                ((TextureMap)iir).setTextureEntry(name, texture);
             }
         }
     }
@@ -78,49 +81,15 @@ public abstract class BlockMultiTexture extends BlockGti {
      */
     @Override
     public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
-        TileEntity te = iBlockAccess.getTileEntity(x, y, z);
-        if (te instanceof TileGti) {
-            boolean isBurn = ((TileGti) te).isBurn();
-            switch (((TileGti) te).getFacing()) {
-                case 2:
-                    switch (side) {
-                        case 5: return isBurn ? burning[4] : normal[4];
-                        case 4: return isBurn ? burning[5] : normal[5];
-                        case 2: return isBurn ? burning[2] : normal[2];
-                        case 3: return isBurn ? burning[3] : normal[3];
-                    }
-                case 5:
-                    switch (side) {
-                        case 3: return isBurn ? burning[4] : normal[4];
-                        case 2: return isBurn ? burning[5] : normal[5];
-                        case 5: return isBurn ? burning[2] : normal[2];
-                        case 4: return isBurn ? burning[3] : normal[3];
-                    }
-                case 3:
-                    switch (side) {
-                        case 4: return isBurn ? burning[4] : normal[4];
-                        case 5: return isBurn ? burning[5] : normal[5];
-                        case 3: return isBurn ? burning[2] : normal[2];
-                        case 2: return isBurn ? burning[3] : normal[3];
-                    }
-                case 4:
-                    switch (side) {
-                        case 2: return isBurn ? burning[4] : normal[4];
-                        case 3: return isBurn ? burning[5] : normal[5];
-                        case 4: return isBurn ? burning[2] : normal[2];
-                        case 5: return isBurn ? burning[3] : normal[3];
-                    }
-            }
+        int facing = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).getFacing();
+        boolean isBurn = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).isBurn();
 
-            if (side == 1) {
-                return isBurn ? burning[0] : normal[0];
-            }
-            if (side == 0) {
-                return isBurn ? burning[1] : normal[1];
-            }
+        int i = facingAndSideToSpriteOffset[facing][side];
+        if (isBurn) {
+            i += 6;
         }
 
-        return null;
+        return textures[i];
     }
 
     /**
@@ -133,15 +102,7 @@ public abstract class BlockMultiTexture extends BlockGti {
      */
     @Override
     public IIcon getIcon(int side, int meta) {
-        switch (side) {
-            case 3: return normal[2];
-            case 2: return normal[3];
-            case 5: return normal[5];
-            case 4: return normal[4];
-            case 1: return normal[0];
-            case 0: return normal[1];
-            default: return null;
-        }
+        return textures[facingAndSideToSpriteOffset[3][side]];
     }
 
     @Override
@@ -167,10 +128,6 @@ public abstract class BlockMultiTexture extends BlockGti {
                 }
             }
         }
-    }
-
-    public boolean canBurn() {
-        return false;
     }
 
 }
