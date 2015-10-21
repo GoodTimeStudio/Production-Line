@@ -25,6 +25,9 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -34,8 +37,8 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TileGti extends TileEntity {
 
-    private short facing;
-    private boolean isBurn;
+    public short facing;
+    public boolean isBurn;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
@@ -65,5 +68,21 @@ public class TileGti extends TileEntity {
 
     public void setIsBurn(boolean isBurn) {
         this.isBurn = isBurn;
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        super.onDataPacket(net, pkt);
+        NBTTagCompound nbt = pkt.func_148857_g();
+        this.facing = nbt.getShort("facing");
+        this.isBurn = nbt.getBoolean("isBurn");
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound sync = new NBTTagCompound();
+        sync.setShort("facing", this.facing);
+        sync.setBoolean("isBurn", this.isBurn);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, sync);
     }
 }

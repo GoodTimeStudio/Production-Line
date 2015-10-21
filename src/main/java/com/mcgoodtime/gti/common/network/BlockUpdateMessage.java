@@ -73,8 +73,7 @@ public class BlockUpdateMessage implements IMessage {
             int z = message.nbt.getInteger("zPos");
             ((TileGti) client.getTileEntity(x, y, z)).setIsBurn(message.nbt.getBoolean("isBurn"));
             client.markBlockForUpdate(x, y, z);
-            client.notifyBlockChange(x, y, z, client.getBlock(x, y, z)
-            );
+            client.notifyBlockChange(x, y, z, client.getBlock(x, y, z));
             return null;
         }
     }
