@@ -75,7 +75,7 @@ public class ContainerCarbonizeFurnace extends Container {
         super.addCraftingToCrafters(crafting);
         crafting.sendProgressBarUpdate(this, 0, this.tile.progress);
         crafting.sendProgressBarUpdate(this, 1, this.tile.fuel);
-        crafting.sendProgressBarUpdate(this, 2, this.tile.fuel);
+        crafting.sendProgressBarUpdate(this, 2, this.tile.maxFuel);
     }
 
     /**
@@ -121,7 +121,7 @@ public class ContainerCarbonizeFurnace extends Container {
         }
 
         if (slot == 2) {
-            this.tile.fuel = var;
+            this.tile.maxFuel = var;
         }
     }
 
