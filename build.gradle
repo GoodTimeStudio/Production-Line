@@ -23,9 +23,21 @@ repositories {
         name = "ic2"
         url = "http://maven.ic2.player.to/"
     }
+    maven {
+        name = "sponge"
+        url = "http://repo.spongepowered.org/maven"
+    }
+}
+
+configurations {
+    shade
+    api
+    compile.extendsFrom api
+    compile.extendsFrom shade
 }
 
 dependencies {
+    shade 'org.spongepowered:mixin:0.4.5-SNAPSHOT'
     compile 'net.industrial-craft:industrialcraft-2:2.2.748-experimental:dev' //adds newest ic2 to the dev env
     checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
 }
@@ -37,11 +49,6 @@ minecraft {
 
 checkstyle { 
     toolVersion = "6.7" 
-} 
-
-configurations { 
-     api 
-     compile.extendsFrom api 
 }
 
 compileJava.options.encoding = 'UTF-8'
