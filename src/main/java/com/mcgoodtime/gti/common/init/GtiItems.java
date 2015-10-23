@@ -118,7 +118,6 @@ public class GtiItems implements IFuelHandler {
         smallDustIridium = new ItemGti("SmallDustIridium");
         ingotIridium = new ItemGti("IngotIridium");
         airBrakeUnit = new ItemGti("AirBrakeUnit");
-        //airBrakeCasing = new ItemGti("AirBrakeCasing");
         bambooCharcoal = new ItemGti("BambooCharcoal", true);
         ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
         bronzeTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
@@ -150,7 +149,6 @@ public class GtiItems implements IFuelHandler {
         enderCalculationCrystal = new ItemGti("EnderCalculationCrystal");
         millTeeth = new ItemGti("MillTeeth");
         millWheel = new ItemGti("MillWheel");
-
 		salt = new ItemGtiFood("Salt", 0, 0F);
 
         // special registry TODO: Better registry system
