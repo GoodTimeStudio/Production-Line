@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.init;
 
+import com.mcgoodtime.gti.common.PotionGti;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiFood;
@@ -34,6 +35,9 @@ import com.mcgoodtime.gti.common.items.tools.ToolGti;
 
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import ic2.core.Ic2Items;
+import ic2.core.init.InternalName;
+import ic2.core.item.ItemRadioactive;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -201,7 +205,6 @@ public class GtiItems implements IFuelHandler {
         advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
         carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
         record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
-        salt = new ItemGti("Salt");
         packagedSalt = new ItemGti("PackagedSalt");
         carbonTube = new ItemGti("CarbonTube", true);
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
@@ -225,62 +228,8 @@ public class GtiItems implements IFuelHandler {
         enderCalculationCrystal = new ItemGti("EnderCalculationCrystal");
         millTeeth = new ItemGti("MillTeeth");
         millWheel = new ItemGti("MillWheel");
-        
-        //Food registry
-        seedOil = new ItemGti("SeedOil");
-        fryingPan = new ItemGtiTreetap("FryingPan", 64);
-        rollingPin = new ItemGtiTreetap("RollingPin", 64);
-        saltyYolk = new ItemGtiFood("SaltyYolk");
-        saltyEgg = new ItemGtiFood("SaltyEgg");
-        //whiteSesame = new ItemGtiFood("BlackSesame");
-        wheatFlour = new ItemGtiFood("WheatFlour");
-        dough = new ItemGti("Dough");
-        stickyRiceFlour = new ItemGti("StickyRiceFlour");
-        stickyRiceBalls = new ItemGti("StickyRiceBalls");
-        redBeanPowder = new ItemGti("RedBeanPowder");
-        redBeanPaste = new ItemGtiFood("RedBeanPaste");
-        dumplingSkin = new ItemGti("DumplingSkin");
-        bread = new ItemGti("Bread");
-        thinSkinned = new ItemGti("ThinSkinned");
-        pumpkinBlock = new ItemGti("PumpkinBlock");
-        carrotDumplings = new ItemGti("CarrotDumplings");
-        celeryDumplings = new ItemGti("CeleryDumplings");
-        beefAndCeleryDumplings = new ItemGti("BeefAndCeleryDumplings");
-        beefAndCarrotDumplings = new ItemGti("BeefAndCarrotDumplings");
-        porkAndCeleryDumplings = new ItemGti("PorkAndCeleryDumplings");
-        porkAndCarrotDumplings = new ItemGti("PorkAndCarrotDumplings");
-        aBowlOfCarrotDumplings = new ItemGtiFood("ABowlOfCarrotDumplings");
-        aBowlOfCeleryDumplings = new ItemGtiFood("ABowlOfCeleryDumplings");
-        aBowlOfBeefAndCeleryDumplings = new ItemGtiFood("ABowlOfBeefAndCeleryDumplings");
-        aBowlOfBeefAndCarrotDumplings = new ItemGtiFood("ABowlOfBeefAndCarrotDumplings");
-        aBowlOfPorkAndCeleryDumplings = new ItemGtiFood("ABowlOfPorkAndCeleryDumplings");
-        aBowlOfPorkAndCarrotDumplings = new ItemGtiFood("ABowlOfPorkAndCarrotDumplings");
-        carrotAndPorkFriedDumplings = new ItemGtiFood("CarrotAndPorkFriedDumplings");
-        celeryAndPorkFriedDumplings = new ItemGtiFood("CeleryAndPorkFriedDumplings");
-        carrotAndBeefFriedDumplings = new ItemGtiFood("CarrotAndBeefFriedDumplings");
-        celeryAndBeefFriedDumplings = new ItemGtiFood("CeleryAndBeefFriedDumplings");
-        redBeanPasteStickyRiceBalls = new ItemGti("RedBeanPasteStickyRiceBalls");
-        whiteSesameStickyRiceBalls = new ItemGti("WriteSesameStickyRiceBalls");
-        blackSesameStickyRiceBalls = new ItemGti("BlackSesameStickyRiceBalls");
-        sugarStickyRiceBalls = new ItemGti("SugerStickyRiceBalls");
-        aBowlOfRedBeanPasteStickyRiceBalls = new ItemGtiFood("ABowlOfRedBeanPasteStickyRiceBalls");
-        aBowlOfWhiteSesameStickyRiceBalls = new ItemGtiFood("ABowlOfWhiteSesameStickyRiceBalls");
-        aBowlOfBlackSesameStickyRiceBalls = new ItemGtiFood("ABowlOfBlackSesameStickyRiceBalls");
-        aBowlOfSugerStickyRiceBalls = new ItemGtiFood("ABowlOfSugerStickyRiceBalls");
-        whiteFlapjack = new ItemGtiFood("WhiteFlapjack");
-        sweetFlapjack = new ItemGtiFood("SweetFlapjack");
-        saltyFlapjack = new ItemGtiFood("SaltyFlapjack");
-        doubleFlapjack = new ItemGtiFood("DoubleFlapjack");
-        doubleWhiteFlapjack = new ItemGtiFood("DoubleWhiteFlapjack");
-        doubleSaltyFlapjack = new ItemGtiFood("DoubleSaltyFlapjack");
-        porkChineseHamburger = new ItemGtiFood("PorkChineseHamburger");
-        beefChineseHamburger = new ItemGtiFood("BeefChineseHamburger");
-        beefWonton = new ItemGti("BeefWonton");
-        porkWonton = new ItemGti("PorkWonton");
-        aBowlOfBeefWonton = new ItemGtiFood("ABowlOfBeefWonton");
-        aBowlOfPorkWonton = new ItemGtiFood("ABowlOfPorkWonton");
-        pumpkinMoonCake = new ItemGtiFood("PumpkinMoonCake");
-        saltyYolkMoonCake = new ItemGtiFood("SaltyYolkMoonCake");
+
+		salt = new ItemGtiFood("Salt", 0, 0F);
 
         // special registry TODO: Better registry system
  
@@ -302,11 +251,11 @@ public class GtiItems implements IFuelHandler {
                 list.add(I18n.format(diamondApple.getUnlocalizedName() + ".desc1"));
             }
         };
-
         diamondApple = diamondApple
                 .setUnlocalizedName("gti.food.DiamondApple")
                 .setCreativeTab(Gti.creativeTabGti)
                 .setTextureName("gti:itemDiamondApple");
+
         iridiumPickaxe = ToolGti.registerPickaxe(GtiToolMaterial.iridium, "IridiumPickaxe");
         iridiumAxe = ToolGti.registerAxe(GtiToolMaterial.iridium, "IridiumAxe");
         iridiumSpade = ToolGti.registerSpade(GtiToolMaterial.iridium, "IridiumSpade");
@@ -314,7 +263,6 @@ public class GtiItems implements IFuelHandler {
 
         // TODO: Better registry system
         GameRegistry.registerItem(diamondApple, "DiamondApple");
-        
         GameRegistry.registerFuelHandler(new GtiItems());
     }
 

@@ -27,7 +27,6 @@ package com.mcgoodtime.gti.common.core;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
 import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.network.BlockUpdateMessage;
-import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.worldgen.BasaltGen;
 import com.mcgoodtime.gti.common.worldgen.IridiumGen;
 import cpw.mods.fml.common.FMLCommonHandler;
