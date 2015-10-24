@@ -24,7 +24,6 @@
  */
 package com.mcgoodtime.gti.common.init;
 
-import com.mcgoodtime.gti.common.PotionGti;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiFood;
@@ -35,9 +34,6 @@ import com.mcgoodtime.gti.common.items.tools.ToolGti;
 
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import ic2.core.Ic2Items;
-import ic2.core.init.InternalName;
-import ic2.core.item.ItemRadioactive;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -149,7 +145,7 @@ public class GtiItems implements IFuelHandler {
         enderCalculationCrystal = new ItemGti("EnderCalculationCrystal");
         millTeeth = new ItemGti("MillTeeth");
         millWheel = new ItemGti("MillWheel");
-		salt = new ItemGtiFood("Salt", 0, 0F);
+		salt = new ItemGtiFood("Salt", 0, 10F, true);
 
         // special registry TODO: Better registry system
  

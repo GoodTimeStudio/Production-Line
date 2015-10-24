@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.core;
 
+import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
 import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.network.BlockUpdateMessage;
@@ -89,6 +90,7 @@ public final class Gti {
         GtiItems.init();
         //register TileEntity
         GtiTiles.init();
+        GtiPotion.initPotion();
     }
     
     @Mod.EventHandler
