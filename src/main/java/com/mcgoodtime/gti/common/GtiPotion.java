@@ -54,7 +54,7 @@ public class GtiPotion extends Potion {
     }
 
     public static void initPotion() {
-        Potion[] potionTypes = null;
+        Potion[] potionTypes;
         for (Field f : Potion.class.getDeclaredFields()) {
             f.setAccessible(true);
             try {
@@ -80,25 +80,60 @@ public class GtiPotion extends Potion {
         Salty.setIconIndex(0, 0);
     }
 
-    @Override
-    public boolean isReady(int duration, int level) {
-        if (this.id == Salty.id) {
-            int k = 150 >> level;
-            return k <= 0 || duration % k == 0;
+    public boolean isReady(GtiEffect effect) {
+        if (effect.level == -1) {
+            effect.durationTime = 0;
         }
-        return true;
+        if (this.id == Salty.id) {
+            int k = 150 >> effect.level;
+            if (k <= 0 || effect.durationTime % k == 0) {
+                if (effect.level != -1 & effect.level <= 14) {
+                    if ((effect.level + 2) == effect.preLevel) {
+                        --effect.level;
+                        return true;
+                    }
+                } else if (effect.level > 14) {
+                    throw new IndexOutOfBoundsException("Level cannot exceed the value of 14!");
+                }
+                --effect.level;
+            }
+        }
+        return false;
     }
 
-    @Override
-    public void performEffect(EntityLivingBase entityLivingBase, int level) {
+    public void performEffect(EntityLivingBase entityLivingBase) {
         if (this.id == Salty.id) {
             entityLivingBase.attackEntityFrom(GtiDamageSource.salty, 1.0F);
         }
     }
 
     public void applyPotion(EntityLivingBase entityLivingBase, int durationTime, int level) {
-        PotionEffect effect = new PotionEffect(this.id, durationTime, level);
+        GtiEffect effect = new GtiEffect(this.id, durationTime, level);
         effect.setCurativeItems(this.curativeItems);
         entityLivingBase.addPotionEffect(effect);
+    }
+
+    public static class GtiEffect extends PotionEffect {
+
+        private int durationTime = this.getDuration();
+        private int level = this.getAmplifier();
+        private int preLevel = level;
+        private int id = this.getPotionID();
+
+        public GtiEffect(int id, int durationTime, int level) {
+            super(id, durationTime, level);
+        }
+
+        @Override
+        public boolean onUpdate(EntityLivingBase entityLivingBase) {
+            if (this.durationTime > 0) {
+                if (((GtiPotion)Potion.potionTypes[this.id]).isReady(this)) {
+                    ((GtiPotion) Potion.potionTypes[this.id]).performEffect(entityLivingBase);
+                }
+                
+                --durationTime;
+            }
+            return this.durationTime > 0;
+        }
     }
 }

@@ -12,7 +12,7 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 
 	/** The amount this food item heals the player. */
 	private int healAmount;
-	/** ±¥Ê³¶È */
+	/** é¥±é£Ÿåº¦ */
 	private final float saturationModifier;
 	/** If this field is true, the food can be consumed even if the player don't need to eat. */
 	private boolean alwaysEdible;
@@ -46,7 +46,7 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 
 		if (!world.isRemote) {
 			if (this.equals(GtiItems.salt)) {
-				GtiPotion.Salty.applyPotion(player, 300, 0);
+				GtiPotion.Salty.applyPotion(player, 1000, 2);
 			}
 		}
 		return stack;
