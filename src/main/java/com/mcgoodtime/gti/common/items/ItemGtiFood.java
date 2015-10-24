@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class ItemGtiFood extends ItemGti implements ITextureFolder {
 
 	/** The amount this food item heals the player. */
@@ -46,7 +48,8 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 
 		if (!world.isRemote) {
 			if (this.equals(GtiItems.salt)) {
-				GtiPotion.Salty.applyPotion(player, 1000, 2);
+				Random random = new Random();
+				GtiPotion.Salty.applyPotion(player, random.nextInt(2000) % (2000 + 1), random.nextInt(14) % (14 + 1));
 			}
 		}
 		return stack;

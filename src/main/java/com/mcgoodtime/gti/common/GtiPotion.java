@@ -34,9 +34,7 @@ import org.apache.logging.log4j.Level;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by suhao on 2015.10.23.0023.
@@ -45,6 +43,8 @@ import java.util.List;
  */
 public class GtiPotion extends Potion {
     public static GtiPotion Salty;
+
+    public final int saltyMaxLevel = 14;
 
     private List<ItemStack> curativeItems = new ArrayList<ItemStack>();
 
@@ -77,23 +77,22 @@ public class GtiPotion extends Potion {
 
         Salty = new GtiPotion(100, true, 0xFFFFFFF, new ItemStack(Items.water_bucket), new ItemStack(Items.milk_bucket));
         Salty.setPotionName("gti.potion.Salty");
-        Salty.setIconIndex(0, 0);
+        Salty.setIconIndex(3, 1);
     }
 
     public boolean isReady(GtiEffect effect) {
         if (effect.level == -1) {
             effect.durationTime = 0;
         }
+        if (effect.level > 14) {
+            throw new IndexOutOfBoundsException("Level cannot exceed the value of 14!");
+        }
         if (this.id == Salty.id) {
-            int k = 150 >> effect.level;
+            int k = 100 >> effect.level;
             if (k <= 0 || effect.durationTime % k == 0) {
-                if (effect.level != -1 & effect.level <= 14) {
-                    if ((effect.level + 2) == effect.preLevel) {
-                        --effect.level;
-                        return true;
-                    }
-                } else if (effect.level > 14) {
-                    throw new IndexOutOfBoundsException("Level cannot exceed the value of 14!");
+                if ((effect.level + 2) == effect.preLevel) {
+                    effect.preLevel = effect.level;
+                    return true;
                 }
                 --effect.level;
             }
@@ -114,7 +113,6 @@ public class GtiPotion extends Potion {
     }
 
     public static class GtiEffect extends PotionEffect {
-
         private int durationTime = this.getDuration();
         private int level = this.getAmplifier();
         private int preLevel = level;
@@ -130,7 +128,10 @@ public class GtiPotion extends Potion {
                 if (((GtiPotion)Potion.potionTypes[this.id]).isReady(this)) {
                     ((GtiPotion) Potion.potionTypes[this.id]).performEffect(entityLivingBase);
                 }
-                
+
+                System.out.println("time: " + durationTime);
+                System.out.println("level: " + level);
+                System.out.println("preLevel: " + preLevel);
                 --durationTime;
             }
             return this.durationTime > 0;
