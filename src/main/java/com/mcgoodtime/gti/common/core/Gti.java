@@ -26,6 +26,7 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
+import com.mcgoodtime.gti.common.entity.GtiEntity;
 import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.network.BlockUpdateMessage;
 import com.mcgoodtime.gti.common.worldgen.BasaltGen;
@@ -34,6 +35,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.ModMetadata;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -77,12 +79,19 @@ public final class Gti {
 
     public static SimpleNetworkWrapper network;
 
+    @SidedProxy(
+            modId = MOD_ID,
+            serverSide = "com.mcgoodtime.gti.common.core.CommonProxy",
+            clientSide = "com.mcgoodtime.gti.client.ClientProxy"
+    )
+    public static CommonProxy proxy;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         setupMeta();
         GtiConfig.configFile = event.getSuggestedConfigurationFile();
         GtiConfig.init();
-
+        proxy.init();
         //register Blocks. 注册方块
         GtiBlocks.init();
         FluidRegistry.registerFluid(Gas.gasNatural);
@@ -95,6 +104,7 @@ public final class Gti {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        GtiEntity.init();
         // register Recipes. 注册合成
         Recipes.init();
         //register gui handler
