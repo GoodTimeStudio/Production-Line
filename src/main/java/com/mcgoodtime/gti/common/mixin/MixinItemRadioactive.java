@@ -1,5 +1,6 @@
 package com.mcgoodtime.gti.common.mixin;
 
+import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.entity.EntityUran238;
 import ic2.core.Ic2Items;
 import ic2.core.init.InternalName;
@@ -26,12 +27,14 @@ public abstract class MixinItemRadioactive extends ItemIC2 {
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
         if (itemStack.isItemEqual(Ic2Items.Uran238)) {
-            if (!entityPlayer.capabilities.isCreativeMode) {
-                --itemStack.stackSize;
-            }
-            world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-            if (!world.isRemote) {
-                world.spawnEntityInWorld(new EntityUran238(world, entityPlayer));
+            if (GtiConfig.instance.isThrowableUran238()) {
+                if (!entityPlayer.capabilities.isCreativeMode) {
+                    --itemStack.stackSize;
+                }
+                world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+                if (!world.isRemote) {
+                    world.spawnEntityInWorld(new EntityUran238(world, entityPlayer));
+                }
             }
         }
         return itemStack;

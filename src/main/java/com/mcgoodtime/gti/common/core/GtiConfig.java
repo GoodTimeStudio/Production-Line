@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.core;
 
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,12 +35,14 @@ import java.io.File;
 /**
  * Config loader in GoodTime-Industrial.
  *
- * @author liach, SuHao
+ * @author liach, BestOwl
  */
 public class GtiConfig extends Configuration {
     public static Logger gtiLogger = LogManager.getLogger(Gti.MOD_ID);
     public static GtiConfig instance;
     public static File configFile;
+
+    private boolean throwableUran238;
 
     private GtiConfig(File configFile) {
         super(configFile);
@@ -53,7 +56,15 @@ public class GtiConfig extends Configuration {
             gtiLogger.log(Level.INFO, "Skipping config load");
         } else {
             instance.load();
+
+            Property throwableUran238 = instance.get(CATEGORY_GENERAL, "Throwable Uran238", true);
+            throwableUran238.comment = "Allows throw a uranium-238, was hit after the radiation effect";
+            instance.throwableUran238 = throwableUran238.getBoolean();
         }
         gtiLogger.log(Level.INFO, "Gti config loaded");
+    }
+
+    public boolean isThrowableUran238() {
+        return throwableUran238;
     }
 }
