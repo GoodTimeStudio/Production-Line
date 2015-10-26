@@ -39,7 +39,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiCarbonizeFurnace extends GuiContainer {
     public ContainerCarbonizeFurnace container;
     public String name;
-    private static final ResourceLocation background = new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/client/gui/GuiCarbonizeFurnace.png");;
+    private static final ResourceLocation background = new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/gui/GuiCarbonizeFurnace.png");
 
     public GuiCarbonizeFurnace(ContainerCarbonizeFurnace container1) {
         super(container1);
@@ -59,9 +59,10 @@ public class GuiCarbonizeFurnace extends GuiContainer {
         int k = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(j, k, 0, 0, this.xSize, this.ySize);
 
+
         TileCarbonizeFurnace tile = this.container.getTileEntity();
-        if (tile.isBurning()) {
-            int i1 = tile.getBurnTimeRemainingScaled(13);
+        if (tile.isProcessing()) {
+            int i1 = tile.getRemainingBatteryScaled(13);
             this.drawTexturedModalRect(j + 56, k + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
             i1 = tile.getProgressScaled(24);
             this.drawTexturedModalRect(j + 79, k + 34, 176, 14, i1 + 1, 16);

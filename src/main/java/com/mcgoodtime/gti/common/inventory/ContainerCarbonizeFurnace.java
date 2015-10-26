@@ -24,23 +24,17 @@
  */
 package com.mcgoodtime.gti.common.inventory;
 
+import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
+import com.mcgoodtime.gti.common.tiles.TileContainer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ic2.core.ContainerFullInv;
-import ic2.core.block.invslot.InvSlot;
-import ic2.core.block.machine.tileentity.TileEntityIronFurnace;
-import ic2.core.slot.SlotInvSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.tileentity.TileEntityFurnace;
-
-import java.util.List;
 
 /*
  * Created by suhao on 2015.7.4.
@@ -54,9 +48,10 @@ public class ContainerCarbonizeFurnace extends Container {
 
     public ContainerCarbonizeFurnace(EntityPlayer player, TileCarbonizeFurnace tile) {
         this.tile = tile;
-        this.addSlotToContainer(new Slot(tile, 0, 56, 17));
+        this.addSlotToContainer(new Slot(tile, 0, 56, 16));
         this.addSlotToContainer(new Slot(tile, 1, 56, 53));
-        this.addSlotToContainer(new SlotFurnace(player, tile, 2, 116, 35));
+        this.addSlotToContainer(new SlotFurnace(player, tile, 2, 113, 35));
+        this.addSlotToContainer(new SlotFurnace(player, tile, 3, 131, 35));
         int i;
 
         for (i = 0; i < 3; ++i) {
@@ -70,46 +65,42 @@ public class ContainerCarbonizeFurnace extends Container {
         }
     }
 
-    public void addCraftingToCrafters(ICrafting crafting)
-    {
+    @Override
+    public void addCraftingToCrafters(ICrafting crafting) {
         super.addCraftingToCrafters(crafting);
         crafting.sendProgressBarUpdate(this, 0, this.tile.progress);
-        crafting.sendProgressBarUpdate(this, 1, this.tile.fuel);
-        crafting.sendProgressBarUpdate(this, 2, this.tile.maxFuel);
+        crafting.sendProgressBarUpdate(this, 1, this.tile.requireEnergy);
     }
 
     /**
      * Looks for changes made in the container, sends them to every listener.
      */
-    public void detectAndSendChanges()
-    {
+    @Override
+    public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < this.crafters.size(); ++i)
-        {
-            ICrafting icrafting = (ICrafting)this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.tile.progress)
-            {
+            if (this.lastCookTime != this.tile.progress) {
                 icrafting.sendProgressBarUpdate(this, 0, this.tile.progress);
             }
 
-            if (this.lastBurnTime != this.tile.fuel)
-            {
-                icrafting.sendProgressBarUpdate(this, 1, this.tile.fuel);
+            if (this.lastBurnTime != this.tile.requireEnergy) {
+                icrafting.sendProgressBarUpdate(this, 1, this.tile.requireEnergy);
             }
 
-            if (this.lastItemBurnTime != this.tile.maxFuel)
-            {
-                icrafting.sendProgressBarUpdate(this, 2, this.tile.maxFuel);
+            if (this.lastItemBurnTime != this.tile.maxEnergy) {
+                icrafting.sendProgressBarUpdate(this, 2, this.tile.maxEnergy);
             }
         }
 
         this.lastCookTime = this.tile.progress;
-        this.lastBurnTime = this.tile.fuel;
-        this.lastItemBurnTime = this.tile.maxFuel;
+        this.lastBurnTime = this.tile.requireEnergy;
+        this.lastItemBurnTime = this.tile.maxEnergy;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int slot, int var) {
         if (slot == 0) {
@@ -117,84 +108,76 @@ public class ContainerCarbonizeFurnace extends Container {
         }
 
         if (slot == 1) {
-            this.tile.fuel = var;
+            this.tile.requireEnergy = var;
         }
 
         if (slot == 2) {
-            this.tile.maxFuel = var;
+            this.tile.energy = var;
         }
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
+     * @param i The number of slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer player, int i)
-    {
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int i) {
         ItemStack itemstack = null;
         Slot slot = (Slot)this.inventorySlots.get(i);
 
-        if (slot != null && slot.getHasStack())
-        {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+        if (slot != null && slot.getHasStack()) {
+            ItemStack stack = slot.getStack();
+            itemstack = stack.copy();
 
-            if (i == 2)
-            {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
-                {
+            if (i == 2) {
+                if (!this.mergeItemStack(stack, 4, 39, true)) {
                     return null;
                 }
 
-                slot.onSlotChange(itemstack1, itemstack);
+                slot.onSlotChange(stack, itemstack);
             }
-            else if (i != 1 && i != 0)
-            {
-                if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null)
-                {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (TileEntityFurnace.isItemFuel(itemstack1))
-                {
-                    if (!this.mergeItemStack(itemstack1, 1, 2, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (i >= 3 && i < 30)
-                {
-                    if (!this.mergeItemStack(itemstack1, 30, 39, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (i >= 30 && i < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
-                {
+            else if (i == 3) {
+                if (!this.mergeItemStack(stack, 4, 39, true)) {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 3, 39, false))
-            {
+            else if (i != 1 && i != 0) {
+                if (CarbonizeFurnaceRecipes.instance.getProcessResult(stack) != null) {
+                    if (!this.mergeItemStack(stack, 0, 1, false)) {
+                        return null;
+                    }
+                }
+                else if (TileContainer.isElectricPower(stack)) {
+                    if (!this.mergeItemStack(stack, 1, 2, false)) {
+                        return null;
+                    }
+                }
+                else if (i >= 3 && i < 30) {
+                    if (!this.mergeItemStack(stack, 30, 39, false))
+                    {
+                        return null;
+                    }
+                }
+                else if (i >= 30 && i < 39 && !this.mergeItemStack(stack, 4, 30, false)) {
+                    return null;
+                }
+            }
+            else if (!this.mergeItemStack(stack, 4, 39, false)) {
                 return null;
             }
 
-            if (itemstack1.stackSize == 0)
-            {
-                slot.putStack((ItemStack)null);
+            if (stack.stackSize == 0) {
+                slot.putStack(null);
             }
-            else
-            {
+            else {
                 slot.onSlotChanged();
             }
 
-            if (itemstack1.stackSize == itemstack.stackSize)
-            {
+            if (stack.stackSize == itemstack.stackSize) {
                 return null;
             }
 
-            slot.onPickupFromSlot(player, itemstack1);
+            slot.onPickupFromSlot(player, stack);
         }
 
         return itemstack;

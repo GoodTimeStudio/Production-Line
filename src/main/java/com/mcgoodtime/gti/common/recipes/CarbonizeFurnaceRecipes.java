@@ -24,111 +24,66 @@
  */
 package com.mcgoodtime.gti.common.recipes;
 
-import com.mcgoodtime.gti.common.init.GtiItems;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CarbonizeFurnaceRecipes
-{
+/**
+ * List of CarbonizeFurnace's Recipes
+ *
+ * @author BestOwl
+ */
+public class CarbonizeFurnaceRecipes {
+    public static final CarbonizeFurnaceRecipes instance = new CarbonizeFurnaceRecipes();
+
+    /** The default value after the process */
     private final float xp = 0.15F;
-
-    private static final CarbonizeFurnaceRecipes smeltingBase = new CarbonizeFurnaceRecipes();
     /** The list of smelting results. */
-    private Map smeltingList = new HashMap();
-    private Map experienceList = new HashMap();
+    private List<Recipes> processList = new ArrayList<Recipes>();
 
-    /**
-     * Used to call methods addSmelting and getSmeltingResult.
-     */
-    public static CarbonizeFurnaceRecipes smelting()
-    {
-        return smeltingBase;
-    }
-
-    private CarbonizeFurnaceRecipes()
-    {
-        this.registerBlock(Blocks.log, new ItemStack(Items.coal, 1, 1), xp);
-        this.registerBlock(Blocks.log2, new ItemStack(Items.coal, 1, 1), xp);
-        this.register(new ItemStack(Blocks.planks, 2), new ItemStack(Items.coal, 1, 1), xp);
-        this.register(new ItemStack(Blocks.reeds, 4), new ItemStack(GtiItems.bambooCharcoal), xp);
-        this.registerItem(Items.water_bucket, new ItemStack(GtiItems.salt), xp);
-    }
-
-    public void registerBlock(Block block, ItemStack itemStack, float xp)
-    {
-        this.registerItem(Item.getItemFromBlock(block), itemStack, xp);
-    }
-
-    public void registerItem(Item item, ItemStack itemStack, float xp)
-    {
-        this.register(new ItemStack(item, 1, 32767), itemStack, xp);
-    }
-
-    public void register(ItemStack itemStack, ItemStack itemStack1, float xp)
-    {
-        this.smeltingList.put(itemStack, itemStack1);
-        this.experienceList.put(itemStack1, Float.valueOf(xp));
+    public void register(ItemStack input, ItemStack output, double requireEnergy, float xp) {
+        processList.add(new Recipes(input, output, requireEnergy, xp));
     }
 
     /**
      * Returns the smelting result of an item.
      */
-    public ItemStack getSmeltingResult(ItemStack itemStack)
-    {
-        Iterator iterator = this.smeltingList.entrySet().iterator();
-        Entry entry;
-
-        do
-        {
-            if (!iterator.hasNext())
-            {
-                return null;
+    public ItemStack getProcessResult(ItemStack itemStack) {
+        for (Recipes recipes : processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return recipes.output;
             }
-
-            entry = (Entry)iterator.next();
         }
-        while (!this.func_151397_a(itemStack, (ItemStack)entry.getKey()));
-
-        return (ItemStack)entry.getValue();
+        return null;
     }
 
-    private boolean func_151397_a(ItemStack p_151397_1_, ItemStack p_151397_2_)
-    {
-        return p_151397_2_.getItem() == p_151397_1_.getItem() && (p_151397_2_.getItemDamage() == 32767 || p_151397_2_.getItemDamage() == p_151397_1_.getItemDamage());
-    }
-
-    public Map getSmeltingList()
-    {
-        return this.smeltingList;
-    }
-
-    public float func_151398_b(ItemStack p_151398_1_)
-    {
-        float ret = p_151398_1_.getItem().getSmeltingExperience(p_151398_1_);
-        if (ret != -1) return ret;
-
-        Iterator iterator = this.experienceList.entrySet().iterator();
-        Entry entry;
-
-        do
-        {
-            if (!iterator.hasNext())
-            {
-                return 0.0F;
+    /**
+     * Get required amount of process
+     * @param itemStack Input item
+     * @return Required amount of process
+     */
+    public int getRequiredProcessAmount(ItemStack itemStack) {
+        for (Recipes recipes : processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return recipes.input.stackSize;
             }
-
-            entry = (Entry)iterator.next();
         }
-        while (!this.func_151397_a(p_151398_1_, (ItemStack)entry.getKey()));
+        return 1;
+    }
 
-        return ((Float)entry.getValue()).floatValue();
+    public static class Recipes {
+        public ItemStack input;
+        public ItemStack output;
+        /** Value of EU consumption */
+        public double requiresEnergy;
+        public double xp;
+
+        public Recipes(ItemStack input, ItemStack output, double requiresEnergy, float xp) {
+            this.input = input;
+            this.output = output;
+            this.requiresEnergy = requiresEnergy;
+            this.xp = xp;
+        }
     }
 }
