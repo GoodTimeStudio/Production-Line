@@ -27,10 +27,17 @@ package com.mcgoodtime.gti.common.tiles;
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.api.tile.IWrenchable;
 import ic2.core.Ic2Items;
-import net.minecraft.item.*;
+import ic2.core.block.IUpgradableBlock;
+import ic2.core.item.IUpgradeItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,21 +47,21 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public class TileCarbonizeFurnace extends TileElectricContainer {
-    /** containerItemsList: 0 = input, 1 = power, 2 & 3 = output */
+public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgradableBlock, IWrenchable {
+    /** containerItemsList: 0 = input, 1 = power, 2 & 3 = output, 4 & 5 = upgrades */
 
-    /** The number of remaining battery */
-    public double energy;
-    /** The number of that can storage battery */
-    public final int maxEnergy = 200;
     /** The number of ticks that the furnace will keep burning */
-    public int requireEnergy;
+    public double requireEnergy;
     /** The number of ticks that the current item has been process for */
     public int progress;
 
+    public TileCarbonizeFurnace() {
+        super(3, 300, 1, 1);
+    }
+
     @Override
     public int getSizeInventory() {
-        return 4;
+        return 6;
     }
 
     @Override
@@ -65,7 +72,6 @@ public class TileCarbonizeFurnace extends TileElectricContainer {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        this.energy = nbt.getDouble("Energy");
         this.requireEnergy = nbt.getShort("requireEnergy");
         this.progress = nbt.getShort("Progress");
 
@@ -86,7 +92,6 @@ public class TileCarbonizeFurnace extends TileElectricContainer {
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        nbt.setDouble("Energy", energy);
         nbt.setShort("requireEnergy", (short) requireEnergy);
         nbt.setShort("Progress", (short) progress);
 
@@ -112,7 +117,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer {
      */
     @SideOnly(Side.CLIENT)
     public int getProgressScaled(int i) {
-        return this.progress * i /200;
+        return (int) (i * Math.min(1.0F, this.progress / this.requireEnergy));
     }
 
     /**
@@ -121,16 +126,49 @@ public class TileCarbonizeFurnace extends TileElectricContainer {
      */
     @SideOnly(Side.CLIENT)
     public int getRemainingBatteryScaled(int i) {
-        return (int) (this.requireEnergy * i / this.energy);
+        return (int) (i * Math.min(1.0F, (float) this.energy / (float) this.maxEnergy));
     }
 
     public boolean isProcessing() {
-        return this.requireEnergy > 0;
+        return requireEnergy == 0;
     }
 
     @Override
     public void updateEntity() {
+        super.updateEntity();
 
+        if (!this.worldObj.isRemote) {
+            boolean needUpdate = false;
+
+            if (canProcess() && this.energy >= this.energyPerTick) {
+                this.requireEnergy = CarbonizeFurnaceRecipes.instance.getRecipes(this.containerItemsList.get(0)).requiresEnergy;
+                this.setActive(true);
+                this.energy -= this.energyPerTick;
+                this.progress += this.energyPerTick;
+
+                if (this.progress >= this.requireEnergy) {
+                    this.requireEnergy = 0;
+                    this.progress = 0;
+                    this.processItem();
+                    needUpdate = true;
+                }
+            } else {
+                this.setActive(false);
+                this.requireEnergy = 0;
+                this.progress = 0;
+            }
+
+            for(int i = 4; i < 6; i++) {
+                ItemStack stack = this.containerItemsList.get(i);
+                if(stack != null && stack.getItem() instanceof IUpgradeItem && ((IUpgradeItem)stack.getItem()).onTick(stack, this)) {
+                    needUpdate = true;
+                }
+            }
+
+            if (needUpdate) {
+                this.markDirty();
+            }
+        }
     }
 
     /**
@@ -193,54 +231,97 @@ public class TileCarbonizeFurnace extends TileElectricContainer {
     }
 
     @Override
-    public ItemStack decrStackSize(int slot, int num) {
-        if (this.containerItemsList.get(slot) != null) {
-            ItemStack itemstack;
-
-            if (this.containerItemsList.get(slot).stackSize <= num) {
-                itemstack = this.containerItemsList.get(slot);
-                this.containerItemsList.set(slot, null);
-                return itemstack;
-            } else {
-                itemstack = this.containerItemsList.get(slot).splitStack(num);
-
-                if (this.containerItemsList.get(slot).stackSize == 0) {
-                    this.containerItemsList.set(slot, null);
-                }
-
-                return itemstack;
-            }
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-        return (!(slot == 2 || slot == 3)) && (slot != 1 || isElectricPower(itemStack));
-
+    public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
+        return direction != ForgeDirection.UP && super.acceptsEnergyFrom(emitter, direction);
     }
 
     @Override
     public double getEnergy() {
-        return 0;
+        return this.energy;
     }
 
     @Override
-    public boolean useEnergy(double v) {
-        return false;
+    public boolean useEnergy(double amount) {
+        if(this.energy >= amount) {
+            this.energy -= amount;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void setRedstonePowered(boolean b) {
-
+    public void setRedstonePowered(boolean redstonePowered) {
     }
 
     @Override
     public List<ItemStack> getCompatibleUpgradeList() {
-        ArrayList<ItemStack> itemStacks = new ArrayList<ItemStack>();
-        itemStacks.add(Ic2Items.ejectorUpgrade);
-        itemStacks.add(Ic2Items.pullingUpgrade);
-        return itemStacks;
+        List<ItemStack> list = new ArrayList<ItemStack>();
+        list.add(Ic2Items.ejectorUpgrade);
+        list.add(Ic2Items.pullingUpgrade);
+        return list;
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int i) {
+        return true;
+    }
+
+    @Override
+    public short getFacing() {
+        return this.facing;
+    }
+
+    @Override
+    public void setFacing(short i) {
+        if (this.facing == i) {
+
+        } else {
+            super.setFacing(i);
+        }
+    }
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        return true;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
+    }
+
+    /**
+     * Returns true if automation can extract the given item in the given
+     * slot from the given side. Args: Slot, item, side
+     */
+    @Override
+    public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
+        if (itemStack.getItem() == Items.bucket) {
+            return true;
+        }
+        switch (slot) {
+            case 2: return true;
+            case 3: return true;
+            default: return false;
+        }
+    }
+
+    /**
+     * Returns true if automation can insert the given item in the given
+     * slot from the given side. Args: Slot, item, side
+     */
+    @Override
+    public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
+        switch (slot) {
+            case 2: return false;
+            case 3: return false;
+            default: return true;
+        }
     }
 }

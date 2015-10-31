@@ -26,40 +26,40 @@ package com.mcgoodtime.gti.common.inventory;
 
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
-import com.mcgoodtime.gti.common.tiles.TileContainer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.core.item.IUpgradeItem;
+import ic2.core.slot.SlotDischarge;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
 
 /*
  * Created by suhao on 2015.7.4.
  */
-public class ContainerCarbonizeFurnace extends Container {
+public class ContainerCarbonizeFurnace extends ContainerGti<TileCarbonizeFurnace> {
 
-    public TileCarbonizeFurnace tile;
-    private int lastCookTime;
-    private int lastBurnTime;
-    private int lastItemBurnTime;
+    private int lastProgress;
+    private int lastRequireEnergy;
+    private int lastEnergy;
 
     public ContainerCarbonizeFurnace(EntityPlayer player, TileCarbonizeFurnace tile) {
+        super(player, tile);
         this.tile = tile;
         this.addSlotToContainer(new Slot(tile, 0, 56, 16));
-        this.addSlotToContainer(new Slot(tile, 1, 56, 53));
-        this.addSlotToContainer(new SlotFurnace(player, tile, 2, 113, 35));
-        this.addSlotToContainer(new SlotFurnace(player, tile, 3, 131, 35));
-        int i;
+        this.addSlotToContainer(new SlotDischarge(tile, 1, 1, 56, 53));
+        this.addSlotToContainer(new SlotOutput(player, tile, 2, 113, 35));
+        this.addSlotToContainer(new SlotOutput(player, tile, 3, 131, 35));
+        this.addSlotToContainer(new SlotUpgrade(tile, 4, 153, 26));
+        this.addSlotToContainer(new SlotUpgrade(tile, 5, 153, 44));
 
+        int i;
         for (i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
-
         for (i = 0; i < 9; ++i) {
             this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
         }
@@ -69,7 +69,8 @@ public class ContainerCarbonizeFurnace extends Container {
     public void addCraftingToCrafters(ICrafting crafting) {
         super.addCraftingToCrafters(crafting);
         crafting.sendProgressBarUpdate(this, 0, this.tile.progress);
-        crafting.sendProgressBarUpdate(this, 1, this.tile.requireEnergy);
+        crafting.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
+        crafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
     }
 
     /**
@@ -82,36 +83,42 @@ public class ContainerCarbonizeFurnace extends Container {
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.tile.progress) {
+            if (this.lastProgress != this.tile.progress) {
                 icrafting.sendProgressBarUpdate(this, 0, this.tile.progress);
             }
 
-            if (this.lastBurnTime != this.tile.requireEnergy) {
-                icrafting.sendProgressBarUpdate(this, 1, this.tile.requireEnergy);
+            if (this.lastRequireEnergy != this.tile.requireEnergy) {
+                icrafting.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
             }
 
-            if (this.lastItemBurnTime != this.tile.maxEnergy) {
-                icrafting.sendProgressBarUpdate(this, 2, this.tile.maxEnergy);
+            if (this.lastEnergy != this.tile.energy) {
+                icrafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
             }
         }
 
-        this.lastCookTime = this.tile.progress;
-        this.lastBurnTime = this.tile.requireEnergy;
-        this.lastItemBurnTime = this.tile.maxEnergy;
+        this.lastProgress = this.tile.progress;
+        this.lastRequireEnergy = (int) this.tile.requireEnergy;
+        this.lastEnergy = this.tile.maxEnergy;
     }
 
+    /**
+     * Sends two ints to the client-side Container. Used for furnace burning time, smelting progress, brewing progress,
+     * and enchanting level. Normally the first int identifies which variable to update, and the second contains the new
+     * value. Both are truncated to shorts in non-local SMP.
+     * @param i Identifies which variable to update
+     */
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateProgressBar(int slot, int var) {
-        if (slot == 0) {
+    public void updateProgressBar(int i, int var) {
+        if (i == 0) {
             this.tile.progress = var;
         }
 
-        if (slot == 1) {
+        if (i == 1) {
             this.tile.requireEnergy = var;
         }
 
-        if (slot == 2) {
+        if (i == 2) {
             this.tile.energy = var;
         }
     }
@@ -123,21 +130,31 @@ public class ContainerCarbonizeFurnace extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int i) {
         ItemStack itemstack = null;
-        Slot slot = (Slot)this.inventorySlots.get(i);
+        Slot slot = (Slot) this.inventorySlots.get(i);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack stack = slot.getStack();
             itemstack = stack.copy();
 
             if (i == 2) {
-                if (!this.mergeItemStack(stack, 4, 39, true)) {
+                if (!this.mergeItemStack(stack, 6, 39, true)) {
                     return null;
                 }
 
                 slot.onSlotChange(stack, itemstack);
             }
             else if (i == 3) {
-                if (!this.mergeItemStack(stack, 4, 39, true)) {
+                if (!this.mergeItemStack(stack, 6, 39, true)) {
+                    return null;
+                }
+            }
+            else if (i == 4) {
+                if (!this.mergeItemStack(stack, 6, 39, true)) {
+                    return null;
+                }
+            }
+            else if (i == 5) {
+                if (!this.mergeItemStack(stack, 6, 39, true)) {
                     return null;
                 }
             }
@@ -147,22 +164,36 @@ public class ContainerCarbonizeFurnace extends Container {
                         return null;
                     }
                 }
-                else if (TileContainer.isElectricPower(stack)) {
+                else if (this.tile.isDischargeItem(stack)) {
                     if (!this.mergeItemStack(stack, 1, 2, false)) {
                         return null;
                     }
                 }
-                else if (i >= 3 && i < 30) {
+                else if (stack.getItem() instanceof IUpgradeItem) {
+                    for (ItemStack itemStack1 : this.tile.getCompatibleUpgradeList()) {
+                        if (stack.isItemEqual(itemStack1)) {
+                            if (stack.stackSize <= 4) {
+                                if (!this.mergeItemStack(stack, 4, 5, false)) {
+                                    if (!this.mergeItemStack(stack, 5, 6, false)) {
+                                        return null;
+                                    }
+                                    return null;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (i >= 6 && i < 30) {
                     if (!this.mergeItemStack(stack, 30, 39, false))
                     {
                         return null;
                     }
                 }
-                else if (i >= 30 && i < 39 && !this.mergeItemStack(stack, 4, 30, false)) {
+                else if (i >= 30 && i < 39 && !this.mergeItemStack(stack, 6, 30, false)) {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(stack, 4, 39, false)) {
+            else if (!this.mergeItemStack(stack, 6, 39, false)) {
                 return null;
             }
 
@@ -181,14 +212,5 @@ public class ContainerCarbonizeFurnace extends Container {
         }
 
         return itemstack;
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer player) {
-        return this.tile.isUseableByPlayer(player);
-    }
-
-    public TileCarbonizeFurnace getTileEntity() {
-        return this.tile;
     }
 }

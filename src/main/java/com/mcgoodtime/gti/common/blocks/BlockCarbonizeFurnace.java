@@ -26,34 +26,13 @@ package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GuiHandler;
-import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileGti;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import ic2.core.block.BlockTextureStitched;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -84,7 +63,7 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
 
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        if ( ((TileGti)world.getTileEntity(x, y, z)).isBurn ) {
+        if ( ((TileGti)world.getTileEntity(x, y, z)).active) {
             float f2;
             float fmod;
             float f1mod;

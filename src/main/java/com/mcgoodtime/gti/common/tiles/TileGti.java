@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.tiles;
 
+import com.mcgoodtime.gti.common.network.GtiNetwork;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -38,36 +39,20 @@ import net.minecraft.tileentity.TileEntity;
 public class TileGti extends TileEntity {
 
     public short facing;
-    public boolean isBurn;
+    public boolean active;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         facing = nbt.getShort("facing");
-        isBurn = nbt.getBoolean("isBurn");
+        active = nbt.getBoolean("active");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setShort("facing", facing);
-        nbt.setBoolean("isBurn", isBurn);
-    }
-
-    public short getFacing() {
-        return facing;
-    }
-
-    public boolean isBurn() {
-        return isBurn;
-    }
-
-    public void setFacing(short facing) {
-        this.facing = facing;
-    }
-
-    public void setIsBurn(boolean isBurn) {
-        this.isBurn = isBurn;
+        nbt.setBoolean("active", active);
     }
 
     @Override
@@ -75,14 +60,24 @@ public class TileGti extends TileEntity {
         super.onDataPacket(net, pkt);
         NBTTagCompound nbt = pkt.func_148857_g();
         this.facing = nbt.getShort("facing");
-        this.isBurn = nbt.getBoolean("isBurn");
+        this.active = nbt.getBoolean("active");
     }
 
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound sync = new NBTTagCompound();
         sync.setShort("facing", this.facing);
-        sync.setBoolean("isBurn", this.isBurn);
+        sync.setBoolean("active", this.active);
         return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, sync);
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+        GtiNetwork.updateBlockState(this.xCoord, this.yCoord, this.zCoord, active, this.facing);
+    }
+
+    public void setFacing(short facing) {
+        this.facing = facing;
+        GtiNetwork.updateBlockState(this.xCoord, this.yCoord, this.zCoord, this.active, facing);
     }
 }

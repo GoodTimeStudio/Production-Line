@@ -80,7 +80,27 @@ public abstract class TileContainer extends TileGti implements ISidedInventory {
      * (second arg) of items and returns them in a new stack.
      */
     @Override
-    public abstract ItemStack decrStackSize(int slot, int num);
+    public ItemStack decrStackSize(int slot, int num) {
+        if (this.containerItemsList.get(slot) != null) {
+            ItemStack itemstack;
+
+            if (this.containerItemsList.get(slot).stackSize <= num) {
+                itemstack = this.containerItemsList.get(slot);
+                this.containerItemsList.set(slot, null);
+                return itemstack;
+            } else {
+                itemstack = this.containerItemsList.get(slot).splitStack(num);
+
+                if (this.containerItemsList.get(slot).stackSize == 0) {
+                    this.containerItemsList.set(slot, null);
+                }
+
+                return itemstack;
+            }
+        } else {
+            return null;
+        }
+    }
 
     /**
      * When some containers are closed they call this on each slot, then drop whatever
@@ -140,17 +160,8 @@ public abstract class TileContainer extends TileGti implements ISidedInventory {
      * @param slot The number of slot.
      */
     @Override
-    public abstract boolean isItemValidForSlot(int slot, ItemStack itemStack);
-
-    /**
-     *
-     * @return Whether the item can supply energy
-     */
-    public static boolean isElectricPower(ItemStack item) {
-        if (item.getItem() instanceof BaseElectricItem) {
-            ((BaseElectricItem) item.getItem()).canProvideEnergy(item);
-            return true;
-        }
-        return false;
+    public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
+        return true;
     }
+
 }

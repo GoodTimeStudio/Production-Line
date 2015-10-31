@@ -35,22 +35,23 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * Created by suhao on 2015.10.18.0018.
+ * Created by BestOwl on 2015.10.18.0018.
  *
- * @author suhao
+ * @author BestOwl
  */
-public class BlockUpdateMessage implements IMessage {
+public class MessageBlockState implements IMessage {
 
     private NBTTagCompound nbt;
 
-    public BlockUpdateMessage(){}
+    public MessageBlockState(){}
 
-    public BlockUpdateMessage(int x, int y, int z, boolean isBurn) {
+    public MessageBlockState(int x, int y, int z, boolean active, short facing) {
         nbt = new NBTTagCompound();
         nbt.setInteger("xPos", x);
         nbt.setInteger("yPos", y);
         nbt.setInteger("zPos", z);
-        nbt.setBoolean("isBurn", isBurn);
+        nbt.setBoolean("active", active);
+        nbt.setShort("facing", facing);
     }
 
     @Override
@@ -63,17 +64,21 @@ public class BlockUpdateMessage implements IMessage {
         ByteBufUtils.writeTag(buf, nbt);
     }
 
-    public static class Handler implements IMessageHandler<BlockUpdateMessage, IMessage> {
+    public static class Handler implements IMessageHandler<MessageBlockState, IMessage> {
 
         @Override
-        public IMessage onMessage(BlockUpdateMessage message, MessageContext ctx) {
+        public IMessage onMessage(MessageBlockState message, MessageContext ctx) {
             WorldClient client = Minecraft.getMinecraft().theWorld;
             int x = message.nbt.getInteger("xPos");
             int y = message.nbt.getInteger("yPos");
             int z = message.nbt.getInteger("zPos");
-            ((TileGti) client.getTileEntity(x, y, z)).setIsBurn(message.nbt.getBoolean("isBurn"));
-            client.markBlockForUpdate(x, y, z);
-            client.notifyBlockChange(x, y, z, client.getBlock(x, y, z));
+            TileGti tileGti = (TileGti) client.getTileEntity(x, y, z);
+            if (tileGti != null) {
+                tileGti.active = message.nbt.getBoolean("active");
+                tileGti.facing = message.nbt.getShort("facing");
+                client.markBlockForUpdate(x, y, z);
+                client.notifyBlockChange(x, y, z, client.getBlock(x, y, z));
+            }
             return null;
         }
     }

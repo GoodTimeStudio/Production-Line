@@ -24,6 +24,9 @@
  */
 package com.mcgoodtime.gti.common.recipes;
 
+import com.mcgoodtime.gti.common.init.GtiItems;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -38,16 +41,36 @@ public class CarbonizeFurnaceRecipes {
     public static final CarbonizeFurnaceRecipes instance = new CarbonizeFurnaceRecipes();
 
     /** The default value after the process */
-    private final float xp = 0.15F;
+    private final float XP = 0.15F;
     /** The list of smelting results. */
     private List<Recipes> processList = new ArrayList<Recipes>();
+
+    private CarbonizeFurnaceRecipes() {
+        register(new ItemStack(Blocks.log), new ItemStack(Items.coal, 2, 1), 2000, XP);
+        register(new ItemStack(Blocks.log2), new ItemStack(Items.coal, 2, 1), 2000, XP);
+        register(new ItemStack(Blocks.planks, 2), new ItemStack(Items.coal, 1, 1), 1500, XP);
+        register(new ItemStack(Items.reeds, 4), new ItemStack(GtiItems.bambooCharcoal), 1500, XP);
+        register(new ItemStack(Items.water_bucket), new ItemStack(GtiItems.salt), 1100, XP);
+    }
 
     public void register(ItemStack input, ItemStack output, double requireEnergy, float xp) {
         processList.add(new Recipes(input, output, requireEnergy, xp));
     }
 
     /**
-     * Returns the smelting result of an item.
+     * Returns the process result of an item.
+     */
+    public Recipes getRecipes(ItemStack itemStack) {
+        for (Recipes recipes : processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return recipes;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the process result of an item.
      */
     public ItemStack getProcessResult(ItemStack itemStack) {
         for (Recipes recipes : processList) {
@@ -79,7 +102,7 @@ public class CarbonizeFurnaceRecipes {
         public double requiresEnergy;
         public double xp;
 
-        public Recipes(ItemStack input, ItemStack output, double requiresEnergy, float xp) {
+        private Recipes(ItemStack input, ItemStack output, double requiresEnergy, float xp) {
             this.input = input;
             this.output = output;
             this.requiresEnergy = requiresEnergy;

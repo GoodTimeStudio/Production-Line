@@ -25,17 +25,14 @@
 package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.block.BlockTextureStitched;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -49,9 +46,7 @@ import net.minecraft.world.World;
 public abstract class BlockMultiTexture extends BlockGti {
 
     private static final int[][] facingAndSideToSpriteOffset = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
-
-    @SideOnly(Side.CLIENT)
-    protected IIcon textures[] = new IIcon[12];
+    protected IIcon textures[];
     //top, low, front, back, left, right;
 
     public BlockMultiTexture(Material material, String name, float hardness, float resistance, String harvestLevelToolClass, int harvestLevel) {
@@ -65,6 +60,8 @@ public abstract class BlockMultiTexture extends BlockGti {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iir) {
+        this.textures = new IIcon[12];
+
         for(int burn = 0; burn < 2; ++burn) {
             for(int side = 0; side < 6; ++side) {
                 int subIndex = burn * 6 + side;
@@ -79,10 +76,11 @@ public abstract class BlockMultiTexture extends BlockGti {
     /**
      * World only
      */
+    @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
-        int facing = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).getFacing();
-        boolean isBurn = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).isBurn();
+        int facing = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).facing;
+        boolean isBurn = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).active;
 
         int i = facingAndSideToSpriteOffset[facing][side];
         if (isBurn) {
@@ -100,6 +98,7 @@ public abstract class BlockMultiTexture extends BlockGti {
      * 0:low  4:west  2:north
      *
      */
+    @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
         return textures[facingAndSideToSpriteOffset[3][side]];
@@ -110,21 +109,21 @@ public abstract class BlockMultiTexture extends BlockGti {
         TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof TileGti) {
             if(entityLivingBase == null) {
-                ((TileGti) te).setFacing((short) 2);
+                ((TileGti) te).facing = ((short) 2);
             } else {
                 int l = MathHelper.floor_double((double) (entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
                 switch(l) {
                     case 0:
-                        ((TileGti) te).setFacing((short) 2);
+                        ((TileGti) te).facing = ((short) 2);
                         break;
                     case 1:
-                        ((TileGti) te).setFacing((short) 5);
+                        ((TileGti) te).facing = ((short) 5);
                         break;
                     case 2:
-                        ((TileGti) te).setFacing((short) 3);
+                        ((TileGti) te).facing = ((short) 3);
                         break;
                     case 3:
-                        ((TileGti) te).setFacing((short) 4);
+                        ((TileGti) te).facing = ((short) 4);
                 }
             }
         }
