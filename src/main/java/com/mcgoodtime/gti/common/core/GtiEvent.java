@@ -30,7 +30,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 
 /*
  * Created by suhao on 2015/5/17.
