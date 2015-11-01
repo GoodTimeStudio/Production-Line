@@ -5,12 +5,15 @@ import com.mcgoodtime.gti.common.init.GtiItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
-
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemGtiFood extends ItemGti implements ITextureFolder {
+
+	private long preTime;
+	private Map<EntityPlayer, EatAmount> amountMap = new HashMap<EntityPlayer, EatAmount>();
 
 	/** The amount this food item heals the player. */
 	private int healAmount;
@@ -30,10 +33,8 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
-	{
-		if (entityPlayer.canEat(this.alwaysEdible))
-		{
+	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+		if (entityPlayer.canEat(this.alwaysEdible)) {
 			entityPlayer.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
 		}
 
@@ -47,10 +48,36 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 
 		if (!world.isRemote) {
-			if (this.equals(GtiItems.salt)) {
-				Random random = new Random();
-				GtiPotion.Salty.applyPotion(player, random.nextInt(2000) % (2000 + 1), random.nextInt(14) % (14 + 1));
+
+			if (this.preTime == 0) {
+				MinecraftServer.getSystemTimeMillis();
+			} else {
+				if (MinecraftServer.getSystemTimeMillis() - this.preTime >= 6000) {
+					amountMap.remove(player);
+					return stack;
+				}
 			}
+
+			if (this.equals(GtiItems.salt)) {
+
+				if (!amountMap.containsKey(player)) {
+					EatAmount amount = amountMap.get(player);
+					if (!stack.isItemEqual(amount.itemStack)) {
+						amountMap.remove(player);
+					}
+					//3 - 1
+					else if (amount.amount == 2) {
+						amountMap.remove(player);
+						GtiPotion.salty.applyPotion(player, 0, 6);
+						return stack;
+					}
+
+				} else {
+					amountMap.put(player, new EatAmount(stack, 0));
+				}
+				amountMap.get(player).amount++;
+			}
+
 		}
 		return stack;
 	}
@@ -76,5 +103,13 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 		return EnumAction.eat;
 	}
 
+	public static class EatAmount {
+		private ItemStack itemStack;
+		private int amount;
 
+		private EatAmount(ItemStack itemStack, int amount) {
+			this.itemStack = itemStack;
+			this.amount = amount;
+		}
+	}
 }
