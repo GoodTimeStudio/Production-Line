@@ -48,23 +48,12 @@ public class ContainerCarbonizeFurnace extends ContainerGti<TileCarbonizeFurnace
 
     public ContainerCarbonizeFurnace(EntityPlayer player, TileCarbonizeFurnace tile) {
         super(player, tile);
-        this.tile = tile;
         this.addSlotToContainer(new Slot(tile, 0, 56, 16));
         this.addSlotToContainer(new SlotDischarge(tile, 1, 1, 56, 53));
         this.addSlotToContainer(new SlotOutput(player, tile, 2, 113, 35));
         this.addSlotToContainer(new SlotOutput(player, tile, 3, 131, 35));
         this.addSlotToContainer(new SlotUpgrade(tile, 4, 153, 26));
         this.addSlotToContainer(new SlotUpgrade(tile, 5, 153, 44));
-
-        int i;
-        for (i = 0; i < 3; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
-        for (i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
-        }
     }
 
     @Override
@@ -185,13 +174,13 @@ public class ContainerCarbonizeFurnace extends ContainerGti<TileCarbonizeFurnace
                         }
                     }
                 }
-                else if (i >= 6 && i < 30) {
-                    if (!this.mergeItemStack(stack, 30, 39, false))
+                else if (i >= 6 && i < 33) {
+                    if (!this.mergeItemStack(stack, 33, 39, false))
                     {
                         return null;
                     }
                 }
-                else if (i >= 30 && i < 39 && !this.mergeItemStack(stack, 6, 30, false)) {
+                else if (i >= 33 && i < 39 && !this.mergeItemStack(stack, 6, 30, false)) {
                     return null;
                 }
             }
