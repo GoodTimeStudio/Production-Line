@@ -53,25 +53,30 @@ public class GtiPotion extends Potion {
         this.curativeItems = Arrays.asList(curativeItems);
     }
 
+    /**
+     * @note http://www.minecraftforum.net/forums/mapping-and-modding/mapping-and-modding-tutorials/2363067-forge-1-7-10-redds-advanced-tutorials-make-your
+     */
     public static void initPotion() {
-        Potion[] potionTypes;
-        for (Field f : Potion.class.getDeclaredFields()) {
-            f.setAccessible(true);
-            try {
-                if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
-                    Field modfield = Field.class.getDeclaredField("modifiers");
-                    modfield.setAccessible(true);
-                    modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+        if (Potion.potionTypes.length < 256) {
+            Potion[] potionTypes;
+            for (Field f : Potion.class.getDeclaredFields()) {
+                f.setAccessible(true);
+                try {
+                    if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
+                        Field modfield = Field.class.getDeclaredField("modifiers");
+                        modfield.setAccessible(true);
+                        modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
 
-                    potionTypes = (Potion[])f.get(null);
-                    final Potion[] newPotionTypes = new Potion[256];
-                    System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-                    f.set(null, newPotionTypes);
+                        potionTypes = (Potion[])f.get(null);
+                        final Potion[] newPotionTypes = new Potion[256];
+                        System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+                        f.set(null, newPotionTypes);
+                    }
                 }
-            }
-            catch (Exception e) {
-                GtiConfig.gtiLogger.log(Level.ERROR, "Severe error, please report this to the mod author:");
-                GtiConfig.gtiLogger.log(Level.ERROR, e);
+                catch (Exception e) {
+                    GtiConfig.gtiLogger.log(Level.ERROR, "Severe error, please report this to the mod author:");
+                    GtiConfig.gtiLogger.log(Level.ERROR, e);
+                }
             }
         }
 
