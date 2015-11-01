@@ -125,6 +125,7 @@ public class GtiPotion extends Potion {
                 effect.level = 0;
             }
 
+            //20ticks = 1s
             if (effect.timer < 20) {
                 ++effect.timer;
                 return false;
