@@ -47,6 +47,11 @@ public class BlockUtility extends BlockMultiTexture {
     }
 
     @Override
+    protected Class<? extends TileGti> getTileEntityClass() {
+        return null;
+    }
+
+    @Override
     public TileEntity createTileEntity(World world, int metadata) {
         switch (metadata) {
             case 0: return new TileGti();

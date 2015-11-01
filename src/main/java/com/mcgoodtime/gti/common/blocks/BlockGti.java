@@ -40,7 +40,7 @@ import org.apache.logging.log4j.Level;
  * @author suhao
  */
 public class BlockGti extends Block {
-    protected String blockName;
+    public String blockName;
 
     public BlockGti(Material material, String name, float hardness, float resistance,
                        String harvestLevelToolClass, int harvestLevel) {

@@ -26,9 +26,11 @@ package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.tiles.TileGti;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.block.BlockTextureStitched;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -43,7 +45,7 @@ import net.minecraft.world.World;
 /*
  * Created by suhao on 2015.7.13.
  */
-public abstract class BlockMultiTexture extends BlockGti {
+public abstract class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
 
     private static final int[][] facingAndSideToSpriteOffset = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
     protected IIcon textures[];
@@ -51,10 +53,12 @@ public abstract class BlockMultiTexture extends BlockGti {
 
     public BlockMultiTexture(Material material, String name, float hardness, float resistance, String harvestLevelToolClass, int harvestLevel) {
         super(material, name, hardness, resistance, harvestLevelToolClass, harvestLevel);
+        GameRegistry.registerTileEntity(this.getTileEntityClass(), name);
     }
 
     public BlockMultiTexture(Material material, String name) {
         super(material, name);
+        GameRegistry.registerTileEntity(this.getTileEntityClass(), name);
     }
 
     @Override
@@ -79,15 +83,18 @@ public abstract class BlockMultiTexture extends BlockGti {
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
-        int facing = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).facing;
-        boolean isBurn = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).active;
+        if (iBlockAccess.getTileEntity(x, y, z) instanceof TileGti) {
+            int facing = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).facing;
+            boolean isBurn = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).active;
 
-        int i = facingAndSideToSpriteOffset[facing][side];
-        if (isBurn) {
-            i += 6;
+            int i = facingAndSideToSpriteOffset[facing][side];
+            if (isBurn) {
+                i += 6;
+            }
+
+            return textures[i];
         }
-
-        return textures[i];
+        return null;
     }
 
     /**
@@ -129,4 +136,17 @@ public abstract class BlockMultiTexture extends BlockGti {
         }
     }
 
+    protected abstract Class<? extends TileGti> getTileEntityClass();
+
+    @Override
+    public TileEntity createNewTileEntity(World world, int var) {
+        try {
+            return this.getTileEntityClass().newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

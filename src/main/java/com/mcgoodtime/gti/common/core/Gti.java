@@ -92,8 +92,6 @@ public final class Gti {
         FluidRegistry.registerFluid(Gas.gasNatural);
         //register Items. 注册物品
         GtiItems.init();
-        //register TileEntity
-        GtiTiles.init();
         GtiPotion.initPotion();
     }
     
