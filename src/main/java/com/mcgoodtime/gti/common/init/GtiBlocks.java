@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.blocks.*;
+import com.mcgoodtime.gti.common.blocks.generator.BlockFluidKineticGenerator;
 import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
 
@@ -60,11 +61,10 @@ public class GtiBlocks {
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
-        genGasKU = new GenGasKu();
+        genGasKU = new BlockFluidKineticGenerator();
         evsu = new BlockEVSU();
 
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
-        GameRegistry.registerBlock(genGasKU, "GenGasKu");
         GameRegistry.registerBlock(evsu, "EVSU");
 
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));

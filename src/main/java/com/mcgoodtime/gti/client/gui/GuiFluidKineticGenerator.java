@@ -22,38 +22,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package com.mcgoodtime.gti.client.gui;
 
-package com.mcgoodtime.gti.common.inventory;
+import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.inventory.ContainerFluidKineticGenerator;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.ResourceLocation;
 
-import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+/**
+ * The Gui.
+ *
+ * @author liach
+ */
+@SideOnly(Side.CLIENT)
+public class GuiFluidKineticGenerator extends GuiGti<ContainerFluidKineticGenerator> {
 
-public class ContainerGenGasKu extends Container {
-
-    private TileGenGasKu tileEntity;
-
-    public ContainerGenGasKu(InventoryPlayer inventoryPlayer, TileGenGasKu tileEntity) {
-        this.tileEntity = tileEntity;
-        /*this.addSlotToContainer(new Slot(tileEntity, 0, 56, 17));
-        this.addSlotToContainer(new Slot(tileEntity, 1, 56, 53));
-        this.addSlotToContainer(new Slot(tileEntity, 2, 116, 35));*/
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
-
-        for (int i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
-        }
+    public GuiFluidKineticGenerator(ContainerFluidKineticGenerator container) {
+        super(container);
+        this.name = "FluidKineticGenerator";
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer p_75145_1_) {
-        return true;
+    protected ResourceLocation getResource() {
+        return new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/gui/GuiFluidKineticGenerator.png");
     }
-
 }

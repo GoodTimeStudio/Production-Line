@@ -22,44 +22,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.blocks;
 
-import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
+package com.mcgoodtime.gti.common.inventory;
 
-import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.core.GuiHandler;
-import com.mcgoodtime.gti.common.tiles.TileGenGasKu;
-
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
+import com.mcgoodtime.gti.common.tiles.TileFluidKineticGenerator;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
-public class GenGasKu extends BlockContainer {
-    public GenGasKu() {
-        super(Material.rock);
-        this.setCreativeTab(creativeTabGti);
-        this.setBlockName("gti.block.GenGasKu");
-        this.setBlockTextureName("gti:GenGasKu");
+public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineticGenerator> {
+
+    public ContainerFluidKineticGenerator(EntityPlayer player, TileFluidKineticGenerator tile) {
+        super(player, tile);
     }
-
-    /**
-     * Called upon blocks activation (right click on the blocks.)
-     */
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p1, float p2, float p3, float p4) {
-        if (!world.isRemote) {
-            entityPlayer.openGui(Gti.instance, GuiHandler.EnumGui.GenGasKu.ordinal(), world, x, y, z);
-        } else {
-            entityPlayer.isInvisibleToPlayer(entityPlayer);
-        }
-        return true;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int var2) {
-        return new TileGenGasKu();
-    }
-
 }
