@@ -30,6 +30,7 @@ public abstract class ContainerGti<T extends IInventory> extends Container {
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     protected final Slot addSlotToContainer(Slot slot) {
         int num = this.tile.getSizeInventory();
 
