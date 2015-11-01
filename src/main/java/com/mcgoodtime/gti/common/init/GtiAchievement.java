@@ -54,6 +54,5 @@ public class GtiAchievement {
      * A stub functions called to make the static initializer for this class run.
      */
     public static void init() {
-
     }
 }

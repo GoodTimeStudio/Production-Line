@@ -1,4 +1,4 @@
-package com.mcgoodtime.gti.common.inventory;
+package com.mcgoodtime.gti.common.inventory.slot;
 
 import com.mcgoodtime.gti.common.tiles.TileGti;
 import ic2.core.block.IUpgradableBlock;

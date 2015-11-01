@@ -57,8 +57,8 @@ public class BlockCarbonizeFurnace extends BlockContainerGti {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int var) {
-        return new TileCarbonizeFurnace();
+    protected Class<? extends TileGti> getTileEntityClass() {
+        return TileCarbonizeFurnace.class;
     }
 
     @Override

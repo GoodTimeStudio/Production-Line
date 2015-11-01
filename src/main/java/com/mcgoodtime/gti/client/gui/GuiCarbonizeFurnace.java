@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.client.gui;
 
+import com.mcgoodtime.gti.common.blocks.BlockCarbonizeFurnace;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
@@ -38,7 +39,7 @@ public class GuiCarbonizeFurnace extends GuiGti<ContainerCarbonizeFurnace> {
 
     public GuiCarbonizeFurnace(ContainerCarbonizeFurnace container) {
         super(container);
-        this.name = StatCollector.translateToLocal(GtiBlocks.carbonizeFurnace.getLocalizedName());
+        this.name = "CarbonizeFurnace";
     }
 
     @Override

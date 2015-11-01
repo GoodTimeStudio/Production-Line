@@ -264,7 +264,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
 
     @Override
     public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int i) {
-        return true;
+        return i != this.facing && i != 0 && i != 1;
     }
 
     @Override
@@ -274,11 +274,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
 
     @Override
     public void setFacing(short i) {
-        if (this.facing == i) {
-
-        } else {
-            super.setFacing(i);
-        }
+        super.setFacing(i);
     }
 
     @Override

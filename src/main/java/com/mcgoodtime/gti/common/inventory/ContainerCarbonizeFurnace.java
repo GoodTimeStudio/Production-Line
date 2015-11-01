@@ -24,6 +24,8 @@
  */
 package com.mcgoodtime.gti.common.inventory;
 
+import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
+import com.mcgoodtime.gti.common.inventory.slot.SlotUpgrade;
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import cpw.mods.fml.relauncher.Side;
