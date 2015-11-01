@@ -2,17 +2,18 @@ package com.mcgoodtime.gti.common.items;
 
 import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.init.GtiItems;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ItemGtiFood extends ItemGti implements ITextureFolder {
 
-	private long preTime;
+	private int timer;
 	private Map<EntityPlayer, EatAmount> amountMap = new HashMap<EntityPlayer, EatAmount>();
 
 	/** The amount this food item heals the player. */
@@ -41,6 +42,26 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 		return itemStack;
 	}
 
+	/**
+	 * Called each tick as long the item is on a player inventory. Uses by maps to check if is on a player hand and
+	 * update it's contents.
+	 *
+	 */
+	@Override
+	public void onUpdate(ItemStack itemStack, World world, Entity entity, int slotIndex, boolean isCurrentItem) {
+		if (!world.isRemote) {
+			if (entity instanceof EntityPlayer)
+			//1200 ticks = 1min
+			if (this.timer < 1200) {
+				++this.timer;
+			}
+			else if (this.timer == 1200) {
+				this.timer = 0;
+				amountMap.remove(entity);
+			}
+		}
+	}
+
 	@Override
 	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
 		--stack.stackSize;
@@ -48,15 +69,6 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 
 		if (!world.isRemote) {
-
-			if (this.preTime == 0) {
-				MinecraftServer.getSystemTimeMillis();
-			} else {
-				if (MinecraftServer.getSystemTimeMillis() - this.preTime >= 6000) {
-					amountMap.remove(player);
-					return stack;
-				}
-			}
 
 			if (this.equals(GtiItems.salt)) {
 
