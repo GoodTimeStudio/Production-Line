@@ -113,6 +113,7 @@ public class GtiPotion extends Potion {
         mc.getTextureManager().bindTexture(new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/gui/potion.png"));
         mc.currentScreen.drawTexturedModalRect(x + 6, y + 7, 0, 0, 18, 18);
         if (effect instanceof GtiEffect) {
+            System.out.println("s");
             String s = I18n.format(effect.getEffectName()) + " " + ((GtiEffect) effect).level + 1;
             mc.currentScreen.drawString(mc.fontRenderer, s, x + 10 + 18, y + 6, 16777215);
         }
@@ -147,6 +148,9 @@ public class GtiPotion extends Potion {
     }
 
     public void applyPotion(EntityLivingBase entityLivingBase, int durationTime, int level) {
+        if (entityLivingBase.isPotionActive(salty)) {
+            level += ((GtiEffect) entityLivingBase.getActivePotionEffect(salty)).level;
+        }
         GtiEffect effect = new GtiEffect(this.id, durationTime, level);
         effect.setCurativeItems(this.curativeItems);
         entityLivingBase.addPotionEffect(effect);
