@@ -24,7 +24,10 @@
  */
 package com.mcgoodtime.gti.common.init;
 
+import com.mcgoodtime.gti.common.GtiUtil;
 import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.entity.EntityPackedSalt;
+import com.mcgoodtime.gti.common.entity.EntityThrowableGti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiFood;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
@@ -122,7 +125,6 @@ public class GtiItems implements IFuelHandler {
         advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
         carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
         record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
-        packagedSalt = new ItemGti("PackagedSalt");
         carbonTube = new ItemGti("CarbonTube", true);
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
         redstoneModule = new ItemGti("RedstoneModule");
@@ -171,6 +173,17 @@ public class GtiItems implements IFuelHandler {
                 .setUnlocalizedName("gti.food.DiamondApple")
                 .setCreativeTab(Gti.creativeTabGti)
                 .setTextureName("gti:itemDiamondApple");
+
+		packagedSalt = new ItemGti("PackagedSalt") {
+			/**
+			 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+			 */
+			@Override
+			public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+				GtiUtil.throwItemByPlayer(new EntityThrowableGti(world, entityPlayer), itemStack);
+				return itemStack;
+			}
+		};
 
         iridiumPickaxe = ToolGti.registerPickaxe(GtiToolMaterial.iridium, "IridiumPickaxe");
         iridiumAxe = ToolGti.registerAxe(GtiToolMaterial.iridium, "IridiumAxe");

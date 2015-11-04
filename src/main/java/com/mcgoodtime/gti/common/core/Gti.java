@@ -26,6 +26,7 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
+import com.mcgoodtime.gti.common.entity.EntityUran238;
 import com.mcgoodtime.gti.common.entity.GtiEntity;
 import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.network.GtiNetwork;
@@ -86,18 +87,18 @@ public final class Gti {
         setupMeta();
         GtiConfig.configFile = event.getSuggestedConfigurationFile();
         GtiConfig.init();
-        proxy.init();
         //register Blocks. 注册方块
         GtiBlocks.init();
         FluidRegistry.registerFluid(Gas.gasNatural);
         //register Items. 注册物品
         GtiItems.init();
+        GtiEntity.init();
         GtiPotion.initPotion();
+        proxy.init();
     }
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        GtiEntity.init();
         // register Recipes. 注册合成
         Recipes.init();
         //register gui handler
