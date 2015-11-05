@@ -30,7 +30,6 @@ import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileGti;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.Random;
