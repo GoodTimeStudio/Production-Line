@@ -19,5 +19,6 @@ public class GtiEntity {
 
     public static void init() {
         registerEntities(EntityUran238.class, "Uran238");
+        registerEntities(EntityPackagedSalt.class, "PackagedSalt");
     }
 }

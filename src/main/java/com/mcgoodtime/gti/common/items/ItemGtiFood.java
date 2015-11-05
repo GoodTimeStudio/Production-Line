@@ -72,7 +72,7 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 
 			if (this.equals(GtiItems.salt)) {
 
-				if (!amountMap.containsKey(player)) {
+				if (amountMap.containsKey(player)) {
 					EatAmount amount = amountMap.get(player);
 					if (!stack.isItemEqual(amount.itemStack)) {
 						amountMap.remove(player);
@@ -80,7 +80,7 @@ public class ItemGtiFood extends ItemGti implements ITextureFolder {
 					//3 - 1
 					else if (amount.amount == 2) {
 						amountMap.remove(player);
-						GtiPotion.salty.applyPotion(player, 0, 6);
+						GtiPotion.salty.applyPotion(player, 0, 1);
 						return stack;
 					}
 

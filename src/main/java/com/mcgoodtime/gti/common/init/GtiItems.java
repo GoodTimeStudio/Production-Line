@@ -25,6 +25,9 @@
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.core.GtiConfig;
+import com.mcgoodtime.gti.common.entity.EntityPackagedSalt;
+import com.mcgoodtime.gti.common.entity.EntityUran238;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiFood;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
@@ -34,6 +37,7 @@ import com.mcgoodtime.gti.common.items.tools.ToolGti;
 
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import ic2.core.Ic2Items;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -122,7 +126,6 @@ public class GtiItems implements IFuelHandler {
         advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
         carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
         record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
-        packagedSalt = new ItemGti("PackagedSalt");
         carbonTube = new ItemGti("CarbonTube", true);
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
         redstoneModule = new ItemGti("RedstoneModule");
@@ -167,10 +170,27 @@ public class GtiItems implements IFuelHandler {
                 list.add(I18n.format(diamondApple.getUnlocalizedName() + ".desc1"));
             }
         };
-        diamondApple = diamondApple
-                .setUnlocalizedName("gti.food.DiamondApple")
-                .setCreativeTab(Gti.creativeTabGti)
-                .setTextureName("gti:itemDiamondApple");
+        diamondApple.setUnlocalizedName("gti.food.DiamondApple").setCreativeTab(Gti.creativeTabGti).setTextureName("gti:itemDiamondApple");
+
+		packagedSalt = new ItemGti("PackagedSalt") {
+			/**
+			 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+			 */
+			@Override
+			public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+				if (GtiConfig.instance.isThrowableUran238()) {
+					if (!entityPlayer.capabilities.isCreativeMode) {
+						--itemStack.stackSize;
+					}
+					world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+					if (!world.isRemote) {
+						world.spawnEntityInWorld(new EntityPackagedSalt(world, entityPlayer));
+					}
+				}
+
+				return itemStack;
+			}
+		};
 
         iridiumPickaxe = ToolGti.registerPickaxe(GtiToolMaterial.iridium, "IridiumPickaxe");
         iridiumAxe = ToolGti.registerAxe(GtiToolMaterial.iridium, "IridiumAxe");

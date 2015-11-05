@@ -86,13 +86,13 @@ public final class Gti {
         setupMeta();
         GtiConfig.configFile = event.getSuggestedConfigurationFile();
         GtiConfig.init();
-        proxy.init();
         //register Blocks. 注册方块
         GtiBlocks.init();
         FluidRegistry.registerFluid(Gas.gasNatural);
         //register Items. 注册物品
         GtiItems.init();
         GtiPotion.initPotion();
+        proxy.init();
     }
     
     @Mod.EventHandler
