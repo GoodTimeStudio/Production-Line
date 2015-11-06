@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemGtiFood extends ItemGti implements ITextureFolder {
+public class ItemGtiFood extends ItemGti {
 
 	private int timer;
 	private Map<EntityPlayer, EatAmount> amountMap = new HashMap<EntityPlayer, EatAmount>();

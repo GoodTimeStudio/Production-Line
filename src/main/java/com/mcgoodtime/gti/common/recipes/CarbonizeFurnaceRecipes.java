@@ -49,7 +49,7 @@ public class CarbonizeFurnaceRecipes {
         register(new ItemStack(Blocks.log), new ItemStack(Items.coal, 2, 1), 2000, XP);
         register(new ItemStack(Blocks.log2), new ItemStack(Items.coal, 2, 1), 2000, XP);
         register(new ItemStack(Blocks.planks, 2), new ItemStack(Items.coal, 1, 1), 1500, XP);
-        register(new ItemStack(Items.reeds, 4), new ItemStack(GtiItems.bambooCharcoal), 1500, XP);
+        register(new ItemStack(Items.reeds, 4), GtiItems.bambooCharcoal, 1500, XP);
         register(new ItemStack(Items.water_bucket), new ItemStack(GtiItems.salt), 1100, XP);
     }
 

@@ -65,7 +65,7 @@ public class Recipes {
         );
         
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.roller),
+                GtiItems.roller,
                 " A",
                 "ABA",
                 " A",
@@ -73,7 +73,7 @@ public class Recipes {
                 'B', IC2Items.getItem("ironFence")
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.heatInsulationMaterial),
+                GtiItems.heatInsulationMaterial,
                 "AAA",
                 "AAA",
                 "BBB",
@@ -81,7 +81,7 @@ public class Recipes {
                 'B', IC2Items.getItem("advIronIngot"));
 
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.airBrakeCasing),
+                new ItemStack(GtiBlocks.airBrakeCasing),
                 "AAA",
                 "BBB",
                 "ACA",
@@ -90,7 +90,7 @@ public class Recipes {
                 'C', Items.bucket
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.airBrakeUnit),
+                GtiItems.airBrakeUnit,
                 "AY ",
                 "YY ",
                 " YY",
@@ -114,16 +114,16 @@ public class Recipes {
                 'A', Items.apple
         );
         GameRegistry.addShapelessRecipe(
-                new ItemStack(GtiItems.dustIridium),
-                new ItemStack(GtiItems.smallDustIridium),
-                new ItemStack(GtiItems.smallDustIridium),
-                new ItemStack(GtiItems.smallDustIridium),
-                new ItemStack(GtiItems.smallDustIridium),
-                new ItemStack(GtiItems.smallDustIridium),
-                new ItemStack(GtiItems.smallDustIridium),
-                new ItemStack(GtiItems.smallDustIridium),
-                new ItemStack(GtiItems.smallDustIridium),
-                new ItemStack(GtiItems.smallDustIridium)
+                GtiItems.dustIridium,
+                GtiItems.smallDustIridium,
+                GtiItems.smallDustIridium,
+                GtiItems.smallDustIridium,
+                GtiItems.smallDustIridium,
+                GtiItems.smallDustIridium,
+                GtiItems.smallDustIridium,
+                GtiItems.smallDustIridium,
+                GtiItems.smallDustIridium,
+                GtiItems.smallDustIridium
         );
         GameRegistry.addRecipe(
                 new ItemStack(GtiItems.ironTreetap),
@@ -169,7 +169,7 @@ public class Recipes {
                 'Y', IC2Items.getItem("carbonMesh")
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.redstoneModule, 2),
+                GtiItems.getItems(GtiItems.redstoneModule, 2),
                 "ABA",
                 "BCB",
                 "ABA",
@@ -179,7 +179,7 @@ public class Recipes {
         );
 
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.electronicCircuitCore, 3),
+                GtiItems.getItems(GtiItems.electronicCircuitCore, 3),
                 "AAA",
                 "BBB",
                 "BBB",
@@ -187,7 +187,7 @@ public class Recipes {
                 'B', IC2Items.getItem("tinCableItem")
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.electronicCircuitControl, 2),
+                GtiItems.getItems(GtiItems.electronicCircuitControl, 2),
                 " A ",
                 "BCB",
                 'A', Blocks.lever,
@@ -195,7 +195,7 @@ public class Recipes {
                 'C', Blocks.stone_button
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.lazuliModule),
+                GtiItems.lazuliModule,
                 "ABA",
                 "CDC",
                 "ABA",
@@ -205,7 +205,7 @@ public class Recipes {
                 'D', GtiItems.redstoneModule
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.pulseElectronicCircuitCore),
+                GtiItems.pulseElectronicCircuitCore,
                 "AAA",
                 "AAA",
                 "BC ",
@@ -214,7 +214,7 @@ public class Recipes {
                 'C', GtiItems.electronicCircuitCore
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.pulseElectronicCircuitControl),
+                GtiItems.pulseElectronicCircuitControl,
                 "AAA",
                 "BAC",
                 "BDC",
@@ -224,7 +224,7 @@ public class Recipes {
                 'D', GtiItems.electronicCircuitControl
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.cyclotronParticleAccelerator),
+                GtiItems.cyclotronParticleAccelerator,
                 "A A",
                 "BCB",
                 "ADA",
@@ -234,7 +234,7 @@ public class Recipes {
                 'D', IC2Items.getItem("teslaCoil")
         );
         GameRegistry.addShapelessRecipe(
-                new ItemStack(GtiItems.calculateUnit),
+                GtiItems.calculateUnit,
                 new ItemStack(Blocks.stone_button),
                 new ItemStack(Blocks.stone_button),
                 new ItemStack(Blocks.stone_button),
@@ -246,43 +246,43 @@ public class Recipes {
                 new ItemStack(Blocks.stone_button)
         );
         GameRegistry.addShapelessRecipe(
-                new ItemStack(GtiItems.calculateChunk),
-                new ItemStack(GtiItems.calculateUnit),
-                new ItemStack(GtiItems.calculateUnit),
-                new ItemStack(GtiItems.calculateUnit),
-                new ItemStack(GtiItems.calculateUnit),
-                new ItemStack(GtiItems.calculateUnit),
-                new ItemStack(GtiItems.calculateUnit),
-                new ItemStack(GtiItems.calculateUnit),
-                new ItemStack(GtiItems.calculateUnit),
-                new ItemStack(GtiItems.calculateUnit)
+                GtiItems.calculateChunk,
+                GtiItems.calculateUnit,
+                GtiItems.calculateUnit,
+                GtiItems.calculateUnit,
+                GtiItems.calculateUnit,
+                GtiItems.calculateUnit,
+                GtiItems.calculateUnit,
+                GtiItems.calculateUnit,
+                GtiItems.calculateUnit,
+                GtiItems.calculateUnit
         );
         GameRegistry.addShapelessRecipe(
-                new ItemStack(GtiItems.calculateArray),
-                new ItemStack(GtiItems.calculateChunk),
-                new ItemStack(GtiItems.calculateChunk),
-                new ItemStack(GtiItems.calculateChunk),
-                new ItemStack(GtiItems.calculateChunk),
-                new ItemStack(GtiItems.calculateChunk),
-                new ItemStack(GtiItems.calculateChunk),
-                new ItemStack(GtiItems.calculateChunk),
-                new ItemStack(GtiItems.calculateChunk),
-                new ItemStack(GtiItems.calculateChunk)
+                GtiItems.calculateArray,
+                GtiItems.calculateChunk,
+                GtiItems.calculateChunk,
+                GtiItems.calculateChunk,
+                GtiItems.calculateChunk,
+                GtiItems.calculateChunk,
+                GtiItems.calculateChunk,
+                GtiItems.calculateChunk,
+                GtiItems.calculateChunk,
+                GtiItems.calculateChunk
         );
         GameRegistry.addShapelessRecipe(
-                new ItemStack(GtiItems.floatPointCalculationsRegion),
-                new ItemStack(GtiItems.calculateArray),
-                new ItemStack(GtiItems.calculateArray),
-                new ItemStack(GtiItems.calculateArray),
-                new ItemStack(GtiItems.calculateArray),
-                new ItemStack(GtiItems.calculateArray),
-                new ItemStack(GtiItems.calculateArray),
-                new ItemStack(GtiItems.calculateArray),
-                new ItemStack(GtiItems.calculateArray),
-                new ItemStack(GtiItems.calculateArray)
+                GtiItems.floatPointCalculationsRegion,
+                GtiItems.calculateArray,
+                GtiItems.calculateArray,
+                GtiItems.calculateArray,
+                GtiItems.calculateArray,
+                GtiItems.calculateArray,
+                GtiItems.calculateArray,
+                GtiItems.calculateArray,
+                GtiItems.calculateArray,
+                GtiItems.calculateArray
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.parallelSpaceConverter),
+                GtiItems.parallelSpaceConverter,
                 "A A",
                 " B ",
                 "A A",
@@ -290,7 +290,7 @@ public class Recipes {
                 'B', GtiItems.enderCalculationCrystal
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.uuMatterCore),
+                GtiItems.uuMatterCore,
                 "ABA",
                 "CDC",
                 "ABA",
@@ -310,14 +310,14 @@ public class Recipes {
                 'D', GtiItems.uuMatterCore
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.obsidianMechanicalFrame),
+                GtiItems.obsidianMechanicalFrame,
                 "AAA",
                 "A A",
                 "AAA",
                 'A', GtiItems.obsidianPlateGravityField
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.obsidianMechanicalCasing),
+                GtiItems.obsidianMechanicalCasing,
                 "ABA",
                 "ACA",
                 'A', GtiItems.pulseElectronicCircuitCore,
@@ -325,7 +325,7 @@ public class Recipes {
                 'C', GtiItems.obsidianMechanicalFrame
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.enderCalculationCrystal),
+                GtiItems.enderCalculationCrystal,
                 "AAA",
                 "BCB",
                 "BCB",
@@ -334,14 +334,14 @@ public class Recipes {
                 'C', Items.ender_pearl
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.millTeeth),
+                GtiItems.millTeeth,
                 "ABC",
                 'A', Items.flint,
                 'B', Blocks.stone,
                 'C', Blocks.brick_block
         );
         GameRegistry.addRecipe(
-                new ItemStack(GtiItems.millWheel),
+                GtiItems.millWheel,
                 "AAA",
                 "ABA",
                 "AAA",
@@ -359,77 +359,77 @@ public class Recipes {
         );
 
         //smelting registry
-        GameRegistry.addSmelting(GtiBlocks.oreIridium, new ItemStack(GtiItems.ingotIridium), XP);
-        GameRegistry.addSmelting(GtiItems.cleanedCrushedIridium, new ItemStack(GtiItems.ingotIridium), XP);
-        GameRegistry.addSmelting(GtiItems.dustIridium, new ItemStack(GtiItems.ingotIridium), XP);
-        GameRegistry.addSmelting(GtiItems.crushedIridium, new ItemStack(GtiItems.ingotIridium), XP);
-        GameRegistry.addSmelting(Blocks.log2, new ItemStack(GtiItems.bambooCharcoal), XP);
-        GameRegistry.addSmelting(IC2Items.getItem("iridiumOre"), new ItemStack(GtiItems.ingotIridium), XP);
+        GameRegistry.addSmelting(GtiBlocks.oreIridium, GtiItems.ingotIridium, XP);
+        GameRegistry.addSmelting(GtiItems.cleanedCrushedIridium, GtiItems.ingotIridium, XP);
+        GameRegistry.addSmelting(GtiItems.dustIridium, GtiItems.ingotIridium, XP);
+        GameRegistry.addSmelting(GtiItems.crushedIridium, GtiItems.ingotIridium, XP);
+        GameRegistry.addSmelting(IC2Items.getItem("iridiumOre"), GtiItems.ingotIridium, XP);
 
         //ic2 recipe registry
         ic2.api.recipe.Recipes.compressor.addRecipe(
-        		new RecipeInputItemStack(new ItemStack(GtiItems.smallCompressedWaterHyacinth, 8)),
+        		new RecipeInputItemStack(GtiItems.getItems(GtiItems.smallCompressedWaterHyacinth, 8)),
         		null,
         		new ItemStack(GtiBlocks.compressedWaterHyacinth)
         );
         ic2.api.recipe.Recipes.compressor.addRecipe(
         		new RecipeInputItemStack(new ItemStack(GtiBlocks.waterHyacinth, 8)),
         		null,
-        		new ItemStack(GtiItems.smallCompressedWaterHyacinth)
+        		GtiItems.smallCompressedWaterHyacinth
         );
         ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
                 new RecipeInputItemStack(new ItemStack(Items.diamond)),
                 null,
-                new ItemStack(GtiItems.diamondPlate)
+                GtiItems.diamondPlate
         );
         ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
-               		new RecipeInputItemStack(new ItemStack(GtiItems.heatInsulationMaterial)),
+               		new RecipeInputItemStack(GtiItems.heatInsulationMaterial),
                		null,
-               		new ItemStack (GtiItems.heatInsulationPlate));
-        ic2.api.recipe.Recipes.compressor.addRecipe(
-                new RecipeInputItemStack(new ItemStack(GtiItems.diamondPlate, 9)),
-                null,
-                new ItemStack(GtiItems.denseDiamondPlate)
+               		GtiItems.heatInsulationPlate
         );
         ic2.api.recipe.Recipes.compressor.addRecipe(
-                new RecipeInputItemStack(new ItemStack(GtiItems.smallDustIridium, 8)),
+                new RecipeInputItemStack(GtiItems.getItems(GtiItems.diamondPlate, 9)),
                 null,
-                new ItemStack(GtiItems.ingotIridium)
+                GtiItems.denseDiamondPlate
+        );
+        ic2.api.recipe.Recipes.compressor.addRecipe(
+                new RecipeInputItemStack(GtiItems.getItems(GtiItems.smallDustIridium, 8)),
+                null,
+                GtiItems.ingotIridium
         );
         ic2.api.recipe.Recipes.macerator.addRecipe(
                 new RecipeInputItemStack(new ItemStack(GtiBlocks.oreIridium)),
                 null,
-                new ItemStack(GtiItems.crushedIridium, 2)
+                GtiItems.getItems(GtiItems.crushedIridium, 2)
         );
         ic2.api.recipe.Recipes.macerator.addRecipe(
-                new RecipeInputItemStack(new ItemStack(GtiItems.ingotIridium)),
+                new RecipeInputItemStack(GtiItems.ingotIridium),
                 null,
-                new ItemStack(GtiItems.dustIridium)
+                GtiItems.dustIridium
         );
         ic2.api.recipe.Recipes.compressor.addRecipe(
                 new RecipeInputItemStack(IC2Items.getItem("diamondDust"), 3),
                 null,
-                new ItemStack(GtiItems.carbonCrystal)
+                GtiItems.carbonCrystal
         );
         ic2.api.recipe.Recipes.compressor.addRecipe(
                 new RecipeInputItemStack(IC2Items.getItem("denseplateobsidian"), 8),
                 null,
-                new ItemStack(GtiItems.obsidianPlateGravityField)
+                GtiItems.obsidianPlateGravityField
         );
 
         ItemStack doubleSmallTinDust = Ic2Items.smallTinDust.copy();
         doubleSmallTinDust.stackSize = 2;
         ic2.api.recipe.Recipes.oreWashing.addRecipe(
-                new RecipeInputItemStack(new ItemStack(GtiItems.crushedIridium)),
+                new RecipeInputItemStack(GtiItems.crushedIridium),
                 null,
-                new ItemStack(GtiItems.cleanedCrushedIridium),
+                GtiItems.cleanedCrushedIridium,
                 doubleSmallTinDust
         );
         ic2.api.recipe.Recipes.centrifuge.addRecipe(
-                new RecipeInputItemStack(new ItemStack(GtiItems.cleanedCrushedIridium)),
+                new RecipeInputItemStack(GtiItems.cleanedCrushedIridium),
                 null,
-                new ItemStack(GtiItems.dustIridium),
-                new ItemStack(GtiItems.smallDustIridium, 2)
+                GtiItems.dustIridium,
+                GtiItems.getItems(GtiItems.smallDustIridium, 2)
         );
     }
 
@@ -440,8 +440,9 @@ public class Recipes {
 
     /**
      * Disable recipes.
-     * @param itemStack Disable all recipes of this item. 绂佺敤杩欎釜鐗╁搧鐨勬墍鏈夊悎鎴�
+     * @param itemStack Disable all recipes of this item.
      */
+    @SuppressWarnings("unchecked")
     public static void disableRecipes(ItemStack itemStack) {
         List<IRecipe> recipeList = CraftingManager.getInstance().getRecipeList();
         for (int i = 0; i < recipeList.size(); i++) {
@@ -453,6 +454,7 @@ public class Recipes {
         }
     }
 
+    @SuppressWarnings({"unchecked", "SuspiciousMethodCalls"})
     public static void disableSmelting(ItemStack itemStack) {
         Map<List<Integer>, ItemStack> smelting = FurnaceRecipes.smelting().getSmeltingList();
         smelting.remove(itemStack);

@@ -27,17 +27,15 @@ package com.mcgoodtime.gti.common.init;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.entity.EntityPackagedSalt;
-import com.mcgoodtime.gti.common.entity.EntityUran238;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiFood;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
+import com.mcgoodtime.gti.common.items.ItemMultiDamage;
 import com.mcgoodtime.gti.common.items.tools.GtiToolMaterial;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
 import com.mcgoodtime.gti.common.items.tools.ToolGti;
-
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import ic2.core.Ic2Items;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -53,102 +51,160 @@ import java.util.List;
  * The list of all those items in GoodTime-Industrial.
  */
 public class GtiItems implements IFuelHandler {
-	public static Item roller;
-	public static Item heatInsulationPlate;
-	public static Item heatInsulationMaterial;
-	public static Item smallCompressedWaterHyacinth;
-	public static Item crushedIridium;
-	public static Item cleanedCrushedIridium;
-	public static Item dustIridium;
-	public static Item smallDustIridium;
-	public static Item ingotIridium;
-	public static Item denseDiamondPlate;
-	public static Item diamondPlate;
-	public static Item airBrakeUnit;
-	public static Item airBrakeCasing;
-	public static Item bambooCharcoal;
+
 	public static Item diamondApple;
+	public static Item packagedSalt;
+	public static Item iridiumAxe;
+	public static Item iridiumSpade;
+	public static Item iridiumSword;
 	public static Item iridiumPickaxe;
+	public static Item salt;
+
 	public static Item ironTreetap;
 	public static Item bronzeTreetap;
 	public static Item leadTreetap;
 	public static Item refinedIronTreetap;
 	public static Item advancedAlloyTreetap;
 	public static Item carbonTreetap;
+
 	public static Item record_theSaltWaterRoom;
-	public static Item salt;
-	public static Item packagedSalt;
-	public static Item carbonTube;
 	public static Item record_MusicSpring;
-	public static Item iridiumAxe;
-	public static Item iridiumSpade;
-	public static Item iridiumSword;
-	public static Item redstoneModule;
-	public static Item lazuliModule;
-	public static Item obsidianPlateGravityField;
-	public static Item electronicCircuitControl;
-	public static Item electronicCircuitCore;
-	public static Item pulseElectronicCircuitControl;
-	public static Item pulseElectronicCircuitCore;
-	public static Item cyclotronParticleAccelerator;
-	public static Item calculateUnit;
-	public static Item calculateChunk;
-	public static Item calculateArray;
-	public static Item floatPointCalculationsRegion;
-	public static Item parallelSpaceConverter;
-	public static Item uuMatterCore;
-	public static Item obsidianMechanicalFrame;
-	public static Item obsidianMechanicalCasing;
-	public static Item carbonCrystal;
-	public static Item enderCalculationCrystal;
-	public static Item millTeeth;
-	public static Item millWheel;
+	//---------------------------------------
+
+	public static ItemStack crushedIridium;
+	public static ItemStack cleanedCrushedIridium;
+	public static ItemStack dustIridium;
+	public static ItemStack smallDustIridium;
+	public static ItemStack ingotIridium;
+	public static ItemStack denseDiamondPlate;
+	public static ItemStack diamondPlate;
+
+	public static ItemStack heatInsulationPlate;
+	public static ItemStack roller;
+	public static ItemStack heatInsulationMaterial;
+	public static ItemStack smallCompressedWaterHyacinth;
+	public static ItemStack airBrakeUnit;
+	public static ItemStack bambooCharcoal;
+	public static ItemStack carbonTube;
+	public static ItemStack redstoneModule;
+	public static ItemStack lazuliModule;
+	public static ItemStack obsidianPlateGravityField;
+	public static ItemStack electronicCircuitControl;
+	public static ItemStack electronicCircuitCore;
+	public static ItemStack pulseElectronicCircuitControl;
+	public static ItemStack pulseElectronicCircuitCore;
+	public static ItemStack cyclotronParticleAccelerator;
+	public static ItemStack calculateUnit;
+	public static ItemStack calculateChunk;
+	public static ItemStack calculateArray;
+	public static ItemStack floatPointCalculationsRegion;
+	public static ItemStack parallelSpaceConverter;
+	public static ItemStack uuMatterCore;
+	public static ItemStack obsidianMechanicalFrame;
+	public static ItemStack obsidianMechanicalCasing;
+	public static ItemStack carbonCrystal;
+	public static ItemStack enderCalculationCrystal;
+	public static ItemStack millTeeth;
+	public static ItemStack millWheel;
 
 	public static void init() {
-		
-    	roller = new ItemGti("Roller", true);
-    	heatInsulationPlate = new ItemGti("HeatInsulationPlate",true);
-        heatInsulationMaterial = new ItemGti("HeatInsulationMaterial",true);
-    	smallCompressedWaterHyacinth = new ItemGti("SmallCompressedWaterHyacinth",true);
-        diamondPlate = new ItemGti("DiamondPlate", true);
-        denseDiamondPlate = new ItemGti("DenseDiamondPlate", true);
-        crushedIridium = new ItemGti("CrushedIridium");
-        cleanedCrushedIridium = new ItemGti("CleanedCrushedIridium");
-        dustIridium = new ItemGti("DustIridium");
-        smallDustIridium = new ItemGti("SmallDustIridium");
-        ingotIridium = new ItemGti("IngotIridium");
-        airBrakeUnit = new ItemGti("AirBrakeUnit");
-        bambooCharcoal = new ItemGti("BambooCharcoal", true);
-        ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
-        bronzeTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
-        leadTreetap = new ItemGtiTreetap("LeadTreetap", 48);
-        refinedIronTreetap = new ItemGtiTreetap("RefinedIronTreetap", 64);
-        advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
-        carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
+		ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
+		bronzeTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
+		leadTreetap = new ItemGtiTreetap("LeadTreetap", 48);
+		refinedIronTreetap = new ItemGtiTreetap("RefinedIronTreetap", 64);
+		advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
+		carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
         record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
-        carbonTube = new ItemGti("CarbonTube", true);
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
-        redstoneModule = new ItemGti("RedstoneModule");
-        lazuliModule = new ItemGti("LazuliModule");
-        obsidianPlateGravityField = new ItemGti("ObsidianPlateGravityField");
-        electronicCircuitControl = new ItemGti("ElectronicCircuitControl");
-        electronicCircuitCore = new ItemGti("ElectronicCircuitCore");
-        pulseElectronicCircuitControl = new ItemGti("PulseElectronicCircuitControl");
-        pulseElectronicCircuitCore = new ItemGti("PulseElectronicCircuitCore");
-        cyclotronParticleAccelerator = new ItemGti("CyclotronParticleAccelerator");
-        calculateUnit = new ItemGti("CalculateUnit");
-        calculateChunk = new ItemGti("CalculateChunk");
-        calculateArray = new ItemGti("CalculateArray");
-        floatPointCalculationsRegion = new ItemGti("FloatPointCalculationsRegion");
-        parallelSpaceConverter = new ItemGti("ParallelSpaceConverter");
-        uuMatterCore = new ItemGti("UUMatterCore");
-        obsidianMechanicalFrame = new ItemGti("ObsidianMechanicalFrame");
-        obsidianMechanicalCasing = new ItemGti("ObsidianMechanicalCasing");
-        carbonCrystal = new ItemGti("CarbonCrystal");
-        enderCalculationCrystal = new ItemGti("EnderCalculationCrystal");
-        millTeeth = new ItemGti("MillTeeth");
-        millWheel = new ItemGti("MillWheel");
 		salt = new ItemGtiFood("Salt", 0, 10F, true);
+
+
+		//MultiMetaItem registry
+		ItemMultiDamage itemOre = new ItemMultiDamage("ItemOre") {
+			@Override
+			public String getInternalName(int meta) {
+				switch (meta) {
+					case 0: return "IngotIridium";
+					case 1: return "DiamondPlate";
+					case 2: return "DenseDiamondPlate";
+					case 3: return "CrushedIridium";
+					case 4: return "CleanedCrushedIridium";
+					case 5: return "DustIridium";
+					case 6: return "SmallDustIridium";
+					default: return null;
+				}
+			}
+		};
+		ingotIridium = new ItemStack(itemOre, 1, 0);
+		diamondPlate = new ItemStack(itemOre, 1, 1);
+		denseDiamondPlate = new ItemStack(itemOre, 1, 2);
+		crushedIridium = new ItemStack(itemOre, 1, 3);
+		cleanedCrushedIridium = new ItemStack(itemOre, 1, 4);
+		dustIridium = new ItemStack(itemOre, 1, 5);
+		smallDustIridium = new ItemStack(itemOre, 1, 6);
+
+		ItemMultiDamage itemDisc = new ItemMultiDamage("ItemDisc") {
+			@Override
+			public String getInternalName(int meta) {
+				switch (meta) {
+					case 0: return "Roller";
+					case 1: return "HeatInsulationMaterial";
+					case 2: return "SmallCompressedWaterHyacinth";
+					case 3: return "AirBrakeUnit";
+					case 4: return "CarbonTube";
+					case 5: return "RedstoneModule";
+					case 6: return "LazuliModule";
+					case 7: return "ObsidianPlateGravityField";
+					case 8: return "ElectronicCircuitControl";
+					case 9: return "ElectronicCircuitCore";
+					case 10: return "PulseElectronicCircuitControl";
+					case 11: return "PulseElectronicCircuitCore";
+					case 12: return "CyclotronParticleAccelerator";
+					case 13: return "CalculateUnit";
+					case 14: return "CalculateChunk";
+					case 15: return "CalculateArray";
+					case 16: return "FloatPointCalculationsRegion";
+					case 17: return "ParallelSpaceConverter";
+					case 18: return "ObsidianMechanicalFrame";
+					case 19: return "ObsidianMechanicalCasing";
+					case 20: return "CarbonCrystal";
+					case 21: return "EnderCalculationCrystal";
+					case 22: return "MillTeeth";
+					case 23: return "MillWheel";
+					case 24: return "HeatInsulationPlate";
+					case 25: return "UUMatterCore";
+					case 26: return "BambooCharcoal";
+					default: return null;
+				}
+			}
+		};
+		roller = new ItemStack(itemDisc, 1, 0);
+		heatInsulationMaterial = new ItemStack(itemDisc, 1, 1);
+		smallCompressedWaterHyacinth = new ItemStack(itemDisc, 1, 2);
+		airBrakeUnit = new ItemStack(itemDisc, 1, 3);
+		carbonTube = new ItemStack(itemDisc, 1, 4);
+		redstoneModule = new ItemStack(itemDisc, 1, 5);
+		lazuliModule = new ItemStack(itemDisc, 1, 6);
+		obsidianPlateGravityField = new ItemStack(itemDisc, 1, 7);
+		electronicCircuitControl = new ItemStack(itemDisc, 1, 8);
+		electronicCircuitCore = new ItemStack(itemDisc, 1, 9);
+		pulseElectronicCircuitControl = new ItemStack(itemDisc, 1, 10);
+		pulseElectronicCircuitCore = new ItemStack(itemDisc, 1, 11);
+		cyclotronParticleAccelerator = new ItemStack(itemDisc, 1, 12);
+		calculateUnit = new ItemStack(itemDisc, 1, 13);
+		calculateChunk = new ItemStack(itemDisc, 1, 14);
+		calculateArray = new ItemStack(itemDisc, 1, 15);
+		floatPointCalculationsRegion = new ItemStack(itemDisc, 1, 16);
+		parallelSpaceConverter = new ItemStack(itemDisc, 1, 17);
+		obsidianMechanicalFrame = new ItemStack(itemDisc, 1, 18);
+		obsidianMechanicalCasing = new ItemStack(itemDisc, 1, 19);
+		carbonCrystal = new ItemStack(itemDisc, 1,20);
+		enderCalculationCrystal = new ItemStack(itemDisc, 1, 21);
+		millTeeth = new ItemStack(itemDisc, 1, 22);
+		millWheel = new ItemStack(itemDisc, 1, 23);
+		heatInsulationPlate = new ItemStack(itemDisc, 1, 24);
+		uuMatterCore = new ItemStack(itemDisc, 1, 25);
+		bambooCharcoal = new ItemStack(itemDisc, 1, 26);
 
         // special registry TODO: Better registry system
  
@@ -204,10 +260,10 @@ public class GtiItems implements IFuelHandler {
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		if (fuel.getItem() == bambooCharcoal) {
+		if (fuel.isItemEqual(bambooCharcoal)) {
 			return 800;
 		}
-		if (fuel.getItem() == smallCompressedWaterHyacinth) {
+		if (fuel.isItemEqual(smallCompressedWaterHyacinth)) {
 			return 400;
 		}
 		if (fuel.getItem().equals(
@@ -223,5 +279,11 @@ public class GtiItems implements IFuelHandler {
 			return 1000;
 		}
 		return 0;
+	}
+
+	public static ItemStack getItems(ItemStack itemStack, int count) {
+		ItemStack ret = itemStack.copy();
+		ret.stackSize = count;
+		return ret;
 	}
 }

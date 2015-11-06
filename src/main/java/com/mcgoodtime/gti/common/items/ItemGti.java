@@ -42,7 +42,7 @@ import static com.mcgoodtime.gti.common.core.Gti.*;
  *
  * @author liach
  */
-public class ItemGti extends Item implements ITextureFolder {
+public class ItemGti extends Item {
 
     private String itemName;
 
@@ -72,12 +72,10 @@ public class ItemGti extends Item implements ITextureFolder {
         this.itemIcon = iconRegister.registerIcon(Gti.RESOURCE_DOMAIN + ":" + this.getTextureFolder() + this.getIconName());
     }
 
-    @Override
     public String getTextureFolder() {
         return "";
     }
 
-    @Override
     public String getIconName() {
         return "item" + itemName;
     }
