@@ -34,6 +34,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 
+import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.Level;
 
 /**
@@ -42,22 +43,25 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
-	public static Block dehydratedWaterHyacinthblock;
-	public static Block compressedWaterHyacinth;
+    public static ItemStack dehydratedWaterHyacinthblock;
+    public static ItemStack compressedWaterHyacinth;
+
+    public static Block airBrakeCasing;
     public static Block waterHyacinth;
     public static Block genGasKU;
     public static Block oreIridium;
     public static Block carbonizeFurnace;
-    public static Block airBrakeCasing;
     public static BlockContainer evsu;
     public static BlockContainer heatDryer;
 
     public static void init() {
-        oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
-        compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5F, 0.3F, null, 0);
-        dehydratedWaterHyacinthblock=new BlockGti(Material.rock, "DehydratedWaterHyacinthBlock", 1.0F, 0.3F, null, 0);
+        //compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5F, 0.3F, null, 0);
+        //dehydratedWaterHyacinthblock=new BlockGti(Material.rock, "DehydratedWaterHyacinthBlock", 1.0F, 0.3F, null, 0);
+        new BlockMisc();
+
         carbonizeFurnace = new BlockCarbonizeFurnace();
-        airBrakeCasing = new BlockUtility(Material.iron, "AirBrakeCasing");
+        airBrakeCasing = new BlockGti(Material.iron, "AirBrakeCasing");
+        oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
