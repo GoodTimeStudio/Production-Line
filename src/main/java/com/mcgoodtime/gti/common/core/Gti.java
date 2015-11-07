@@ -26,10 +26,13 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
+import com.mcgoodtime.gti.common.entity.EntityPackagedSalt;
+import com.mcgoodtime.gti.common.entity.EntityUran238;
 import com.mcgoodtime.gti.common.entity.GtiEntity;
 import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.network.GtiNetwork;
 import com.mcgoodtime.gti.common.worldgen.GtiWorldGen;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -41,6 +44,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.core.Ic2Items;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.AchievementPage;
@@ -76,8 +81,8 @@ public final class Gti {
 
     @SidedProxy(
             modId = MOD_ID,
-            serverSide = "com.mcgoodtime.gti.common.core.CommonProxy",
-            clientSide = "com.mcgoodtime.gti.client.ClientProxy"
+            serverSide = "com.mcgoodtime.gti.common.core.Gti$CommonProxy",
+            clientSide = "com.mcgoodtime.gti.common.core.Gti$ClientProxy"
     )
     public static CommonProxy proxy;
 
@@ -129,5 +134,17 @@ public final class Gti {
         this.meta.authorList.add("JAVA0");
         this.meta.authorList.add("GoodTime Studio");
         this.meta.credits = "GoodTime Studio";
+    }
+
+    public static class CommonProxy {
+        public void init() {}
+    }
+
+    public static class ClientProxy extends CommonProxy {
+        @Override
+        public void init() {
+            RenderingRegistry.registerEntityRenderingHandler(EntityUran238.class, new RenderSnowball(Ic2Items.Uran238.getItem()));
+            RenderingRegistry.registerEntityRenderingHandler(EntityPackagedSalt.class, new RenderSnowball(GtiItems.packagedSalt));
+        }
     }
 }
