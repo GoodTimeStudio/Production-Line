@@ -106,6 +106,8 @@ public class GtiItems implements IFuelHandler {
 	public static ItemStack enderCalculationCrystal;
 	public static ItemStack millTeeth;
 	public static ItemStack millWheel;
+	public static ItemStack rigidPaper;
+	public static ItemStack rigidPaperPack;
 
 	public static void init() {
 		ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
@@ -174,6 +176,8 @@ public class GtiItems implements IFuelHandler {
 					case 24: return "HeatInsulationPlate";
 					case 25: return "UUMatterCore";
 					case 26: return "BambooCharcoal";
+					case 27: return "RigidPaper";
+					case 28: return "rigidPaperPack";
 					default: return null;
 				}
 			}
@@ -205,6 +209,8 @@ public class GtiItems implements IFuelHandler {
 		heatInsulationPlate = new ItemStack(itemDisc, 1, 24);
 		uuMatterCore = new ItemStack(itemDisc, 1, 25);
 		bambooCharcoal = new ItemStack(itemDisc, 1, 26);
+		rigidPaper = new ItemStack(itemDisc, 1, 27);
+		rigidPaperPack = new ItemStack(itemDisc, 1, 28);
 
         // special registry TODO: Better registry system
  

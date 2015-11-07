@@ -357,6 +357,27 @@ public class Recipes {
                 'B', IC2Items.getItem("advancedAlloy"),
                 'C', GtiItems.denseDiamondPlate
         );
+        GameRegistry.addRecipe(
+                GtiItems.carbonTube,
+                "AB",
+                "B",
+                'A', Items.redstone,
+                'B', IC2Items.getItem("coalDust")
+        );
+        GameRegistry.addRecipe(
+                GtiItems.rigidPaper,
+                "A",
+                "B",
+                "A",
+                'A', Items.paper,
+                'B', Items.sugar
+        );
+        GameRegistry.addShapelessRecipe(
+                new ItemStack(Items.book),
+                GtiItems.rigidPaper,
+                GtiItems.rigidPaper,
+                Items.leather
+        );
 
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, GtiItems.ingotIridium, XP);
@@ -430,6 +451,18 @@ public class Recipes {
                 null,
                 GtiItems.dustIridium,
                 GtiItems.getItems(GtiItems.smallDustIridium, 2)
+        );
+        ic2.api.recipe.Recipes.cannerBottle.addRecipe(
+                new RecipeInputItemStack(GtiItems.rigidPaperPack),
+                new RecipeInputItemStack(new ItemStack(GtiItems.salt, 9)),
+                new ItemStack(GtiItems.packagedSalt)
+        );
+        GameRegistry.addRecipe(
+                GtiItems.getItems(GtiItems.rigidPaperPack, 2),
+                " A ",
+                "A A",
+                " A ",
+                'A', GtiItems.rigidPaper
         );
     }
 
