@@ -26,6 +26,7 @@ public abstract class ItemMultiDamage extends ItemGti {
         super(name);
         int maxDamage = this.getMaxDamage();
         this.setMaxDamage(maxDamage);
+        this.setHasSubtypes(true);
         this.icons = new IIcon[maxDamage];
     }
 
