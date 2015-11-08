@@ -177,7 +177,7 @@ public class GtiItems implements IFuelHandler {
 					case 25: return "UUMatterCore";
 					case 26: return "BambooCharcoal";
 					case 27: return "RigidPaper";
-					case 28: return "rigidPaperPack";
+					case 28: return "RigidPaperPack";
 					default: return null;
 				}
 			}

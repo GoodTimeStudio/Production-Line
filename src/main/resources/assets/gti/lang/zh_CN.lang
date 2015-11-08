@@ -76,6 +76,8 @@ item.gti.CarbonCrystal.name=碳元素水晶
 item.gti.EnderCalculationCrystal.name=末影运算水晶
 item.gti.MillTeeth.name=磨齿
 item.gti.MillWheel.name=磨轮
+item.gti.RigidPaper.name=硬质纸
+item.gti.RigidPaperPack=硬质纸袋
 
 item.gti.food.DiamondApple.name=钻石苹果
 

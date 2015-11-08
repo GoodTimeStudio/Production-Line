@@ -1,13 +1,13 @@
 package com.mcgoodtime.gti.common.items;
 
-import com.mcgoodtime.gti.common.core.Gti;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
@@ -101,5 +101,18 @@ public abstract class ItemMultiDamage extends ItemGti {
     @Override
     public boolean showDurabilityBar(ItemStack stack) {
         return false;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
+        int i = 1;
+        String unLocal = this.getUnlocalizedName(itemStack) + ".desc" + i;
+
+        while (StatCollector.canTranslate(unLocal)) {
+            list.add(StatCollector.translateToLocal(unLocal));
+            i++;
+            unLocal = this.getUnlocalizedName() + ".desc" + i;
+        }
     }
 }
