@@ -45,7 +45,7 @@ public class GtiBlocks {
 	public static Block dehydratedWaterHyacinthblock;
 	public static Block compressedWaterHyacinth;
     public static Block waterHyacinth;
-    public static Block genGasKU;
+    public static Block fluidKineticGenerator;
     public static Block oreIridium;
     public static Block carbonizeFurnace;
     public static Block airBrakeCasing;
@@ -57,18 +57,18 @@ public class GtiBlocks {
         compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5F, 0.3F, null, 0);
         dehydratedWaterHyacinthblock=new BlockGti(Material.rock, "DehydratedWaterHyacinthBlock", 1.0F, 0.3F, null, 0);
         carbonizeFurnace = new BlockCarbonizeFurnace();
-        airBrakeCasing = new BlockUtility(Material.iron, "AirBrakeCasing");
+        airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
+        fluidKineticGenerator = new BlockFluidKineticGenerator();
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
-        genGasKU = new BlockFluidKineticGenerator();
         evsu = new BlockEVSU();
 
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(evsu, "EVSU");
 
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
-        GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
+        GtiConfig.gtiLogger.log(Level.INFO, "FluidKineticGenerator" + Integer.toString(Block.getIdFromBlock(fluidKineticGenerator)));
         GtiConfig.gtiLogger.log(Level.INFO, "carbonizefurnace" + Integer.toString(Block.getIdFromBlock(carbonizeFurnace)));
     }
 }

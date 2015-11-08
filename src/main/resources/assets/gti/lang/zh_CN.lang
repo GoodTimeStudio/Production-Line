@@ -17,6 +17,7 @@ tile.gti.block.FluidKineticGenerator.name=流体动能发生机
 tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
 tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 tile.gti.block.EVSU.name=EVSU
+tile.gti.block.AirBrakeCasing.name=气闸外壳
 
 [ITEMS]
 //crushed
@@ -50,7 +51,6 @@ item.gti.CarbonTreetap.name=碳板龙头
 
 item.gti.BambooCharcoal.name=竹炭
 item.gti.AirBrakeUnit.name=气闸单元
-item.gti.AirBrakeCasing.name=气闸外壳
 item.gti.Salt.name=食盐
 item.gti.PackagedSalt.name=一小袋盐
 item.gti.CarbonTube.name=碳管

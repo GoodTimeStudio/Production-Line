@@ -45,7 +45,7 @@ import net.minecraft.world.World;
 /*
  * Created by suhao on 2015.7.13.
  */
-public abstract class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
+public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
 
     private static final int[][] facingAndSideToSpriteOffset = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
     protected IIcon textures[];
@@ -136,17 +136,22 @@ public abstract class BlockMultiTexture extends BlockGti implements ITileEntityP
         }
     }
 
-    protected abstract Class<? extends TileGti> getTileEntityClass();
+    protected Class<? extends TileGti> getTileEntityClass() {
+        return TileGti.class;
+    }
 
     @Override
     public TileEntity createNewTileEntity(World world, int var) {
-        try {
-            return this.getTileEntityClass().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        if (this.getTileEntityClass() != null) {
+            try {
+                return this.getTileEntityClass().newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
+
         return null;
     }
 }
