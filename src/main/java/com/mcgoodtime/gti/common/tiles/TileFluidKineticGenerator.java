@@ -26,11 +26,13 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import ic2.api.energy.tile.IKineticSource;
+import ic2.core.util.StackUtil;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.*;
+import org.apache.commons.lang3.mutable.MutableObject;
 
 /**
  * The BlockFluidKineticGenerator tile.
@@ -39,9 +41,44 @@ import net.minecraftforge.fluids.IFluidHandler;
  */
 public class TileFluidKineticGenerator extends TileContainer implements IKineticSource, IFluidHandler {
 
+    public final int kuOutput = 32;
+    public FluidTank fluidTank = new FluidTank(10000);
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        this.fluidTank.readFromNBT(nbt.getCompoundTag("fluidTank"));
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+
+        NBTTagCompound fluidTag = new NBTTagCompound();
+        this.fluidTank.writeToNBT(fluidTag);
+        nbt.setTag("fluidTank", fluidTag);
+    }
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+
+        if (!this.worldObj.isRemote) {
+            boolean needUpdate = false;
+
+            if (this.fluidTank.getFluidAmount() <= this.fluidTank.getCapacity()) {
+
+            }
+
+            if (needUpdate) {
+                this.markDirty();
+            }
+        }
+    }
+
     @Override
     public int getSizeInventory() {
-        return 0;
+        return 2;
     }
 
     @Override
@@ -49,14 +86,24 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
         return "FluidKineticGenerator";
     }
 
+    /*
+	 *  Return max kinetic energy transmission peer Tick (only theoretical bandwidth not available amount)
+	 */
     @Override
-    public int maxrequestkineticenergyTick(ForgeDirection forgeDirection) {
-        return 0;
+    public int maxrequestkineticenergyTick(ForgeDirection directionFrom) {
+        return directionFrom.ordinal() != this.facing ? 0 : this.kuOutput;
     }
 
+    /*
+	 * @param requested amount of kinetic energy to transfer
+	 * @return transmitted amount of kineticenergy
+	 *
+	 * example: You Request 100 units of kinetic energy but the Source have only 50 units left
+	 * requestkineticenergy(100) : return 50 : so 50 units of kinetic energy remove from KineticSource
+	 */
     @Override
-    public int requestkineticenergy(ForgeDirection forgeDirection, int i) {
-        return 0;
+    public int requestkineticenergy(ForgeDirection directionFrom, int requestKineticenergy) {
+        return directionFrom.ordinal() != this.facing ? 0 : Math.min(this.kuOutput, requestKineticenergy);
     }
 
     /**
@@ -69,7 +116,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        return 0;
+        return this.canFill(from, resource.getFluid()) ? this.fluidTank.fill(resource, doFill) : 0;
     }
 
     /**
@@ -83,7 +130,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        return null;
+        return resource != null && resource.isFluidEqual(this.fluidTank.getFluid()) ? (!this.canDrain(from, resource.getFluid()) ? null : this.fluidTank.drain(resource.amount, doDrain)) : null;
     }
 
     /**
@@ -99,7 +146,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-        return null;
+        return this.fluidTank.drain(maxDrain, doDrain);
     }
 
     /**
@@ -109,7 +156,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        return false;
+        return true;
     }
 
     /**
@@ -131,6 +178,6 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        return new FluidTankInfo[0];
+        return new FluidTankInfo[] {new FluidTankInfo(this.fluidTank.getFluid(), this.fluidTank.getCapacity())};
     }
 }
