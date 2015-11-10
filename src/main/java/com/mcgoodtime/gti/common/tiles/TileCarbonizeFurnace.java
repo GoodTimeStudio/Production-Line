@@ -119,7 +119,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
             boolean needUpdate = false;
 
             if (canProcess() && this.energy >= this.energyPerTick) {
-                this.requireEnergy = CarbonizeFurnaceRecipes.instance.getRecipes(this.getStackInSlot(0)).requiresEnergy;
+                this.requireEnergy = CarbonizeFurnaceRecipes.instance.getRecipe(this.getStackInSlot(0)).requiresEnergy;
                 this.setActive(true);
                 this.energy -= this.energyPerTick;
                 this.progress += this.energyPerTick;

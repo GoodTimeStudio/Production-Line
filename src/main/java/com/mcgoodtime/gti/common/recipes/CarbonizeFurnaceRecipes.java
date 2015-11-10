@@ -102,6 +102,19 @@ public class CarbonizeFurnaceRecipes implements IProcessable<CarbonizeFurnaceRec
         return this.processList;
     }
 
+    /**
+     * @param itemStack Input item
+     */
+    @Override
+    public Recipes getRecipe(ItemStack itemStack) {
+        for (Recipes recipes : this.processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return recipes;
+            }
+        }
+        return null;
+    }
+
     public static class Recipes {
         public ItemStack input;
         public ItemStack output;

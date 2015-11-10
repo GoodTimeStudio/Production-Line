@@ -28,4 +28,9 @@ public interface IProcessable<T> {
     int getRequiredProcessAmount(ItemStack itemStack);
 
     List<T> getProcessRecipesList();
+
+    /**
+     * @param itemStack Input item
+     */
+    T getRecipe(ItemStack itemStack);
 }
