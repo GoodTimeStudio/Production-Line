@@ -53,7 +53,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
         if(amount <= 0.0D) {
             throw new IllegalArgumentException("Amount must be > 0.");
         } else {
-            ItemStack stack = this.containerItemsList.get(index);
+            ItemStack stack = this.getStackInSlot(index);
             if(stack == null) {
                 return 0.0D;
             } else {
@@ -66,7 +66,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
 
                     --stack.stackSize;
                     if(stack.stackSize <= 0) {
-                        this.containerItemsList.set(index, null);
+                        this.setInventorySlotContents(index, null);
                     }
                 }
 

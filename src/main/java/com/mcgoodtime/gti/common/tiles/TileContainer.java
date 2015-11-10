@@ -1,12 +1,12 @@
 package com.mcgoodtime.gti.common.tiles;
 
-import ic2.api.item.IElectricItem;
-import ic2.core.item.BaseElectricItem;
+import com.mcgoodtime.gti.common.tiles.tileslot.TileSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,20 +19,56 @@ import java.util.List;
 public abstract class TileContainer extends TileGti implements ISidedInventory {
 
     /** The ItemStacks that hold the itemsList in the container */
-    public List<ItemStack> containerItemsList = new ArrayList<ItemStack>();
+    public final List<TileSlot> tileSlots = new ArrayList<TileSlot>();
+
     protected String name;
 
-    public TileContainer() {
-        for (int i = 0; i < getSizeInventory(); i++) {
-            containerItemsList.add(null);
+    @Override
+    public int getSizeInventory() {
+        return this.tileSlots.size();
+    }
+
+    @Override
+    public abstract String getInventoryName();
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+
+        NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+        for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+            NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
+            byte slot = tag.getByte("Slot");
+
+            if (slot >= 0 && slot < this.getSizeInventory()) {
+                this.tileSlots.get(i).readFromNBT(tag);
+            }
+        }
+
+        if (nbt.hasKey("CustomName", 8)) {
+            this.name = nbt.getString("CustomName");
         }
     }
 
     @Override
-    public abstract int getSizeInventory();
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
 
-    @Override
-    public abstract String getInventoryName();
+        NBTTagList slotList = new NBTTagList();
+        for (int i = 0; i < this.getSizeInventory(); ++i) {
+            if (this.tileSlots.get(i) != null) {
+                NBTTagCompound tag = new NBTTagCompound();
+                tag.setByte("Slot", (byte) i);
+                this.tileSlots.get(i).writeToNBT(tag);
+                slotList.appendTag(tag);
+            }
+        }
+        nbt.setTag("Items", slotList);
+
+        if (this.hasCustomInventoryName()) {
+            nbt.setString("CustomName", this.name);
+        }
+    }
 
     /**
      * Returns an array containing the indices of the slots that can be accessed by automation
@@ -72,7 +108,7 @@ public abstract class TileContainer extends TileGti implements ISidedInventory {
      */
     @Override
     public ItemStack getStackInSlot(int slot) {
-        return this.containerItemsList.get(slot);
+        return this.tileSlots.get(slot).getStack();
     }
 
     /**
@@ -81,18 +117,20 @@ public abstract class TileContainer extends TileGti implements ISidedInventory {
      */
     @Override
     public ItemStack decrStackSize(int slot, int num) {
-        if (this.containerItemsList.get(slot) != null) {
+        if (this.tileSlots.get(slot).getStack() != null) {
+            ItemStack slotItem;
             ItemStack itemstack;
 
-            if (this.containerItemsList.get(slot).stackSize <= num) {
-                itemstack = this.containerItemsList.get(slot);
-                this.containerItemsList.set(slot, null);
-                return itemstack;
-            } else {
-                itemstack = this.containerItemsList.get(slot).splitStack(num);
+            slotItem = this.tileSlots.get(slot).getStack();
 
-                if (this.containerItemsList.get(slot).stackSize == 0) {
-                    this.containerItemsList.set(slot, null);
+            if (slotItem.stackSize <= num) {
+                this.tileSlots.get(slot).putStack(null);
+                return slotItem;
+            } else {
+                itemstack = slotItem.splitStack(num);
+
+                if (slotItem.stackSize == 0) {
+                    this.tileSlots.get(slot).putStack(null);
                 }
 
                 return itemstack;
@@ -107,10 +145,10 @@ public abstract class TileContainer extends TileGti implements ISidedInventory {
      * it returns as an EntityItem like when you close a workbench GUI.
      */
     @Override
-    public ItemStack getStackInSlotOnClosing(int slot) {
-        ItemStack itemstack = this.containerItemsList.get(slot);
+    public ItemStack getStackInSlotOnClosing(int index) {
+        ItemStack itemstack = this.tileSlots.get(index).getStack();
         if (itemstack != null) {
-            this.containerItemsList.set(slot, null);
+            this.tileSlots.get(index).putStack(null);
         }
         return itemstack;
     }
@@ -120,11 +158,12 @@ public abstract class TileContainer extends TileGti implements ISidedInventory {
      * (can be crafting or armor sections).
      */
     @Override
-    public void setInventorySlotContents(int slot, ItemStack itemStack) {
-        this.containerItemsList.set(slot, itemStack);
+    public void setInventorySlotContents(int index, ItemStack itemStack) {
+        TileSlot slot = this.tileSlots.get(index);
         if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
             itemStack.stackSize = this.getInventoryStackLimit();
         }
+        slot.putStack(itemStack);
     }
 
     /**
