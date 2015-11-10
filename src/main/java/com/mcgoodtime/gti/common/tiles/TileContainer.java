@@ -98,7 +98,8 @@ public abstract class TileContainer extends TileGti implements ISidedInventory {
      */
     @Override
     public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
-        return side != 0 || slot != 1 || itemStack.getItem() == Items.bucket;
+        TileSlot tileSlot = this.tileSlots.get(slot);
+        return tileSlot.slotMode == TileSlot.SlotMode.OUTPUT || tileSlot.slotMode == TileSlot.SlotMode.INOUT || itemStack.getItem() == Items.bucket;
     }
 
 
@@ -200,7 +201,8 @@ public abstract class TileContainer extends TileGti implements ISidedInventory {
      */
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-        return true;
+        TileSlot tileSlot = this.tileSlots.get(slot);
+        return (tileSlot.slotMode == TileSlot.SlotMode.INPUT || tileSlot.slotMode == TileSlot.SlotMode.INOUT) && tileSlot.canInput(itemStack);
     }
 
 }

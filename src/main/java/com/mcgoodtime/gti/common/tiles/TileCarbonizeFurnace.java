@@ -57,12 +57,12 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
 
     public TileCarbonizeFurnace() {
         super(3, 300, 1, 1);
-        this.tileSlots.add(new TileSlot(this));
-        this.tileSlots.add(new TileSlot(this));
-        this.tileSlots.add(new TileSlot(this));
-        this.tileSlots.add(new TileSlot(this));
-        this.tileSlots.add(new TileSlot(this));
-        this.tileSlots.add(new TileSlot(this));
+        this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.INPUT));
+        this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.NULL));
+        this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.OUTPUT));
+        this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.OUTPUT));
+        this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.NULL));
+        this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.NULL));
     }
 
     @Override
@@ -268,34 +268,5 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     @Override
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
         return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
-    }
-
-    /**
-     * Returns true if automation can extract the given item in the given
-     * slot from the given side. Args: Slot, item, side
-     */
-    @Override
-    public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
-        if (itemStack.getItem() == Items.bucket) {
-            return true;
-        }
-        switch (slot) {
-            case 2: return true;
-            case 3: return true;
-            default: return false;
-        }
-    }
-
-    /**
-     * Returns true if automation can insert the given item in the given
-     * slot from the given side. Args: Slot, item, side
-     */
-    @Override
-    public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
-        switch (slot) {
-            case 2: return false;
-            case 3: return false;
-            default: return true;
-        }
     }
 }
