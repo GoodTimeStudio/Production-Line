@@ -26,6 +26,7 @@ package com.mcgoodtime.gti.common.tiles;
 
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.gti.common.tiles.tileslot.TileSlot;
+import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotInput;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.tile.IWrenchable;
@@ -57,7 +58,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
 
     public TileCarbonizeFurnace() {
         super(3, 300, 1, 1);
-        this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.INPUT));
+        this.tileSlots.add(new TileSlotInput(this, CarbonizeFurnaceRecipes.instance));
         this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.NULL));
         this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.OUTPUT));
         this.tileSlots.add(new TileSlot(this, TileSlot.SlotMode.OUTPUT));

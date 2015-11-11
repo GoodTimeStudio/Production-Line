@@ -24,10 +24,12 @@
  */
 package com.mcgoodtime.gti.common.inventory;
 
+import com.mcgoodtime.gti.common.inventory.slot.SlotInput;
 import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
 import com.mcgoodtime.gti.common.inventory.slot.SlotUpgrade;
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
+import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotInput;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.item.IUpgradeItem;
@@ -48,7 +50,7 @@ public class ContainerCarbonizeFurnace extends ContainerGti<TileCarbonizeFurnace
 
     public ContainerCarbonizeFurnace(EntityPlayer player, TileCarbonizeFurnace tile) {
         super(player, tile);
-        this.addSlotToContainer(new Slot(tile, 0, 56, 16));
+        this.addSlotToContainer(new SlotInput((TileSlotInput) tile.tileSlots.get(0), tile, 0, 56, 16));
         this.addSlotToContainer(new SlotDischarge(tile, 1, 1, 56, 53));
         this.addSlotToContainer(new SlotOutput(player, tile, 2, 113, 35));
         this.addSlotToContainer(new SlotOutput(player, tile, 3, 131, 35));
@@ -165,9 +167,9 @@ public class ContainerCarbonizeFurnace extends ContainerGti<TileCarbonizeFurnace
                         if (stack.isItemEqual(itemStack1)) {
                             if (stack.stackSize <= 4) {
                                 if (!this.mergeItemStack(stack, 4, 5, false)) {
-                                    if (!this.mergeItemStack(stack, 5, 6, false)) {
-                                        return null;
-                                    }
+                                    return null;
+                                }
+                                else if (!this.mergeItemStack(stack, 5, 6, false)) {
                                     return null;
                                 }
                             }
