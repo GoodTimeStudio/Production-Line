@@ -1,10 +1,12 @@
 package com.mcgoodtime.gti.common.inventory;
 
 import com.mcgoodtime.gti.common.tiles.TileContainer;
+import ic2.core.util.StackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 /**
  * Created by BestOwl on 2015.10.31.0031.
@@ -56,5 +58,39 @@ public abstract class ContainerGti<T extends IInventory> extends Container {
 
     public T getTileEntity() {
         return this.tile;
+    }
+
+    public boolean transferItemStack(ItemStack item, Slot slot) {
+        int max = Math.min(item.getMaxStackSize(), slot.getSlotStackLimit());
+        max = Math.min(max, slot.inventory.getInventoryStackLimit());
+        ItemStack slotItem = slot.getStack();
+
+        if (slotItem != null) {
+            if (!item.isItemEqual(slotItem)) {
+                return false;
+            }
+
+            int i = this.getTransferAmount(item.stackSize, slotItem.stackSize, max);
+            slotItem.stackSize += i;
+            item.stackSize -= i;
+            return true;
+        }
+        else {
+            int i = this.getTransferAmount(item.stackSize, 0, max);
+            slot.putStack(StackUtil.copyWithSize(item, i));
+            item.stackSize -= i;
+            return true;
+        }
+    }
+
+    private int getTransferAmount(int amount, int currentAmount, int maxAmount) {
+        if (amount <= maxAmount) {
+            if (amount + currentAmount > maxAmount) {
+                return maxAmount - currentAmount;
+            } else {
+                return amount;
+            }
+        }
+        return 0;
     }
 }
