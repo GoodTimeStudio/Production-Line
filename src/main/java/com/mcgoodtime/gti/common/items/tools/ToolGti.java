@@ -26,16 +26,13 @@ package com.mcgoodtime.gti.common.items.tools;
 
 
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.items.ItemGti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.IIcon;
 
-import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
-import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
-import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
+import static com.mcgoodtime.gti.common.core.Gti.*;
 
 /**
  * Created by suhao on 2015.7.19.
@@ -43,8 +40,6 @@ import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
  * @author suhao
  */
 public class ToolGti {
-
-    private String name;
 
     public static Item registerPickaxe(ToolMaterial toolMaterial, String name) {
         return new Pickaxe(toolMaterial, name);

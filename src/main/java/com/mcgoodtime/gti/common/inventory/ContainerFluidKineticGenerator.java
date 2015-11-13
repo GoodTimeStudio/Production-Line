@@ -27,12 +27,8 @@ package com.mcgoodtime.gti.common.inventory;
 
 import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
 import com.mcgoodtime.gti.common.tiles.TileFluidKineticGenerator;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraftforge.fluids.FluidTank;
 
 public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineticGenerator> {
 

@@ -27,17 +27,13 @@ package com.mcgoodtime.gti.common.inventory;
 import com.mcgoodtime.gti.common.inventory.slot.SlotInput;
 import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
 import com.mcgoodtime.gti.common.inventory.slot.SlotUpgrade;
-import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotInput;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ic2.core.item.IUpgradeItem;
 import ic2.core.slot.SlotDischarge;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 /*
  * Created by suhao on 2015.7.4.

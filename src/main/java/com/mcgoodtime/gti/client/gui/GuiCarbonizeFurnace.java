@@ -24,15 +24,12 @@
  */
 package com.mcgoodtime.gti.client.gui;
 
-import com.mcgoodtime.gti.common.blocks.BlockCarbonizeFurnace;
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
 public class GuiCarbonizeFurnace extends GuiGti<ContainerCarbonizeFurnace> {

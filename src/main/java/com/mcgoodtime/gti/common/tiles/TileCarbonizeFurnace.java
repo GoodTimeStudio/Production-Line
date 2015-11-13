@@ -25,7 +25,6 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
-import com.mcgoodtime.gti.common.recipes.IProcessable;
 import com.mcgoodtime.gti.common.tiles.tileslot.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,7 +33,6 @@ import ic2.core.Ic2Items;
 import ic2.core.block.IUpgradableBlock;
 import ic2.core.item.IUpgradeItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

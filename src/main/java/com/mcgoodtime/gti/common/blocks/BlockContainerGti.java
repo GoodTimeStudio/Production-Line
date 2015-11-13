@@ -26,7 +26,6 @@ package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.tiles.TileContainer;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
