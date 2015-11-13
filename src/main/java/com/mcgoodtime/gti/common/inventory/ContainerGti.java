@@ -93,4 +93,69 @@ public abstract class ContainerGti<T extends IInventory> extends Container {
         }
         return 0;
     }
+
+    /**
+     * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
+     */
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int index) {
+        ItemStack itemstack = null;
+        Slot slot = (Slot) this.inventorySlots.get(index);
+
+        if (slot != null && slot.getHasStack()) {
+            ItemStack stack = slot.getStack();
+            itemstack = stack.copy();
+
+            if (this.tile instanceof TileContainer) {
+                TileContainer container = (TileContainer) this.tile;
+
+                if (index <= container.tileSlots.size()) {
+
+                    boolean flag = false;
+                    for (int i = container.tileSlots.size() + 27; i < this.inventorySlots.size(); i++) {
+                        flag = this.transferItemStack(stack, (Slot) this.inventorySlots.get(i - 1));
+                        if (flag) {
+                            break;
+                        }
+                    }
+
+                    if (!flag) {
+                        for (int i = container.tileSlots.size(); i < this.inventorySlots.size() - 9; i++) {
+                            flag = this.transferItemStack(stack, (Slot) this.inventorySlots.get(i));
+                            if (flag) {
+                                break;
+                            }
+                        }
+                    }
+
+                }
+
+                else {
+                    for (int i = 0; i < container.tileSlots.size(); i++) {
+                        if (container.tileSlots.get(i) != null && container.tileSlots.get(i).canInput(stack)) {
+                            if (this.transferItemStack(stack, (Slot) this.inventorySlots.get(i))) {
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            if (stack.stackSize == 0) {
+                slot.putStack(null);
+            }
+            else {
+                slot.onSlotChanged();
+            }
+
+            if (stack.stackSize == itemstack.stackSize) {
+                return null;
+            }
+
+            slot.onPickupFromSlot(entityPlayer, stack);
+        }
+
+        return itemstack;
+    }
 }

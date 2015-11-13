@@ -119,7 +119,7 @@ public class ContainerCarbonizeFurnace extends ContainerGti<TileCarbonizeFurnace
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      * @param i The number of slot.
-     */
+     *//*
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int i) {
         ItemStack itemstack = null;
@@ -205,5 +205,5 @@ public class ContainerCarbonizeFurnace extends ContainerGti<TileCarbonizeFurnace
         }
 
         return itemstack;
-    }
+    }*/
 }

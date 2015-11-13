@@ -164,12 +164,4 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
         MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
     }
 
-    /**
-     * Check whether the items can provide energy
-     * @param stack item.
-     */
-    public boolean isDischargeItem(ItemStack stack) {
-        return stack != null && (!(stack.getItem() != Items.redstone && !(stack.getItem() instanceof ItemBatterySU)) || ElectricItem.manager.discharge(stack, 1.0D / 0.0, this.tier, true, true, true) > 0.0D);
-    }
-
 }

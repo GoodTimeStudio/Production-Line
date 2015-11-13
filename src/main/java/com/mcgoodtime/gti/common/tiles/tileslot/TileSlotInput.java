@@ -12,11 +12,10 @@ import net.minecraft.item.ItemStack;
 
 public class TileSlotInput extends TileSlot {
 
-    protected IProcessable processable;
+    public IProcessable processable;
 
     public TileSlotInput(TileContainer tile, IProcessable processable) {
-        super(tile, SlotMode.INPUT);
-        this.processable = processable;
+        this(tile, SlotMode.INPUT, processable);
     }
 
     public TileSlotInput(TileContainer tile, SlotMode mode, IProcessable processable) {
@@ -31,6 +30,6 @@ public class TileSlotInput extends TileSlot {
      */
     @Override
     public boolean canInput(ItemStack itemStack) {
-        return processable.canProcess(itemStack);
+        return this.processable.canProcess(itemStack);
     }
 }
