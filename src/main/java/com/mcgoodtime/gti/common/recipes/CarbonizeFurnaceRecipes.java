@@ -37,15 +37,15 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public class CarbonizeFurnaceRecipes {
+public class CarbonizeFurnaceRecipes implements IProcessable<CarbonizeFurnaceRecipes.Recipes> {
     public static final CarbonizeFurnaceRecipes instance = new CarbonizeFurnaceRecipes();
 
-    /** The default value after the process */
-    private final float XP = 0.15F;
     /** The list of smelting results. */
     private List<Recipes> processList = new ArrayList<Recipes>();
 
     private CarbonizeFurnaceRecipes() {
+        /* The default value after the process */
+        float XP = 0.15F;
         register(new ItemStack(Blocks.log), new ItemStack(Items.coal, 2, 1), 2000, XP);
         register(new ItemStack(Blocks.log2), new ItemStack(Items.coal, 2, 1), 2000, XP);
         register(new ItemStack(Blocks.planks, 2), new ItemStack(Items.coal, 1, 1), 1500, XP);
@@ -57,17 +57,6 @@ public class CarbonizeFurnaceRecipes {
         processList.add(new Recipes(input, output, requireEnergy, xp));
     }
 
-    /**
-     * Returns the process result of an item.
-     */
-    public Recipes getRecipes(ItemStack itemStack) {
-        for (Recipes recipes : processList) {
-            if (recipes.input.isItemEqual(itemStack)) {
-                return recipes;
-            }
-        }
-        return null;
-    }
 
     /**
      * Returns the process result of an item.
@@ -82,17 +71,48 @@ public class CarbonizeFurnaceRecipes {
     }
 
     /**
+     * @return Whether this item can process
+     */
+    @Override
+    public boolean canProcess(ItemStack itemStack) {
+        for (Recipes recipes : this.processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Get required amount of process
      * @param itemStack Input item
      * @return Required amount of process
      */
     public int getRequiredProcessAmount(ItemStack itemStack) {
-        for (Recipes recipes : processList) {
+        for (Recipes recipes : this.processList) {
             if (recipes.input.isItemEqual(itemStack)) {
                 return recipes.input.stackSize;
             }
         }
         return 1;
+    }
+
+    @Override
+    public List<Recipes> getProcessRecipesList() {
+        return this.processList;
+    }
+
+    /**
+     * @param itemStack Input item
+     */
+    @Override
+    public Recipes getRecipe(ItemStack itemStack) {
+        for (Recipes recipes : this.processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return recipes;
+            }
+        }
+        return null;
     }
 
     public static class Recipes {
