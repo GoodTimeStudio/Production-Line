@@ -71,16 +71,21 @@ public abstract class ContainerGti<T extends IInventory> extends Container {
             }
 
             int i = this.getTransferAmount(item.stackSize, slotItem.stackSize, max);
-            slotItem.stackSize += i;
-            item.stackSize -= i;
-            return true;
+            if (i != 0) {
+                slotItem.stackSize += i;
+                item.stackSize -= i;
+                return true;
+            }
         }
         else {
             int i = this.getTransferAmount(item.stackSize, 0, max);
-            slot.putStack(StackUtil.copyWithSize(item, i));
-            item.stackSize -= i;
-            return true;
+            if (i != 0) {
+                slot.putStack(StackUtil.copyWithSize(item, i));
+                item.stackSize -= i;
+                return true;
+            }
         }
+        return false;
     }
 
     private int getTransferAmount(int amount, int currentAmount, int maxAmount) {
@@ -113,7 +118,7 @@ public abstract class ContainerGti<T extends IInventory> extends Container {
 
                     boolean flag = false;
                     for (int i = container.tileSlots.size() + 27; i < this.inventorySlots.size(); i++) {
-                        flag = this.transferItemStack(stack, (Slot) this.inventorySlots.get(i - 1));
+                        flag = this.transferItemStack(stack, (Slot) this.inventorySlots.get(i));
                         if (flag) {
                             break;
                         }
@@ -131,12 +136,33 @@ public abstract class ContainerGti<T extends IInventory> extends Container {
                 }
 
                 else {
+                    boolean flag = false;
                     for (int i = 0; i < container.tileSlots.size(); i++) {
                         if (container.tileSlots.get(i) != null && container.tileSlots.get(i).canInput(stack)) {
-                            if (this.transferItemStack(stack, (Slot) this.inventorySlots.get(i))) {
+                            flag = this.transferItemStack(stack, (Slot) this.inventorySlots.get(i));
+                            if (flag) {
                                 break;
                             }
                         }
+                    }
+
+                    if (!flag) {
+
+                        if (index >= this.inventorySlots.size() - 9) {
+                            for (int i = container.tileSlots.size(); i < this.inventorySlots.size() - 9; i++) {
+                                if (this.transferItemStack(stack, (Slot) this.inventorySlots.get(i))) {
+                                    break;
+                                }
+                            }
+                        }
+                        else {
+                            for (int i = container.tileSlots.size() + 27; i < this.inventorySlots.size(); i++) {
+                                if (this.transferItemStack(stack, (Slot) this.inventorySlots.get(i))) {
+                                    break;
+                                }
+                            }
+                        }
+
                     }
                 }
 
