@@ -24,59 +24,52 @@
  */
 package com.mcgoodtime.gti.common.tiles.tileslot;
 
+import com.mcgoodtime.gti.common.recipes.IProcessable;
 import com.mcgoodtime.gti.common.tiles.TileContainer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
 /**
- * Created by BestOwl on 2015.11.9.0009.
+ * Created by BestOwl on 2015.11.13.0013.
  *
  * @author BestOwl
  */
-public class TileSlot {
+public class TileSlotFluidInput extends TileSlot {
 
-    public final SlotMode slotMode;
+    protected IProcessable processable;
 
-    public final TileContainer tile;
-    protected ItemStack item;
-
-    public TileSlot(TileContainer tile, SlotMode mode) {
-        this.tile = tile;
-        this.slotMode = mode;
+    public TileSlotFluidInput(TileContainer tile, IProcessable processable) {
+        this(tile, SlotMode.INPUT, processable);
     }
 
-    public void putStack(ItemStack itemStack) {
-        this.item = itemStack;
-    }
-
-    public ItemStack getStack() {
-        return this.item;
-    }
-
-    public void writeToNBT(NBTTagCompound nbt) {
-        NBTTagCompound nbtTagCompound = new NBTTagCompound();
-        if (this.item != null) {
-            this.item.writeToNBT(nbtTagCompound);
-        }
-        nbt.setTag("TileSlot", nbtTagCompound);
-    }
-
-    public void readFromNBT(NBTTagCompound nbt) {
-        this.item = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("TileSlot"));
+    public TileSlotFluidInput(TileContainer tile, SlotMode mode, IProcessable processable) {
+        super(tile, mode);
+        this.processable = processable;
     }
 
     /**
      * Whether the current item can be inputted.
+     *
      * @param itemStack Input item.
      */
+    @Override
     public boolean canInput(ItemStack itemStack) {
-        return true;
+        return this.processable.canProcess(itemStack);
     }
 
-    public enum SlotMode {
-        INPUT,
-        OUTPUT,
-        INOUT,
-        NULL
+    public void drainToTank(FluidTank tank) {
+        if (this.item != null) {
+            FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(this.item);
+
+            if (fluidStack instanceof IFluidContainerItem) {
+                ((IFluidContainerItem) fluidStack).drain(this.item, FluidContainerRegistry.getContainerCapacity(this.item), true);
+                System.out.println(",....");
+            }
+        }
     }
+
 }

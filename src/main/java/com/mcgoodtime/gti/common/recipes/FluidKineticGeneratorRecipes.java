@@ -24,6 +24,8 @@
  */
 package com.mcgoodtime.gti.common.recipes;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -35,7 +37,7 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public class FluidKineticGeneratorRecipes {
+public class FluidKineticGeneratorRecipes implements IProcessable {
     public static final FluidKineticGeneratorRecipes instance = new FluidKineticGeneratorRecipes();
     /** The list of smelting results. */
     private List<Recipes> processList = new ArrayList<Recipes>();
@@ -47,6 +49,62 @@ public class FluidKineticGeneratorRecipes {
     public void register(FluidStack input) {
         processList.add(new Recipes(input));
     }
+
+    /**
+     * Returns the process result of an item.
+     *
+     */
+    @Override
+    public ItemStack getProcessResult(ItemStack itemStack) {
+        return null;
+    }
+
+    /**
+     * @return Whether this item can process
+     */
+    @Override
+    public boolean canProcess(ItemStack itemStack) {
+        FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(itemStack);
+        if (fluidStack != null) {
+            for (Recipes recipes : this.processList) {
+                if (recipes.fluidStack.isFluidEqual(fluidStack)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Get required amount of process
+     *
+     * @param itemStack Input item
+     * @return Required amount of process
+     */
+    @Override
+    public int getRequiredProcessAmount(ItemStack itemStack) {
+        return 1;
+    }
+
+    @Override
+    public List getProcessRecipesList() {
+        return this.processList;
+    }
+
+    /**
+     * @param itemStack Input item
+     */
+    @Override
+    public Object getRecipe(ItemStack itemStack) {
+        for (Recipes recipes : this.processList) {
+            if (recipes.fluidStack.isFluidEqual(FluidContainerRegistry.getFluidForFilledItem(itemStack))) {
+                return recipes;
+            }
+        }
+        return null;
+    }
+
 
     public static class Recipes {
         public FluidStack fluidStack;

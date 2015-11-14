@@ -34,6 +34,10 @@ import net.minecraft.item.ItemStack;
  */
 public class TileSlotOutput extends TileSlot {
 
+    public TileSlotOutput(TileContainer tile) {
+        this(tile, SlotMode.OUTPUT);
+    }
+
     public TileSlotOutput(TileContainer tile, SlotMode mode) {
         super(tile, mode);
     }

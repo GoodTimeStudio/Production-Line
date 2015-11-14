@@ -25,14 +25,14 @@
 
 package com.mcgoodtime.gti.common.tiles;
 
+import com.mcgoodtime.gti.common.recipes.FluidKineticGeneratorRecipes;
+import com.mcgoodtime.gti.common.tiles.tileslot.TileSlot;
+import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotFluidInput;
+import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotOutput;
 import ic2.api.energy.tile.IKineticSource;
-import ic2.core.util.StackUtil;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
-import org.apache.commons.lang3.mutable.MutableObject;
 
 /**
  * The BlockFluidKineticGenerator tile.
@@ -43,6 +43,11 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
 
     public final int kuOutput = 32;
     public FluidTank fluidTank = new FluidTank(10000);
+
+    public TileFluidKineticGenerator() {
+        this.tileSlots.add(new TileSlotFluidInput(this, FluidKineticGeneratorRecipes.instance));
+        this.tileSlots.add(new TileSlotOutput(this));
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
@@ -67,7 +72,12 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
             boolean needUpdate = false;
 
             if (this.fluidTank.getFluidAmount() <= this.fluidTank.getCapacity()) {
-
+                for (TileSlot tileSlot : this.tileSlots) {
+                    if (tileSlot instanceof TileSlotFluidInput) {
+                        ((TileSlotFluidInput) tileSlot).drainToTank(this.fluidTank);
+                        needUpdate = true;
+                    }
+                }
             }
 
             if (needUpdate) {
