@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.network;
 
 import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
@@ -41,11 +42,17 @@ public class GtiNetwork {
     public static void init() {
         if (network == null) {
             network = NetworkRegistry.INSTANCE.newSimpleChannel(Gti.MOD_ID);
-            network.registerMessage(MessageBlockState.Handler.class, MessageBlockState.class, 0, Side.CLIENT);
+            network.registerMessage(MessageBlockDisplayState.Handler.class, MessageBlockDisplayState.class, 0, Side.CLIENT);
         }
     }
 
-    public static void updateBlockState(int x, int y, int z, boolean active, short facing) {
-        network.sendToAll(new MessageBlockState(x, y, z, active, facing));
+    public static void updateBlockDisplayState(TileGti tile) {
+        network.sendToAllAround(new MessageBlockDisplayState(tile.xCoord, tile.yCoord, tile.zCoord, tile.active, tile.facing),
+                new NetworkRegistry.TargetPoint(tile.getWorldObj().getWorldInfo().getVanillaDimension(),
+                tile.xCoord, tile.yCoord, tile.zCoord, 64));
+    }
+
+    public static SimpleNetworkWrapper getNetwork() {
+        return network;
     }
 }
