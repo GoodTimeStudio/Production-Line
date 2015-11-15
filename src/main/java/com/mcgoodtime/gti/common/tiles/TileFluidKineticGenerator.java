@@ -49,7 +49,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
     public FluidTank fluidTank = new FluidTank(10000);
 
     public TileFluidKineticGenerator() {
-        this.tileSlots.add(new TileSlotFluidInput(this, FluidKineticGeneratorRecipes.instance));
+        this.tileSlots.add(new TileSlotFluidInput(this, FluidKineticGeneratorRecipes.instance, this.fluidTank));
         this.tileSlots.add(new TileSlotOutput(this));
     }
 
@@ -78,14 +78,14 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
             if (this.fluidTank.getFluidAmount() <= this.fluidTank.getCapacity()) {
                 for (TileSlot tileSlot : this.tileSlots) {
                     if (tileSlot instanceof TileSlotFluidInput) {
-                        ((TileSlotFluidInput) tileSlot).drainToTank(this.fluidTank);
+                        ((TileSlotFluidInput) tileSlot).drainToTank();
                         needUpdate = true;
                     }
                 }
             }
 
 
-            if (this.maxrequestkineticenergyTick(ForgeDirection.VALID_DIRECTIONS[this.facing]) > 0) {
+            if (this.fluidTank.getFluid() != null && this.maxrequestkineticenergyTick(ForgeDirection.VALID_DIRECTIONS[this.facing]) > 0) {
                 int amount = 0;
                 for (FluidStack fluidStack : FluidKineticGeneratorRecipes.instance.getProcessRecipesList()) {
                     if (fluidStack.isFluidEqual(this.fluidTank.getFluid())) {
