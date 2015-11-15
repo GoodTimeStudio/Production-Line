@@ -27,7 +27,9 @@ package com.mcgoodtime.gti.common.inventory;
 
 import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
 import com.mcgoodtime.gti.common.tiles.TileFluidKineticGenerator;
+import ic2.core.IC2;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Slot;
 
 public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineticGenerator> {
@@ -37,5 +39,17 @@ public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineti
 
         this.addSlotToContainer(new Slot(tile, 0, 27, 21));
         this.addSlotToContainer(new SlotOutput(player, tile, 1, 27, 54));
+    }
+
+    /**
+     * Looks for changes made in the container, sends them to every listener.
+     */
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+
+        for (Object object : this.crafters) {
+            IC2.network.get().updateTileEntityFieldTo(this.tile, "fluidTank", (EntityPlayerMP) object); //(Temporary use) ic2 network system
+        }
     }
 }

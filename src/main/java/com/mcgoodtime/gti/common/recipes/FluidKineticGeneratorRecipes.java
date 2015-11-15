@@ -40,14 +40,14 @@ import java.util.List;
 public class FluidKineticGeneratorRecipes implements IProcessable {
     public static final FluidKineticGeneratorRecipes instance = new FluidKineticGeneratorRecipes();
     /** The list of smelting results. */
-    private List<Recipes> processList = new ArrayList<Recipes>();
+    private List<FluidStack> processList = new ArrayList<FluidStack>();
 
     private FluidKineticGeneratorRecipes() {
         register(FluidRegistry.getFluidStack("lava", 10));
     }
 
     public void register(FluidStack input) {
-        processList.add(new Recipes(input));
+        processList.add(input);
     }
 
     /**
@@ -66,8 +66,8 @@ public class FluidKineticGeneratorRecipes implements IProcessable {
     public boolean canProcess(ItemStack itemStack) {
         FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(itemStack);
         if (fluidStack != null) {
-            for (Recipes recipes : this.processList) {
-                if (recipes.fluidStack.isFluidEqual(fluidStack)) {
+            for (FluidStack fluid : this.processList) {
+                if (fluid.isFluidEqual(fluidStack)) {
                     return true;
                 }
             }
@@ -88,7 +88,7 @@ public class FluidKineticGeneratorRecipes implements IProcessable {
     }
 
     @Override
-    public List getProcessRecipesList() {
+    public List<FluidStack> getProcessRecipesList() {
         return this.processList;
     }
 
@@ -97,20 +97,12 @@ public class FluidKineticGeneratorRecipes implements IProcessable {
      */
     @Override
     public Object getRecipe(ItemStack itemStack) {
-        for (Recipes recipes : this.processList) {
-            if (recipes.fluidStack.isFluidEqual(FluidContainerRegistry.getFluidForFilledItem(itemStack))) {
-                return recipes;
+        FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(itemStack);
+        for (FluidStack fluid : this.processList) {
+            if (fluid.isFluidEqual(fluidStack)) {
+                return fluid;
             }
         }
         return null;
-    }
-
-
-    public static class Recipes {
-        public FluidStack fluidStack;
-
-        public Recipes(FluidStack input) {
-            this.fluidStack = input;
-        }
     }
 }

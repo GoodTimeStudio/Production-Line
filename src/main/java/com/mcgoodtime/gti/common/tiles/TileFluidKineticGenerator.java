@@ -30,6 +30,9 @@ import com.mcgoodtime.gti.common.tiles.tileslot.TileSlot;
 import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotFluidInput;
 import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotOutput;
 import ic2.api.energy.tile.IKineticSource;
+import ic2.api.tile.IWrenchable;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
@@ -39,8 +42,9 @@ import net.minecraftforge.fluids.*;
  *
  * @author liach
  */
-public class TileFluidKineticGenerator extends TileContainer implements IKineticSource, IFluidHandler {
+public class TileFluidKineticGenerator extends TileContainer implements IKineticSource, IFluidHandler, IWrenchable {
 
+    private int timer;
     public final int kuOutput = 32;
     public FluidTank fluidTank = new FluidTank(10000);
 
@@ -78,6 +82,39 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
                         needUpdate = true;
                     }
                 }
+            }
+
+
+            if (this.maxrequestkineticenergyTick(ForgeDirection.VALID_DIRECTIONS[this.facing]) > 0) {
+                int amount = 0;
+                for (FluidStack fluidStack : FluidKineticGeneratorRecipes.instance.getProcessRecipesList()) {
+                    if (fluidStack.isFluidEqual(this.fluidTank.getFluid())) {
+                        amount = fluidStack.amount;
+
+                    }
+                }
+
+                if (this.fluidTank.getFluidAmount() >= amount) {
+                    this.setActive(true);
+
+                    if (this.timer == 20) {
+                        this.timer = 0;
+                        this.fluidTank.getFluid().amount -= amount;
+                    }
+                    this.timer++;
+
+                } else {
+                    this.setActive(false);
+                    this.timer = 0;
+                }
+
+                if (this.fluidTank.getFluidAmount() < 0) {
+                    this.fluidTank.getFluid().amount = 0;
+                }
+
+            }
+            else {
+                this.setActive(false);
             }
 
             if (needUpdate) {
@@ -189,5 +226,30 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
         return new FluidTankInfo[] {new FluidTankInfo(this.fluidTank.getFluid(), this.fluidTank.getCapacity())};
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int i) {
+        return i != this.facing;
+    }
+
+    @Override
+    public short getFacing() {
+        return this.facing;
+    }
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        return true;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
     }
 }

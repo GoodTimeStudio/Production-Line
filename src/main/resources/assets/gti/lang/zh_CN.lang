@@ -7,6 +7,8 @@ itemGroup.GoodTime-Industrial=GoodTime Industrial
 
 [GUI]
 gui.gti.FluidKineticGenerator=流体动能发生机
+gui.gti.FluidKineticGenerator.output=输出: %s
+gui.gti.FluidKineticGenerator.max-output=最大输出: %s
 gui.gti.CarbonizeFurnace=碳化燃烧炉
 
 [BLOCKS]

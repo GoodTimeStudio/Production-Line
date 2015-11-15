@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.client.gui;
 
+import com.mcgoodtime.gti.GtiUtil;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
@@ -36,16 +37,15 @@ public class GuiCarbonizeFurnace extends GuiGti<ContainerCarbonizeFurnace> {
 
     public GuiCarbonizeFurnace(ContainerCarbonizeFurnace container) {
         super(container);
-        this.name = "CarbonizeFurnace";
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
         super.drawGuiContainerBackgroundLayer(f, x, y);
         TileCarbonizeFurnace tile = this.container.getTileEntity();
-        int i1 = tile.getRemainingBatteryScaled(14);
+        int i1 = GtiUtil.getGuiScaled(14, (float) tile.energy, tile.maxEnergy);
         this.drawTexturedModalRect(this.x + 56, this.y + 36 + 14 - i1, 176, 14 - i1, 14, i1 + 1);
-        i1 = tile.getProgressScaled(24);
+        i1 = GtiUtil.getGuiScaled(24, tile.progress, (float) tile.requireEnergy);
         this.drawTexturedModalRect(this.x + 79, this.y + 34, 176, 14, i1 + 1, 16);
     }
 

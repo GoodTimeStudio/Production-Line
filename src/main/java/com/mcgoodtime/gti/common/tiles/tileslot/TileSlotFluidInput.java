@@ -26,12 +26,11 @@ package com.mcgoodtime.gti.common.tiles.tileslot;
 
 import com.mcgoodtime.gti.common.recipes.IProcessable;
 import com.mcgoodtime.gti.common.tiles.TileContainer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.IFluidContainerItem;
+import net.minecraftforge.fluids.IFluidTank;
 
 /**
  * Created by BestOwl on 2015.11.13.0013.
@@ -61,15 +60,53 @@ public class TileSlotFluidInput extends TileSlot {
         return this.processable.canProcess(itemStack);
     }
 
-    public void drainToTank(FluidTank tank) {
+    public void drainToTank(IFluidTank tank) {
         if (this.item != null) {
-            FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(this.item);
+            FluidStack tankFluid = tank.getFluid();
 
-            if (fluidStack instanceof IFluidContainerItem) {
-                ((IFluidContainerItem) fluidStack).drain(this.item, FluidContainerRegistry.getContainerCapacity(this.item), true);
-                System.out.println(",....");
+            int capacity = tank.getCapacity();
+            int requiredAmount = capacity;
+            Fluid requiredFluid = null;
+
+            if (tankFluid != null) {
+                requiredAmount = capacity - tank.getFluidAmount();
+                requiredFluid = tankFluid.getFluid();
             }
+
+            if (requiredAmount > 0) {
+                FluidStack fluidStack  = this.drain(requiredFluid, requiredAmount);
+
+                if (fluidStack != null) {
+                    tank.fill(fluidStack, true);
+                }
+            }
+
         }
     }
 
+    private FluidStack drain(Fluid fluid, int amount) {
+        if (FluidContainerRegistry.isFilledContainer(this.item)) {
+            System.out.println(1);
+            FluidStack container = FluidContainerRegistry.getFluidForFilledItem(this.item);
+
+            if (container != null && (fluid == null || fluid == container.getFluid()) && this.canInput(this.item)) {
+                if (container.amount > 0 && container.amount <= amount) {
+                    --this.item.stackSize;
+                    if (this.item.stackSize <= 0) {
+                        this.putStack(null);
+                    }
+                    return container;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+
+        } else {
+            System.out.println(2);
+        }
+
+        return null;
+    }
 }

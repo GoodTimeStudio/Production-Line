@@ -73,11 +73,11 @@ public class TileGti extends TileEntity {
 
     public void setActive(boolean active) {
         this.active = active;
-        GtiNetwork.updateBlockState(this.xCoord, this.yCoord, this.zCoord, active, this.facing);
+        GtiNetwork.updateBlockDisplayState(this);
     }
 
     public void setFacing(short facing) {
         this.facing = facing;
-        GtiNetwork.updateBlockState(this.xCoord, this.yCoord, this.zCoord, this.active, facing);
+        GtiNetwork.updateBlockDisplayState(this);
     }
 }
