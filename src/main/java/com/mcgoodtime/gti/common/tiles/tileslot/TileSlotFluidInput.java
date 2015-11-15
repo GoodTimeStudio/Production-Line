@@ -27,10 +27,7 @@ package com.mcgoodtime.gti.common.tiles.tileslot;
 import com.mcgoodtime.gti.common.recipes.IProcessable;
 import com.mcgoodtime.gti.common.tiles.TileContainer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.*;
 
 /**
  * Created by BestOwl on 2015.11.13.0013.
@@ -39,15 +36,17 @@ import net.minecraftforge.fluids.IFluidTank;
  */
 public class TileSlotFluidInput extends TileSlot {
 
+    protected IFluidTank fluidTank;
     protected IProcessable processable;
 
-    public TileSlotFluidInput(TileContainer tile, IProcessable processable) {
-        this(tile, SlotMode.INPUT, processable);
+    public TileSlotFluidInput(TileContainer tile, IProcessable processable, IFluidTank fluidTank) {
+        this(tile, SlotMode.INPUT, processable, fluidTank);
     }
 
-    public TileSlotFluidInput(TileContainer tile, SlotMode mode, IProcessable processable) {
+    public TileSlotFluidInput(TileContainer tile, SlotMode mode, IProcessable processable, IFluidTank fluidTank) {
         super(tile, mode);
         this.processable = processable;
+        this.fluidTank = fluidTank;
     }
 
     /**
@@ -60,16 +59,16 @@ public class TileSlotFluidInput extends TileSlot {
         return this.processable.canProcess(itemStack);
     }
 
-    public void drainToTank(IFluidTank tank) {
+    public void drainToTank() {
         if (this.item != null) {
-            FluidStack tankFluid = tank.getFluid();
+            FluidStack tankFluid = this.fluidTank.getFluid();
 
-            int capacity = tank.getCapacity();
+            int capacity = this.fluidTank.getCapacity();
             int requiredAmount = capacity;
             Fluid requiredFluid = null;
 
             if (tankFluid != null) {
-                requiredAmount = capacity - tank.getFluidAmount();
+                requiredAmount = capacity - this.fluidTank.getFluidAmount();
                 requiredFluid = tankFluid.getFluid();
             }
 
@@ -77,7 +76,7 @@ public class TileSlotFluidInput extends TileSlot {
                 FluidStack fluidStack  = this.drain(requiredFluid, requiredAmount);
 
                 if (fluidStack != null) {
-                    tank.fill(fluidStack, true);
+                    this.fluidTank.fill(fluidStack, true);
                 }
             }
 
@@ -86,7 +85,6 @@ public class TileSlotFluidInput extends TileSlot {
 
     private FluidStack drain(Fluid fluid, int amount) {
         if (FluidContainerRegistry.isFilledContainer(this.item)) {
-            System.out.println(1);
             FluidStack container = FluidContainerRegistry.getFluidForFilledItem(this.item);
 
             if (container != null && (fluid == null || fluid == container.getFluid()) && this.canInput(this.item)) {
@@ -104,7 +102,16 @@ public class TileSlotFluidInput extends TileSlot {
             }
 
         } else {
-            System.out.println(2);
+            //ic2 Universal Fluid Cell <@link ItemFluidCell>
+
+            if(this.item.getItem() instanceof IFluidContainerItem) {
+                IFluidContainerItem containerItem = (IFluidContainerItem) this.item.getItem();
+
+                FluidStack var1 = containerItem.getFluid(this.item);
+                if (var1 != null && var1.isFluidEqual(this.fluidTank.getFluid()) && this.canInput(this.item)) {
+
+                }
+            }
         }
 
         return null;

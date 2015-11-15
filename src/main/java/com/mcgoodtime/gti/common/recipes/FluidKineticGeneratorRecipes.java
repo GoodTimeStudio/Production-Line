@@ -43,11 +43,16 @@ public class FluidKineticGeneratorRecipes implements IProcessable {
     private List<FluidStack> processList = new ArrayList<FluidStack>();
 
     private FluidKineticGeneratorRecipes() {
-        register(FluidRegistry.getFluidStack("lava", 10));
+        this.register("lava", 10);
+        this.register("oil", 10);
+        this.register("fuel", 5);
+        this.register("biomass", 20);
+        this.register("bioethanol", 10);
+        this.register("ic2biogas", 10);
     }
 
-    public void register(FluidStack input) {
-        processList.add(input);
+    public void register(String fluidName, int amount) {
+        processList.add(FluidRegistry.getFluidStack(fluidName, amount));
     }
 
     /**

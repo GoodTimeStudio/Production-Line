@@ -42,6 +42,7 @@ import static com.mcgoodtime.gti.common.core.Gti.GUI_PREFIX;
  * The Gui.
  *
  * @author liach
+ * improve by BestOwl
  */
 @SideOnly(Side.CLIENT)
 public class GuiFluidKineticGenerator extends GuiGti<ContainerFluidKineticGenerator> {
