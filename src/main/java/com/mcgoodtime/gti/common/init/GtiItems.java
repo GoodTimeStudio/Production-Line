@@ -67,7 +67,6 @@ public class GtiItems implements IFuelHandler {
 	public static Item advancedAlloyTreetap;
 	public static Item carbonTreetap;
 
-	public static Item record_theSaltWaterRoom;
 	public static Item record_MusicSpring;
 	//---------------------------------------
 
@@ -116,7 +115,6 @@ public class GtiItems implements IFuelHandler {
 		refinedIronTreetap = new ItemGtiTreetap("RefinedIronTreetap", 64);
 		advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
 		carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
-        record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
 		salt = new ItemGtiFood("Salt", 0, 10F, true);
 
