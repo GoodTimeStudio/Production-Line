@@ -26,8 +26,6 @@ package com.mcgoodtime.gti.common.tiles;
 
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.gti.common.tiles.tileslot.*;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.tile.IWrenchable;
 import ic2.core.Ic2Items;
 import ic2.core.block.IUpgradableBlock;
@@ -71,7 +69,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
 
     @Override
     public String getInventoryName() {
-        return this.hasCustomInventoryName() ? this.name : "Carbonize Furnace";
+        return "CarbonizeFurnace";
     }
 
     @Override
@@ -86,28 +84,6 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
         super.writeToNBT(nbt);
         nbt.setShort("requireEnergy", (short) requireEnergy);
         nbt.setShort("Progress", (short) progress);
-    }
-
-    /**
-     * Returns an integer between 0 and the passed value representing
-     * how close the current item is to being completely cooked
-     */
-    @SideOnly(Side.CLIENT)
-    public int getProgressScaled(int i) {
-        return (int) (i * Math.min(1.0F, this.progress / this.requireEnergy));
-    }
-
-    /**
-     * Returns an integer between 0 and the passed value representing how
-     * much remaining battery
-     */
-    @SideOnly(Side.CLIENT)
-    public int getRemainingBatteryScaled(int i) {
-        return (int) (i * Math.min(1.0F, (float) this.energy / (float) this.maxEnergy));
-    }
-
-    public boolean isProcessing() {
-        return requireEnergy == 0;
     }
 
     @Override

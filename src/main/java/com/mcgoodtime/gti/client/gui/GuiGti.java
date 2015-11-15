@@ -50,13 +50,14 @@ public abstract class GuiGti<T extends ContainerGti> extends GuiContainer {
     public GuiGti(T container) {
         super(container);
         this.container = container;
+        this.name = container.tile.getInventoryName();
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+    protected void drawGuiContainerForegroundLayer(int x, int y) {
         this.fontRendererObj.drawString(StatCollector.translateToLocal(Gti.GUI_PREFIX + this.name), (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
         if(this.container.tile instanceof IUpgradableBlock) {
-            GuiTooltiphelper.drawUpgradeslotTooltip(par1 - this.guiLeft, par2 - this.guiTop, 0, 0, 12, 12, (IUpgradableBlock) this.container.tile, 25, 0);
+            GuiTooltiphelper.drawUpgradeslotTooltip(x - this.guiLeft, y - this.guiTop, 0, 0, 12, 12, (IUpgradableBlock) this.container.tile, 25, 0);
         }
     }
 
