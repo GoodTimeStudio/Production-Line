@@ -39,13 +39,13 @@ import net.minecraft.nbt.NBTTagCompound;
  *
  * @author BestOwl
  */
-public class MessageBlockState implements IMessage {
+public class MessageBlockDisplayState implements IMessage {
 
     private NBTTagCompound nbt;
 
-    public MessageBlockState(){}
+    public MessageBlockDisplayState(){}
 
-    public MessageBlockState(int x, int y, int z, boolean active, short facing) {
+    public MessageBlockDisplayState(int x, int y, int z, boolean active, short facing) {
         nbt = new NBTTagCompound();
         nbt.setInteger("xPos", x);
         nbt.setInteger("yPos", y);
@@ -64,10 +64,10 @@ public class MessageBlockState implements IMessage {
         ByteBufUtils.writeTag(buf, nbt);
     }
 
-    public static class Handler implements IMessageHandler<MessageBlockState, IMessage> {
+    public static class Handler implements IMessageHandler<MessageBlockDisplayState, IMessage> {
 
         @Override
-        public IMessage onMessage(MessageBlockState message, MessageContext ctx) {
+        public IMessage onMessage(MessageBlockDisplayState message, MessageContext ctx) {
             WorldClient client = Minecraft.getMinecraft().theWorld;
             int x = message.nbt.getInteger("xPos");
             int y = message.nbt.getInteger("yPos");
