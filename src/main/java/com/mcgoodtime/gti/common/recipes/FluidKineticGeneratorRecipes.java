@@ -52,7 +52,9 @@ public class FluidKineticGeneratorRecipes implements IProcessable {
     }
 
     public void register(String fluidName, int amount) {
-        processList.add(FluidRegistry.getFluidStack(fluidName, amount));
+        if (FluidRegistry.getFluid(fluidName) != null) {
+            processList.add(FluidRegistry.getFluidStack(fluidName, amount));
+        }
     }
 
     /**
