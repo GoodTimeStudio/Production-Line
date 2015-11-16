@@ -378,6 +378,13 @@ public class Recipes {
                 GtiItems.rigidPaper,
                 Items.leather
         );
+        GameRegistry.addRecipe(
+                GtiItems.getItems(GtiItems.rigidPaperPack, 2),
+                " A ",
+                "A A",
+                " A ",
+                'A', GtiItems.rigidPaper
+        );
 
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, GtiItems.ingotIridium, XP);
@@ -456,13 +463,6 @@ public class Recipes {
                 new RecipeInputItemStack(GtiItems.rigidPaperPack),
                 new RecipeInputItemStack(new ItemStack(GtiItems.salt, 9)),
                 new ItemStack(GtiItems.packagedSalt)
-        );
-        GameRegistry.addRecipe(
-                GtiItems.getItems(GtiItems.rigidPaperPack, 2),
-                " A ",
-                "A A",
-                " A ",
-                'A', GtiItems.rigidPaper
         );
     }
 
