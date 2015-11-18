@@ -53,6 +53,8 @@ public abstract class GuiGti<T extends ContainerGti> extends GuiContainer {
         this.name = container.tile.getInventoryName();
     }
 
+
+
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         this.fontRendererObj.drawString(StatCollector.translateToLocal(Gti.GUI_PREFIX + this.name), (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);

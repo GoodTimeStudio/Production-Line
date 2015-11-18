@@ -27,6 +27,8 @@ package com.mcgoodtime.gti.common.blocks;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.core.GuiHandler;
+import com.mcgoodtime.gti.common.tiles.TileGti;
+import com.mcgoodtime.gti.common.tiles.TileHeatDryer;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -36,6 +38,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 
+import java.util.Random;
+
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
 import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
@@ -44,32 +48,45 @@ import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
  * Created by suhao on 2015.7.10.
  */
 
-public class BlockHeatDryer extends BlockContainer {
+public class BlockHeatDryer extends BlockContainerGti{
 
-    protected BlockHeatDryer(Material material, String name) {
-        super(material);
-        this.setBlockName(MOD_ID + "." + "block" + "." + name);
-        this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
-        this.setCreativeTab(creativeTabGti);
-        GameRegistry.registerBlock(this, name);
-        GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
+    public BlockHeatDryer() {
+        super(Material.iron, "HeatDryer");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-        return null;
-    }
-
-    /**
-     * Called upon blocks activation (right click on the blocks.)
-     */
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p1, float p2, float p3, float p4) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
         if (!world.isRemote) {
             entityPlayer.openGui(Gti.instance, GuiHandler.EnumGui.HeatDryer.ordinal(), world, x, y, z);
         } else {
             entityPlayer.isInvisibleToPlayer(entityPlayer);
         }
         return true;
+    }
+
+    @Override
+    protected Class<? extends TileGti> getTileEntityClass() {
+        return TileHeatDryer.class;
+    }
+
+    @Override
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+        if ( ((TileGti)world.getTileEntity(x, y, z)).active) {
+            float f2;
+            float fmod;
+            float f1mod;
+            float f2mod;
+
+            float f = (float)x + 1.0F;
+            float f1 = (float)y + 1.0F;
+            f2 = (float)z + 1.0F;
+
+            for(int i = 0; i < 4; ++i) {
+                fmod = -0.2F - random.nextFloat() * 0.6F;
+                f1mod = -0.1F + random.nextFloat() * 0.2F;
+                f2mod = -0.2F - random.nextFloat() * 0.6F;
+                world.spawnParticle("smoke", (double)(f + fmod), (double)(f1 + f1mod), (double)(f2 + f2mod), 0.0D, 0.0D, 0.0D);
+            }
+        }
     }
 }
