@@ -24,19 +24,16 @@
  */
 package com.mcgoodtime.gti.common.inventory;
 
+import com.mcgoodtime.gti.common.inventory.slot.SlotInput;
 import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
 import com.mcgoodtime.gti.common.inventory.slot.SlotUpgrade;
-import com.mcgoodtime.gti.common.recipes.HeatDryerRecipes;
 import com.mcgoodtime.gti.common.tiles.TileHeatDryer;
+import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotInput;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ic2.core.item.IUpgradeItem;
 import ic2.core.slot.SlotDischarge;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 /*
  * Created by suhao on 2015.7.10.
@@ -48,7 +45,7 @@ public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
 
     public ContainerHeatDryer(EntityPlayer player, TileHeatDryer tile) {
         super(player, tile);
-        this.addSlotToContainer(new Slot(tile, 0, 56, 16));
+        this.addSlotToContainer(new SlotInput((TileSlotInput) tile.tileSlots.get(0), tile, 0, 56, 16));
         this.addSlotToContainer(new SlotDischarge(tile, 1, 1, 56, 53));
         this.addSlotToContainer(new SlotOutput(player, tile, 2, 113, 35));
         this.addSlotToContainer(new SlotOutput(player, tile, 3, 131, 35));
@@ -64,6 +61,9 @@ public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
         crafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
     }
 
+    /**
+     * Looks for changes made in the container, sends them to every listener.
+     */
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
@@ -89,6 +89,12 @@ public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
         this.lastEnergy = this.tile.maxEnergy;
     }
 
+    /**
+     * Sends two ints to the client-side Container. Used for furnace burning time, smelting progress, brewing progress,
+     * and enchanting level. Normally the first int identifies which variable to update, and the second contains the new
+     * value. Both are truncated to shorts in non-local SMP.
+     * @param i Identifies which variable to update
+     */
     @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int i, int var) {
@@ -103,93 +109,5 @@ public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
         if (i == 2) {
             this.tile.energy = var;
         }
-    }
-
-    @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int i) {
-        ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(i);
-
-        if (slot != null && slot.getHasStack()) {
-            ItemStack stack = slot.getStack();
-            itemstack = stack.copy();
-
-            if (i == 2) {
-                if (!this.mergeItemStack(stack, 6, 39, true)) {
-                    return null;
-                }
-
-                slot.onSlotChange(stack, itemstack);
-            }
-            else if (i == 3) {
-                if (!this.mergeItemStack(stack, 6, 39, true)) {
-                    return null;
-                }
-            }
-            else if (i == 4) {
-                if (!this.mergeItemStack(stack, 6, 39, true)) {
-                    return null;
-                }
-            }
-            else if (i == 5) {
-                if (!this.mergeItemStack(stack, 6, 39, true)) {
-                    return null;
-                }
-            }
-            else if (i != 1 && i != 0) {
-                if (HeatDryerRecipes.instance.getProcessResult(stack) != null) {
-                    if (!this.mergeItemStack(stack, 0, 1, false)) {
-                        return null;
-                    }
-                }
-                else if (this.tile.isDischargeItem(stack)) {
-                    if (!this.mergeItemStack(stack, 1, 2, false)) {
-                        return null;
-                    }
-                }
-                else if (stack.getItem() instanceof IUpgradeItem) {
-                    for (ItemStack itemStack1 : this.tile.getCompatibleUpgradeList()) {
-                        if (stack.isItemEqual(itemStack1)) {
-                            if (stack.stackSize <= 4) {
-                                if (!this.mergeItemStack(stack, 4, 5, false)) {
-                                    if (!this.mergeItemStack(stack, 5, 6, false)) {
-                                        return null;
-                                    }
-                                    return null;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                else if (i >= 6 && i < 33) {
-                    if (!this.mergeItemStack(stack, 33, 39, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (i >= 33 && i < 39 && !this.mergeItemStack(stack, 6, 30, false)) {
-                    return null;
-                }
-            }
-            else if (!this.mergeItemStack(stack, 6, 39, false)) {
-                return null;
-            }
-
-            if (stack.stackSize == 0) {
-                slot.putStack(null);
-            }
-            else {
-                slot.onSlotChanged();
-            }
-
-            if (stack.stackSize == itemstack.stackSize) {
-                return null;
-            }
-
-            slot.onPickupFromSlot(player, stack);
-        }
-
-        return itemstack;
     }
 }

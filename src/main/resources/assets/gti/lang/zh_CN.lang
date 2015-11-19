@@ -10,6 +10,7 @@ gui.gti.FluidKineticGenerator=流体动能发生机
 gui.gti.FluidKineticGenerator.output=输出: %s
 gui.gti.FluidKineticGenerator.max-output=最大输出: %s
 gui.gti.CarbonizeFurnace=碳化燃烧炉
+gui.gti.HeatDryer=干燥机
 
 [BLOCKS]
 tile.gti.block.CompressedWaterHyacinth.name=压缩水葫芦
@@ -17,6 +18,7 @@ tile.gti.block.oreIridium.name=铱矿石
 tile.gti.block.WaterHyacinth.name=水葫芦
 tile.gti.block.FluidKineticGenerator.name=流体动能发生机
 tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
+tile.gti.block.HeatDryer.name=干燥机
 tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 tile.gti.block.EVSU.name=EVSU
 tile.gti.block.AirBrakeCasing.name=气闸外壳

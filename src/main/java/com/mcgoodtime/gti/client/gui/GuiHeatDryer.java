@@ -24,34 +24,27 @@
  */
 package com.mcgoodtime.gti.client.gui;
 
-import com.mcgoodtime.gti.common.blocks.BlockHeatDryer;
+import com.mcgoodtime.gti.GtiUtil;
         import com.mcgoodtime.gti.common.core.Gti;
-        import com.mcgoodtime.gti.common.init.GtiBlocks;
-        import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
         import com.mcgoodtime.gti.common.inventory.ContainerHeatDryer;
-        import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
         import com.mcgoodtime.gti.common.tiles.TileHeatDryer;
-        import cpw.mods.fml.relauncher.Side;
-        import cpw.mods.fml.relauncher.SideOnly;
-        import net.minecraft.util.ResourceLocation;
-        import net.minecraft.util.StatCollector;
+import net.minecraft.util.ResourceLocation;
 /*
  * Created by suhao on 2015.7.10.
  */
 public class GuiHeatDryer extends GuiGti<ContainerHeatDryer>{
 
-        public GuiHeatDryer(ContainerHeatDryer container) {
+    public GuiHeatDryer(ContainerHeatDryer container) {
         super(container);
-        this.name = "HeatDryer";
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
         super.drawGuiContainerBackgroundLayer(f, x, y);
-        TileHeatDryer tile=this.container.getTileEntity();
-        int i1 = tile.getRemainingBatteryScaled(14);
+        TileHeatDryer tile = this.container.getTileEntity();
+        int i1 = GtiUtil.getGuiScaled(14, (float) tile.energy, tile.maxEnergy);
         this.drawTexturedModalRect(this.x + 56, this.y + 36 + 14 - i1, 176, 14 - i1, 14, i1 + 1);
-        i1 = tile.getProgressScaled(24);
+        i1 = GtiUtil.getGuiScaled(24, tile.progress, (float) tile.requireEnergy);
         this.drawTexturedModalRect(this.x + 79, this.y + 34, 176, 14, i1 + 1, 16);
     }
 

@@ -50,7 +50,7 @@ public class GtiBlocks {
     public static Block carbonizeFurnace;
     public static Block airBrakeCasing;
     public static BlockContainer evsu;
-    public static BlockContainer heatDryer;
+    public static Block heatDryer;
 
     public static void init() {
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
@@ -59,6 +59,7 @@ public class GtiBlocks {
         carbonizeFurnace = new BlockCarbonizeFurnace();
         airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
         fluidKineticGenerator = new BlockFluidKineticGenerator();
+        heatDryer = new BlockHeatDryer();
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
@@ -70,5 +71,6 @@ public class GtiBlocks {
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
         GtiConfig.gtiLogger.log(Level.INFO, "FluidKineticGenerator" + Integer.toString(Block.getIdFromBlock(fluidKineticGenerator)));
         GtiConfig.gtiLogger.log(Level.INFO, "carbonizefurnace" + Integer.toString(Block.getIdFromBlock(carbonizeFurnace)));
+        GtiConfig.gtiLogger.log(Level.INFO,"heatdryer" + Integer.toString(Block.getIdFromBlock(heatDryer)));
     }
 }

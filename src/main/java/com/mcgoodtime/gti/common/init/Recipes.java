@@ -51,7 +51,8 @@ public class Recipes {
         //disable recipes
         disable();
 
-        //vanilla recipe registry
+        //vanilla recipe registry;
+
         GameRegistry.addRecipe(
                 new ItemStack(GtiBlocks.carbonizeFurnace),
                 "ABA",

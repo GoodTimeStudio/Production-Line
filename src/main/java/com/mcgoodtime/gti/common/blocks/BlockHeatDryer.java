@@ -25,24 +25,14 @@
 package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.core.GuiHandler;
 import com.mcgoodtime.gti.common.tiles.TileGti;
 import com.mcgoodtime.gti.common.tiles.TileHeatDryer;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.Level;
 
 import java.util.Random;
-
-import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
-import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
-import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 
 /*
  * Created by suhao on 2015.7.10.
