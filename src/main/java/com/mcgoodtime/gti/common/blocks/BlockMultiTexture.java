@@ -48,7 +48,7 @@ import net.minecraft.world.World;
 public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
 
     //low, top, left, front, right, back;
-    private static final int[][] direction = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
+    private static final int[][] DIRECTION = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
     protected IIcon textures[];
 
     public BlockMultiTexture(Material material, String name, float hardness, float resistance, String harvestLevelToolClass, int harvestLevel) {
@@ -87,7 +87,7 @@ public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
             int facing = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).facing;
             boolean isBurn = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).active;
 
-            int i = direction[facing][side];
+            int i = DIRECTION[facing][side];
             if (isBurn) {
                 i += 6;
             }
@@ -108,7 +108,7 @@ public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
-        return textures[direction[3][side]];
+        return textures[DIRECTION[3][side]];
     }
 
     @Override
