@@ -145,7 +145,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
 	 */
     @Override
     public int requestkineticenergy(ForgeDirection directionFrom, int requestKineticenergy) {
-        return directionFrom.ordinal() != this.facing ? 0 : Math.min(this.kuOutput, requestKineticenergy);
+        return directionFrom.ordinal() != this.facing ? 0 : (this.fluidTank.getFluidAmount() > 0 ? Math.min(this.kuOutput, requestKineticenergy) : 0);
     }
 
     /**
