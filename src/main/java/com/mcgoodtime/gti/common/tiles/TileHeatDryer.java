@@ -1,6 +1,6 @@
 package com.mcgoodtime.gti.common.tiles;
 
-import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
+import com.mcgoodtime.gti.common.recipes.HeatDryerRecipes;
 import com.mcgoodtime.gti.common.tiles.tileslot.*;
 import ic2.api.tile.IWrenchable;
 import ic2.core.Ic2Items;
@@ -8,7 +8,6 @@ import ic2.core.block.IUpgradableBlock;
 import ic2.core.item.IUpgradeItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -20,35 +19,21 @@ import java.util.List;
  */
 public class TileHeatDryer extends TileElectricContainer implements IUpgradableBlock, IWrenchable {
 
+    public final int requireEnergy = 500;
+    public int progress;
+
     public TileHeatDryer() {
         super(3, 300, 1, 1);
-        //this.tileSlots.add(new TileSlotInput(this, ));
+        this.tileSlots.add(new TileSlotInput(this, HeatDryerRecipes.instance));
         this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
         this.tileSlots.add(new TileSlotOutput(this));
         this.tileSlots.add(new TileSlotUpgrade(this, TileSlot.SlotMode.NULL));
         this.tileSlots.add(new TileSlotUpgrade(this, TileSlot.SlotMode.NULL));
-
     }
-
-    @Override
-    public int getSizeInventory() {
-        return 6;
-    }
-
 
     @Override
     public String getInventoryName() {
-        return this.hasCustomInventoryName() ? this.name : "Heat Dryer";
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
+        return "HeatDryer";
     }
 
     @Override
@@ -56,17 +41,77 @@ public class TileHeatDryer extends TileElectricContainer implements IUpgradableB
         super.updateEntity();
 
         if (!this.worldObj.isRemote) {
+            boolean needUpdate = false;
 
+            if (this.canProcess() && this.energy >= this.energyPerTick) {
+                this.setActive(true);
+                this.energy -= this.energyPerTick;
+                this.progress += this.energyPerTick;
+
+                if (this.progress >= this.requireEnergy) {
+                    this.progress = 0;
+                    this.processItem();
+                    needUpdate = true;
+                }
+            } else {
+                this.setActive(false);
+                this.progress = 0;
+            }
+
+            for (TileSlot tileSlot : this.tileSlots) {
+                if (tileSlot instanceof TileSlotUpgrade) {
+                    ItemStack stack = tileSlot.getStack();
+                    if(stack != null && stack.getItem() instanceof IUpgradeItem && ((IUpgradeItem)stack.getItem()).onTick(stack, this)) {
+                        needUpdate = true;
+                    }
+                }
+            }
+
+            if (needUpdate) {
+                this.markDirty();
+            }
         }
     }
 
     private boolean canProcess() {
+        if (this.getStackInSlot(0) == null) {
+            return false;
+        } else {
+            ItemStack itemStack = HeatDryerRecipes.instance.getProcessResult(this.getStackInSlot(0));
+            if (itemStack != null) {
+                if (this.getStackInSlot(2) == null) {
+                    return true;
+                } else {
+                    if (this.getStackInSlot(2).isItemEqual(itemStack)) {
+                        int result = this.getStackInSlot(2).stackSize + itemStack.stackSize;
+                        if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(2).getMaxStackSize()) {
+                            return true;
+                        }
+                    }
+                }
 
-        return false;
+            }
+            return false;
+        }
     }
 
     public void processItem() {
+        if (this.canProcess()) {
+            ItemStack outputItem = HeatDryerRecipes.instance.getProcessResult(this.getStackInSlot(0));
 
+            if (this.getStackInSlot(2) == null) {
+                this.setInventorySlotContents(2, outputItem.copy());
+            }
+            else if (this.getStackInSlot(2).isItemEqual(outputItem)) {
+                this.getStackInSlot(2).stackSize += outputItem.stackSize;
+            }
+
+            this.getStackInSlot(0).stackSize -= HeatDryerRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0));
+
+            if (this.getStackInSlot(0).stackSize <= 0) {
+                this.setInventorySlotContents(0, null);
+            }
+        }
     }
 
     @Override

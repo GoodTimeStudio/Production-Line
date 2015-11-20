@@ -19,11 +19,11 @@ public class HeatDryerRecipes implements IProcessable<HeatDryerRecipes.Recipes> 
     private HeatDryerRecipes() {
         /* The default value after the process */
         float XP = 0.15F;
-        this.register(new ItemStack(GtiBlocks.waterHyacinth, 4), new ItemStack(GtiBlocks.dehydratedWaterHyacinthblock), 1500, XP);
+        this.register(new ItemStack(GtiBlocks.waterHyacinth, 4), new ItemStack(GtiBlocks.dehydratedWaterHyacinthblock), XP);
     }
 
-    public void register(ItemStack input, ItemStack output, double requireEnergy, float xp) {
-        processList.add(new Recipes(input, output, requireEnergy, xp));
+    public void register(ItemStack input, ItemStack output, float xp) {
+        processList.add(new Recipes(input, output, xp));
     }
 
 
@@ -87,14 +87,11 @@ public class HeatDryerRecipes implements IProcessable<HeatDryerRecipes.Recipes> 
     public static class Recipes {
         public ItemStack input;
         public ItemStack output;
-        /** Value of EU consumption */
-        public double requiresEnergy;
         public double xp;
 
-        private Recipes(ItemStack input, ItemStack output, double requiresEnergy, float xp) {
+        private Recipes(ItemStack input, ItemStack output, float xp) {
             this.input = input;
             this.output = output;
-            this.requiresEnergy = requiresEnergy;
             this.xp = xp;
         }
     }

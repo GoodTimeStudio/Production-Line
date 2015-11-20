@@ -38,17 +38,26 @@ import net.minecraft.inventory.ICrafting;
 /*
  * Created by suhao on 2015.7.10.
  */
-public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
+public class ContainerHeatDryer extends ContainerGti<TileHeatDryer>{
+
+    private int lastProgress;
+    private int lastEnergy;
 
     public ContainerHeatDryer(EntityPlayer player, TileHeatDryer tile) {
         super(player, tile);
+
         this.addSlotToContainer(new SlotInput((TileSlotInput) tile.tileSlots.get(0), tile, 0, 56, 16));
         this.addSlotToContainer(new SlotDischarge(tile, 1, 1, 56, 53));
-        this.addSlotToContainer(new SlotOutput(player, tile, 2, 116, 35));
+        this.addSlotToContainer(new SlotOutput(player, tile, 2, 107, 35));
+        this.addSlotToContainer(new SlotUpgrade(tile, 3, 153, 26));
+        this.addSlotToContainer(new SlotUpgrade(tile, 4, 153, 44));
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting crafting) {
+    public void addCraftingToCrafters(ICrafting iCrafting) {
+        super.addCraftingToCrafters(iCrafting);
+        iCrafting.sendProgressBarUpdate(this, 1, lastProgress);
+        iCrafting.sendProgressBarUpdate(this, 2, lastEnergy);
     }
 
     /**
@@ -57,16 +66,25 @@ public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
+
+        for (Object object : this.crafters) {
+            ICrafting icrafting = (ICrafting) object;
+
+            if (this.lastProgress != this.tile.progress) {
+                icrafting.sendProgressBarUpdate(this, 1, this.tile.progress);
+            }
+            if (this.lastEnergy != this.tile.energy) {
+                icrafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
+            }
+        }
     }
 
-    /**
-     * Sends two ints to the client-side Container. Used for furnace burning time, smelting progress, brewing progress,
-     * and enchanting level. Normally the first int identifies which variable to update, and the second contains the new
-     * value. Both are truncated to shorts in non-local SMP.
-     * @param i Identifies which variable to update
-     */
     @Override
-    @SideOnly(Side.CLIENT)
-    public void updateProgressBar(int i, int var) {
+    public void updateProgressBar(int id, int i) {
+        super.updateProgressBar(id, i);
+        switch (id) {
+            case 1: this.tile.progress = i;
+            case 2: this.tile.energy = i;
+        }
     }
 }
