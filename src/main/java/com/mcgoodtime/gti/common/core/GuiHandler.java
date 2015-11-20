@@ -28,12 +28,15 @@ package com.mcgoodtime.gti.common.core;
 import com.mcgoodtime.gti.client.gui.GuiCarbonizeFurnace;
 import com.mcgoodtime.gti.client.gui.GuiEVSU;
 import com.mcgoodtime.gti.client.gui.GuiFluidKineticGenerator;
+import com.mcgoodtime.gti.client.gui.GuiHeatDryer;
 import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
 import com.mcgoodtime.gti.common.inventory.ContainerEVSU;
 import com.mcgoodtime.gti.common.inventory.ContainerFluidKineticGenerator;
+import com.mcgoodtime.gti.common.inventory.ContainerHeatDryer;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileEVSU;
 import com.mcgoodtime.gti.common.tiles.TileFluidKineticGenerator;
+import com.mcgoodtime.gti.common.tiles.TileHeatDryer;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -59,7 +62,7 @@ public class GuiHandler implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if (id == EnumGui.GenGasKu.ordinal()) {
+        if (id == EnumGui.FluidKineticGenerator.ordinal()) {
             return new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(x, y, z));
         }
         if (id == EnumGui.CarbonizeFurnace.ordinal()) {
@@ -68,12 +71,15 @@ public class GuiHandler implements IGuiHandler {
         if (id == EnumGui.EVSU.ordinal()) {
             return new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z));
         }
+        if (id == EnumGui.HeatDryer.ordinal()) {
+            return new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z));
+        }
         return null;
     }
 
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if (id == EnumGui.GenGasKu.ordinal()) {
+        if (id == EnumGui.FluidKineticGenerator.ordinal()) {
             return new GuiFluidKineticGenerator(new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(x, y, z)));
         }
         if (id == EnumGui.CarbonizeFurnace.ordinal()) {
@@ -82,15 +88,14 @@ public class GuiHandler implements IGuiHandler {
         if (id == EnumGui.EVSU.ordinal()) {
             return new GuiEVSU(new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z)));
         }
-        /*
         if (id == EnumGui.HeatDryer.ordinal()) {
-            return new
-        }*/
+            return new GuiHeatDryer(new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z)));
+        }
         return null;
     }
 
     public enum EnumGui {
-        GenGasKu,
+        FluidKineticGenerator,
         CarbonizeFurnace,
         EVSU,
         HeatDryer
