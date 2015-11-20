@@ -63,11 +63,6 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     }
 
     @Override
-    public int getSizeInventory() {
-        return 6;
-    }
-
-    @Override
     public String getInventoryName() {
         return "CarbonizeFurnace";
     }

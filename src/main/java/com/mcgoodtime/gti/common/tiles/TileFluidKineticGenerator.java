@@ -124,11 +124,6 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
     }
 
     @Override
-    public int getSizeInventory() {
-        return 2;
-    }
-
-    @Override
     public String getInventoryName() {
         return "FluidKineticGenerator";
     }
