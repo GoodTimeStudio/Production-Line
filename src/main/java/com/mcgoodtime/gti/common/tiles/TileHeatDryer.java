@@ -22,6 +22,12 @@ public class TileHeatDryer extends TileElectricContainer implements IUpgradableB
 
     public TileHeatDryer() {
         super(3, 300, 1, 1);
+        //this.tileSlots.add(new TileSlotInput(this, ));
+        this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
+        this.tileSlots.add(new TileSlotOutput(this));
+        this.tileSlots.add(new TileSlotUpgrade(this, TileSlot.SlotMode.NULL));
+        this.tileSlots.add(new TileSlotUpgrade(this, TileSlot.SlotMode.NULL));
+
     }
 
     @Override

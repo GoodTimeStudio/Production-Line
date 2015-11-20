@@ -42,7 +42,9 @@ public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
 
     public ContainerHeatDryer(EntityPlayer player, TileHeatDryer tile) {
         super(player, tile);
-
+        this.addSlotToContainer(new SlotInput((TileSlotInput) tile.tileSlots.get(0), tile, 0, 56, 16));
+        this.addSlotToContainer(new SlotDischarge(tile, 1, 1, 56, 53));
+        this.addSlotToContainer(new SlotOutput(player, tile, 2, 116, 35));
     }
 
     @Override
