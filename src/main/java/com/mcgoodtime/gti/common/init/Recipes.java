@@ -28,12 +28,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.core.Ic2Items;
+import ic2.core.util.StackUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.List;
 import java.util.Map;
@@ -445,14 +447,13 @@ public class Recipes {
                 null,
                 GtiItems.obsidianPlateGravityField
         );
-
-        ItemStack doubleSmallTinDust = Ic2Items.smallTinDust.copy();
-        doubleSmallTinDust.stackSize = 2;
+        NBTTagCompound oreWash = new NBTTagCompound();
+        oreWash.setInteger("amount", 1000);
         ic2.api.recipe.Recipes.oreWashing.addRecipe(
                 new RecipeInputItemStack(GtiItems.crushedIridium),
-                null,
+                oreWash,
                 GtiItems.cleanedCrushedIridium,
-                doubleSmallTinDust
+                StackUtil.copyWithSize(Ic2Items.smallTinDust, 2)
         );
         ic2.api.recipe.Recipes.centrifuge.addRecipe(
                 new RecipeInputItemStack(GtiItems.cleanedCrushedIridium),
