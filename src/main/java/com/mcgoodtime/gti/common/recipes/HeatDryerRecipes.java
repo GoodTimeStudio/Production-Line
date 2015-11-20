@@ -1,16 +1,14 @@
 package com.mcgoodtime.gti.common.recipes;
 
 import com.mcgoodtime.gti.common.init.GtiBlocks;
-import com.mcgoodtime.gti.common.init.GtiItems;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/11/18.
+ * Created by JAVA0 on 2015/11/18.
+ *
  */
 public class HeatDryerRecipes implements IProcessable<HeatDryerRecipes.Recipes> {
     public static final HeatDryerRecipes instance = new HeatDryerRecipes();
@@ -21,7 +19,7 @@ public class HeatDryerRecipes implements IProcessable<HeatDryerRecipes.Recipes> 
     private HeatDryerRecipes() {
         /* The default value after the process */
         float XP = 0.15F;
-        register(new ItemStack(GtiBlocks.waterHyacinth, 4), new ItemStack(GtiBlocks.dehydratedWaterHyacinthblock), 1500, XP);
+        this.register(new ItemStack(GtiBlocks.waterHyacinth, 4), new ItemStack(GtiBlocks.dehydratedWaterHyacinthblock), 1500, XP);
     }
 
     public void register(ItemStack input, ItemStack output, double requireEnergy, float xp) {

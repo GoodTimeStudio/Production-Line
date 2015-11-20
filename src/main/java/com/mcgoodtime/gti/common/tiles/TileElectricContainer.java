@@ -63,7 +63,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
         super.updateEntity();
 
         if((double)this.maxEnergy - this.energy >= 1.0D) {
-            double amount = discharge(dischargeSlotIndex, (double) this.maxEnergy - this.energy, false);
+            double amount = this.discharge(dischargeSlotIndex, (double) this.maxEnergy - this.energy, false);
             if(amount > 0.0D) {
                 this.energy += amount;
                 this.markDirty();

@@ -104,16 +104,19 @@ public class BlockWaterHyacinth extends BlockBush {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public int getBlockColor() {
         return 2129968;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public int getRenderColor(int p_149741_1_) {
         return 2129968;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess iBlockAccess, int x, int y, int z) {
         return 2129968;
