@@ -39,26 +39,14 @@ import net.minecraft.inventory.ICrafting;
  * Created by suhao on 2015.7.10.
  */
 public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
-    private int lastProgress;
-    private int lastRequireEnergy;
-    private int lastEnergy;
 
     public ContainerHeatDryer(EntityPlayer player, TileHeatDryer tile) {
         super(player, tile);
-        this.addSlotToContainer(new SlotInput((TileSlotInput) tile.tileSlots.get(0), tile, 0, 56, 16));
-        this.addSlotToContainer(new SlotDischarge(tile, 1, 1, 56, 53));
-        this.addSlotToContainer(new SlotOutput(player, tile, 2, 113, 35));
-        this.addSlotToContainer(new SlotOutput(player, tile, 3, 131, 35));
-        this.addSlotToContainer(new SlotUpgrade(tile, 4, 153, 26));
-        this.addSlotToContainer(new SlotUpgrade(tile, 5, 153, 44));
+
     }
 
     @Override
     public void addCraftingToCrafters(ICrafting crafting) {
-        super.addCraftingToCrafters(crafting);
-        crafting.sendProgressBarUpdate(this, 0, this.tile.progress);
-        crafting.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
-        crafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
     }
 
     /**
@@ -67,26 +55,6 @@ public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
-
-        for (Object crafter : this.crafters) {
-            ICrafting icrafting = (ICrafting) crafter;
-
-            if (this.lastProgress != this.tile.progress) {
-                icrafting.sendProgressBarUpdate(this, 0, this.tile.progress);
-            }
-
-            if (this.lastRequireEnergy != this.tile.requireEnergy) {
-                icrafting.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
-            }
-
-            if (this.lastEnergy != this.tile.energy) {
-                icrafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
-            }
-        }
-
-        this.lastProgress = this.tile.progress;
-        this.lastRequireEnergy = (int) this.tile.requireEnergy;
-        this.lastEnergy = this.tile.maxEnergy;
     }
 
     /**
@@ -98,16 +66,5 @@ public class ContainerHeatDryer extends ContainerGti <TileHeatDryer>{
     @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int i, int var) {
-        if (i == 0) {
-            this.tile.progress = var;
-        }
-
-        if (i == 1) {
-            this.tile.requireEnergy = var;
-        }
-
-        if (i == 2) {
-            this.tile.energy = var;
-        }
     }
 }

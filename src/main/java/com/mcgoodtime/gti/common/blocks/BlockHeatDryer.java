@@ -45,7 +45,7 @@ public class BlockHeatDryer extends BlockContainerGti{
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int i, float f1, float f2, float f3) {
         if (!world.isRemote) {
             entityPlayer.openGui(Gti.instance, GuiHandler.EnumGui.HeatDryer.ordinal(), world, x, y, z);
         } else {
@@ -62,21 +62,7 @@ public class BlockHeatDryer extends BlockContainerGti{
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
         if ( ((TileGti)world.getTileEntity(x, y, z)).active) {
-            float f2;
-            float fmod;
-            float f1mod;
-            float f2mod;
 
-            float f = (float)x + 1.0F;
-            float f1 = (float)y + 1.0F;
-            f2 = (float)z + 1.0F;
-
-            for(int i = 0; i < 4; ++i) {
-                fmod = -0.2F - random.nextFloat() * 0.6F;
-                f1mod = -0.1F + random.nextFloat() * 0.2F;
-                f2mod = -0.2F - random.nextFloat() * 0.6F;
-                world.spawnParticle("smoke", (double)(f + fmod), (double)(f1 + f1mod), (double)(f2 + f2mod), 0.0D, 0.0D, 0.0D);
-            }
         }
     }
 }

@@ -44,8 +44,6 @@ public class GuiHeatDryer extends GuiGti<ContainerHeatDryer>{
         TileHeatDryer tile = this.container.getTileEntity();
         int i1 = GtiUtil.getGuiScaled(14, (float) tile.energy, tile.maxEnergy);
         this.drawTexturedModalRect(this.x + 56, this.y + 36 + 14 - i1, 176, 14 - i1, 14, i1 + 1);
-        i1 = GtiUtil.getGuiScaled(24, tile.progress, (float) tile.requireEnergy);
-        this.drawTexturedModalRect(this.x + 79, this.y + 34, 176, 14, i1 + 1, 16);
     }
 
     @Override
