@@ -26,13 +26,17 @@
 package com.mcgoodtime.gti.common.inventory;
 
 import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
+import com.mcgoodtime.gti.common.network.GtiNetwork;
 import com.mcgoodtime.gti.common.tiles.TileFluidKineticGenerator;
 import ic2.core.IC2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fluids.FluidTank;
 
 public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineticGenerator> {
+
+    public FluidTank last;
 
     public ContainerFluidKineticGenerator(EntityPlayer player, TileFluidKineticGenerator tile) {
         super(player, tile);
@@ -49,7 +53,12 @@ public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineti
         super.detectAndSendChanges();
 
         for (Object object : this.crafters) {
-            IC2.network.get().updateTileEntityFieldTo(this.tile, "fluidTank", (EntityPlayerMP) object); //(Temporary use) ic2 network system
+            //IC2.network.get().updateTileEntityFieldTo(this.tile, "fluidTank", (EntityPlayerMP) object); //(Temporary use) ic2 network system
+            if (last != this.tile.fluidTank) {
+                GtiNetwork.updateTileEntityFiledToPlayer((EntityPlayer) object, this.tile.xCoord, this.tile.yCoord, this.tile.zCoord, "fluidTank", this.tile.fluidTank);
+            }
         }
+
+        this.last = this.tile.fluidTank;
     }
 }
