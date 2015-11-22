@@ -56,7 +56,7 @@ public class Recipes {
         //vanilla recipe registry;
 
         GameRegistry.addRecipe(
-                new ItemStack(GtiBlocks.carbonizeFurnace),
+                GtiBlocks.carbonizeFurnace,
                 "ABA",
                 "CDC",
                 "EEE",

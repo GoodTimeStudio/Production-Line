@@ -32,6 +32,9 @@ import com.mcgoodtime.gti.common.core.GtiConfig;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 
 /**
@@ -55,8 +58,18 @@ public class BlockGti extends Block {
         this.setBlockName(MOD_ID + "." + "block" + "." + name);
         this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
         this.setCreativeTab(creativeTabGti);
-        GameRegistry.registerBlock(this, name);
         GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
         this.blockName = name;
+    }
+
+    /**
+     * Called when the block is placed in the world.
+     */
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase livingBase, ItemStack itemStack) {
+        super.onBlockPlacedBy(world, x, y, z, livingBase, itemStack);
+        if (itemStack.getItemDamage() > 0) {
+            world.setBlockMetadataWithNotify(x, y, z, itemStack.getItemDamage(), 2);
+        }
     }
 }

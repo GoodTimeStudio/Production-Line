@@ -48,17 +48,21 @@ import net.minecraft.world.World;
 public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
 
     //low, top, left, front, right, back;
-    private static final int[][] DIRECTION = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
+    protected static final int[][] DIRECTION = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
     protected IIcon textures[];
 
     public BlockMultiTexture(Material material, String name, float hardness, float resistance, String harvestLevelToolClass, int harvestLevel) {
         super(material, name, hardness, resistance, harvestLevelToolClass, harvestLevel);
-        GameRegistry.registerTileEntity(this.getTileEntityClass(), name);
+        if (this.getTileEntityClass() != null) {
+            GameRegistry.registerTileEntity(this.getTileEntityClass(), name);
+        }
     }
 
     public BlockMultiTexture(Material material, String name) {
         super(material, name);
-        GameRegistry.registerTileEntity(this.getTileEntityClass(), name);
+        if (this.getTileEntityClass() != null) {
+            GameRegistry.registerTileEntity(this.getTileEntityClass(), name);
+        }
     }
 
     @Override
@@ -113,6 +117,7 @@ public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
+        super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
         TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof TileGti) {
             if(entityLivingBase == null) {
@@ -140,18 +145,26 @@ public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
         return TileGti.class;
     }
 
+    protected Class<? extends TileGti> getTileEntityClass(int meta) {
+        return null;
+    }
+
     @Override
-    public TileEntity createNewTileEntity(World world, int var) {
-        if (this.getTileEntityClass() != null) {
+    public TileEntity createNewTileEntity(World world, int meta) {
+        Class<? extends TileGti> c = this.getTileEntityClass(meta);
+        if (c == null) {
+            c = this.getTileEntityClass();
+        }
+
+        if (c != null) {
             try {
-                return this.getTileEntityClass().newInstance();
+                return c.newInstance();
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
-
         return null;
     }
 }

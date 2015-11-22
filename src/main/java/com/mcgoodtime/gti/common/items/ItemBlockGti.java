@@ -22,32 +22,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.core;
+package com.mcgoodtime.gti.common.items;
 
-import com.mcgoodtime.gti.common.init.GtiAchievement;
-import com.mcgoodtime.gti.common.init.GtiBlocks;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
-import net.minecraft.item.Item;
+import com.mcgoodtime.gti.common.blocks.IMultiMetaBlock;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
-/*
- * Created by suhao on 2015/5/17.
+/**
+ * Created by BestOwl on 2015.11.22.0022.
+ *
+ * @author BestOwl
+ * @since 0.2
  */
+public class ItemBlockGti extends ItemBlock {
 
-public class GtiEvent {
-    @SubscribeEvent
-    public void onPlayerCrafting(PlayerEvent.ItemCraftedEvent event) {
-        if (event.crafting.getItem().equals(GtiBlocks.carbonizeFurnace.getItem())) {
-            event.player.addStat(GtiAchievement.getCarbonizeFurnace, 1);
-        }
+    protected Block block;
+
+    public ItemBlockGti(Block block) {
+        super(block);
+        this.block = block;
+        this.hasSubtypes = true;
     }
 
-    @SubscribeEvent
-    public void onPlayerPickup(PlayerEvent.ItemPickupEvent event) {
-        if (event.pickedUp.getEntityItem().isItemEqual(new ItemStack(GtiBlocks.oreIridium))) {
-            event.player.addStat(GtiAchievement.getIrOre, 1);
+    @Override
+    public String getItemStackDisplayName(ItemStack itemStack) {
+        if (this.block instanceof IMultiMetaBlock) {
+            return StatCollector.translateToLocal(((IMultiMetaBlock) block).getBlockName(itemStack) + ".name");
         }
+        return super.getItemStackDisplayName(itemStack);
     }
-
 }

@@ -25,16 +25,16 @@
 package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.init.GtiBlocks;
-import com.mcgoodtime.gti.common.tiles.TileGti;
+import com.mcgoodtime.gti.common.items.ItemBlockGti;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
@@ -45,48 +45,49 @@ import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
  *
  * @author suhao
  */
-public class BlockMisc extends BlockGti {
+public class BlockMisc extends BlockGti implements IMultiMetaBlock {
 
-    public int maxMeta;
+    public static List<String> internalNameList = new ArrayList<String>();
     protected IIcon[] icons;
+
+    static {
+        internalNameList.add("CompressedWaterHyacinth");
+        internalNameList.add("DehydratedWaterHyacinthBlock");
+    }
 
     public BlockMisc() {
         super(Material.rock, "BlockMisc");
         this.icons = new IIcon[this.getMaxMeta()];
         this.setHardness(1.0F);
+        GameRegistry.registerBlock(this, ItemBlockGti.class, "BlockMisc");
 
         GtiBlocks.compressedWaterHyacinth = new ItemStack(this, 1, 0);
         GtiBlocks.dehydratedWaterHyacinthblock = new ItemStack(this, 1, 1);
     }
 
     public int getMaxMeta() {
-        if (this.maxMeta == 0) {
-            int meta = 0;
-            while (this.getInternalName(meta) != null) {
-                meta++;
-            }
-            return meta;
-        }
-        else {
-            return this.maxMeta;
-        }
+        return internalNameList.size();
     }
 
     /**
-     * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
-     * different names based on their damage or NBT.
+     * Returns the unlocalized name of this block. This version accepts an ItemStack so different stacks can have
+     * different names based on their meta or NBT.
      */
-    //@Override
     public String getBlockName(ItemStack itemStack) {
-        return "item." + MOD_ID + "." + this.getInternalName(itemStack.getItemDamage());
+        return "tile." + MOD_ID + ".block." + this.getInternalName(itemStack.getItemDamage());
+    }
+
+    /**
+     * Get block's unlocalized name
+     * @return unlocalized name
+     */
+    @Override
+    public String getBlockName(int meta) {
+        return "tile." + MOD_ID + ".block." + this.getInternalName(meta);
     }
 
     public String getInternalName(int meta) {
-        switch (meta) {
-            case 0: return "CompressedWaterHyacinth";
-            case 1: return "DehydratedWaterHyacinthBlock";
-            default: return null;
-        }
+        return internalNameList.get(meta);
     }
 
     @Override
@@ -116,19 +117,4 @@ public class BlockMisc extends BlockGti {
         }
     }
 
-    /**
-     * Returns an item stack containing a single instance of the current block type. 'meta' is the block's subtype/damage
-     * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
-     *//*
-    protected ItemStack createStackedBlock(int meta) {
-        return new ItemStack(Item.getItemFromBlock(this), 1, this.func_150162_k(meta));
-    }*/
-
-    /**
-     * The type of render function that is called for this block
-     */
-    @Override
-    public int getRenderType() {
-        return 31;
-    }
 }
