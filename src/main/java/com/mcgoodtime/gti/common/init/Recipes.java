@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,12 +28,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.core.Ic2Items;
+import ic2.core.util.StackUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.List;
 import java.util.Map;
@@ -51,7 +53,8 @@ public class Recipes {
         //disable recipes
         disable();
 
-        //vanilla recipe registry
+        //vanilla recipe registry;
+
         GameRegistry.addRecipe(
                 new ItemStack(GtiBlocks.carbonizeFurnace),
                 "ABA",
@@ -357,6 +360,34 @@ public class Recipes {
                 'B', IC2Items.getItem("advancedAlloy"),
                 'C', GtiItems.denseDiamondPlate
         );
+        GameRegistry.addRecipe(
+                GtiItems.carbonTube,
+                "AB",
+                "B",
+                'A', Items.redstone,
+                'B', IC2Items.getItem("coalDust")
+        );
+        GameRegistry.addRecipe(
+                GtiItems.rigidPaper,
+                "A",
+                "B",
+                "A",
+                'A', Items.paper,
+                'B', Items.sugar
+        );
+        GameRegistry.addShapelessRecipe(
+                new ItemStack(Items.book),
+                GtiItems.rigidPaper,
+                GtiItems.rigidPaper,
+                Items.leather
+        );
+        GameRegistry.addRecipe(
+                GtiItems.getItems(GtiItems.rigidPaperPack, 2),
+                " A ",
+                "A A",
+                " A ",
+                'A', GtiItems.rigidPaper
+        );
 
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, GtiItems.ingotIridium, XP);
@@ -416,20 +447,24 @@ public class Recipes {
                 null,
                 GtiItems.obsidianPlateGravityField
         );
-
-        ItemStack doubleSmallTinDust = Ic2Items.smallTinDust.copy();
-        doubleSmallTinDust.stackSize = 2;
+        NBTTagCompound oreWash = new NBTTagCompound();
+        oreWash.setInteger("amount", 1000);
         ic2.api.recipe.Recipes.oreWashing.addRecipe(
                 new RecipeInputItemStack(GtiItems.crushedIridium),
-                null,
+                oreWash,
                 GtiItems.cleanedCrushedIridium,
-                doubleSmallTinDust
+                StackUtil.copyWithSize(Ic2Items.smallTinDust, 2)
         );
         ic2.api.recipe.Recipes.centrifuge.addRecipe(
                 new RecipeInputItemStack(GtiItems.cleanedCrushedIridium),
                 null,
                 GtiItems.dustIridium,
                 GtiItems.getItems(GtiItems.smallDustIridium, 2)
+        );
+        ic2.api.recipe.Recipes.cannerBottle.addRecipe(
+                new RecipeInputItemStack(GtiItems.rigidPaperPack),
+                new RecipeInputItemStack(new ItemStack(GtiItems.salt, 9)),
+                new ItemStack(GtiItems.packagedSalt)
         );
     }
 

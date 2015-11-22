@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -73,11 +73,11 @@ public class TileGti extends TileEntity {
 
     public void setActive(boolean active) {
         this.active = active;
-        GtiNetwork.updateBlockState(this.xCoord, this.yCoord, this.zCoord, active, this.facing);
+        GtiNetwork.updateBlockDisplayState(this);
     }
 
     public void setFacing(short facing) {
         this.facing = facing;
-        GtiNetwork.updateBlockState(this.xCoord, this.yCoord, this.zCoord, this.active, facing);
+        GtiNetwork.updateBlockDisplayState(this);
     }
 }

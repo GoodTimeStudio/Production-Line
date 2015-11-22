@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -67,7 +67,6 @@ public class GtiItems implements IFuelHandler {
 	public static Item advancedAlloyTreetap;
 	public static Item carbonTreetap;
 
-	public static Item record_theSaltWaterRoom;
 	public static Item record_MusicSpring;
 	//---------------------------------------
 
@@ -106,6 +105,8 @@ public class GtiItems implements IFuelHandler {
 	public static ItemStack enderCalculationCrystal;
 	public static ItemStack millTeeth;
 	public static ItemStack millWheel;
+	public static ItemStack rigidPaper;
+	public static ItemStack rigidPaperPack;
 
 	public static void init() {
 		ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
@@ -114,7 +115,6 @@ public class GtiItems implements IFuelHandler {
 		refinedIronTreetap = new ItemGtiTreetap("RefinedIronTreetap", 64);
 		advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
 		carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
-        record_theSaltWaterRoom = new ItemGtiRecord("record_TheSaltwaterRoom");
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
 		salt = new ItemGtiFood("Salt", 0, 10F, true);
 
@@ -174,6 +174,8 @@ public class GtiItems implements IFuelHandler {
 					case 24: return "HeatInsulationPlate";
 					case 25: return "UUMatterCore";
 					case 26: return "BambooCharcoal";
+					case 27: return "RigidPaper";
+					case 28: return "RigidPaperPack";
 					default: return null;
 				}
 			}
@@ -205,6 +207,8 @@ public class GtiItems implements IFuelHandler {
 		heatInsulationPlate = new ItemStack(itemDisc, 1, 24);
 		uuMatterCore = new ItemStack(itemDisc, 1, 25);
 		bambooCharcoal = new ItemStack(itemDisc, 1, 26);
+		rigidPaper = new ItemStack(itemDisc, 1, 27);
+		rigidPaperPack = new ItemStack(itemDisc, 1, 28);
 
         // special registry TODO: Better registry system
  

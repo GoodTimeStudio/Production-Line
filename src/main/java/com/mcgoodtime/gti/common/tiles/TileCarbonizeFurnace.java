@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,17 +25,14 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.mcgoodtime.gti.common.tiles.tileslot.*;
 import ic2.api.tile.IWrenchable;
 import ic2.core.Ic2Items;
 import ic2.core.block.IUpgradableBlock;
 import ic2.core.item.IUpgradeItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -57,16 +54,17 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
 
     public TileCarbonizeFurnace() {
         super(3, 300, 1, 1);
-    }
-
-    @Override
-    public int getSizeInventory() {
-        return 6;
+        this.tileSlots.add(new TileSlotInput(this, CarbonizeFurnaceRecipes.instance));
+        this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
+        this.tileSlots.add(new TileSlotOutput(this, TileSlot.SlotMode.OUTPUT));
+        this.tileSlots.add(new TileSlotOutput(this, TileSlot.SlotMode.OUTPUT));
+        this.tileSlots.add(new TileSlotUpgrade(this, TileSlot.SlotMode.NULL));
+        this.tileSlots.add(new TileSlotUpgrade(this, TileSlot.SlotMode.NULL));
     }
 
     @Override
     public String getInventoryName() {
-        return this.hasCustomInventoryName() ? this.name : "Carbonize Furnace";
+        return "CarbonizeFurnace";
     }
 
     @Override
@@ -74,19 +72,6 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
         super.readFromNBT(nbt);
         this.requireEnergy = nbt.getShort("requireEnergy");
         this.progress = nbt.getShort("Progress");
-
-        NBTTagList nbttaglist = nbt.getTagList("Items", 10);
-        for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-            NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
-            byte slot = tag.getByte("Slot");
-            if (slot >= 0 && slot < this.containerItemsList.size()) {
-                this.containerItemsList.set(slot, ItemStack.loadItemStackFromNBT(tag));
-            }
-        }
-
-        if (nbt.hasKey("CustomName", 8)) {
-            this.name = nbt.getString("CustomName");
-        }
     }
 
     @Override
@@ -94,43 +79,6 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
         super.writeToNBT(nbt);
         nbt.setShort("requireEnergy", (short) requireEnergy);
         nbt.setShort("Progress", (short) progress);
-
-        NBTTagList itemList = new NBTTagList();
-        for (int i = 0; i < this.containerItemsList.size(); ++i) {
-            if (this.containerItemsList.get(i) != null) {
-                NBTTagCompound tag = new NBTTagCompound();
-                tag.setByte("Slot", (byte) i);
-                this.containerItemsList.get(i).writeToNBT(tag);
-                itemList.appendTag(tag);
-            }
-        }
-        nbt.setTag("Items", itemList);
-
-        if (this.hasCustomInventoryName()) {
-            nbt.setString("CustomName", this.name);
-        }
-    }
-
-    /**
-     * Returns an integer between 0 and the passed value representing
-     * how close the current item is to being completely cooked
-     */
-    @SideOnly(Side.CLIENT)
-    public int getProgressScaled(int i) {
-        return (int) (i * Math.min(1.0F, this.progress / this.requireEnergy));
-    }
-
-    /**
-     * Returns an integer between 0 and the passed value representing how
-     * much remaining battery
-     */
-    @SideOnly(Side.CLIENT)
-    public int getRemainingBatteryScaled(int i) {
-        return (int) (i * Math.min(1.0F, (float) this.energy / (float) this.maxEnergy));
-    }
-
-    public boolean isProcessing() {
-        return requireEnergy == 0;
     }
 
     @Override
@@ -141,7 +89,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
             boolean needUpdate = false;
 
             if (canProcess() && this.energy >= this.energyPerTick) {
-                this.requireEnergy = CarbonizeFurnaceRecipes.instance.getRecipes(this.containerItemsList.get(0)).requiresEnergy;
+                this.requireEnergy = CarbonizeFurnaceRecipes.instance.getRecipe(this.getStackInSlot(0)).requiresEnergy;
                 this.setActive(true);
                 this.energy -= this.energyPerTick;
                 this.progress += this.energyPerTick;
@@ -159,7 +107,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
             }
 
             for(int i = 4; i < 6; i++) {
-                ItemStack stack = this.containerItemsList.get(i);
+                ItemStack stack = this.getStackInSlot(i);
                 if(stack != null && stack.getItem() instanceof IUpgradeItem && ((IUpgradeItem)stack.getItem()).onTick(stack, this)) {
                     needUpdate = true;
                 }
@@ -175,25 +123,25 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
      * @return Whether this Item can process
      */
     private boolean canProcess() {
-        if (this.containerItemsList.get(0) == null) {
+        if (this.getStackInSlot(0) == null) {
             return false;
         } else {
-            ItemStack itemStack = CarbonizeFurnaceRecipes.instance.getProcessResult(this.containerItemsList.get(0));
+            ItemStack itemStack = CarbonizeFurnaceRecipes.instance.getProcessResult(this.getStackInSlot(0));
             if (itemStack != null) {
-                if (this.containerItemsList.get(2) == null || this.containerItemsList.get(3) == null) {
+                if (this.getStackInSlot(2) == null || this.getStackInSlot(3) == null) {
                     return true;
                 } else {
 
-                    if (this.containerItemsList.get(2).isItemEqual(itemStack)) {
-                        int result = containerItemsList.get(2).stackSize + itemStack.stackSize;
-                        if (result <= getInventoryStackLimit() && result <= this.containerItemsList.get(2).getMaxStackSize()) {
+                    if (this.getStackInSlot(2).isItemEqual(itemStack)) {
+                        int result = this.getStackInSlot(2).stackSize + itemStack.stackSize;
+                        if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(2).getMaxStackSize()) {
                             return true;
                         }
                     }
 
-                    if (this.containerItemsList.get(3).isItemEqual(itemStack)) {
-                        int result = containerItemsList.get(3).stackSize + itemStack.stackSize;
-                        if (result <= getInventoryStackLimit() && result <= this.containerItemsList.get(3).getMaxStackSize()) {
+                    if (this.getStackInSlot(3).isItemEqual(itemStack)) {
+                        int result = this.getStackInSlot(3).stackSize + itemStack.stackSize;
+                        if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(3).getMaxStackSize()) {
                             return true;
                         }
                     }
@@ -207,25 +155,25 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
 
     public void processItem() {
         if (this.canProcess()) {
-            ItemStack outputItem = CarbonizeFurnaceRecipes.instance.getProcessResult(this.containerItemsList.get(0));
+            ItemStack outputItem = CarbonizeFurnaceRecipes.instance.getProcessResult(this.getStackInSlot(0));
 
-            if (this.containerItemsList.get(2) == null) {
-                this.containerItemsList.set(2, outputItem.copy());
+            if (this.getStackInSlot(2) == null) {
+                this.setInventorySlotContents(2, outputItem.copy());
             }
-            else if (this.containerItemsList.get(2).isItemEqual(outputItem)) {
-                this.containerItemsList.get(2).stackSize += outputItem.stackSize;
+            else if (this.getStackInSlot(2).isItemEqual(outputItem)) {
+                this.getStackInSlot(2).stackSize += outputItem.stackSize;
             }
-            else if (this.containerItemsList.get(3) == null) {
-                this.containerItemsList.set(3, outputItem.copy());
+            else if (this.getStackInSlot(3) == null) {
+                this.setInventorySlotContents(3, outputItem.copy());
             }
-            else if (this.containerItemsList.get(3).isItemEqual(outputItem)) {
-                this.containerItemsList.get(3).stackSize += outputItem.stackSize;
+            else if (this.getStackInSlot(3).isItemEqual(outputItem)) {
+                this.getStackInSlot(3).stackSize += outputItem.stackSize;
             }
 
-            this.containerItemsList.get(0).stackSize -= CarbonizeFurnaceRecipes.instance.getRequiredProcessAmount(this.containerItemsList.get(0));
+            this.getStackInSlot(0).stackSize -= CarbonizeFurnaceRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0));
 
-            if (this.containerItemsList.get(0).stackSize <= 0) {
-                this.containerItemsList.set(0, null);
+            if (this.getStackInSlot(0).stackSize <= 0) {
+                this.setInventorySlotContents(0, null);
             }
         }
     }
@@ -290,34 +238,5 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     @Override
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
         return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
-    }
-
-    /**
-     * Returns true if automation can extract the given item in the given
-     * slot from the given side. Args: Slot, item, side
-     */
-    @Override
-    public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
-        if (itemStack.getItem() == Items.bucket) {
-            return true;
-        }
-        switch (slot) {
-            case 2: return true;
-            case 3: return true;
-            default: return false;
-        }
-    }
-
-    /**
-     * Returns true if automation can insert the given item in the given
-     * slot from the given side. Args: Slot, item, side
-     */
-    @Override
-    public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
-        switch (slot) {
-            case 2: return false;
-            case 3: return false;
-            default: return true;
-        }
     }
 }

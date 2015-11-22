@@ -7,7 +7,10 @@ itemGroup.GoodTime-Industrial=GoodTime Industrial
 
 [GUI]
 gui.gti.FluidKineticGenerator=流体动能发生机
+gui.gti.FluidKineticGenerator.output=输出: %s
+gui.gti.FluidKineticGenerator.max-output=最大输出: %s
 gui.gti.CarbonizeFurnace=碳化燃烧炉
+gui.gti.HeatDryer=干燥机
 
 [BLOCKS]
 tile.gti.block.CompressedWaterHyacinth.name=压缩水葫芦
@@ -15,8 +18,10 @@ tile.gti.block.oreIridium.name=铱矿石
 tile.gti.block.WaterHyacinth.name=水葫芦
 tile.gti.block.FluidKineticGenerator.name=流体动能发生机
 tile.gti.block.CarbonizeFurnace.name=碳化燃烧炉
+tile.gti.block.HeatDryer.name=干燥机
 tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 tile.gti.block.EVSU.name=EVSU
+tile.gti.block.AirBrakeCasing.name=气闸外壳
 
 [ITEMS]
 //crushed
@@ -50,7 +55,6 @@ item.gti.CarbonTreetap.name=碳板龙头
 
 item.gti.BambooCharcoal.name=竹炭
 item.gti.AirBrakeUnit.name=气闸单元
-item.gti.AirBrakeCasing.name=气闸外壳
 item.gti.Salt.name=食盐
 item.gti.PackagedSalt.name=一小袋盐
 item.gti.CarbonTube.name=碳管
@@ -76,6 +80,8 @@ item.gti.CarbonCrystal.name=碳元素水晶
 item.gti.EnderCalculationCrystal.name=末影运算水晶
 item.gti.MillTeeth.name=磨齿
 item.gti.MillWheel.name=磨轮
+item.gti.RigidPaper.name=硬质纸
+item.gti.RigidPaperPack=硬质纸袋
 
 item.gti.food.DiamondApple.name=钻石苹果
 

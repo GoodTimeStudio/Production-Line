@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -45,11 +45,11 @@ import net.minecraft.world.World;
 /*
  * Created by suhao on 2015.7.13.
  */
-public abstract class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
+public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
 
-    private static final int[][] facingAndSideToSpriteOffset = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
+    //low, top, left, front, right, back;
+    private static final int[][] DIRECTION = new int[][]{{3, 5, 1, 0, 4, 2}, {5, 3, 1, 0, 2, 4}, {0, 1, 3, 5, 4, 2}, {0, 1, 5, 3, 2, 4}, {0, 1, 2, 4, 3, 5}, {0, 1, 4, 2, 5, 3}};
     protected IIcon textures[];
-    //top, low, front, back, left, right;
 
     public BlockMultiTexture(Material material, String name, float hardness, float resistance, String harvestLevelToolClass, int harvestLevel) {
         super(material, name, hardness, resistance, harvestLevelToolClass, harvestLevel);
@@ -87,7 +87,7 @@ public abstract class BlockMultiTexture extends BlockGti implements ITileEntityP
             int facing = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).facing;
             boolean isBurn = ((TileGti) iBlockAccess.getTileEntity(x, y, z)).active;
 
-            int i = facingAndSideToSpriteOffset[facing][side];
+            int i = DIRECTION[facing][side];
             if (isBurn) {
                 i += 6;
             }
@@ -108,7 +108,7 @@ public abstract class BlockMultiTexture extends BlockGti implements ITileEntityP
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
-        return textures[facingAndSideToSpriteOffset[3][side]];
+        return textures[DIRECTION[3][side]];
     }
 
     @Override
@@ -136,17 +136,22 @@ public abstract class BlockMultiTexture extends BlockGti implements ITileEntityP
         }
     }
 
-    protected abstract Class<? extends TileGti> getTileEntityClass();
+    protected Class<? extends TileGti> getTileEntityClass() {
+        return TileGti.class;
+    }
 
     @Override
     public TileEntity createNewTileEntity(World world, int var) {
-        try {
-            return this.getTileEntityClass().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        if (this.getTileEntityClass() != null) {
+            try {
+                return this.getTileEntityClass().newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
+
         return null;
     }
 }

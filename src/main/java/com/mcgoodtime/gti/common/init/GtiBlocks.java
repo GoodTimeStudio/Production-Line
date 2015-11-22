@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -48,11 +48,11 @@ public class GtiBlocks {
 
     public static Block airBrakeCasing;
     public static Block waterHyacinth;
-    public static Block genGasKU;
+    public static Block fluidKineticGenerator;
     public static Block oreIridium;
     public static Block carbonizeFurnace;
     public static BlockContainer evsu;
-    public static BlockContainer heatDryer;
+    public static Block heatDryer;
 
     public static void init() {
         //compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5F, 0.3F, null, 0);
@@ -62,17 +62,19 @@ public class GtiBlocks {
         carbonizeFurnace = new BlockCarbonizeFurnace();
         airBrakeCasing = new BlockGti(Material.iron, "AirBrakeCasing");
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
+        fluidKineticGenerator = new BlockFluidKineticGenerator();
+        heatDryer = new BlockHeatDryer();
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
-        genGasKU = new BlockFluidKineticGenerator();
         evsu = new BlockEVSU();
 
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(evsu, "EVSU");
 
         GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
-        GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
+        GtiConfig.gtiLogger.log(Level.INFO, "FluidKineticGenerator" + Integer.toString(Block.getIdFromBlock(fluidKineticGenerator)));
         GtiConfig.gtiLogger.log(Level.INFO, "carbonizefurnace" + Integer.toString(Block.getIdFromBlock(carbonizeFurnace)));
+        GtiConfig.gtiLogger.log(Level.INFO,"heatdryer" + Integer.toString(Block.getIdFromBlock(heatDryer)));
     }
 }
