@@ -26,7 +26,6 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.blocks.*;
 import com.mcgoodtime.gti.common.blocks.generator.BlockFluidKineticGenerator;
-import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -34,7 +33,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 
-import org.apache.logging.log4j.Level;
+import net.minecraft.item.ItemStack;
 
 /**
  * Gti blocks.
@@ -42,35 +41,41 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
-	public static Block dehydratedWaterHyacinthblock;
-	public static Block compressedWaterHyacinth;
+    public static ItemStack dehydratedWaterHyacinthblock;
+    public static ItemStack compressedWaterHyacinth;
+    public static ItemStack carbonizeFurnace;
+    public static ItemStack heatDryer;
+
+    public static BlockGti fluidKineticGenerator;
+    public static BlockGti oreIridium;
+    public static BlockGti airBrakeCasing;
+
     public static Block waterHyacinth;
-    public static Block fluidKineticGenerator;
-    public static Block oreIridium;
-    public static Block carbonizeFurnace;
-    public static Block airBrakeCasing;
     public static BlockContainer evsu;
-    public static Block heatDryer;
+
 
     public static void init() {
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
-        compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5F, 0.3F, null, 0);
-        dehydratedWaterHyacinthblock=new BlockGti(Material.rock, "DehydratedWaterHyacinthBlock", 1.0F, 0.3F, null, 0);
-        carbonizeFurnace = new BlockCarbonizeFurnace();
-        airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
         fluidKineticGenerator = new BlockFluidKineticGenerator();
-        heatDryer = new BlockHeatDryer();
+        airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
+        new BlockMisc();
+        new BlockMachine();
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
         evsu = new BlockEVSU();
 
+        //----------------------------
+        //------Block Registry--------
+        registerBlock(oreIridium);
+        registerBlock(fluidKineticGenerator);
+        registerBlock(airBrakeCasing);
+
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(evsu, "EVSU");
+    }
 
-        GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
-        GtiConfig.gtiLogger.log(Level.INFO, "FluidKineticGenerator" + Integer.toString(Block.getIdFromBlock(fluidKineticGenerator)));
-        GtiConfig.gtiLogger.log(Level.INFO, "carbonizefurnace" + Integer.toString(Block.getIdFromBlock(carbonizeFurnace)));
-        GtiConfig.gtiLogger.log(Level.INFO,"heatdryer" + Integer.toString(Block.getIdFromBlock(heatDryer)));
+    private static void registerBlock(BlockGti blockGti) {
+        GameRegistry.registerBlock(blockGti, blockGti.blockName);
     }
 }

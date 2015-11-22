@@ -19,7 +19,7 @@ public class HeatDryerRecipes implements IProcessable<HeatDryerRecipes.Recipes> 
     private HeatDryerRecipes() {
         /* The default value after the process */
         float XP = 0.15F;
-        this.register(new ItemStack(GtiBlocks.waterHyacinth, 4), new ItemStack(GtiBlocks.dehydratedWaterHyacinthblock), XP);
+        this.register(new ItemStack(GtiBlocks.waterHyacinth, 4), GtiBlocks.dehydratedWaterHyacinthblock, XP);
     }
 
     public void register(ItemStack input, ItemStack output, float xp) {

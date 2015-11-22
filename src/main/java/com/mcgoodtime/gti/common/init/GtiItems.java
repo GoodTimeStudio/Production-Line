@@ -143,7 +143,7 @@ public class GtiItems implements IFuelHandler {
 		dustIridium = new ItemStack(itemOre, 1, 5);
 		smallDustIridium = new ItemStack(itemOre, 1, 6);
 
-		ItemMultiDamage itemDisc = new ItemMultiDamage("ItemDisc") {
+		ItemMultiDamage itemDisc = new ItemMultiDamage("ItemMisc") {
 			@Override
 			public String getInternalName(int meta) {
 				switch (meta) {
@@ -274,12 +274,10 @@ public class GtiItems implements IFuelHandler {
 				Item.getItemFromBlock(GtiBlocks.waterHyacinth))) {
 			return 100;
 		}
-		if (fuel.getItem().equals(
-				Item.getItemFromBlock(GtiBlocks.compressedWaterHyacinth))) {
+		if (fuel.isItemEqual(GtiBlocks.compressedWaterHyacinth)) {
 			return 800;
 		}
-		if (fuel.getItem().equals(
-				Item.getItemFromBlock(GtiBlocks.dehydratedWaterHyacinthblock))) {
+		if (fuel.isItemEqual(GtiBlocks.dehydratedWaterHyacinthblock)) {
 			return 1000;
 		}
 		return 0;

@@ -56,7 +56,7 @@ public class Recipes {
         //vanilla recipe registry;
 
         GameRegistry.addRecipe(
-                new ItemStack(GtiBlocks.carbonizeFurnace),
+                GtiBlocks.carbonizeFurnace,
                 "ABA",
                 "CDC",
                 "EEE",
@@ -400,7 +400,7 @@ public class Recipes {
         ic2.api.recipe.Recipes.compressor.addRecipe(
         		new RecipeInputItemStack(GtiItems.getItems(GtiItems.smallCompressedWaterHyacinth, 8)),
         		null,
-        		new ItemStack(GtiBlocks.compressedWaterHyacinth)
+        		GtiBlocks.compressedWaterHyacinth
         );
         ic2.api.recipe.Recipes.compressor.addRecipe(
         		new RecipeInputItemStack(new ItemStack(GtiBlocks.waterHyacinth, 8)),
