@@ -104,7 +104,7 @@ public final class Gti {
     public void init(FMLInitializationEvent event) {
         GtiEntity.init();
         // register Recipes. 注册合成
-        Recipes.init();
+        GtiRecipes.init();
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance());
          //register achievement

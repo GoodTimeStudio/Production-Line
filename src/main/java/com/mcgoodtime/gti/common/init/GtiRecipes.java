@@ -27,6 +27,7 @@ package com.mcgoodtime.gti.common.init;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
+import ic2.api.recipe.Recipes;
 import ic2.core.Ic2Items;
 import ic2.core.util.StackUtil;
 import net.minecraft.init.Blocks;
@@ -45,7 +46,7 @@ import java.util.Map;
  *
  * @author liach
  */
-public class Recipes {
+public class GtiRecipes {
     private static final float XP = 2F;
 
     /** Load recipes of GoodTime-Industrial.*/
@@ -397,71 +398,71 @@ public class Recipes {
         GameRegistry.addSmelting(IC2Items.getItem("iridiumOre"), GtiItems.ingotIridium, XP);
 
         //ic2 recipe registry
-        ic2.api.recipe.Recipes.compressor.addRecipe(
+        Recipes.compressor.addRecipe(
         		new RecipeInputItemStack(GtiItems.getItems(GtiItems.smallCompressedWaterHyacinth, 8)),
         		null,
         		GtiBlocks.compressedWaterHyacinth
         );
-        ic2.api.recipe.Recipes.compressor.addRecipe(
+        Recipes.compressor.addRecipe(
         		new RecipeInputItemStack(new ItemStack(GtiBlocks.waterHyacinth, 8)),
         		null,
         		GtiItems.smallCompressedWaterHyacinth
         );
-        ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
+        Recipes.metalformerRolling.addRecipe(
                 new RecipeInputItemStack(new ItemStack(Items.diamond)),
                 null,
                 GtiItems.diamondPlate
         );
-        ic2.api.recipe.Recipes.metalformerRolling.addRecipe(
+        Recipes.metalformerRolling.addRecipe(
                		new RecipeInputItemStack(GtiItems.heatInsulationMaterial),
                		null,
                		GtiItems.heatInsulationPlate
         );
-        ic2.api.recipe.Recipes.compressor.addRecipe(
+        Recipes.compressor.addRecipe(
                 new RecipeInputItemStack(GtiItems.getItems(GtiItems.diamondPlate, 9)),
                 null,
                 GtiItems.denseDiamondPlate
         );
-        ic2.api.recipe.Recipes.compressor.addRecipe(
+        Recipes.compressor.addRecipe(
                 new RecipeInputItemStack(GtiItems.getItems(GtiItems.smallDustIridium, 8)),
                 null,
                 GtiItems.ingotIridium
         );
-        ic2.api.recipe.Recipes.macerator.addRecipe(
+        Recipes.macerator.addRecipe(
                 new RecipeInputItemStack(new ItemStack(GtiBlocks.oreIridium)),
                 null,
                 GtiItems.getItems(GtiItems.crushedIridium, 2)
         );
-        ic2.api.recipe.Recipes.macerator.addRecipe(
+        Recipes.macerator.addRecipe(
                 new RecipeInputItemStack(GtiItems.ingotIridium),
                 null,
                 GtiItems.dustIridium
         );
-        ic2.api.recipe.Recipes.compressor.addRecipe(
+        Recipes.compressor.addRecipe(
                 new RecipeInputItemStack(IC2Items.getItem("diamondDust"), 3),
                 null,
                 GtiItems.carbonCrystal
         );
-        ic2.api.recipe.Recipes.compressor.addRecipe(
+        Recipes.compressor.addRecipe(
                 new RecipeInputItemStack(IC2Items.getItem("denseplateobsidian"), 8),
                 null,
                 GtiItems.obsidianPlateGravityField
         );
         NBTTagCompound oreWash = new NBTTagCompound();
         oreWash.setInteger("amount", 1000);
-        ic2.api.recipe.Recipes.oreWashing.addRecipe(
+        Recipes.oreWashing.addRecipe(
                 new RecipeInputItemStack(GtiItems.crushedIridium),
                 oreWash,
                 GtiItems.cleanedCrushedIridium,
                 StackUtil.copyWithSize(Ic2Items.smallTinDust, 2)
         );
-        ic2.api.recipe.Recipes.centrifuge.addRecipe(
+        Recipes.centrifuge.addRecipe(
                 new RecipeInputItemStack(GtiItems.cleanedCrushedIridium),
                 null,
                 GtiItems.dustIridium,
                 GtiItems.getItems(GtiItems.smallDustIridium, 2)
         );
-        ic2.api.recipe.Recipes.cannerBottle.addRecipe(
+        Recipes.cannerBottle.addRecipe(
                 new RecipeInputItemStack(GtiItems.rigidPaperPack),
                 new RecipeInputItemStack(new ItemStack(GtiItems.salt, 9)),
                 new ItemStack(GtiItems.packagedSalt)
