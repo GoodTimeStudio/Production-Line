@@ -155,7 +155,6 @@ public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
         if (c == null) {
             c = this.getTileEntityClass();
         }
-
         if (c != null) {
             try {
                 return c.newInstance();
