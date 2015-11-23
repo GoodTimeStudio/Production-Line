@@ -24,6 +24,8 @@
  */
 package com.mcgoodtime.gti.common.blocks;
 
+import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.core.GuiHandler;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.items.ItemBlockGti;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
@@ -36,10 +38,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +70,7 @@ public class BlockMachine extends BlockContainerGti implements IMultiMetaBlock {
 
     public BlockMachine() {
         super(Material.iron, "BlockMachine");
+        this.setHardness(2.0F);
         GameRegistry.registerBlock(this, ItemBlockGti.class, this.blockName);
         for (int i = 0; i < this.getMaxMeta(); i++) {
             GameRegistry.registerTileEntity(this.getTileEntityClass(i), internalNameList.get(i));
@@ -72,6 +78,30 @@ public class BlockMachine extends BlockContainerGti implements IMultiMetaBlock {
 
         GtiBlocks.carbonizeFurnace = new ItemStack(this, 1, 0);
         GtiBlocks.heatDryer = new ItemStack(this, 1, 1);
+    }
+
+    /**
+     * Called upon block activation (right click on the block.)
+     */
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f1, float f2, float f3) {
+        if (!world.isRemote) {
+            GuiHandler.EnumGui gui = this.getGui(world.getBlockMetadata(x, y, z));
+            if (gui != null) {
+                player.openGui(Gti.instance, gui.ordinal(), world, x, y, z);
+            }
+        } else {
+            player.isInvisibleToPlayer(player);
+        }
+        return true;
+    }
+
+    private GuiHandler.EnumGui getGui(int meta) {
+        switch (meta) {
+            case 0: return GuiHandler.EnumGui.CarbonizeFurnace;
+            case 1: return GuiHandler.EnumGui.HeatDryer;
+            default: return null;
+        }
     }
 
     @Override
@@ -82,6 +112,33 @@ public class BlockMachine extends BlockContainerGti implements IMultiMetaBlock {
             default: return null;
         }
     }
+
+    @Override
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+        switch (world.getBlockMetadata(x, y, z)) {
+            case 0:
+                if ( ((TileGti)world.getTileEntity(x, y, z)).active) {
+                    float f2;
+                    float fmod;
+                    float f1mod;
+                    float f2mod;
+
+                    float f = (float)x + 1.0F;
+                    float f1 = (float)y + 1.0F;
+                    f2 = (float)z + 1.0F;
+
+                    for(int i = 0; i < 4; ++i) {
+                        fmod = -0.2F - random.nextFloat() * 0.6F;
+                        f1mod = -0.1F + random.nextFloat() * 0.2F;
+                        f2mod = -0.2F - random.nextFloat() * 0.6F;
+                        world.spawnParticle("smoke", (double)(f + fmod), (double)(f1 + f1mod), (double)(f2 + f2mod), 0.0D, 0.0D, 0.0D);
+                    }
+                }
+        }
+    }
+
+    //-----------------------
+    //-----------------------
 
     /**
      * World only
@@ -171,5 +228,10 @@ public class BlockMachine extends BlockContainerGti implements IMultiMetaBlock {
             ItemStack stack = new ItemStack(this, 1, meta);
             list.add(stack);
         }
+    }
+
+    @Override
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+        return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
     }
 }

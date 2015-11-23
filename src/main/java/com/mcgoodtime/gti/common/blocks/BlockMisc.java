@@ -33,6 +33,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,4 +119,17 @@ public class BlockMisc extends BlockGti implements IMultiMetaBlock {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+        return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
+    }
+
+    /**
+     * Determines the damage on the item the block drops. Used in cloth and wood.
+     */
+    @Override
+    public int damageDropped(int meta) {
+        return meta;
+    }
 }

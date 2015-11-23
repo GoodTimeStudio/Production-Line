@@ -25,9 +25,12 @@
 package com.mcgoodtime.gti.common.items;
 
 import com.mcgoodtime.gti.common.blocks.IMultiMetaBlock;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
 /**
@@ -38,19 +41,37 @@ import net.minecraft.util.StatCollector;
  */
 public class ItemBlockGti extends ItemBlock {
 
-    protected Block block;
-
     public ItemBlockGti(Block block) {
         super(block);
-        this.block = block;
+        this.setMaxDamage(0);
         this.hasSubtypes = true;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public String getItemStackDisplayName(ItemStack itemStack) {
-        if (this.block instanceof IMultiMetaBlock) {
-            return StatCollector.translateToLocal(((IMultiMetaBlock) block).getBlockName(itemStack) + ".name");
+        if (this.field_150939_a instanceof IMultiMetaBlock) {
+            return StatCollector.translateToLocal(((IMultiMetaBlock) field_150939_a).getBlockName(itemStack) + ".name");
         }
         return super.getItemStackDisplayName(itemStack);
+    }
+
+    /**
+     * Gets an icon index based on an item's damage value
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int meta)
+    {
+        return this.field_150939_a.getIcon(2, meta);
+    }
+
+    /**
+     * Returns the metadata of the block which this Item (ItemBlock) can place
+     */
+    @Override
+    public int getMetadata(int meta)
+    {
+        return meta;
     }
 }
