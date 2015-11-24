@@ -28,9 +28,12 @@ import com.mcgoodtime.gti.common.tiles.TileContainer;
 import ic2.core.util.StackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import java.util.*;
 
 /**
  * Created by BestOwl on 2015.10.31.0031.
@@ -41,6 +44,8 @@ import net.minecraft.item.ItemStack;
 public abstract class ContainerGti<T extends IInventory> extends Container {
 
     public T tile;
+    private Map<String, Integer> saveMap = new HashMap<String, Integer>();
+    protected Map<String, Integer> lastMap = new HashMap<String, Integer>();
 
     public ContainerGti(EntityPlayer player, T tile) {
         this.tile = tile;

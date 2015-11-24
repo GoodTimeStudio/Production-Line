@@ -27,18 +27,31 @@ package com.mcgoodtime.gti.common.inventory;
 
 import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
 import com.mcgoodtime.gti.common.tiles.TileFluidKineticGenerator;
-import ic2.core.IC2;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineticGenerator> {
+
+    public int fluidAmount;
+    public int fluidID;
 
     public ContainerFluidKineticGenerator(EntityPlayer player, TileFluidKineticGenerator tile) {
         super(player, tile);
 
         this.addSlotToContainer(new Slot(tile, 0, 27, 21));
         this.addSlotToContainer(new SlotOutput(player, tile, 1, 27, 54));
+    }
+
+    @Override
+    public void addCraftingToCrafters(ICrafting iCrafting) {
+        super.addCraftingToCrafters(iCrafting);
+        iCrafting.sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
+        if (this.tile.fluidTank.getFluid() != null) {
+            iCrafting.sendProgressBarUpdate(this, 1, this.tile.fluidTank.getFluid().getFluidID());
+        }
     }
 
     /**
@@ -49,7 +62,30 @@ public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineti
         super.detectAndSendChanges();
 
         for (Object object : this.crafters) {
-            IC2.network.get().updateTileEntityFieldTo(this.tile, "fluidTank", (EntityPlayerMP) object); //(Temporary use) ic2 network system
+            if (this.fluidAmount != this.tile.fluidTank.getFluidAmount()) {
+                ((ICrafting) object).sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
+            }
+            if (this.tile.fluidTank.getFluid() != null && this.fluidID != this.tile.fluidTank.getFluid().getFluidID()) {
+                ((ICrafting) object).sendProgressBarUpdate(this, 1, this.tile.fluidTank.getFluid().getFluidID());
+            }
+        }
+
+        this.fluidAmount = this.tile.fluidTank.getFluidAmount();
+        if (this.tile.fluidTank.getFluid() != null) {
+            this.fluidID = this.tile.fluidTank.getFluid().getFluidID();
+        }
+    }
+
+    @Override
+    public void updateProgressBar(int id, int var) {
+        super.updateProgressBar(id, var);
+        switch (id) {
+            case 0: if (this.tile.fluidTank.getFluid() != null) {
+                        this.tile.fluidTank.getFluid().amount = var;
+                    }
+            case 1: if (FluidRegistry.getFluid(var) != null) {
+                        this.tile.fluidTank.setFluid(new FluidStack(FluidRegistry.getFluid(var), this.tile.fluidTank.getFluidAmount()));
+                    }
         }
     }
 }

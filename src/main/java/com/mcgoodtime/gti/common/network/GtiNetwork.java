@@ -29,6 +29,8 @@ import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 /**
  * Created by BestOwl on 2015.10.30.0030.
@@ -36,20 +38,21 @@ import cpw.mods.fml.relauncher.Side;
  * @author BestOwl
  */
 public class GtiNetwork {
+    public final static SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(Gti.MOD_ID);;
 
-    private static SimpleNetworkWrapper network;
-
-    public static void init() {
-        if (network == null) {
-            network = NetworkRegistry.INSTANCE.newSimpleChannel(Gti.MOD_ID);
-            network.registerMessage(MessageBlockDisplayState.Handler.class, MessageBlockDisplayState.class, 0, Side.CLIENT);
-        }
+    static {
+        network.registerMessage(MessageBlockDisplayState.Handler.class, MessageBlockDisplayState.class, 0, Side.CLIENT);
+        network.registerMessage(MessageUpdateTileEntity.Handler.class, MessageUpdateTileEntity.class, 1, Side.CLIENT);
     }
 
     public static void updateBlockDisplayState(TileGti tile) {
         network.sendToAllAround(new MessageBlockDisplayState(tile.xCoord, tile.yCoord, tile.zCoord, tile.active, tile.facing),
                 new NetworkRegistry.TargetPoint(tile.getWorldObj().getWorldInfo().getVanillaDimension(),
                 tile.xCoord, tile.yCoord, tile.zCoord, 64));
+    }
+
+    public static void updateTileEntityFiledToPlayer(EntityPlayer player, int x, int y, int z, String fieldName, Object object) {
+        network.sendTo(new MessageUpdateTileEntity(fieldName, object, x, y, z), (EntityPlayerMP) player);
     }
 
     public static SimpleNetworkWrapper getNetwork() {
