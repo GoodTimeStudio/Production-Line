@@ -26,16 +26,17 @@
 package com.mcgoodtime.gti.common.inventory;
 
 import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
-import com.mcgoodtime.gti.common.network.GtiNetwork;
 import com.mcgoodtime.gti.common.tiles.TileFluidKineticGenerator;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraftforge.fluids.FluidTank;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineticGenerator> {
+
+    public int fluidAmount;
+    public int fluidID;
 
     public ContainerFluidKineticGenerator(EntityPlayer player, TileFluidKineticGenerator tile) {
         super(player, tile);
@@ -45,18 +46,46 @@ public class ContainerFluidKineticGenerator extends ContainerGti<TileFluidKineti
     }
 
     @Override
-    public List<String> getNetworkUpdateField() {
-        List<String> list = new ArrayList<String>();
-        list.add()
-        return super.getNetworkUpdateField();
+    public void addCraftingToCrafters(ICrafting iCrafting) {
+        super.addCraftingToCrafters(iCrafting);
+        iCrafting.sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
+        if (this.tile.fluidTank.getFluid() != null) {
+            iCrafting.sendProgressBarUpdate(this, 1, this.tile.fluidTank.getFluid().getFluidID());
+        }
     }
 
     /**
-     * Update lastMap value from tile entity
+     * Looks for changes made in the container, sends them to every listener.
      */
     @Override
-    protected void updateLastMap() {
-        super.updateLastMap();
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
 
+        for (Object object : this.crafters) {
+            if (this.fluidAmount != this.tile.fluidTank.getFluidAmount()) {
+                ((ICrafting) object).sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
+            }
+            if (this.tile.fluidTank.getFluid() != null && this.fluidID != this.tile.fluidTank.getFluid().getFluidID()) {
+                ((ICrafting) object).sendProgressBarUpdate(this, 1, this.tile.fluidTank.getFluid().getFluidID());
+            }
+        }
+
+        this.fluidAmount = this.tile.fluidTank.getFluidAmount();
+        if (this.tile.fluidTank.getFluid() != null) {
+            this.fluidID = this.tile.fluidTank.getFluid().getFluidID();
+        }
+    }
+
+    @Override
+    public void updateProgressBar(int id, int var) {
+        super.updateProgressBar(id, var);
+        switch (id) {
+            case 0: if (this.tile.fluidTank.getFluid() != null) {
+                        this.tile.fluidTank.getFluid().amount = var;
+                    }
+            case 1: if (FluidRegistry.getFluid(var) != null) {
+                        this.tile.fluidTank.setFluid(new FluidStack(FluidRegistry.getFluid(var), this.tile.fluidTank.getFluidAmount()));
+                    }
+        }
     }
 }

@@ -213,41 +213,4 @@ public abstract class ContainerGti<T extends IInventory> extends Container {
 
         return itemstack;
     }
-
-    /*
-     * Get
-     * String: need update field name
-     * Int: value
-     * @return field list.
-     */
-    public List<String> getNetworkUpdateField() {
-        return new ArrayList<String>();
-    }
-
-    /**
-     * Looks for changes made in the container, sends them to every listener.
-     */
-    @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
-        this.updateLastMap();
-        List<String> updateList = this.getNetworkUpdateField();
-
-        for (Object object : this.crafters) {
-            for (int i = 0; i < updateList.size(); i++) {
-                String field = updateList.get(i);
-                if (!this.lastMap.get(field).equals(this.saveMap.get(field))) {
-                    ((ICrafting) object).sendProgressBarUpdate(this, i, this.lastMap.get(field));
-                }
-            }
-        }
-
-        this.saveMap.clear();
-        this.saveMap.putAll(this.lastMap);
-    }
-
-    /**
-     * Update lastMap value from tile entity
-     */
-    protected void updateLastMap() {}
 }
