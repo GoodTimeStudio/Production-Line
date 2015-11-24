@@ -69,7 +69,7 @@ public class GtiItems implements IFuelHandler {
 
 	public static Item record_MusicSpring;
 	//---------------------------------------
-
+	public static ItemStack batten;
 	public static ItemStack crushedIridium;
 	public static ItemStack cleanedCrushedIridium;
 	public static ItemStack dustIridium;
@@ -176,6 +176,7 @@ public class GtiItems implements IFuelHandler {
 					case 26: return "BambooCharcoal";
 					case 27: return "RigidPaper";
 					case 28: return "RigidPaperPack";
+					case 29: return "batten";
 					default: return null;
 				}
 			}
@@ -209,6 +210,7 @@ public class GtiItems implements IFuelHandler {
 		bambooCharcoal = new ItemStack(itemDisc, 1, 26);
 		rigidPaper = new ItemStack(itemDisc, 1, 27);
 		rigidPaperPack = new ItemStack(itemDisc, 1, 28);
+		batten = new ItemStack(itemDisc,1,29);
 
         // special registry TODO: Better registry system
  
@@ -264,6 +266,9 @@ public class GtiItems implements IFuelHandler {
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
+		if(fuel.isItemEqual(batten)){
+			return 850;
+		}
 		if (fuel.isItemEqual(bambooCharcoal)) {
 			return 800;
 		}
@@ -273,6 +278,10 @@ public class GtiItems implements IFuelHandler {
 		if (fuel.getItem().equals(
 				Item.getItemFromBlock(GtiBlocks.waterHyacinth))) {
 			return 100;
+		}
+		if(fuel.getItem().equals(
+				Item.getItemFromBlock(GtiBlocks.dryLog))){
+			return  850;
 		}
 		if (fuel.isItemEqual(GtiBlocks.compressedWaterHyacinth)) {
 			return 800;

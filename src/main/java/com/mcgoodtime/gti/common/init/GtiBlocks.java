@@ -41,6 +41,7 @@ import net.minecraft.item.ItemStack;
  * @author liach
  */
 public class GtiBlocks {
+    public static  Block dryLog;
     public static ItemStack dehydratedWaterHyacinthblock;
     public static ItemStack compressedWaterHyacinth;
     public static ItemStack carbonizeFurnace;
@@ -55,6 +56,7 @@ public class GtiBlocks {
 
 
     public static void init() {
+        dryLog = new BlockGti(Material.rock, "dryLog",1.5f , 0, "axe", 0);
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
         fluidKineticGenerator = new BlockFluidKineticGenerator();
         airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
