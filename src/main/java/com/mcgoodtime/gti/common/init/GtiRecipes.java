@@ -389,6 +389,18 @@ public class GtiRecipes {
                 " A ",
                 'A', GtiItems.rigidPaper
         );
+        GameRegistry.addRecipe(
+                GtiBlocks.heatDryer,
+                "ABA",
+                "CDC",
+                "EFE",
+                'A', IC2Items.getItem("plateiron"),
+                'B', GtiItems.electronicCircuitControl,
+                'C', GtiItems.roller,
+                'D', Blocks.furnace,
+                'E', GtiItems.redstoneModule,
+                'F', IC2Items.getItem("machine")
+        );
 
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, GtiItems.ingotIridium, XP);
