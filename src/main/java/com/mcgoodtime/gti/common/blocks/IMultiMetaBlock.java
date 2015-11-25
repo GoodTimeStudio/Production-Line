@@ -50,6 +50,4 @@ public interface IMultiMetaBlock {
     int getMaxMeta();
 
     String getInternalName(int meta);
-
-    int damageDropped(int meta);
 }
