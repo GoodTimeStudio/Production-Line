@@ -128,6 +128,10 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
         } else {
             ItemStack itemStack = CarbonizeFurnaceRecipes.instance.getProcessResult(this.getStackInSlot(0));
             if (itemStack != null) {
+                if (!(itemStack.stackSize > CarbonizeFurnaceRecipes.instance.getRequiredProcessAmount(itemStack))) {
+                    return false;
+                }
+
                 if (this.getStackInSlot(2) == null || this.getStackInSlot(3) == null) {
                     return true;
                 } else {

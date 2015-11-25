@@ -103,6 +103,9 @@ public class TileHeatDryer extends TileElectricContainer implements IUpgradableB
         } else {
             ItemStack itemStack = HeatDryerRecipes.instance.getProcessResult(this.getStackInSlot(0));
             if (itemStack != null) {
+                if (!(itemStack.stackSize >= HeatDryerRecipes.instance.getRequiredProcessAmount(itemStack))) {
+                    return false;
+                }
                 if (this.getStackInSlot(2) == null) {
                     return true;
                 } else {
