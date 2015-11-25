@@ -27,10 +27,7 @@ package com.mcgoodtime.gti.common.init;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.entity.EntityPackagedSalt;
-import com.mcgoodtime.gti.common.items.ItemGti;
-import com.mcgoodtime.gti.common.items.ItemGtiFood;
-import com.mcgoodtime.gti.common.items.ItemGtiRecord;
-import com.mcgoodtime.gti.common.items.ItemMultiDamage;
+import com.mcgoodtime.gti.common.items.*;
 import com.mcgoodtime.gti.common.items.tools.GtiToolMaterial;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
 import com.mcgoodtime.gti.common.items.tools.ToolGti;
@@ -118,99 +115,9 @@ public class GtiItems implements IFuelHandler {
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
 		salt = new ItemGtiFood("Salt", 0, 10F, true);
 
-
 		//MultiMetaItem registry
-		ItemMultiDamage itemOre = new ItemMultiDamage("ItemOre") {
-			@Override
-			public String getInternalName(int meta) {
-				switch (meta) {
-					case 0: return "IngotIridium";
-					case 1: return "DiamondPlate";
-					case 2: return "DenseDiamondPlate";
-					case 3: return "CrushedIridium";
-					case 4: return "CleanedCrushedIridium";
-					case 5: return "DustIridium";
-					case 6: return "SmallDustIridium";
-					default: return null;
-				}
-			}
-		};
-		ingotIridium = new ItemStack(itemOre, 1, 0);
-		diamondPlate = new ItemStack(itemOre, 1, 1);
-		denseDiamondPlate = new ItemStack(itemOre, 1, 2);
-		crushedIridium = new ItemStack(itemOre, 1, 3);
-		cleanedCrushedIridium = new ItemStack(itemOre, 1, 4);
-		dustIridium = new ItemStack(itemOre, 1, 5);
-		smallDustIridium = new ItemStack(itemOre, 1, 6);
-
-		ItemMultiDamage itemDisc = new ItemMultiDamage("ItemMisc") {
-			@Override
-			public String getInternalName(int meta) {
-				switch (meta) {
-					case 0: return "Roller";
-					case 1: return "HeatInsulationMaterial";
-					case 2: return "SmallCompressedWaterHyacinth";
-					case 3: return "AirBrakeUnit";
-					case 4: return "CarbonTube";
-					case 5: return "RedstoneModule";
-					case 6: return "LazuliModule";
-					case 7: return "ObsidianPlateGravityField";
-					case 8: return "ElectronicCircuitControl";
-					case 9: return "ElectronicCircuitCore";
-					case 10: return "PulseElectronicCircuitControl";
-					case 11: return "PulseElectronicCircuitCore";
-					case 12: return "CyclotronParticleAccelerator";
-					case 13: return "CalculateUnit";
-					case 14: return "CalculateChunk";
-					case 15: return "CalculateArray";
-					case 16: return "FloatPointCalculationsRegion";
-					case 17: return "ParallelSpaceConverter";
-					case 18: return "ObsidianMechanicalFrame";
-					case 19: return "ObsidianMechanicalCasing";
-					case 20: return "CarbonCrystal";
-					case 21: return "EnderCalculationCrystal";
-					case 22: return "MillTeeth";
-					case 23: return "MillWheel";
-					case 24: return "HeatInsulationPlate";
-					case 25: return "UUMatterCore";
-					case 26: return "BambooCharcoal";
-					case 27: return "RigidPaper";
-					case 28: return "RigidPaperPack";
-					case 29: return "batten";
-					default: return null;
-				}
-			}
-		};
-		roller = new ItemStack(itemDisc, 1, 0);
-		heatInsulationMaterial = new ItemStack(itemDisc, 1, 1);
-		smallCompressedWaterHyacinth = new ItemStack(itemDisc, 1, 2);
-		airBrakeUnit = new ItemStack(itemDisc, 1, 3);
-		carbonTube = new ItemStack(itemDisc, 1, 4);
-		redstoneModule = new ItemStack(itemDisc, 1, 5);
-		lazuliModule = new ItemStack(itemDisc, 1, 6);
-		obsidianPlateGravityField = new ItemStack(itemDisc, 1, 7);
-		electronicCircuitControl = new ItemStack(itemDisc, 1, 8);
-		electronicCircuitCore = new ItemStack(itemDisc, 1, 9);
-		pulseElectronicCircuitControl = new ItemStack(itemDisc, 1, 10);
-		pulseElectronicCircuitCore = new ItemStack(itemDisc, 1, 11);
-		cyclotronParticleAccelerator = new ItemStack(itemDisc, 1, 12);
-		calculateUnit = new ItemStack(itemDisc, 1, 13);
-		calculateChunk = new ItemStack(itemDisc, 1, 14);
-		calculateArray = new ItemStack(itemDisc, 1, 15);
-		floatPointCalculationsRegion = new ItemStack(itemDisc, 1, 16);
-		parallelSpaceConverter = new ItemStack(itemDisc, 1, 17);
-		obsidianMechanicalFrame = new ItemStack(itemDisc, 1, 18);
-		obsidianMechanicalCasing = new ItemStack(itemDisc, 1, 19);
-		carbonCrystal = new ItemStack(itemDisc, 1,20);
-		enderCalculationCrystal = new ItemStack(itemDisc, 1, 21);
-		millTeeth = new ItemStack(itemDisc, 1, 22);
-		millWheel = new ItemStack(itemDisc, 1, 23);
-		heatInsulationPlate = new ItemStack(itemDisc, 1, 24);
-		uuMatterCore = new ItemStack(itemDisc, 1, 25);
-		bambooCharcoal = new ItemStack(itemDisc, 1, 26);
-		rigidPaper = new ItemStack(itemDisc, 1, 27);
-		rigidPaperPack = new ItemStack(itemDisc, 1, 28);
-		batten = new ItemStack(itemDisc,1,29);
+		new ItemOre();
+		new ItemMisc();
 
         // special registry TODO: Better registry system
  

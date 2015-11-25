@@ -46,4 +46,10 @@ public interface IMultiMetaBlock {
      * @return unlocalized name
      */
     String getBlockName(int  meta);
+
+    int getMaxMeta();
+
+    String getInternalName(int meta);
+
+    int damageDropped(int meta);
 }

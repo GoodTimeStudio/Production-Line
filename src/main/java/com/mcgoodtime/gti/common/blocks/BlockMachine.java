@@ -37,12 +37,10 @@ import ic2.core.block.BlockTextureStitched;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -71,7 +69,7 @@ public class BlockMachine extends BlockContainerGti implements IMultiMetaBlock {
     public BlockMachine() {
         super(Material.iron, "BlockMachine");
         this.setHardness(2.0F);
-        GameRegistry.registerBlock(this, ItemBlockGti.class, this.blockName);
+        GameRegistry.registerBlock(this, ItemBlockGti.class, this.internalName);
         for (int i = 0; i < this.getMaxMeta(); i++) {
             GameRegistry.registerTileEntity(this.getTileEntityClass(i), internalNameList.get(i));
         }
@@ -193,6 +191,7 @@ public class BlockMachine extends BlockContainerGti implements IMultiMetaBlock {
         return IC2Items.getItem("machine").getItem();
     }
 
+    @Override
     public int getMaxMeta() {
         return internalNameList.size();
     }
@@ -214,24 +213,8 @@ public class BlockMachine extends BlockContainerGti implements IMultiMetaBlock {
         return "tile." + MOD_ID + ".block." + this.getInternalName(meta);
     }
 
+    @Override
     public String getInternalName(int meta) {
         return internalNameList.get(meta);
-    }
-
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
-        for(int meta = 0; meta < this.getMaxMeta(); ++meta) {
-            ItemStack stack = new ItemStack(this, 1, meta);
-            list.add(stack);
-        }
-    }
-
-    @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
     }
 }

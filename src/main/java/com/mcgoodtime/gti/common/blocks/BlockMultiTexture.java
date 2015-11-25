@@ -73,7 +73,7 @@ public class BlockMultiTexture extends BlockGti implements ITileEntityProvider {
         for(int burn = 0; burn < 2; ++burn) {
             for(int side = 0; side < 6; ++side) {
                 int subIndex = burn * 6 + side;
-                String name = Gti.RESOURCE_DOMAIN + ":" + "block" + blockName + ":" + subIndex;
+                String name = Gti.RESOURCE_DOMAIN + ":" + "block" + internalName + ":" + subIndex;
                 BlockTextureStitched texture = new BlockTextureStitched(name, subIndex);
                 this.textures[subIndex] = texture;
                 ((TextureMap)iir).setTextureEntry(name, texture);

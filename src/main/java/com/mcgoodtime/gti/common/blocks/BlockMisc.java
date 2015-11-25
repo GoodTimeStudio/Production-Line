@@ -108,24 +108,6 @@ public class BlockMisc extends BlockGti implements IMultiMetaBlock {
     }
 
     /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
-        for(int meta = 0; meta < this.getMaxMeta(); ++meta) {
-            ItemStack stack = new ItemStack(this, 1, meta);
-            list.add(stack);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
-    }
-
-    /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
     @Override

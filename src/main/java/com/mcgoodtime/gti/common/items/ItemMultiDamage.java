@@ -20,6 +20,7 @@ import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
  */
 public abstract class ItemMultiDamage extends ItemGti {
 
+    protected List<String> internalNameList;
     protected IIcon[] icons;
 
     public ItemMultiDamage(String name) {
@@ -28,6 +29,7 @@ public abstract class ItemMultiDamage extends ItemGti {
         this.setMaxDamage(maxDamage);
         this.setHasSubtypes(true);
         this.icons = new IIcon[maxDamage];
+        this.internalNameList = this.getInternalNameList();
     }
 
     @Override
@@ -71,7 +73,11 @@ public abstract class ItemMultiDamage extends ItemGti {
         return "item." + MOD_ID + "." + this.getInternalName(itemStack.getItemDamage());
     }
 
-    public abstract String getInternalName(int meta);
+    public String getInternalName(int meta) {
+        return this.internalNameList.get(meta);
+    }
+
+    protected abstract List<String> getInternalNameList();
 
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)

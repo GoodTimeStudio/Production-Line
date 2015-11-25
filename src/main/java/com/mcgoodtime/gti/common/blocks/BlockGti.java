@@ -29,14 +29,16 @@ import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
 
 import com.mcgoodtime.gti.common.core.GtiConfig;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
+
+import java.util.List;
 
 /**
  * Created by suhao on 2015-6-10-0010.
@@ -44,7 +46,7 @@ import org.apache.logging.log4j.Level;
  * @author suhao
  */
 public class BlockGti extends Block {
-    public String blockName;
+    public String internalName;
 
     public BlockGti(Material material, String name, float hardness, float resistance,
                        String harvestLevelToolClass, int harvestLevel) {
@@ -60,25 +62,29 @@ public class BlockGti extends Block {
         this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
         this.setCreativeTab(creativeTabGti);
         GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
-        this.blockName = name;
+        this.internalName = name;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+        if (this instanceof IMultiMetaBlock) {
+            return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
+        }
+        return super.getPickBlock(target, world, x, y, z);
     }
 
     /**
-     * Called when the block is placed in the world.
+     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase livingBase, ItemStack itemStack) {
-        super.onBlockPlacedBy(world, x, y, z, livingBase, itemStack);/*
-        if (itemStack.getItemDamage() > 0) {
-            world.setBlockMetadataWithNotify(x, y, z, itemStack.getItemDamage(), 2);
-        }*/
-    }
-
-    /**
-     * Gets an item for the block being called on. Args: world, x, y, z
-     */
-    @Override
-    public Item getItem(World world, int x, int y, int z) {
-        return super.getItem(world, x, y, z);
+    @SuppressWarnings("unchecked")
+    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
+        if (this instanceof IMultiMetaBlock) {
+            for(int meta = 0; meta < ((IMultiMetaBlock) this).getMaxMeta(); ++meta) {
+                ItemStack stack = new ItemStack(this, 1, meta);
+                list.add(stack);
+            }
+        }
     }
 }
