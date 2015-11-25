@@ -41,7 +41,6 @@ import net.minecraft.item.ItemStack;
  * @author liach
  */
 public class GtiBlocks {
-    public static  Block dryLog;
     public static ItemStack dehydratedWaterHyacinthblock;
     public static ItemStack compressedWaterHyacinth;
     public static ItemStack carbonizeFurnace;
@@ -50,6 +49,7 @@ public class GtiBlocks {
     public static BlockGti fluidKineticGenerator;
     public static BlockGti oreIridium;
     public static BlockGti airBrakeCasing;
+    public static BlockGti dryLog;
 
     public static Block waterHyacinth;
     public static BlockContainer evsu;
@@ -72,12 +72,13 @@ public class GtiBlocks {
         registerBlock(oreIridium);
         registerBlock(fluidKineticGenerator);
         registerBlock(airBrakeCasing);
+        registerBlock(dryLog);
 
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
         GameRegistry.registerBlock(evsu, "EVSU");
     }
 
     private static void registerBlock(BlockGti blockGti) {
-        GameRegistry.registerBlock(blockGti, blockGti.blockName);
+        GameRegistry.registerBlock(blockGti, blockGti.internalName);
     }
 }
