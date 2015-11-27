@@ -20,7 +20,7 @@ import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
  */
 public abstract class ItemMultiDamage extends ItemGti {
 
-    protected List<String> internalNameList;
+    protected List<String> internalNameList = this.getInternalNameList();
     protected IIcon[] icons;
 
     public ItemMultiDamage(String name) {
@@ -29,7 +29,6 @@ public abstract class ItemMultiDamage extends ItemGti {
         this.setMaxDamage(maxDamage);
         this.setHasSubtypes(true);
         this.icons = new IIcon[maxDamage];
-        this.internalNameList = this.getInternalNameList();
     }
 
     @Override
@@ -52,16 +51,7 @@ public abstract class ItemMultiDamage extends ItemGti {
      */
     @Override
     public int getMaxDamage() {
-        if (super.getMaxDamage() == 0) {
-            int meta = 0;
-            while (this.getInternalName(meta) != null) {
-                meta++;
-            }
-            return meta;
-        }
-        else {
-            return super.getMaxDamage();
-        }
+        return this.internalNameList.size();
     }
 
     /**
