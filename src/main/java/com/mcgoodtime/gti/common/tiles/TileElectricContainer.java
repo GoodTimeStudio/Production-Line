@@ -24,12 +24,11 @@
  */
 package com.mcgoodtime.gti.common.tiles;
 
+import com.mcgoodtime.gti.common.tiles.tileslot.TileSlot;
+import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotDischarge;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySink;
-import ic2.api.info.Info;
-import ic2.api.item.ElectricItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
@@ -49,13 +48,11 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
     public final int maxEnergy;
     /** Determine the tier of this energy sink */
     public int tier;
-    public final int dischargeSlotIndex;
 
-    public TileElectricContainer (int energyPerTick, int maxEnergy, int sinkTier, int dischargeSlotIndex) {
+    public TileElectricContainer (int energyPerTick, int maxEnergy, int sinkTier) {
         this.energyPerTick = energyPerTick;
         this.maxEnergy = maxEnergy;
         this.tier = sinkTier;
-        this.dischargeSlotIndex = dischargeSlotIndex;
     }
 
     @Override
@@ -63,36 +60,14 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
         super.updateEntity();
 
         if((double)this.maxEnergy - this.energy >= 1.0D) {
-            double amount = this.discharge(dischargeSlotIndex, (double) this.maxEnergy - this.energy, false);
-            if(amount > 0.0D) {
-                this.energy += amount;
-                this.markDirty();
-            }
-        }
-    }
-
-    public double discharge(int index, double amount, boolean ignoreLimit) {
-        if(amount <= 0.0D) {
-            throw new IllegalArgumentException("Amount must be > 0.");
-        } else {
-            ItemStack stack = this.getStackInSlot(index);
-            if(stack == null) {
-                return 0.0D;
-            } else {
-                double realAmount = ElectricItem.manager.discharge(stack, amount, this.tier, ignoreLimit, true, false);
-                if(realAmount <= 0.0D) {
-                    realAmount = Info.itemEnergy.getEnergyValue(stack);
-                    if(realAmount <= 0.0D) {
-                        return 0.0D;
-                    }
-
-                    --stack.stackSize;
-                    if(stack.stackSize <= 0) {
-                        this.setInventorySlotContents(index, null);
+            for (TileSlot tileSlot : this.tileSlots) {
+                if (tileSlot instanceof TileSlotDischarge) {
+                    double amount = ((TileSlotDischarge) tileSlot).discharge((double) this.maxEnergy - this.energy, false);
+                    if(amount > 0.0D) {
+                        this.energy += amount;
+                        this.markDirty();
                     }
                 }
-
-                return realAmount;
             }
         }
     }
