@@ -41,7 +41,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public abstract class TileElectricContainer extends TileContainer implements IEnergySink {
 
-    public final int energyPerTick;
+    public final int energyTick;
     /** The number of remaining battery */
     public double energy;
     /** The number of that can storage battery */
@@ -50,7 +50,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
     public int tier;
 
     public TileElectricContainer (int energyPerTick, int maxEnergy, int sinkTier) {
-        this.energyPerTick = energyPerTick;
+        this.energyTick = energyPerTick;
         this.maxEnergy = maxEnergy;
         this.tier = sinkTier;
     }

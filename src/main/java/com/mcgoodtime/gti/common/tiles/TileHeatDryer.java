@@ -67,10 +67,10 @@ public class TileHeatDryer extends TileElectricContainer implements IUpgradableB
         if (!this.worldObj.isRemote) {
             boolean needUpdate = false;
 
-            if (this.canProcess() && this.energy >= this.energyPerTick) {
+            if (this.canProcess() && this.energy >= this.energyTick) {
                 this.setActive(true);
-                this.energy -= this.energyPerTick;
-                this.progress += this.energyPerTick;
+                this.energy -= this.energyTick;
+                this.progress += this.energyTick;
 
                 if (this.progress >= this.requireEnergy) {
                     this.progress = 0;
