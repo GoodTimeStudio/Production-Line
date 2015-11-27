@@ -27,12 +27,9 @@ package com.mcgoodtime.gti.common.init;
 import com.mcgoodtime.gti.common.blocks.*;
 import com.mcgoodtime.gti.common.blocks.generator.BlockFluidKineticGenerator;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-
 import net.minecraft.item.ItemStack;
 
 /**
@@ -45,6 +42,7 @@ public class GtiBlocks {
     public static ItemStack compressedWaterHyacinth;
     public static ItemStack carbonizeFurnace;
     public static ItemStack heatDryer;
+    public static ItemStack evsu;
 
     public static BlockGti fluidKineticGenerator;
     public static BlockGti oreIridium;
@@ -52,8 +50,6 @@ public class GtiBlocks {
     public static BlockGti dryLog;
 
     public static Block waterHyacinth;
-    public static BlockContainer evsu;
-
 
     public static void init() {
         dryLog = new BlockGti(Material.rock, "dryLog",1.5f , 0, "axe", 0);
@@ -62,10 +58,10 @@ public class GtiBlocks {
         airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
         new BlockMisc();
         new BlockMachine();
+        new BlockEUStorage();
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
-        evsu = new BlockEVSU();
 
         //----------------------------
         //------Block Registry--------
@@ -75,7 +71,6 @@ public class GtiBlocks {
         registerBlock(dryLog);
 
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
-        GameRegistry.registerBlock(evsu, "EVSU");
     }
 
     private static void registerBlock(BlockGti blockGti) {
