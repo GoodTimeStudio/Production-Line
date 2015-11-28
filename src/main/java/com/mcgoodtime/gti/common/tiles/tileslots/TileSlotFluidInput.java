@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.tiles.tileslot;
+package com.mcgoodtime.gti.common.tiles.tileslots;
 
 import com.mcgoodtime.gti.common.recipes.IProcessable;
 import com.mcgoodtime.gti.common.tiles.TileContainer;

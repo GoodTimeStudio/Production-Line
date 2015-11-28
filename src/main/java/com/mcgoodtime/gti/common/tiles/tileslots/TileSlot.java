@@ -22,33 +22,61 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.tiles.tileslot;
+package com.mcgoodtime.gti.common.tiles.tileslots;
 
 import com.mcgoodtime.gti.common.tiles.TileContainer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * Created by BestOwl on 2015.11.12.0012.
+ * Created by BestOwl on 2015.11.9.0009.
  *
  * @author BestOwl
  */
-public class TileSlotOutput extends TileSlot {
+public class TileSlot {
 
-    public TileSlotOutput(TileContainer tile) {
-        this(tile, SlotMode.OUTPUT);
+    public final SlotMode slotMode;
+
+    public final TileContainer tile;
+    protected ItemStack item;
+
+    public TileSlot(TileContainer tile, SlotMode mode) {
+        this.tile = tile;
+        this.slotMode = mode;
     }
 
-    public TileSlotOutput(TileContainer tile, SlotMode mode) {
-        super(tile, mode);
+    public void putStack(ItemStack itemStack) {
+        this.item = itemStack;
+    }
+
+    public ItemStack getStack() {
+        return this.item;
+    }
+
+    public void writeToNBT(NBTTagCompound nbt) {
+        NBTTagCompound nbtTagCompound = new NBTTagCompound();
+        if (this.item != null) {
+            this.item.writeToNBT(nbtTagCompound);
+        }
+        nbt.setTag("TileSlot", nbtTagCompound);
+    }
+
+    public void readFromNBT(NBTTagCompound nbt) {
+        this.item = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("TileSlot"));
     }
 
     /**
      * Whether the current item can be inputted.
-     *
      * @param itemStack Input item.
      */
-    @Override
     public boolean canInput(ItemStack itemStack) {
-        return false;
+        return true;
+    }
+
+    public enum SlotMode {
+        INPUT,
+        OUTPUT,
+        INOUT,
+        NULL
     }
 }

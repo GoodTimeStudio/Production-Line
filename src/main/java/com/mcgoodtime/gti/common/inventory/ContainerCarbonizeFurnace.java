@@ -28,7 +28,7 @@ import com.mcgoodtime.gti.common.inventory.slot.SlotInput;
 import com.mcgoodtime.gti.common.inventory.slot.SlotOutput;
 import com.mcgoodtime.gti.common.inventory.slot.SlotUpgrade;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
-import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotInput;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotInput;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.core.slot.SlotDischarge;

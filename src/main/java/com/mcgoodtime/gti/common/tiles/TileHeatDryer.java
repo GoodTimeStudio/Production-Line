@@ -25,7 +25,7 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import com.mcgoodtime.gti.common.recipes.HeatDryerRecipes;
-import com.mcgoodtime.gti.common.tiles.tileslot.*;
+import com.mcgoodtime.gti.common.tiles.tileslots.*;
 import ic2.api.tile.IWrenchable;
 import ic2.core.Ic2Items;
 import ic2.core.block.IUpgradableBlock;

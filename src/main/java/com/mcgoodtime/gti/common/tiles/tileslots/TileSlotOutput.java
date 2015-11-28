@@ -22,13 +22,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.tiles.tileslot;
+package com.mcgoodtime.gti.common.tiles.tileslots;
 
-import com.mcgoodtime.gti.common.tiles.TileElectricContainer;
-import ic2.api.info.Info;
-import ic2.api.item.ElectricItem;
-import ic2.core.item.ItemBatterySU;
-import net.minecraft.init.Items;
+import com.mcgoodtime.gti.common.tiles.TileContainer;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -36,9 +32,13 @@ import net.minecraft.item.ItemStack;
  *
  * @author BestOwl
  */
-public class TileSlotDischarge extends TileSlot {
+public class TileSlotOutput extends TileSlot {
 
-    public TileSlotDischarge(TileElectricContainer tile, SlotMode mode) {
+    public TileSlotOutput(TileContainer tile) {
+        this(tile, SlotMode.OUTPUT);
+    }
+
+    public TileSlotOutput(TileContainer tile, SlotMode mode) {
         super(tile, mode);
     }
 
@@ -47,35 +47,8 @@ public class TileSlotDischarge extends TileSlot {
      *
      * @param itemStack Input item.
      */
-    @SuppressWarnings("NumericOverflow")
     @Override
     public boolean canInput(ItemStack itemStack) {
-        return itemStack != null && (!(itemStack.getItem() != Items.redstone && !(itemStack.getItem() instanceof ItemBatterySU)) || ElectricItem.manager.discharge(itemStack, 1.0D / 0.0, 1, true, true, true) > 0.0D);
-    }
-
-    public double discharge(double amount, boolean ignoreLimit) {
-        if(amount <= 0.0D) {
-            throw new IllegalArgumentException("Amount must be > 0.");
-        } else {
-            ItemStack stack = this.getStack();
-            if(stack == null) {
-                return 0.0D;
-            } else {
-                double realAmount = ElectricItem.manager.discharge(stack, amount, ((TileElectricContainer) this.tile).tier, ignoreLimit, true, false);
-                if(realAmount <= 0.0D) {
-                    realAmount = Info.itemEnergy.getEnergyValue(stack);
-                    if(realAmount <= 0.0D) {
-                        return 0.0D;
-                    }
-
-                    --stack.stackSize;
-                    if(stack.stackSize <= 0) {
-                        this.putStack(null);
-                    }
-                }
-
-                return realAmount;
-            }
-        }
+        return false;
     }
 }

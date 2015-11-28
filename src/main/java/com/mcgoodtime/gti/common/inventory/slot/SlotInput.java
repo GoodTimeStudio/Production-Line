@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.gti.common.inventory.slot;
 
-import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotInput;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotInput;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;

@@ -24,8 +24,8 @@
  */
 package com.mcgoodtime.gti.common.tiles;
 
-import com.mcgoodtime.gti.common.tiles.tileslot.TileSlot;
-import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotDischarge;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlot;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotDischarge;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySink;

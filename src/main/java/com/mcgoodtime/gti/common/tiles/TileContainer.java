@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.gti.common.tiles;
 
-import com.mcgoodtime.gti.common.tiles.tileslot.TileSlot;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;

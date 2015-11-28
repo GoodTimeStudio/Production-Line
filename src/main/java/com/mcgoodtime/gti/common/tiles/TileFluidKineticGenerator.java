@@ -26,9 +26,9 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import com.mcgoodtime.gti.common.recipes.FluidKineticGeneratorRecipes;
-import com.mcgoodtime.gti.common.tiles.tileslot.TileSlot;
-import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotFluidInput;
-import com.mcgoodtime.gti.common.tiles.tileslot.TileSlotOutput;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlot;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotFluidInput;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotOutput;
 import ic2.api.energy.tile.IKineticSource;
 import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
