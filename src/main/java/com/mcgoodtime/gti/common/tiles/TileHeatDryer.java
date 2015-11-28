@@ -47,7 +47,7 @@ public class TileHeatDryer extends TileElectricContainer implements IUpgradableB
     public int progress;
 
     public TileHeatDryer() {
-        super(3, 300, 1, 1);
+        super(3, 300, 1);
         this.tileSlots.add(new TileSlotInput(this, HeatDryerRecipes.instance));
         this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
         this.tileSlots.add(new TileSlotOutput(this));

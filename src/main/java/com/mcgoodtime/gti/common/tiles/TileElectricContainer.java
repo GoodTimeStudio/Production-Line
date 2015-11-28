@@ -49,8 +49,8 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
     /** Determine the tier of this energy sink */
     public int tier;
 
-    public TileElectricContainer (int energyPerTick, int maxEnergy, int sinkTier) {
-        this.energyTick = energyPerTick;
+    public TileElectricContainer (int energyTick, int maxEnergy, int sinkTier) {
+        this.energyTick = energyTick;
         this.maxEnergy = maxEnergy;
         this.tier = sinkTier;
     }

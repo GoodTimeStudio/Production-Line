@@ -53,7 +53,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     public int progress;
 
     public TileCarbonizeFurnace() {
-        super(3, 300, 1, 1);
+        super(3, 300, 1);
         this.tileSlots.add(new TileSlotInput(this, CarbonizeFurnaceRecipes.instance));
         this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
         this.tileSlots.add(new TileSlotOutput(this, TileSlot.SlotMode.OUTPUT));
