@@ -43,6 +43,8 @@ public class GtiBlocks {
     public static ItemStack carbonizeFurnace;
     public static ItemStack heatDryer;
     public static ItemStack evsu;
+    public static ItemStack cseu;
+    public static ItemStack parallelSpaceSU;
 
     public static BlockGti fluidKineticGenerator;
     public static BlockGti oreIridium;

@@ -28,12 +28,9 @@ import com.mcgoodtime.gti.common.tiles.TileContainer;
 import ic2.core.util.StackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import java.util.*;
 
 /**
  * Created by BestOwl on 2015.10.31.0031.
@@ -44,20 +41,23 @@ import java.util.*;
 public abstract class ContainerGti<T extends IInventory> extends Container {
 
     public T tile;
-    private Map<String, Integer> saveMap = new HashMap<String, Integer>();
-    protected Map<String, Integer> lastMap = new HashMap<String, Integer>();
 
-    public ContainerGti(EntityPlayer player, T tile) {
+    public ContainerGti(EntityPlayer player, T tile, int ySide) {
         this.tile = tile;
+        int yOffset = ySide - 166;
         int i;
         for (i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + yOffset));
             }
         }
         for (i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
+            this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142 + yOffset));
         }
+    }
+
+    public ContainerGti(EntityPlayer player, T tile) {
+        this(player, tile, 166);
     }
 
     @SuppressWarnings("unchecked")

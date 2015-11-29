@@ -1,7 +1,7 @@
 package com.mcgoodtime.gti.common.network;
 
 import com.mcgoodtime.gti.GtiUtil;
-import com.mcgoodtime.gti.common.tiles.TileEUStorage;
+import com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -10,7 +10,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 
-import static com.mcgoodtime.gti.common.tiles.TileEUStorage.RedstoneMode;
+import static com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage.RedstoneMode;
 
 /**
  * Created by BestOwl on 2015.11.28.0028.

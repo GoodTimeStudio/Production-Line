@@ -31,7 +31,7 @@ public class TileSlotCharge extends TileSlot {
             throw new IllegalArgumentException("Amount must be > 0.");
         } else {
             ItemStack itemStack = this.getStack();
-            return itemStack == null?0.0D:ElectricItem.manager.charge(itemStack, amount, ((TileElectricContainer) this.tile).tier, false, false);
+            return itemStack == null ? 0.0D : ElectricItem.manager.charge(itemStack, amount, ((TileElectricContainer) this.tile).tier, false, false);
         }
     }
 }

@@ -401,6 +401,22 @@ public class GtiRecipes {
                 'E', GtiItems.redstoneModule,
                 'F', IC2Items.getItem("machine")
         );
+        GameRegistry.addRecipe(
+                GtiBlocks.evsu,
+                "ABA",
+                "ACD",
+                "ABA",
+                'A', IC2Items.getItem("evTransformer"),
+                'B', IC2Items.getItem("lapotronCrystal"),
+                'C', IC2Items.getItem("mfsUnit"),
+                'D', GtiItems.pulseElectronicCircuitControl
+        );/*
+        GameRegistry.addRecipe(
+                GtiBlocks.cseu,
+                "ABA",
+                "CCC",
+                "CCC",
+        );*/
 
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, GtiItems.ingotIridium, XP);

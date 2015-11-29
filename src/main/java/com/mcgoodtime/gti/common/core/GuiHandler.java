@@ -26,17 +26,17 @@
 package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.client.gui.GuiCarbonizeFurnace;
-import com.mcgoodtime.gti.client.gui.GuiEVSU;
+import com.mcgoodtime.gti.client.gui.GuiEUStorage;
 import com.mcgoodtime.gti.client.gui.GuiFluidKineticGenerator;
 import com.mcgoodtime.gti.client.gui.GuiHeatDryer;
 import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
-import com.mcgoodtime.gti.common.inventory.ContainerEVSU;
+import com.mcgoodtime.gti.common.inventory.ContainerEUStorage;
 import com.mcgoodtime.gti.common.inventory.ContainerFluidKineticGenerator;
 import com.mcgoodtime.gti.common.inventory.ContainerHeatDryer;
-import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;
-import com.mcgoodtime.gti.common.tiles.TileEVSU;
-import com.mcgoodtime.gti.common.tiles.TileFluidKineticGenerator;
-import com.mcgoodtime.gti.common.tiles.TileHeatDryer;
+import com.mcgoodtime.gti.common.tiles.*;
+import com.mcgoodtime.gti.common.tiles.eustorage.TileCSEU;
+import com.mcgoodtime.gti.common.tiles.eustorage.TileEVSU;
+import com.mcgoodtime.gti.common.tiles.eustorage.TileParallelSpaceSU;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -62,42 +62,42 @@ public class GuiHandler implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if (id == EnumGui.FluidKineticGenerator.ordinal()) {
-            return new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(x, y, z));
+        EnumGui gui = EnumGui.values()[id];
+        switch (gui) {
+            case FluidKineticGenerator: return new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(x, y, z));
+            case CarbonizeFurnace: return new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(x, y, z));
+            case EVSU: return new ContainerEUStorage<TileEVSU>(player, (TileEVSU)world.getTileEntity(x, y, z));
+            case HeatDryer: return new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z));
+            case CSEU: return new ContainerEUStorage<TileCSEU>(player, (TileCSEU) world.getTileEntity(x, y, z));
+            case ParallelSpaceSU: return new ContainerEUStorage<TileParallelSpaceSU>(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z));
+            default: return null;
         }
-        if (id == EnumGui.CarbonizeFurnace.ordinal()) {
-            return new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(x, y, z));
-        }
-        if (id == EnumGui.EVSU.ordinal()) {
-            return new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z));
-        }
-        if (id == EnumGui.HeatDryer.ordinal()) {
-            return new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z));
-        }
-        return null;
     }
 
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if (id == EnumGui.FluidKineticGenerator.ordinal()) {
-            return new GuiFluidKineticGenerator(new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(x, y, z)));
+        EnumGui gui = EnumGui.values()[id];
+        switch (gui) {
+            case FluidKineticGenerator:
+                return new GuiFluidKineticGenerator(new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(x, y, z)));
+            case CarbonizeFurnace:
+                return new GuiCarbonizeFurnace(new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(x, y, z)));
+            case EVSU:
+                return new GuiEUStorage(new ContainerEUStorage<TileEVSU>(player, (TileEVSU) world.getTileEntity(x, y, z)));
+            case HeatDryer: return new GuiHeatDryer(new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z)));
+            case CSEU: return new GuiEUStorage(new ContainerEUStorage<TileCSEU>(player, (TileCSEU) world.getTileEntity(x, y, z)));
+            case ParallelSpaceSU:
+                return new GuiEUStorage(new ContainerEUStorage<TileParallelSpaceSU>(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z)));
+            default: return null;
         }
-        if (id == EnumGui.CarbonizeFurnace.ordinal()) {
-            return new GuiCarbonizeFurnace(new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(x, y, z)));
-        }
-        if (id == EnumGui.EVSU.ordinal()) {
-            return new GuiEVSU(new ContainerEVSU(player, (TileEVSU)world.getTileEntity(x, y, z)));
-        }
-        if (id == EnumGui.HeatDryer.ordinal()) {
-            return new GuiHeatDryer(new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z)));
-        }
-        return null;
     }
 
     public enum EnumGui {
         FluidKineticGenerator,
         CarbonizeFurnace,
         EVSU,
-        HeatDryer
+        HeatDryer,
+        CSEU,
+        ParallelSpaceSU
     }
 }

@@ -22,20 +22,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.tiles;
-
-import ic2.core.block.wiring.TileEntityElectricBlock;
+package com.mcgoodtime.gti.common.tiles.eustorage;
 
 /*
  * Created by suhao on 2015-6-3-0003.
  */
-public class TileEVSU extends TileEntityElectricBlock {
-
-    public static final int MAX_OUT = 8192;
-    public static final int MAX_STORAGE = 100000000;
+public class TileEVSU extends TileEUStorage {
 
     public TileEVSU() {
-        super(5, MAX_OUT, MAX_STORAGE);
+        super(5, (int) 1E8);
     }
 
     @Override

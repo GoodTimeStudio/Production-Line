@@ -25,7 +25,7 @@
 package com.mcgoodtime.gti.common.network;
 
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.tiles.TileEUStorage;
+import com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage;
 import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
