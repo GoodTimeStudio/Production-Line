@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.network;
 
 import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.tiles.TileEUStorage;
 import com.mcgoodtime.gti.common.tiles.TileGti;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -43,6 +44,7 @@ public class GtiNetwork {
     static {
         network.registerMessage(MessageBlockDisplayState.Handler.class, MessageBlockDisplayState.class, 0, Side.CLIENT);
         network.registerMessage(MessageUpdateTileEntity.Handler.class, MessageUpdateTileEntity.class, 1, Side.CLIENT);
+        network.registerMessage(MessageEUStorage.Handler.class, MessageEUStorage.class, 2, Side.SERVER);
     }
 
     public static void updateBlockDisplayState(TileGti tile) {
@@ -53,6 +55,10 @@ public class GtiNetwork {
 
     public static void updateTileEntityFiledToPlayer(EntityPlayer player, int x, int y, int z, String fieldName, Object object) {
         network.sendTo(new MessageUpdateTileEntity(fieldName, object, x, y, z), (EntityPlayerMP) player);
+    }
+
+    public static void updateTileEUStorage(TileEUStorage tile) {
+        network.sendToServer(new MessageEUStorage(tile));
     }
 
     public static SimpleNetworkWrapper getNetwork() {
