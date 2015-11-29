@@ -43,8 +43,9 @@ configurations {
 dependencies {
     shade 'org.spongepowered:mixin:0.4.5-SNAPSHOT'
     compile 'net.industrial-craft:industrialcraft-2:2.2.748-experimental:dev' //adds newest ic2 to the dev env
-    compile 'codechicken:NotEnoughItems:1.7.10-1.0.3.74:dev'
+    compile 'codechicken:NotEnoughItems:1.7.10-1.0.4.79:dev'
     compile 'codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev'
+    compile fileTree(dir:'lib',include:"*.jar")
     checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
 }
 
