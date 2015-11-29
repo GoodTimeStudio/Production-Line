@@ -53,8 +53,8 @@ public class GuiParallelSpaceSU extends GuiGti<ContainerParallelSpaceSU> {
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
         super.drawGuiContainerBackgroundLayer(f, x, y);
         if(this.container.tile.energy > 0.0D) {
-            int i = GtiUtil.getGuiScaled(24, (float) this.container.tile.energy, this.container.tile.maxEnergy);
-            this.drawTexturedModalRect(this.x + 79, this.y + 34, 176, 14, i + 1, 16);
+            int i = GtiUtil.getGuiScaled(58, (float) this.container.tile.energy, this.container.tile.maxEnergy);
+            this.drawTexturedModalRect(this.x + 60, this.y + 34, 176, 15, i + 1, 13);
         }
     }
 
