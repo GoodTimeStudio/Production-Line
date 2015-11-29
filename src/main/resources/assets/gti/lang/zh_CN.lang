@@ -13,7 +13,7 @@ gui.gti.CarbonizeFurnace=碳化燃烧炉
 gui.gti.HeatDryer=干燥机
 gui.gti.EVSU=EVSU
 gui.gti.CSEU=CSEU
-gui.gti.ParallelSpaceSU=ParallelSpace SU
+gui.gti.ParallelSpaceSU=平行空间储电盒
 
 [BLOCKS]
 tile.gti.block.CompressedWaterHyacinth.name=压缩水葫芦
@@ -26,7 +26,7 @@ tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 tile.gti.block.EVSU.name=EVSU
 tile.gti.block.AirBrakeCasing.name=气闸外壳
 tile.gti.block.CSEU.name=CSEU
-tile.gti.block.ParallelSpaceSU.name=ParallelSpace SU
+tile.gti.block.ParallelSpaceSU.name=平行空间储电盒
 
 [ITEMS]
 //crushed
