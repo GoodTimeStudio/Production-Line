@@ -43,7 +43,6 @@ public class GtiNetwork {
 
     static {
         network.registerMessage(MessageBlockDisplayState.Handler.class, MessageBlockDisplayState.class, 0, Side.CLIENT);
-        network.registerMessage(MessageUpdateTileEntity.Handler.class, MessageUpdateTileEntity.class, 1, Side.CLIENT);
         network.registerMessage(MessageEUStorage.Handler.class, MessageEUStorage.class, 2, Side.SERVER);
     }
 
@@ -51,10 +50,6 @@ public class GtiNetwork {
         network.sendToAllAround(new MessageBlockDisplayState(tile.xCoord, tile.yCoord, tile.zCoord, tile.active, tile.facing),
                 new NetworkRegistry.TargetPoint(tile.getWorldObj().getWorldInfo().getVanillaDimension(),
                 tile.xCoord, tile.yCoord, tile.zCoord, 64));
-    }
-
-    public static void updateTileEntityFiledToPlayer(EntityPlayer player, int x, int y, int z, String fieldName, Object object) {
-        network.sendTo(new MessageUpdateTileEntity(fieldName, object, x, y, z), (EntityPlayerMP) player);
     }
 
     public static void updateTileEUStorage(TileEUStorage tile) {
