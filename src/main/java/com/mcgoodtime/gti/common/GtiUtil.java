@@ -1,4 +1,4 @@
-package com.mcgoodtime.gti;
+package com.mcgoodtime.gti.common;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.gti.client.gui;
 
-import com.mcgoodtime.gti.GtiUtil;
+import com.mcgoodtime.gti.common.GtiUtil;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
 import com.mcgoodtime.gti.common.tiles.TileCarbonizeFurnace;

@@ -1,6 +1,6 @@
 package com.mcgoodtime.gti.client.gui;
 
-import com.mcgoodtime.gti.GtiUtil;
+import com.mcgoodtime.gti.common.GtiUtil;
 import com.mcgoodtime.gti.common.inventory.ContainerEUStorage;
 import com.mcgoodtime.gti.common.network.GtiNetwork;
 import com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage;

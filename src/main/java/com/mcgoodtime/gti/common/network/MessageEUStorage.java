@@ -1,6 +1,6 @@
 package com.mcgoodtime.gti.common.network;
 
-import com.mcgoodtime.gti.GtiUtil;
+import com.mcgoodtime.gti.common.GtiUtil;
 import com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
