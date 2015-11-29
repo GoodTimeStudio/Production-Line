@@ -14,7 +14,7 @@ import net.minecraft.inventory.Slot;
  */
 public class ContainerEUStorage<T extends TileEUStorage> extends ContainerGti<T> {
 
-    public int lastEnergy;
+    public double lastEnergy;
     public int lastMode;
 
     public ContainerEUStorage(EntityPlayer player, T tile) {
@@ -48,6 +48,9 @@ public class ContainerEUStorage<T extends TileEUStorage> extends ContainerGti<T>
                 ((ICrafting) object).sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
             }
         }
+
+        this.lastEnergy = this.tile.energy;
+        this.lastMode = this.tile.redstoneMode.ordinal();
     }
 
     @Override

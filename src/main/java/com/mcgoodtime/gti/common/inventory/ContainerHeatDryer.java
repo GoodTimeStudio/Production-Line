@@ -39,7 +39,7 @@ import net.minecraft.inventory.ICrafting;
 public class ContainerHeatDryer extends ContainerGti<TileHeatDryer>{
 
     private int lastProgress;
-    private int lastEnergy;
+    private double lastEnergy;
 
     public ContainerHeatDryer(EntityPlayer player, TileHeatDryer tile) {
         super(player, tile);
@@ -55,7 +55,7 @@ public class ContainerHeatDryer extends ContainerGti<TileHeatDryer>{
     public void addCraftingToCrafters(ICrafting iCrafting) {
         super.addCraftingToCrafters(iCrafting);
         iCrafting.sendProgressBarUpdate(this, 1, lastProgress);
-        iCrafting.sendProgressBarUpdate(this, 2, lastEnergy);
+        iCrafting.sendProgressBarUpdate(this, 2, (int) lastEnergy);
     }
 
     /**
@@ -75,6 +75,9 @@ public class ContainerHeatDryer extends ContainerGti<TileHeatDryer>{
                 icrafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
             }
         }
+
+        this.lastEnergy = this.tile.energy;
+        this.lastProgress = this.tile.progress;
     }
 
     @Override

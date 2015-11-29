@@ -42,7 +42,7 @@ public class ContainerCarbonizeFurnace extends ContainerGti<TileCarbonizeFurnace
 
     private int lastProgress;
     private int lastRequireEnergy;
-    private int lastEnergy;
+    private double lastEnergy;
 
     public ContainerCarbonizeFurnace(EntityPlayer player, TileCarbonizeFurnace tile) {
         super(player, tile);
@@ -87,7 +87,7 @@ public class ContainerCarbonizeFurnace extends ContainerGti<TileCarbonizeFurnace
 
         this.lastProgress = this.tile.progress;
         this.lastRequireEnergy = (int) this.tile.requireEnergy;
-        this.lastEnergy = this.tile.maxEnergy;
+        this.lastEnergy = this.tile.energy;
     }
 
     /**
