@@ -25,14 +25,8 @@
 
 package com.mcgoodtime.gti.common.core;
 
-import com.mcgoodtime.gti.client.gui.GuiCarbonizeFurnace;
-import com.mcgoodtime.gti.client.gui.GuiEUStorage;
-import com.mcgoodtime.gti.client.gui.GuiFluidKineticGenerator;
-import com.mcgoodtime.gti.client.gui.GuiHeatDryer;
-import com.mcgoodtime.gti.common.inventory.ContainerCarbonizeFurnace;
-import com.mcgoodtime.gti.common.inventory.ContainerEUStorage;
-import com.mcgoodtime.gti.common.inventory.ContainerFluidKineticGenerator;
-import com.mcgoodtime.gti.common.inventory.ContainerHeatDryer;
+import com.mcgoodtime.gti.client.gui.*;
+import com.mcgoodtime.gti.common.inventory.*;
 import com.mcgoodtime.gti.common.tiles.*;
 import com.mcgoodtime.gti.common.tiles.eustorage.TileCSEU;
 import com.mcgoodtime.gti.common.tiles.eustorage.TileEVSU;
@@ -69,7 +63,7 @@ public class GuiHandler implements IGuiHandler {
             case EVSU: return new ContainerEUStorage<TileEVSU>(player, (TileEVSU)world.getTileEntity(x, y, z));
             case HeatDryer: return new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z));
             case CSEU: return new ContainerEUStorage<TileCSEU>(player, (TileCSEU) world.getTileEntity(x, y, z));
-            case ParallelSpaceSU: return new ContainerEUStorage<TileParallelSpaceSU>(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z));
+            case ParallelSpaceSU: return new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z));
             default: return null;
         }
     }
@@ -87,7 +81,7 @@ public class GuiHandler implements IGuiHandler {
             case HeatDryer: return new GuiHeatDryer(new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z)));
             case CSEU: return new GuiEUStorage(new ContainerEUStorage<TileCSEU>(player, (TileCSEU) world.getTileEntity(x, y, z)));
             case ParallelSpaceSU:
-                return new GuiEUStorage(new ContainerEUStorage<TileParallelSpaceSU>(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z)));
+                return new GuiParallelSpaceSU(new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z)));
             default: return null;
         }
     }

@@ -33,8 +33,10 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
     public TileEUStorage(int tier, int maxStorage) {
         super((int) EnergyNet.instance.getPowerFromTier(tier), maxStorage, tier);
         this.redstoneMode = RedstoneMode.NONE;
-        this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
-        this.tileSlots.add(new TileSlotCharge(this, TileSlot.SlotMode.INPUT));
+        if (!(this instanceof TileParallelSpaceSU)) {
+            this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
+            this.tileSlots.add(new TileSlotCharge(this, TileSlot.SlotMode.INPUT));
+        }
     }
 
     @Override

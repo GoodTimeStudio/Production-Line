@@ -1,29 +1,22 @@
 package com.mcgoodtime.gti.common.inventory;
 
 import com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage;
-import ic2.core.slot.SlotArmor;
-import ic2.core.slot.SlotDischarge;
+import com.mcgoodtime.gti.common.tiles.eustorage.TileParallelSpaceSU;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
 
 /**
- * Created by BestOwl on 2015.11.28.0028.
+ * Created by BestOwl on 2015.11.29.0029.
  *
  * @author BestOwl
  */
-public class ContainerEUStorage<T extends TileEUStorage> extends ContainerGti<T> {
+public class ContainerParallelSpaceSU extends ContainerGti<TileParallelSpaceSU> {
 
     public double lastEnergy;
     public int lastMode;
 
-    public ContainerEUStorage(EntityPlayer player, T tile) {
-        super(player, tile, 196);
-        this.addSlotToContainer(new SlotDischarge(this.tile, this.tile.tier, 0, 56, 53));
-        this.addSlotToContainer(new Slot(this.tile, 1, 56, 17));
-        for (int i = 0; i < 4; i++) {
-            this.addSlotToContainer(new SlotArmor(player.inventory, i, 8 + i * 18, 84));
-        }
+    public ContainerParallelSpaceSU(EntityPlayer player, TileParallelSpaceSU tile) {
+        super(player, tile);
     }
 
     @Override
