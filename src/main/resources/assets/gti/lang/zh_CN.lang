@@ -11,6 +11,9 @@ gui.gti.FluidKineticGenerator.output=输出: %s
 gui.gti.FluidKineticGenerator.max-output=最大输出: %s
 gui.gti.CarbonizeFurnace=碳化燃烧炉
 gui.gti.HeatDryer=干燥机
+gui.gti.EVSU=EVSU
+gui.gti.CSEU=CSEU
+gui.gti.ParallelSpaceSU=ParallelSpace SU
 
 [BLOCKS]
 tile.gti.block.CompressedWaterHyacinth.name=压缩水葫芦
@@ -22,6 +25,8 @@ tile.gti.block.HeatDryer.name=干燥机
 tile.gti.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 tile.gti.block.EVSU.name=EVSU
 tile.gti.block.AirBrakeCasing.name=气闸外壳
+tile.gti.block.CSEU.name=CSEU
+tile.gti.block.ParallelSpaceSU.name=ParallelSpace SU
 
 [ITEMS]
 //crushed
@@ -81,7 +86,7 @@ item.gti.EnderCalculationCrystal.name=末影运算水晶
 item.gti.MillTeeth.name=磨齿
 item.gti.MillWheel.name=磨轮
 item.gti.RigidPaper.name=硬质纸
-item.gti.RigidPaperPack=硬质纸袋
+item.gti.RigidPaperPack.name=硬质纸袋
 
 item.gti.food.DiamondApple.name=钻石苹果
 
