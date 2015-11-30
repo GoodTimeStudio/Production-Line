@@ -33,13 +33,11 @@ import com.mcgoodtime.gti.common.init.GtiAchievement;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.init.GtiItems;
 import com.mcgoodtime.gti.common.init.GtiRecipes;
+import com.mcgoodtime.gti.common.nei.NEIGtiConfig;
 import com.mcgoodtime.gti.common.worldgen.GtiWorldGen;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.ModMetadata;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -121,6 +119,9 @@ public final class Gti {
     public void postInit(FMLPostInitializationEvent event) {
         //register Event. 注册事件
         FMLCommonHandler.instance().bus().register(new GtiEvent());
+        if (Loader.isModLoaded("NotEnoughItems")) {
+            new NEIGtiConfig().loadConfig();
+        }
     }
 
     private void setupMeta() {
