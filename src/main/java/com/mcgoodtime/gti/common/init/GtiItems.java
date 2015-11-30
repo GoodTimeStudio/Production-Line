@@ -65,8 +65,16 @@ public class GtiItems implements IFuelHandler {
 	public static Item carbonTreetap;
 
 	public static Item record_MusicSpring;
-	//---------------------------------------
-	public static ItemStack batten;
+	//--------------------------------------
+	public static ItemStack tiles;
+	public static ItemStack bioFuel;
+	public static ItemStack paperBag;
+	public static ItemStack corrugatedPaper;
+	public static ItemStack woodPulp;
+	public static ItemStack sawdust;
+	public static ItemStack faggot;
+	public static ItemStack firewood;
+	public static ItemStack coarseBatten;
 	public static ItemStack crushedIridium;
 	public static ItemStack cleanedCrushedIridium;
 	public static ItemStack dustIridium;
@@ -173,8 +181,20 @@ public class GtiItems implements IFuelHandler {
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		if(fuel.isItemEqual(batten)){
-			return 850;
+		if(fuel.isItemEqual(bioFuel)){
+			return  1000;
+		}
+		if(fuel.isItemEqual(sawdust)){
+			return 50;
+		}
+		if(fuel.isItemEqual(faggot)){
+			return  1200;
+		}
+		if(fuel.isItemEqual(firewood)) {
+			return  100;
+		}
+		if(fuel.isItemEqual(coarseBatten)){
+			return 100;
 		}
 		if (fuel.isItemEqual(bambooCharcoal)) {
 			return 800;
@@ -188,7 +208,7 @@ public class GtiItems implements IFuelHandler {
 		}
 		if(fuel.getItem().equals(
 				Item.getItemFromBlock(GtiBlocks.dryLog))){
-			return  850;
+			return  300;
 		}
 		if (fuel.isItemEqual(GtiBlocks.compressedWaterHyacinth)) {
 			return 800;

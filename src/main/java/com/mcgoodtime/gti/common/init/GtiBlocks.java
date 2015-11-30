@@ -38,6 +38,7 @@ import net.minecraft.item.ItemStack;
  * @author liach
  */
 public class GtiBlocks {
+    public static ItemStack brokenTiles;
     public static ItemStack dehydratedWaterHyacinthblock;
     public static ItemStack compressedWaterHyacinth;
     public static ItemStack carbonizeFurnace;
