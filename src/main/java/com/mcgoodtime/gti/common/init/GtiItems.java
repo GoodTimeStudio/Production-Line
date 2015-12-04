@@ -209,7 +209,7 @@ public class GtiItems implements IFuelHandler {
 		}
 		if(fuel.getItem().equals(
 				Item.getItemFromBlock(GtiBlocks.dryLog))){
-			return  300;
+			return 300;
 		}
 		if (fuel.isItemEqual(GtiBlocks.compressedWaterHyacinth)) {
 			return 800;

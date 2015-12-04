@@ -44,7 +44,15 @@ public class ItemMisc extends ItemMultiDamage {
         GtiItems.bambooCharcoal = new ItemStack(this, 1, 26);
         GtiItems.rigidPaper = new ItemStack(this, 1, 27);
         GtiItems.rigidPaperPack = new ItemStack(this, 1, 28);
-        GtiItems.batten = new ItemStack(this,1,29);
+        GtiItems.coarseBatten = new ItemStack(this, 1, 29);
+        GtiItems.firewood = new ItemStack(this, 1, 30);
+        GtiItems.faggot = new ItemStack(this, 1, 31);
+        GtiItems.sawdust = new ItemStack(this, 1,32);
+        GtiItems.woodPulp = new ItemStack(this, 1, 33);
+        GtiItems.corrugatedPaper = new ItemStack(this, 1 ,34);
+        GtiItems.paperBag = new ItemStack(this, 1, 34);
+        GtiItems.bioFuel = new ItemStack(this, 1, 35);
+        GtiItems.tiles = new ItemStack(this, 1, 36);
     }
 
     @Override
@@ -79,7 +87,16 @@ public class ItemMisc extends ItemMultiDamage {
         list.add("BambooCharcoal");
         list.add("RigidPaper");
         list.add("RigidPaperPack");
-        list.add("batten");
+        list.add("CoarseBatten");
+        list.add("Firewood");
+        list.add("Faggot");
+        list.add("Sawdust");
+        list.add("WoodPulp");
+        list.add("CorrugatPaper");
+        list.add("PaperBag");
+        list.add("BioFuel");
+        list.add("Tiles");
         return list;
     }
 }
+

@@ -38,7 +38,6 @@ import net.minecraft.item.ItemStack;
  * @author liach
  */
 public class GtiBlocks {
-    public static ItemStack brokenTiles;
     public static ItemStack dehydratedWaterHyacinthblock;
     public static ItemStack compressedWaterHyacinth;
     public static ItemStack carbonizeFurnace;
@@ -47,15 +46,17 @@ public class GtiBlocks {
     public static ItemStack cseu;
     public static ItemStack parallelSpaceSU;
 
+    public static BlockGti pad;
+    public static BlockGti dryLog;
     public static BlockGti fluidKineticGenerator;
     public static BlockGti oreIridium;
     public static BlockGti airBrakeCasing;
-    public static BlockGti dryLog;
 
     public static Block waterHyacinth;
 
     public static void init() {
-        dryLog = new BlockGti(Material.rock, "dryLog",1.5f , 0, "axe", 0);
+        pad = new BlockGti(Material.rock, "Pad", 1, 0, null, 0);
+        dryLog = new BlockGti(Material.rock, "DryLog", 3, 0, "axe", 0);
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
         fluidKineticGenerator = new BlockFluidKineticGenerator();
         airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
@@ -68,10 +69,11 @@ public class GtiBlocks {
 
         //----------------------------
         //------Block Registry--------
+        registerBlock(pad);
+        registerBlock(dryLog);
         registerBlock(oreIridium);
         registerBlock(fluidKineticGenerator);
         registerBlock(airBrakeCasing);
-        registerBlock(dryLog);
 
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
     }
