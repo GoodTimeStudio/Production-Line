@@ -4,10 +4,10 @@ import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GuiHandler;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.items.ItemBlockEUStorage;
+import com.mcgoodtime.gti.common.tiles.TileGti;
 import com.mcgoodtime.gti.common.tiles.eustorage.TileCSEU;
 import com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage;
 import com.mcgoodtime.gti.common.tiles.eustorage.TileEVSU;
-import com.mcgoodtime.gti.common.tiles.TileGti;
 import com.mcgoodtime.gti.common.tiles.eustorage.TileParallelSpaceSU;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
@@ -52,7 +53,6 @@ public class BlockEUStorage extends BlockContainerGti implements IMultiMetaBlock
     public BlockEUStorage() {
         super(Material.iron, "BlockEUStorage");
         this.setHardness(2.0F);
-        GameRegistry.registerBlock(this, ItemBlockEUStorage.class, this.internalName);
         for (int i = 0; i < this.getMaxMeta(); i++) {
             GameRegistry.registerTileEntity(this.getTileEntityClass(i), internalNameList.get(i));
         }
@@ -60,6 +60,11 @@ public class BlockEUStorage extends BlockContainerGti implements IMultiMetaBlock
         GtiBlocks.evsu = new ItemStack(this, 1, 0);
         GtiBlocks.cseu = new ItemStack(this, 1, 1);
         GtiBlocks.parallelSpaceSU = new ItemStack(this, 1, 2);
+    }
+
+    @Override
+    public Class<? extends ItemBlock> getItemBlockClass() {
+        return ItemBlockEUStorage.class;
     }
 
     /**

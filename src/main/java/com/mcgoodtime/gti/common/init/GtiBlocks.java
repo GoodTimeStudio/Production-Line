@@ -66,19 +66,6 @@ public class GtiBlocks {
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
-
-        //----------------------------
-        //------Block Registry--------
-        registerBlock(pad);
-        registerBlock(dryLog);
-        registerBlock(oreIridium);
-        registerBlock(fluidKineticGenerator);
-        registerBlock(airBrakeCasing);
-
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
-    }
-
-    private static void registerBlock(BlockGti blockGti) {
-        GameRegistry.registerBlock(blockGti, blockGti.internalName);
     }
 }

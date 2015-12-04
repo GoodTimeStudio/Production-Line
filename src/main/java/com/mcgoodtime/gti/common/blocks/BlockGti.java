@@ -29,10 +29,12 @@ import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
 
 import com.mcgoodtime.gti.common.core.GtiConfig;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -61,8 +63,9 @@ public class BlockGti extends Block {
         this.setBlockName(MOD_ID + "." + "block" + "." + name);
         this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
         this.setCreativeTab(creativeTabGti);
-        GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
         this.internalName = name;
+        GameRegistry.registerBlock(this, this.getItemBlockClass(), name);
+        GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
     }
 
     @SuppressWarnings("deprecation")
@@ -86,5 +89,9 @@ public class BlockGti extends Block {
                 list.add(stack);
             }
         }
+    }
+
+    public Class<? extends ItemBlock> getItemBlockClass() {
+        return ItemBlock.class;
     }
 }

@@ -39,6 +39,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -69,13 +70,17 @@ public class BlockMachine extends BlockContainerGti implements IMultiMetaBlock {
     public BlockMachine() {
         super(Material.iron, "BlockMachine");
         this.setHardness(2.0F);
-        GameRegistry.registerBlock(this, ItemBlockGti.class, this.internalName);
         for (int i = 0; i < this.getMaxMeta(); i++) {
             GameRegistry.registerTileEntity(this.getTileEntityClass(i), internalNameList.get(i));
         }
 
         GtiBlocks.carbonizeFurnace = new ItemStack(this, 1, 0);
         GtiBlocks.heatDryer = new ItemStack(this, 1, 1);
+    }
+
+    @Override
+    public Class<? extends ItemBlock> getItemBlockClass() {
+        return ItemBlockGti.class;
     }
 
     /**

@@ -26,15 +26,11 @@ package com.mcgoodtime.gti.common.blocks;
 
 import com.mcgoodtime.gti.common.init.GtiBlocks;
 import com.mcgoodtime.gti.common.items.ItemBlockGti;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,10 +57,13 @@ public class BlockMisc extends BlockGti implements IMultiMetaBlock {
         super(Material.rock, "BlockMisc");
         this.icons = new IIcon[this.getMaxMeta()];
         this.setHardness(1.0F);
-        GameRegistry.registerBlock(this, ItemBlockGti.class, "BlockMisc");
-
         GtiBlocks.compressedWaterHyacinth = new ItemStack(this, 1, 0);
         GtiBlocks.dehydratedWaterHyacinthblock = new ItemStack(this, 1, 1);
+    }
+
+    @Override
+    public Class<? extends ItemBlock> getItemBlockClass() {
+        return ItemBlockGti.class;
     }
 
     public int getMaxMeta() {
