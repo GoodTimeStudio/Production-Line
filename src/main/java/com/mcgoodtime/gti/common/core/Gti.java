@@ -56,9 +56,9 @@ import net.minecraftforge.fluids.FluidRegistry;
         name = Gti.MOD_NAME,
         version = Gti.VERSION,
         dependencies = "required-after:"
-                + "Forge@[10.13.2.1291,);"
+                + "Forge@[10.13.4.1558,);"
                 + "required-after:"
-                + "IC2@[2.2.660,);",
+                + "IC2@[2.2.748,);",
         useMetadata = true
     )
 public final class Gti {
