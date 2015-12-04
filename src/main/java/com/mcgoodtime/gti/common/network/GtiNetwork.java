@@ -25,13 +25,15 @@
 package com.mcgoodtime.gti.common.network;
 
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage;
+import com.mcgoodtime.gti.common.network.message.MessageBase;
+import com.mcgoodtime.gti.common.network.message.MessageBlockDisplayState;
+import com.mcgoodtime.gti.common.network.message.MessageEUStorage;
+import com.mcgoodtime.gti.common.network.message.MessageHandlerBase;
 import com.mcgoodtime.gti.common.tiles.TileGti;
+import com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 
 /**
  * Created by BestOwl on 2015.10.30.0030.
@@ -39,15 +41,22 @@ import net.minecraft.entity.player.EntityPlayerMP;
  * @author BestOwl
  */
 public class GtiNetwork {
-    public final static SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(Gti.MOD_ID);;
+    private static int id = 0;
+    public final static SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(Gti.MOD_ID);
 
     static {
-        network.registerMessage(MessageBlockDisplayState.Handler.class, MessageBlockDisplayState.class, 0, Side.CLIENT);
-        network.registerMessage(MessageEUStorage.Handler.class, MessageEUStorage.class, 2, Side.SERVER);
+        registerMessage(MessageBlockDisplayState.class, Side.CLIENT);
+        registerMessage(MessageEUStorage.class, Side.SERVER);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void registerMessage(Class<? extends MessageBase> messageClass, Side side) {
+        network.registerMessage(MessageHandlerBase.class, (Class<MessageBase>) messageClass, id, side);
+        id++;
     }
 
     public static void updateBlockDisplayState(TileGti tile) {
-        network.sendToAllAround(new MessageBlockDisplayState(tile.xCoord, tile.yCoord, tile.zCoord, tile.active, tile.facing),
+        network.sendToAllAround(new MessageBlockDisplayState(tile),
                 new NetworkRegistry.TargetPoint(tile.getWorldObj().getWorldInfo().getVanillaDimension(),
                 tile.xCoord, tile.yCoord, tile.zCoord, 64));
     }
