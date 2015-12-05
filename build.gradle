@@ -58,7 +58,22 @@ checkstyle {
     toolVersion = "6.7" 
 }
 
-compileJava.options.encoding = 'UTF-8'
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += [
+            '-Xlint:-processing',
+            "-AreobfSrgFile=${project.file('build/srgs/mcp-srg.srg').canonicalPath}"
+    ]
+}
+
+task copySrgs(type: Copy, dependsOn: 'genSrgs') {
+    from project.plugins.getPlugin('forge').delayedFile('{SRG_DIR}')
+
+    include '**/*.srg'
+    into 'build/srgs'
+}
+
+compileJava.dependsOn copySrgs
 
 sourceSets {
     main {
