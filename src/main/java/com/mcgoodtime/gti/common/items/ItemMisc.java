@@ -13,46 +13,52 @@ import java.util.List;
  */
 public class ItemMisc extends ItemMultiDamage {
 
+    private int count = 0;
+
     public ItemMisc() {
         super("ItemMisc");
-        GtiItems.roller = new ItemStack(this, 1, 0);
-        GtiItems.heatInsulationMaterial = new ItemStack(this, 1, 1);
-        GtiItems.smallCompressedWaterHyacinth = new ItemStack(this, 1, 2);
-        GtiItems.airBrakeUnit = new ItemStack(this, 1, 3);
-        GtiItems.carbonTube = new ItemStack(this, 1, 4);
-        GtiItems.redstoneModule = new ItemStack(this, 1, 5);
-        GtiItems.lazuliModule = new ItemStack(this, 1, 6);
-        GtiItems.obsidianPlateGravityField = new ItemStack(this, 1, 7);
-        GtiItems.electronicCircuitControl = new ItemStack(this, 1, 8);
-        GtiItems.electronicCircuitCore = new ItemStack(this, 1, 9);
-        GtiItems.pulseElectronicCircuitControl = new ItemStack(this, 1, 10);
-        GtiItems.pulseElectronicCircuitCore = new ItemStack(this, 1, 11);
-        GtiItems.cyclotronParticleAccelerator = new ItemStack(this, 1, 12);
-        GtiItems.calculateUnit = new ItemStack(this, 1, 13);
-        GtiItems.calculateChunk = new ItemStack(this, 1, 14);
-        GtiItems.calculateArray = new ItemStack(this, 1, 15);
-        GtiItems.floatPointCalculationsRegion = new ItemStack(this, 1, 16);
-        GtiItems.parallelSpaceConverter = new ItemStack(this, 1, 17);
-        GtiItems.obsidianMechanicalFrame = new ItemStack(this, 1, 18);
-        GtiItems.obsidianMechanicalCasing = new ItemStack(this, 1, 19);
-        GtiItems.carbonCrystal = new ItemStack(this, 1,20);
-        GtiItems.enderCalculationCrystal = new ItemStack(this, 1, 21);
-        GtiItems.millTeeth = new ItemStack(this, 1, 22);
-        GtiItems.millWheel = new ItemStack(this, 1, 23);
-        GtiItems.heatInsulationPlate = new ItemStack(this, 1, 24);
-        GtiItems.uuMatterCore = new ItemStack(this, 1, 25);
-        GtiItems.bambooCharcoal = new ItemStack(this, 1, 26);
-        GtiItems.rigidPaper = new ItemStack(this, 1, 27);
-        GtiItems.rigidPaperPack = new ItemStack(this, 1, 28);
-        GtiItems.coarseBatten = new ItemStack(this, 1, 29);
-        GtiItems.firewood = new ItemStack(this, 1, 30);
-        GtiItems.faggot = new ItemStack(this, 1, 31);
-        GtiItems.sawdust = new ItemStack(this, 1,32);
-        GtiItems.woodPulp = new ItemStack(this, 1, 33);
-        GtiItems.corrugatedPaper = new ItemStack(this, 1 ,34);
-        GtiItems.paperBag = new ItemStack(this, 1, 34);
-        GtiItems.bioFuel = new ItemStack(this, 1, 35);
-        GtiItems.tiles = new ItemStack(this, 1, 36);
+        GtiItems.roller = this.next();
+        GtiItems.heatInsulationMaterial = this.next();
+        GtiItems.smallCompressedWaterHyacinth = this.next();
+        GtiItems.airBrakeUnit = this.next();
+        GtiItems.carbonTube = this.next();
+        GtiItems.redstoneModule = this.next();
+        GtiItems.lazuliModule = this.next();
+        GtiItems.obsidianPlateGravityField = this.next();
+        GtiItems.electronicCircuitControl = this.next();
+        GtiItems.electronicCircuitCore = this.next();
+        GtiItems.pulseElectronicCircuitControl = this.next();
+        GtiItems.pulseElectronicCircuitCore = this.next();
+        GtiItems.cyclotronParticleAccelerator = this.next();
+        GtiItems.calculateUnit = this.next();
+        GtiItems.calculateChunk = this.next();
+        GtiItems.calculateArray = this.next();
+        GtiItems.floatPointCalculationsRegion = this.next();
+        GtiItems.parallelSpaceConverter = this.next();
+        GtiItems.obsidianMechanicalFrame = this.next();
+        GtiItems.obsidianMechanicalCasing = this.next();
+        GtiItems.carbonCrystal = this.next();
+        GtiItems.enderCalculationCrystal = this.next();
+        GtiItems.millTeeth = this.next();
+        GtiItems.millWheel = this.next();
+        GtiItems.heatInsulationPlate = this.next();
+        GtiItems.uuMatterCore = this.next();
+        GtiItems.bambooCharcoal = this.next();
+        GtiItems.rigidPaper = this.next();
+        GtiItems.rigidPaperPack = this.next();
+        GtiItems.coarseBatten = this.next();
+        GtiItems.firewood = this.next();
+        GtiItems.faggot = this.next();
+        GtiItems.sawdust = this.next();
+        GtiItems.woodPulp = this.next();
+        GtiItems.corrugatedPaper = this.next();
+        GtiItems.paperBag = this.next();
+        GtiItems.bioFuel = this.next();
+        GtiItems.tiles = this.next();
+    }
+
+    private ItemStack next() {
+        return new ItemStack(this, 1, this.count++);
     }
 
     @Override
@@ -96,6 +102,9 @@ public class ItemMisc extends ItemMultiDamage {
         list.add("PaperBag");
         list.add("BioFuel");
         list.add("Tiles");
+        list.add("AdvSolarLensUnit");
+        list.add("AdvSolarLensGroup");
+        list.add("AdvSolarLensCluster");
         return list;
     }
 }

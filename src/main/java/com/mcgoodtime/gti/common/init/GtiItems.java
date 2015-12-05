@@ -115,6 +115,9 @@ public class GtiItems implements IFuelHandler {
 	public static ItemStack millWheel;
 	public static ItemStack rigidPaper;
 	public static ItemStack rigidPaperPack;
+    public static ItemStack advSolarLensUnit;
+    public static ItemStack advSolarLensGroup;
+    public static ItemStack advSolarLensCluster;
 
 	public static void init() {
 		ironTreetap = new ItemGtiTreetap("IronTreetap", 32);

@@ -90,6 +90,9 @@ item.gti.RigidPaper.name=硬质纸
 item.gti.RigidPaperPack.name=硬质纸袋
 item.gti.ItemDryFood.name=干货
 item.gti.SaltWaterBucket.name=咸水桶
+item.gti.AdvSolarLensUnit.name=聚能镜片单元
+item.gti.AdvSolarLensGroup.name=聚能镜片组
+item.gti.AdvSolarLensCluster.name=聚能镜片簇
 
 item.gti.food.DiamondApple.name=钻石苹果
 
