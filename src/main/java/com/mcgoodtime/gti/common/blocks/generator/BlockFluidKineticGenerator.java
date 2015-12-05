@@ -36,7 +36,7 @@ import net.minecraft.world.World;
 public class BlockFluidKineticGenerator extends BlockContainerGti {
 
     public BlockFluidKineticGenerator() {
-        super(Material.rock, "FluidKineticGenerator");
+        super(Material.iron, "FluidKineticGenerator");
     }
 
     /**
