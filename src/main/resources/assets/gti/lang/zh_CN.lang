@@ -27,6 +27,7 @@ tile.gti.block.EVSU.name=EVSU
 tile.gti.block.AirBrakeCasing.name=气闸外壳
 tile.gti.block.CSEU.name=CSEU
 tile.gti.block.ParallelSpaceSU.name=平行空间储电盒
+tile.gti.block.AdvSolar.name=聚能太阳能
 
 [ITEMS]
 //crushed
@@ -88,6 +89,7 @@ item.gti.MillWheel.name=磨轮
 item.gti.RigidPaper.name=硬质纸
 item.gti.RigidPaperPack.name=硬质纸袋
 item.gti.ItemDryFood.name=干货
+item.gti.SaltWaterBucket.name=咸水桶
 
 item.gti.food.DiamondApple.name=钻石苹果
 

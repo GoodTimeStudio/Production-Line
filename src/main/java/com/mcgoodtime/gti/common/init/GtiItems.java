@@ -152,7 +152,8 @@ public class GtiItems implements IFuelHandler {
                 list.add(I18n.format(diamondApple.getUnlocalizedName() + ".desc1"));
             }
         };
-        diamondApple.setUnlocalizedName(Gti.MOD_ID + ".food.DiamondApple").setCreativeTab(Gti.creativeTabGti).setTextureName("gti:itemDiamondApple");
+        diamondApple.setUnlocalizedName(Gti.MOD_ID + ".food.DiamondApple")
+				.setCreativeTab(Gti.creativeTabGti).setTextureName(Gti.MOD_ID + ":itemDiamondApple");
 
 		packagedSalt = new ItemGti("PackagedSalt") {
 			/**
@@ -175,7 +176,8 @@ public class GtiItems implements IFuelHandler {
 		};
 
 		saltWaterBucket = new ItemBucket(Blocks.water);
-		saltWaterBucket.setCreativeTab(Gti.creativeTabGti).setUnlocalizedName(Gti.MOD_ID + ".SaltWaterBucket");
+		saltWaterBucket.setCreativeTab(Gti.creativeTabGti)
+				.setUnlocalizedName(Gti.MOD_ID + ".SaltWaterBucket").setTextureName(Gti.MOD_ID + ":SaltWaterBucket");
 
         iridiumPickaxe = ToolGti.registerPickaxe(GtiToolMaterial.iridium, "IridiumPickaxe");
         iridiumAxe = ToolGti.registerAxe(GtiToolMaterial.iridium, "IridiumAxe");
