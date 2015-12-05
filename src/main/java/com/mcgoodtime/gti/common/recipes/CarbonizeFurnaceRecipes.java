@@ -50,7 +50,7 @@ public class CarbonizeFurnaceRecipes implements IProcessable<CarbonizeFurnaceRec
         register(new ItemStack(Blocks.log2), new ItemStack(Items.coal, 2, 1), 2000, XP);
         register(new ItemStack(Blocks.planks, 2), new ItemStack(Items.coal, 1, 1), 1500, XP);
         register(new ItemStack(Items.reeds, 4), GtiItems.bambooCharcoal, 1500, XP);
-        register(new ItemStack(Items.water_bucket), new ItemStack(GtiItems.salt), 1100, XP);
+        register(new ItemStack(GtiItems.saltWaterBucket), new ItemStack(GtiItems.salt), 1100, XP);
     }
 
     public void register(ItemStack input, ItemStack output, double requireEnergy, float xp) {
