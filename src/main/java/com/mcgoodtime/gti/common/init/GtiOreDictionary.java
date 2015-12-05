@@ -37,5 +37,16 @@ public class GtiOreDictionary {
     public static void init() {
         OreDictionary.registerOre("paper", Items.paper);
         OreDictionary.registerOre("paper", GtiItems.rigidPaper);
+
+        OreDictionary.registerOre("AdvTreetap", GtiItems.ironTreetap);
+        OreDictionary.registerOre("AdvTreetap", GtiItems.bronzeTreetap);
+        OreDictionary.registerOre("AdvTreetap", GtiItems.leadTreetap);
+        OreDictionary.registerOre("AdvTreetap", GtiItems.refinedIronTreetap);
+        OreDictionary.registerOre("AdvTreetap", GtiItems.advancedAlloyTreetap);
+        OreDictionary.registerOre("AdvTreetap", GtiItems.carbonTreetap);
+
+        OreDictionary.registerOre("AdvSolarLens", GtiItems.advSolarLensUnit);
+        OreDictionary.registerOre("AdvSolarLens", GtiItems.advSolarLensGroup);
+        OreDictionary.registerOre("AdvSolarLens", GtiItems.advSolarLensCluster);
     }
 }
