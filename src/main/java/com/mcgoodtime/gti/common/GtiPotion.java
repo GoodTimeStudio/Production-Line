@@ -100,7 +100,7 @@ public class GtiPotion extends Potion {
      */
     @Override
     public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
-        mc.getTextureManager().bindTexture(new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/gui/potion.png"));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/gui/misc.png"));
         mc.currentScreen.drawTexturedModalRect(x + 6, y + 7, 0, 0, 18, 18);
     }
 
