@@ -42,7 +42,7 @@ public class GtiSetup implements IFMLCallHook {
     @Override
     public Void call() throws Exception {
         MixinBootstrap.init();
-        MixinEnvironment.getDefaultEnvironment().addConfiguration("mixin.gti-core.json");
+        MixinEnvironment.getDefaultEnvironment().addConfiguration("mixins.gti.core.json");
         return null;
     }
 }
