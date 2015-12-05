@@ -77,7 +77,6 @@ public class GtiItems implements IFuelHandler {
 	public static ItemStack sawdust;
 	public static ItemStack faggot;
 	public static ItemStack firewood;
-	public static ItemStack batten;
 	public static ItemStack coarseBatten;
 	public static ItemStack crushedIridium;
 	public static ItemStack cleanedCrushedIridium;
