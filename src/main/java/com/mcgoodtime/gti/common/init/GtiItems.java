@@ -127,6 +127,7 @@ public class GtiItems implements IFuelHandler {
 		//MultiMetaItem registry
 		new ItemOre();
 		new ItemMisc();
+		new ItemDryFood();
 
         // special registry TODO: Better registry system
  
