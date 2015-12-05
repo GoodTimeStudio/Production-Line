@@ -35,7 +35,9 @@ import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -56,6 +58,7 @@ public class GtiItems implements IFuelHandler {
 	public static Item iridiumSword;
 	public static Item iridiumPickaxe;
 	public static Item salt;
+	public static Item saltWaterBucket;
 
 	public static Item ironTreetap;
 	public static Item bronzeTreetap;
@@ -149,7 +152,7 @@ public class GtiItems implements IFuelHandler {
                 list.add(I18n.format(diamondApple.getUnlocalizedName() + ".desc1"));
             }
         };
-        diamondApple.setUnlocalizedName("gti.food.DiamondApple").setCreativeTab(Gti.creativeTabGti).setTextureName("gti:itemDiamondApple");
+        diamondApple.setUnlocalizedName(Gti.MOD_ID + ".food.DiamondApple").setCreativeTab(Gti.creativeTabGti).setTextureName("gti:itemDiamondApple");
 
 		packagedSalt = new ItemGti("PackagedSalt") {
 			/**
@@ -171,6 +174,9 @@ public class GtiItems implements IFuelHandler {
 			}
 		};
 
+		saltWaterBucket = new ItemBucket(Blocks.water);
+		saltWaterBucket.setCreativeTab(Gti.creativeTabGti).setUnlocalizedName(Gti.MOD_ID + ".SaltWaterBucket");
+
         iridiumPickaxe = ToolGti.registerPickaxe(GtiToolMaterial.iridium, "IridiumPickaxe");
         iridiumAxe = ToolGti.registerAxe(GtiToolMaterial.iridium, "IridiumAxe");
         iridiumSpade = ToolGti.registerSpade(GtiToolMaterial.iridium, "IridiumSpade");
@@ -178,6 +184,7 @@ public class GtiItems implements IFuelHandler {
 
         // TODO: Better registry system
         GameRegistry.registerItem(diamondApple, "DiamondApple");
+		GameRegistry.registerItem(saltWaterBucket, "SaltWaterBucket");
         GameRegistry.registerFuelHandler(new GtiItems());
     }
 

@@ -49,6 +49,7 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 
 @Mod(
@@ -119,6 +120,7 @@ public final class Gti {
     public void postInit(FMLPostInitializationEvent event) {
         //register Event. 注册事件
         FMLCommonHandler.instance().bus().register(new GtiEvent());
+        MinecraftForge.EVENT_BUS.register(new GtiEvent());
         if (Loader.isModLoaded("NotEnoughItems")) {
             new NEIGtiConfig().loadConfig();
         }
