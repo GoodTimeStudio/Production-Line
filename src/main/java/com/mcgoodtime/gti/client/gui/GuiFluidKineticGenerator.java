@@ -79,12 +79,12 @@ public class GuiFluidKineticGenerator extends GuiGti<ContainerFluidKineticGenera
         if (this.container.tile.fluidTank.getFluidAmount() > 0) {
             String tooltip = this.container.tile.fluidTank.getFluid().getLocalizedName() + ": " + this.container.tile.fluidTank.getFluidAmount() + "mB";
             GuiTooltiphelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, tooltip, 73, 23, 83, 71);
-
-            String output = StatCollector.translateToLocalFormatted(GUI_PREFIX + "FluidKineticGenerator.output",
-                    this.container.getTileEntity().maxrequestkineticenergyTick(
-                    ForgeDirection.VALID_DIRECTIONS[this.container.getTileEntity().facing]));
-            this.drawString(this.fontRendererObj, output, 96, 33, 2157374);
         }
+
+        String output = StatCollector.translateToLocalFormatted(GUI_PREFIX + "FluidKineticGenerator.output",
+                this.container.getTileEntity().maxrequestkineticenergyTick(
+                        ForgeDirection.VALID_DIRECTIONS[this.container.getTileEntity().facing]));
+        this.drawString(this.fontRendererObj, output, 96, 33, 2157374);
 
         String max_output = StatCollector.translateToLocalFormatted(GUI_PREFIX + "FluidKineticGenerator.max-output",
                 this.container.getTileEntity().kuOutput);
