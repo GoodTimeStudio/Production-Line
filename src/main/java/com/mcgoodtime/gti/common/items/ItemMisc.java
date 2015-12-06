@@ -55,6 +55,9 @@ public class ItemMisc extends ItemMultiDamage {
         GtiItems.paperBag = this.next();
         GtiItems.bioFuel = this.next();
         GtiItems.tiles = this.next();
+        GtiItems.advSolarLensUnit = this.next();
+        GtiItems.advSolarLensGroup = this.next();
+        GtiItems.advSolarLensCluster = this.next();
     }
 
     private ItemStack next() {

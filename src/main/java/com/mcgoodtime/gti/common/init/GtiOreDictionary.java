@@ -38,15 +38,15 @@ public class GtiOreDictionary {
         OreDictionary.registerOre("paper", Items.paper);
         OreDictionary.registerOre("paper", GtiItems.rigidPaper);
 
-        OreDictionary.registerOre("AdvTreetap", GtiItems.ironTreetap);
-        OreDictionary.registerOre("AdvTreetap", GtiItems.bronzeTreetap);
-        OreDictionary.registerOre("AdvTreetap", GtiItems.leadTreetap);
-        OreDictionary.registerOre("AdvTreetap", GtiItems.refinedIronTreetap);
-        OreDictionary.registerOre("AdvTreetap", GtiItems.advancedAlloyTreetap);
-        OreDictionary.registerOre("AdvTreetap", GtiItems.carbonTreetap);
+        OreDictionary.registerOre("advTreetap", GtiItems.ironTreetap);
+        OreDictionary.registerOre("advTreetap", GtiItems.bronzeTreetap);
+        OreDictionary.registerOre("advTreetap", GtiItems.leadTreetap);
+        OreDictionary.registerOre("advTreetap", GtiItems.refinedIronTreetap);
+        OreDictionary.registerOre("advTreetap", GtiItems.advancedAlloyTreetap);
+        OreDictionary.registerOre("advTreetap", GtiItems.carbonTreetap);
 
-        OreDictionary.registerOre("AdvSolarLens", GtiItems.advSolarLensUnit);
-        OreDictionary.registerOre("AdvSolarLens", GtiItems.advSolarLensGroup);
-        OreDictionary.registerOre("AdvSolarLens", GtiItems.advSolarLensCluster);
+        OreDictionary.registerOre("advSolarLens", GtiItems.advSolarLensUnit);
+        OreDictionary.registerOre("advSolarLens", GtiItems.advSolarLensGroup);
+        OreDictionary.registerOre("advSolarLens", GtiItems.advSolarLensCluster);
     }
 }
