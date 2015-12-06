@@ -14,6 +14,8 @@ gui.gti.HeatDryer=干燥机
 gui.gti.EVSU=EVSU
 gui.gti.CSEU=CSEU
 gui.gti.ParallelSpaceSU=平行空间储电盒
+gui.gti.AdvSolar=聚能太阳能
+gui.gti.AdvSolar.lens=缺少聚能镜片
 
 [BLOCKS]
 tile.gti.block.CompressedWaterHyacinth.name=压缩水葫芦

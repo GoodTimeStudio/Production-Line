@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.blocks.*;
+import com.mcgoodtime.gti.common.blocks.generator.BlockAdvSolar;
 import com.mcgoodtime.gti.common.blocks.generator.BlockFluidKineticGenerator;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -63,6 +64,7 @@ public class GtiBlocks {
         new BlockMisc();
         new BlockMachine();
         new BlockEUStorage();
+        new BlockAdvSolar();
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();

@@ -64,6 +64,7 @@ public class GuiHandler implements IGuiHandler {
             case HeatDryer: return new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z));
             case CSEU: return new ContainerEUStorage<TileCSEU>(player, (TileCSEU) world.getTileEntity(x, y, z));
             case ParallelSpaceSU: return new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z));
+            case AdvSolar: return new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(x, y, z));
             default: return null;
         }
     }
@@ -82,6 +83,8 @@ public class GuiHandler implements IGuiHandler {
             case CSEU: return new GuiEUStorage(new ContainerEUStorage<TileCSEU>(player, (TileCSEU) world.getTileEntity(x, y, z)));
             case ParallelSpaceSU:
                 return new GuiParallelSpaceSU(new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z)));
+            case AdvSolar:
+                return new GuiAdvSolar(new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(x, y, z)));
             default: return null;
         }
     }
@@ -92,6 +95,7 @@ public class GuiHandler implements IGuiHandler {
         EVSU,
         HeatDryer,
         CSEU,
-        ParallelSpaceSU
+        ParallelSpaceSU,
+        AdvSolar
     }
 }
