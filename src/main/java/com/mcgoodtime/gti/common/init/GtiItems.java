@@ -33,6 +33,8 @@ import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
 import com.mcgoodtime.gti.common.items.tools.ToolGti;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import ic2.core.init.InternalName;
+import ic2.core.item.ItemBattery;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -43,6 +45,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.EnumHelper;
 
 import java.util.List;
 
@@ -67,17 +70,10 @@ public class GtiItems implements IFuelHandler {
 	public static Item advancedAlloyTreetap;
 	public static Item carbonTreetap;
 
+    public static Item ceu;
+
 	public static Item record_MusicSpring;
 	//--------------------------------------
-	public static ItemStack tiles;
-	public static ItemStack bioFuel;
-	public static ItemStack paperBag;
-	public static ItemStack corrugatedPaper;
-	public static ItemStack woodPulp;
-	public static ItemStack sawdust;
-	public static ItemStack faggot;
-	public static ItemStack firewood;
-	public static ItemStack coarseBatten;
 	public static ItemStack crushedIridium;
 	public static ItemStack cleanedCrushedIridium;
 	public static ItemStack dustIridium;
@@ -118,6 +114,15 @@ public class GtiItems implements IFuelHandler {
     public static ItemStack advSolarLensUnit;
     public static ItemStack advSolarLensGroup;
     public static ItemStack advSolarLensCluster;
+	public static ItemStack tiles;
+	public static ItemStack bioFuel;
+	public static ItemStack paperBag;
+	public static ItemStack corrugatedPaper;
+	public static ItemStack woodPulp;
+	public static ItemStack sawdust;
+	public static ItemStack faggot;
+	public static ItemStack firewood;
+	public static ItemStack coarseBatten;
 
 	public static void init() {
 		ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
@@ -128,6 +133,7 @@ public class GtiItems implements IFuelHandler {
 		carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
 		salt = new ItemGtiFood("Salt", 0, 10F, true);
+        ceu = new ItemCEU();
 
 		//MultiMetaItem registry
 		new ItemOre();
@@ -135,7 +141,7 @@ public class GtiItems implements IFuelHandler {
 		new ItemDryFood();
 
         // special registry TODO: Better registry system
- 
+
         diamondApple = new ItemFood(1005, 10F, false) {
             @Override
             protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) {
