@@ -39,7 +39,6 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
 
     /** energy output/tick */
     public double powerTick;
-    public int fuel = 0;
     /** The number of remaining battery */
     public double energy;
     /** The number of that can storage battery */
@@ -56,16 +55,12 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-
-        this.powerTick = nbt.getInteger("fuel");
         this.energy = nbt.getDouble("energy");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-
-        nbt.setInteger("fuel", this.fuel);
         nbt.setDouble("energy", this.energy);
     }
 

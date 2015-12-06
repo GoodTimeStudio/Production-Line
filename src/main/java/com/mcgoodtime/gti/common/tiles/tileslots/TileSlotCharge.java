@@ -1,6 +1,10 @@
 package com.mcgoodtime.gti.common.tiles.tileslots;
 
+import com.mcgoodtime.gti.common.tiles.TileContainer;
 import com.mcgoodtime.gti.common.tiles.TileElectricContainer;
+import ic2.api.energy.tile.IEnergySink;
+import ic2.api.energy.tile.IEnergySource;
+import ic2.api.energy.tile.IEnergyTile;
 import ic2.api.item.ElectricItem;
 import net.minecraft.item.ItemStack;
 
@@ -11,8 +15,8 @@ import net.minecraft.item.ItemStack;
  */
 public class TileSlotCharge extends TileSlot {
 
-    public TileSlotCharge(TileElectricContainer tile, SlotMode mode) {
-        super(tile, mode);
+    public TileSlotCharge(IEnergyTile tile, SlotMode mode) {
+        super((TileContainer) tile, mode);
     }
 
     /**
@@ -23,7 +27,12 @@ public class TileSlotCharge extends TileSlot {
     @SuppressWarnings("NumericOverflow")
     @Override
     public boolean canInput(ItemStack itemStack) {
-        return ElectricItem.manager.charge(itemStack, 1.0D / 0.0, ((TileElectricContainer) this.tile).tier, true, true) > 0.0D;
+        if (this.tile instanceof IEnergySink) {
+            return ElectricItem.manager.charge(itemStack, 1.0D / 0.0, ((IEnergySink) this.tile).getSinkTier(), true, true) > 0.0D;
+        } else if (this.tile instanceof IEnergySource) {
+            return ElectricItem.manager.charge(itemStack, 1.0D / 0.0, ((IEnergySource) this.tile).getSourceTier(), true, true) > 0.0D;
+        }
+        return false;
     }
 
     public double charge(double amount) {
