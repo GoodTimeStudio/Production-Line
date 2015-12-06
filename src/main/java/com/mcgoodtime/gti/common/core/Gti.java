@@ -29,10 +29,7 @@ import com.mcgoodtime.gti.common.blocks.fluid.Gas;
 import com.mcgoodtime.gti.common.entity.EntityPackagedSalt;
 import com.mcgoodtime.gti.common.entity.EntityUran238;
 import com.mcgoodtime.gti.common.entity.GtiEntity;
-import com.mcgoodtime.gti.common.init.GtiAchievement;
-import com.mcgoodtime.gti.common.init.GtiBlocks;
-import com.mcgoodtime.gti.common.init.GtiItems;
-import com.mcgoodtime.gti.common.init.GtiRecipes;
+import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.nei.NEIGtiConfig;
 import com.mcgoodtime.gti.common.worldgen.GtiWorldGen;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -103,6 +100,7 @@ public final class Gti {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        GtiOreDictionary.init();
         GtiEntity.init();
         // register Recipes. 注册合成
         GtiRecipes.init();
