@@ -149,37 +149,4 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
         return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1,
                 this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
     }
-
-    /**
-     * Called when the chunk this TileEntity is on is Unloaded.
-     */
-    @Override
-    public void onChunkUnload() {
-        super.onChunkUnload();
-        if (!this.worldObj.isRemote) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
-        }
-    }
-
-    /**
-     * validates a tile entity
-     */
-    @Override
-    public void validate() {
-        super.validate();
-        if (!this.worldObj.isRemote) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
-        }
-    }
-
-    /**
-     * invalidates a tile entity
-     */
-    @Override
-    public void invalidate() {
-        super.invalidate();
-        if (!this.worldObj.isRemote) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
-        }
-    }
 }

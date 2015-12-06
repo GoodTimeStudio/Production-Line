@@ -3,10 +3,8 @@ package com.mcgoodtime.gti.client.gui;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.inventory.ContainerAdvSolar;
 import ic2.core.util.GuiTooltiphelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Created by BestOwl on 2015.12.5.0005.

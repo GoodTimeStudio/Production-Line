@@ -58,14 +58,17 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
     @Override
     public void updateEntity() {
         super.updateEntity();
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
 
-        if((double)this.maxEnergy - this.energy >= 1.0D) {
-            for (TileSlot tileSlot : this.tileSlots) {
-                if (tileSlot instanceof TileSlotDischarge) {
-                    double amount = ((TileSlotDischarge) tileSlot).discharge((double) this.maxEnergy - this.energy, false);
-                    if(amount > 0.0D) {
-                        this.energy += amount;
-                        this.markDirty();
+            if((double)this.maxEnergy - this.energy >= 1.0D) {
+                for (TileSlot tileSlot : this.tileSlots) {
+                    if (tileSlot instanceof TileSlotDischarge) {
+                        double amount = ((TileSlotDischarge) tileSlot).discharge((double) this.maxEnergy - this.energy, false);
+                        if(amount > 0.0D) {
+                            this.energy += amount;
+                            this.markDirty();
+                        }
                     }
                 }
             }
@@ -151,17 +154,6 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
         super.onChunkUnload();
         if (!this.worldObj.isRemote) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
-        }
-    }
-
-    /**
-     * validates a tile entity
-     */
-    @Override
-    public void validate() {
-        super.validate();
-        if (!this.worldObj.isRemote) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
         }
     }
 

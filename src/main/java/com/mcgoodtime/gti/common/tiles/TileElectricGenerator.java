@@ -25,9 +25,12 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import ic2.api.energy.EnergyNet;
+import ic2.api.energy.event.EnergyTileLoadEvent;
+import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySource;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
@@ -50,6 +53,14 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
         this.tier = tier;
         this.maxEnergy = maxEnergy;
         this.powerTick = EnergyNet.instance.getPowerFromTier(tier);
+    }
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
+        }
     }
 
     @Override
@@ -112,5 +123,27 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     @Override
     public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
         return true;
+    }
+
+    /**
+     * Called when the chunk this TileEntity is on is Unloaded.
+     */
+    @Override
+    public void onChunkUnload() {
+        super.onChunkUnload();
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+        }
+    }
+
+    /**
+     * invalidates a tile entity
+     */
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+        }
     }
 }
