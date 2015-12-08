@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IBoxable;
-import ic2.api.item.IElectricItem;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -19,27 +18,17 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public class ItemCEU extends ItemGti implements IElectricItem, IBoxable {
+public class ItemCEU extends ItemElectricGti implements IBoxable {
 
-    public int maxPowerTick;
-    public int maxEnergy;
-    public int tier;
-    public IIcon[] icons;
+    private IIcon[] icons;
 
     public ItemCEU() {
-        super("ItemCEU");
-        this.setMaxDamage(27);
-        this.setHasSubtypes(true);
-        this.setMaxStackSize(1);
-
-        this.icons = new IIcon[5];
-        this.tier = 1;
-        this.maxEnergy = 20000;
-        this.maxPowerTick = 32;
+        super("CEU", 1, 20000);
     }
 
     @Override
     public void registerIcons(IIconRegister iconRegister) {
+        this.icons = new IIcon[5];
         for (int i = 0; i < 5; i++) {
             this.icons[i] = iconRegister.registerIcon(Gti.RESOURCE_DOMAIN + ":" + "eustorage/itemCEU." + (i + 1));
         }
@@ -67,38 +56,8 @@ public class ItemCEU extends ItemGti implements IElectricItem, IBoxable {
     }
 
     @Override
-    public boolean canBeStoredInToolbox(ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
     public boolean canProvideEnergy(ItemStack itemStack) {
         return true;
-    }
-
-    @Override
-    public Item getChargedItem(ItemStack itemStack) {
-        return this;
-    }
-
-    @Override
-    public Item getEmptyItem(ItemStack itemStack) {
-        return this;
-    }
-
-    @Override
-    public double getMaxCharge(ItemStack itemStack) {
-        return this.maxEnergy;
-    }
-
-    @Override
-    public int getTier(ItemStack itemStack) {
-        return this.tier;
-    }
-
-    @Override
-    public double getTransferLimit(ItemStack itemStack) {
-        return this.maxPowerTick;
     }
 
     @SuppressWarnings({"NumericOverflow", "unchecked"})
@@ -118,5 +77,16 @@ public class ItemCEU extends ItemGti implements IElectricItem, IBoxable {
             ElectricItem.manager.charge(charged, 0.0D, 2147483647, true, false);
             itemList.add(charged);
         }
+    }
+
+    /**
+     * Determine whether an item can be stored in a toolbox or not.
+     *
+     * @param itemstack item to be stored
+     * @return Whether to store the item in the toolbox or not
+     */
+    @Override
+    public boolean canBeStoredInToolbox(ItemStack itemstack) {
+        return true;
     }
 }

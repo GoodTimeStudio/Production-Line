@@ -29,12 +29,11 @@ import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.entity.EntityPackagedSalt;
 import com.mcgoodtime.gti.common.items.*;
 import com.mcgoodtime.gti.common.items.tools.GtiToolMaterial;
+import com.mcgoodtime.gti.common.items.tools.ItemGravityRay;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
 import com.mcgoodtime.gti.common.items.tools.ToolGti;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import ic2.core.init.InternalName;
-import ic2.core.item.ItemBattery;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -45,7 +44,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.EnumHelper;
 
 import java.util.List;
 
@@ -71,6 +69,7 @@ public class GtiItems implements IFuelHandler {
 	public static Item carbonTreetap;
 
     public static Item ceu;
+	public static Item gravityRay;
 
 	public static Item record_MusicSpring;
 	//--------------------------------------
@@ -134,6 +133,7 @@ public class GtiItems implements IFuelHandler {
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
 		salt = new ItemGtiFood("Salt", 0, 10F, true);
         ceu = new ItemCEU();
+		gravityRay = new ItemGravityRay();
 
 		//MultiMetaItem registry
 		new ItemOre();
