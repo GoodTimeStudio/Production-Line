@@ -1,7 +1,7 @@
 package com.mcgoodtime.gti.client;
 
 import com.mcgoodtime.gti.common.core.CommonProxy;
-import com.mcgoodtime.gti.common.entity.EntityThrowableGti;
+import com.mcgoodtime.gti.common.entity.EntityThrowable;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 /**
@@ -13,6 +13,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityThrowableGti.class, new RenderEntityThrowable());
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new RenderEntityThrowable());
     }
 }

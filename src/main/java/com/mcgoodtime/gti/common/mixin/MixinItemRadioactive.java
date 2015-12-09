@@ -2,7 +2,7 @@ package com.mcgoodtime.gti.common.mixin;
 
 import com.mcgoodtime.gti.common.GtiUtil;
 import com.mcgoodtime.gti.common.core.GtiConfig;
-import com.mcgoodtime.gti.common.entity.EntityThrowableGti;
+import com.mcgoodtime.gti.common.entity.EntityThrowable;
 import ic2.core.Ic2Items;
 import ic2.core.init.InternalName;
 import ic2.core.item.ItemIC2;
@@ -28,7 +28,7 @@ public abstract class MixinItemRadioactive extends ItemIC2 {
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
         if (itemStack.isItemEqual(Ic2Items.Uran238)) {
             if (GtiConfig.instance.isThrowableUran238()) {
-                GtiUtil.throwItemByPlayer(new EntityThrowableGti(world, entityPlayer, itemStack));
+                GtiUtil.throwItemByPlayer(new EntityThrowable(world, entityPlayer, itemStack));
             }
         }
         return itemStack;

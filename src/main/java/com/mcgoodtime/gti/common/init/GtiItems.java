@@ -26,7 +26,7 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.GtiUtil;
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.entity.EntityThrowableGti;
+import com.mcgoodtime.gti.common.entity.EntityThrowable;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiFood;
 import com.mcgoodtime.gti.common.items.ItemGtiRecord;
@@ -178,7 +178,7 @@ public class GtiItems implements IFuelHandler {
 			 */
 			@Override
 			public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-				GtiUtil.throwItemByPlayer(new EntityThrowableGti(world, entityPlayer, itemStack));
+				GtiUtil.throwItemByPlayer(new EntityThrowable(world, entityPlayer, itemStack));
 				return itemStack;
 			}
 		};
