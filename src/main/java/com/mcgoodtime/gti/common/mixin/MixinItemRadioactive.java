@@ -52,7 +52,13 @@ public abstract class MixinItemRadioactive extends ItemIC2 {
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
         if (itemStack.isItemEqual(Ic2Items.Uran238)) {
             if (GtiConfig.instance.isThrowableUran238()) {
-                GtiUtil.throwItemByPlayer(new EntityThrowable(world, entityPlayer, itemStack));
+                if (!entityPlayer.capabilities.isCreativeMode) {
+                    --itemStack.stackSize;
+                }
+                world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+                if (!world.isRemote) {
+                    world.spawnEntityInWorld(new EntityThrowable(world, entityPlayer, itemStack));
+                }
             }
         }
         return itemStack;
