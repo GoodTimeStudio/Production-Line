@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,23 +25,102 @@
 
 package com.mcgoodtime.gti.common.tiles;
 
+import com.mcgoodtime.gti.common.recipes.FluidKineticGeneratorRecipes;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlot;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotFluidInput;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotOutput;
 import ic2.api.energy.tile.IKineticSource;
+import ic2.api.tile.IWrenchable;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.*;
 
 /**
  * The BlockFluidKineticGenerator tile.
  *
  * @author liach
  */
-public class TileFluidKineticGenerator extends TileContainer implements IKineticSource, IFluidHandler {
+public class TileFluidKineticGenerator extends TileContainer implements IKineticSource, IFluidHandler, IWrenchable {
+
+    private int timer;
+    public final int kuOutput = 32;
+    public FluidTank fluidTank = new FluidTank(10000);
+
+    public TileFluidKineticGenerator() {
+        this.tileSlots.add(new TileSlotFluidInput(this, FluidKineticGeneratorRecipes.instance, this.fluidTank));
+        this.tileSlots.add(new TileSlotOutput(this));
+    }
 
     @Override
-    public int getSizeInventory() {
-        return 0;
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        this.fluidTank.readFromNBT(nbt.getCompoundTag("fluidTank"));
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+
+        NBTTagCompound fluidTag = new NBTTagCompound();
+        this.fluidTank.writeToNBT(fluidTag);
+        nbt.setTag("fluidTank", fluidTag);
+    }
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+
+        if (!this.worldObj.isRemote) {
+            boolean needUpdate = false;
+
+            if (this.fluidTank.getFluidAmount() <= this.fluidTank.getCapacity()) {
+                for (TileSlot tileSlot : this.tileSlots) {
+                    if (tileSlot instanceof TileSlotFluidInput) {
+                        ((TileSlotFluidInput) tileSlot).drainToTank();
+                        needUpdate = true;
+                    }
+                }
+            }
+
+
+            if (this.fluidTank.getFluid() != null && this.maxrequestkineticenergyTick(ForgeDirection.VALID_DIRECTIONS[this.facing]) > 0) {
+                int amount = 0;
+                for (FluidStack fluidStack : FluidKineticGeneratorRecipes.instance.getProcessRecipesList()) {
+                    if (fluidStack.isFluidEqual(this.fluidTank.getFluid())) {
+                        amount = fluidStack.amount;
+
+                    }
+                }
+
+                if (this.fluidTank.getFluidAmount() >= amount) {
+                    this.setActive(true);
+
+                    if (this.timer == 20) {
+                        this.timer = 0;
+                        this.fluidTank.getFluid().amount -= amount;
+                    }
+                    this.timer++;
+
+                } else {
+                    this.setActive(false);
+                    this.timer = 0;
+                }
+
+                if (this.fluidTank.getFluidAmount() < 0) {
+                    this.fluidTank.getFluid().amount = 0;
+                }
+
+            }
+            else {
+                this.setActive(false);
+            }
+
+            if (needUpdate) {
+                this.markDirty();
+            }
+        }
     }
 
     @Override
@@ -49,14 +128,24 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
         return "FluidKineticGenerator";
     }
 
+    /*
+	 *  Return max kinetic energy transmission peer Tick (only theoretical bandwidth not available amount)
+	 */
     @Override
-    public int maxrequestkineticenergyTick(ForgeDirection forgeDirection) {
-        return 0;
+    public int maxrequestkineticenergyTick(ForgeDirection directionFrom) {
+        return directionFrom.ordinal() != this.facing ? 0 : this.kuOutput;
     }
 
+    /*
+	 * @param requested amount of kinetic energy to transfer
+	 * @return transmitted amount of kineticenergy
+	 *
+	 * example: You Request 100 units of kinetic energy but the Source have only 50 units left
+	 * requestkineticenergy(100) : return 50 : so 50 units of kinetic energy remove from KineticSource
+	 */
     @Override
-    public int requestkineticenergy(ForgeDirection forgeDirection, int i) {
-        return 0;
+    public int requestkineticenergy(ForgeDirection directionFrom, int requestKineticenergy) {
+        return directionFrom.ordinal() != this.facing ? 0 : (this.fluidTank.getFluidAmount() > 0 ? Math.min(this.kuOutput, requestKineticenergy) : 0);
     }
 
     /**
@@ -69,7 +158,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        return 0;
+        return this.canFill(from, resource.getFluid()) ? this.fluidTank.fill(resource, doFill) : 0;
     }
 
     /**
@@ -83,7 +172,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        return null;
+        return resource != null && resource.isFluidEqual(this.fluidTank.getFluid()) ? (!this.canDrain(from, resource.getFluid()) ? null : this.fluidTank.drain(resource.amount, doDrain)) : null;
     }
 
     /**
@@ -99,7 +188,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-        return null;
+        return this.fluidTank.drain(maxDrain, doDrain);
     }
 
     /**
@@ -109,7 +198,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        return false;
+        return true;
     }
 
     /**
@@ -131,6 +220,31 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
      */
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        return new FluidTankInfo[0];
+        return new FluidTankInfo[] {new FluidTankInfo(this.fluidTank.getFluid(), this.fluidTank.getCapacity())};
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int i) {
+        return i != this.facing;
+    }
+
+    @Override
+    public short getFacing() {
+        return this.facing;
+    }
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        return true;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
     }
 }

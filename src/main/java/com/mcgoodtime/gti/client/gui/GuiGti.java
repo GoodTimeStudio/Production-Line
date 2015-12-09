@@ -1,3 +1,27 @@
+/*
+ * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ *
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
+ * Copyright (c) contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.mcgoodtime.gti.client.gui;
 
 import com.mcgoodtime.gti.common.core.Gti;
@@ -26,13 +50,16 @@ public abstract class GuiGti<T extends ContainerGti> extends GuiContainer {
     public GuiGti(T container) {
         super(container);
         this.container = container;
+        this.name = container.tile.getInventoryName();
     }
 
+
+
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+    protected void drawGuiContainerForegroundLayer(int x, int y) {
         this.fontRendererObj.drawString(StatCollector.translateToLocal(Gti.GUI_PREFIX + this.name), (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
         if(this.container.tile instanceof IUpgradableBlock) {
-            GuiTooltiphelper.drawUpgradeslotTooltip(par1 - this.guiLeft, par2 - this.guiTop, 0, 0, 12, 12, (IUpgradableBlock) this.container.tile, 25, 0);
+            GuiTooltiphelper.drawUpgradeslotTooltip(x - this.guiLeft, y - this.guiTop, 0, 0, 12, 12, (IUpgradableBlock) this.container.tile, 25, 0);
         }
     }
 

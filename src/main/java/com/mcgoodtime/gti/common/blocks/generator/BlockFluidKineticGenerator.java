@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,7 +36,7 @@ import net.minecraft.world.World;
 public class BlockFluidKineticGenerator extends BlockContainerGti {
 
     public BlockFluidKineticGenerator() {
-        super(Material.rock, "FluidKineticGenerator");
+        super(Material.iron, "FluidKineticGenerator");
     }
 
     /**
@@ -45,7 +45,7 @@ public class BlockFluidKineticGenerator extends BlockContainerGti {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p1, float p2, float p3, float p4) {
         if (!world.isRemote) {
-            entityPlayer.openGui(Gti.instance, GuiHandler.EnumGui.GenGasKu.ordinal(), world, x, y, z);
+            entityPlayer.openGui(Gti.instance, GuiHandler.EnumGui.FluidKineticGenerator.ordinal(), world, x, y, z);
         } else {
             entityPlayer.isInvisibleToPlayer(entityPlayer);
         }

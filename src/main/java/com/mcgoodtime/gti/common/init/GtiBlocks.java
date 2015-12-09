@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,16 +25,13 @@
 package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.blocks.*;
+import com.mcgoodtime.gti.common.blocks.generator.BlockAdvSolar;
 import com.mcgoodtime.gti.common.blocks.generator.BlockFluidKineticGenerator;
-import com.mcgoodtime.gti.common.core.GtiConfig;
 import com.mcgoodtime.gti.common.items.ItemWaterHyacinth;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-
-import org.apache.logging.log4j.Level;
+import net.minecraft.item.ItemStack;
 
 /**
  * Gti blocks.
@@ -42,33 +39,35 @@ import org.apache.logging.log4j.Level;
  * @author liach
  */
 public class GtiBlocks {
-	public static Block dehydratedWaterHyacinthblock;
-	public static Block compressedWaterHyacinth;
+    public static ItemStack dehydratedWaterHyacinthblock;
+    public static ItemStack compressedWaterHyacinth;
+    public static ItemStack carbonizeFurnace;
+    public static ItemStack heatDryer;
+    public static ItemStack evsu;
+    public static ItemStack cseu;
+    public static ItemStack parallelSpaceSU;
+
+    public static BlockGti pad;
+    public static BlockGti dryLog;
+    public static BlockGti fluidKineticGenerator;
+    public static BlockGti oreIridium;
+    public static BlockGti airBrakeCasing;
+
     public static Block waterHyacinth;
-    public static Block genGasKU;
-    public static Block oreIridium;
-    public static Block carbonizeFurnace;
-    public static Block airBrakeCasing;
-    public static BlockContainer evsu;
-    public static BlockContainer heatDryer;
 
     public static void init() {
+        pad = new BlockGti(Material.rock, "Pad", 1, 0, null, 0);
+        dryLog = new BlockGti(Material.rock, "DryLog", 3, 0, "axe", 0);
         oreIridium = new BlockGti(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
-        compressedWaterHyacinth = new BlockGti(Material.rock, "CompressedWaterHyacinth", 0.5F, 0.3F, null, 0);
-        dehydratedWaterHyacinthblock=new BlockGti(Material.rock, "DehydratedWaterHyacinthBlock", 1.0F, 0.3F, null, 0);
-        carbonizeFurnace = new BlockCarbonizeFurnace();
-        airBrakeCasing = new BlockUtility(Material.iron, "AirBrakeCasing");
+        fluidKineticGenerator = new BlockFluidKineticGenerator();
+        airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
+        new BlockMisc();
+        new BlockMachine();
+        new BlockEUStorage();
+        new BlockAdvSolar();
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();
-        genGasKU = new BlockFluidKineticGenerator();
-        evsu = new BlockEVSU();
-
         GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
-        GameRegistry.registerBlock(evsu, "EVSU");
-
-        GtiConfig.gtiLogger.log(Level.INFO, "waterhyacinth" + Integer.toString(Block.getIdFromBlock(waterHyacinth)));
-        GtiConfig.gtiLogger.log(Level.INFO, "gengasku" + Integer.toString(Block.getIdFromBlock(genGasKU)));
-        GtiConfig.gtiLogger.log(Level.INFO, "carbonizefurnace" + Integer.toString(Block.getIdFromBlock(carbonizeFurnace)));
     }
 }

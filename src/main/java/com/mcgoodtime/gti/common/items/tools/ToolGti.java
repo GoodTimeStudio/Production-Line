@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,16 +26,13 @@ package com.mcgoodtime.gti.common.items.tools;
 
 
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.items.ItemGti;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.IIcon;
 
-import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
-import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
-import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
+import static com.mcgoodtime.gti.common.core.Gti.*;
 
 /**
  * Created by suhao on 2015.7.19.
@@ -43,8 +40,6 @@ import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
  * @author suhao
  */
 public class ToolGti {
-
-    private String name;
 
     public static Item registerPickaxe(ToolMaterial toolMaterial, String name) {
         return new Pickaxe(toolMaterial, name);

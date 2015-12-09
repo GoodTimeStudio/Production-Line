@@ -1,0 +1,24 @@
+package com.mcgoodtime.gti.common.network.message;
+
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+
+/**
+ * Created by BestOwl on 2015.12.4.0004.
+ *
+ * @author BestOwl
+ */
+public class MessageHandlerBase implements IMessageHandler<MessageBase, IMessage> {
+    /**
+     * Called when a message is received of the appropriate type. You can optionally return a reply message, or null if no reply
+     * is needed.
+     *
+     * @param message The message
+     * @return an optional return message
+     */
+    @Override
+    public IMessage onMessage(MessageBase message, MessageContext ctx) {
+        return message.handlerMessage(message, ctx);
+    }
+}

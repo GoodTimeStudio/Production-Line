@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,10 +26,15 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.init.GtiAchievement;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
+import com.mcgoodtime.gti.common.init.GtiItems;
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
 
 /*
  * Created by suhao on 2015/5/17.
@@ -38,7 +43,7 @@ import net.minecraft.item.ItemStack;
 public class GtiEvent {
     @SubscribeEvent
     public void onPlayerCrafting(PlayerEvent.ItemCraftedEvent event) {
-        if (event.crafting.getItem().equals(Item.getItemFromBlock(GtiBlocks.carbonizeFurnace))) {
+        if (event.crafting.getItem().equals(GtiBlocks.carbonizeFurnace.getItem())) {
             event.player.addStat(GtiAchievement.getCarbonizeFurnace, 1);
         }
     }
@@ -50,4 +55,14 @@ public class GtiEvent {
         }
     }
 
+    @SubscribeEvent
+    public void onBucketFill(FillBucketEvent event) {
+        if (event.entityPlayer != null) {
+            BiomeGenBase biome = event.world.getBiomeGenForCoords(event.target.blockX, event.target.blockZ);
+            if (biome == BiomeGenBase.ocean || biome == BiomeGenBase.deepOcean || biome == BiomeGenBase.frozenOcean) {
+                event.setResult(Event.Result.ALLOW);
+                event.result = new ItemStack(GtiItems.saltWaterBucket);
+            }
+        }
+    }
 }

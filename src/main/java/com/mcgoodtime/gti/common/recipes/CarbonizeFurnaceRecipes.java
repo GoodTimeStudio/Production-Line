@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -37,37 +37,26 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public class CarbonizeFurnaceRecipes {
+public class CarbonizeFurnaceRecipes implements IProcessable<CarbonizeFurnaceRecipes.Recipes> {
     public static final CarbonizeFurnaceRecipes instance = new CarbonizeFurnaceRecipes();
 
-    /** The default value after the process */
-    private final float XP = 0.15F;
     /** The list of smelting results. */
     private List<Recipes> processList = new ArrayList<Recipes>();
 
     private CarbonizeFurnaceRecipes() {
+        /* The default value after the process */
+        float XP = 0.15F;
         register(new ItemStack(Blocks.log), new ItemStack(Items.coal, 2, 1), 2000, XP);
         register(new ItemStack(Blocks.log2), new ItemStack(Items.coal, 2, 1), 2000, XP);
         register(new ItemStack(Blocks.planks, 2), new ItemStack(Items.coal, 1, 1), 1500, XP);
-        register(new ItemStack(Items.reeds, 4), new ItemStack(GtiItems.bambooCharcoal), 1500, XP);
-        register(new ItemStack(Items.water_bucket), new ItemStack(GtiItems.salt), 1100, XP);
+        register(new ItemStack(Items.reeds, 4), GtiItems.bambooCharcoal, 1500, XP);
+        register(new ItemStack(GtiItems.saltWaterBucket), new ItemStack(GtiItems.salt), 1100, XP);
     }
 
     public void register(ItemStack input, ItemStack output, double requireEnergy, float xp) {
         processList.add(new Recipes(input, output, requireEnergy, xp));
     }
 
-    /**
-     * Returns the process result of an item.
-     */
-    public Recipes getRecipes(ItemStack itemStack) {
-        for (Recipes recipes : processList) {
-            if (recipes.input.isItemEqual(itemStack)) {
-                return recipes;
-            }
-        }
-        return null;
-    }
 
     /**
      * Returns the process result of an item.
@@ -82,17 +71,48 @@ public class CarbonizeFurnaceRecipes {
     }
 
     /**
+     * @return Whether this item can process
+     */
+    @Override
+    public boolean canProcess(ItemStack itemStack) {
+        for (Recipes recipes : this.processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Get required amount of process
      * @param itemStack Input item
      * @return Required amount of process
      */
     public int getRequiredProcessAmount(ItemStack itemStack) {
-        for (Recipes recipes : processList) {
+        for (Recipes recipes : this.processList) {
             if (recipes.input.isItemEqual(itemStack)) {
                 return recipes.input.stackSize;
             }
         }
         return 1;
+    }
+
+    @Override
+    public List<Recipes> getProcessRecipesList() {
+        return this.processList;
+    }
+
+    /**
+     * @param itemStack Input item
+     */
+    @Override
+    public Recipes getRecipe(ItemStack itemStack) {
+        for (Recipes recipes : this.processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return recipes;
+            }
+        }
+        return null;
     }
 
     public static class Recipes {

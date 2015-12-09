@@ -1,7 +1,7 @@
 /*
  * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 Minecraft-GoodTime <http://github.com/Minecraft-GoodTime>
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,7 +27,6 @@ package com.mcgoodtime.gti.common;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GtiConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -38,7 +37,9 @@ import org.apache.logging.log4j.Level;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by suhao on 2015.10.23.0023.
@@ -89,17 +90,6 @@ public class GtiPotion extends Potion {
     }
 
     /**
-     * If the standard PotionEffect text (name and duration) should be drawn when this potion is active.
-     *
-     * @param effect the active PotionEffect
-     * @return true to draw the standard text
-     */
-    @Override
-    public boolean shouldRenderInvText(PotionEffect effect) {
-        return false;
-    }
-
-    /**
      * Called to draw the this Potion onto the player's inventory when it's active.
      * This can be used to e.g. render Potion icons from your own texture.
      *
@@ -110,19 +100,14 @@ public class GtiPotion extends Potion {
      */
     @Override
     public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
-        mc.getTextureManager().bindTexture(new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/gui/potion.png"));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Gti.RESOURCE_DOMAIN, "textures/gui/misc.png"));
         mc.currentScreen.drawTexturedModalRect(x + 6, y + 7, 0, 0, 18, 18);
-        if (effect instanceof GtiEffect) {
-            String s = I18n.format(effect.getEffectName()) + " " + ((GtiEffect) effect).level + 1;
-            mc.currentScreen.drawString(mc.fontRenderer, s, x + 10 + 18, y + 6, 16777215);
-        }
-
     }
 
     public boolean isReady(GtiEffect effect) {
         if (this.id == salty.id) {
-            if (effect.level > 14) {
-                effect.level = 0;
+            if (effect.level > 15) {
+                effect.level = 15;
             }
 
             //20ticks = 1s
@@ -133,7 +118,8 @@ public class GtiPotion extends Potion {
             if (effect.timer == 20) {
                 effect.timer = 0;
                 --effect.level;
-                effect.hp = effect.level / 3;
+                effect.hp = (effect.level / 3) + 1;
+
                 return true;
             }
         }
@@ -147,36 +133,17 @@ public class GtiPotion extends Potion {
     }
 
     public void applyPotion(EntityLivingBase entityLivingBase, int durationTime, int level) {
+        if (entityLivingBase.isPotionActive(salty)) {
+            level += ((GtiEffect) entityLivingBase.getActivePotionEffect(salty)).level;
+        }
+
         GtiEffect effect = new GtiEffect(this.id, durationTime, level);
+
+        if (this.id == salty.id) {
+            effect.setPotionDurationMax(true);
+        }
+
         effect.setCurativeItems(this.curativeItems);
         entityLivingBase.addPotionEffect(effect);
-    }
-
-    public static class GtiEffect extends PotionEffect {
-        private float hp = 1F;
-        private int timer;
-        private int level = this.getAmplifier();
-        private int id = this.getPotionID();
-
-        public GtiEffect(int id, int durationTime, int level) {
-            super(id, durationTime, level);
-            if (id == salty.id) {
-                timer = 20;
-            }
-        }
-
-        @Override
-        public boolean onUpdate(EntityLivingBase entityLivingBase) {
-            if (this.id == salty.id) {
-                if (this.level > 0) {
-                    if (((GtiPotion)Potion.potionTypes[this.id]).isReady(this)) {
-                        ((GtiPotion) Potion.potionTypes[this.id]).performEffect(entityLivingBase, hp);
-                    }
-                    return true;
-                }
-            }
-
-            return false;
-        }
     }
 }

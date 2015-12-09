@@ -1,13 +1,34 @@
+/*
+ * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ *
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
+ * Copyright (c) contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.mcgoodtime.gti.common.tiles;
 
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlot;
+import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotDischarge;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySink;
-import ic2.api.info.Info;
-import ic2.api.item.ElectricItem;
-import ic2.core.item.ItemBatterySU;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,57 +41,36 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public abstract class TileElectricContainer extends TileContainer implements IEnergySink {
 
-    public final int energyPerTick;
+    public final int energyTick;
     /** The number of remaining battery */
     public double energy;
     /** The number of that can storage battery */
     public final int maxEnergy;
     /** Determine the tier of this energy sink */
     public int tier;
-    public final int dischargeSlotIndex;
 
-    public TileElectricContainer (int energyPerTick, int maxEnergy, int sinkTier, int dischargeSlotIndex) {
-        this.energyPerTick = energyPerTick;
+    public TileElectricContainer (int energyTick, int maxEnergy, int sinkTier) {
+        this.energyTick = energyTick;
         this.maxEnergy = maxEnergy;
         this.tier = sinkTier;
-        this.dischargeSlotIndex = dischargeSlotIndex;
     }
 
     @Override
     public void updateEntity() {
         super.updateEntity();
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
 
-        if((double)this.maxEnergy - this.energy >= 1.0D) {
-            double amount = discharge(dischargeSlotIndex, (double) this.maxEnergy - this.energy, false);
-            if(amount > 0.0D) {
-                this.energy += amount;
-                this.markDirty();
-            }
-        }
-    }
-
-    public double discharge(int index, double amount, boolean ignoreLimit) {
-        if(amount <= 0.0D) {
-            throw new IllegalArgumentException("Amount must be > 0.");
-        } else {
-            ItemStack stack = this.containerItemsList.get(index);
-            if(stack == null) {
-                return 0.0D;
-            } else {
-                double realAmount = ElectricItem.manager.discharge(stack, amount, this.tier, ignoreLimit, true, false);
-                if(realAmount <= 0.0D) {
-                    realAmount = Info.itemEnergy.getEnergyValue(stack);
-                    if(realAmount <= 0.0D) {
-                        return 0.0D;
-                    }
-
-                    --stack.stackSize;
-                    if(stack.stackSize <= 0) {
-                        this.containerItemsList.set(index, null);
+            if((double)this.maxEnergy - this.energy >= 1.0D) {
+                for (TileSlot tileSlot : this.tileSlots) {
+                    if (tileSlot instanceof TileSlotDischarge) {
+                        double amount = ((TileSlotDischarge) tileSlot).discharge((double) this.maxEnergy - this.energy, false);
+                        if(amount > 0.0D) {
+                            this.energy += amount;
+                            this.markDirty();
+                        }
                     }
                 }
-
-                return realAmount;
             }
         }
     }
@@ -152,24 +152,19 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
-        MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+        }
     }
 
     /**
-     * validates a tile entity
+     * invalidates a tile entity
      */
     @Override
-    public void validate() {
-        super.validate();
-        MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
+    public void invalidate() {
+        super.invalidate();
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+        }
     }
-
-    /**
-     * Check whether the items can provide energy
-     * @param stack item.
-     */
-    public boolean isDischargeItem(ItemStack stack) {
-        return stack != null && (!(stack.getItem() != Items.redstone && !(stack.getItem() instanceof ItemBatterySU)) || ElectricItem.manager.discharge(stack, 1.0D / 0.0, this.tier, true, true, true) > 0.0D);
-    }
-
 }

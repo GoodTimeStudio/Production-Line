@@ -1,9 +1,36 @@
+/*
+ * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ *
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
+ * Copyright (c) contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.mcgoodtime.gti.common.tiles;
 
 import ic2.api.energy.EnergyNet;
+import ic2.api.energy.event.EnergyTileLoadEvent;
+import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySource;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
@@ -15,7 +42,6 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
 
     /** energy output/tick */
     public double powerTick;
-    public int fuel = 0;
     /** The number of remaining battery */
     public double energy;
     /** The number of that can storage battery */
@@ -30,18 +56,22 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     }
 
     @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
+        }
+    }
+
+    @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-
-        this.powerTick = nbt.getInteger("fuel");
         this.energy = nbt.getDouble("energy");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-
-        nbt.setInteger("fuel", this.fuel);
         nbt.setDouble("energy", this.energy);
     }
 
@@ -93,5 +123,27 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     @Override
     public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
         return true;
+    }
+
+    /**
+     * Called when the chunk this TileEntity is on is Unloaded.
+     */
+    @Override
+    public void onChunkUnload() {
+        super.onChunkUnload();
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+        }
+    }
+
+    /**
+     * invalidates a tile entity
+     */
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        if (!this.worldObj.isRemote) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+        }
     }
 }

@@ -27,6 +27,10 @@ repositories {
         name = "sponge"
         url = "http://repo.spongepowered.org/maven"
     }
+    maven {
+        name = "chickenbones"
+        url = "http://chickenbones.net/maven"
+    }
 }
 
 configurations {
@@ -39,11 +43,14 @@ configurations {
 dependencies {
     shade 'org.spongepowered:mixin:0.4.5-SNAPSHOT'
     compile 'net.industrial-craft:industrialcraft-2:2.2.748-experimental:dev' //adds newest ic2 to the dev env
+    compile 'codechicken:NotEnoughItems:1.7.10-1.0.4.79:dev'
+    compile 'codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev'
+    compile 'codechicken:CodeChickenLib:1.7.10-1.1.1.99:dev'
     checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
 }
 
 minecraft {
-    version = "1.7.10-10.13.4.1492-1.7.10"
+    version = "1.7.10-10.13.4.1558-1.7.10"
     runDir = "eclipse"
 }
 
@@ -51,7 +58,22 @@ checkstyle {
     toolVersion = "6.7" 
 }
 
-compileJava.options.encoding = 'UTF-8'
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += [
+            '-Xlint:-processing',
+            "-AreobfSrgFile=${project.file('build/srgs/mcp-srg.srg').canonicalPath}"
+    ]
+}
+
+task copySrgs(type: Copy, dependsOn: 'genSrgs') {
+    from project.plugins.getPlugin('forge').delayedFile('{SRG_DIR}')
+
+    include '**/*.srg'
+    into 'build/srgs'
+}
+
+compileJava.dependsOn copySrgs
 
 sourceSets {
     main {
