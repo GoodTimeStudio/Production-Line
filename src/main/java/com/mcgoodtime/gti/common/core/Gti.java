@@ -24,8 +24,10 @@
  */
 package com.mcgoodtime.gti.common.core;
 
+import com.mcgoodtime.gti.client.RenderEntityThrowable;
 import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
+import com.mcgoodtime.gti.common.entity.EntityThrowable;
 import com.mcgoodtime.gti.common.entity.GtiEntity;
 import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.nei.NEIGtiConfig;
@@ -144,8 +146,7 @@ public final class Gti {
     public static class ClientProxy extends CommonProxy {
         @Override
         public void init() {
-            RenderingRegistry.registerEntityRenderingHandler(EntityUran238.class, new RenderSnowball(Ic2Items.Uran238.getItem()));
-            RenderingRegistry.registerEntityRenderingHandler(EntityPackagedSalt.class, new RenderSnowball(GtiItems.packagedSalt));
+            RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new RenderEntityThrowable());
         }
     }
 }
