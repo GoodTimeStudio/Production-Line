@@ -24,10 +24,10 @@
  */
 package com.mcgoodtime.gti.common.core;
 
+import com.mcgoodtime.gti.client.RenderEntityThrowable;
 import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
-import com.mcgoodtime.gti.common.entity.EntityPackagedSalt;
-import com.mcgoodtime.gti.common.entity.EntityUran238;
+import com.mcgoodtime.gti.common.entity.EntityThrowable;
 import com.mcgoodtime.gti.common.entity.GtiEntity;
 import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.nei.NEIGtiConfig;
@@ -41,8 +41,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ic2.core.Ic2Items;
-import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.AchievementPage;
@@ -94,6 +92,7 @@ public final class Gti {
         FluidRegistry.registerFluid(Gas.gasNatural);
         //register Items. 注册物品
         GtiItems.init();
+        GtiEntity.init();
         GtiPotion.initPotion();
         proxy.init();
     }
@@ -145,8 +144,7 @@ public final class Gti {
     public static class ClientProxy extends CommonProxy {
         @Override
         public void init() {
-            RenderingRegistry.registerEntityRenderingHandler(EntityUran238.class, new RenderSnowball(Ic2Items.Uran238.getItem()));
-            RenderingRegistry.registerEntityRenderingHandler(EntityPackagedSalt.class, new RenderSnowball(GtiItems.packagedSalt));
+            RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new RenderEntityThrowable());
         }
     }
 }

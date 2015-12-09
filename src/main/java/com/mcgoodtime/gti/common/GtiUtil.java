@@ -6,8 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentTranslation;
 
 /**
- * Created by BestOwl on 2015.11.14.0014.
+ * Created by BestOwl on 2015.11.2.0002.
  *
+ * Gti Util
  * @author BestOwl
  */
 public class GtiUtil {

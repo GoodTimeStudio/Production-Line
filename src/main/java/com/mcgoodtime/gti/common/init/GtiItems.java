@@ -26,7 +26,7 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.core.GtiConfig;
-import com.mcgoodtime.gti.common.entity.EntityPackagedSalt;
+import com.mcgoodtime.gti.common.entity.EntityThrowable;
 import com.mcgoodtime.gti.common.items.*;
 import com.mcgoodtime.gti.common.items.tools.GtiToolMaterial;
 import com.mcgoodtime.gti.common.items.tools.ItemGravityRay;
@@ -124,12 +124,14 @@ public class GtiItems implements IFuelHandler {
 	public static ItemStack coarseBatten;
 
 	public static void init() {
+
 		ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
 		bronzeTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
 		leadTreetap = new ItemGtiTreetap("LeadTreetap", 48);
 		refinedIronTreetap = new ItemGtiTreetap("RefinedIronTreetap", 64);
 		advancedAlloyTreetap = new ItemGtiTreetap("AdvancedAlloyTreetap", 64);
 		carbonTreetap = new ItemGtiTreetap("CarbonTreetap", 128);
+
         record_MusicSpring = new ItemGtiRecord("record_MusicSpring");
 		salt = new ItemGtiFood("Salt", 0, 10F, true);
         ceu = new ItemCEU();
@@ -175,7 +177,7 @@ public class GtiItems implements IFuelHandler {
 					}
 					world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 					if (!world.isRemote) {
-						world.spawnEntityInWorld(new EntityPackagedSalt(world, entityPlayer));
+						world.spawnEntityInWorld(new EntityThrowable(world, entityPlayer, itemStack));
 					}
 				}
 
