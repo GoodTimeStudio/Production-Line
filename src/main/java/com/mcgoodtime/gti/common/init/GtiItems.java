@@ -26,7 +26,6 @@ package com.mcgoodtime.gti.common.init;
 
 import com.mcgoodtime.gti.common.GtiUtil;
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.entity.EntityPackedSalt;
 import com.mcgoodtime.gti.common.entity.EntityThrowableGti;
 import com.mcgoodtime.gti.common.items.ItemGti;
 import com.mcgoodtime.gti.common.items.ItemGtiFood;
@@ -34,7 +33,6 @@ import com.mcgoodtime.gti.common.items.ItemGtiRecord;
 import com.mcgoodtime.gti.common.items.tools.GtiToolMaterial;
 import com.mcgoodtime.gti.common.items.tools.ItemGtiTreetap;
 import com.mcgoodtime.gti.common.items.tools.ToolGti;
-
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.resources.I18n;
@@ -180,7 +178,7 @@ public class GtiItems implements IFuelHandler {
 			 */
 			@Override
 			public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-				GtiUtil.throwItemByPlayer(new EntityThrowableGti(world, entityPlayer), itemStack);
+				GtiUtil.throwItemByPlayer(new EntityThrowableGti(world, entityPlayer, itemStack));
 				return itemStack;
 			}
 		};

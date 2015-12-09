@@ -26,9 +26,11 @@ package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
-import com.mcgoodtime.gti.common.entity.EntityUran238;
 import com.mcgoodtime.gti.common.entity.GtiEntity;
-import com.mcgoodtime.gti.common.init.*;
+import com.mcgoodtime.gti.common.init.GtiAchievement;
+import com.mcgoodtime.gti.common.init.GtiBlocks;
+import com.mcgoodtime.gti.common.init.GtiItems;
+import com.mcgoodtime.gti.common.init.Recipes;
 import com.mcgoodtime.gti.common.network.GtiNetwork;
 import com.mcgoodtime.gti.common.worldgen.GtiWorldGen;
 import cpw.mods.fml.common.FMLCommonHandler;

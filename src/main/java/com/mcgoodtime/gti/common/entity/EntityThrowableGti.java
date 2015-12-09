@@ -1,11 +1,14 @@
 package com.mcgoodtime.gti.common.entity;
 
+import com.mcgoodtime.gti.common.GtiUtil;
 import cpw.mods.fml.common.registry.IThrowableEntity;
+import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
@@ -16,50 +19,60 @@ import net.minecraft.world.World;
  *
  * @author BwstOwl
  */
-public class EntityThrowableGti extends Entity implements IThrowableEntity {
+public class EntityThrowableGti extends EntityThrowable {
 
     public EntityThrowableGti(World world) {
         super(world);
     }
 
-    @Override
-    protected void entityInit() {
-
+    public EntityThrowableGti(World world, double x, double y, double z) {
+        super(world, x, y, z);
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    @Override
-    protected void readEntityFromNBT(NBTTagCompound p_70037_1_) {
+    public EntityThrowableGti(World world, EntityLivingBase entityLivingBase, ItemStack itemStack) {
+        super(world, entityLivingBase);
+        this.setThrowItem(itemStack);
+    }
 
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.getDataWatcher().addObjectByDataType(23, 5);
     }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     @Override
-    protected void writeEntityToNBT(NBTTagCompound p_70014_1_) {
-
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setTag("throwItem", this.getThrowItem().getTagCompound());
     }
 
     /**
-     * Gets the entity that threw/created this entity.
-     *
-     * @return The owner instance, Null if none.
+     * (abstract) Protected helper method to read subclass entity data from NBT.
      */
     @Override
-    public Entity getThrower() {
-        return null;
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.readEntityFromNBT(nbt);
+        this.setThrowItem(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("throwItem")));
+    }
+
+    public ItemStack getThrowItem() {
+        return this.getDataWatcher().getWatchableObjectItemStack(23);
+    }
+
+    public void setThrowItem(ItemStack itemStack) {
+        DataWatcher watcher = this.getDataWatcher();
+        watcher.updateObject(23, itemStack.copy());
+        watcher.setObjectWatched(23);
     }
 
     /**
-     * Sets the entity that threw/created this entity.
-     *
-     * @param entity The new thrower/creator.
+     * Called when this EntityThrowable hits a block or entity.
      */
     @Override
-    public void setThrower(Entity entity) {
+    protected void onImpact(MovingObjectPosition movingObjectPosition) {
 
     }
 }

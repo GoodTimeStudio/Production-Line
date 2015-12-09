@@ -1,20 +1,15 @@
 package com.mcgoodtime.gti.common;
 
-import com.mcgoodtime.gti.common.entity.EntityUran238;
-import ic2.core.IC2Potion;
-import ic2.core.Ic2Items;
-import net.minecraft.entity.Entity;
+import com.mcgoodtime.gti.common.entity.EntityThrowableGti;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -26,18 +21,14 @@ import java.util.Random;
  */
 public class GtiUtil {
 
-    public static void throwItemByPlayer(EntityThrowable entity, ItemStack itemStack) {
+    public static void throwItemByPlayer(EntityThrowable entity) {
         if (!((EntityPlayer) entity.getThrower()).capabilities.isCreativeMode) {
-            --itemStack.stackSize;
+            --((EntityThrowableGti) entity).getThrowItem().stackSize;
         }
         entity.worldObj.playSoundAtEntity(entity.getThrower(), "random.bow", 0.5F, 0.4F / (new Random().nextFloat() * 0.4F + 0.8F));
         if (!entity.worldObj.isRemote) {
             entity.worldObj.spawnEntityInWorld(entity);
         }
-    }
-
-    public static void onThrowItemImpact(MovingObjectPosition objectPosition, EntityThrowable throwable, Item item) {
-        onThrowItemImpact(objectPosition, throwable, item, null, 0, 0);
     }
 
     public static void onThrowItemImpact(MovingObjectPosition objectPosition, EntityThrowable throwable, Item item, Potion potion, int potionTime, int level) {

@@ -1,10 +1,14 @@
 package com.mcgoodtime.gti.client;
 
-import com.mcgoodtime.gti.common.entity.EntityThrowableGti;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.item.ItemPotion;
+import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -15,7 +19,9 @@ import org.lwjgl.opengl.GL12;
  *
  * @author BestOwl
  */
+@SideOnly(Side.CLIENT)
 public class RenderEntityThrowable extends Render {
+
     /**
      * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
      * handing it off to a worker function which does the actual work. In all probabilty, the class Render is generic
@@ -23,22 +29,34 @@ public class RenderEntityThrowable extends Render {
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
     @Override
-    public void doRender(Entity entity, double x, double y, double z, float f, float f1) {
-        if (entity instanceof EntityThrowableGti) {
-            IIcon iicon = ((EntityThrowableGti) entity).getEntityItem().getItem().getIconFromDamage(((EntityThrowableGti) entity).getEntityItem().getItemDamage());
+    public void doRender(Entity entity, double d, double d1, double d2, float f, float f1) {
 
-            if (iicon != null) {
+        IIcon iicon = entity.getDataWatcher().getWatchableObjectItemStack(23).getIconIndex();
+
+        if (iicon != null)
+        {
+            GL11.glPushMatrix();
+            GL11.glTranslatef((float)d, (float)d1, (float)d2);
+            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+            GL11.glScalef(0.5F, 0.5F, 0.5F);
+            this.bindEntityTexture(entity);
+            Tessellator tessellator = Tessellator.instance;
+
+            if (iicon == ItemPotion.func_94589_d("bottle_splash")) {
+                int i = PotionHelper.func_77915_a(((EntityPotion)entity).getPotionDamage(), false);
+                float f2 = (float)(i >> 16 & 255) / 255.0F;
+                float f3 = (float)(i >> 8 & 255) / 255.0F;
+                float f4 = (float)(i & 255) / 255.0F;
+                GL11.glColor3f(f2, f3, f4);
                 GL11.glPushMatrix();
-                GL11.glTranslatef((float)x, (float)y, (float)z);
-                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-                GL11.glScalef(0.5F, 0.5F, 0.5F);
-                this.bindEntityTexture(entity);
-                Tessellator tessellator = Tessellator.instance;
-
-                this.draw(tessellator, iicon);
-                GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+                this.draw(tessellator, ItemPotion.func_94589_d("overlay"));
                 GL11.glPopMatrix();
+                GL11.glColor3f(1.0F, 1.0F, 1.0F);
             }
+
+            this.draw(tessellator, iicon);
+            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+            GL11.glPopMatrix();
         }
     }
 
@@ -54,10 +72,10 @@ public class RenderEntityThrowable extends Render {
         GL11.glRotatef(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
         tessellator.startDrawingQuads();
         tessellator.setNormal(0.0F, 1.0F, 0.0F);
-        tessellator.addVertexWithUV((double) (0.0F - f5), (double) (0.0F - f6), 0.0D, (double) f, (double) f3);
-        tessellator.addVertexWithUV((double) (f4 - f5), (double) (0.0F - f6), 0.0D, (double) f1, (double) f3);
-        tessellator.addVertexWithUV((double) (f4 - f5), (double) (f4 - f6), 0.0D, (double) f1, (double) f2);
-        tessellator.addVertexWithUV((double) (0.0F - f5), (double) (f4 - f6), 0.0D, (double) f, (double) f2);
+        tessellator.addVertexWithUV((double)(0.0F - f5), (double)(0.0F - f6), 0.0D, (double)f, (double)f3);
+        tessellator.addVertexWithUV((double)(f4 - f5), (double)(0.0F - f6), 0.0D, (double)f1, (double)f3);
+        tessellator.addVertexWithUV((double)(f4 - f5), (double)(f4 - f6), 0.0D, (double)f1, (double)f2);
+        tessellator.addVertexWithUV((double)(0.0F - f5), (double)(f4 - f6), 0.0D, (double)f, (double)f2);
         tessellator.draw();
     }
 
@@ -66,6 +84,6 @@ public class RenderEntityThrowable extends Render {
      */
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
-        return entity instanceof EntityThrowableGti ? RenderManager.instance.renderEngine.getResourceLocation(((EntityThrowableGti) entity).getEntityItem().getItemSpriteNumber()) : null;
+        return TextureMap.locationItemsTexture;
     }
 }
