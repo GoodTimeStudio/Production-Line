@@ -25,8 +25,10 @@
 package com.mcgoodtime.gti.common.core;
 
 import com.mcgoodtime.gti.client.RenderEntityThrowable;
+import com.mcgoodtime.gti.client.RenderEntityRay;
 import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
+import com.mcgoodtime.gti.common.entity.EntityRay;
 import com.mcgoodtime.gti.common.entity.EntityThrowable;
 import com.mcgoodtime.gti.common.entity.GtiEntity;
 import com.mcgoodtime.gti.common.event.GtiEvent;
@@ -146,6 +148,7 @@ public final class Gti {
         @Override
         public void init() {
             RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new RenderEntityThrowable());
+            RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, new RenderEntityRay());
         }
     }
 }

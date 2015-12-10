@@ -34,13 +34,14 @@ import net.minecraft.entity.Entity;
  */
 public class GtiEntity {
 
+    private static int id = 0;
+
     public static void registerEntities(Class<? extends Entity> entity, String name) {
-        int entityID = EntityRegistry.findGlobalUniqueEntityId();
-        EntityRegistry.registerGlobalEntityID(entity, name, entityID);
-        EntityRegistry.registerModEntity(entity, name, entityID, Gti.instance, 64, 1, true);
+        EntityRegistry.registerModEntity(entity, name, id++, Gti.instance, 64, 1, true);
     }
 
     public static void init() {
-        registerEntities(EntityThrowable.class, "ThrowableGti");
+        registerEntities(EntityThrowable.class, "Throwable");
+        registerEntities(EntityRay.class, "Ray");
     }
 }
