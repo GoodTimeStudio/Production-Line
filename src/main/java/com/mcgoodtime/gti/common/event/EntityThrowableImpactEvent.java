@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.gti.common.event;
 
+import com.mcgoodtime.gti.common.entity.EntityThrowable;
 import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.util.MovingObjectPosition;
 
@@ -35,9 +36,11 @@ import net.minecraft.util.MovingObjectPosition;
 public class EntityThrowableImpactEvent extends Event {
 
     public final MovingObjectPosition movingObjectPosition;
+    public final EntityThrowable entityThrowable;
 
-    public EntityThrowableImpactEvent(MovingObjectPosition movingObjectPosition) {
+    public EntityThrowableImpactEvent(EntityThrowable entityThrowable, MovingObjectPosition movingObjectPosition) {
         super();
         this.movingObjectPosition = movingObjectPosition;
+        this.entityThrowable = entityThrowable;
     }
 }

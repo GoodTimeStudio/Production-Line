@@ -24,12 +24,14 @@
  */
 package com.mcgoodtime.gti.common.entity;
 
+import com.mcgoodtime.gti.common.event.EntityThrowableImpactEvent;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Created by suhao on 2015.11.4.0004.
@@ -89,5 +91,7 @@ public class EntityThrowable extends net.minecraft.entity.projectile.EntityThrow
      * Called when this EntityThrowable hits a block or entity.
      */
     @Override
-    protected void onImpact(MovingObjectPosition movingObjectPosition) {}
+    protected void onImpact(MovingObjectPosition movingObjectPosition) {
+        MinecraftForge.EVENT_BUS.post(new EntityThrowableImpactEvent(this, movingObjectPosition));
+    }
 }
