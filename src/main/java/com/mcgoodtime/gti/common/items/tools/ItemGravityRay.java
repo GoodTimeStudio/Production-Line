@@ -1,6 +1,7 @@
 package com.mcgoodtime.gti.common.items.tools;
 
 import com.mcgoodtime.gti.common.core.Gti;
+import com.mcgoodtime.gti.common.entity.EntityRay;
 import com.mcgoodtime.gti.common.items.ItemElectricGti;
 import ic2.api.item.ElectricItem;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -21,6 +22,31 @@ public class ItemGravityRay extends ItemElectricGti {
 
     public ItemGravityRay() {
         super("GravityRay", 3, (int) 11E6);
+    }
+
+    /**
+     * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
+     */
+    @Override
+    public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer player, int itemInUseCount) {
+        if (ElectricItem.manager.getCharge(itemStack) >= 100) {
+            int i = this.getMaxItemUseDuration(itemStack) - itemInUseCount;
+
+            float damge = (float) i / 20.0F;
+            damge = (damge * damge + damge * 2.0F) / 3.0F;
+            if ((double)damge < 0.1D) {
+                return;
+            }
+            if (damge > 1.0F) {
+                damge = 1.0F;
+            }
+
+            world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + damge * 0.5F);
+            ElectricItem.manager.discharge(itemStack, 100, this.tier, false, true, false);
+            if (!world.isRemote) {
+                world.spawnEntityInWorld(new EntityRay(world, player, damge * 2.0F));
+            }
+        }
     }
 
     /**
