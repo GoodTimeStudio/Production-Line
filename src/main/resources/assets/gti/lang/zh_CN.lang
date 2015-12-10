@@ -95,7 +95,8 @@ item.gti.SaltWaterBucket.name=咸水桶
 item.gti.AdvSolarLensUnit.name=聚能镜片单元
 item.gti.AdvSolarLensGroup.name=聚能镜片组
 item.gti.AdvSolarLensCluster.name=聚能镜片簇
-item.gti.ItemCEU.name=CEU
+item.gti.CEU.name=CEU
+item.gti.GravityRay.name=重力势能
 
 item.gti.food.DiamondApple.name=钻石苹果
 
@@ -104,6 +105,10 @@ item.gti.record_TheSaltwaterRoom.name=TheSaltwaterRoom
 item.gti.record_TheSaltwaterRoom.desc=TheSaltwaterRoom -- Owl City
 item.gti.record_MusicSpring.name=MusicSpring
 item.gti.record_MusicSpring.desc=MusicSpring -- Seedking
+
+[entity]
+entity.gti.Throwable.name=可投掷实体
+entity.gti.Ray.name=重力势能
 
 [achievement]
 achievement.CarbonizeFurnace=缺氧燃烧技术
@@ -114,11 +119,8 @@ achievement.getIrOre.desc=挖到一个铱矿石
 [tooltip]
 gti.tooltip.CarbonizeFurnace=缺氧燃烧，燃烧能力有限
 
-item.gti.record_TheSaltwaterRoom.desc1=充满海水的房间
-item.gti.record_TheSaltwaterRoom.desc2=Owl City
 item.gti.record_MusicSpring.desc1=乐泉
 item.gti.record_MusicSpring.desc2=Seedking
-
 
 item.gti.SmallCompressedWaterHyacinth.desc1=不敢想象如此小块居然融合了八棵水葫芦的精华
 item.gti.HeatInsulationMaterial.desc1=这货的唯一用处就是制作隔热板
