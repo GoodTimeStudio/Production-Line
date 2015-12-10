@@ -29,6 +29,7 @@ import com.mcgoodtime.gti.common.GtiPotion;
 import com.mcgoodtime.gti.common.blocks.fluid.Gas;
 import com.mcgoodtime.gti.common.entity.EntityThrowable;
 import com.mcgoodtime.gti.common.entity.GtiEntity;
+import com.mcgoodtime.gti.common.event.GtiEvent;
 import com.mcgoodtime.gti.common.init.*;
 import com.mcgoodtime.gti.common.nei.NEIGtiConfig;
 import com.mcgoodtime.gti.common.worldgen.GtiWorldGen;

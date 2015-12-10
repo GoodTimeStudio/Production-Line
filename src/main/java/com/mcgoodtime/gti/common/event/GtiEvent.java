@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.core;
+package com.mcgoodtime.gti.common.event;
 
 import com.mcgoodtime.gti.common.init.GtiAchievement;
 import com.mcgoodtime.gti.common.init.GtiBlocks;
@@ -30,9 +30,7 @@ import com.mcgoodtime.gti.common.init.GtiItems;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
