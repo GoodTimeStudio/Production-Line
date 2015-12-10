@@ -77,18 +77,29 @@ public class GtiEvent {
     @SubscribeEvent
     public void onEntityThrowableImpact(EntityThrowableImpactEvent event) {
         if (event.entityThrowable.getThrowItem().getItem().equals(GtiItems.packagedSalt)) {
+            for (int i = 0; i < 8; ++i) {
+                float fmod = (float) (1.2 - (Math.random() * 2.4));
+                float f1mod = (float) (0.5 - (Math.random() * 1.0));
+                float f2mod = (float) (1.2 - (Math.random() * 2.4));
+
+                event.entityThrowable.worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(GtiItems.salt), event.entityThrowable.posX + fmod,
+                        event.entityThrowable.posY + f1mod, event.entityThrowable.posZ + f2mod, 0.1D, 0.1D, 0.1D);
+
+                if (!event.entityThrowable.worldObj.isRemote) {
+                    EntityItem entityItem = new EntityItem(event.entityThrowable.worldObj,
+                            event.entityThrowable.posX + fmod, event.entityThrowable.posY + f1mod,
+                            event.entityThrowable.posZ + f2mod, new ItemStack(GtiItems.salt));
+                    event.entityThrowable.worldObj.spawnEntityInWorld(entityItem);
+                }
+            }
             this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(GtiPotion.salty.id, 0, 3));
         }
         else if (event.entityThrowable.getThrowItem().isItemEqual(Ic2Items.Uran238)) {
             this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(IC2Potion.radiation.id, 200, 0));
         }
-        else if (event.entityThrowable.getThrowItem().getItem().equals(GtiItems.gravityRay)) {
-            this.onImpact(event.entityThrowable, event.movingObjectPosition);
+        else {
+            this.onImpact(event.entityThrowable, event.movingObjectPosition, null);
         }
-    }
-
-    private void onImpact(EntityThrowable entity, MovingObjectPosition movingObjectPosition) {
-        this.onImpact(entity, movingObjectPosition, null);
     }
 
     private void onImpact(EntityThrowable entity, MovingObjectPosition movingObjectPosition, PotionEffect potionEffect) {
@@ -98,21 +109,7 @@ public class GtiEvent {
                 ((EntityLivingBase) movingObjectPosition.entityHit).addPotionEffect(potionEffect);
             }
         }
-
-        for (int i = 0; i < 8; ++i) {
-            float fmod = (float) (1.2 - (Math.random() * 2.4));
-            float f1mod = (float) (0.5 - (Math.random() * 1.0));
-            float f2mod = (float) (1.2 - (Math.random() * 2.4));
-
-            entity.worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(GtiItems.salt), entity.posX + fmod,
-                    entity.posY + f1mod, entity.posZ + f2mod, 0.1D, 0.1D, 0.1D);
-
-            if (!entity.worldObj.isRemote) {
-                EntityItem entityItem = new EntityItem(entity.worldObj, entity.posX + fmod, entity.posY + f1mod, entity.posZ + f2mod, new ItemStack(GtiItems.salt));
-                entity.worldObj.spawnEntityInWorld(entityItem);
-            }
-        }
-
+        entity.worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(entity.getThrowItem().getItem()), entity.posX, entity.posY, entity.posZ, 0.1D, 0.1D, 0.1D);
         if (!entity.worldObj.isRemote) {
             entity.setDead();
         }
