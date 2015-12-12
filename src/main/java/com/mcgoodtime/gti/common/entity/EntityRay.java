@@ -2,10 +2,9 @@ package com.mcgoodtime.gti.common.entity;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by BestOwl on 2015.12.10.0010.
@@ -13,8 +12,6 @@ import net.minecraft.world.World;
  * @author BestOwl
  */
 public class EntityRay extends EntityArrow {
-
-    public float damage;
 
     public EntityRay(World world) {
         super(world);
@@ -26,7 +23,7 @@ public class EntityRay extends EntityArrow {
 
     public EntityRay(World world, EntityLivingBase entityLivingBase, float damage) {
         super(world, entityLivingBase, damage);
-        this.damage = damage;
+        this.canBePickedUp = 0;
     }
 
     public EntityRay(World world, EntityLivingBase entityLivingBase, EntityLivingBase entityLivingBase1, float f, float f1) {
@@ -39,13 +36,16 @@ public class EntityRay extends EntityArrow {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        Vec3 vec3 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-        Vec3 vec31 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-        MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(vec3, vec31);
-        if (movingobjectposition != null) {
-            if (movingobjectposition.entityHit != null && movingobjectposition.entityHit instanceof EntityLivingBase) {
-                movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeArrowDamage(this, this.shootingEntity), this.damage);
+        try {
+            if (((Boolean) super.getClass().getMethod("inGround").invoke(this))) {
+                this.setDead();
             }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
         }
     }
 }

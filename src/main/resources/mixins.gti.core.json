@@ -6,7 +6,8 @@
   "priority": 1111,
   "mixins": [
     "MixinItemRadioactive",
-    "MixinTileEntityFurnace"
+    "MixinTileEntityFurnace",
+    "MixinEntityArrow"
   ],
   "client": [],
   "server": []
