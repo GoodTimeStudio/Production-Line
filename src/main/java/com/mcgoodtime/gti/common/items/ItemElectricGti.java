@@ -1,9 +1,15 @@
 package com.mcgoodtime.gti.common.items;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.energy.EnergyNet;
+import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 /**
  * Created by BestOwl on 2015.12.8.0008.
@@ -24,6 +30,25 @@ public class ItemElectricGti extends ItemGti implements IElectricItem {
         this.tier = tier;
         this.maxEnergy = maxEnergy;
         this.maxPowerTick = (int) EnergyNet.instance.getPowerFromTier(tier);
+    }
+
+    @SuppressWarnings({"NumericOverflow", "unchecked"})
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
+        ItemStack itemStack = new ItemStack(this, 1);
+        ItemStack charged;
+        if (this.getChargedItem(itemStack) == this) {
+            charged = new ItemStack(this, 1);
+            ElectricItem.manager.charge(charged, 1.0D / 0.0, 2147483647, true, false);
+            itemList.add(charged);
+        }
+
+        if (this.getEmptyItem(itemStack) == this) {
+            charged = new ItemStack(this, 1);
+            ElectricItem.manager.charge(charged, 0.0D, 2147483647, true, false);
+            itemList.add(charged);
+        }
     }
 
     /**

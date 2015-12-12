@@ -60,25 +60,6 @@ public class ItemCEU extends ItemElectricGti implements IBoxable {
         return true;
     }
 
-    @SuppressWarnings({"NumericOverflow", "unchecked"})
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
-        ItemStack itemStack = new ItemStack(this, 1);
-        ItemStack charged;
-        if (this.getChargedItem(itemStack) == this) {
-            charged = new ItemStack(this, 1);
-            ElectricItem.manager.charge(charged, 1.0D / 0.0, 2147483647, true, false);
-            itemList.add(charged);
-        }
-
-        if (this.getEmptyItem(itemStack) == this) {
-            charged = new ItemStack(this, 1);
-            ElectricItem.manager.charge(charged, 0.0D, 2147483647, true, false);
-            itemList.add(charged);
-        }
-    }
-
     /**
      * Determine whether an item can be stored in a toolbox or not.
      *

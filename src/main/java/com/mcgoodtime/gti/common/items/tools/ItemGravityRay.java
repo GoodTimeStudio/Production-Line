@@ -29,7 +29,7 @@ public class ItemGravityRay extends ItemElectricGti {
      */
     @Override
     public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer player, int itemInUseCount) {
-        if (ElectricItem.manager.getCharge(itemStack) >= 100) {
+        if (ElectricItem.manager.getCharge(itemStack) >= 100 || player.capabilities.isCreativeMode) {
             int i = this.getMaxItemUseDuration(itemStack) - itemInUseCount;
 
             float damge = (float) i / 20.0F;
@@ -42,7 +42,9 @@ public class ItemGravityRay extends ItemElectricGti {
             }
 
             world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + damge * 0.5F);
-            ElectricItem.manager.discharge(itemStack, 100, this.tier, false, true, false);
+            if (!player.capabilities.isCreativeMode) {
+                ElectricItem.manager.discharge(itemStack, 100, this.tier, false, true, false);
+            }
             if (!world.isRemote) {
                 world.spawnEntityInWorld(new EntityRay(world, player, damge * 2.0F));
             }
