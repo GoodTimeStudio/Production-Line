@@ -36,16 +36,8 @@ public class EntityRay extends EntityArrow {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        try {
-            if (((Boolean) super.getClass().getMethod("inGround").invoke(this))) {
-                this.setDead();
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        if (this.inGround) {
+            this.setDead();
         }
     }
 }
