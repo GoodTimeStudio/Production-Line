@@ -50,6 +50,8 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import java.util.ArrayList;
+
 @Mod(
         modid = Gti.MOD_ID,
         name = Gti.MOD_NAME,
@@ -63,7 +65,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 public final class Gti {
     public static final String MOD_ID = "gti";
     public static final String MOD_NAME = "GoodTime-Industrial";
-    public static final String VERSION = "Dev.0.1.1";
+    public static final String VERSION = "dev.0.2";
     public static final String RESOURCE_DOMAIN = "gti";
     public static final String GUI_PREFIX = "gui.gti.";
     public static final CreativeTabs creativeTabGti = new CreativeTabs(MOD_NAME) {
@@ -129,9 +131,10 @@ public final class Gti {
     private void setupMeta() {
         this.meta.modId = MOD_ID;
         this.meta.name = MOD_NAME;
-        this.meta.version = "dev 0.1.1";
-        this.meta.url = "https://github.com/Minecraft-GoodTime/GoodTime-Industrial";
+        this.meta.version = VERSION;
+        this.meta.url = "https://github.com/GoodTimeStudio/GoodTime-Industrial";
         this.meta.updateUrl = this.meta.url;
+        this.meta.authorList = new ArrayList<String>();
         this.meta.authorList.add("BestOwl");
         this.meta.authorList.add("liach");
         this.meta.authorList.add("Seedking");
