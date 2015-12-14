@@ -120,7 +120,7 @@ checkstyle {
     configFile = file('checkstyle.xml')
     configProperties = [
             "name" : 'GoodTime-Industrial',
-            "organization" : 'Minecraft-GoodTime',
+            "organization" : 'GoodTimeStudio',
             "url" : 'https://github.com/GoodTimeStudio/GoodTime-Industrial',
             "year" : '2015',
             "basedir": project.projectDir,
