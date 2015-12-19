@@ -22,36 +22,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.gti.common.nei;
+package com.mcgoodtime.gti.common.nei.handler;
 
-import codechicken.nei.api.API;
-import codechicken.nei.api.IConfigureNEI;
+import com.mcgoodtime.gti.client.gui.GuiHeatDryer;
 import com.mcgoodtime.gti.common.core.Gti;
-import com.mcgoodtime.gti.common.nei.handler.RecipeHandlerCarbonizeFurnace;
-import com.mcgoodtime.gti.common.nei.handler.RecipeHandlerHeatDryer;
+import com.mcgoodtime.gti.common.recipes.HeatDryerRecipes;
+import com.mcgoodtime.gti.common.recipes.IProcessable;
+import net.minecraft.client.gui.inventory.GuiContainer;
 
 /**
- * Created by BestOwl on 2015.11.29.0029.
+ * Created by BestOwl on 2015.12.19.0019.
  *
  * @author BestOwl
  */
-public class NEIGtiConfig implements IConfigureNEI {
-
+public class RecipeHandlerHeatDryer extends RecipeHandlerBase {
     @Override
-    public void loadConfig() {
-        API.registerRecipeHandler(new RecipeHandlerCarbonizeFurnace());
-        API.registerUsageHandler(new RecipeHandlerCarbonizeFurnace());
-        API.registerRecipeHandler(new RecipeHandlerHeatDryer());
-        API.registerUsageHandler(new RecipeHandlerHeatDryer());
+    public IProcessable getRecipesList() {
+        return HeatDryerRecipes.instance;
     }
 
     @Override
-    public String getName() {
-        return Gti.MOD_NAME;
+    public String getRecipeNameForCrafting() {
+        return "HeatDryer";
     }
 
     @Override
-    public String getVersion() {
-        return Gti.VERSION;
+    public String getRecipeID() {
+        return "gti.dryer";
+    }
+
+    @Override
+    public Class<? extends GuiContainer> getGuiClass() {
+        return GuiHeatDryer.class;
+    }
+
+    @Override
+    public String getGuiTexture() {
+        return Gti.RESOURCE_DOMAIN + ":" + "textures/gui/GuiHeatDryer.png";
+    }
+
+    @Override
+    public String getOverlayIdentifier() {
+        return "dryer";
     }
 }
