@@ -24,39 +24,21 @@
  */
 package com.mcgoodtime.gti.common.recipes;
 
-import com.mcgoodtime.gti.common.init.GtiItems;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 /**
- * List of CarbonizeFurnace's Recipes
+ * Created by BestOwl on 2015.12.19.0019.
  *
  * @author BestOwl
  */
-public class CarbonizeFurnaceRecipes extends RecipeBase {
+public class RecipePart {
+    public ItemStack input;
+    public ItemStack output;
 
-    public static final CarbonizeFurnaceRecipes instance = new CarbonizeFurnaceRecipes();
-
-    private CarbonizeFurnaceRecipes() {
-        register(new ItemStack(Blocks.log), new ItemStack(Items.coal, 2, 1), 2000);
-        register(new ItemStack(Blocks.log2), new ItemStack(Items.coal, 2, 1), 2000);
-        register(new ItemStack(Blocks.planks, 2), new ItemStack(Items.coal, 1, 1), 1500);
-        register(new ItemStack(Items.reeds, 4), GtiItems.bambooCharcoal, 1500);
-        register(new ItemStack(GtiItems.saltWaterBucket), new ItemStack(GtiItems.salt), 1100);
+    public RecipePart(ItemStack input, ItemStack output) {
+        this.input = input;
+        this.output = output;
     }
 
-    public void register(ItemStack input, ItemStack output, double requireEnergy) {
-        this.processList.add(new RecipePartCarbonizeFurnace(input, output, requireEnergy));
-    }
-
-    public class RecipePartCarbonizeFurnace extends RecipePart {
-        /** Value of EU consumption */
-        public double requiresEnergy;
-
-        private RecipePartCarbonizeFurnace(ItemStack input, ItemStack output, double requiresEnergy) {
-            super(input, output);
-            this.requiresEnergy = requiresEnergy;
-        }
-    }
+    public RecipePart() {}
 }

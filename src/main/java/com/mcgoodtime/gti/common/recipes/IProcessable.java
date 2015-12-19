@@ -32,7 +32,7 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public interface IProcessable<T> {
+public interface IProcessable {
 
     /**
      * Returns the process result of an item.
@@ -51,10 +51,10 @@ public interface IProcessable<T> {
      */
     int getRequiredProcessAmount(ItemStack itemStack);
 
-    List<T> getProcessRecipesList();
+    List<RecipePart> getProcessRecipesList();
 
     /**
      * @param itemStack Input item
      */
-    T getRecipe(ItemStack itemStack);
+    RecipePart getRecipePart(ItemStack itemStack);
 }

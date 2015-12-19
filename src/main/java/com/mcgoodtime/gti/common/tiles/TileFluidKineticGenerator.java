@@ -26,6 +26,7 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import com.mcgoodtime.gti.common.recipes.FluidKineticGeneratorRecipes;
+import com.mcgoodtime.gti.common.recipes.RecipePart;
 import com.mcgoodtime.gti.common.tiles.tileslots.TileSlot;
 import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotFluidInput;
 import com.mcgoodtime.gti.common.tiles.tileslots.TileSlotOutput;
@@ -87,7 +88,8 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
 
             if (this.fluidTank.getFluid() != null && this.maxrequestkineticenergyTick(ForgeDirection.VALID_DIRECTIONS[this.facing]) > 0) {
                 int amount = 0;
-                for (FluidStack fluidStack : FluidKineticGeneratorRecipes.instance.getProcessRecipesList()) {
+                for (RecipePart recipePart : FluidKineticGeneratorRecipes.instance.getProcessRecipesList()) {
+                    FluidStack fluidStack = ((FluidKineticGeneratorRecipes.RecipePartFluidKineticGenerator) recipePart).fluidStack;
                     if (fluidStack.isFluidEqual(this.fluidTank.getFluid())) {
                         amount = fluidStack.amount;
 

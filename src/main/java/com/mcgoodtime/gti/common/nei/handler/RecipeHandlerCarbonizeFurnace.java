@@ -1,97 +1,69 @@
+/*
+ * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ *
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
+ * Copyright (c) contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.mcgoodtime.gti.common.nei.handler;
 
-import codechicken.nei.NEIServerUtils;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 import com.mcgoodtime.gti.client.gui.GuiCarbonizeFurnace;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
+import com.mcgoodtime.gti.common.recipes.IProcessable;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-
-import java.awt.*;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by BestOwl on 2015.11.29.0029.
  *
  * @author BestOwl
  */
-public class RecipeHandlerCarbonizeFurnace extends TemplateRecipeHandler {
+public class RecipeHandlerCarbonizeFurnace extends RecipeHandlerBase {
 
-    public void loadTransferRects() {
-        this.transferRects.add(new RecipeTransferRect(new Rectangle(74, 23, 24, 18), "carbonizeSmelting"));
+    @Override
+    public IProcessable getRecipesList() {
+        return CarbonizeFurnaceRecipes.instance;
     }
 
+    @Override
+    public String getRecipeNameForCrafting() {
+        return "CarbonizeFurnace";
+    }
+
+    @Override
+    public String getRecipeID() {
+        return "gti.carbonize";
+    }
+
+    @Override
     public Class<? extends GuiContainer> getGuiClass() {
         return GuiCarbonizeFurnace.class;
     }
 
-    public String getRecipeName() {
-        return StatCollector.translateToLocal(Gti.GUI_PREFIX + "CarbonizeFurnace");
+    @Override
+    public String getOverlayIdentifier() {
+        return "carbonize";
     }
 
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals("carbonizeSmelting")) {
-            for (CarbonizeFurnaceRecipes.Recipes recipes : CarbonizeFurnaceRecipes.instance.getProcessRecipesList()) {
-                this.arecipes.add(new SmeltingPair(recipes.input, recipes.output));
-            }
-        } else {
-            super.loadCraftingRecipes(outputId, results);
-        }
-    }
-
-    public void loadCraftingRecipes(ItemStack result) {
-        for (CarbonizeFurnaceRecipes.Recipes recipes : CarbonizeFurnaceRecipes.instance.getProcessRecipesList()) {
-            if(NEIServerUtils.areStacksSameTypeCrafting(recipes.output, result)) {
-                this.arecipes.add(new SmeltingPair(recipes.input, recipes.output));
-            }
-        }
-    }
-
-    public void loadUsageRecipes(ItemStack ingredient) {
-        for (CarbonizeFurnaceRecipes.Recipes recipes : CarbonizeFurnaceRecipes.instance.getProcessRecipesList()) {
-            if (recipes.input.isItemEqual(ingredient)) {
-                this.arecipes.add(new SmeltingPair(recipes.input, recipes.output));
-            }
-        }
-    }
-
+    @Override
     public String getGuiTexture() {
         return Gti.RESOURCE_DOMAIN + ":" + "textures/gui/GuiCarbonizeFurnace.png";
-    }
-
-    public void drawExtras(int recipe) {
-        this.drawProgressBar(51, 25, 176, 0, 14, 14, 48, 3);
-        this.drawProgressBar(74, 23, 176, 14, 24, 16, 48, 0);
-    }
-
-    public String getOverlayIdentifier() {
-        return "carbonizeSmelting";
-    }
-
-    public class SmeltingPair extends CachedRecipe {
-        PositionedStack ingred;
-        PositionedStack result;
-
-        public SmeltingPair(ItemStack ingred, ItemStack result) {
-            super();
-            this.ingred = new PositionedStack(ingred, 51, 5);
-            this.result = new PositionedStack(result, 111, 24);
-        }
-
-        public List<PositionedStack> getIngredients() {
-            return this.getCycledIngredients(RecipeHandlerCarbonizeFurnace.this.cycleticks / 48, Collections.singletonList(this.ingred));
-        }
-
-        public PositionedStack getResult() {
-            return this.result;
-        }
-
-        public PositionedStack getOtherStack() {
-            return null;
-        }
     }
 }

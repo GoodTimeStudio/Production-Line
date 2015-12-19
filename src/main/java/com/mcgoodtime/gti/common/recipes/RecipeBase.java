@@ -25,41 +25,30 @@
 package com.mcgoodtime.gti.common.recipes;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by BestOwl on 2015.11.8.0008.
+ * Created by BestOwl on 2015.12.19.0019.
  *
  * @author BestOwl
  */
-public class FluidKineticGeneratorRecipes extends RecipeBase {
-    public static final FluidKineticGeneratorRecipes instance = new FluidKineticGeneratorRecipes();
+public abstract class RecipeBase implements IProcessable {
 
-    private FluidKineticGeneratorRecipes() {
-        this.register("lava", 10);
-        this.register("oil", 10);
-        this.register("fuel", 5);
-        this.register("biomass", 20);
-        this.register("bioethanol", 10);
-        this.register("ic2biogas", 10);
-    }
-
-    public void register(String fluidName, int amount) {
-        if (FluidRegistry.getFluid(fluidName) != null) {
-            processList.add(new RecipePartFluidKineticGenerator(FluidRegistry.getFluidStack(fluidName, amount)));
-        }
-    }
+    /** The list of recipes. */
+    protected List<RecipePart> processList = new ArrayList<RecipePart>();
 
     /**
      * Returns the process result of an item.
-     *
      */
     @Override
     public ItemStack getProcessResult(ItemStack itemStack) {
+        for (RecipePart recipes : processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return recipes.output;
+            }
+        }
         return null;
     }
 
@@ -68,18 +57,13 @@ public class FluidKineticGeneratorRecipes extends RecipeBase {
      */
     @Override
     public boolean canProcess(ItemStack itemStack) {
-        FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(itemStack);
-        if (fluidStack != null) {
-            for (RecipePart recipePart : this.processList) {
-                if (((RecipePartFluidKineticGenerator) recipePart).fluidStack.isFluidEqual(fluidStack)) {
-                    return true;
-                }
+        for (RecipePart recipes : this.processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return true;
             }
         }
-
         return false;
     }
-
     /**
      * Get required amount of process
      *
@@ -88,6 +72,11 @@ public class FluidKineticGeneratorRecipes extends RecipeBase {
      */
     @Override
     public int getRequiredProcessAmount(ItemStack itemStack) {
+        for (RecipePart recipes : this.processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return recipes.input.stackSize;
+            }
+        }
         return 1;
     }
 
@@ -101,15 +90,11 @@ public class FluidKineticGeneratorRecipes extends RecipeBase {
      */
     @Override
     public RecipePart getRecipePart(ItemStack itemStack) {
-        return null;
-    }
-
-    public class RecipePartFluidKineticGenerator extends RecipePart {
-
-        public FluidStack fluidStack;
-
-        public RecipePartFluidKineticGenerator(FluidStack fluidStack) {
-            this.fluidStack = fluidStack;
+        for (RecipePart recipes : this.processList) {
+            if (recipes.input.isItemEqual(itemStack)) {
+                return recipes;
+            }
         }
+        return null;
     }
 }

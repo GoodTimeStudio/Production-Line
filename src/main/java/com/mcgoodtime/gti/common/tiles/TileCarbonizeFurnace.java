@@ -25,6 +25,7 @@
 package com.mcgoodtime.gti.common.tiles;
 
 import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
+import com.mcgoodtime.gti.common.recipes.RecipePart;
 import com.mcgoodtime.gti.common.tiles.tileslots.*;
 import ic2.api.tile.IWrenchable;
 import ic2.core.Ic2Items;
@@ -89,7 +90,8 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
             boolean needUpdate = false;
 
             if (canProcess() && this.energy >= this.energyTick) {
-                this.requireEnergy = CarbonizeFurnaceRecipes.instance.getRecipe(this.getStackInSlot(0)).requiresEnergy;
+                RecipePart recipePart = CarbonizeFurnaceRecipes.instance.getRecipePart(this.getStackInSlot(0));
+                this.requireEnergy = ((CarbonizeFurnaceRecipes.RecipePartCarbonizeFurnace) recipePart).requiresEnergy;
                 this.setActive(true);
                 this.energy -= this.energyTick;
                 this.progress += this.energyTick;
