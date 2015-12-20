@@ -103,14 +103,25 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
         this.drawProgressBar(74, 23, 176, 14, 24, 16, 48, 0);
     }
 
+    protected Position getInputPosition() {
+        return new Position(51, 5);
+    }
+
+    protected Position getOutputPosition() {
+        return new Position(111, 24);
+    }
+
     public class CachedRecipePart extends CachedRecipe {
-        PositionedStack input;
-        PositionedStack result;
+        protected PositionedStack input;
+        protected PositionedStack result;
 
         public CachedRecipePart(ItemStack input, ItemStack result) {
             super();
-            this.input = new PositionedStack(input, 51, 5);
-            this.result = new PositionedStack(result, 111, 24);
+            Position position;
+            position = RecipeHandlerBase.this.getInputPosition();
+            this.input = new PositionedStack(input, position.x, position.y);
+            position = RecipeHandlerBase.this.getOutputPosition();
+            this.result = new PositionedStack(result, position.x, position.y);
         }
 
         @Override
@@ -126,6 +137,16 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
         @Override
         public PositionedStack getOtherStack() {
             return null;
+        }
+    }
+
+    public static class Position {
+        public int x;
+        public int y;
+
+        public Position(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
 }
