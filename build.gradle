@@ -53,8 +53,15 @@ jar {
 	}
 	
     manifest {
-        attributes 'FMLCorePlugin': 'com.mcgoodtime.gti.common.core.coremod.GtiCore'
-        attributes 'FMLAT': 'gti_at.cfg'
+		attributes (
+			'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+			'TweakOrder': 0,
+			'MixinConfigs': 'mixins.gti.core.json',
+			'FMLCorePlugin': 'com.mcgoodtime.gti.common.core.coremod.GtiCore',
+			'FMLCorePluginContainsFMLMod': true,
+			'FMLAT': 'gti_at.cfg',
+			'ForceLoadAsMod': true
+		)
     }
 }
 
