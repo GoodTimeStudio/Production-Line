@@ -35,8 +35,6 @@ repositories {
 
 configurations {
     shade
-    api
-    compile.extendsFrom api
     compile.extendsFrom shade
 }
 
@@ -50,6 +48,10 @@ dependencies {
 }
 
 jar {
+	configurations.shade.copyRecursive().setTransitive(false).each { artifact ->
+		from (zipTree(artifact))
+	}
+	
     manifest {
         attributes 'FMLCorePlugin': 'com.mcgoodtime.gti.common.core.coremod.GtiCore'
         attributes 'FMLAT': 'gti_at.cfg'
@@ -79,7 +81,6 @@ task copySrgs(type: Copy, dependsOn: 'genSrgs') {
     include '**/*.srg'
     into 'build/srgs'
 }
-
 compileJava.dependsOn copySrgs
 
 sourceSets {
