@@ -27,7 +27,6 @@ package com.mcgoodtime.gti.common.blocks;
 import static com.mcgoodtime.gti.common.core.Gti.creativeTabGti;
 import static com.mcgoodtime.gti.common.core.Gti.RESOURCE_DOMAIN;
 import static com.mcgoodtime.gti.common.core.Gti.MOD_ID;
-
 import com.mcgoodtime.gti.common.core.GtiConfig;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -63,7 +62,6 @@ public class BlockGti extends Block {
         this.setBlockName(MOD_ID + "." + "block" + "." + name);
         this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
         this.setCreativeTab(creativeTabGti);
-        System.out.println(creativeTabGti);
         this.internalName = name;
         GameRegistry.registerBlock(this, this.getItemBlockClass(), name);
         GtiConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
@@ -89,6 +87,8 @@ public class BlockGti extends Block {
                 ItemStack stack = new ItemStack(this, 1, meta);
                 list.add(stack);
             }
+        } else {
+            super.getSubBlocks(item, creativeTabs, list);
         }
     }
 
