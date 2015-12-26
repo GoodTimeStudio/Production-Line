@@ -5,7 +5,7 @@ import com.mcgoodtime.gti.common.inventory.ContainerEUStorage;
 import com.mcgoodtime.gti.common.network.GtiNetwork;
 import com.mcgoodtime.gti.common.tiles.eustorage.TileEUStorage;
 import ic2.core.GuiIconButton;
-import ic2.core.util.GuiTooltiphelper;
+import ic2.core.util.GuiTooltipHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -47,7 +47,7 @@ public class GuiEUStorage extends GuiGti<ContainerEUStorage> {
         this.fontRendererObj.drawString("/" + ((TileEUStorage) this.container.tile).maxEnergy, 110, 45, 4210752);
         this.fontRendererObj.drawString(translateToLocalFormatted("ic2.EUStorage.gui.info.output",
                 ((TileEUStorage) this.container.tile).energyTick), 85, 60, 4210752);
-        GuiTooltiphelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, translateToLocal("ic2.EUStorage.gui.mod.redstone"
+        GuiTooltipHelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, translateToLocal("ic2.EUStorage.gui.mod.redstone"
                 + ((TileEUStorage)this.container.tile).redstoneMode.ordinal()), 153, 3, 172, 22);
 
     }

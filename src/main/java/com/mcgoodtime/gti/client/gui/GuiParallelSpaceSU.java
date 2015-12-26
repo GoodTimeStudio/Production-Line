@@ -4,7 +4,7 @@ import com.mcgoodtime.gti.common.GtiUtil;
 import com.mcgoodtime.gti.common.inventory.ContainerParallelSpaceSU;
 import com.mcgoodtime.gti.common.network.GtiNetwork;
 import ic2.core.GuiIconButton;
-import ic2.core.util.GuiTooltiphelper;
+import ic2.core.util.GuiTooltipHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -40,11 +40,11 @@ public class GuiParallelSpaceSU extends GuiGti<ContainerParallelSpaceSU> {
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         super.drawGuiContainerForegroundLayer(x, y);
         this.fontRendererObj.drawString("§l" + translateToLocal("ic2.EUStorage.gui.info.level"), 60, 25, 0x9A00FF);
-        GuiTooltiphelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, "§l§5" + ((int) this.container.tile.energy)
+        GuiTooltipHelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, "§l§5" + ((int) this.container.tile.energy)
                 + "/" + this.container.tile.maxEnergy, 62, 36, 115, 44);
         this.fontRendererObj.drawString(translateToLocalFormatted("ic2.EUStorage.gui.info.output",
                 this.container.tile.energyTick), 60, 51, 0x9A00FF);
-        GuiTooltiphelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, translateToLocal("ic2.EUStorage.gui.mod.redstone"
+        GuiTooltipHelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, translateToLocal("ic2.EUStorage.gui.mod.redstone"
                 + this.container.tile.redstoneMode.ordinal()), 153, 3, 172, 22);
 
     }

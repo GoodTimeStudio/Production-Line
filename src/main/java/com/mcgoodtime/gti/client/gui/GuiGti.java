@@ -27,8 +27,8 @@ package com.mcgoodtime.gti.client.gui;
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.inventory.ContainerGti;
 import ic2.core.IC2;
-import ic2.core.block.IUpgradableBlock;
-import ic2.core.util.GuiTooltiphelper;
+import ic2.core.upgrade.IUpgradableBlock;
+import ic2.core.util.GuiTooltipHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -59,7 +59,7 @@ public abstract class GuiGti<T extends ContainerGti> extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         this.fontRendererObj.drawString(StatCollector.translateToLocal(Gti.GUI_PREFIX + this.name), (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
         if(this.container.tile instanceof IUpgradableBlock) {
-            GuiTooltiphelper.drawUpgradeslotTooltip(x - this.guiLeft, y - this.guiTop, 0, 0, 12, 12, (IUpgradableBlock) this.container.tile, 25, 0);
+            GuiTooltipHelper.drawUpgradeslotTooltip(x - this.guiLeft, y - this.guiTop, 0, 0, 12, 12, (IUpgradableBlock) this.container.tile, 25, 0);
         }
     }
 

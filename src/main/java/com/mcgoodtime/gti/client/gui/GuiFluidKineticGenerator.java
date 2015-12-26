@@ -30,7 +30,7 @@ import com.mcgoodtime.gti.common.inventory.ContainerFluidKineticGenerator;
 import com.mcgoodtime.gti.common.tiles.TileFluidKineticGenerator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ic2.core.util.GuiTooltiphelper;
+import ic2.core.util.GuiTooltipHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -78,7 +78,7 @@ public class GuiFluidKineticGenerator extends GuiGti<ContainerFluidKineticGenera
         super.drawGuiContainerForegroundLayer(x, y);
         if (this.container.tile.fluidTank.getFluidAmount() > 0) {
             String tooltip = this.container.tile.fluidTank.getFluid().getLocalizedName() + ": " + this.container.tile.fluidTank.getFluidAmount() + "mB";
-            GuiTooltiphelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, tooltip, 73, 23, 83, 71);
+            GuiTooltipHelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, tooltip, 73, 23, 83, 71);
         }
 
         String output = StatCollector.translateToLocalFormatted(GUI_PREFIX + "FluidKineticGenerator.output",

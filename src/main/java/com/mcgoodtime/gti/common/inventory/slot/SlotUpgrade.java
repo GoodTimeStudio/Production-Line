@@ -24,8 +24,8 @@
  */
 package com.mcgoodtime.gti.common.inventory.slot;
 
-import ic2.core.block.IUpgradableBlock;
-import ic2.core.util.StackUtil;
+import ic2.core.upgrade.IUpgradableBlock;
+import ic2.core.upgrade.IUpgradeItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -46,10 +46,8 @@ public class SlotUpgrade extends Slot {
     @Override
     public boolean isItemValid(ItemStack itemStack) {
         if (this.inventory instanceof IUpgradableBlock) {
-            for (ItemStack itemstack : ((IUpgradableBlock) this.inventory).getCompatibleUpgradeList()) {
-                if (StackUtil.isStackEqual(itemstack, itemStack)) {
-                    return true;
-                }
+            if (itemStack.getItem() instanceof IUpgradeItem) {
+                return ((IUpgradeItem) itemStack.getItem()).isSuitableFor(itemStack, ((IUpgradableBlock) this).getUpgradableProperties());
             }
         }
 

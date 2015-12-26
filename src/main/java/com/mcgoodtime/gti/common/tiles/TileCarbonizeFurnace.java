@@ -28,17 +28,17 @@ import com.mcgoodtime.gti.common.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.gti.common.recipes.RecipePart;
 import com.mcgoodtime.gti.common.tiles.tileslots.*;
 import ic2.api.tile.IWrenchable;
-import ic2.core.Ic2Items;
-import ic2.core.block.IUpgradableBlock;
-import ic2.core.item.IUpgradeItem;
+import ic2.core.upgrade.IUpgradableBlock;
+import ic2.core.upgrade.IUpgradeItem;
+import ic2.core.upgrade.UpgradableProperty;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * CarbonizeFurnace TileEntity
@@ -205,15 +205,8 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     }
 
     @Override
-    public void setRedstonePowered(boolean redstonePowered) {
-    }
-
-    @Override
-    public List<ItemStack> getCompatibleUpgradeList() {
-        List<ItemStack> list = new ArrayList<ItemStack>();
-        list.add(Ic2Items.ejectorUpgrade);
-        list.add(Ic2Items.pullingUpgrade);
-        return list;
+    public Set<UpgradableProperty> getUpgradableProperties() {
+        return EnumSet.of(UpgradableProperty.ItemConsuming, UpgradableProperty.ItemProducing);
     }
 
     @Override

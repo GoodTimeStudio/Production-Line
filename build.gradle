@@ -40,7 +40,7 @@ configurations {
 
 dependencies {
     shade 'org.spongepowered:mixin:0.4.5-SNAPSHOT'
-    compile 'net.industrial-craft:industrialcraft-2:2.2.748-experimental:dev' //adds newest ic2 to the dev env
+    compile 'net.industrial-craft:industrialcraft-2:2.2.800-experimental:dev' //adds ic2 to the dev env
     compile 'codechicken:NotEnoughItems:1.7.10-1.0.4.79:dev'
     compile 'codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev'
     compile 'codechicken:CodeChickenLib:1.7.10-1.1.1.99:dev'
@@ -54,10 +54,10 @@ jar {
 	
     manifest {
 		attributes (
+            'FMLCorePlugin': 'com.mcgoodtime.gti.common.core.coremod.GtiCore',
 			'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
 			'TweakOrder': 0,
 			'MixinConfigs': 'mixins.gti.core.json',
-			'FMLCorePlugin': 'com.mcgoodtime.gti.common.core.coremod.GtiCore',
 			'FMLCorePluginContainsFMLMod': true,
 			'FMLAT': 'gti_at.cfg',
 			'ForceLoadAsMod': true

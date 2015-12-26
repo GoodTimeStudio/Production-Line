@@ -2,7 +2,7 @@ package com.mcgoodtime.gti.client.gui;
 
 import com.mcgoodtime.gti.common.core.Gti;
 import com.mcgoodtime.gti.common.inventory.ContainerAdvSolar;
-import ic2.core.util.GuiTooltiphelper;
+import ic2.core.util.GuiTooltipHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -28,7 +28,7 @@ public class GuiAdvSolar extends GuiGti<ContainerAdvSolar> {
 
         if (!this.container.tile.hasLens) {
             String tooltip = StatCollector.translateToLocal(Gti.GUI_PREFIX + "AdvSolar.lens");
-            GuiTooltiphelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, tooltip, 3, 13, 13, 23);
+            GuiTooltipHelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, tooltip, 3, 13, 13, 23);
         }
     }
 
