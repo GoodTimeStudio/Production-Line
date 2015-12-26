@@ -56,7 +56,6 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
 
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
-        System.out.println(outputId);
         if (outputId.equals(this.getRecipeID())) {
             for (RecipePart recipes : this.getRecipesList().getProcessRecipesList()) {
                 this.arecipes.add(new CachedRecipePart(recipes.input, recipes.output));

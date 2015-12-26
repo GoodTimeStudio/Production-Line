@@ -187,7 +187,7 @@ public class GtiItems implements IFuelHandler {
 
 		saltWaterBucket = new ItemBucket(Blocks.water);
 		saltWaterBucket.setCreativeTab(Gti.creativeTabGti)
-				.setUnlocalizedName(Gti.MOD_ID + ".SaltWaterBucket").setTextureName(Gti.MOD_ID + ":SaltWaterBucket");
+				.setUnlocalizedName(Gti.MOD_ID + ".SaltWaterBucket").setTextureName(Gti.MOD_ID + ":itemSaltWaterBucket");
 
         iridiumPickaxe = ToolGti.registerPickaxe(GtiToolMaterial.iridium, "IridiumPickaxe");
         iridiumAxe = ToolGti.registerAxe(GtiToolMaterial.iridium, "IridiumAxe");
