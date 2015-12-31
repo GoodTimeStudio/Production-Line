@@ -59,7 +59,7 @@ import java.util.ArrayList;
         dependencies = "required-after:"
                 + "Forge@[10.13.4.1558,);"
                 + "required-after:"
-                + "IC2@[2.2.748,);",
+                + "IC2@[2.2.800,);",
         useMetadata = true
     )
 public final class Gti {
