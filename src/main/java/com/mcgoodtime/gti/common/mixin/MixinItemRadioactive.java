@@ -51,7 +51,7 @@ public abstract class MixinItemRadioactive extends ItemIC2 {
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
         if (itemStack.isItemEqual(Ic2Items.Uran238)) {
-            if (GtiConfig.instance.isThrowableUran238()) {
+            if (GtiConfig.instance.throwableUran238) {
                 if (!entityPlayer.capabilities.isCreativeMode) {
                     --itemStack.stackSize;
                 }

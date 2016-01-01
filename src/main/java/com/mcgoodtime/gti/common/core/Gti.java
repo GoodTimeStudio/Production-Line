@@ -59,7 +59,9 @@ import java.util.ArrayList;
         dependencies = "required-after:"
                 + "Forge@[10.13.4.1558,);"
                 + "required-after:"
-                + "IC2@[2.2.800,);",
+                + "IC2@[2.2.800,);"
+                + "after:"
+                + "NotEnoughItems;",
         useMetadata = true
     )
 public final class Gti {
@@ -90,8 +92,7 @@ public final class Gti {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         setupMeta();
-        GtiConfig.configFile = event.getSuggestedConfigurationFile();
-        GtiConfig.init();
+        GtiConfig.init(event.getSuggestedConfigurationFile());
         //register Blocks. 注册方块
         GtiBlocks.init();
         FluidRegistry.registerFluid(Gas.gasNatural);
@@ -123,9 +124,6 @@ public final class Gti {
         //register Event. 注册事件
         FMLCommonHandler.instance().bus().register(new GtiEvent());
         MinecraftForge.EVENT_BUS.register(new GtiEvent());
-        if (Loader.isModLoaded("NotEnoughItems")) {
-            new NEIGtiConfig().loadConfig();
-        }
     }
 
     private void setupMeta() {
@@ -152,6 +150,10 @@ public final class Gti {
         public void init() {
             RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new RenderEntityThrowable());
             RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, new RenderEntityRay());
+
+            if (Loader.isModLoaded("NotEnoughItems")) {
+                new NEIGtiConfig().loadConfig();
+            }
         }
     }
 }
