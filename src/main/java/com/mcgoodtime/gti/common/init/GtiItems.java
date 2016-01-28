@@ -124,6 +124,7 @@ public class GtiItems implements IFuelHandler {
 	public static ItemStack coarseBatten;
 
 	public static void init() {
+        diamondApple = new ItemDiamondApple();
 
 		ironTreetap = new ItemGtiTreetap("IronTreetap", 32);
 		bronzeTreetap = new ItemGtiTreetap("BronzeTreetap", 32);
@@ -143,27 +144,6 @@ public class GtiItems implements IFuelHandler {
 		new ItemDryFood();
 
         // special registry TODO: Better registry system
-
-        diamondApple = new ItemFood(1005, 10F, false) {
-            @Override
-            protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) {
-                if (!world.isRemote) {
-                    player.addPotionEffect(new PotionEffect(Potion.field_76434_w.id, 12000, 0));
-                    player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 6000, 4));
-                    player.addPotionEffect(new PotionEffect(Potion.resistance.id, 6000, 4));
-                    player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 0));
-                }
-                super.onFoodEaten(itemStack, world, player);
-            }
-
-            @Override
-            @SuppressWarnings("unchecked")
-            public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
-                list.add(I18n.format(diamondApple.getUnlocalizedName() + ".desc1"));
-            }
-        };
-        diamondApple.setUnlocalizedName(Gti.MOD_ID + ".food.DiamondApple")
-				.setCreativeTab(Gti.creativeTabGti).setTextureName(Gti.MOD_ID + ":itemDiamondApple");
 
 		packagedSalt = new ItemGti("PackagedSalt") {
 			/**
@@ -195,7 +175,6 @@ public class GtiItems implements IFuelHandler {
         iridiumSword = ToolGti.registerSword(GtiToolMaterial.iridium, "IridiumSword");
 
         // TODO: Better registry system
-        GameRegistry.registerItem(diamondApple, "DiamondApple");
 		GameRegistry.registerItem(saltWaterBucket, "SaltWaterBucket");
         GameRegistry.registerFuelHandler(new GtiItems());
     }
