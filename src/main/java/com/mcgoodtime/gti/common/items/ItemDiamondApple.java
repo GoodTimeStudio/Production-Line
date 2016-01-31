@@ -28,6 +28,7 @@ public class ItemDiamondApple extends ItemFood {
         this.setCreativeTab(Gti.creativeTabGti);
         this.setTextureName(Gti.MOD_ID + ":itemDiamondApple");
         this.setHasSubtypes(true);
+        this.setAlwaysEdible();
         GameRegistry.registerItem(this, "DiamondApple");
     }
 
@@ -67,4 +68,8 @@ public class ItemDiamondApple extends ItemFood {
         return itemStack.getItemDamage() == 0 ? EnumRarity.rare : EnumRarity.epic;
     }
 
+    @Override
+    public boolean hasEffect(ItemStack itemStack) {
+        return itemStack.getItemDamage() >= 1;
+    }
 }

@@ -106,7 +106,7 @@ public class GtiRecipes {
                 "DDD",
                 "DAD",
                 "DDD",
-                'D', GtiItems.diamondPlate,
+                'D', GtiItems.denseDiamondPlate,
                 'A', Items.apple
         );
         GameRegistry.addRecipe(
@@ -114,8 +114,8 @@ public class GtiRecipes {
                 "DDD",
                 "DAD",
                 "DDD",
-                'D', GtiItems.denseDiamondPlate,
-                'A', Items.apple
+                'D', GtiItems.diamondApple,
+                'A', Blocks.diamond_block
         );
         GameRegistry.addShapelessRecipe(
                 GtiItems.dustIridium,

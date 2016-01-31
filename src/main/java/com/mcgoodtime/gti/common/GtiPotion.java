@@ -79,7 +79,7 @@ public class GtiPotion extends Potion {
                     }
                 }
                 catch (Exception e) {
-                    GtiConfig.gtiLogger.log(Level.ERROR, "Severe error, please report this to the mod author:");
+                    GtiConfig.gtiLogger.log(Level.ERROR, "An unknown error occurred, please report this to the mod author:");
                     GtiConfig.gtiLogger.log(Level.ERROR, e);
                 }
             }
