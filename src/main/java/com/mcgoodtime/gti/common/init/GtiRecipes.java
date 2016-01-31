@@ -28,6 +28,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
+import ic2.core.AdvRecipe;
 import ic2.core.Ic2Items;
 import ic2.core.util.StackUtil;
 import net.minecraft.init.Blocks;
@@ -410,13 +411,17 @@ public class GtiRecipes {
                 'B', IC2Items.getItem("lapotronCrystal"),
                 'C', IC2Items.getItem("mfsUnit"),
                 'D', GtiItems.pulseElectronicCircuitControl
-        );/*
-        GameRegistry.addRecipe(
-                GtiBlocks.cseu,
+        );
+        AdvRecipe.addAndRegister(
+                new ItemStack(GtiItems.ceu),
                 "ABA",
-                "CCC",
-                "CCC",
-        );*/
+                "CDC",
+                "CDC",
+                'A', IC2Items.getItem("copperCableItem"),
+                'B', IC2Items.getItem("lapiDust"),
+                'C', IC2Items.getItem("casingtin"),
+                'D', GtiItems.carbonTube
+        );
 
         //smelting registry
         GameRegistry.addSmelting(GtiBlocks.oreIridium, GtiItems.ingotIridium, XP);
@@ -494,6 +499,15 @@ public class GtiRecipes {
                 new RecipeInputItemStack(GtiItems.rigidPaperPack),
                 new RecipeInputItemStack(new ItemStack(GtiItems.salt, 9)),
                 new ItemStack(GtiItems.packagedSalt)
+        );
+        AdvRecipe.addAndRegister(
+                GtiBlocks.cseu,
+                "ABA",
+                "CCC",
+                "CCC",
+                'A', IC2Items.getItem("insulatedGoldCableItem"),
+                'B', IC2Items.getItem("advancedMachine"),
+                'C', GtiItems.ceu
         );
     }
 
