@@ -34,7 +34,7 @@ import com.mcgoodtime.productionline.common.entity.PLEntity;
 import com.mcgoodtime.productionline.common.event.PLEvent;
 import com.mcgoodtime.productionline.common.init.*;
 import com.mcgoodtime.productionline.common.nei.NEIPLConfig;
-import com.mcgoodtime.productionline.common.worldgen.GtiWorldGen;
+import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.Mod.Instance;
@@ -115,7 +115,7 @@ public final class ProductionLine {
         //register achievement page
         AchievementPage.registerAchievementPage(PLAchievement.pageGti);
          //register ore gen bus. 注册矿石生成总线
-        GtiWorldGen.init();
+        PLWorldGen.init();
     }
 
     @Mod.EventHandler

@@ -41,7 +41,7 @@ import java.util.Random;
  * ProductionLine world gen.
  * @author BestOwl
  */
-public class GtiWorldGen implements IWorldGenerator {
+public class PLWorldGen implements IWorldGenerator {
 
     private static int index = 1;
 
@@ -50,7 +50,7 @@ public class GtiWorldGen implements IWorldGenerator {
     protected final int MAX_HEIGHT;
     protected final int GEN_SIZE;
 
-    public GtiWorldGen(Block genBlock, int ticket, int maxHeight, int genSize) {
+    public PLWorldGen(Block genBlock, int ticket, int maxHeight, int genSize) {
         this.GEN_BLOCK = genBlock;
         this.TICKET  = ticket;
         this.MAX_HEIGHT = maxHeight;
@@ -60,8 +60,8 @@ public class GtiWorldGen implements IWorldGenerator {
     }
 
     public static void init() {
-        new GtiWorldGen(PLBlocks.oreIridium, 1, 16, 3);
-        new GtiWorldGen(Block.getBlockFromItem(Ic2Items.basaltBlock.getItem()), 5, 27, 10);
+        new PLWorldGen(PLBlocks.oreIridium, 1, 16, 3);
+        new PLWorldGen(Block.getBlockFromItem(Ic2Items.basaltBlock.getItem()), 5, 27, 10);
     }
 
     /**
