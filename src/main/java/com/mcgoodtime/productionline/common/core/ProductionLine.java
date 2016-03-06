@@ -66,7 +66,7 @@ import java.util.ArrayList;
     )
 public final class ProductionLine {
     public static final String MOD_NAME = "ProductionLine";
-    public static final String VERSION = "dev.0.2";
+    public static final String VERSION = "dev.0.3";
     public static final String RESOURCE_DOMAIN = "productionline";
     public static final String GUI_PREFIX = "gui.ProductionLine.";
     public static final CreativeTabs creativeTabGti = new CreativeTabs(MOD_NAME) {

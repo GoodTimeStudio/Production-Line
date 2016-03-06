@@ -14,7 +14,7 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'checkstyle'
 
-version = "dev.0.2" + getBuildNumber()
+version = "dev.0.3" + getBuildNumber()
 group= "com.mcgoodtime.productionline"
 archivesBaseName = "ProductionLine"
 
