@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 TweakClass: org.spongepowered.asm.launch.MixinTweaker
 TweakOrder: 0
-MixinConfigs: mixins.gti.core.json
-FMLCorePlugin: com.mcgoodtime.gti.common.core.coremod.GtiCore
+MixinConfigs: mixins.productionline.core.json
+FMLCorePlugin: com.mcgoodtime.productionline.common.core.coremod.PLCore
 FMLCorePluginContainsFMLMod: true
 FMLAT: gti_at.cfg
 

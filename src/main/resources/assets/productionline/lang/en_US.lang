@@ -1,0 +1,39 @@
+#ProductionLine Language file
+#en_US
+
+//gui
+gui.ProductionLine.GenGasKu=GenGasKu
+
+//----Food
+item.DiamondApple.name=Diamond Apple
+
+//----OreItem
+item.CrushedIriridium.name=Crushed Iriridium Ore
+
+item.DustIriridium.name=Iriridium Dust
+
+item.Roller.name=Roller
+
+//----Ingot
+item.IngotIriridium.name=Iriridium Ingot
+item.ThermalInsulationMaterial=Thermal Insulation Material
+
+//----Plate
+item.DiamondPlate.name=Diamond Plate
+item.DenseDiamondPlate.name=Dense Diamond Plate
+item.HeatInsulationBoard.name=Heat Insulation Board
+
+//----Ore
+tile.iridiumore.name=Iridium Ore
+
+//----Block
+tile.CompressedWaterHyacinth.name=Compressed Water Hyacinth
+tile.DehydratedWaterHyacinthBlock.name=Dehydrated Water Hyacinth Block
+tile.BlackSesame.name=Black Sesame
+tile.StickyRice.name=Sticky Rice
+tile.RedBean.name=Red Bean
+tile.Celery.name=Celery
+
+//---Item
+tile.SmallCompressedWaterHyacinth.name=Small Compressed Water Hyacinth
+

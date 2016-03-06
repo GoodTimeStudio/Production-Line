@@ -15,8 +15,8 @@ apply plugin: 'forge'
 apply plugin: 'checkstyle'
 
 version = "dev.0.2" + getBuildNumber()
-group= "com.mcgoodtime.gti"
-archivesBaseName = "gti"
+group= "com.mcgoodtime.productionline"
+archivesBaseName = "ProductionLine"
 
 repositories {
     maven {
@@ -54,12 +54,12 @@ jar {
 	
     manifest {
 		attributes (
-            'FMLCorePlugin': 'com.mcgoodtime.gti.common.core.coremod.GtiCore',
+            'FMLCorePlugin': 'com.mcgoodtime.productionline.common.core.coremod.PLCore',
 			'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
 			'TweakOrder': 0,
-			'MixinConfigs': 'mixins.gti.core.json',
+			'MixinConfigs': 'mixins.productionline.core.json',
 			'FMLCorePluginContainsFMLMod': true,
-			'FMLAT': 'gti_at.cfg',
+			'FMLAT': 'productionline_at.cfg',
 			'ForceLoadAsMod': true
 		)
     }
@@ -127,10 +127,10 @@ processResources {
 checkstyle {
     configFile = file('checkstyle.xml')
     configProperties = [
-            "name" : 'GoodTime-Industrial',
+            "name" : 'Production-Line',
             "organization" : 'GoodTimeStudio',
-            "url" : 'https://github.com/GoodTimeStudio/GoodTime-Industrial',
-            "year" : '2015',
+            "url" : 'https://github.com/GoodTimeStudio/Production-Line',
+            "year" : '2016',
             "basedir": project.projectDir,
             "severity": 'warning'
     ]
