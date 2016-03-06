@@ -1,7 +1,7 @@
-# GoodTime-Industrial
+# Production-Line
 
-[![Join the chat at https://gitter.im/GoodTimeStudio/GoodTime-Industrial](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GoodTimeStudio/GoodTime-Industrial?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/GoodTimeStudio/GoodTime-Industrial.svg?branch=master)](https://travis-ci.org/GoodTimeStudio/GoodTime-Industrial)
+[![Gitter](https://badges.gitter.im/GoodTimeStudio/Production-Line.svg)](https://gitter.im/GoodTimeStudio/Production-Line?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](https://travis-ci.org/GoodTimeStudio/Production-Line.svg?branch=master)](https://travis-ci.org/GoodTimeStudio/Production-Line)
 
 IC2 Addon
 Very early, under MIT License
