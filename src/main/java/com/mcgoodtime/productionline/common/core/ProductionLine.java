@@ -73,7 +73,7 @@ public final class ProductionLine {
         @SideOnly(Side.CLIENT)
         @Override
         public Item getTabIconItem() {
-            return PLItems.diamondApple;
+            return PLItems.gravityRay;
         }
     };
     @Mod.Metadata
