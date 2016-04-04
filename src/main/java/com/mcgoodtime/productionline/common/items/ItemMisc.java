@@ -13,8 +13,6 @@ import java.util.List;
  */
 public class ItemMisc extends ItemMultiDamage {
 
-    private int count = 0;
-
     public ItemMisc() {
         super("ItemMisc");
         PLItems.roller = this.next();
@@ -58,10 +56,6 @@ public class ItemMisc extends ItemMultiDamage {
         PLItems.advSolarLensUnit = this.next();
         PLItems.advSolarLensGroup = this.next();
         PLItems.advSolarLensCluster = this.next();
-    }
-
-    private ItemStack next() {
-        return new ItemStack(this, 1, this.count++);
     }
 
     @Override

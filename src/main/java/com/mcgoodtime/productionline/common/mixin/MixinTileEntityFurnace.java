@@ -22,7 +22,7 @@ public abstract class MixinTileEntityFurnace extends TileEntityFurnace {
 
     @Shadow
     public ItemStack[] furnaceItemStacks;
-
+/*
     @Overwrite
     public void updateEntity() {
         boolean flag = this.furnaceBurnTime > 0;
@@ -102,7 +102,7 @@ public abstract class MixinTileEntityFurnace extends TileEntityFurnace {
     private void doExplosion() {
         this.worldObj.createExplosion(null, this.xCoord, this.yCoord, this.zCoord, 4.0F, true);
     }
-
+*/
     @Shadow
     public abstract boolean canSmelt();
 }

@@ -20,6 +20,7 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_
  */
 public abstract class ItemMultiDamage extends ItemPL {
 
+    private int count = 0;
     protected List<String> internalNameList = this.getInternalNameList();
     protected IIcon[] icons;
 
@@ -110,5 +111,9 @@ public abstract class ItemMultiDamage extends ItemPL {
             i++;
             unLocal = this.getUnlocalizedName() + ".desc" + i;
         }
+    }
+
+    protected ItemStack next() {
+        return new ItemStack(this, 1, this.count++);
     }
 }

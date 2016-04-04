@@ -116,6 +116,7 @@ public class PLItems implements IFuelHandler {
 	public static ItemStack faggot;
 	public static ItemStack firewood;
 	public static ItemStack coarseBatten;
+	public static ItemStack yourHouseBombed;
 
 	public static void init() {
         diamondApple = new ItemDiamondApple();
@@ -136,6 +137,7 @@ public class PLItems implements IFuelHandler {
 		new ItemOre();
 		new ItemMisc();
 		new ItemDryFood();
+        new ItemHidden();
 
         // special registry TODO: Better registry system
 

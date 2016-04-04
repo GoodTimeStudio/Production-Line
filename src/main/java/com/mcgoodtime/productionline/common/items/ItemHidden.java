@@ -1,7 +1,7 @@
 /*
- * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ * This file is part of Production-Line, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
+ * Copyright (c) 2016 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,39 +22,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common.nei;
+package com.mcgoodtime.productionline.common.items;
 
-import codechicken.nei.api.API;
-import codechicken.nei.api.IConfigureNEI;
-import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.init.PLItems;
-import com.mcgoodtime.productionline.common.nei.handler.RecipeHandlerCarbonizeFurnace;
-import com.mcgoodtime.productionline.common.nei.handler.RecipeHandlerHeatDryer;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by BestOwl on 2015.11.29.0029.
+ * Created by BestOwl on 2016-03-19  14:09.
  *
  * @author BestOwl
  */
-public class NEIPLConfig implements IConfigureNEI {
+public class ItemHidden extends ItemMultiDamage {
 
-    @Override
-    public void loadConfig() {
-        API.registerRecipeHandler(new RecipeHandlerCarbonizeFurnace());
-        API.registerUsageHandler(new RecipeHandlerCarbonizeFurnace());
-        API.registerRecipeHandler(new RecipeHandlerHeatDryer());
-        API.registerUsageHandler(new RecipeHandlerHeatDryer());
-
-        API.hideItem(PLItems.yourHouseBombed);
+    public ItemHidden() {
+        super("ItemHidden");
+        PLItems.yourHouseBombed = this.next();
+        System.err.println(this.getMaxDamage());
     }
 
     @Override
-    public String getName() {
-        return ProductionLine.MOD_NAME;
+    protected List<String> getInternalNameList() {
+        List<String> ret = new ArrayList<String>();
+        ret.add("YourHouseBombed");
+        return ret;
     }
 
     @Override
-    public String getVersion() {
-        return ProductionLine.VERSION;
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
     }
 }
