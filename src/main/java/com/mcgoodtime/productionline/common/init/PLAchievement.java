@@ -37,6 +37,9 @@ public class PLAchievement {
     /** Is the 'ir ore' achievement. */
     public static Achievement getIrOre = new Achievement("achievement.getIrOre", "getIrOre", 0, 0,
             PLBlocks.oreIridium, AchievementList.acquireIron).registerStat();
+    /** Just for funny, :) */
+    public static Achievement yourHouseBombed = new Achievement("achievement.yourHouseBombed", "yourHouseBombed", 0, 3,
+            PLItems.yourHouseBombed, null).setSpecial().registerStat().initIndependentStat();
 
     /** Is the 'getting CarbonizeFurnace' achievement. */
     public static Achievement getCarbonizeFurnace = new Achievement(
@@ -45,10 +48,11 @@ public class PLAchievement {
     ).registerStat();
 
     /** Is the AchievementPage for ProductionLine */
-    public static AchievementPage pageGti = new AchievementPage(
+    public static AchievementPage pagePL = new AchievementPage(
             ProductionLine.MOD_NAME,
             getIrOre,
-            getCarbonizeFurnace);
+            getCarbonizeFurnace,
+            yourHouseBombed);
 
     /**
      * A stub functions called to make the static initializer for this class run.

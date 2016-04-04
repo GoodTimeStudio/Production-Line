@@ -113,7 +113,7 @@ public final class ProductionLine {
          //register achievement
         PLAchievement.init();
         //register achievement page
-        AchievementPage.registerAchievementPage(PLAchievement.pageGti);
+        AchievementPage.registerAchievementPage(PLAchievement.pagePL);
          //register ore gen bus. 注册矿石生成总线
         PLWorldGen.init();
     }
