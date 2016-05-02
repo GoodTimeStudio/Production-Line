@@ -5,8 +5,7 @@
   "refmap": "mixins.forge.refmap.json",
   "priority": 1111,
   "mixins": [
-    "MixinItemRadioactive",
-    "MixinTileEntityFurnace"
+    "MixinItemRadioactive"
   ],
   "client": [],
   "server": []
