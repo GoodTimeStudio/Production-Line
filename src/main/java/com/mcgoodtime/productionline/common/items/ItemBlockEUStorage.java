@@ -34,10 +34,14 @@ public class ItemBlockEUStorage extends ItemBlockPL {
         String info = StatCollector.translateToLocal("ic2.item.tooltip.Output") + " ";
         switch (meta) {
             case 0: info += "8192EU/t";
+            case 1: info += "128EU/t";
+            case 2: info += "32768EU/t";
         }
         info += " " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " ";
         switch (meta) {
             case 0: info += "100m EU";
+            case 1: info += "720k EU";
+            case 2: info += "200m EU";
         }
         list.add(info);
         NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
