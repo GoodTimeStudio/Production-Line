@@ -6,4 +6,4 @@
 IC2 Addon
 Very early, under MIT License
 
-###Dev Build: http://ci.mcgoodtime.com:8080/job/Gti/
+###Dev Build: http://ci.mcgoodtime.com/job/Production-Line
