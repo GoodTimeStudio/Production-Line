@@ -8,7 +8,7 @@ package com.mcgoodtime.productionline.common.tiles.eustorage;
 public class TileParallelSpaceSU extends TileEUStorage {
 
     public TileParallelSpaceSU() {
-        super(6, (int) 2E8);
+        super(6, (int) 2.5E8);
     }
 
     @Override

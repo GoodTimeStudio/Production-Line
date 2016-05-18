@@ -41,12 +41,17 @@ public class ItemBlockEUStorage extends ItemBlockPL {
         switch (meta) {
             case 0: info += "100m EU";
             case 1: info += "720k EU";
-            case 2: info += "200m EU";
+            case 2: info += "250m EU";
         }
         list.add(info);
         NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
         String internalEnergy = StatCollector.translateToLocal("ic2.item.tooltip.Store") + " " + nbt.getInteger("energy") + " EU";
         list.add(internalEnergy);
+
+        switch (meta) {
+            case 2:
+                list.add(StatCollector.translateToLocal("tile.ProductionLine.block.ParallelSpaceSU.desc"));
+        }
     }
 
     /**
