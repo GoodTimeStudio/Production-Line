@@ -50,7 +50,14 @@ public class ItemBlockEUStorage extends ItemBlockPL {
 
         switch (meta) {
             case 2:
-                list.add(StatCollector.translateToLocal("tile.ProductionLine.block.ParallelSpaceSU.desc"));
+                int i = 1;
+                String unLocal = "tile.ProductionLine.block.ParallelSpaceSU.desc" + i;
+
+                while (StatCollector.canTranslate(unLocal)) {
+                    list.add(StatCollector.translateToLocal(unLocal));
+                    i++;
+                    unLocal = "tile.ProductionLine.block.ParallelSpaceSU.desc" + i;
+                }
         }
     }
 

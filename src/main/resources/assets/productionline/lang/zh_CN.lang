@@ -30,6 +30,12 @@ tile.ProductionLine.block.CSEU.name=CSEU
 tile.ProductionLine.block.ParallelSpaceSU.name=平行空间储电盒
 tile.ProductionLine.block.AdvSolar.name=聚能太阳能
 
+//tooltip
+tile.ProductionLine.block.ParallelSpaceSU.desc1=
+tile.ProductionLine.block.ParallelSpaceSU.desc2=§m这个老鼠夹这么的明显老鼠会踩吗？
+tile.ProductionLine.block.ParallelSpaceSU.desc3=§m拜托狗熊你眼瞎啊，狩猎夹这么大！哦不！这个竹筐这么大，鸟儿你制杖吗？
+tile.ProductionLine.block.ParallelSpaceSU.desc4=§m天啊有个250m EU的储电器，我要立马做一个！
+
 [ITEMS]
 //crushed
 item.ProductionLine.CrushedIridium.name=粉碎的铱矿石
