@@ -510,6 +510,18 @@ public class PLRecipes {
                 'C', IC2Items.getItem("mfsUnit"),
                 'D', PLItems.pulseElectronicCircuitControl
         );
+        PLAdvShapedRecipe.addShapedRecipe(
+                PLBlocks.parallelSpaceSU,
+                "ABA",
+                "CDC",
+                "EFE",
+                'A', PLItems.obsidianPlateGravityField,
+                'B', PLItems.cyclotronParticleAccelerator,
+                'C', PLBlocks.evsu,
+                'D', PLItems.obsidianMechanicalCasing,
+                'E', IC2Items.getItem("evTransformer"),
+                'F', PLItems.enderCalculationCrystal
+        );
     }
 
     private static void disable() {
