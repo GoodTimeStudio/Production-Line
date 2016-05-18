@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common.nei.handler;
+package com.mcgoodtime.productionline.common.crafting.nei.handler;
 
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;

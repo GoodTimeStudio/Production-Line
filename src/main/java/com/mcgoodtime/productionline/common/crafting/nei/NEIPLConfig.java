@@ -22,47 +22,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common.nei.handler;
+package com.mcgoodtime.productionline.common.crafting.nei;
 
-import com.mcgoodtime.productionline.client.gui.GuiHeatDryer;
+import codechicken.nei.api.API;
+import codechicken.nei.api.IConfigureNEI;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.recipes.HeatDryerRecipes;
-import com.mcgoodtime.productionline.common.recipes.IProcessable;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import com.mcgoodtime.productionline.common.crafting.nei.handler.RecipeHandlerCarbonizeFurnace;
+import com.mcgoodtime.productionline.common.crafting.nei.handler.RecipeHandlerHeatDryer;
 
 /**
- * Created by BestOwl on 2015.12.19.0019.
+ * Created by BestOwl on 2015.11.29.0029.
  *
  * @author BestOwl
  */
-public class RecipeHandlerHeatDryer extends RecipeHandlerBase {
+public class NEIPLConfig implements IConfigureNEI {
+
     @Override
-    public IProcessable getRecipesList() {
-        return HeatDryerRecipes.instance;
+    public void loadConfig() {
+        API.registerRecipeHandler(new RecipeHandlerCarbonizeFurnace());
+        API.registerUsageHandler(new RecipeHandlerCarbonizeFurnace());
+        API.registerRecipeHandler(new RecipeHandlerHeatDryer());
+        API.registerUsageHandler(new RecipeHandlerHeatDryer());
     }
 
     @Override
-    public String getRecipeNameForCrafting() {
-        return "HeatDryer";
+    public String getName() {
+        return ProductionLine.MOD_NAME;
     }
 
     @Override
-    public String getRecipeID() {
-        return "productionline.dryer";
-    }
-
-    @Override
-    public Class<? extends GuiContainer> getGuiClass() {
-        return GuiHeatDryer.class;
-    }
-
-    @Override
-    public String getGuiTexture() {
-        return ProductionLine.RESOURCE_DOMAIN + ":" + "textures/gui/GuiHeatDryer.png";
-    }
-
-    @Override
-    public String getOverlayIdentifier() {
-        return "dryer";
+    public String getVersion() {
+        return ProductionLine.VERSION;
     }
 }

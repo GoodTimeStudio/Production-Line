@@ -22,48 +22,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common.nei.handler;
+package com.mcgoodtime.productionline.common.crafting.nei.handler;
 
-import com.mcgoodtime.productionline.client.gui.GuiCarbonizeFurnace;
+import com.mcgoodtime.productionline.client.gui.GuiHeatDryer;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.recipes.CarbonizeFurnaceRecipes;
+import com.mcgoodtime.productionline.common.recipes.HeatDryerRecipes;
 import com.mcgoodtime.productionline.common.recipes.IProcessable;
 import net.minecraft.client.gui.inventory.GuiContainer;
 
 /**
- * Created by BestOwl on 2015.11.29.0029.
+ * Created by BestOwl on 2015.12.19.0019.
  *
  * @author BestOwl
  */
-public class RecipeHandlerCarbonizeFurnace extends RecipeHandlerBase {
-
+public class RecipeHandlerHeatDryer extends RecipeHandlerBase {
     @Override
     public IProcessable getRecipesList() {
-        return CarbonizeFurnaceRecipes.instance;
+        return HeatDryerRecipes.instance;
     }
 
     @Override
     public String getRecipeNameForCrafting() {
-        return "CarbonizeFurnace";
+        return "HeatDryer";
     }
 
     @Override
     public String getRecipeID() {
-        return "productionline.carbonize";
+        return "productionline.dryer";
     }
 
     @Override
     public Class<? extends GuiContainer> getGuiClass() {
-        return GuiCarbonizeFurnace.class;
-    }
-
-    @Override
-    public String getOverlayIdentifier() {
-        return "carbonize";
+        return GuiHeatDryer.class;
     }
 
     @Override
     public String getGuiTexture() {
-        return ProductionLine.RESOURCE_DOMAIN + ":" + "textures/gui/GuiCarbonizeFurnace.png";
+        return ProductionLine.RESOURCE_DOMAIN + ":" + "textures/gui/GuiHeatDryer.png";
+    }
+
+    @Override
+    public String getOverlayIdentifier() {
+        return "dryer";
     }
 }

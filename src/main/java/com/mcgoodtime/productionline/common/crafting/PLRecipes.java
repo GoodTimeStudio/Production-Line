@@ -22,14 +22,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common.init;
+package com.mcgoodtime.productionline.common.crafting;
 
+import com.mcgoodtime.productionline.common.init.PLBlocks;
+import com.mcgoodtime.productionline.common.init.PLItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
-import ic2.core.AdvRecipe;
-import ic2.core.Ic2Items;
 import ic2.core.util.StackUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -56,7 +56,6 @@ public class PLRecipes {
         disable();
 
         //vanilla recipe registry;
-
         GameRegistry.addRecipe(
                 PLBlocks.carbonizeFurnace,
                 "ABA",
@@ -305,7 +304,7 @@ public class PLRecipes {
                 'D', PLItems.parallelSpaceConverter
         );
         GameRegistry.addRecipe(
-                Ic2Items.massFabricator,
+                IC2Items.getItem("massFabricator"),
                 "ACA",
                 "BDB",
                 "ACA",
@@ -403,22 +402,12 @@ public class PLRecipes {
                 'F', IC2Items.getItem("machine")
         );
         GameRegistry.addRecipe(
-                PLBlocks.evsu,
-                "ABA",
-                "ACD",
-                "ABA",
-                'A', IC2Items.getItem("evTransformer"),
-                'B', IC2Items.getItem("lapotronCrystal"),
-                'C', IC2Items.getItem("mfsUnit"),
-                'D', PLItems.pulseElectronicCircuitControl
-        );
-        AdvRecipe.addAndRegister(
                 new ItemStack(PLItems.ceu),
                 "ABA",
                 "CDC",
                 "CDC",
                 'A', IC2Items.getItem("copperCableItem"),
-                'B', IC2Items.getItem("lapiDust"),
+                'B', IC2Items.getItem("AshesDust"),
                 'C', IC2Items.getItem("casingtin"),
                 'D', PLItems.carbonTube
         );
@@ -487,7 +476,7 @@ public class PLRecipes {
                 new RecipeInputItemStack(PLItems.crushedIridium),
                 oreWash,
                 PLItems.cleanedCrushedIridium,
-                StackUtil.copyWithSize(Ic2Items.smallTinDust, 2)
+                StackUtil.copyWithSize(IC2Items.getItem("smallTinDust"), 2)
         );
         Recipes.centrifuge.addRecipe(
                 new RecipeInputItemStack(PLItems.cleanedCrushedIridium),
@@ -500,7 +489,9 @@ public class PLRecipes {
                 new RecipeInputItemStack(new ItemStack(PLItems.salt, 9)),
                 new ItemStack(PLItems.packagedSalt)
         );
-        AdvRecipe.addAndRegister(
+
+        //ProductioneLine Adv Recipe
+        PLAdvShapedRecipe.addShapedRecipe(
                 PLBlocks.cseu,
                 "ABA",
                 "CCC",
@@ -509,10 +500,20 @@ public class PLRecipes {
                 'B', IC2Items.getItem("advancedMachine"),
                 'C', PLItems.ceu
         );
+        PLAdvShapedRecipe.addShapedRecipe(
+                PLBlocks.evsu,
+                "ACA",
+                "ABD",
+                "ACA",
+                'A', IC2Items.getItem("evTransformer"),
+                'B', IC2Items.getItem("lapotronCrystal"),
+                'C', IC2Items.getItem("mfsUnit"),
+                'D', PLItems.pulseElectronicCircuitControl
+        );
     }
 
     private static void disable() {
-        disableRecipes(Ic2Items.massFabricator);
+        disableRecipes(IC2Items.getItem("massFabricator"));
         disableRecipes(IC2Items.getItem("iridiumPlate"));
     }
 
@@ -537,4 +538,5 @@ public class PLRecipes {
         Map<List<Integer>, ItemStack> smelting = FurnaceRecipes.smelting().getSmeltingList();
         smelting.remove(itemStack);
     }
+
 }

@@ -22,36 +22,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common.nei;
+package com.mcgoodtime.productionline.common.crafting.nei.handler;
 
-import codechicken.nei.api.API;
-import codechicken.nei.api.IConfigureNEI;
+import com.mcgoodtime.productionline.client.gui.GuiCarbonizeFurnace;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.nei.handler.RecipeHandlerCarbonizeFurnace;
-import com.mcgoodtime.productionline.common.nei.handler.RecipeHandlerHeatDryer;
+import com.mcgoodtime.productionline.common.recipes.CarbonizeFurnaceRecipes;
+import com.mcgoodtime.productionline.common.recipes.IProcessable;
+import net.minecraft.client.gui.inventory.GuiContainer;
 
 /**
  * Created by BestOwl on 2015.11.29.0029.
  *
  * @author BestOwl
  */
-public class NEIPLConfig implements IConfigureNEI {
+public class RecipeHandlerCarbonizeFurnace extends RecipeHandlerBase {
 
     @Override
-    public void loadConfig() {
-        API.registerRecipeHandler(new RecipeHandlerCarbonizeFurnace());
-        API.registerUsageHandler(new RecipeHandlerCarbonizeFurnace());
-        API.registerRecipeHandler(new RecipeHandlerHeatDryer());
-        API.registerUsageHandler(new RecipeHandlerHeatDryer());
+    public IProcessable getRecipesList() {
+        return CarbonizeFurnaceRecipes.instance;
     }
 
     @Override
-    public String getName() {
-        return ProductionLine.MOD_NAME;
+    public String getRecipeNameForCrafting() {
+        return "CarbonizeFurnace";
     }
 
     @Override
-    public String getVersion() {
-        return ProductionLine.VERSION;
+    public String getRecipeID() {
+        return "productionline.carbonize";
+    }
+
+    @Override
+    public Class<? extends GuiContainer> getGuiClass() {
+        return GuiCarbonizeFurnace.class;
+    }
+
+    @Override
+    public String getOverlayIdentifier() {
+        return "carbonize";
+    }
+
+    @Override
+    public String getGuiTexture() {
+        return ProductionLine.RESOURCE_DOMAIN + ":" + "textures/gui/GuiCarbonizeFurnace.png";
     }
 }
