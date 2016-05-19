@@ -52,6 +52,7 @@ public class PLBlocks {
     public static BlockPL fluidKineticGenerator;
     public static BlockPL oreIridium;
     public static BlockPL airBrakeCasing;
+    public static BlockPL advSolar;
 
     public static Block waterHyacinth;
 
@@ -61,10 +62,10 @@ public class PLBlocks {
         oreIridium = new BlockPL(Material.rock, "oreIridium", 10, 20, "pickaxe", 3);
         fluidKineticGenerator = new BlockFluidKineticGenerator();
         airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
+        advSolar = new BlockAdvSolar();
         new BlockMisc();
         new BlockMachine();
         new BlockEUStorage();
-        new BlockAdvSolar();
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();

@@ -38,6 +38,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.List;
 import java.util.Map;
@@ -52,10 +53,22 @@ public class PLRecipes {
 
     /** Load recipes of GoodTime-Industrial.*/
     public static void init() {
-        //disable recipes
-        disable();
+        disableRecipes();
+        registerVanillaRecipes();
+        registerSmelting();
+        registerIC2Recipes();
+        registerPLAdvRecipes();
+        registerOreDictionaryRecipes();
+    }
 
-        //vanilla recipe registry;
+    /** Disable recipes. */
+    private static void disableRecipes() {
+        disableRecipes(IC2Items.getItem("massFabricator"));
+        disableRecipes(IC2Items.getItem("iridiumPlate"));
+    }
+
+    /** Vanilla recipe registry. */
+    private static void registerVanillaRecipes() {
         GameRegistry.addRecipe(
                 PLBlocks.carbonizeFurnace,
                 "ABA",
@@ -67,7 +80,6 @@ public class PLRecipes {
                 'D', IC2Items.getItem("electroFurnace"),
                 'E', IC2Items.getItem("plateiron")
         );
-        
         GameRegistry.addRecipe(
                 PLItems.roller,
                 " A",
@@ -411,24 +423,49 @@ public class PLRecipes {
                 'C', IC2Items.getItem("casingtin"),
                 'D', PLItems.carbonTube
         );
+        GameRegistry.addRecipe(
+                PLItems.advSolarLensUnit,
+                "A A",
+                "A A",
+                " A ",
+                'A', Blocks.glass
+        );
+        GameRegistry.addRecipe(
+                PLItems.advSolarLensGroup,
+                "A A",
+                "A A",
+                " A ",
+                'A', PLItems.advSolarLensUnit
+        );
+        GameRegistry.addRecipe(
+                PLItems.advSolarLensCluster,
+                "A A",
+                "A A",
+                " A ",
+                'A', PLItems.advSolarLensGroup
+        );
+    }
 
-        //smelting registry
+    /** Smelting registry. */
+    private static void registerSmelting() {
         GameRegistry.addSmelting(PLBlocks.oreIridium, PLItems.ingotIridium, XP);
         GameRegistry.addSmelting(PLItems.cleanedCrushedIridium, PLItems.ingotIridium, XP);
         GameRegistry.addSmelting(PLItems.dustIridium, PLItems.ingotIridium, XP);
         GameRegistry.addSmelting(PLItems.crushedIridium, PLItems.ingotIridium, XP);
         GameRegistry.addSmelting(IC2Items.getItem("iridiumOre"), PLItems.ingotIridium, XP);
+    }
 
-        //ic2 recipe registry
+    /** ic2 recipe registry. */
+    private static void registerIC2Recipes() {
         Recipes.compressor.addRecipe(
-        		new RecipeInputItemStack(PLItems.getItems(PLItems.smallCompressedWaterHyacinth, 8)),
-        		null,
-        		PLBlocks.compressedWaterHyacinth
+                new RecipeInputItemStack(PLItems.getItems(PLItems.smallCompressedWaterHyacinth, 8)),
+                null,
+                PLBlocks.compressedWaterHyacinth
         );
         Recipes.compressor.addRecipe(
-        		new RecipeInputItemStack(new ItemStack(PLBlocks.waterHyacinth, 8)),
-        		null,
-        		PLItems.smallCompressedWaterHyacinth
+                new RecipeInputItemStack(new ItemStack(PLBlocks.waterHyacinth, 8)),
+                null,
+                PLItems.smallCompressedWaterHyacinth
         );
         Recipes.metalformerRolling.addRecipe(
                 new RecipeInputItemStack(new ItemStack(Items.diamond)),
@@ -436,9 +473,9 @@ public class PLRecipes {
                 PLItems.diamondPlate
         );
         Recipes.metalformerRolling.addRecipe(
-               		new RecipeInputItemStack(PLItems.heatInsulationMaterial),
-               		null,
-               		PLItems.heatInsulationPlate
+                new RecipeInputItemStack(PLItems.heatInsulationMaterial),
+                null,
+                PLItems.heatInsulationPlate
         );
         Recipes.compressor.addRecipe(
                 new RecipeInputItemStack(PLItems.getItems(PLItems.diamondPlate, 9)),
@@ -489,8 +526,10 @@ public class PLRecipes {
                 new RecipeInputItemStack(new ItemStack(PLItems.salt, 9)),
                 new ItemStack(PLItems.packagedSalt)
         );
+    }
 
-        //ProductioneLine Adv Recipe
+    /** ProductioneLine adv recipe registry. */
+    private static void registerPLAdvRecipes() {
         PLAdvShapedRecipe.addShapedRecipe(
                 PLBlocks.cseu,
                 "ABA",
@@ -524,9 +563,30 @@ public class PLRecipes {
         );
     }
 
-    private static void disable() {
-        disableRecipes(IC2Items.getItem("massFabricator"));
-        disableRecipes(IC2Items.getItem("iridiumPlate"));
+    /** OreDictionary recipe registry. */
+    private static void registerOreDictionaryRecipes() {
+        addOreDictionaryRecipes(
+                new ItemStack(PLBlocks.advSolar),
+                "A",
+                "B",
+                "C",
+                'A', "advSolarLens",
+                'B', IC2Items.getItem("lvTransformer"),
+                'C', IC2Items.getItem("solarPanel")
+        );
+        addOreDictionaryRecipes(
+                new ItemStack(PLBlocks.advSolar),
+                "A",
+                "B",
+                "C",
+                'A', "advSolarLens",
+                'B', IC2Items.getItem("mvTransformer"),
+                'C', IC2Items.getItem("solarPanel")
+        );
+    }
+
+    private static void addOreDictionaryRecipes(ItemStack result, Object... recipe) {
+        GameRegistry.addRecipe(new ShapedOreRecipe(result, recipe));
     }
 
     /**
@@ -534,7 +594,7 @@ public class PLRecipes {
      * @param itemStack Disable all recipes of this item.
      */
     @SuppressWarnings("unchecked")
-    public static void disableRecipes(ItemStack itemStack) {
+    private static void disableRecipes(ItemStack itemStack) {
         List<IRecipe> recipeList = CraftingManager.getInstance().getRecipeList();
         for (int i = 0; i < recipeList.size(); i++) {
             IRecipe iRecipe = recipeList.get(i);
