@@ -33,15 +33,27 @@ public class ItemBlockEUStorage extends ItemBlockPL {
         int meta = itemStack.getItemDamage();
         String info = StatCollector.translateToLocal("ic2.item.tooltip.Output") + " ";
         switch (meta) {
-            case 0: info += "8192EU/t";
-            case 1: info += "128EU/t";
-            case 2: info += "32768EU/t";
+            case 0:
+                info += "8192EU/t";
+                break;
+            case 1:
+                info += "128EU/t";
+                break;
+            case 2:
+                info += "32768EU/t";
+                break;
         }
         info += " " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " ";
         switch (meta) {
-            case 0: info += "100m EU";
-            case 1: info += "720k EU";
-            case 2: info += "250m EU";
+            case 0:
+                info += "100m EU";
+                break;
+            case 1:
+                info += "720k EU";
+                break;
+            case 2:
+                info += "250m EU";
+                break;
         }
         list.add(info);
         NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
