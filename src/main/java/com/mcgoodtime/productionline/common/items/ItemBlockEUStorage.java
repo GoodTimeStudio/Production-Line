@@ -52,7 +52,7 @@ public class ItemBlockEUStorage extends ItemBlockPL {
             case 2:
                 int i = 1;
                 String unLocal = "tile.ProductionLine.block.ParallelSpaceSU.desc" + i;
-
+                list.add(" ");
                 while (StatCollector.canTranslate(unLocal)) {
                     list.add(StatCollector.translateToLocal(unLocal));
                     i++;

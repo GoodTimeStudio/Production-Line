@@ -35,7 +35,6 @@ import net.minecraft.util.StatCollector;
 import java.util.List;
 
 import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_NAME;
-import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
 import static com.mcgoodtime.productionline.common.core.ProductionLine.creativeTabGti;
 
 /**
