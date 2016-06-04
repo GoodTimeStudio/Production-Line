@@ -1,11 +1,11 @@
 {
   "required": true,
-  "minVersion": "0.4.5",
+  "minVersion": "0.4.4",
   "package": "com.mcgoodtime.productionline.common.mixin",
   "refmap": "mixins.forge.refmap.json",
   "priority": 1111,
   "mixins": [
-    "MixinItemRadioactive",
+    "MixinItemMulti",
     "MixinTileEntityFurnace"
   ],
   "client": [],

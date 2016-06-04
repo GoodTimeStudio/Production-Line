@@ -41,7 +41,7 @@ configurations {
 }
 
 dependencies {
-    compile 'org.spongepowered:mixin:0.5.6-SNAPSHOT'
+    compile 'org.spongepowered:mixin:0.4.4'
     compile 'net.industrial-craft:industrialcraft-2:2.3.251-ex18:dev' //adds ic2 to the dev env
     checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
 }
