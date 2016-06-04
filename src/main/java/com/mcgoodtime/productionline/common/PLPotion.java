@@ -49,43 +49,18 @@ import java.util.List;
 public class PLPotion extends Potion {
     public static PLPotion salty;
 
-    private static int index = 0;
     private List<ItemStack> curativeItems = new ArrayList<ItemStack>();
 
-    protected PLPotion(boolean deBuff, int liquidColor, ItemStack... curativeItems) {
-        super(100 + index, deBuff, liquidColor);
+    protected PLPotion(String name, boolean deBuff, int liquidColor, ItemStack... curativeItems) {
+        super(new ResourceLocation(ProductionLine.RESOURCE_DOMAIN, name), deBuff, liquidColor);
         this.curativeItems = Arrays.asList(curativeItems);
-        index++;
     }
 
     /**
      * @note http://www.minecraftforum.net/forums/mapping-and-modding/mapping-and-modding-tutorials/2363067-forge-1-7-10-redds-advanced-tutorials-make-your
      */
     public static void initPotion() {
-        if (Potion.potionTypes.length < 256) {
-            Potion[] potionTypes;
-            for (Field f : Potion.class.getDeclaredFields()) {
-                f.setAccessible(true);
-                try {
-                    if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
-                        Field modfield = Field.class.getDeclaredField("modifiers");
-                        modfield.setAccessible(true);
-                        modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-
-                        potionTypes = (Potion[])f.get(null);
-                        final Potion[] newPotionTypes = new Potion[256];
-                        System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-                        f.set(null, newPotionTypes);
-                    }
-                }
-                catch (Exception e) {
-                    PLConfig.gtiLogger.log(Level.ERROR, "An unknown error occurred, please report this to the mod author:");
-                    PLConfig.gtiLogger.log(Level.ERROR, e);
-                }
-            }
-        }
-
-        salty = new PLPotion(true, 0xFFFFFFF, new ItemStack(Items.water_bucket), new ItemStack(Items.milk_bucket));
+        salty = new PLPotion("salty", true, 0xFFFFFFF, new ItemStack(Items.water_bucket), new ItemStack(Items.milk_bucket));
         salty.setPotionName("productionline.potion.Salty");
     }
 
