@@ -33,7 +33,7 @@ public abstract class MixinTileEntityFurnace extends TileEntityFurnace {
                 ItemStack itemStack = this.furnaceItemStacks[0];
                 if (itemStack != null) {
                     if (itemStack.getItem() instanceof ItemBlock) {
-                        if (((ItemBlock) itemStack.getItem()).block.getMaterial() == Material.tnt) {
+                        if (((ItemBlock) itemStack.getItem()).field_150939_a.getMaterial() == Material.tnt) {
                             this.doExplosion();
                         }
                     } else if (itemStack.getItem().getPotionEffect(itemStack).equals(PotionHelper.gunpowderEffect)) {
