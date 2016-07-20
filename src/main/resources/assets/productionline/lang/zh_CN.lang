@@ -17,25 +17,36 @@ gui.ProductionLine.AdvSolar=聚能太阳能
 gui.ProductionLine.AdvSolar.lens=缺少聚能镜片
 
 [BLOCKS]
+//Fuel
+tile.ProductionLine.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
+tile.ProductionLine.block.DryLog.name=干木
+
 tile.ProductionLine.block.CompressedWaterHyacinth.name=压缩水葫芦
 tile.ProductionLine.block.oreIridium.name=铱矿石
 tile.ProductionLine.block.WaterHyacinth.name=水葫芦
 tile.ProductionLine.block.FluidKineticGenerator.name=流体动能发生机
 tile.ProductionLine.block.CarbonizeFurnace.name=碳化燃烧炉
 tile.ProductionLine.block.HeatDryer.name=干燥机
-tile.ProductionLine.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
 tile.ProductionLine.block.EVSU.name=EVSU
 tile.ProductionLine.block.AirBrakeCasing.name=气闸外壳
 tile.ProductionLine.block.CSEU.name=CSEU
 tile.ProductionLine.block.ParallelSpaceSU.name=平行空间储电盒
 tile.ProductionLine.block.AdvSolar.name=聚能太阳能
+tile.ProductionLine.block.Pad.name=瓦块
 
 //tooltip
 tile.ProductionLine.block.ParallelSpaceSU.desc1=§m这个老鼠夹这么的明显老鼠会踩吗？
-tile.ProductionLine.block.ParallelSpaceSU.desc2=§m拜托狗熊你眼瞎啊，狩猎夹这么大！哦不！这个竹筐这么大，鸟儿你制杖吗？
-tile.ProductionLine.block.ParallelSpaceSU.desc3=§m天啊有个250m EU的储电器，我要立马做一个！
+tile.ProductionLine.block.ParallelSpaceSU.desc2=§m狗熊你瞎啊，狩猎夹这么大！呸！这个竹筐这么大，鸟儿你制杖吗？
+tile.ProductionLine.block.ParallelSpaceSU.desc3=§m天啊有个250M EU的储电器，我要立马做一个！
 
 [ITEMS]
+//fuel
+item.ProductionLine.Firewood.name=干柴
+item.ProductionLine.CoarseBatten.name=粗制板条
+item.ProductionLine.Faggot.name=柴捆
+item.ProductionLine.BioFuel.name=生物燃料
+
+
 //crushed
 item.ProductionLine.CrushedIridium.name=粉碎的铱矿石
 item.ProductionLine.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
@@ -43,6 +54,7 @@ item.ProductionLine.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
 //dust
 item.ProductionLine.DustIridium.name=铱矿石粉
 item.ProductionLine.SmallDustIridium.name=小撮铱矿石粉
+item.ProductionLine.Sawdust.name=木屑
 
 //ingot
 item.ProductionLine.IngotIridium.name=铱锭
@@ -52,6 +64,7 @@ item.ProductionLine.HeatInsulationMaterial.name=隔热材料
 item.ProductionLine.HeatInsulationPlate.name=隔热板
 item.ProductionLine.DenseDiamondPlate.name=致密钻石板
 item.ProductionLine.DiamondPlate.name=钻石板
+item.ProductionLine.Tiles.name=瓦片
 
 //tool
 item.ProductionLine.IridiumPickaxe.name=铱镐
@@ -64,6 +77,11 @@ item.ProductionLine.LeadTreetap.name=铅龙头
 item.ProductionLine.RefinedIronTreetap.name=精炼铁龙头
 item.ProductionLine.AdvancedAlloyTreetap.name=高级合金龙头
 item.ProductionLine.CarbonTreetap.name=碳板龙头
+item.ProductionLine.PaperBag.name=纸袋
+item.ProductionLine.WoodenHammer.name=木锤
+item.ProductionLine.Tupid.name=铁锤
+item.ProductionLine.IronCone.name=铁改锥
+item.ProductionLine.SteelCone.name=钢改锥
 
 item.ProductionLine.BambooCharcoal.name=竹炭
 item.ProductionLine.AirBrakeUnit.name=气闸单元
@@ -101,6 +119,8 @@ item.ProductionLine.AdvSolarLensGroup.name=聚能镜片组
 item.ProductionLine.AdvSolarLensCluster.name=聚能镜片簇
 item.ProductionLine.CEU.name=CEU
 item.ProductionLine.GravityRay.name=重力势能
+item.ProductionLine.WoodPulp.name=木浆
+item.ProductionLine.CorrugatPaper.name=瓦楞纸
 
 item.ProductionLine.food.DiamondApple.name=钻石苹果
 
@@ -128,14 +148,16 @@ item.ProductionLine.record_MusicSpring.desc2=Seedking
 
 item.ProductionLine.SmallCompressedWaterHyacinth.desc1=不敢想象如此小块居然融合了八棵水葫芦的精华
 item.ProductionLine.HeatInsulationMaterial.desc1=这货的唯一用处就是制作隔热板
-item.ProductionLine.HeatInsulationPlate.desc1=暖暖的，好贴心
+item.ProductionLine.HeatInsulationPlate.desc1=暖暖的，很贴心
 item.ProductionLine.Roller.desc1=看起来并没有什么卵用
 item.ProductionLine.heatInsulationBoard.desc1=有了这个，妈妈再也不用担心岩浆桶烫手了
 item.ProductionLine.thermalInsulationMaterial.desc1=制作隔热板的唯一原料
 item.ProductionLine.DiamondPlate.desc1=纯钻石打造
-item.ProductionLine.DenseDiamondPlate.desc1=更闪，更硬a
+item.ProductionLine.DenseDiamondPlate.desc1=更闪，更硬...
 item.ProductionLine.BambooCharcoal.desc1=散发着诡异的绿色
 item.ProductionLine.CarbonTube.desc1=一条黑色而坚韧的细线
+item.ProductionLine.MillTeeth.desc1=摩擦，摩擦
+item.ProductionLine.Tupid.desc1=为了毁灭之锤！！！
 
 item.ProductionLine.food.DiamondApple.desc1=你确定你敢吃？
 
@@ -143,4 +165,4 @@ item.ProductionLine.food.DiamondApple.desc1=你确定你敢吃？
 ProductionLine.potion.Salty=好咸
 
 [DEATH]
-death.attack.salty=%1$s 被咸死了
+death.attack.salty=%1$s 你被咸死了

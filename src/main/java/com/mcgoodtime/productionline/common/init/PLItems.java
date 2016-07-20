@@ -61,6 +61,10 @@ public class PLItems implements IFuelHandler {
 	public static Item refinedIronTreetap;
 	public static Item advancedAlloyTreetap;
 	public static Item carbonTreetap;
+	public static Item woodenHammer;
+	public static Item tupid;
+	public static Item ironCone;
+	public static Item steelCone;
 
     public static Item ceu;
 	public static Item gravityRay;
@@ -116,6 +120,7 @@ public class PLItems implements IFuelHandler {
 	public static ItemStack faggot;
 	public static ItemStack firewood;
 	public static ItemStack coarseBatten;
+	public static ItemStack heatResistantTiles;
 
 	public static void init() {
         diamondApple = new ItemDiamondApple();
@@ -126,6 +131,10 @@ public class PLItems implements IFuelHandler {
 		refinedIronTreetap = new ItemPLTreetap("RefinedIronTreetap", 64);
 		advancedAlloyTreetap = new ItemPLTreetap("AdvancedAlloyTreetap", 64);
 		carbonTreetap = new ItemPLTreetap("CarbonTreetap", 128);
+		woodenHammer = new ItemPLTreetap("WoodenHammer",32);
+		tupid = new ItemPLTreetap("Tupid" ,64);
+		ironCone = new ItemPLTreetap("IronCone" ,64);
+		steelCone = new ItemPLTreetap("SteelCone", 128);
 
         record_MusicSpring = new ItemPLRecord("record_MusicSpring");
 		salt = new ItemPLFood("Salt", 0, 10F, true);
