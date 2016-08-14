@@ -25,7 +25,7 @@ public abstract class MixinTileEntityFurnace extends TileEntityFurnace {
     @Shadow
     private ItemStack[] furnaceItemStacks;
 
-    @Inject(method = "update", at = @At("RETURN"))
+    @Inject(method = "updateEntity", at = @At("RETURN"))
     private void onUpdate(CallbackInfo callbackInfo) {
 
         if (!this.worldObj.isRemote) {
