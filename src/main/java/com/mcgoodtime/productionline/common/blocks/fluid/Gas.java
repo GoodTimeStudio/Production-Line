@@ -1,5 +1,5 @@
 /*
- * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ * This file is part of Production-Line, licensed under MIT License (MIT).
  *
  * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors

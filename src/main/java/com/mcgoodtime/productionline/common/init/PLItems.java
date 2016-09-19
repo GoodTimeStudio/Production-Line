@@ -121,10 +121,11 @@ public class PLItems implements IFuelHandler {
 	public static ItemStack firewood;
 	public static ItemStack coarseBatten;
 	public static ItemStack heatResistantTiles;
-
+	public static Item chainPiece;
+	public static Item chain;
+	
 	public static void init() {
         diamondApple = new ItemDiamondApple();
-
 		ironTreetap = new ItemPLTreetap("IronTreetap", 32);
 		bronzeTreetap = new ItemPLTreetap("BronzeTreetap", 32);
 		leadTreetap = new ItemPLTreetap("LeadTreetap", 48);
