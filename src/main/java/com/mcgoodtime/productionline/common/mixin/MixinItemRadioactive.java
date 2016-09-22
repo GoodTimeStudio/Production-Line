@@ -25,8 +25,7 @@
 package com.mcgoodtime.productionline.common.mixin;
 
 import com.mcgoodtime.productionline.common.core.PLConfig;
-import com.mcgoodtime.productionline.common.entity.EntityThrowable;
-import ic2.core.Ic2Items;
+import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import ic2.core.init.InternalName;
 import ic2.core.item.ItemIC2;
 import ic2.core.item.ItemRadioactive;
@@ -49,15 +48,13 @@ public abstract class MixinItemRadioactive extends ItemIC2 {
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-        if (itemStack.isItemEqual(Ic2Items.Uran238)) {
-            if (PLConfig.instance.throwableUran238) {
-                if (!entityPlayer.capabilities.isCreativeMode) {
-                    --itemStack.stackSize;
-                }
-                world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-                if (!world.isRemote) {
-                    world.spawnEntityInWorld(new EntityThrowable(world, entityPlayer, itemStack));
-                }
+        if (PLConfig.instance.throwableUran238) {
+            if (!entityPlayer.capabilities.isCreativeMode) {
+                --itemStack.stackSize;
+            }
+            world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            if (!world.isRemote) {
+                world.spawnEntityInWorld(new EntityThrownItem(world, entityPlayer, itemStack));
             }
         }
         return itemStack;

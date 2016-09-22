@@ -25,7 +25,6 @@
 package com.mcgoodtime.productionline.common;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.core.PLConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
@@ -33,7 +32,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import org.apache.logging.log4j.Level;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -64,6 +62,22 @@ public class PLPotion extends Potion {
     public static void initPotion() {
         if (Potion.potionTypes.length < 256) {
             Potion[] potionTypes;
+            Field f = Potion.class.getDeclaredFields()[0];
+            try {
+                Field modfield = Field.class.getDeclaredField("modifiers");
+                modfield.setAccessible(true);
+                modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+
+                potionTypes = (Potion[])f.get(null);
+                final Potion[] newPotionTypes = new Potion[256];
+                System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+                f.set(null, newPotionTypes);
+            } catch (NoSuchFieldException expected) {
+
+            } catch (IllegalAccessException expected) {
+
+            }
+            /*
             for (Field f : Potion.class.getDeclaredFields()) {
                 f.setAccessible(true);
                 try {
@@ -82,10 +96,10 @@ public class PLPotion extends Potion {
                     PLConfig.gtiLogger.log(Level.ERROR, "An unknown error occurred, please report this to the mod author:");
                     PLConfig.gtiLogger.log(Level.ERROR, e);
                 }
-            }
+            }*/
         }
 
-        salty = new PLPotion(true, 0xFFFFFFF, new ItemStack(Items.water_bucket), new ItemStack(Items.milk_bucket));
+        salty = new PLPotion(true, 0xFFFFFFF, new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.milk_bucket));
         salty.setPotionName("productionline.potion.Salty");
     }
 

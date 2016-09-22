@@ -24,18 +24,21 @@
  */
 package com.mcgoodtime.productionline.common.event;
 
+import com.google.common.base.Predicate;
 import com.mcgoodtime.productionline.common.PLPotion;
-import com.mcgoodtime.productionline.common.entity.EntityThrowable;
+import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import com.mcgoodtime.productionline.common.init.PLAchievement;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.init.PLItems;
-import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import ic2.core.IC2Potion;
 import ic2.core.Ic2Items;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -43,12 +46,24 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
+
+import javax.annotation.Nullable;
 
 /*
  * Created by suhao on 2015/5/17.
  */
 
+@SuppressWarnings("unused")
 public class PLEvent {
+
+    private final Predicate<EntityCreature> entityLivingPredicate = new Predicate<EntityCreature>() {
+        @Override
+        public boolean apply(@Nullable EntityCreature input) {
+            return (input != null) && (input instanceof EntityCow || input instanceof EntityPig);
+        }
+    };
+
     @SubscribeEvent
     public void onPlayerCrafting(PlayerEvent.ItemCraftedEvent event) {
         if (event.crafting.getItem().equals(PLBlocks.carbonizeFurnace.getItem())) {
@@ -68,41 +83,57 @@ public class PLEvent {
         if (event.entityPlayer != null) {
             BiomeGenBase biome = event.world.getBiomeGenForCoords(event.target.blockX, event.target.blockZ);
             if (biome == BiomeGenBase.ocean || biome == BiomeGenBase.deepOcean || biome == BiomeGenBase.frozenOcean) {
-                event.setResult(Event.Result.ALLOW);
+                //event.setResult(Event.Result.ALLOW);
                 event.result = new ItemStack(PLItems.saltWaterBucket);
             }
         }
     }
 
+    /*@SubscribeEvent
+    public void onEntityAdd(EntityJoinWorldEvent event) {
+        if (!event.world.isRemote && event.entity instanceof EntityCreature) {
+            EntityCreature living = (EntityCreature) event.entity;
+            if (entityLivingPredicate.apply(living)) {
+                living.tasks.addTask(4, new EntityAITempt(living, 1.2D, PLItems.waterHyacinth, false));
+                living.tasks.addTask(5, new EntityAiEatWaterHyacinth(living));
+            }
+        }
+    }*/
+
+    @SubscribeEvent
+    public void onItemRightClick(PlayerUseItemEvent event) {
+
+    }
+
     @SubscribeEvent
     public void onEntityThrowableImpact(EntityThrowableImpactEvent event) {
-        if (event.entityThrowable.getThrowItem().getItem().equals(PLItems.packagedSalt)) {
+        if (event.entityThrownItem.getThrowItem().getItem().equals(PLItems.packagedSalt)) {
             for (int i = 0; i < 8; ++i) {
                 float fmod = (float) (1.2 - (Math.random() * 2.4));
                 float f1mod = (float) (0.5 - (Math.random() * 1.0));
                 float f2mod = (float) (1.2 - (Math.random() * 2.4));
 
-                event.entityThrowable.worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(PLItems.salt), event.entityThrowable.posX + fmod,
-                        event.entityThrowable.posY + f1mod, event.entityThrowable.posZ + f2mod, 0.1D, 0.1D, 0.1D);
+                event.entityThrownItem.worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(PLItems.salt), event.entityThrownItem.posX + fmod,
+                        event.entityThrownItem.posY + f1mod, event.entityThrownItem.posZ + f2mod, 0.1D, 0.1D, 0.1D);
 
-                if (!event.entityThrowable.worldObj.isRemote) {
-                    EntityItem entityItem = new EntityItem(event.entityThrowable.worldObj,
-                            event.entityThrowable.posX + fmod, event.entityThrowable.posY + f1mod,
-                            event.entityThrowable.posZ + f2mod, new ItemStack(PLItems.salt));
-                    event.entityThrowable.worldObj.spawnEntityInWorld(entityItem);
+                if (!event.entityThrownItem.worldObj.isRemote) {
+                    EntityItem entityItem = new EntityItem(event.entityThrownItem.worldObj,
+                            event.entityThrownItem.posX + fmod, event.entityThrownItem.posY + f1mod,
+                            event.entityThrownItem.posZ + f2mod, new ItemStack(PLItems.salt));
+                    event.entityThrownItem.worldObj.spawnEntityInWorld(entityItem);
                 }
             }
-            this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(PLPotion.salty.id, 0, 3));
+            onImpact(event.entityThrownItem, event.movingObjectPosition, new PotionEffect(PLPotion.salty.id, 0, 3));
         }
-        else if (event.entityThrowable.getThrowItem().isItemEqual(Ic2Items.Uran238)) {
-            this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(IC2Potion.radiation.id, 200, 0));
+        else if (event.entityThrownItem.getThrowItem().isItemEqual(Ic2Items.Uran238)) {
+            onImpact(event.entityThrownItem, event.movingObjectPosition, new PotionEffect(IC2Potion.radiation.id, 200, 0));
         }
         else {
-            this.onImpact(event.entityThrowable, event.movingObjectPosition, null);
+            onImpact(event.entityThrownItem, event.movingObjectPosition, null);
         }
     }
 
-    private void onImpact(EntityThrowable entity, MovingObjectPosition movingObjectPosition, PotionEffect potionEffect) {
+    private void onImpact(EntityThrownItem entity, MovingObjectPosition movingObjectPosition, PotionEffect potionEffect) {
         if (movingObjectPosition.entityHit != null) {
             movingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(entity, entity.getThrower()), 3F);
             if (movingObjectPosition.entityHit instanceof EntityLivingBase && potionEffect != null) {

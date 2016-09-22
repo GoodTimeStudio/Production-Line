@@ -26,7 +26,7 @@ package com.mcgoodtime.productionline.common.init;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.core.PLConfig;
-import com.mcgoodtime.productionline.common.entity.EntityThrowable;
+import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import com.mcgoodtime.productionline.common.items.*;
 import com.mcgoodtime.productionline.common.items.tools.PLToolMaterial;
 import com.mcgoodtime.productionline.common.items.tools.ItemGravityRay;
@@ -34,6 +34,7 @@ import com.mcgoodtime.productionline.common.items.tools.ItemPLTreetap;
 import com.mcgoodtime.productionline.common.items.tools.ToolPL;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -70,6 +71,7 @@ public class PLItems implements IFuelHandler {
 	public static Item gravityRay;
 
 	public static Item record_MusicSpring;
+	public static Item waterHyacinth;
 	//--------------------------------------
 	public static ItemStack crushedIridium;
 	public static ItemStack cleanedCrushedIridium;
@@ -141,6 +143,7 @@ public class PLItems implements IFuelHandler {
 		salt = new ItemPLFood("Salt", 0, 10F, true);
         ceu = new ItemCEU();
 		gravityRay = new ItemGravityRay();
+        waterHyacinth = Item.getItemFromBlock(PLBlocks.waterHyacinth);
 
 		//MultiMetaItem registry
 		new ItemOre();
@@ -161,11 +164,16 @@ public class PLItems implements IFuelHandler {
 					}
 					world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 					if (!world.isRemote) {
-						world.spawnEntityInWorld(new EntityThrowable(world, entityPlayer, itemStack));
+						world.spawnEntityInWorld(new EntityThrownItem(world, entityPlayer, itemStack));
 					}
 				}
 
 				return itemStack;
+			}
+
+			@Override
+			public void onUpdate(ItemStack p_77663_1_, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
+				super.onUpdate(p_77663_1_, p_77663_2_, p_77663_3_, p_77663_4_, p_77663_5_);
 			}
 		};
 

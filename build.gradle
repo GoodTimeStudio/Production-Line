@@ -5,6 +5,10 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        maven {
+            name = "sponge"
+            url = "http://repo.spongepowered.org/maven"
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
@@ -12,7 +16,7 @@ buildscript {
 }
 
 apply plugin: 'forge'
-apply plugin: 'checkstyle'
+//apply plugin: 'checkstyle'
 
 version = "dev.0.3" + getBuildNumber()
 group= "com.mcgoodtime.productionline"
@@ -35,16 +39,17 @@ repositories {
 
 configurations {
     shade
-    compile.extendsFrom shade
+    provided
+    compile.extendsFrom configurations.shade
 }
 
 dependencies {
-    shade 'org.spongepowered:mixin:0.4.5-SNAPSHOT'
+    shade 'org.spongepowered:mixin:0.5.14-SNAPSHOT'
     compile 'net.industrial-craft:industrialcraft-2:2.2.800-experimental:dev' //adds ic2 to the dev env
-    compile 'codechicken:NotEnoughItems:1.7.10-1.0.4.79:dev'
-    compile 'codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev'
-    compile 'codechicken:CodeChickenLib:1.7.10-1.1.1.99:dev'
-    checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
+    //provided 'codechicken:NotEnoughItems:1.7.10-1.0.4.79:dev'
+    //provided 'codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev'
+    //provided 'codechicken:CodeChickenLib:1.7.10-1.1.1.99:dev'
+    //checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
 }
 
 jar {
@@ -70,11 +75,9 @@ minecraft {
     runDir = "eclipse"
 }
 
-checkstyle { 
-    toolVersion = "6.7" 
-}
 
 compileJava {
+
     options.encoding = 'UTF-8'
     options.compilerArgs += [
             '-Xlint:-processing',
@@ -92,6 +95,7 @@ compileJava.dependsOn copySrgs
 
 sourceSets {
     main {
+        compileClasspath += configurations.provided
         java {
             srcDir 'src/main/java'
         }
@@ -103,6 +107,7 @@ sourceSets {
 
 idea { 
     module {
+        scopes.PROVIDED.plus += [configurations.provided]
         inheritOutputDirs = true 
     } 
 }
@@ -122,18 +127,6 @@ processResources {
     from (sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-checkstyle {
-    configFile = file('checkstyle.xml')
-    configProperties = [
-            "name" : 'Production-Line',
-            "organization" : 'GoodTimeStudio',
-            "url" : 'https://github.com/GoodTimeStudio/Production-Line',
-            "year" : '2016',
-            "basedir": project.projectDir,
-            "severity": 'warning'
-    ]
 }
 
 def getBuildNumber() {

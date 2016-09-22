@@ -24,8 +24,9 @@
  */
 package com.mcgoodtime.productionline.common.event;
 
-import com.mcgoodtime.productionline.common.entity.EntityThrowable;
+import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import cpw.mods.fml.common.eventhandler.Event;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 
 /**
@@ -36,11 +37,12 @@ import net.minecraft.util.MovingObjectPosition;
 public class EntityThrowableImpactEvent extends Event {
 
     public final MovingObjectPosition movingObjectPosition;
-    public final EntityThrowable entityThrowable;
+    public final EntityThrownItem entityThrownItem;
+    public final ItemStack itemStack;
 
-    public EntityThrowableImpactEvent(EntityThrowable entityThrowable, MovingObjectPosition movingObjectPosition) {
-        super();
+    public EntityThrowableImpactEvent(EntityThrownItem entityThrownItem, MovingObjectPosition movingObjectPosition) {
         this.movingObjectPosition = movingObjectPosition;
-        this.entityThrowable = entityThrowable;
+        this.entityThrownItem = entityThrownItem;
+        this.itemStack = entityThrownItem.getThrowItem();
     }
 }

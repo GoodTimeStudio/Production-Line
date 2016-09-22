@@ -32,13 +32,15 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
+
+import javax.annotation.Nullable;
 
 public class ItemPLFood extends ItemPL {
 
 	private int timer;
-	private Map<EntityPlayer, EatAmount> amountMap = new HashMap<EntityPlayer, EatAmount>();
+	private Map<EntityPlayer, EatAmount> amountMap = new WeakHashMap<EntityPlayer, EatAmount>();
 
 	/** The amount this food item heals the player. */
 	private int healAmount;
@@ -47,12 +49,27 @@ public class ItemPLFood extends ItemPL {
 	/** If this field is true, the food can be consumed even if the player don't need to eat. */
 	private boolean alwaysEdible;
 
+    /**
+     * 物品的容器，比如饭碗
+     */
+	private ItemStack container;
+
 	public ItemPLFood(String name, int healAmount, float saturationModifier, boolean alwaysEdible) {
 		super(name);
 		this.healAmount = healAmount;
 		this.saturationModifier = saturationModifier;
 		this.alwaysEdible = alwaysEdible;
 	}
+
+	public void setContainer(ItemStack container) {
+        this.container = container;
+        this.maxStackSize = 1;
+    }
+
+    @Nullable
+    public ItemStack getContainer() {
+        return container;
+    }
 
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
@@ -115,7 +132,7 @@ public class ItemPLFood extends ItemPL {
 			}
 
 		}
-		return stack;
+		return stack.stackSize > 0 ? stack : container.copy();
 	}
 
 	@Override
