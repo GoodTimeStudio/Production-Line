@@ -25,7 +25,6 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.init.PLBlocks;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -35,6 +34,9 @@ import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.BlockSnapshot;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.ForgeEventFactory;
 
 /**
  * The item of water hyacinth in GoodTime-Industrial.
@@ -48,10 +50,12 @@ public class ItemWaterHyacinth extends ItemColored {
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public int getColorFromItemStack(ItemStack itemStack, int damage) {
         return PLBlocks.waterHyacinth.getRenderColor(itemStack.getItemDamage());
     }
 
+    @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, player, true);
         if (movingobjectposition == null) {
@@ -73,11 +77,9 @@ public class ItemWaterHyacinth extends ItemColored {
                 if (world.getBlock(i, j, k).getMaterial() == Material.water && world.getBlockMetadata(i, j, k) == 0
                         && world.isAirBlock(i, j + 1, k)) {
                     // special case for handling block placement with water lilies, moved to water hyacinth
-                    net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util
-                            .BlockSnapshot.getBlockSnapshot(world, i, j + 1, k);
+                    BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(world, i, j + 1, k);
                     world.setBlock(i, j + 1, k, PLBlocks.waterHyacinth);
-                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(player, blocksnapshot,
-                            net.minecraftforge.common.util.ForgeDirection.UP).isCanceled()) {
+                    if (ForgeEventFactory.onPlayerBlockPlace(player, blocksnapshot, ForgeDirection.UP).isCanceled()) {
                         blocksnapshot.restore(true, false);
                         return itemStack;
                     }

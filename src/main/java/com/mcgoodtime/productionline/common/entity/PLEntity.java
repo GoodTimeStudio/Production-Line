@@ -37,11 +37,12 @@ public class PLEntity {
     private static int id = 0;
 
     public static void registerEntities(Class<? extends Entity> entity, String name) {
-        EntityRegistry.registerModEntity(entity, name, id++, ProductionLine.instance, 64, 1, true);
+        id++;
+        EntityRegistry.registerModEntity(entity, name, id, ProductionLine.instance, 64, 1, true);
     }
 
     public static void init() {
-        registerEntities(EntityThrowable.class, "Throwable");
+        registerEntities(EntityThrownItem.class, "Throwable");
         registerEntities(EntityRay.class, "Ray");
     }
 }

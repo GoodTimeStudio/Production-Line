@@ -30,7 +30,7 @@ import com.mcgoodtime.productionline.common.PLPotion;
 import com.mcgoodtime.productionline.common.blocks.fluid.Gas;
 import com.mcgoodtime.productionline.common.crafting.PLRecipes;
 import com.mcgoodtime.productionline.common.entity.EntityRay;
-import com.mcgoodtime.productionline.common.entity.EntityThrowable;
+import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import com.mcgoodtime.productionline.common.entity.PLEntity;
 import com.mcgoodtime.productionline.common.event.PLEvent;
 import com.mcgoodtime.productionline.common.init.*;
@@ -122,8 +122,9 @@ public final class ProductionLine {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         //register Event. 注册事件
-        FMLCommonHandler.instance().bus().register(new PLEvent());
-        MinecraftForge.EVENT_BUS.register(new PLEvent());
+        PLEvent instance = new PLEvent();
+        FMLCommonHandler.instance().bus().register(instance);
+        MinecraftForge.EVENT_BUS.register(instance);
     }
 
     private void setupMeta() {
@@ -148,7 +149,7 @@ public final class ProductionLine {
     public static class ClientProxy extends CommonProxy {
         @Override
         public void init() {
-            RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new RenderEntityThrowable());
+            RenderingRegistry.registerEntityRenderingHandler(EntityThrownItem.class, new RenderEntityThrowable());
             RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, new RenderEntityRay());
 
             if (Loader.isModLoaded("NotEnoughItems")) {

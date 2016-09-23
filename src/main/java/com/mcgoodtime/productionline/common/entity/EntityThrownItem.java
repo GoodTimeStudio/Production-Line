@@ -27,6 +27,7 @@ package com.mcgoodtime.productionline.common.entity;
 import com.mcgoodtime.productionline.common.event.EntityThrowableImpactEvent;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
@@ -38,17 +39,17 @@ import net.minecraftforge.common.MinecraftForge;
  *
  * @author BwstOwl
  */
-public class EntityThrowable extends net.minecraft.entity.projectile.EntityThrowable {
+public class EntityThrownItem extends EntityThrowable {
 
-    public EntityThrowable(World world) {
+    public EntityThrownItem(World world) {
         super(world);
     }
 
-    public EntityThrowable(World world, double x, double y, double z) {
+    public EntityThrownItem(World world, double x, double y, double z) {
         super(world, x, y, z);
     }
 
-    public EntityThrowable(World world, EntityLivingBase entityLivingBase, ItemStack itemStack) {
+    public EntityThrownItem(World world, EntityLivingBase entityLivingBase, ItemStack itemStack) {
         super(world, entityLivingBase);
         this.setThrowItem(itemStack);
     }
@@ -65,7 +66,7 @@ public class EntityThrowable extends net.minecraft.entity.projectile.EntityThrow
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
-        nbt.setTag("throwItem", this.getThrowItem().getTagCompound());
+        nbt.setTag("throwItem", this.getThrowItem().writeToNBT(nbt.getCompoundTag("throwItem")));
     }
 
     /**
@@ -88,7 +89,7 @@ public class EntityThrowable extends net.minecraft.entity.projectile.EntityThrow
     }
 
     /**
-     * Called when this EntityThrowable hits a block or entity.
+     * Called when this EntityThrownItem hits a block or entity.
      */
     @Override
     protected void onImpact(MovingObjectPosition movingObjectPosition) {
