@@ -1,3 +1,4 @@
+/*
 package com.mcgoodtime.productionline.common.inventory;
 
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
@@ -9,7 +10,7 @@ import net.minecraft.inventory.ICrafting;
  * Created by BestOwl on 2015.11.29.0029.
  *
  * @author BestOwl
- */
+ *//*
 public class ContainerParallelSpaceSU extends ContainerPL<TileParallelSpaceSU> {
 
     public double lastEnergy;
@@ -28,7 +29,7 @@ public class ContainerParallelSpaceSU extends ContainerPL<TileParallelSpaceSU> {
 
     /**
      * Looks for changes made in the container, sends them to every listener.
-     */
+     *//*
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
@@ -58,4 +59,4 @@ public class ContainerParallelSpaceSU extends ContainerPL<TileParallelSpaceSU> {
                 break;
         }
     }
-}
+}*/

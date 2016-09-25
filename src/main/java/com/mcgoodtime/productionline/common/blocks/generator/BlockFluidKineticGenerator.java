@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.blocks.generator;
 
 import com.mcgoodtime.productionline.common.blocks.BlockContainerPL;
@@ -41,7 +42,7 @@ public class BlockFluidKineticGenerator extends BlockContainerPL {
 
     /**
      * Called upon blocks activation (right click on the blocks.)
-     */
+     *//*
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p1, float p2, float p3, float p4) {
         if (!world.isRemote) {
@@ -56,4 +57,4 @@ public class BlockFluidKineticGenerator extends BlockContainerPL {
     protected Class<? extends TilePL> getTileEntityClass() {
         return TileFluidKineticGenerator.class;
     }
-}
+}*/

@@ -1,6 +1,7 @@
+/*
 package com.mcgoodtime.productionline.common.items;
 
-import cpw.mods.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.GameData;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by BestOwl on 2015.12.4.0004.
  *
  * @author BestOwl
- */
+ *//*
 public class ItemDryFood extends ItemPL {
 
     public List<ItemFood> foodList = new ArrayList<ItemFood>();
@@ -36,7 +37,7 @@ public class ItemDryFood extends ItemPL {
 
     /**
      * Returns the maximum damage an item can take.
-     */
+     *//*
     @Override
     public int getMaxDamage() {
         return this.foodList.size();
@@ -44,7 +45,7 @@ public class ItemDryFood extends ItemPL {
 
     /**
      * Gets an icon index based on an item's damage value
-     */
+     *//*
     @Override
     public IIcon getIconFromDamage(int meta) {
         return this.foodList.get(meta).getIconFromDamage(0);
@@ -62,7 +63,7 @@ public class ItemDryFood extends ItemPL {
 
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
+     *//*
     @Override
     @SuppressWarnings("unchecked")
     public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
@@ -84,9 +85,10 @@ public class ItemDryFood extends ItemPL {
      *
      * @param stack The current Item Stack
      * @return True if it should render the 'durability' bar.
-     */
+     *//*
     @Override
     public boolean showDurabilityBar(ItemStack stack) {
         return false;
     }
 }
+*/

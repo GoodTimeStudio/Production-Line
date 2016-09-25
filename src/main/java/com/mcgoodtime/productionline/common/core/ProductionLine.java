@@ -24,56 +24,51 @@
  */
 package com.mcgoodtime.productionline.common.core;
 
-import com.mcgoodtime.productionline.client.RenderEntityThrowable;
-import com.mcgoodtime.productionline.client.RenderEntityRay;
-import com.mcgoodtime.productionline.common.PLPotion;
-import com.mcgoodtime.productionline.common.blocks.fluid.Gas;
-import com.mcgoodtime.productionline.common.entity.EntityRay;
-import com.mcgoodtime.productionline.common.entity.EntityThrowable;
-import com.mcgoodtime.productionline.common.entity.PLEntity;
-import com.mcgoodtime.productionline.common.event.PLEvent;
-import com.mcgoodtime.productionline.common.init.*;
-import com.mcgoodtime.productionline.common.nei.NEIPLConfig;
-import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+//import com.mcgoodtime.productionline.client.RenderEntityThrowable;
+//import com.mcgoodtime.productionline.client.RenderEntityRay;
+//import com.mcgoodtime.productionline.common.PLPotion;
+//import com.mcgoodtime.productionline.common.blocks.fluid.Gas;
+//import com.mcgoodtime.productionline.common.entity.EntityThrowable;
+//import com.mcgoodtime.productionline.common.entity.PLEntity;
+//import com.mcgoodtime.productionline.common.event.PLEvent;
+//import com.mcgoodtime.productionline.common.init.*;
+//import com.mcgoodtime.productionline.common.nei.NEIPLConfig;
+//import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
+import com.mcgoodtime.productionline.common.init.PLItems;
+import ic2.api.item.IC2Items;
+import net.minecraft.init.Items;
+        import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+        import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidRegistry;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 @Mod(
         modid = ProductionLine.MOD_NAME,
         name = ProductionLine.MOD_NAME,
         version = ProductionLine.VERSION,
         dependencies = "required-after:"
-                + "Forge@[10.13.4.1558,);"
+                + "Forge@[12.17.0.1976,);"
                 + "required-after:"
-                + "IC2@[2.2.800,);"
-                + "after:"
-                + "NotEnoughItems;",
+                + "IC2@[2.5.52,);",
         useMetadata = true
     )
 public final class ProductionLine {
     public static final String MOD_NAME = "ProductionLine";
-    public static final String VERSION = "dev.0.3";
+    public static final String VERSION = "${version}";
     public static final String RESOURCE_DOMAIN = "productionline";
     public static final String GUI_PREFIX = "gui.ProductionLine.";
     public static final CreativeTabs creativeTabGti = new CreativeTabs(MOD_NAME) {
         @SideOnly(Side.CLIENT)
         @Override
         public Item getTabIconItem() {
-            return PLItems.gravityRay;
+            return Items.GOLDEN_APPLE;
         }
     };
     @Mod.Metadata
@@ -91,38 +86,40 @@ public final class ProductionLine {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         setupMeta();
-        PLConfig.init(event.getSuggestedConfigurationFile());
+//        PLConfig.init(event.getSuggestedConfigurationFile());
         //register Blocks. 注册方块
-        PLBlocks.init();
-        FluidRegistry.registerFluid(Gas.gasNatural);
+//        PLBlocks.init();
+//        FluidRegistry.registerFluid(Gas.gasNatural);
         //register Items. 注册物品
         PLItems.init();
-        PLEntity.init();
-        PLPotion.initPotion();
+//        PLEntity.init();
+//        PLPotion.initPotion();
         proxy.init();
+
+        System.out.println(IC2Items.getItem("purified", "copper").getItem().getClass());
     }
-    
+
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        PLOreDictionary.init();
-        PLEntity.init();
+//        PLOreDictionary.init();
+//        PLEntity.init();
         // register Recipes. 注册合成
-        PLRecipes.init();
+//        PLRecipes.init();
         //register gui handler
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance());
+//        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance());
          //register achievement
-        PLAchievement.init();
+//        PLAchievement.init();
         //register achievement page
-        AchievementPage.registerAchievementPage(PLAchievement.pagePL);
+//        AchievementPage.registerAchievementPage(PLAchievement.pagePL);
          //register ore gen bus. 注册矿石生成总线
-        PLWorldGen.init();
+        //PLWorldGen.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         //register Event. 注册事件
-        FMLCommonHandler.instance().bus().register(new PLEvent());
-        MinecraftForge.EVENT_BUS.register(new PLEvent());
+//        FMLCommonHandler.instance().bus().register(new PLEvent());
+//        MinecraftForge.EVENT_BUS.register(new PLEvent());
     }
 
     private void setupMeta() {
@@ -147,12 +144,13 @@ public final class ProductionLine {
     public static class ClientProxy extends CommonProxy {
         @Override
         public void init() {
-            RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new RenderEntityThrowable());
-            RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, new RenderEntityRay());
-
-            if (Loader.isModLoaded("NotEnoughItems")) {
-                new NEIPLConfig().loadConfig();
-            }
+//            ModelLoaderRegistry.registerLoader(new PLItemModelLoader());
+//            RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new RenderEntityThrowable());
+//            RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, new RenderEntityRay());
+//
+//            if (Loader.isModLoaded("NotEnoughItems")) {
+//                new NEIPLConfig().loadConfig();
+//            }
         }
     }
 }

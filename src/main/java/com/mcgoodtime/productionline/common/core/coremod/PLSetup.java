@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.productionline.common.core.coremod;
 
-import cpw.mods.fml.relauncher.IFMLCallHook;
+import net.minecraftforge.fml.relauncher.IFMLCallHook;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 

@@ -1,3 +1,4 @@
+/*
 package com.mcgoodtime.productionline.common.tiles;
 
 import com.mcgoodtime.productionline.common.init.PLItems;
@@ -15,7 +16,7 @@ import net.minecraftforge.oredict.OreDictionary;
  * Created by BestOwl on 2015.12.5.0005.
  *
  * @author BestOwl
- */
+ *//*
 public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
 
     private int timer;
@@ -110,7 +111,7 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
      * @param receiver  receiver, may also be null or an IMetaDelegate
      * @param direction direction the receiver is from the emitter
      * @return Whether energy should be emitted
-     */
+     *//*
     @Override
     public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
         return direction != ForgeDirection.UP;
@@ -147,3 +148,4 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
                 this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
     }
 }
+*/

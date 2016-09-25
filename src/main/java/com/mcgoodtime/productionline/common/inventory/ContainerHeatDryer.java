@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.inventory;
 
 import com.mcgoodtime.productionline.common.inventory.slot.SlotInput;
@@ -35,7 +36,7 @@ import net.minecraft.inventory.ICrafting;
 
 /*
  * Created by suhao on 2015.7.10.
- */
+ *//*
 public class ContainerHeatDryer extends ContainerPL<TileHeatDryer> {
 
     private int lastProgress;
@@ -60,7 +61,7 @@ public class ContainerHeatDryer extends ContainerPL<TileHeatDryer> {
 
     /**
      * Looks for changes made in the container, sends them to every listener.
-     */
+     *//*
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
@@ -88,4 +89,4 @@ public class ContainerHeatDryer extends ContainerPL<TileHeatDryer> {
             case 2: this.tile.energy = i;
         }
     }
-}
+}*/

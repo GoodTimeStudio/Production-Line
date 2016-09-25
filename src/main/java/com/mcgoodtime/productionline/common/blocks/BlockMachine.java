@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
@@ -31,7 +32,7 @@ import com.mcgoodtime.productionline.common.items.ItemBlockPL;
 import com.mcgoodtime.productionline.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.productionline.common.tiles.TilePL;
 import com.mcgoodtime.productionline.common.tiles.TileHeatDryer;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.core.block.BlockTextureStitched;
 import net.minecraft.block.material.Material;
@@ -57,7 +58,7 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_
  *
  * @author BestOwl
  * @since 0.2
- */
+ *//*
 public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
     private static List<String> internalNameList = new ArrayList<String>();
     public IIcon textures[][];
@@ -85,7 +86,7 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
 
     /**
      * Called upon block activation (right click on the block.)
-     */
+     *//*
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f1, float f2, float f3) {
         if (!world.isRemote) {
@@ -145,7 +146,7 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
 
     /**
      * World only
-     */
+     *//*
     @Override
     public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
         if (iBlockAccess.getTileEntity(x, y, z) instanceof TilePL) {
@@ -168,7 +169,7 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
      * 1:top  5:east  3:south
      * 0:low  4:west  2:north
      *
-     */
+     *//*
     @Override
     public IIcon getIcon(int side, int meta) {
         return this.textures[meta][DIRECTION[3][side]];
@@ -204,7 +205,7 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
     /**
      * Returns the unlocalized name of this block. This version accepts an ItemStack so different stacks can have
      * different names based on their meta or NBT.
-     */
+     *//*
     public String getBlockName(ItemStack itemStack) {
         return "tile." + MOD_NAME + ".block." + this.getInternalName(itemStack.getItemDamage());
     }
@@ -212,7 +213,7 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
     /**
      * Get block's unlocalized name
      * @return unlocalized name
-     */
+     *//*
     @Override
     public String getBlockName(int meta) {
         return "tile." + MOD_NAME + ".block." + this.getInternalName(meta);
@@ -223,3 +224,4 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
         return internalNameList.get(meta);
     }
 }
+*/

@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.nei.handler;
 
 import com.mcgoodtime.productionline.client.gui.GuiCarbonizeFurnace;
@@ -34,7 +35,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
  * Created by BestOwl on 2015.11.29.0029.
  *
  * @author BestOwl
- */
+ *//*
 public class RecipeHandlerCarbonizeFurnace extends RecipeHandlerBase {
 
     @Override
@@ -67,3 +68,4 @@ public class RecipeHandlerCarbonizeFurnace extends RecipeHandlerBase {
         return ProductionLine.RESOURCE_DOMAIN + ":" + "textures/gui/GuiCarbonizeFurnace.png";
     }
 }
+*/

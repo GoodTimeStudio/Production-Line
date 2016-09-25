@@ -1,7 +1,10 @@
 package com.mcgoodtime.productionline.common.items;
 
+import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.init.PLItems;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +18,18 @@ public class ItemOre extends ItemMultiDamage {
 
     public ItemOre() {
         super("ItemOre");
-        PLItems.ingotIridium = new ItemStack(this, 1, 0);
-        PLItems.diamondPlate = new ItemStack(this, 1, 1);
-        PLItems.denseDiamondPlate = new ItemStack(this, 1, 2);
-        PLItems.crushedIridium = new ItemStack(this, 1, 3);
-        PLItems.cleanedCrushedIridium = new ItemStack(this, 1, 4);
-        PLItems.dustIridium = new ItemStack(this, 1, 5);
-        PLItems.smallDustIridium = new ItemStack(this, 1, 6);
+//        ModelLoader.setCustomModelResourceLocation(this, 1, new ModelResourceLocation(ProductionLine.RESOURCE_DOMAIN + ":" + this.getInternalName(1), null));
+//        for (int i = 0; i < this.getMaxDamage(); i++) {
+//            ModelLoader.setCustomModelResourceLocation(this, i, new ModelResourceLocation(ProductionLine.RESOURCE_DOMAIN + ":" + "ItemOre", null));
+//        }
+//        PLItemModelLoader.instance.register();
+        PLItems.ingotIridium = this.next();
+        PLItems.diamondPlate = this.next();
+        PLItems.denseDiamondPlate = this.next();
+        PLItems.crushedIridium = this.next();
+        PLItems.cleanedCrushedIridium = this.next();
+        PLItems.dustIridium = this.next();
+        PLItems.smallDustIridium = this.next();
     }
 
     @Override

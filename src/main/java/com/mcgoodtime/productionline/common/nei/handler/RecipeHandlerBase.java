@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.nei.handler;
 
 import codechicken.nei.NEIServerUtils;
@@ -42,7 +43,7 @@ import java.util.List;
  * Created by BestOwl on 2015.12.19.0019.
  *
  * @author BestOwl
- */
+ *//*
 public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
 
     public abstract IProcessable getRecipesList();
@@ -148,4 +149,4 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler {
             this.y = y;
         }
     }
-}
+}*/

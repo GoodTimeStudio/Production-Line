@@ -1,3 +1,4 @@
+/*
 package com.mcgoodtime.productionline.client.gui;
 
 import com.mcgoodtime.productionline.common.PLUtil;
@@ -19,7 +20,7 @@ import static net.minecraft.util.StatCollector.translateToLocalFormatted;
  * Created by BestOwl on 2015.11.28.0028.
  *
  * @author BestOwl
- */
+ *//*
 public class GuiEUStorage extends GuiPL<ContainerEUStorage> {
 
     public GuiEUStorage(ContainerEUStorage container) {
@@ -29,7 +30,7 @@ public class GuiEUStorage extends GuiPL<ContainerEUStorage> {
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
-     */
+     *//*
     @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
@@ -73,4 +74,4 @@ public class GuiEUStorage extends GuiPL<ContainerEUStorage> {
             PLNetwork.updateTileEUStorage((TileEUStorage) this.container.tile);
         }
     }
-}
+}*/

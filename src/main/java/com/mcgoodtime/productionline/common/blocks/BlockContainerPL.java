@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.common.tiles.TileContainer;
@@ -39,7 +40,7 @@ import java.util.Random;
  * Created by suhao on 2015.6.23.
  *
  * @author suhao
- */
+ *//*
 public abstract class BlockContainerPL extends BlockMultiTexture {
 
     public BlockContainerPL(Material material, String name) {
@@ -100,4 +101,4 @@ public abstract class BlockContainerPL extends BlockMultiTexture {
         return tileentity != null && tileentity.receiveClientEvent(var1, var2);
     }
 
-}
+}*/

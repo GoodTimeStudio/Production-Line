@@ -22,13 +22,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.tiles.TilePL;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ic2.core.block.BlockTextureStitched;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -44,7 +45,7 @@ import net.minecraft.world.World;
 
 /*
  * Created by suhao on 2015.7.13.
- */
+ *//*
 public class BlockMultiTexture extends BlockPL implements ITileEntityProvider {
 
     //low, top, left, front, right, back;
@@ -83,7 +84,7 @@ public class BlockMultiTexture extends BlockPL implements ITileEntityProvider {
 
     /**
      * World only
-     */
+     *//*
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
@@ -108,7 +109,7 @@ public class BlockMultiTexture extends BlockPL implements ITileEntityProvider {
      * 1:top  5:east  3:south
      * 0:low  4:west  2:north
      *
-     */
+     */ /*
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
@@ -167,3 +168,4 @@ public class BlockMultiTexture extends BlockPL implements ITileEntityProvider {
         return null;
     }
 }
+*/

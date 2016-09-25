@@ -1,3 +1,4 @@
+/*
 package com.mcgoodtime.productionline.common.inventory;
 
 import com.mcgoodtime.productionline.common.tiles.TileAdvSolar;
@@ -9,7 +10,7 @@ import net.minecraft.inventory.Slot;
  * Created by BestOwl on 2015.12.5.0005.
  *
  * @author BestOwl
- */
+ *//*
 public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
 
     public boolean sunIsVisible;
@@ -30,7 +31,7 @@ public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
 
     /**
      * Looks for changes made in the container, sends them to every listener.
-     */
+     *//*
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
@@ -75,4 +76,4 @@ public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
             }
         }
     }
-}
+}*/

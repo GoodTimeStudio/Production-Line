@@ -1,3 +1,4 @@
+/*
 package com.mcgoodtime.productionline.common.tiles.eustorage;
 
 import com.mcgoodtime.productionline.common.tiles.TileElectricContainer;
@@ -24,7 +25,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  * Created by BestOwl on 2015.11.27.0027.
  *
  * @author BestOwl
- */
+ *//*
 public abstract class TileEUStorage extends TileElectricContainer implements IEnergySource, IEnergyStorage, IWrenchable {
 
     public RedstoneMode redstoneMode;
@@ -83,7 +84,7 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
      *
      * @param emitter   energy emitter, may also be null or an IMetaDelegate
      * @param direction direction the energy is being received from
-     */
+     *//*
     @Override
     public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
         return direction.ordinal() != this.facing;
@@ -214,4 +215,4 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
         NO_OUTPUT_WHEN_REDSTONEPOWER,
         OUTPUT_WHEN_REDSTONEPOWER_AND_FULLENEGRY
     }
-}
+}*/

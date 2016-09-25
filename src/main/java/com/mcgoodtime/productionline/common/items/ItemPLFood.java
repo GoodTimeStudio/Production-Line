@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.PLPotion;
@@ -41,12 +42,12 @@ public class ItemPLFood extends ItemPL {
 	private Map<EntityPlayer, EatAmount> amountMap = new HashMap<EntityPlayer, EatAmount>();
 
 	/** The amount this food item heals the player. */
-	private int healAmount;
+	//private int healAmount;
 	/** 饱食度 */
-	private final float saturationModifier;
+	//private final float saturationModifier;
 	/** If this field is true, the food can be consumed even if the player don't need to eat. */
-	private boolean alwaysEdible;
-
+	//private boolean alwaysEdible;
+/*
 	public ItemPLFood(String name, int healAmount, float saturationModifier, boolean alwaysEdible) {
 		super(name);
 		this.healAmount = healAmount;
@@ -56,7 +57,7 @@ public class ItemPLFood extends ItemPL {
 
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-	 */
+	 *//*
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
 		if (entityPlayer.canEat(this.alwaysEdible)) {
@@ -70,7 +71,7 @@ public class ItemPLFood extends ItemPL {
 	 * Called each tick as long the item is on a player inventory. Uses by maps to check if is on a player hand and
 	 * update it's contents.
 	 *
-	 */
+	 *//*
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int slotIndex, boolean isCurrentItem) {
 		if (!world.isRemote) {
@@ -125,7 +126,7 @@ public class ItemPLFood extends ItemPL {
 
 	/**
 	 * How long it takes to use or consume an item
-	 */
+	 *//*
 	@Override
 	public int getMaxItemUseDuration(ItemStack itemStack) {
 		return 32;
@@ -133,7 +134,7 @@ public class ItemPLFood extends ItemPL {
 
 	/**
 	 * returns the action that specifies what animation to play when the items is being used
-	 */
+	 *//*
 	@Override
 	public EnumAction getItemUseAction(ItemStack itemStack) {
 		return EnumAction.eat;
@@ -148,4 +149,4 @@ public class ItemPLFood extends ItemPL {
 			this.amount = amount;
 		}
 	}
-}
+}*/

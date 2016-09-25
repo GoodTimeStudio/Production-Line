@@ -1,7 +1,8 @@
+/*
 package com.mcgoodtime.productionline.common.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ic2.api.energy.EnergyNet;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by BestOwl on 2015.12.8.0008.
  *
  * @author BestOwl
- */
+ *//*
 public class ItemElectricPL extends ItemPL implements IElectricItem {
 
     protected int maxPowerTick;
@@ -54,7 +55,7 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
     /**
      * Determine if the item can be used in a machine or as an armor part to supply energy.
      * @return Whether the item can supply energy
-     */
+     *//*
     @Override
     public boolean canProvideEnergy(ItemStack itemStack) {
         return false;
@@ -63,7 +64,7 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
     /**
      * Get the item ID to use for a charge energy greater than 0.
      * @return Item ID to use
-     */
+     *//*
     @Override
     public Item getChargedItem(ItemStack itemStack) {
         return this;
@@ -72,7 +73,7 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
     /**
      * Get the item ID to use for a charge energy of 0.
      * @return Item ID to use
-     */
+     *//*
     @Override
     public Item getEmptyItem(ItemStack itemStack) {
         return this;
@@ -81,7 +82,7 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
     /**
      * Get the item's maximum charge energy in EU.
      * @return Maximum charge energy
-     */
+     *//*
     @Override
     public double getMaxCharge(ItemStack itemStack) {
         return this.maxEnergy;
@@ -92,7 +93,7 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
      * Batteries are Tier 1, Energy Crystals are Tier 2, Lapotron Crystals are Tier 3.
 
      * @return Item's tier
-     */
+     *//*
     @Override
     public int getTier(ItemStack itemStack) {
         return this.tier;
@@ -101,9 +102,9 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
     /**
      * Get the item's transfer limit in EU per transfer operation.
      * @return Transfer limit
-     */
+     *//*
     @Override
     public double getTransferLimit(ItemStack itemStack) {
         return this.maxPowerTick;
     }
-}
+}*/

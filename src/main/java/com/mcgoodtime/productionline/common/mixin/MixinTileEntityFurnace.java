@@ -26,23 +26,23 @@ public abstract class MixinTileEntityFurnace extends TileEntityFurnace {
 
     @Inject(method = "update", at = @At("RETURN"))
     private void onUpdate(CallbackInfo callbackInfo) {
-        if (!this.worldObj.isRemote) {
-            if (this.isBurning()) {
-                ItemStack itemStack = this.furnaceItemStacks[0];
-                if (itemStack != null) {
-                    if (itemStack.getItem() instanceof ItemBlock) {
-                        if (((ItemBlock) itemStack.getItem()).block.getMaterial() == Material.tnt) {
-                            this.doExplosion();
-                        }
-                    } else if (itemStack.getItem().getPotionEffect(itemStack).equals(PotionHelper.gunpowderEffect)) {
-                        this.doExplosion();
-                    } else if (itemStack.getItem() instanceof ItemFirework || itemStack.getItem()
-                            instanceof ItemFireworkCharge) {
-                        this.doExplosion();
-                    }
-                }
-            }
-        }
+//        if (!this.worldObj.isRemote) {
+//            if (this.isBurning()) {
+//                ItemStack itemStack = this.furnaceItemStacks[0];
+//                if (itemStack != null) {
+//                    if (itemStack.getItem() instanceof ItemBlock) {
+//                        if (((ItemBlock) itemStack.getItem()).block.getMaterial() == Material.tnt) {
+//                            this.doExplosion();
+//                        }
+//                    } else if (itemStack.getItem().getPotionEffect(itemStack).equals(PotionHelper.gunpowderEffect)) {
+//                        this.doExplosion();
+//                    } else if (itemStack.getItem() instanceof ItemFirework || itemStack.getItem()
+//                            instanceof ItemFireworkCharge) {
+//                        this.doExplosion();
+//                    }
+//                }
+//            }
+//        }
     }
 
     private void doExplosion() {

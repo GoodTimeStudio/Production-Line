@@ -25,12 +25,12 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+//import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
@@ -49,29 +49,29 @@ public class ItemPL extends Item {
 
     public ItemPL(String name) {
         this.setUnlocalizedName(MOD_NAME + "." + name);
-        this.setTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + "item" + name);
+//        this.setTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + "item" + name);
+
         this.itemName = name;
         this.setCreativeTab(creativeTabGti);
-        GameRegistry.registerItem(this, name, MOD_NAME);
+        GameRegistry.registerItem(this, name);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean bool) {
         int i = 1;
         String unLocal = this.getUnlocalizedName() + ".desc" + i;
 
-        while (StatCollector.canTranslate(unLocal)) {
-            list.add(StatCollector.translateToLocal(unLocal));
+        while (I18n.hasKey(unLocal)) {
+            list.add(I18n.format(unLocal));
             i++;
             unLocal = this.getUnlocalizedName() + ".desc" + i;
         }
     }
 
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(ProductionLine.RESOURCE_DOMAIN + ":" + this.getTextureFolder() + this.getIconName());
-    }
+//    @Override
+//    public void registerIcons(IIconRegister iconRegister) {
+//        this.itemIcon = iconRegister.registerIcon(ProductionLine.RESOURCE_DOMAIN + ":" + this.getTextureFolder() + this.getIconName());
+//    }
 
     public String getTextureFolder() {
         return "";

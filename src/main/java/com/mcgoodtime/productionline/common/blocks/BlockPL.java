@@ -25,18 +25,24 @@
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.common.core.PLConfig;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
+//import net.minecraft.util.MovingObjectPositionsition;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 
 import java.util.List;
+import java.util.Random;
 
 import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
 
@@ -58,14 +64,15 @@ public class BlockPL extends Block {
 
     public BlockPL(Material material, String name) {
         super(material);
-        this.setBlockName(MOD_NAME + "." + "block" + "." + name);
-        this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
+        this.setUnlocalizedName(MOD_NAME + "." + "block" + "." + name);
+        //this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
         this.setCreativeTab(creativeTabGti);
         this.internalName = name;
         GameRegistry.registerBlock(this, this.getItemBlockClass(), name);
         PLConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
     }
 
+    /*
     @SuppressWarnings("deprecation")
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
@@ -73,6 +80,44 @@ public class BlockPL extends Block {
             return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
         }
         return super.getPickBlock(target, world, x, y, z);
+    }*/
+
+    /**
+     * Called when a user uses the creative pick block button on this block
+     *
+     * @param target The full target the player is looking at
+     * @param player @return A ItemStack to add to the player's inventory, Null if nothing should be added.
+     */
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        if (this instanceof IMultiMetaBlock) {
+            Block block = world.getBlockState(pos).getBlock();
+            return new ItemStack(this, 1, block.getMetaFromState(world.getBlockState(pos)));
+        }
+        return super.getPickBlock(state, target, world, pos, player);
+    }
+
+    /**
+     * This returns a complete list of items dropped from this block.
+     *
+     * @param world   The current world
+     * @param pos     Block position in world
+     * @param state   Current state
+     * @param fortune Breakers fortune level
+     * @return A ArrayList containing all items this block drops
+     */
+    @Override
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        return super.getDrops(world, pos, state, fortune);
+    }
+
+    /**
+     * Get the Item that this Block should drop when harvested.
+     *
+     */
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return super.getItemDropped(state, rand, fortune);
     }
 
     /**

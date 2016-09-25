@@ -1,3 +1,4 @@
+/*
 package com.mcgoodtime.productionline.common.blocks.generator;
 
 import com.mcgoodtime.productionline.common.blocks.BlockContainerPL;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
  * Created by BestOwl on 2015.12.5.0005.
  *
  * @author BestOwl
- */
+ *//*
 public class BlockAdvSolar extends BlockContainerPL {
 
     public BlockAdvSolar() {
@@ -22,7 +23,7 @@ public class BlockAdvSolar extends BlockContainerPL {
 
     /**
      * Called upon blocks activation (right click on the blocks.)
-     */
+     *//*
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p1, float p2, float p3, float p4) {
         if (!world.isRemote) {
@@ -37,4 +38,4 @@ public class BlockAdvSolar extends BlockContainerPL {
     protected Class<? extends TilePL> getTileEntityClass() {
         return TileAdvSolar.class;
     }
-}
+}*/

@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.tiles;
 
 import com.mcgoodtime.productionline.common.recipes.HeatDryerRecipes;
@@ -41,7 +42,7 @@ import java.util.Set;
 /**
  * Created by Java0 on 2015/11/18.
  *
- */
+ *//*
 public class TileHeatDryer extends TileElectricContainer implements IUpgradableBlock, IWrenchable {
 
     public final int requireEnergy = 500;
@@ -196,4 +197,4 @@ public class TileHeatDryer extends TileElectricContainer implements IUpgradableB
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
         return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
     }
-}
+}*/

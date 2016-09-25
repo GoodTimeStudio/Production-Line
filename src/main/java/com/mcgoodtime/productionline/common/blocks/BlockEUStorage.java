@@ -1,3 +1,4 @@
+/*
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
@@ -9,7 +10,7 @@ import com.mcgoodtime.productionline.common.tiles.eustorage.TileCSEU;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEVSU;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileParallelSpaceSU;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import ic2.api.item.IC2Items;
 import ic2.core.block.BlockTextureStitched;
 import ic2.core.util.StackUtil;
@@ -38,7 +39,7 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_
  *
  * @author BestOwl
  * @since 0.2
- */
+ *//*
 public class BlockEUStorage extends BlockContainerPL implements IMultiMetaBlock {
 
     private static List<String> internalNameList = new ArrayList<String>();
@@ -69,7 +70,7 @@ public class BlockEUStorage extends BlockContainerPL implements IMultiMetaBlock 
 
     /**
      * Called upon block activation (right click on the block.)
-     */
+     *//*
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f1, float f2, float f3) {
         if (!world.isRemote) {
@@ -104,7 +105,7 @@ public class BlockEUStorage extends BlockContainerPL implements IMultiMetaBlock 
 
     /**
      * World only
-     */
+     *//*
     @Override
     public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
         if (iBlockAccess.getTileEntity(x, y, z) instanceof TilePL) {
@@ -127,7 +128,7 @@ public class BlockEUStorage extends BlockContainerPL implements IMultiMetaBlock 
      * 1:top  5:east  3:south
      * 0:low  4:west  2:north
      *
-     */
+     *//*
     @Override
     public IIcon getIcon(int side, int meta) {
         return this.textures[meta][DIRECTION[3][side]];
@@ -158,7 +159,7 @@ public class BlockEUStorage extends BlockContainerPL implements IMultiMetaBlock 
 
     /**
      * Returns the unlocalized name of this block.
-     */
+     *//*
     public String getBlockName(ItemStack itemStack) {
         return "tile." + MOD_NAME + ".block." + this.getInternalName(itemStack.getItemDamage());
     }
@@ -166,7 +167,7 @@ public class BlockEUStorage extends BlockContainerPL implements IMultiMetaBlock 
     /**
      * Get block's unlocalized name
      * @return unlocalized name
-     */
+     *//*
     @Override
     public String getBlockName(int meta) {
         return "tile." + MOD_NAME + ".block." + this.getInternalName(meta);
@@ -179,7 +180,7 @@ public class BlockEUStorage extends BlockContainerPL implements IMultiMetaBlock 
 
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
-     */
+     *//*
     @Override
     public boolean canProvidePower() {
         return true;
@@ -198,4 +199,4 @@ public class BlockEUStorage extends BlockContainerPL implements IMultiMetaBlock 
         NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
         tile.energy = nbt.getDouble("energy");
     }
-}
+}*/

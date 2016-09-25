@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.tiles;
 
 import com.mcgoodtime.productionline.common.recipes.CarbonizeFurnaceRecipes;
@@ -44,15 +45,15 @@ import java.util.Set;
  * CarbonizeFurnace TileEntity
  *
  * @author BestOwl
- */
+ *//*
 public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgradableBlock, IWrenchable {
     /** containerItemsList: 0 = input, 1 = power, 2 & 3 = output, 4 & 5 = upgrades */
 
     /** The number of ticks that the furnace will keep burning */
-    public double requireEnergy;
+    //public double requireEnergy;
     /** The number of ticks that the current item has been process for */
-    public int progress;
-
+    //public int progress;
+/*
     public TileCarbonizeFurnace() {
         super(3, 300, 1);
         this.tileSlots.add(new TileSlotInput(this, CarbonizeFurnaceRecipes.instance));
@@ -123,7 +124,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
 
     /**
      * @return Whether this Item can process
-     */
+     *//*
     private boolean canProcess() {
         if (this.getStackInSlot(0) == null) {
             return false;
@@ -238,4 +239,4 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
         return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
     }
-}
+}*/

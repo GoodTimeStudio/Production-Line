@@ -26,14 +26,14 @@ package com.mcgoodtime.productionline.common.init;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.core.PLConfig;
-import com.mcgoodtime.productionline.common.entity.EntityThrowable;
+//import coreom.mcgoodtime.productionline.common.entity.EntityThrowable;
 import com.mcgoodtime.productionline.common.items.*;
 import com.mcgoodtime.productionline.common.items.tools.PLToolMaterial;
-import com.mcgoodtime.productionline.common.items.tools.ItemGravityRay;
-import com.mcgoodtime.productionline.common.items.tools.ItemPLTreetap;
-import com.mcgoodtime.productionline.common.items.tools.ToolPL;
-import cpw.mods.fml.common.IFuelHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
+//import com.mcgoodtime.productionline.common.items.tools.ItemGravityRay;
+//import com.mcgoodtime.productionline.common.items.tools.ItemPLTreetap;
+//import com.mcgoodtime.productionline.common.items.tools.ToolPL;
+import net.minecraftforge.fml.common.IFuelHandler;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -118,59 +118,59 @@ public class PLItems implements IFuelHandler {
 	public static ItemStack coarseBatten;
 
 	public static void init() {
-        diamondApple = new ItemDiamondApple();
+//        diamondApple = new ItemDiamondApple();
 
-		ironTreetap = new ItemPLTreetap("IronTreetap", 32);
-		bronzeTreetap = new ItemPLTreetap("BronzeTreetap", 32);
-		leadTreetap = new ItemPLTreetap("LeadTreetap", 48);
-		refinedIronTreetap = new ItemPLTreetap("RefinedIronTreetap", 64);
-		advancedAlloyTreetap = new ItemPLTreetap("AdvancedAlloyTreetap", 64);
-		carbonTreetap = new ItemPLTreetap("CarbonTreetap", 128);
+//		ironTreetap = new ItemPLTreetap("IronTreetap", 32);
+//		bronzeTreetap = new ItemPLTreetap("BronzeTreetap", 32);
+//		leadTreetap = new ItemPLTreetap("LeadTreetap", 48);
+//		refinedIronTreetap = new ItemPLTreetap("RefinedIronTreetap", 64);
+//		advancedAlloyTreetap = new ItemPLTreetap("AdvancedAlloyTreetap", 64);
+//		carbonTreetap = new ItemPLTreetap("CarbonTreetap", 128);
 
-        record_MusicSpring = new ItemPLRecord("record_MusicSpring");
-		salt = new ItemPLFood("Salt", 0, 10F, true);
-        ceu = new ItemCEU();
-		gravityRay = new ItemGravityRay();
+//        record_MusicSpring = new ItemPLRecord("record_MusicSpring");
+//		salt = new ItemPLFood("Salt", 0, 10F, true);
+//        ceu = new ItemCEU();
+//		gravityRay = new ItemGravityRay();
 
 		//MultiMetaItem registry
 		new ItemOre();
 		new ItemMisc();
-		new ItemDryFood();
+//		new ItemDryFood();
 
         // special registry TODO: Better registry system
 
-		packagedSalt = new ItemPL("PackagedSalt") {
-			/**
-			 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-			 */
-			@Override
-			public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-				if (PLConfig.instance.throwableUran238) {
-					if (!entityPlayer.capabilities.isCreativeMode) {
-						--itemStack.stackSize;
-					}
-					world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-					if (!world.isRemote) {
-						world.spawnEntityInWorld(new EntityThrowable(world, entityPlayer, itemStack));
-					}
-				}
+//		packagedSalt = new ItemPL("PackagedSalt") {
+//			/**
+//			 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+//			 */
+//			@Override
+//			public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+//				if (PLConfig.instance.throwableUran238) {
+//					if (!entityPlayer.capabilities.isCreativeMode) {
+//						--itemStack.stackSize;
+//					}
+//					world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+//					if (!world.isRemote) {
+//						world.spawnEntityInWorld(new EntityThrowable(world, entityPlayer, itemStack));
+//					}
+//				}
+//
+//				return itemStack;
+//			}
+//		};
 
-				return itemStack;
-			}
-		};
-
-		saltWaterBucket = new ItemBucket(Blocks.water);
-		saltWaterBucket.setCreativeTab(ProductionLine.creativeTabGti)
-				.setUnlocalizedName(ProductionLine.MOD_NAME + ".SaltWaterBucket").setTextureName(ProductionLine.RESOURCE_DOMAIN + ":itemSaltWaterBucket");
-
-        iridiumPickaxe = ToolPL.registerPickaxe(PLToolMaterial.iridium, "IridiumPickaxe");
-        iridiumAxe = ToolPL.registerAxe(PLToolMaterial.iridium, "IridiumAxe");
-        iridiumSpade = ToolPL.registerSpade(PLToolMaterial.iridium, "IridiumSpade");
-        iridiumSword = ToolPL.registerSword(PLToolMaterial.iridium, "IridiumSword");
-
-        // TODO: Better registry system
-		GameRegistry.registerItem(saltWaterBucket, "SaltWaterBucket");
-        GameRegistry.registerFuelHandler(new PLItems());
+//		saltWaterBucket = new ItemBucket(Blocks.water);
+//		saltWaterBucket.setCreativeTab(ProductionLine.creativeTabGti)
+//				.setUnlocalizedName(ProductionLine.MOD_NAME + ".SaltWaterBucket").setTextureName(ProductionLine.RESOURCE_DOMAIN + ":itemSaltWaterBucket");
+//
+//        iridiumPickaxe = ToolPL.registerPickaxe(PLToolMaterial.iridium, "IridiumPickaxe");
+//        iridiumAxe = ToolPL.registerAxe(PLToolMaterial.iridium, "IridiumAxe");
+//        iridiumSpade = ToolPL.registerSpade(PLToolMaterial.iridium, "IridiumSpade");
+//        iridiumSword = ToolPL.registerSword(PLToolMaterial.iridium, "IridiumSword");
+//
+//        // TODO: Better registry system
+//		GameRegistry.registerItem(saltWaterBucket, "SaltWaterBucket");
+//        GameRegistry.registerFuelHandler(new PLItems());
     }
 
 	@Override
@@ -200,10 +200,10 @@ public class PLItems implements IFuelHandler {
 				Item.getItemFromBlock(PLBlocks.waterHyacinth))) {
 			return 100;
 		}
-		if(fuel.getItem().equals(
-				Item.getItemFromBlock(PLBlocks.dryLog))){
-			return 300;
-		}
+//		if(fuel.getItem().equals(
+//				Item.getItemFromBlock(PLBlocks.dryLog))){
+//			return 300;
+//		}
 		if (fuel.isItemEqual(PLBlocks.compressedWaterHyacinth)) {
 			return 800;
 		}

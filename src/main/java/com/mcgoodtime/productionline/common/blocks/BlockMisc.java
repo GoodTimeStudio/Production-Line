@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.common.init.PLBlocks;
@@ -42,7 +43,7 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_
  * Created by suhao on 2015.10.18.0018.
  *
  * @author suhao
- */
+ *//*
 public class BlockMisc extends BlockPL implements IMultiMetaBlock {
 
     public static List<String> internalNameList = new ArrayList<String>();
@@ -73,7 +74,7 @@ public class BlockMisc extends BlockPL implements IMultiMetaBlock {
     /**
      * Returns the unlocalized name of this block. This version accepts an ItemStack so different stacks can have
      * different names based on their meta or NBT.
-     */
+     *//*
     public String getBlockName(ItemStack itemStack) {
         return "tile." + MOD_NAME + ".block." + this.getInternalName(itemStack.getItemDamage());
     }
@@ -81,7 +82,7 @@ public class BlockMisc extends BlockPL implements IMultiMetaBlock {
     /**
      * Get block's unlocalized name
      * @return unlocalized name
-     */
+     *//*
     @Override
     public String getBlockName(int meta) {
         return "tile." + MOD_NAME + ".block." + this.getInternalName(meta);
@@ -100,7 +101,7 @@ public class BlockMisc extends BlockPL implements IMultiMetaBlock {
 
     /**
      * Gets the block's texture. Args: side, meta
-     */
+     *//*
     @Override
     public IIcon getIcon(int side, int meta) {
         return this.icons[meta];
@@ -108,9 +109,10 @@ public class BlockMisc extends BlockPL implements IMultiMetaBlock {
 
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
-     */
+     *//*
     @Override
     public int damageDropped(int meta) {
         return meta;
     }
 }
+*/

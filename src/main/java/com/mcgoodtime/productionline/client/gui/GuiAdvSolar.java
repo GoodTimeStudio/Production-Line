@@ -1,3 +1,4 @@
+/*
 package com.mcgoodtime.productionline.client.gui;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
@@ -10,7 +11,7 @@ import net.minecraft.util.StatCollector;
  * Created by BestOwl on 2015.12.5.0005.
  *
  * @author BestOwl
- */
+ *//*
 public class GuiAdvSolar extends GuiPL<ContainerAdvSolar> {
 
     public GuiAdvSolar(ContainerAdvSolar container) {
@@ -45,4 +46,4 @@ public class GuiAdvSolar extends GuiPL<ContainerAdvSolar> {
             this.drawTexturedModalRect(this.x + 3, this.y + 3 +10, 0, 246, 10, 10);
         }
     }
-}
+}*/

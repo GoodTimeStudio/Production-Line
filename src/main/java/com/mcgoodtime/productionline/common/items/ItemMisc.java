@@ -60,10 +60,6 @@ public class ItemMisc extends ItemMultiDamage {
         PLItems.advSolarLensCluster = this.next();
     }
 
-    private ItemStack next() {
-        return new ItemStack(this, 1, this.count++);
-    }
-
     @Override
     protected List<String> getInternalNameList() {
         List<String> list = new ArrayList<String>();

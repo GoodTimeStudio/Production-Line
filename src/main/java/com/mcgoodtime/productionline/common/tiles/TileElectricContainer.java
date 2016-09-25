@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/*
 package com.mcgoodtime.productionline.common.tiles;
 
 import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlot;
@@ -38,17 +39,17 @@ import net.minecraftforge.common.util.ForgeDirection;
  * Created by BestOwl on 2015.10.26.0026.
  *
  * @author BestOwl
- */
+ *//*
 public abstract class TileElectricContainer extends TileContainer implements IEnergySink {
 
     public final int energyTick;
     /** The number of remaining battery */
-    public double energy;
+    //public double energy;
     /** The number of that can storage battery */
-    public final int maxEnergy;
+    //public final int maxEnergy;
     /** Determine the tier of this energy sink */
-    public int tier;
-
+    //public int tier;
+/*
     public TileElectricContainer (int energyTick, int maxEnergy, int sinkTier) {
         this.energyTick = energyTick;
         this.maxEnergy = maxEnergy;
@@ -95,7 +96,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
      *
      * @param emitter energy emitter, may also be null or an IMetaDelegate
      * @param direction direction the energy is being received from
-     */
+     *//*
     @Override
     public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
         return true;
@@ -107,7 +108,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
      *
      * @note Modifying the energy net from this method is disallowed.
      * @return max accepted input in eu
-     */
+     *//*
     @Override
     public double getDemandedEnergy() {
         return (double) this.maxEnergy - this.energy;
@@ -120,7 +121,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
      * @note Modifying the energy net from this method is disallowed.
      * @note Return Integer.MAX_VALUE to allow any voltage.
      * @return tier of this energy sink
-     */
+     *//*
     @Override
     public int getSinkTier() {
         return this.tier;
@@ -135,7 +136,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
      * @param directionFrom direction from which the energy comes from
      * @param amount energy to be transferred
      * @return Energy not consumed (leftover)
-     */
+     *//*
     @Override
     public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
         if(this.energy >= (double) this.maxEnergy) {
@@ -148,7 +149,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
 
     /**
      * Called when the chunk this TileEntity is on is Unloaded.
-     */
+     *//*
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
@@ -159,7 +160,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
 
     /**
      * invalidates a tile entity
-     */
+     *//*
     @Override
     public void invalidate() {
         super.invalidate();
@@ -167,4 +168,4 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
             MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
         }
     }
-}
+}*/
