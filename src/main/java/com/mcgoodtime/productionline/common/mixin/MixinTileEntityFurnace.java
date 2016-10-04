@@ -20,12 +20,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @author BestOwl
  */
 @Mixin(TileEntityFurnace.class)
-public abstract class MixinTileEntityFurnace extends TileEntity {
+public abstract class MixinTileEntityFurnace extends TileEntityFurnace {
 
     @Shadow
-    private ItemStack[] furnaceItemStacks;
-    @Shadow
-    public abstract boolean isBurning();
+    ItemStack[] furnaceItemStacks;
 
     @Inject(method = "updateEntity", at = @At("RETURN"))
     private void onUpdate(CallbackInfo callbackInfo) {

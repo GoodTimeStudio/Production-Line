@@ -46,9 +46,9 @@ configurations {
 dependencies {
     shade 'org.spongepowered:mixin:0.5.14-SNAPSHOT'
     compile 'net.industrial-craft:industrialcraft-2:2.2.800-experimental:dev' //adds ic2 to the dev env
-    //provided 'codechicken:NotEnoughItems:1.7.10-1.0.4.79:dev'
-    //provided 'codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev'
-    //provided 'codechicken:CodeChickenLib:1.7.10-1.1.1.99:dev'
+    provided 'codechicken:NotEnoughItems:1.7.10-1.0.4.79:dev'
+    provided 'codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev'
+    provided 'codechicken:CodeChickenLib:1.7.10-1.1.1.99:dev'
     //checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
 }
 
