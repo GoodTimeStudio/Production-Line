@@ -19,7 +19,7 @@ group= "com.mcgoodtime.productionline"
 archivesBaseName = "ProductionLine"
 
 minecraft {
-    version = "1.10.2-12.18.1.2011"
+    version = "1.10.2-12.18.1.2094"
     runDir = "run"
     mappings = "snapshot_20160518"
 }
@@ -46,7 +46,7 @@ configurations {
 
 dependencies {
     compile 'org.spongepowered:mixin:0.4.4'
-    compile 'net.industrial-craft:industrialcraft-2:2.6.46-ex110' //adds ic2 to the dev env
+    compile 'net.industrial-craft:industrialcraft-2:2.6.46-ex110:dev' //adds ic2 to the dev env
 	compile 'mezz.jei:jei_1.10.2:3.9.0.246'
     checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
 }
