@@ -45,9 +45,9 @@ repositories {
 }
 
 dependencies {
-    compile 'org.spongepowered:mixin:0.4.4'
-    compile 'net.industrial-craft:industrialcraft-2:2.6.46-ex110:dev' //adds ic2 to the dev env
-	compile 'mezz.jei:jei_1.10.2:3.9.0.246'
+    compile 'org.spongepowered:mixin:0.5.+'
+    compile 'net.industrial-craft:industrialcraft-2:2.6.83-ex110:dev' //adds ic2 to the dev env
+	compile 'mezz.jei:jei_1.10.2:3.12.2.290'
 }
 
 jar {
