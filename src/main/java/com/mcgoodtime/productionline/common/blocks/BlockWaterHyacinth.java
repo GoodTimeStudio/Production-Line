@@ -29,7 +29,7 @@
 //import com.mcgoodtime.productionline.common.core.ProductionLine;
 //
 //import net.minecraft.block.state.IBlockState;
-//import net.minecraft.util.BlockPos;
+//import net.minecraft.util.math.BlockPos;
 //import net.minecraftforge.fml.relauncher.Side;
 //import net.minecraftforge.fml.relauncher.SideOnly;
 //import net.minecraft.block.Block;
@@ -49,21 +49,21 @@
 // * Yeah the water hyacinth block... For fun.
 // *
 // * @author liach
-// *//*
+// */
 //public class BlockWaterHyacinth extends BlockBush {
 //
 //    public BlockWaterHyacinth() {
-//        super(Material.plants);
+//        super(Material.PLANTS);
 //        this.setUnlocalizedName("productionline.block.WaterHyacinth");
 //        this.setCreativeTab(creativeTabGti);
 //        //this.setBlockTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + "BlockWaterHyacinth");
 //        this.setHardness(0.0F);
 //        this.setResistance(0.0F);
-//        this.setStepSound(soundTypeGrass);
+//        //this.setStepSound(soundTypeGrass);
 //        this.setTickRandomly(true);
 //        float f = 0.5F;
 //        float f1 = 0.015625F;
-//        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
+//        //this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
 //    }
 //
 //    @Override
@@ -71,15 +71,15 @@
 //        return 23;
 //    }
 //
-//    /*
 //    @Override
-//    public void updateTick(World world, int x, int y, int z, Random rand) {
-//        int changedX = rand.nextInt(5) - 3 + x;
-//        int changedZ = rand.nextInt(5) - 3 + z;
+//    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+//        int changedX = random.nextInt(5) - 3 + x;
+//        int changedZ = random.nextInt(5) - 3 + z;
 //        if ((world.isAirBlock(changedX, y, changedZ)) && (this.canPlaceBlockOn(world.getBlock(changedX, y - 1, changedZ)))) {
 //            world.setBlock(changedX, y, changedZ, this);
 //        }
-//    }*//*
+//    }
+//
 //    @Override
 //    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 //        int changedX = rand.nextInt(5) - 3 + x;
@@ -90,7 +90,7 @@
 //    }
 //
 //    @Override
-//    protected boolean canPlaceBlockOn(Block placedOn) {
+//    protected boolean canPlaceBlockOn(IBlockState placedOn) {
 //        return placedOn == Blocks.water;
 //    }
 //
@@ -132,4 +132,4 @@
 //    public int colorMultiplier(IBlockAccess iBlockAccess, int x, int y, int z) {
 //        return 2129968;
 //    }
-//}*/
+//}

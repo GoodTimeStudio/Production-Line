@@ -22,26 +22,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common.entity;
+package com.mcgoodtime.productionline.common.potion;
 
-import com.mcgoodtime.productionline.common.core.ProductionLine;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 
 /**
- * Created by suhao on 2015.10.25.0025.
+ * Created by suhao on 2015.11.5.0005.
  *
+ * @author BestOwl
  */
-public class PLEntity {
+public class PLEffect extends PotionEffect {
 
-    private static int id = 0;
+    protected float hp = 1F;
+    protected int timer;
+    protected int level;
 
-    public static void registerEntities(Class<? extends Entity> entity, String name) {
-        EntityRegistry.registerModEntity(entity, name, id++, ProductionLine.instance, 64, 1, true);
+    public PLEffect(Potion potion, int durationTime, int level) {
+        super(potion, durationTime, level);
+        if (potion == PLPotion.salty) {
+            this.timer = 20;
+        }
+        this.level = level;
     }
 
-    public static void init() {
-        registerEntities(EntityThrowable.class, "Throwable");
-        registerEntities(EntityRay.class, "Ray");
+    @Override
+    public boolean onUpdate(EntityLivingBase entityLivingBase) {
+        if (this.getPotion() == PLPotion.salty) {
+            if (this.level > 0) {
+                if (PLPotion.salty.isReady(this)) {
+                    PLPotion.salty.performEffect(entityLivingBase, hp);
+                }
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -26,7 +26,7 @@ package com.mcgoodtime.productionline.common.core;
 
 //import com.mcgoodtime.productionline.client.RenderEntityThrowable;
 //import com.mcgoodtime.productionline.client.RenderEntityRay;
-//import com.mcgoodtime.productionline.common.PLPotion;
+//import com.mcgoodtime.productionline.common.potion.PLPotion;
 //import com.mcgoodtime.productionline.common.blocks.fluid.Gas;
 //import com.mcgoodtime.productionline.common.entity.EntityThrowable;
 //import com.mcgoodtime.productionline.common.entity.PLEntity;
@@ -34,10 +34,15 @@ package com.mcgoodtime.productionline.common.core;
 //import com.mcgoodtime.productionline.common.init.*;
 //import com.mcgoodtime.productionline.common.nei.NEIPLConfig;
 //import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
+import com.mcgoodtime.productionline.common.event.PLEvent;
+import com.mcgoodtime.productionline.common.potion.PLPotion;
 import com.mcgoodtime.productionline.common.init.PLItems;
+import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
 import ic2.api.item.IC2Items;
 import net.minecraft.init.Items;
-        import net.minecraftforge.fml.common.*;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -50,7 +55,7 @@ import net.minecraft.item.Item;
         import java.util.ArrayList;
 
 @Mod(
-        modid = ProductionLine.MOD_NAME,
+        modid = ProductionLine.MOD_ID,
         name = ProductionLine.MOD_NAME,
         version = ProductionLine.VERSION,
         dependencies = "required-after:"
@@ -60,6 +65,7 @@ import net.minecraft.item.Item;
         useMetadata = true
     )
 public final class ProductionLine {
+    public static final String MOD_ID = "productionline";
     public static final String MOD_NAME = "ProductionLine";
     public static final String VERSION = "${version}";
     public static final String RESOURCE_DOMAIN = "productionline";
@@ -93,7 +99,7 @@ public final class ProductionLine {
         //register Items. 注册物品
         PLItems.init();
 //        PLEntity.init();
-//        PLPotion.initPotion();
+        PLPotion.initPotion();
         proxy.init();
 
         System.out.println(IC2Items.getItem("purified", "copper").getItem().getClass());
@@ -112,14 +118,13 @@ public final class ProductionLine {
         //register achievement page
 //        AchievementPage.registerAchievementPage(PLAchievement.pagePL);
          //register ore gen bus. 注册矿石生成总线
-        //PLWorldGen.init();
+        PLWorldGen.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         //register Event. 注册事件
-//        FMLCommonHandler.instance().bus().register(new PLEvent());
-//        MinecraftForge.EVENT_BUS.register(new PLEvent());
+        MinecraftForge.EVENT_BUS.register(new PLEvent());
     }
 
     private void setupMeta() {
@@ -152,5 +157,9 @@ public final class ProductionLine {
 //                new NEIPLConfig().loadConfig();
 //            }
         }
+    }
+
+    public static ResourceLocation loc(String name) {
+        return new ResourceLocation(ProductionLine.MOD_ID, name);
     }
 }

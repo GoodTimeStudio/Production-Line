@@ -1,11 +1,14 @@
 package com.mcgoodtime.productionline.common.mixin;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemFirework;
 import net.minecraft.item.ItemFireworkCharge;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionHelper;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,30 +22,34 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @author BestOwl
  */
 @Mixin(TileEntityFurnace.class)
-public abstract class MixinTileEntityFurnace extends TileEntityFurnace {
+public abstract class MixinTileEntityFurnace extends TileEntity {
 
     @Shadow
     private ItemStack[] furnaceItemStacks;
 
+    @Shadow
+    public abstract boolean isBurning();
+
     @Inject(method = "update", at = @At("RETURN"))
     private void onUpdate(CallbackInfo callbackInfo) {
-//        if (!this.worldObj.isRemote) {
-//            if (this.isBurning()) {
-//                ItemStack itemStack = this.furnaceItemStacks[0];
-//                if (itemStack != null) {
-//                    if (itemStack.getItem() instanceof ItemBlock) {
-//                        if (((ItemBlock) itemStack.getItem()).block.getMaterial() == Material.tnt) {
-//                            this.doExplosion();
-//                        }
-//                    } else if (itemStack.getItem().getPotionEffect(itemStack).equals(PotionHelper.gunpowderEffect)) {
-//                        this.doExplosion();
-//                    } else if (itemStack.getItem() instanceof ItemFirework || itemStack.getItem()
-//                            instanceof ItemFireworkCharge) {
-//                        this.doExplosion();
-//                    }
-//                }
-//            }
-//        }
+        if (!this.worldObj.isRemote) {
+            if (this.isBurning()) {
+                ItemStack itemStack = this.furnaceItemStacks[0];
+                if (itemStack != null) {
+                    if (itemStack.getItem() instanceof ItemBlock) {
+                        Block block = ((ItemBlock) itemStack.getItem()).block;
+                        if (block.getMaterial(block.getStateFromMeta(itemStack.getMetadata())) == Material.TNT) {
+                            this.doExplosion();
+                        }
+                    } else if (itemStack.getItem() == Items.GUNPOWDER) {
+                        this.doExplosion();
+                    } else if (itemStack.getItem() instanceof ItemFirework || itemStack.getItem()
+                            instanceof ItemFireworkCharge) {
+                        this.doExplosion();
+                    }
+                }
+            }
+        }
     }
 
     private void doExplosion() {
