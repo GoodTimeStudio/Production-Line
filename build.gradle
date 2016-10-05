@@ -5,14 +5,19 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        maven {
+            name = "sponge"
+            url = "http://repo.spongepowered.org/maven"
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'checkstyle'
+apply plugin: 'org.spongepowered.mixin'
 
 version = "dev.0.4" + getBuildNumber()
 group= "com.mcgoodtime.productionline"
@@ -21,7 +26,7 @@ archivesBaseName = "ProductionLine"
 minecraft {
     version = "1.10.2-12.18.1.2094"
     runDir = "run"
-    mappings = "snapshot_20160518"
+    mappings = "snapshot_20161004"
 }
 
 repositories {
@@ -39,30 +44,13 @@ repositories {
 	}
 }
 
-configurations {
-    shade
-    compile.extendsFrom shade
-}
-
 dependencies {
     compile 'org.spongepowered:mixin:0.4.4'
     compile 'net.industrial-craft:industrialcraft-2:2.6.46-ex110:dev' //adds ic2 to the dev env
 	compile 'mezz.jei:jei_1.10.2:3.9.0.246'
-    checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
 }
 
 jar {
-	/*configurations.shade.copyRecursive().setTransitive(false).each { artifact ->
-		from (zipTree(artifact))
-	}*/
-
-    configurations.shade.each { dep ->
-        from(project.zipTree(dep)){
-            exclude 'META-INF', 'META-INF/**'
-        }
-    }
-
-
     manifest {
 		attributes (
             'FMLCorePlugin': 'com.mcgoodtime.productionline.common.core.coremod.PLCore',
@@ -76,47 +64,29 @@ jar {
     }
 }
 
-checkstyle { 
-    toolVersion = "6.7" 
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-        }
-        resources {
-            srcDir 'src/main/resources'
-        }
-    }
+mixin {
+    // Specify "notch" or "searge" here
+    defaultObfuscationEnv searge
+    add sourceSets.main, "mixins.forge.refmap.json"
 }
 
 compileJava {
     options.encoding = 'UTF-8'
-    options.compilerArgs += [
+    /*options.compilerArgs += [
             '-Xlint:-processing',
             "-AreobfSrgFile=${project.file('build/srgs/mcp-srg.srg').canonicalPath}"
-    ]
+    ]*/
 }
 
-task copySrgs(type: Copy, dependsOn: 'genSrgs') {
+/*task copySrgs(type: Copy, dependsOn: 'genSrgs') {
     from project.plugins.getPlugin('net.minecraftforge.gradle.forge').delayedFile('{SRG_DIR}')
-
-    include '**/*.srg'
-    into 'build/srgs'
+*/
+//    include '**/*.srg'
+/*    into 'build/srgs'
 }
-compileJava.dependsOn copySrgs
+compileJava.dependsOn copySrgs*/
 
-idea { 
-    module {
-        inheritOutputDirs = true 
-    } 
-}
-
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'dev'
-}
+idea.module.inheritOutputDirs = true 
 
 processResources {
     inputs.property "version", project.version
@@ -130,18 +100,6 @@ processResources {
     from (sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-checkstyle {
-    configFile = file('checkstyle.xml')
-    configProperties = [
-            "name" : 'Production-Line',
-            "organization" : 'GoodTimeStudio',
-            "url" : 'https://github.com/GoodTimeStudio/Production-Line',
-            "year" : '2016',
-            "basedir": project.projectDir,
-            "severity": 'warning'
-    ]
 }
 
 def getBuildNumber() {
