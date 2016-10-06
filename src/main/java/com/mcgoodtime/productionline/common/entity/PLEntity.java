@@ -37,7 +37,7 @@ public class PLEntity {
     private static int id = 0;
 
     public static void registerEntities(Class<? extends Entity> entity, String name) {
-        EntityRegistry.registerModEntity(entity, name, id++, ProductionLine.instance, 64, 1, true);
+        EntityRegistry.registerModEntity(entity, name, id++, ProductionLine.getInstance(), 64, 1, true);
     }
 
     public static void init() {

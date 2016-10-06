@@ -34,26 +34,28 @@ package com.mcgoodtime.productionline.common.core;
 //import com.mcgoodtime.productionline.common.init.*;
 //import com.mcgoodtime.productionline.common.nei.NEIPLConfig;
 //import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
+
+import com.mcgoodtime.productionline.common.entity.PLEntity;
 import com.mcgoodtime.productionline.common.event.PLEvent;
-import com.mcgoodtime.productionline.common.potion.PLPotion;
 import com.mcgoodtime.productionline.common.init.PLItems;
+import com.mcgoodtime.productionline.common.potion.PLPotion;
 import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
-import ic2.api.item.IC2Items;
-import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ModMetadata;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-        import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 
-        import java.util.ArrayList;
+import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 @Mod(
         modid = ProductionLine.MOD_ID,
@@ -64,36 +66,35 @@ import net.minecraft.item.Item;
                 + "required-after:"
                 + "IC2@[2.5.52,);",
         useMetadata = true
-    )
+)
 public final class ProductionLine {
     public static final String MOD_ID = "productionline";
     public static final String MOD_NAME = "ProductionLine";
     public static final String VERSION = "${version}";
-    public static final String RESOURCE_DOMAIN = "productionline";
+    public static final String RESOURCE_DOMAIN = MOD_ID;
     public static final String GUI_PREFIX = "gui.ProductionLine.";
     public static final CreativeTabs creativeTabGti = new CreativeTabs(MOD_NAME) {
         @SideOnly(Side.CLIENT)
         @Override
+        @Nonnull
         public Item getTabIconItem() {
             return Items.GOLDEN_APPLE;
         }
     };
+    /**
+     * Forge will inject to this field.
+     */
     @Mod.Metadata
-    public ModMetadata meta = new ModMetadata();
-    @Instance(ProductionLine.MOD_NAME)
-    public static ProductionLine instance;
+    private ModMetadata meta;
+    private static final ProductionLine INSTANCE = new ProductionLine();
 
-    @SidedProxy(
-            modId = MOD_NAME,
-            serverSide = "com.mcgoodtime.productionline.common.core.ProductionLine$CommonProxy",
-            clientSide = "com.mcgoodtime.productionline.common.core.ProductionLine$ClientProxy"
-    )
+    @SidedProxy
     public static CommonProxy proxy;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         setupMeta();
-//        PLConfig.init(event.getSuggestedConfigurationFile());
+        PLConfig.init(event.getSuggestedConfigurationFile());
         //register Blocks. 注册方块
 //        PLBlocks.init();
 //        FluidRegistry.registerFluid(Gas.gasNatural);
@@ -102,23 +103,21 @@ public final class ProductionLine {
 //        PLEntity.init();
         PLPotion.initPotion();
         proxy.init();
-
-        System.out.println(IC2Items.getItem("purified", "copper").getItem().getClass());
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
 //        PLOreDictionary.init();
-//        PLEntity.init();
+        PLEntity.init();
         // register Recipes. 注册合成
 //        PLRecipes.init();
         //register gui handler
-//        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandler.getInstance());
-         //register achievement
+//        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
+        //register achievement
 //        PLAchievement.init();
         //register achievement page
 //        AchievementPage.registerAchievementPage(PLAchievement.pagePL);
-         //register ore gen bus. 注册矿石生成总线
+        //register ore gen bus. 注册矿石生成总线
         PLWorldGen.init();
     }
 
@@ -129,26 +128,24 @@ public final class ProductionLine {
     }
 
     private void setupMeta() {
-        this.meta.modId = MOD_NAME;
+        this.meta.modId = MOD_ID;
         this.meta.name = MOD_NAME;
         this.meta.version = VERSION;
         this.meta.url = "https://github.com/GoodTimeStudio/Production-Line";
-        this.meta.updateUrl = this.meta.url;
-        this.meta.authorList = new ArrayList<String>();
-        this.meta.authorList.add("BestOwl");
-        this.meta.authorList.add("liach");
-        this.meta.authorList.add("Seedking");
-        this.meta.authorList.add("JAVA0");
-        this.meta.authorList.add("GoodTime Studio");
+        this.meta.authorList = Arrays.asList("BestOwl", "liach", "JAVA0", "Seedking", "GoodTime Studio");
         this.meta.credits = "GoodTime Studio";
     }
 
     public static class CommonProxy {
-        public void init() {}
+        public void init() {
+        }
 
         public void registerItemRender(Item item) {
 
         }
+    }
+
+    public static class ServerProxy extends CommonProxy {
     }
 
     @SideOnly(Side.CLIENT)
@@ -166,8 +163,12 @@ public final class ProductionLine {
 
         @Override
         public void registerItemRender(Item item) {
-            ModelBakery.registerItemVariants();
         }
+    }
+
+    @Mod.InstanceFactory
+    public static ProductionLine getInstance() {
+        return INSTANCE;
     }
 
     public static ResourceLocation loc(String name) {

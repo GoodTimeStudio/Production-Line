@@ -54,7 +54,6 @@ public class ItemPL extends Item {
 
         this.itemName = name;
         this.setCreativeTab(creativeTabGti);
-        GameRegistry.registerItem(this, name);
     }
 
     @Override

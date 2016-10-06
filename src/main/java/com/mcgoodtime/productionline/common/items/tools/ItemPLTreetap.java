@@ -27,11 +27,8 @@ package com.mcgoodtime.productionline.common.items.tools;
 import com.mcgoodtime.productionline.common.items.ItemPL;
 import ic2.api.item.IBoxable;
 import ic2.core.IC2;
-import ic2.core.Ic2Items;
 import ic2.core.audio.PositionSpec;
 import ic2.core.block.BlockRubWood;
-import ic2.core.block.TileEntityBarrel;
-import ic2.core.item.tool.ItemTreetap;
 import ic2.core.item.type.MiscResourceType;
 import ic2.core.ref.BlockName;
 import ic2.core.ref.ItemName;
@@ -64,9 +61,9 @@ public class ItemPLTreetap extends ItemPL implements IBoxable {
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float xOffset, float yOffset, float zOffset) {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        if(block == BlockName.rubber_wood.getInstance()) {
+        if (block == BlockName.rubber_wood.getInstance()) {
             attemptExtract(player, world, pos, side, state, null);
-            if(!world.isRemote) {
+            if (!world.isRemote) {
                 stack.damageItem(1, player);
             }
 
@@ -78,42 +75,42 @@ public class ItemPLTreetap extends ItemPL implements IBoxable {
 
     public static boolean attemptExtract(EntityPlayer player, World world, BlockPos pos, EnumFacing side, IBlockState state, List<ItemStack> stacks) {
         BlockRubWood.RubberWoodState rwState = state.getValue(BlockRubWood.stateProperty);
-        if(!rwState.isPlain() && rwState.facing == side) {
-            if(rwState.wet) {
-                if(!world.isRemote) {
+        if (!rwState.isPlain() && rwState.facing == side) {
+            if (rwState.wet) {
+                if (!world.isRemote) {
                     world.setBlockState(pos, state.withProperty(BlockRubWood.stateProperty, rwState.getDry()));
-                    if(stacks != null) {
+                    if (stacks != null) {
                         stacks.add(StackUtil.copyWithSize(ItemName.misc_resource.getItemStack(MiscResourceType.resin), world.rand.nextInt(3) + 1));
                     } else {
                         ejectResin(world, pos, side, world.rand.nextInt(3) + 1);
                     }
 
-                    if(player != null) {
+                    if (player != null) {
                         IC2.achievements.issueAchievement(player, "acquireResin");
                     }
                 }
 
-                if(world.isRemote && player != null) {
+                if (world.isRemote && player != null) {
                     IC2.audioManager.playOnce(player, PositionSpec.Hand, "Tools/Treetap.ogg", true, IC2.audioManager.getDefaultVolume());
                 }
 
                 return true;
             } else {
-                if(!world.isRemote && world.rand.nextInt(5) == 0) {
+                if (!world.isRemote && world.rand.nextInt(5) == 0) {
                     world.setBlockState(pos, state.withProperty(BlockRubWood.stateProperty, BlockRubWood.RubberWoodState.plain_y));
                 }
 
-                if(world.rand.nextInt(5) == 0) {
-                    if(!world.isRemote) {
+                if (world.rand.nextInt(5) == 0) {
+                    if (!world.isRemote) {
                         ejectResin(world, pos, side, 1);
-                        if(stacks != null) {
+                        if (stacks != null) {
                             stacks.add(ItemName.misc_resource.getItemStack(MiscResourceType.resin));
                         } else {
                             ejectResin(world, pos, side, 1);
                         }
                     }
 
-                    if(world.isRemote && player != null) {
+                    if (world.isRemote && player != null) {
                         IC2.audioManager.playOnce(player, PositionSpec.Hand, "Tools/Treetap.ogg", true, IC2.audioManager.getDefaultVolume());
                     }
 
@@ -129,11 +126,11 @@ public class ItemPLTreetap extends ItemPL implements IBoxable {
 
     private static void ejectResin(World world, BlockPos pos, EnumFacing side, int quantity) {
         double ejectBias = 0.3D;
-        double ejectX = (double)pos.getX() + 0.5D + (double)side.getFrontOffsetX() * 0.3D;
-        double ejectY = (double)pos.getY() + 0.5D + (double)side.getFrontOffsetY() * 0.3D;
-        double ejectZ = (double)pos.getZ() + 0.5D + (double)side.getFrontOffsetZ() * 0.3D;
+        double ejectX = (double) pos.getX() + 0.5D + (double) side.getFrontOffsetX() * 0.3D;
+        double ejectY = (double) pos.getY() + 0.5D + (double) side.getFrontOffsetY() * 0.3D;
+        double ejectZ = (double) pos.getZ() + 0.5D + (double) side.getFrontOffsetZ() * 0.3D;
 
-        for(int i = 0; i < quantity; ++i) {
+        for (int i = 0; i < quantity; ++i) {
             EntityItem entityitem = new EntityItem(world, ejectX, ejectY, ejectZ, ItemName.misc_resource.getItemStack(MiscResourceType.resin));
             entityitem.setDefaultPickupDelay();
             world.spawnEntityInWorld(entityitem);
