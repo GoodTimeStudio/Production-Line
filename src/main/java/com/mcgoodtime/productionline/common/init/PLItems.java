@@ -28,6 +28,7 @@ import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.core.PLConfig;
 //import coreom.mcgoodtime.productionline.common.entity.EntityThrowable;
 import com.mcgoodtime.productionline.common.items.*;
+import com.mcgoodtime.productionline.common.items.tools.ItemPLTreetap;
 import com.mcgoodtime.productionline.common.items.tools.PLToolMaterial;
 //import com.mcgoodtime.productionline.common.items.tools.ItemGravityRay;
 //import com.mcgoodtime.productionline.common.items.tools.ItemPLTreetap;
@@ -120,12 +121,12 @@ public class PLItems implements IFuelHandler {
 	public static void init() {
 //        diamondApple = new ItemDiamondApple();
 
-//		ironTreetap = new ItemPLTreetap("IronTreetap", 32);
-//		bronzeTreetap = new ItemPLTreetap("BronzeTreetap", 32);
-//		leadTreetap = new ItemPLTreetap("LeadTreetap", 48);
-//		refinedIronTreetap = new ItemPLTreetap("RefinedIronTreetap", 64);
-//		advancedAlloyTreetap = new ItemPLTreetap("AdvancedAlloyTreetap", 64);
-//		carbonTreetap = new ItemPLTreetap("CarbonTreetap", 128);
+		ironTreetap = new ItemPLTreetap("treetap.iron", 32);
+		bronzeTreetap = new ItemPLTreetap("treetap.bronze", 32);
+		leadTreetap = new ItemPLTreetap("treetap.lead", 48);
+		refinedIronTreetap = new ItemPLTreetap("treetap.steel", 64);
+		advancedAlloyTreetap = new ItemPLTreetap("treetap.iron", 64);
+		carbonTreetap = new ItemPLTreetap("treetap.iron", 128);
 
 //        record_MusicSpring = new ItemPLRecord("record_MusicSpring");
 //		salt = new ItemPLFood("Salt", 0, 10F, true);

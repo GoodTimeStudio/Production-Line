@@ -25,7 +25,9 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.resources.I18n;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 //import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,9 +36,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_NAME;
-import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
-import static com.mcgoodtime.productionline.common.core.ProductionLine.creativeTabGti;
+import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
 
 /**
  * Created by liach on 5/22/2015.
@@ -48,7 +48,8 @@ public class ItemPL extends Item {
     private String itemName;
 
     public ItemPL(String name) {
-        this.setUnlocalizedName(MOD_NAME + "." + name);
+        this.setUnlocalizedName(MOD_ID + "." + name);
+        this.setRegistryName(ProductionLine.loc(name));
 //        this.setTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + "item" + name);
 
         this.itemName = name;

@@ -39,6 +39,7 @@ import com.mcgoodtime.productionline.common.potion.PLPotion;
 import com.mcgoodtime.productionline.common.init.PLItems;
 import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
 import ic2.api.item.IC2Items;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -144,8 +145,13 @@ public final class ProductionLine {
 
     public static class CommonProxy {
         public void init() {}
+
+        public void registerItemRender(Item item) {
+
+        }
     }
 
+    @SideOnly(Side.CLIENT)
     public static class ClientProxy extends CommonProxy {
         @Override
         public void init() {
@@ -156,6 +162,11 @@ public final class ProductionLine {
 //            if (Loader.isModLoaded("NotEnoughItems")) {
 //                new NEIPLConfig().loadConfig();
 //            }
+        }
+
+        @Override
+        public void registerItemRender(Item item) {
+            ModelBakery.registerItemVariants();
         }
     }
 
