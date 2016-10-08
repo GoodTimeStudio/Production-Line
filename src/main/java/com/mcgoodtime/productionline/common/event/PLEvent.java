@@ -24,12 +24,18 @@
  */
 package com.mcgoodtime.productionline.common.event;
 
+import com.google.common.base.Optional;
 import com.mcgoodtime.productionline.common.potion.PLPotion;
-//import com.mcgoodtime.productionline.common.entity.EntityThrowable;
+import com.mcgoodtime.productionline.common.entity.EntityThrowable;
 import com.mcgoodtime.productionline.common.init.PLAchievement;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.init.PLItems;
+import ic2.api.item.IC2Items;
+import net.minecraft.client.renderer.BlockModelRenderer;
+import net.minecraft.init.Biomes;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -44,10 +50,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
-/*
- * Created by suhao on 2015/5/17.
+/**
+ * Production Line event listener.
+ *
+ * @author BestOwl, liach
  */
-
+@Mod.EventBusSubscriber
 public class PLEvent {
     @SubscribeEvent
     public void onPlayerCrafting(PlayerEvent.ItemCraftedEvent event) {
@@ -63,55 +71,64 @@ public class PLEvent {
         }
     }
 
-//    @SubscribeEvent
-//    public void onBucketFill(FillBucketEvent event) {
-//        if (event.entityPlayer != null) {
-//            BiomeGenBase biome = event.world.getBiomeGenForCoords(event.target.blockX, event.target.blockZ);
-//            if (biome == BiomeGenBase.ocean || biome == BiomeGenBase.deepOcean || biome == BiomeGenBase.frozenOcean) {
-//                event.setResult(Event.Result.ALLOW);
-//                event.result = new ItemStack(PLItems.saltWaterBucket);
-//            }
-//        }
-//    }
-//
-//    @SubscribeEvent
-//    public void onEntityThrowableImpact(EntityThrowableImpactEvent event) {
-//        if (event.entityThrowable.getThrowItem().getItem().equals(PLItems.packagedSalt)) {
-//            for (int i = 0; i < 8; ++i) {
-//                float fmod = (float) (1.2 - (Math.random() * 2.4));
-//                float f1mod = (float) (0.5 - (Math.random() * 1.0));
-//                float f2mod = (float) (1.2 - (Math.random() * 2.4));
-//
-//                event.entityThrowable.worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(PLItems.salt), event.entityThrowable.posX + fmod,
-//                        event.entityThrowable.posY + f1mod, event.entityThrowable.posZ + f2mod, 0.1D, 0.1D, 0.1D);
-//
-//                if (!event.entityThrowable.worldObj.isRemote) {
-//                    EntityItem entityItem = new EntityItem(event.entityThrowable.worldObj,
-//                            event.entityThrowable.posX + fmod, event.entityThrowable.posY + f1mod,
-//                            event.entityThrowable.posZ + f2mod, new ItemStack(PLItems.salt));
-//                    event.entityThrowable.worldObj.spawnEntityInWorld(entityItem);
-//                }
-//            }
-//            this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(PLPotion.salty.id, 0, 3));
-//        }
-//        else if (event.entityThrowable.getThrowItem().isItemEqual(Ic2Items.Uran238)) {
-//            this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(IC2Potion.radiation.id, 200, 0));
-//        }
-//        else {
-//            this.onImpact(event.entityThrowable, event.movingObjectPosition, null);
-//        }
-//    }
-//
-//    private void onImpact(EntityThrowable entity, RayTraceResult movingObjectPosition, PotionEffect potionEffect) {
-//        if (movingObjectPosition.entityHit != null) {
-//            movingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(entity, entity.getThrower()), 3F);
-//            if (movingObjectPosition.entityHit instanceof EntityLivingBase && potionEffect != null) {
-//                ((EntityLivingBase) movingObjectPosition.entityHit).addPotionEffect(potionEffect);
-//            }
-//        }
-//        entity.worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(entity.getThrowItem().getItem()), entity.posX, entity.posY, entity.posZ, 0.1D, 0.1D, 0.1D);
-//        if (!entity.worldObj.isRemote) {
-//            entity.setDead();
-//        }
-//    }
+    @SubscribeEvent
+    public void onBucketFill(FillBucketEvent event) {
+        if (event.getEntityPlayer() != null) {
+            Biome biome = event.getWorld().getBiome(event.getTarget().getBlockPos());
+            if (biome == Biomes.OCEAN || biome == Biomes.DEEP_OCEAN || biome == Biomes.FROZEN_OCEAN) {
+                event.setResult(Event.Result.ALLOW);
+                event.setFilledBucket(new ItemStack(PLItems.saltWaterBucket));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityThrowableImpact(EntityThrowableImpactEvent event) {
+        Optional<ItemStack> optItemStack = event.entityThrowable.getThrowItem();
+        if (!optItemStack.isPresent()) {
+            return;
+        }
+        ItemStack stack = optItemStack.get();
+        if (stack.getItem().equals(PLItems.packagedSalt)) {
+            for (int i = 0; i < 8; ++i) {
+                float fmod = (float) (1.2 - (Math.random() * 2.4));
+                float f1mod = (float) (0.5 - (Math.random() * 1.0));
+                float f2mod = (float) (1.2 - (Math.random() * 2.4));
+
+                event.entityThrowable.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK,
+                        event.entityThrowable.posX + fmod, event.entityThrowable.posY + f1mod,
+                        event.entityThrowable.posZ + f2mod, 0.1D, 0.1D, 0.1D, Item.getIdFromItem(PLItems.salt));
+
+                if (!event.entityThrowable.worldObj.isRemote) {
+                    EntityItem entityItem = new EntityItem(event.entityThrowable.worldObj,
+                            event.entityThrowable.posX + fmod, event.entityThrowable.posY + f1mod,
+                            event.entityThrowable.posZ + f2mod, new ItemStack(PLItems.salt));
+                    event.entityThrowable.worldObj.spawnEntityInWorld(entityItem);
+                }
+            }
+            this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(PLPotion.salty, 0, 3));
+        }
+        else if (stack.isItemEqual(IC2Items.getItem("Uran238"))) {
+            this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(IC2Potion.radiation, 200, 0));
+        }
+        else {
+            this.onImpact(event.entityThrowable, event.movingObjectPosition, null);
+        }
+    }
+
+    private void onImpact(EntityThrowable entity, RayTraceResult movingObjectPosition, PotionEffect potionEffect) {
+        if (movingObjectPosition.entityHit != null) {
+            movingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(entity, entity.getThrower()), 3F);
+            if (movingObjectPosition.entityHit instanceof EntityLivingBase && potionEffect != null) {
+                ((EntityLivingBase) movingObjectPosition.entityHit).addPotionEffect(potionEffect);
+            }
+        }
+        entity.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, entity.posX, entity.posY, entity.posZ, 0.1D, 0.1D,
+                0.1D, Item.getIdFromItem(entity.getThrowItem().get().getItem()));
+        if (!entity.worldObj.isRemote) {
+            entity.setDead();
+            entity.worldObj.spawnEntityInWorld(new EntityItem(entity.worldObj, entity.posX, entity.posY, entity.posZ,
+                    entity.getThrowItem().get()));
+        }
+    }
 }

@@ -37,20 +37,27 @@ package com.mcgoodtime.productionline.common.core;
 
 import com.mcgoodtime.productionline.common.entity.PLEntity;
 import com.mcgoodtime.productionline.common.event.PLEvent;
+import com.mcgoodtime.productionline.common.init.PLAchievement;
+import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.init.PLItems;
+import com.mcgoodtime.productionline.common.init.PLOreDictionary;
+import com.mcgoodtime.productionline.common.init.PLRecipes;
 import com.mcgoodtime.productionline.common.potion.PLPotion;
 import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -96,35 +103,29 @@ public final class ProductionLine {
         setupMeta();
         PLConfig.init(event.getSuggestedConfigurationFile());
         //register Blocks. 注册方块
-//        PLBlocks.init();
+        PLBlocks.init();
 //        FluidRegistry.registerFluid(Gas.gasNatural);
         //register Items. 注册物品
         PLItems.init();
-//        PLEntity.init();
+        PLEntity.init();
         PLPotion.initPotion();
         proxy.init();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-//        PLOreDictionary.init();
+        PLOreDictionary.init();
         PLEntity.init();
         // register Recipes. 注册合成
-//        PLRecipes.init();
+        PLRecipes.init();
         //register gui handler
-//        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
+        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
         //register achievement
-//        PLAchievement.init();
+        PLAchievement.init();
         //register achievement page
-//        AchievementPage.registerAchievementPage(PLAchievement.pagePL);
+        AchievementPage.registerAchievementPage(PLAchievement.pagePL);
         //register ore gen bus. 注册矿石生成总线
         PLWorldGen.init();
-    }
-
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        //register Event. 注册事件
-        MinecraftForge.EVENT_BUS.register(new PLEvent());
     }
 
     private void setupMeta() {
