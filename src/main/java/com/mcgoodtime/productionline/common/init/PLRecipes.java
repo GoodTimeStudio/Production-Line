@@ -68,7 +68,42 @@ public class PLRecipes {
                 'D', IC2Items.getItem("electroFurnace"),
                 'E', IC2Items.getItem("plateiron")
         );
-
+        GameRegistry.addRecipe(
+        		new ItemStack(PLBlocks.opticalGlass,5),
+        		"ABA",
+        		"BAB",
+        		"ABA",
+        		'A',Blocks.quartz_block,
+        		'B',Blocks.glass
+        );
+        GameRegistry.addRecipe(
+        		PLItems.advSolarLensUnit,
+        		"A A",
+        		"A A",
+        		" A ",
+        		'A',PLBlocks.opticalGlass
+        );
+        GameRegistry.addRecipe(
+        		PLItems.advSolarLensGroup,
+        		"A A",
+        		"ABA",
+        		"CAC",
+        		'A',PLItems.advSolarLensUnit,
+        		'B',IC2Items.getItem("dimondPowder"),
+        		'C',IC2Items.getItem("carbonPlate")
+        );
+        GameRegistry.addRecipe(PLItems.ironChain,
+        		" AA",
+        		"A A",
+        		" A ",
+        		'A',IC2Items.getItem("ironPlate")
+        );
+        GameRegistry.addRecipe(PLItems.steelChain,
+        		" AA",
+        		"A A",
+        		" A ",
+        		'A',IC2Items.getItem("steelPlate")
+        );
         GameRegistry.addRecipe(
                 PLItems.roller,
                 " A",

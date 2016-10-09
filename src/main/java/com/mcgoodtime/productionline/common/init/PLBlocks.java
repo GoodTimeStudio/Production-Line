@@ -47,12 +47,15 @@ public class PLBlocks {
     public static ItemStack cseu;
     public static ItemStack parallelSpaceSU;
 
-    public static BlockPL pad;
-    public static BlockPL dryLog;
     public static BlockPL fluidKineticGenerator;
     public static BlockPL oreIridium;
     public static BlockPL airBrakeCasing;
-
+    public static BlockPL dryLog;
+    public static BlockPL pad;
+    
+    public static BlockPL hardWood;
+    public static BlockPL opticalGlass;
+    
     public static Block waterHyacinth;
 
     public static void init() {

@@ -55,6 +55,12 @@ public class PLItems implements IFuelHandler {
 	public static Item iridiumPickaxe;
 	public static Item salt;
 	public static Item saltWaterBucket;
+	public static Item woodenHammer;
+	public static Item hammer;
+	public static Item ironCone;
+	public static Item steelCone;
+	
+	
 
 	public static Item ironTreetap;
 	public static Item bronzeTreetap;
@@ -105,18 +111,23 @@ public class PLItems implements IFuelHandler {
 	public static ItemStack millWheel;
 	public static ItemStack rigidPaper;
 	public static ItemStack rigidPaperPack;
-    public static ItemStack advSolarLensUnit;
+	public static ItemStack advSolarLensUnit;
     public static ItemStack advSolarLensGroup;
     public static ItemStack advSolarLensCluster;
-	public static ItemStack tiles;
-	public static ItemStack bioFuel;
+    public static ItemStack tiles;
 	public static ItemStack paperBag;
 	public static ItemStack corrugatedPaper;
 	public static ItemStack woodPulp;
 	public static ItemStack sawdust;
 	public static ItemStack faggot;
-	public static ItemStack firewood;
-	public static ItemStack coarseBatten;
+	public static ItemStack crudeWood;
+	public static ItemStack batten;
+	public static ItemStack chainPiece;
+	public static ItemStack sprocket;
+	public static ItemStack ironChain;
+	public static ItemStack steelChain;
+	public static ItemStack toothedChain;
+	public static ItemStack heatResistantBrick;
 
 	public static void init() {
 //        diamondApple = new ItemDiamondApple();
@@ -175,20 +186,17 @@ public class PLItems implements IFuelHandler {
     }
 
 	@Override
-	public int getBurnTime(ItemStack fuel) {
-		if(fuel.isItemEqual(bioFuel)){
-			return  1000;
-		}
+	public int getBurnTime(ItemStack fuel){ 
 		if(fuel.isItemEqual(sawdust)){
 			return 50;
 		}
 		if(fuel.isItemEqual(faggot)){
 			return  1200;
 		}
-		if(fuel.isItemEqual(firewood)) {
+		if(fuel.isItemEqual(crudeWood)) {
 			return  100;
 		}
-		if(fuel.isItemEqual(coarseBatten)){
+		if(fuel.isItemEqual(batten)){
 			return 100;
 		}
 		if (fuel.isItemEqual(bambooCharcoal)) {

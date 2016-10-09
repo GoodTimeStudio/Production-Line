@@ -29,6 +29,8 @@ tile.productionline.block.AirBrakeCasing.name=气闸外壳
 tile.productionline.block.CSEU.name=CSEU
 tile.productionline.block.ParallelSpaceSU.name=平行空间储电盒
 tile.productionline.block.AdvSolar.name=聚能太阳能
+tile.productionline.block.HardWood.name=硬质木块
+tile.productionline.block.OpticalGlass=光学玻璃
 
 [ITEMS]
 //crushed
@@ -60,6 +62,7 @@ item.productionline.RefinedIronTreetap.name=精炼铁龙头
 item.productionline.AdvancedAlloyTreetap.name=高级合金龙头
 item.productionline.CarbonTreetap.name=碳板龙头
 
+//item
 item.productionline.BambooCharcoal.name=竹炭
 item.productionline.AirBrakeUnit.name=气闸单元
 item.productionline.Salt.name=食盐
@@ -95,8 +98,25 @@ item.productionline.AdvSolarLensUnit.name=聚能镜片单元
 item.productionline.AdvSolarLensGroup.name=聚能镜片组
 item.productionline.AdvSolarLensCluster.name=聚能镜片簇
 item.productionline.CEU.name=CEU
+item.productionline.Tiles.name=瓦片
+item.productionline.PaperBag.name=纸袋
+item.productionline.CorrugatedPaper.name=瓦楞纸
+item.productionline.WoodPulp.name=木浆
+item.productionline.SawDust.name=木屑
+item.productionline.Faggot.name=柴捆
+item.productionline.CrudeWood.name=粗制木条
+item.productionline.Batten.name=板条
+item.productionline.ChainPiece.name=链片
+item.productionline.Sprocket.name=链齿
+item.productionline.IronChain.name=铁质链条
+item.productionline.SteelChain.name=钢质链条
+item.productionline.ToothedChain.name=带齿链条
+item.productionline.HeatResistantBrick.name=耐热砖
+
+//weapon
 item.productionline.GravityRay.name=重力势能
 
+//food
 item.productionline.food.DiamondApple.name=钻石苹果
 
 //record
