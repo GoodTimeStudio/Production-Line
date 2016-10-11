@@ -72,16 +72,6 @@ public class BlockPL extends Block {
         PLConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
     }
 
-    /*
-    @SuppressWarnings("deprecation")
-    @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
-        if (this instanceof IMultiMetaBlock) {
-            return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
-        }
-        return super.getPickBlock(target, world, x, y, z);
-    }*/
-
     /**
      * Called when a user uses the creative pick block button on this block
      *
