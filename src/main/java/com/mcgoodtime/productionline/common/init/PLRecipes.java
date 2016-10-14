@@ -73,8 +73,8 @@ public class PLRecipes {
         		"ABA",
         		"BAB",
         		"ABA",
-        		'A',Blocks.quartz_block,
-        		'B',Blocks.glass
+        		'A',Blocks.QUARTZ_BLOCK,
+        		'B',Blocks.GLASS
         );
         GameRegistry.addRecipe(
         		PLItems.advSolarLensUnit,

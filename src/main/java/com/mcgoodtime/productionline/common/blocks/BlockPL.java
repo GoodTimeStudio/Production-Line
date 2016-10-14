@@ -68,6 +68,7 @@ public class BlockPL extends Block {
         //this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
         this.setCreativeTab(creativeTabGti);
         this.internalName = name;
+        // TODO fix registry with GameRegistry.register();
         GameRegistry.registerBlock(this, this.getItemBlockClass(), name);
         PLConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
     }

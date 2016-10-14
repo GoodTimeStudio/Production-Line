@@ -22,43 +22,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/*
+
 package com.mcgoodtime.productionline.common.tiles;
 
 import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlot;
 import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlotDischarge;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by BestOwl on 2015.10.26.0026.
  *
  * @author BestOwl
- *//*
+ */
 public abstract class TileElectricContainer extends TileContainer implements IEnergySink {
 
     public final int energyTick;
     /** The number of remaining battery */
-    //public double energy;
+    public double energy;
     /** The number of that can storage battery */
-    //public final int maxEnergy;
+    public final int maxEnergy;
     /** Determine the tier of this energy sink */
-    //public int tier;
-/*
+    public int tier;
+
     public TileElectricContainer (int energyTick, int maxEnergy, int sinkTier) {
         this.energyTick = energyTick;
         this.maxEnergy = maxEnergy;
         this.tier = sinkTier;
     }
 
+
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
         if (!this.worldObj.isRemote) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
 
@@ -83,22 +83,14 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        nbt = super.writeToNBT(nbt);
         nbt.setDouble("energy", this.energy);
+        return nbt;
     }
 
-    /**
-     * Determine if this acceptor can accept current from an adjacent emitter in a direction.
-     *
-     * The TileEntity in the emitter parameter is what was originally added to the energy net,
-     * which may be normal in-world TileEntity, a delegate or an IMetaDelegate.
-     *
-     * @param emitter energy emitter, may also be null or an IMetaDelegate
-     * @param direction direction the energy is being received from
-     *//*
     @Override
-    public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
+    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing enumFacing) {
         return true;
     }
 
@@ -108,7 +100,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
      *
      * @note Modifying the energy net from this method is disallowed.
      * @return max accepted input in eu
-     *//*
+     */
     @Override
     public double getDemandedEnergy() {
         return (double) this.maxEnergy - this.energy;
@@ -121,24 +113,14 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
      * @note Modifying the energy net from this method is disallowed.
      * @note Return Integer.MAX_VALUE to allow any voltage.
      * @return tier of this energy sink
-     *//*
+     */
     @Override
     public int getSinkTier() {
         return this.tier;
     }
 
-    /**
-     * Transfer energy to the sink.
-     *
-     * It's highly recommended to accept all energy by letting the internal buffer overflow to
-     * increase the performance and accuracy of the distribution simulation.
-     *
-     * @param directionFrom direction from which the energy comes from
-     * @param amount energy to be transferred
-     * @return Energy not consumed (leftover)
-     *//*
     @Override
-    public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
+    public double injectEnergy(EnumFacing enumFacing, double amount, double voltage) {
         if(this.energy >= (double) this.maxEnergy) {
             return amount;
         } else {
@@ -149,7 +131,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
 
     /**
      * Called when the chunk this TileEntity is on is Unloaded.
-     *//*
+     */
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
@@ -160,7 +142,7 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
 
     /**
      * invalidates a tile entity
-     *//*
+     */
     @Override
     public void invalidate() {
         super.invalidate();
@@ -168,4 +150,4 @@ public abstract class TileElectricContainer extends TileContainer implements IEn
             MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
         }
     }
-}*/
+}

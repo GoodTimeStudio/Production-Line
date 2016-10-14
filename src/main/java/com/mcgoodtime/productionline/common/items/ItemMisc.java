@@ -46,14 +46,14 @@ public class ItemMisc extends ItemMultiDamage {
         PLItems.bambooCharcoal = this.next();
         PLItems.rigidPaper = this.next();
         PLItems.rigidPaperPack = this.next();
-        PLItems.coarseBatten = this.next();
-        PLItems.firewood = this.next();
+//        PLItems.coarseBatten = this.next();
+//        PLItems.firewood = this.next();
         PLItems.faggot = this.next();
         PLItems.sawdust = this.next();
         PLItems.woodPulp = this.next();
         PLItems.corrugatedPaper = this.next();
         PLItems.paperBag = this.next();
-        PLItems.bioFuel = this.next();
+//        PLItems.bioFuel = this.next();
         PLItems.tiles = this.next();
         PLItems.advSolarLensUnit = this.next();
         PLItems.advSolarLensGroup = this.next();
