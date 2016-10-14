@@ -1,4 +1,3 @@
-/*
 package com.mcgoodtime.productionline.common.tiles.tileslots;
 
 import com.mcgoodtime.productionline.common.tiles.TileContainer;
@@ -13,7 +12,7 @@ import net.minecraft.item.ItemStack;
  * Created by BestOwl on 2015.11.28.0028.
  *
  * @author BestOwl
- *//*
+ */
 public class TileSlotCharge extends TileSlot {
 
     public TileSlotCharge(IEnergyTile tile, SlotMode mode) {
@@ -24,7 +23,7 @@ public class TileSlotCharge extends TileSlot {
      * Whether the current item can be inputted.
      *
      * @param itemStack Input item.
-     *//*
+     */
     @SuppressWarnings("NumericOverflow")
     @Override
     public boolean canInput(ItemStack itemStack) {
@@ -44,4 +43,4 @@ public class TileSlotCharge extends TileSlot {
             return itemStack == null ? 0.0D : ElectricItem.manager.charge(itemStack, amount, ((TileElectricContainer) this.tile).tier, false, false);
         }
     }
-}*/
+}
