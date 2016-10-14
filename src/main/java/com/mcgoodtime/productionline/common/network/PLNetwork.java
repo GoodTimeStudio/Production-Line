@@ -26,12 +26,11 @@ package com.mcgoodtime.productionline.common.network;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.network.message.MessageBase;
-//import com.mcgoodtime.productionline.common.network.message.MessageBlockDisplayState;
-//import com.mcgoodtime.productionline.common.network.message.MessageEUStorage;
 import com.mcgoodtime.productionline.common.network.message.MessageBlockDisplayState;
+import com.mcgoodtime.productionline.common.network.message.MessageEUStorage;
 import com.mcgoodtime.productionline.common.network.message.MessageHandlerBase;
 import com.mcgoodtime.productionline.common.tiles.TilePL;
-//import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
+import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -46,8 +45,8 @@ public class PLNetwork {
     public final static SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(ProductionLine.MOD_NAME);
 
     static {
-//        registerMessage(MessageBlockDisplayState.class, Side.CLIENT);
-//        registerMessage(MessageEUStorage.class, Side.SERVER);
+        registerMessage(MessageBlockDisplayState.class, Side.CLIENT);
+        registerMessage(MessageEUStorage.class, Side.SERVER);
     }
 
     @SuppressWarnings("unchecked")
@@ -62,9 +61,9 @@ public class PLNetwork {
                 tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 64));
     }
 
-//    public static void updateTileEUStorage(TileEUStorage tile) {
-//        network.sendToServer(new MessageEUStorage(tile));
-//    }
+    public static void updateTileEUStorage(TileEUStorage tile) {
+        network.sendToServer(new MessageEUStorage(tile));
+    }
 
     public static SimpleNetworkWrapper getNetwork() {
         return network;

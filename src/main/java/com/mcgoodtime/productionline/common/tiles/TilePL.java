@@ -30,6 +30,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,13 +44,13 @@ import javax.annotation.Nullable;
  */
 public class TilePL extends TileEntity {
 
-    public short facing;
+    public EnumFacing facing;
     public boolean active;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        facing = nbt.getShort("facing");
+        facing = EnumFacing.VALUES[nbt.getShort("facing")];
         active = nbt.getBoolean("active");
     }
 
@@ -57,7 +58,7 @@ public class TilePL extends TileEntity {
     @Nonnull
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt = super.writeToNBT(nbt);
-        nbt.setShort("facing", facing);
+        nbt.setShort("facing", (short) facing.ordinal());
         nbt.setBoolean("active", active);
         return nbt;
     }
@@ -67,7 +68,7 @@ public class TilePL extends TileEntity {
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
         NBTTagCompound nbt = pkt.getNbtCompound();
-        this.facing = nbt.getShort("facing");
+        facing = EnumFacing.VALUES[nbt.getShort("facing")];
         this.active = nbt.getBoolean("active");
     }
 
@@ -75,7 +76,7 @@ public class TilePL extends TileEntity {
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound sync = new NBTTagCompound();
-        sync.setShort("facing", this.facing);
+        sync.setShort("facing", (short) facing.ordinal());
         sync.setBoolean("active", this.active);
         return new SPacketUpdateTileEntity(this.pos, 1, sync);
     }
@@ -85,7 +86,7 @@ public class TilePL extends TileEntity {
         PLNetwork.updateBlockDisplayState(this);
     }
 
-    public void setFacing(short facing) {
+    public void setFacing(EnumFacing facing) {
         this.facing = facing;
         PLNetwork.updateBlockDisplayState(this);
     }
