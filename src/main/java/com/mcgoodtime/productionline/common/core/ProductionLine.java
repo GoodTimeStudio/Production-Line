@@ -35,6 +35,10 @@ package com.mcgoodtime.productionline.common.core;
 //import com.mcgoodtime.productionline.common.nei.NEIPLConfig;
 //import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
 
+import com.mcgoodtime.productionline.client.RenderEntityRay;
+import com.mcgoodtime.productionline.client.RenderEntityThrowable;
+import com.mcgoodtime.productionline.common.entity.EntityRay;
+import com.mcgoodtime.productionline.common.entity.EntityThrowable;
 import com.mcgoodtime.productionline.common.entity.PLEntity;
 import com.mcgoodtime.productionline.common.event.PLEvent;
 import com.mcgoodtime.productionline.common.init.PLAchievement;
@@ -44,6 +48,8 @@ import com.mcgoodtime.productionline.common.init.PLOreDictionary;
 import com.mcgoodtime.productionline.common.init.PLRecipes;
 import com.mcgoodtime.productionline.common.potion.PLPotion;
 import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -51,6 +57,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -109,13 +117,11 @@ public final class ProductionLine {
         PLItems.init();
         PLEntity.init();
         PLPotion.initPotion();
-        proxy.init();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         PLOreDictionary.init();
-        PLEntity.init();
         // register Recipes. 注册合成
         PLRecipes.init();
         //register gui handler
@@ -126,6 +132,7 @@ public final class ProductionLine {
         AchievementPage.registerAchievementPage(PLAchievement.pagePL);
         //register ore gen bus. 注册矿石生成总线
         PLWorldGen.init();
+        proxy.init();
     }
 
     private void setupMeta() {
@@ -139,6 +146,7 @@ public final class ProductionLine {
 
     public static class CommonProxy {
         public void init() {
+
         }
 
         public void registerItemRender(Item item) {
@@ -154,8 +162,8 @@ public final class ProductionLine {
         @Override
         public void init() {
 //            ModelLoaderRegistry.registerLoader(new PLItemModelLoader());
-//            RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, new RenderEntityThrowable());
-//            RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, new RenderEntityRay());
+            RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, manager -> new RenderEntityThrowable<>(manager, Minecraft.getMinecraft().getRenderItem()));
+            RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, RenderEntityRay::new);
 //
 //            if (Loader.isModLoaded("NotEnoughItems")) {
 //                new NEIPLConfig().loadConfig();
