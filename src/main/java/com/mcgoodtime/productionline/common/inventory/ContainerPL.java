@@ -31,6 +31,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * Created by BestOwl on 2015.10.31.0031.
@@ -38,7 +39,7 @@ import net.minecraft.item.ItemStack;
  * ProductionLine base container.
  * @author BestOwl
  */
-public abstract class ContainerPL<T extends IInventory> extends Container {
+public abstract class ContainerPL<T extends TileEntity & IInventory> extends Container {
 
     public T tile;
 
