@@ -64,12 +64,11 @@ public class BlockPL extends Block {
 
     public BlockPL(Material material, String name) {
         super(material);
-        this.setUnlocalizedName(MOD_NAME + "." + "block" + "." + name);
+        this.setUnlocalizedName(MOD_ID + ".block." + name);
         //this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
         this.setCreativeTab(creativeTabGti);
         this.internalName = name;
-        // TODO fix registry with GameRegistry.register();
-        GameRegistry.registerBlock(this, this.getItemBlockClass(), name);
+        // TODO register after construction
         PLConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
     }
 

@@ -22,34 +22,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/*
 package com.mcgoodtime.productionline.common.tiles;
 
 import ic2.api.energy.EnergyNet;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergyAcceptor;
 import ic2.api.energy.tile.IEnergySource;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by BestOwl on 2015.10.31.0031.
  *
  * ProductionLine electric generator tile.
- *//*
+ */
 public abstract class TileElectricGenerator extends TileContainer implements IEnergySource {
 
     /** energy output/tick */
-    //public double powerTick;
+    public double powerTick;
     /** The number of remaining battery */
-    //public double energy;
+    public double energy;
     /** The number of that can storage battery */
-    //public final int maxEnergy;
+    public final int maxEnergy;
     /** Determine the tier of this */
-    //public int tier;
-/*
+    public int tier;
+
     public TileElectricGenerator(int tier, int maxEnergy) {
         this.tier = tier;
         this.maxEnergy = maxEnergy;
@@ -57,8 +56,7 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
         if (!this.worldObj.isRemote) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
         }
@@ -71,9 +69,10 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setDouble("energy", this.energy);
+        return nbt;
     }
 
     /**
@@ -81,7 +80,7 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
      * If the source doesn't have a buffer, this is a no-op.
      *
      * @param amount amount of EU to draw, may be negative
-     *//*
+     */
     @Override
     public void drawEnergy(double amount) {
         this.energy -= amount;
@@ -93,7 +92,7 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
      *
      * @note Modifying the energy net from this method is disallowed.
      * @return tier of this energy source
-     *//*
+     */
     @Override
     public int getSourceTier() {
         return this.tier;
@@ -105,30 +104,20 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
      *
      * @note Modifying the energy net from this method is disallowed.
      * @return Energy offered this tick
-     *//*
+     */
     @Override
     public double getOfferedEnergy() {
         return Math.min(this.energy, this.powerTick);
     }
 
-    /**
-     * Determine if this emitter can emit energy to an adjacent receiver.
-     *
-     * The TileEntity in the receiver parameter is what was originally added to the energy net,
-     * which may be normal in-world TileEntity, a delegate or an IMetaDelegate.
-     *
-     * @param receiver receiver, may also be null or an IMetaDelegate
-     * @param direction direction the receiver is from the emitter
-     * @return Whether energy should be emitted
-     *//*
     @Override
-    public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
+    public boolean emitsEnergyTo(IEnergyAcceptor iEnergyAcceptor, EnumFacing enumFacing) {
         return true;
     }
 
     /**
      * Called when the chunk this TileEntity is on is Unloaded.
-     *//*
+     */
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
@@ -139,7 +128,7 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
 
     /**
      * invalidates a tile entity
-     *//*
+     */
     @Override
     public void invalidate() {
         super.invalidate();
@@ -147,4 +136,4 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
             MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
         }
     }
-}*/
+}

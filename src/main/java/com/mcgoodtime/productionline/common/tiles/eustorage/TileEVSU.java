@@ -22,12 +22,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/*
+
 package com.mcgoodtime.productionline.common.tiles.eustorage;
 
 /*
  * Created by suhao on 2015-6-3-0003.
- *//*
+ */
 public class TileEVSU extends TileEUStorage {
 
     public TileEVSU() {
@@ -35,7 +35,7 @@ public class TileEVSU extends TileEUStorage {
     }
 
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "EVSU";
     }
-}*/
+}

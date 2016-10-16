@@ -35,6 +35,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,41 @@ public abstract class TileContainer extends TilePL implements ISidedInventory, I
     @Override
     @Nonnull
     public abstract String getName();
+
+    @Nullable
+    @Override
+    public ItemStack removeStackFromSlot(int index) {
+        if (index < 0 || index >= tileSlots.size()) {
+            return null;
+        }
+        TileSlot slot = tileSlots.get(index);
+        if (slot != null) {
+            ItemStack stack = slot.getStack();
+            slot.putStack(null);
+            return stack;
+        }
+        return null;
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+        tileSlots.forEach(slot -> slot.putStack(null));
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
