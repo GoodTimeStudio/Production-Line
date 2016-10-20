@@ -3,7 +3,7 @@
 
 //gui
 gui.ProductionLine.GenGasKu=GenGasKu
-gui.productionline.FluidKineticGenerator=流体动能发生机
+gui.productionline.FluidKineticGenerator=Fluid Kinetic Generator
 gui.productionline.FluidKineticGenerator.output=Output: %s
 gui.productionline.FluidKineticGenerator.max-output=Max-Output: %s
 gui.productionline.CarbonizeFurnace=CarbonizeFurnace
