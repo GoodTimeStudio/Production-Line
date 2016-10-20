@@ -3,37 +3,121 @@
 
 //gui
 gui.ProductionLine.GenGasKu=GenGasKu
+gui.productionline.FluidKineticGenerator=流体动能发生机
+gui.productionline.FluidKineticGenerator.output=Output: %s
+gui.productionline.FluidKineticGenerator.max-output=Max-Output: %s
+gui.productionline.CarbonizeFurnace=CarbonizeFurnace
+gui.productionline.HeatDryer=HeatDryer
+gui.productionline.EVSU=EVSU
+gui.productionline.CSEU=CSEU
+gui.productionline.ParallelSpaceSU=ParallelSpaceSU
+gui.productionline.AdvSolar=AdvSolar
+gui.productionline.AdvSolar.lens=Lack of AdvSolar
 
-//----Food
-item.DiamondApple.name=Diamond Apple
-
-//----OreItem
-item.CrushedIriridium.name=Crushed Iriridium Ore
-
-item.DustIriridium.name=Iriridium Dust
-
-item.Roller.name=Roller
-
-//----Ingot
-item.IngotIriridium.name=Iriridium Ingot
-item.ThermalInsulationMaterial=Thermal Insulation Material
-
-//----Plate
-item.DiamondPlate.name=Diamond Plate
-item.DenseDiamondPlate.name=Dense Diamond Plate
-item.HeatInsulationBoard.name=Heat Insulation Board
-
-//----Ore
-tile.iridiumore.name=Iridium Ore
 
 //----Block
 tile.CompressedWaterHyacinth.name=Compressed Water Hyacinth
 tile.DehydratedWaterHyacinthBlock.name=Dehydrated Water Hyacinth Block
-tile.BlackSesame.name=Black Sesame
-tile.StickyRice.name=Sticky Rice
-tile.RedBean.name=Red Bean
-tile.Celery.name=Celery
+tile.WaterHyacinth.name=Water Hyacinth
+tile.FluidKineticGenerator.name=Fluid Kinetic Generator
+tile.CarbonizeFurnace.name=Carbonize Furnace
+tile.HeatDryer.name=Heat Dryer
+tile.EVSU.name=EVSU
+tile.AirBrakeCasing.name=Air Brake Casing
+tile.CSEU.name=CSEU
+tile.ParallelSpaceSU.name=Parallel Space SU
+tile.AdvSolar.name=Adv Solar
+tile.HardWood.name=Hard Wood
+tile.OpticalGlass=Optical Glass
 
-//---Item
+//----Item
+item.Salt.name=Salt
+item.SaltWaterBucket.name=Salt Water Bucket
+
 tile.SmallCompressedWaterHyacinth.name=Small Compressed Water Hyacinth
+tile.BambooCharcoal.name=Bamboo Charcoal
+tile.AirBrakeUnit.name=Air Brake Unit
+tile.PackagedSalt.name=PackagedSalt
+tile.CarbonTube.name=Carbon Tub
+tile.Roller.name=Roller
+tile.RedstoneModule.name=Redstone Module
+tile.LazuliModule.name=Lazuli Module
+tile.ObsidianPlateGravityField.name=Obsidian Plate Gravity Field
+tile.ElectronicCircuitControl.name=Electronic Circuit Control
+tile.ElectronicCircuitCore.name=Electronic Circuit Core
+tile.PulseElectronicCircuitControl.name=Pulse Electronic Circuit Control
+tile.PulseElectronicCircuitCore.name=Pulse Electronic CircuitCore
+tile.CyclotronParticleAccelerator.name=Cyclotron Particle Accelerator
+tile.CalculateUnit.name=Calculate Unit
+tile.CalculateChunk.name=Calculate Chunk
+tile.CalculateArray.name=Calculate Array
+tile.FloatPointCalculationsRegion.name=Float Point Calculations Region
+tile.ParallelSpaceConverter.name=Parallel Space Converter
+tile.UUMatterCore.name=UU Matter Core
+tile.ObsidianMechanicalFrame.name=Obsidian Mechanical Frame
+tile.ObsidianMechanicalCasing.name=Obsidian Mechanical Casing
+tile.CarbonCrystal.name=Carbon Crystal
+tile.EnderCalculationCrystal.name=Ender Calculation Crystal
+tile.MillTeeth.name=Mill Teeth
+tile.MillWheel.name=Mill Wheel
+tile.RigidPaper.name=Rigid Paper
+tile.RigidPaperPack.name=Rigid Paper Pack
+tile.ItemDryFood.name=Dry Food
+
+tile.AdvSolarLensUnit.name=Adv Solar LensUnit
+tile.AdvSolarLensGroup.name=Adv Solar Lens Group
+tile.AdvSolarLensCluster.name=Adv Solar Lens Cluster
+tile.CEU.name=CEU
+tile.Tiles.name=Tiles
+tile.PaperBag.name=Paper Bag
+tile.CorrugatedPaper.name=Corrugated Paper
+tile.WoodPulp.name=Wood Pulp
+tile.SawDust.name=Saw Dust
+tile.Faggot.name=Faggot
+tile.CrudeWood.name=Crude Wood
+tile.Batten.name=Batten
+tile.ChainPiece.name=Chain Piece
+tile.Sprocket.name=Sprocket
+tile.IronChain.name=Iron Chain
+tile.SteelChain.name=Steel Chain
+tile.ToothedChain.name=Toothed Chain
+tile.HeatResistantBrick.name=Heat Resistant Brick
+
+//---Food
+item.DiamondApple.name=Diamond Apple
+
+//---Crushed
+item.CrushedIriridium.name=Crushed Iridium Ore
+item.CleanedCrushedIridium.name=Cleaned Crushed Iridium
+
+//---Dust
+tile.DustIriridium.name=Iriridium Dust
+tile.SmallDustIridium.name=Small Iridium Dust
+
+//---Ingot
+tile.IngotIriridium.name=Iridium Ingot
+item.ThermalInsulationMaterial=Thermal Insulation Material
+
+//---Plate
+item.DiamondPlate.name=Diamond Plate
+item.DenseDiamondPlate.name=Dense Diamond Plate
+item.HeatInsulationBoard.name=Heat Insulation Board
+
+//---Ore
+item.iridiumore.name=Iridium Ore
+
+//---Tool
+item.IridiumPickaxe.name=Iridium Pickaxe
+item.IridiumAxe.name=Iridium Axe
+item.IridiumSpade.name=Iridium Spade
+item.IridiumSword.name=Iridium Sword
+item.IronTreetap.name=Iron Treetap
+item.BronzeTreetap.name=Bronze Treetap
+item.LeadTreetap.name=Lead Treetap
+item.RefinedIronTreetap.name=RefinedIron Treetap
+item.AdvancedAlloyTreetap.name=AdvancedAlloy Treetap
+item.CarbonTreetap.name=Carbon Treetap
+
+//---Weapon
+item.GravityRay.name=Gravity Ray
 
