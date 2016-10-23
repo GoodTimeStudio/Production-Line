@@ -1,135 +1,117 @@
-///*
-// * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
-// *
-// * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
-// * Copyright (c) contributors
-// *
-// * Permission is hereby granted, free of charge, to any person obtaining a copy
-// * of this software and associated documentation files (the "Software"), to deal
-// * in the Software without restriction, including without limitation the rights
-// * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// * copies of the Software, and to permit persons to whom the Software is
-// * furnished to do so, subject to the following conditions:
-// *
-// * The above copyright notice and this permission notice shall be included in
-// * all copies or substantial portions of the Software.
-// *
-// * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// * THE SOFTWARE.
-// */
-//package com.mcgoodtime.productionline.common.blocks;
-//
-//import static com.mcgoodtime.productionline.common.core.ProductionLine.creativeTabGti;
-//
-//import com.mcgoodtime.productionline.common.core.ProductionLine;
-//
-//import net.minecraft.block.state.IBlockState;
-//import net.minecraft.util.math.BlockPos;
-//import net.minecraftforge.fml.relauncher.Side;
-//import net.minecraftforge.fml.relauncher.SideOnly;
-//import net.minecraft.block.Block;
-//import net.minecraft.block.BlockBush;
-//import net.minecraft.block.material.Material;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.item.EntityBoat;
-//import net.minecraft.init.Blocks;
-//import net.minecraft.util.AxisAlignedBB;
-//import net.minecraft.world.IBlockAccess;
-//import net.minecraft.world.World;
-//
-//import java.util.List;
-//import java.util.Random;
-//
-///**
-// * Yeah the water hyacinth block... For fun.
-// *
-// * @author liach
-// */
-//public class BlockWaterHyacinth extends BlockBush {
-//
-//    public BlockWaterHyacinth() {
-//        super(Material.PLANTS);
-//        this.setUnlocalizedName("productionline.block.WaterHyacinth");
-//        this.setCreativeTab(creativeTabGti);
-//        //this.setBlockTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + "BlockWaterHyacinth");
-//        this.setHardness(0.0F);
-//        this.setResistance(0.0F);
-//        //this.setStepSound(soundTypeGrass);
-//        this.setTickRandomly(true);
-//        float f = 0.5F;
-//        float f1 = 0.015625F;
-//        //this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
-//    }
-//
-//    @Override
-//    public int getRenderType() {
-//        return 23;
-//    }
-//
-//    @Override
-//    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-//        int changedX = random.nextInt(5) - 3 + x;
-//        int changedZ = random.nextInt(5) - 3 + z;
-//        if ((world.isAirBlock(changedX, y, changedZ)) && (this.canPlaceBlockOn(world.getBlock(changedX, y - 1, changedZ)))) {
-//            world.setBlock(changedX, y, changedZ, this);
-//        }
-//    }
-//
-//    @Override
-//    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-//        int changedX = rand.nextInt(5) - 3 + x;
-//        int changedZ = rand.nextInt(5) - 3 + z;
-//        if ((worldIn.isAirBlock(changedX, y, changedZ)) && (this.canPlaceBlockOn(world.getBlock(changedX, y - 1, changedZ)))) {
-//            worldIn.setBlock(changedX, y, changedZ, this);
-//        }
-//    }
-//
-//    @Override
-//    protected boolean canPlaceBlockOn(IBlockState placedOn) {
-//        return placedOn == Blocks.water;
-//    }
-//
-//    @Override
-//    public boolean canBlockStay(World world, int x, int y, int z) {
-//        return y >= 0 && y < 256 && world.getBlock(x, y - 1, z).getMaterial() == Material.water
-//                && world.getBlockMetadata(x, y - 1, z) == 0;
-//    }
-//
-//    @Override
-//    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-//        return AxisAlignedBB.getBoundingBox((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ,
-//                (double)x + this.maxX, (double)y + this.maxY, (double)z + this.maxZ);
-//    }
-//
-//    @Override
-//    public void addCollisionBoxesToList(World world, int x, int y, int z,
-//                                        AxisAlignedBB alignedBB, List list, Entity entity) {
-//        if (entity == null || !(entity instanceof EntityBoat)) {
-//            super.addCollisionBoxesToList(world, x, y,
-//                    z, alignedBB, list, entity);
-//        }
-//    }
-//
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public int getBlockColor() {
-//        return 2129968;
-//    }
-//
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public int getRenderColor(int p_149741_1_) {
-//        return 2129968;
-//    }
-//
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public int colorMultiplier(IBlockAccess iBlockAccess, int x, int y, int z) {
-//        return 2129968;
-//    }
-//}
+/*
+ * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ *
+ * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
+ * Copyright (c) contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+package com.mcgoodtime.productionline.common.blocks;
+
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
+import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
+
+/**
+ * Yeah the water hyacinth block... For fun.
+ *
+ * @author liach
+ */
+public class BlockWaterHyacinth extends BlockBush {
+
+    private final AxisAlignedBB box = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.09375D, 0.9375D);
+
+    public BlockWaterHyacinth() {
+        super(Material.PLANTS);
+        this.setUnlocalizedName("productionline.block.WaterHyacinth");
+        this.setCreativeTab(creativeTabGti);
+        //this.setBlockTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + "BlockWaterHyacinth");
+        this.setHardness(0.0F);
+        this.setResistance(0.0F);
+        this.setSoundType(SoundType.PLANT);
+        this.setTickRandomly(true);
+    }
+
+    @Override
+    public void randomTick(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
+        int changedX = rand.nextInt(5) - 3 + pos.getX();
+        int changedZ = rand.nextInt(5) - 3 + pos.getZ();
+        BlockPos check = new BlockPos(changedX, pos.getY(), changedZ);
+        if ((world.isAirBlock(check)) && (this.canSustainBush(world.getBlockState(check.down())))) {
+            world.setBlockState(pos, getDefaultState());
+        }
+    }
+
+    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+        if (pos.getY() >= 0 && pos.getY() < 256) {
+            IBlockState iblockstate = worldIn.getBlockState(pos.down());
+            Material material = iblockstate.getMaterial();
+            return material == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 || material == Material.ICE;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    protected boolean canSustainBush(IBlockState state) {
+        return state.getBlock() == Blocks.WATER || state.getMaterial() == Material.ICE;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void addCollisionBoxToList(IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull AxisAlignedBB entityBox, @Nonnull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn) {
+        if (!(entityIn instanceof EntityBoat)) {
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, box);
+        }
+    }
+
+    /**
+     * Called When an Entity Collided with the Block
+     */
+    @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+        super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
+
+        if (entityIn instanceof EntityBoat) {
+            worldIn.destroyBlock(new BlockPos(pos), true);
+        }
+    }
+
+    @Nonnull
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return box;
+    }
+}

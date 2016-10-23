@@ -39,8 +39,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 //import net.minecraft.util.MovingObjectPositionsition;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Level;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
@@ -78,8 +81,9 @@ public class BlockPL extends Block {
      * @param target The full target the player is looking at
      * @param player @return A ItemStack to add to the player's inventory, Null if nothing should be added.
      */
+    @Nonnull
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    public ItemStack getPickBlock(@Nonnull IBlockState state, RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player) {
         if (this instanceof IMultiMetaBlock) {
             Block block = world.getBlockState(pos).getBlock();
             return new ItemStack(this, 1, block.getMetaFromState(world.getBlockState(pos)));
@@ -97,7 +101,8 @@ public class BlockPL extends Block {
      * @return A ArrayList containing all items this block drops
      */
     @Override
-    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    @Nonnull
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
         return super.getDrops(world, pos, state, fortune);
     }
 
@@ -114,8 +119,8 @@ public class BlockPL extends Block {
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(@Nonnull Item item, CreativeTabs creativeTabs, List<ItemStack> list) {
         if (this instanceof IMultiMetaBlock) {
             for(int meta = 0; meta < ((IMultiMetaBlock) this).getMaxMeta(); ++meta) {
                 ItemStack stack = new ItemStack(this, 1, meta);

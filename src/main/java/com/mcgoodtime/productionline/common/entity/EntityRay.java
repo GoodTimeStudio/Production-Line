@@ -5,6 +5,9 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * Created by BestOwl on 2015.12.10.0010.
  *
@@ -25,9 +28,15 @@ public class EntityRay extends EntityArrow {
         this.pickupStatus = PickupStatus.DISALLOWED;
     }
 
+    public EntityRay(World world, EntityLivingBase entity, double damage) {
+        this(world, entity);
+        setDamage(damage);
+    }
+
     @Override
+    @Nonnull
     protected ItemStack getArrowStack() {
-        return null;
+        throw new AssertionError("This should not be called");
     }
 
     /**
