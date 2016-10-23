@@ -25,14 +25,12 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
-import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.resources.I18n;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-//import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -57,6 +55,7 @@ public class ItemPL extends Item {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean bool) {
         int i = 1;
         String unLocal = this.getUnlocalizedName() + ".desc" + i;
@@ -67,11 +66,6 @@ public class ItemPL extends Item {
             unLocal = this.getUnlocalizedName() + ".desc" + i;
         }
     }
-
-//    @Override
-//    public void registerIcons(IIconRegister iconRegister) {
-//        this.itemIcon = iconRegister.registerIcon(ProductionLine.RESOURCE_DOMAIN + ":" + this.getTextureFolder() + this.getIconName());
-//    }
 
     public String getTextureFolder() {
         return "";
