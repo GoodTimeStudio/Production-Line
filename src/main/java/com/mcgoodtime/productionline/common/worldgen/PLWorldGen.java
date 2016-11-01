@@ -26,6 +26,8 @@ package com.mcgoodtime.productionline.common.worldgen;
 
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import ic2.api.item.IC2Items;
+import ic2.core.block.type.ResourceBlock;
+import ic2.core.ref.BlockName;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -66,8 +68,7 @@ public class PLWorldGen implements IWorldGenerator {
 
     public static void init() {
         new PLWorldGen(PLBlocks.oreIridium.getDefaultState(), 1, 16, 3);
-        ItemStack basalt = IC2Items.getItem("resource", "basalt");
-        new PLWorldGen(Block.getBlockFromItem(basalt.getItem()).getStateFromMeta(basalt.getItemDamage()), 5, 27, 10);
+        new PLWorldGen(BlockName.resource.getBlockState(ResourceBlock.basalt), 5, 27, 10);
     }
 
     private void generateOre(World world, Random rand, int chunkX, int chunkZ) {

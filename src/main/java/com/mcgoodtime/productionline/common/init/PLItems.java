@@ -82,6 +82,7 @@ public class PLItems implements IFuelHandler {
 	public static ItemStack denseDiamondPlate;
 	public static ItemStack diamondPlate;
 
+	public static ItemStack yourHouseBombed;
 	public static ItemStack heatInsulationPlate;
 	public static ItemStack roller;
 	public static ItemStack heatInsulationMaterial;

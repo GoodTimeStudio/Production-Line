@@ -25,12 +25,14 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.blocks.IMultiMetaBlock;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by BestOwl on 2015.11.22.0022.
@@ -48,9 +50,10 @@ public class ItemBlockPL extends ItemBlock {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public String getItemStackDisplayName(ItemStack itemStack) {
+    @Nonnull
+    public String getItemStackDisplayName(@Nonnull ItemStack itemStack) {
         if (this.block instanceof IMultiMetaBlock) {
-            return I18n.translateToLocal(((IMultiMetaBlock) block).getBlockName(itemStack) + ".name");
+            return I18n.format(((IMultiMetaBlock) block).getBlockName(itemStack) + ".name");
         }
         return super.getItemStackDisplayName(itemStack);
     }

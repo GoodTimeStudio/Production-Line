@@ -9,6 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 //import net.minecraft.util.IIcon;
 
 import java.util.List;
@@ -109,6 +111,7 @@ public abstract class ItemMultiDamage extends ItemPL {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean bool) {
         int i = 1;
         String unLocal = this.getUnlocalizedName(itemStack) + ".desc" + i;

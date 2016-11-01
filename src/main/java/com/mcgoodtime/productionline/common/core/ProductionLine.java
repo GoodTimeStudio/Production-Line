@@ -37,6 +37,7 @@ package com.mcgoodtime.productionline.common.core;
 
 import com.mcgoodtime.productionline.client.RenderEntityRay;
 import com.mcgoodtime.productionline.client.RenderEntityThrowable;
+import com.mcgoodtime.productionline.common.blocks.fluid.Gas;
 import com.mcgoodtime.productionline.common.entity.EntityRay;
 import com.mcgoodtime.productionline.common.entity.EntityThrowable;
 import com.mcgoodtime.productionline.common.entity.PLEntity;
@@ -112,7 +113,7 @@ public final class ProductionLine {
         PLConfig.init(event.getSuggestedConfigurationFile());
         //register Blocks. 注册方块
         PLBlocks.init();
-//        FluidRegistry.registerFluid(Gas.gasNatural);
+        FluidRegistry.registerFluid(Gas.gasNatural);
         //register Items. 注册物品
         PLItems.init();
         PLEntity.init();
