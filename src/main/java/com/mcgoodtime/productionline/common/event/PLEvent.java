@@ -74,7 +74,7 @@ public class PLEvent {
     @SubscribeEvent
     public void onBucketFill(FillBucketEvent event) {
         if (event.getEntityPlayer() != null) {
-            Biome biome = event.getWorld().getBiome(event.getTarget().getBlockPos());
+            Biome biome = event.getWorld().getBiomeForCoordsBody(event.getTarget().getBlockPos());
             if (biome == Biomes.OCEAN || biome == Biomes.DEEP_OCEAN || biome == Biomes.FROZEN_OCEAN) {
                 event.setResult(Event.Result.ALLOW);
                 event.setFilledBucket(new ItemStack(PLItems.saltWaterBucket));
