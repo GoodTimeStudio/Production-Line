@@ -27,9 +27,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 minecraft {
-    version = "1.10.2-12.18.1.2094"
+    version = "1.10.2-12.18.3.2185"
     runDir = "run"
-    mappings = "snapshot_20161004"
+    mappings = "snapshot_20161111"
 }
 
 repositories {
@@ -51,7 +51,7 @@ dependencies {
     compile ('org.spongepowered:mixin:0.5.+') {
         exclude module: 'launchwrapper'
     }
-    compile 'net.industrial-craft:industrialcraft-2:2.6.83-ex110:dev' //adds ic2 to the dev env
+    compile 'net.industrial-craft:industrialcraft-2:2.6.130-ex110:dev' //adds ic2 to the dev env
 	compile 'mezz.jei:jei_1.10.2:3.12.2.290'
 }
 
