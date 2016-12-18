@@ -27,12 +27,17 @@ package com.mcgoodtime.productionline.common.init;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.core.PLConfig;
 //import coreom.mcgoodtime.productionline.common.entity.EntityThrowable;
+import com.mcgoodtime.productionline.common.entity.EntityThrowable;
 import com.mcgoodtime.productionline.common.items.*;
+import com.mcgoodtime.productionline.common.items.tools.ItemGravityRay;
 import com.mcgoodtime.productionline.common.items.tools.ItemPLTreetap;
 import com.mcgoodtime.productionline.common.items.tools.PLToolMaterial;
 //import com.mcgoodtime.productionline.common.items.tools.ItemGravityRay;
 //import com.mcgoodtime.productionline.common.items.tools.ItemPLTreetap;
 //import com.mcgoodtime.productionline.common.items.tools.ToolPL;
+import com.mcgoodtime.productionline.common.items.tools.ToolPL;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,6 +46,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
 
 /**
  * The list of all those items in GoodTime-Industrial.
@@ -59,8 +66,6 @@ public class PLItems implements IFuelHandler {
 	public static Item hammer;
 	public static Item ironCone;
 	public static Item steelCone;
-	
-	
 
 	public static Item ironTreetap;
 	public static Item bronzeTreetap;
@@ -73,6 +78,9 @@ public class PLItems implements IFuelHandler {
 	public static Item gravityRay;
 
 	public static Item record_MusicSpring;
+
+	public static Item itemCrafting;
+	public static Item itemOre;
 	//--------------------------------------
 	public static ItemStack crushedIridium;
 	public static ItemStack cleanedCrushedIridium;
@@ -131,58 +139,59 @@ public class PLItems implements IFuelHandler {
 	public static ItemStack heatResistantBrick;
 
 	public static void init() {
-//        diamondApple = new ItemDiamondApple();
+        diamondApple = new ItemDiamondApple();
 
-		ironTreetap = new ItemPLTreetap("treetap.iron", 32);
-		bronzeTreetap = new ItemPLTreetap("treetap.bronze", 32);
-		leadTreetap = new ItemPLTreetap("treetap.lead", 48);
-		refinedIronTreetap = new ItemPLTreetap("treetap.steel", 64);
-		advancedAlloyTreetap = new ItemPLTreetap("treetap.iron", 64);
-		carbonTreetap = new ItemPLTreetap("treetap.iron", 128);
+		ironTreetap = new ItemPLTreetap("treetap_iron", 32);
+		bronzeTreetap = new ItemPLTreetap("treetap_bronze", 32);
+		leadTreetap = new ItemPLTreetap("treetap_lead", 48);
+		refinedIronTreetap = new ItemPLTreetap("treetap_steel", 64);
+		advancedAlloyTreetap = new ItemPLTreetap("treetap_alloy", 64);
+		carbonTreetap = new ItemPLTreetap("treetap_carbon", 128);
 
-//        record_MusicSpring = new ItemPLRecord("record_MusicSpring");
-//		salt = new ItemPLFood("Salt", 0, 10F, true);
-//        ceu = new ItemCEU();
-//		gravityRay = new ItemGravityRay();
+        record_MusicSpring = new ItemPLRecord("record_musicspring", PLSounds.recordMusicSpring);
+		salt = new ItemPLFood("salt", 0, 10F, true);
+        ceu = new ItemCEU();
+		gravityRay = new ItemGravityRay();
 
 		//MultiMetaItem registry
-		new ItemOre();
-		new ItemMisc();
+		itemOre = new ItemOre();
+		itemCrafting = new ItemCrafting();
+
 //		new ItemDryFood();
 
         // special registry TODO: Better registry system
 
-//		packagedSalt = new ItemPL("PackagedSalt") {
-//			/**
-//			 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-//			 */
-//			@Override
-//			public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-//				if (PLConfig.instance.throwableUran238) {
-//					if (!entityPlayer.capabilities.isCreativeMode) {
-//						--itemStack.stackSize;
-//					}
-//					world.playSoundAtEntity(entityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-//					if (!world.isRemote) {
-//						world.spawnEntityInWorld(new EntityThrowable(world, entityPlayer, itemStack));
-//					}
-//				}
-//
-//				return itemStack;
-//			}
-//		};
+		packagedSalt = new ItemPL("packaged_salt") {
+			/**
+			 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+			 */
+			@Override
+			public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
+				if (PLConfig.instance.throwablePackagedSalt) {
+					if (!player.capabilities.isCreativeMode) {
+						--itemStack.stackSize;
+					}
+					world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+					if (!world.isRemote) {
+						world.spawnEntityInWorld(new EntityThrowable(world, player, itemStack));
+					}
+				}
 
-//		saltWaterBucket = new ItemBucket(Blocks.water);
-//		saltWaterBucket.setCreativeTab(ProductionLine.creativeTabGti)
-//				.setUnlocalizedName(ProductionLine.MOD_NAME + ".SaltWaterBucket").setTextureName(ProductionLine.RESOURCE_DOMAIN + ":itemSaltWaterBucket");
-//
-//        iridiumPickaxe = ToolPL.registerPickaxe(PLToolMaterial.iridium, "IridiumPickaxe");
-//        iridiumAxe = ToolPL.registerAxe(PLToolMaterial.iridium, "IridiumAxe");
-//        iridiumSpade = ToolPL.registerSpade(PLToolMaterial.iridium, "IridiumSpade");
-//        iridiumSword = ToolPL.registerSword(PLToolMaterial.iridium, "IridiumSword");
+				return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
+			}
+		};
+
+		saltWaterBucket = new ItemBucket(Blocks.WATER);
+		saltWaterBucket.setCreativeTab(ProductionLine.creativeTabGti)
+				.setUnlocalizedName(MOD_ID + ".saltwater_bucket");
+
+//        iridiumPickaxe = ToolPL.registerPickaxe(PLToolMaterial.iridium, "iridium_pickaxe");
+//        iridiumAxe = ToolPL.registerAxe(PLToolMaterial.iridium, "iridium_axe");
+//        iridiumSpade = ToolPL.registerSpade(PLToolMaterial.iridium, "iridium_spade");
+//        iridiumSword = ToolPL.registerSword(PLToolMaterial.iridium, "iridium_sword");
 //
 //        // TODO: Better registry system
-//		GameRegistry.registerItem(saltWaterBucket, "SaltWaterBucket");
+		GameRegistry.<Item>register(saltWaterBucket, new ResourceLocation(MOD_ID, "saltwater_bucket"));
 //        GameRegistry.registerFuelHandler(new PLItems());
     }
 

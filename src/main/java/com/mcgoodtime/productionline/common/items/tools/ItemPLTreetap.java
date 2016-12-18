@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.productionline.common.items.tools;
 
+import com.mcgoodtime.productionline.client.IItemModelProvider;
 import com.mcgoodtime.productionline.common.items.ItemPL;
 import ic2.api.item.IBoxable;
 import ic2.core.IC2;
@@ -49,7 +50,7 @@ import java.util.List;
 /*
  * Created by suhao on 2015-6-4-0004.
  */
-public class ItemPLTreetap extends ItemPL implements IBoxable {
+public class ItemPLTreetap extends ItemPL implements IBoxable, IItemModelProvider {
 
     public ItemPLTreetap(String name, int damage) {
         super(name);
@@ -143,8 +144,17 @@ public class ItemPLTreetap extends ItemPL implements IBoxable {
     }
 
     @Override
-    public String getTextureFolder() {
-        return "tools/";
+    public String getModelResourcePath() {
+        return "tool/treetap";
     }
 
+    /**
+     * Get custom resource name.
+     * To use default resource name, return null.
+     *
+     */
+    @Override
+    public String getModelResourceName(int meta) {
+        return null;
+    }
 }

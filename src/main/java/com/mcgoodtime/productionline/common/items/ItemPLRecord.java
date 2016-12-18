@@ -25,6 +25,7 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
+import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -37,6 +38,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
 
+import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
 import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_NAME;
 import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
 
@@ -52,21 +54,20 @@ public class ItemPLRecord extends ItemRecord {
         super(name, soundEvent);
         this.name = name;
         this.setCreativeTab(ProductionLine.creativeTabGti);
-        this.setUnlocalizedName(MOD_NAME + "." + name);
-//        this.setTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + name);
-//        GameRegistry.registerItem(this, name, MOD_NAME);
+        this.setUnlocalizedName(MOD_ID + "." + name);
+        GameRegistry.<Item>register(this, new ResourceLocation(MOD_ID, name));
     }
 
     @Override
     public String getRecordNameLocal() {
         return net.minecraft.util.text.translation.I18n.translateToLocal(this.getUnlocalizedName() + ".desc");
     }
-
+/*
     @Override
     public ResourceLocation getRecordResource(String name) {
         return new ResourceLocation(ProductionLine.RESOURCE_DOMAIN + ":" + this.name);
     }
-
+*/
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List tooltipList, boolean boo) {

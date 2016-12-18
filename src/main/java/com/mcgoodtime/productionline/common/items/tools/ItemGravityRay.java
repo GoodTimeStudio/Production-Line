@@ -1,5 +1,6 @@
 package com.mcgoodtime.productionline.common.items.tools;
 
+import com.mcgoodtime.productionline.client.IItemModelProvider;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.entity.EntityRay;
 import com.mcgoodtime.productionline.common.items.ItemElectricPL;
@@ -22,10 +23,10 @@ import javax.annotation.Nonnull;
  *
  * @author BestOwl
  */
-public class ItemGravityRay extends ItemElectricPL {
+public class ItemGravityRay extends ItemElectricPL implements IItemModelProvider {
 
     public ItemGravityRay() {
-        super("GravityRay", 3, (int) 11E6);
+        super("gravity_ray", 3, (int) 11E6);
     }
 
     /**
@@ -87,4 +88,18 @@ public class ItemGravityRay extends ItemElectricPL {
         return 72000;
     }
 
+    @Override
+    public String getModelResourcePath() {
+        return "tool";
+    }
+
+    /**
+     * Get custom resource name.
+     * To use default resource name, return null.
+     *
+     */
+    @Override
+    public String getModelResourceName(int meta) {
+        return null;
+    }
 }

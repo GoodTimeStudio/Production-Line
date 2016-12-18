@@ -26,10 +26,13 @@
 package com.mcgoodtime.productionline.client;
 
 import com.mcgoodtime.productionline.common.init.PLItems;
+import com.mcgoodtime.productionline.common.items.ItemMulti;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+
+import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
 
 /**
  * Created by BestOwl on 2016/11/5.
@@ -47,21 +50,54 @@ public class PLModelRegistry {
     }
 
     public static void registerItemModel(Item item) {
-        registerItemModel(item, getItemModelResLoc(item));
+        registerItemModel(item, getItemModelResLoc(item, 0));
     }
 
     public static void registerItemModel(Item item, int metadata) {
-        registerItemModel(item, metadata, getItemModelResLoc(item));
+        registerItemModel(item, metadata, getItemModelResLoc(item, metadata));
     }
 
-    public static ModelResourceLocation getItemModelResLoc(Item item) {
-        ResourceLocation tmp = item.getRegistryName();
-        ResourceLocation ret = new ResourceLocation(tmp.getResourceDomain(), tmp.getResourcePath().replace('.', '/'));
+    public static ModelResourceLocation getItemModelResLoc(Item item, int meta) {
+        String name = item.getRegistryName().getResourcePath();
+        String path = "";
+        if (item instanceof IItemModelProvider) {
+            path = ((IItemModelProvider) item).getModelResourcePath() + "/";
+
+            String custom = ((IItemModelProvider) item).getModelResourceName(meta);
+            if (custom != null) {
+                name = custom;
+            }
+        }
+        ResourceLocation ret = new ResourceLocation(RESOURCE_DOMAIN, path + name);
         return new ModelResourceLocation(ret, "normal");
     }
 
     static {
         registerItemModel(PLItems.diamondApple, 0);
         registerItemModel(PLItems.diamondApple, 1);
+        registerItemModel(PLItems.ironTreetap);
+        registerItemModel(PLItems.bronzeTreetap);
+        registerItemModel(PLItems.leadTreetap);
+        registerItemModel(PLItems.refinedIronTreetap);
+        registerItemModel(PLItems.advancedAlloyTreetap);
+        registerItemModel(PLItems.carbonTreetap);
+        registerItemModel(PLItems.record_MusicSpring);
+        registerItemModel(PLItems.salt);
+        registerItemModel(PLItems.ceu);
+        registerItemModel(PLItems.gravityRay);
+        registerItemModel(PLItems.packagedSalt);
+        registerItemModel(PLItems.saltWaterBucket);
+
+        if (PLItems.itemCrafting instanceof ItemMulti) {
+            for (int i = 0; i < ((ItemMulti) PLItems.itemCrafting).getInternalNameSize(); i++) {
+                registerItemModel(PLItems.itemCrafting, i);
+            }
+        }
+
+        if (PLItems.itemOre instanceof ItemMulti) {
+            for (int i = 0; i < ((ItemMulti) PLItems.itemOre).getInternalNameSize(); i++) {
+                registerItemModel(PLItems.itemOre, i);
+            }
+        }
     }
 }

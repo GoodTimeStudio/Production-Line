@@ -31,6 +31,7 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
@@ -62,7 +63,7 @@ public class ToolPL {
         item.setUnlocalizedName(MOD_NAME + "." + name);
 //        item.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
         item.setCreativeTab(creativeTabGti);
-//        GameRegistry.registerItem(item, name, MOD_NAME);
+        GameRegistry.<Item>register(item, new ResourceLocation(MOD_ID, name));
     }
 
     private static class Pickaxe extends ItemPickaxe {

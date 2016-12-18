@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.productionline.common.items;
 
+import com.mcgoodtime.productionline.client.IItemModelProvider;
 import com.mcgoodtime.productionline.common.init.PLItems;
 import com.mcgoodtime.productionline.common.potion.PLPotion;
 import net.minecraft.entity.Entity;
@@ -44,7 +45,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-public class ItemPLFood extends ItemPL {
+public class ItemPLFood extends ItemPL implements IItemModelProvider {
 
     private int timer;
     private Map<EntityPlayer, EatAmount> amountMap = new WeakHashMap<>();
@@ -138,11 +139,6 @@ public class ItemPLFood extends ItemPL {
         return stack;
     }
 
-    @Override
-    public String getTextureFolder() {
-        return "food/";
-    }
-
     /**
      * How long it takes to use or consume an item
      */
@@ -158,6 +154,21 @@ public class ItemPLFood extends ItemPL {
     @Nonnull
     public EnumAction getItemUseAction(ItemStack itemStack) {
         return EnumAction.EAT;
+    }
+
+    @Override
+    public String getModelResourcePath() {
+        return "food";
+    }
+
+    /**
+     * Get custom resource name.
+     * To use default resource name, return null.
+     *
+     */
+    @Override
+    public String getModelResourceName(int meta) {
+        return null;
     }
 
     static class EatAmount {

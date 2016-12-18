@@ -1,6 +1,0 @@
-{
-    "parent": "productionline:item/default",
-    "textures": {
-        "layer0": "productionline:items/itemDiamondPlate"
-    }
-}

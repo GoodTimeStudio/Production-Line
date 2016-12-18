@@ -35,6 +35,7 @@ package com.mcgoodtime.productionline.common.core;
 //import com.mcgoodtime.productionline.common.nei.NEIPLConfig;
 //import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
 
+import com.mcgoodtime.productionline.client.PLModelRegistry;
 import com.mcgoodtime.productionline.client.RenderEntityRay;
 import com.mcgoodtime.productionline.client.RenderEntityThrowable;
 import com.mcgoodtime.productionline.common.blocks.fluid.Gas;
@@ -118,13 +119,14 @@ public final class ProductionLine {
         PLItems.init();
         PLEntity.init();
         PLPotion.initPotion();
+        new PLModelRegistry();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         PLOreDictionary.init();
         // register Recipes. 注册合成
-        PLRecipes.init();
+//        PLRecipes.init();
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
         //register achievement
@@ -166,6 +168,7 @@ public final class ProductionLine {
             RenderingRegistry.registerEntityRenderingHandler(EntityThrowable.class, manager -> new RenderEntityThrowable<>(manager, Minecraft.getMinecraft().getRenderItem()));
             RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, RenderEntityRay::new);
 //
+            //new PLModelRegistry();
 //            if (Loader.isModLoaded("NotEnoughItems")) {
 //                new NEIPLConfig().loadConfig();
 //            }

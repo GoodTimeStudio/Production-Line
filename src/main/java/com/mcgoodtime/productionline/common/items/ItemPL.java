@@ -24,17 +24,19 @@
  */
 package com.mcgoodtime.productionline.common.items;
 
-import com.mcgoodtime.productionline.common.core.ProductionLine;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
+import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
+import static com.mcgoodtime.productionline.common.core.ProductionLine.creativeTabGti;
 
 /**
  * Created by liach on 5/22/2015.
@@ -47,11 +49,9 @@ public class ItemPL extends Item {
 
     public ItemPL(String name) {
         this.setUnlocalizedName(MOD_ID + "." + name);
-        this.setRegistryName(ProductionLine.loc(name));
-//        this.setTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + "item" + name);
-
         this.itemName = name;
         this.setCreativeTab(creativeTabGti);
+        GameRegistry.<Item>register(this, new ResourceLocation(MOD_ID, name));
     }
 
     @Override
@@ -65,13 +65,5 @@ public class ItemPL extends Item {
             i++;
             unLocal = this.getUnlocalizedName() + ".desc" + i;
         }
-    }
-
-    public String getTextureFolder() {
-        return "";
-    }
-
-    public String getIconName() {
-        return "item" + itemName;
     }
 }

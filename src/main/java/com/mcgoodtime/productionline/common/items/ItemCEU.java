@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 public class ItemCEU extends ItemElectricPL implements IBoxable {
 
     public ItemCEU() {
-        super("CEU", 1, 20000);
+        super("ceu", 1, 20000);
     }
 
     @Override

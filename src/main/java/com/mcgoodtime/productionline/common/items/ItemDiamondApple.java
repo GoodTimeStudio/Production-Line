@@ -1,6 +1,8 @@
 package com.mcgoodtime.productionline.common.items;
 
+import com.mcgoodtime.productionline.client.IItemModelProvider;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +12,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -22,16 +27,15 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public class ItemDiamondApple extends ItemFood {
+public class ItemDiamondApple extends ItemFood implements IItemModelProvider {
 
     public ItemDiamondApple() {
         super(1000, 10F, false);
-        this.setUnlocalizedName(ProductionLine.MOD_NAME + ".food.DiamondApple");
+        this.setUnlocalizedName(ProductionLine.MOD_ID + ".diamond_apple");
         this.setCreativeTab(ProductionLine.creativeTabGti);
-//        this.setTextureName(ProductionLine.MOD_NAME + ":itemDiamondApple");
         this.setHasSubtypes(true);
         this.setAlwaysEdible();
-//        GameRegistry.registerItem(this, "DiamondApple");
+        GameRegistry.<Item>register(this, new ResourceLocation(ProductionLine.MOD_ID, "diamond_apple"));
     }
 
     @Override
@@ -74,5 +78,20 @@ public class ItemDiamondApple extends ItemFood {
     @Override
     public boolean hasEffect(ItemStack itemStack) {
         return itemStack.getItemDamage() >= 1;
+    }
+
+    @Override
+    public String getModelResourcePath() {
+        return "food";
+    }
+
+    /**
+     * Get custom resource name.
+     * To use default resource name, return null.
+     *
+     */
+    @Override
+    public String getModelResourceName(int meta) {
+        return null;
     }
 }

@@ -1,10 +1,6 @@
 package com.mcgoodtime.productionline.common.items;
 
-import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.init.PLItems;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +10,11 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public class ItemOre extends ItemMultiDamage {
+public class ItemOre extends ItemMulti {
 
     public ItemOre() {
-        super("ItemOre");
-//        ModelLoader.setCustomModelResourceLocation(this, 1, new ModelResourceLocation(ProductionLine.RESOURCE_DOMAIN + ":" + this.getInternalName(1), null));
-//        for (int i = 0; i < this.getMaxDamage(); i++) {
-//            ModelLoader.setCustomModelResourceLocation(this, i, new ModelResourceLocation(ProductionLine.RESOURCE_DOMAIN + ":" + "ItemOre", null));
-//        }
-//        PLItemModelLoader.instance.register();
+        super("ore");
+
         PLItems.ingotIridium = this.next();
         PLItems.diamondPlate = this.next();
         PLItems.denseDiamondPlate = this.next();
@@ -35,13 +27,18 @@ public class ItemOre extends ItemMultiDamage {
     @Override
     protected List<String> getInternalNameList() {
         List<String> list = new ArrayList<String>();
-        list.add("IngotIridium");
-        list.add("DiamondPlate");
-        list.add("DenseDiamondPlate");
-        list.add("CrushedIridium");
-        list.add("CleanedCrushedIridium");
-        list.add("DustIridium");
-        list.add("SmallDustIridium");
+        list.add("ingot_iridium");
+        list.add("diamond_plate");
+        list.add("dense_diamond_plate");
+        list.add("crushed_iridium");
+        list.add("cleaned_crushed_iridium");
+        list.add("dust_iridium");
+        list.add("small_dust_iridium");
         return list;
+    }
+
+    @Override
+    public String getModelResourcePath() {
+        return "ore";
     }
 }
