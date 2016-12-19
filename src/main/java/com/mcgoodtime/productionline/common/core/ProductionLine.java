@@ -43,11 +43,7 @@ import com.mcgoodtime.productionline.common.entity.EntityRay;
 import com.mcgoodtime.productionline.common.entity.EntityThrowable;
 import com.mcgoodtime.productionline.common.entity.PLEntity;
 import com.mcgoodtime.productionline.common.event.PLEvent;
-import com.mcgoodtime.productionline.common.init.PLAchievement;
-import com.mcgoodtime.productionline.common.init.PLBlocks;
-import com.mcgoodtime.productionline.common.init.PLItems;
-import com.mcgoodtime.productionline.common.init.PLOreDictionary;
-import com.mcgoodtime.productionline.common.init.PLRecipes;
+import com.mcgoodtime.productionline.common.init.*;
 import com.mcgoodtime.productionline.common.potion.PLPotion;
 import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
 import net.minecraft.client.Minecraft;
@@ -112,6 +108,7 @@ public final class ProductionLine {
     public void preInit(FMLPreInitializationEvent event) {
         setupMeta();
         PLConfig.init(event.getSuggestedConfigurationFile());
+        PLSounds.init();
         //register Blocks. 注册方块
         PLBlocks.init();
         FluidRegistry.registerFluid(Gas.gasNatural);

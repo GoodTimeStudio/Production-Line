@@ -120,10 +120,8 @@ item.productionline.GravityRay.name=重力势能
 item.productionline.food.DiamondApple.name=钻石苹果
 
 //record
-item.productionline.record_TheSaltwaterRoom.name=TheSaltwaterRoom
-item.productionline.record_TheSaltwaterRoom.desc=TheSaltwaterRoom -- Owl City
-item.productionline.record_MusicSpring.name=MusicSpring
-item.productionline.record_MusicSpring.desc=MusicSpring -- Seedking
+item.productionline.record_musicspring.name=MusicSpring
+item.productionline.record_musicspring.desc=MusicSpring -- Seedking
 
 [entity]
 entity.productionline.Throwable.name=可投掷实体
@@ -138,8 +136,8 @@ achievement.getIrOre.desc=挖到一个铱矿石
 [tooltip]
 productionline.tooltip.CarbonizeFurnace=缺氧燃烧，燃烧能力有限
 
-item.productionline.record_MusicSpring.desc1=乐泉
-item.productionline.record_MusicSpring.desc2=Seedking
+item.productionline.record_musicspring.desc1=乐泉
+item.productionline.record_musicspring.desc2=Seedking
 
 item.productionline.SmallCompressedWaterHyacinth.desc1=不敢想象如此小块居然融合了八棵水葫芦的精华
 item.productionline.HeatInsulationMaterial.desc1=这货的唯一用处就是制作隔热板
