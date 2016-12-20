@@ -1,14 +1,16 @@
 package com.mcgoodtime.productionline.common.items;
 
+import com.mcgoodtime.productionline.client.IItemModelProvider;
 import ic2.api.item.IBoxable;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Created by BestOwl on 2015.12.6.0006.
  *
  * @author BestOwl
  */
-public class ItemCEU extends ItemElectricPL implements IBoxable {
+public class ItemCEU extends ItemElectricPL implements IBoxable, IItemModelProvider {
 
     public ItemCEU() {
         super("ceu", 1, 20000);
@@ -28,5 +30,19 @@ public class ItemCEU extends ItemElectricPL implements IBoxable {
     @Override
     public boolean canBeStoredInToolbox(ItemStack itemstack) {
         return true;
+    }
+
+    @Override
+    public String getModelResourcePath() {
+        return "eustorage";
+    }
+
+    /**
+     * Get custom resource name.
+     * To use default resource name, return null.
+     */
+    @Override
+    public String getModelResourceName(int meta) {
+        return null;
     }
 }

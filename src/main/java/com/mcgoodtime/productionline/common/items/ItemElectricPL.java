@@ -4,11 +4,16 @@ import ic2.api.energy.EnergyNet;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -30,18 +35,43 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
         this.tier = tier;
         this.maxEnergy = maxEnergy;
         this.maxPowerTick = (int) EnergyNet.instance.getPowerFromTier(tier);
+        this.addPropertyOverrides();
+    }
+
+    protected void addPropertyOverrides() {
+        this.addPropertyOverride(new ResourceLocation("energy"), new IItemPropertyGetter() {
+            @Override
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+                int meta = stack.getMetadata();
+                if (meta < 3) {
+                    return 0;
+                }
+                else if (meta < 10) {
+                    return 1;
+                }
+                else if (meta < 17) {
+                    return 2;
+                }
+                else if (meta < 24) {
+                    return 3;
+                }
+                else {
+                    return 4;
+                }
+            }
+        });
     }
 
     @SuppressWarnings({"NumericOverflow", "unchecked"})
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
+        ItemStack itemStack = new ItemStack(this, 1);
+        ElectricItem.manager.charge(itemStack, 0.0D, Integer.MAX_VALUE, true, false);
+        itemList.add(itemStack);
+
         ItemStack charged = new ItemStack(this, 1);
         ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, Integer.MAX_VALUE, true, false);
-        itemList.add(charged);
-
-        ItemStack itemStack = new ItemStack(this, 1);
-        ElectricItem.manager.charge(charged, 0.0D, Integer.MAX_VALUE, true, false);
         itemList.add(charged);
     }
 
@@ -85,4 +115,5 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
     public double getTransferLimit(ItemStack itemStack) {
         return this.maxPowerTick;
     }
+
 }
