@@ -25,30 +25,28 @@
 package com.mcgoodtime.productionline.common.event;
 
 import com.google.common.base.Optional;
-import com.mcgoodtime.productionline.common.potion.PLPotion;
-import com.mcgoodtime.productionline.common.entity.EntityThrowable;
+import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import com.mcgoodtime.productionline.common.init.PLAchievement;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.init.PLItems;
+import com.mcgoodtime.productionline.common.potion.PLPotion;
 import ic2.api.item.IC2Items;
-import net.minecraft.client.renderer.BlockModelRenderer;
-import net.minecraft.init.Biomes;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import ic2.core.IC2Potion;
-import ic2.core.Ic2Items;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Biomes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 /**
  * Production Line event listener.
@@ -84,7 +82,7 @@ public class PLEvent {
 
     @SubscribeEvent
     public void onEntityThrowableImpact(EntityThrowableImpactEvent event) {
-        Optional<ItemStack> optItemStack = event.entityThrowable.getThrowItem();
+        Optional<ItemStack> optItemStack = event.entityThrownItem.getThrowItem();
         if (!optItemStack.isPresent()) {
             return;
         }
@@ -95,28 +93,28 @@ public class PLEvent {
                 float f1mod = (float) (0.5 - (Math.random() * 1.0));
                 float f2mod = (float) (1.2 - (Math.random() * 2.4));
 
-                event.entityThrowable.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK,
-                        event.entityThrowable.posX + fmod, event.entityThrowable.posY + f1mod,
-                        event.entityThrowable.posZ + f2mod, 0.1D, 0.1D, 0.1D, Item.getIdFromItem(PLItems.salt));
+                event.entityThrownItem.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK,
+                        event.entityThrownItem.posX + fmod, event.entityThrownItem.posY + f1mod,
+                        event.entityThrownItem.posZ + f2mod, 0.1D, 0.1D, 0.1D, Item.getIdFromItem(PLItems.salt));
 
-                if (!event.entityThrowable.worldObj.isRemote) {
-                    EntityItem entityItem = new EntityItem(event.entityThrowable.worldObj,
-                            event.entityThrowable.posX + fmod, event.entityThrowable.posY + f1mod,
-                            event.entityThrowable.posZ + f2mod, new ItemStack(PLItems.salt));
-                    event.entityThrowable.worldObj.spawnEntityInWorld(entityItem);
+                if (!event.entityThrownItem.worldObj.isRemote) {
+                    EntityItem entityItem = new EntityItem(event.entityThrownItem.worldObj,
+                            event.entityThrownItem.posX + fmod, event.entityThrownItem.posY + f1mod,
+                            event.entityThrownItem.posZ + f2mod, new ItemStack(PLItems.salt));
+                    event.entityThrownItem.worldObj.spawnEntityInWorld(entityItem);
                 }
             }
-            this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(PLPotion.salty, 0, 3));
+            this.onImpact(event.entityThrownItem, event.movingObjectPosition, new PotionEffect(PLPotion.salty, 0, 3));
         }
         else if (stack.isItemEqual(IC2Items.getItem("Uran238"))) {
-            this.onImpact(event.entityThrowable, event.movingObjectPosition, new PotionEffect(IC2Potion.radiation, 200, 0));
+            this.onImpact(event.entityThrownItem, event.movingObjectPosition, new PotionEffect(IC2Potion.radiation, 200, 0));
         }
         else {
-            this.onImpact(event.entityThrowable, event.movingObjectPosition, null);
+            this.onImpact(event.entityThrownItem, event.movingObjectPosition, null);
         }
     }
 
-    private void onImpact(EntityThrowable entity, RayTraceResult movingObjectPosition, PotionEffect potionEffect) {
+    private void onImpact(EntityThrownItem entity, RayTraceResult movingObjectPosition, PotionEffect potionEffect) {
         if (movingObjectPosition.entityHit != null) {
             movingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(entity, entity.getThrower()), 3F);
             if (movingObjectPosition.entityHit instanceof EntityLivingBase && potionEffect != null) {

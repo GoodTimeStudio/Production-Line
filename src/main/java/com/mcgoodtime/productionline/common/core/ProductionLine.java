@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.productionline.common.core;
 
-//import com.mcgoodtime.productionline.client.RenderEntityThrowable;
+//import com.mcgoodtime.productionline.client.RenderEntityThrownItem;
 //import com.mcgoodtime.productionline.client.RenderEntityRay;
 //import com.mcgoodtime.productionline.common.potion.PLPotion;
 //import com.mcgoodtime.productionline.common.blocks.fluid.Gas;
@@ -37,7 +37,7 @@ package com.mcgoodtime.productionline.common.core;
 
 import com.mcgoodtime.productionline.client.PLModelRegistry;
 import com.mcgoodtime.productionline.client.RenderEntityRay;
-import com.mcgoodtime.productionline.client.RenderEntityThrowable;
+import com.mcgoodtime.productionline.client.RenderEntityThrownItem;
 import com.mcgoodtime.productionline.common.blocks.fluid.Gas;
 import com.mcgoodtime.productionline.common.entity.EntityRay;
 import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
@@ -160,7 +160,7 @@ public final class ProductionLine {
         @Override
         public void init() {
 //            ModelLoaderRegistry.registerLoader(new PLItemModelLoader());
-            RenderingRegistry.registerEntityRenderingHandler(EntityThrownItem.class, manager -> new RenderEntityThrowable<>(manager, Minecraft.getMinecraft().getRenderItem()));
+            RenderingRegistry.registerEntityRenderingHandler(EntityThrownItem.class, manager -> new RenderEntityThrownItem<>(manager, Minecraft.getMinecraft().getRenderItem()));
             RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, RenderEntityRay::new);
 //
             //new PLModelRegistry();
@@ -168,7 +168,7 @@ public final class ProductionLine {
 //                new NEIPLConfig().loadConfig();
 //            }
         }
-        
+
     }
 
     @Mod.InstanceFactory

@@ -1,6 +1,5 @@
 package com.mcgoodtime.productionline.common.mixin;
 
-//import com.mcgoodtime.productionline.ThrowableUranium238Handlerdler;
 import com.mcgoodtime.productionline.common.event.ThrowableUranium238Handler;
 import ic2.core.block.state.EnumProperty;
 import ic2.core.block.state.IIdProvider;

@@ -10,7 +10,7 @@ public class BioFuel extends Fluid{
 	
 	
 	public BioFuel() {
-		super("bioFuel");
+		super("bioFuel", still, still);
 		
 		this.setUnlocalizedName("BioFuel");
 		this.setDensity(800);

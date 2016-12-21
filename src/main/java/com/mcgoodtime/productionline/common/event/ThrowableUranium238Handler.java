@@ -1,7 +1,7 @@
 package com.mcgoodtime.productionline.common.event;
 
 import com.mcgoodtime.productionline.common.core.PLConfig;
-import com.mcgoodtime.productionline.common.entity.EntityThrowable;
+import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import ic2.api.item.IC2Items;
 import ic2.core.item.ItemMulti;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,7 +39,7 @@ public class ThrowableUranium238Handler implements ItemMulti.IItemRightClickHand
                         SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS,
                         0.5F, 0.4F / (new Random().nextFloat() * 0.4F + 0.8F));
                 if (!entityPlayer.worldObj.isRemote) {
-                    entityPlayer.worldObj.spawnEntityInWorld(new EntityThrowable(entityPlayer.worldObj, entityPlayer, itemStack));
+                    entityPlayer.worldObj.spawnEntityInWorld(new EntityThrownItem(entityPlayer.worldObj, entityPlayer, itemStack));
                 }
             }
             return ActionResult.newResult(EnumActionResult.SUCCESS, itemStack);
