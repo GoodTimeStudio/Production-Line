@@ -2,9 +2,10 @@ package com.mcgoodtime.productionline.client.gui;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.inventory.ContainerAdvSolar;
-import ic2.core.util.GuiTooltipHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+
+import java.util.Collections;
 
 /**
  * Created by BestOwl on 2015.12.5.0005.
@@ -27,8 +28,8 @@ public class GuiAdvSolar extends GuiPL<ContainerAdvSolar> {
         super.drawGuiContainerForegroundLayer(x, y);
 
         if (!this.container.tile.hasLens) {
-            String tooltip = StatCollector.translateToLocal(ProductionLine.GUI_PREFIX + "AdvSolar.lens");
-            GuiTooltipHelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, tooltip, 3, 13, 13, 23);
+            String tooltip = I18n.format(ProductionLine.GUI_PREFIX + "AdvSolar.lens");
+            drawTooltip(x - this.guiLeft, y - this.guiTop, Collections.singletonList(tooltip));
         }
     }
 
@@ -42,7 +43,7 @@ public class GuiAdvSolar extends GuiPL<ContainerAdvSolar> {
 
         if (!this.container.tile.hasLens) {
             this.mc.renderEngine.bindTexture(new ResourceLocation(ProductionLine.RESOURCE_DOMAIN, "textures/gui/misc.png"));
-            this.drawTexturedModalRect(this.x + 3, this.y + 3 +10, 0, 246, 10, 10);
+            this.drawTexturedModalRect(this.x + 3, this.y + 3 + 10, 0, 246, 10, 10);
         }
     }
 }

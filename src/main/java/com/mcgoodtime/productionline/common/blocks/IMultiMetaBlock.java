@@ -45,7 +45,7 @@ public interface IMultiMetaBlock {
      * Get block's unlocalized name
      * @return unlocalized name
      */
-    String getBlockName(int  meta);
+    String getBlockName(int meta);
 
     int getMaxMeta();
 

@@ -27,16 +27,13 @@ package com.mcgoodtime.productionline.common.blocks;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.items.ItemBlockPL;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_NAME;
-import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
+import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
 
 /**
  * Created by suhao on 2015.10.18.0018.
@@ -46,7 +43,6 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_
 public class BlockMisc extends BlockPL implements IMultiMetaBlock {
 
     public static List<String> internalNameList = new ArrayList<String>();
-    protected IIcon[] icons;
 
     static {
         internalNameList.add("CompressedWaterHyacinth");
@@ -54,8 +50,7 @@ public class BlockMisc extends BlockPL implements IMultiMetaBlock {
     }
 
     public BlockMisc() {
-        super(Material.rock, "BlockMisc");
-        this.icons = new IIcon[this.getMaxMeta()];
+        super(Material.ROCK, "BlockMisc");
         this.setHardness(1.0F);
         PLBlocks.compressedWaterHyacinth = new ItemStack(this, 1, 0);
         PLBlocks.dehydratedWaterHyacinthblock = new ItemStack(this, 1, 1);
@@ -73,9 +68,9 @@ public class BlockMisc extends BlockPL implements IMultiMetaBlock {
     /**
      * Returns the unlocalized name of this block. This version accepts an ItemStack so different stacks can have
      * different names based on their meta or NBT.
-     */
+    */
     public String getBlockName(ItemStack itemStack) {
-        return "tile." + MOD_NAME + ".block." + this.getInternalName(itemStack.getItemDamage());
+        return "tile." + MOD_ID + ".block." + this.getInternalName(itemStack.getItemDamage());
     }
 
     /**
@@ -84,33 +79,18 @@ public class BlockMisc extends BlockPL implements IMultiMetaBlock {
      */
     @Override
     public String getBlockName(int meta) {
-        return "tile." + MOD_NAME + ".block." + this.getInternalName(meta);
+        return "tile." + MOD_ID + ".block." + this.getInternalName(meta);
     }
 
     public String getInternalName(int meta) {
         return internalNameList.get(meta);
     }
 
-    @Override
-    public void registerBlockIcons(IIconRegister iir) {
-        for (int i = 0; i < this.getMaxMeta(); i++) {
-            this.icons[i] = iir.registerIcon(RESOURCE_DOMAIN + ":" + "block" + this.getInternalName(i));
-        }
-    }
-
-    /**
-     * Gets the block's texture. Args: side, meta
-     */
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        return this.icons[meta];
-    }
-
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and wood.
-     */
-    @Override
-    public int damageDropped(int meta) {
-        return meta;
-    }
+//    /**
+//     * Determines the damage on the item the block drops. Used in cloth and wood.
+//     */
+//    @Override
+//    public int damageDropped(int meta) {
+//        return meta;
+//    }
 }

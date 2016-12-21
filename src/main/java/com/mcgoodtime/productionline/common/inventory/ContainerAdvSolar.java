@@ -2,8 +2,10 @@ package com.mcgoodtime.productionline.common.inventory;
 
 import com.mcgoodtime.productionline.common.tiles.TileAdvSolar;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Created by BestOwl on 2015.12.5.0005.
@@ -22,10 +24,10 @@ public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting iCrafting) {
-        super.addCraftingToCrafters(iCrafting);
-        iCrafting.sendProgressBarUpdate(this, 0, this.sunIsVisible ? 1 : 0);
-        iCrafting.sendProgressBarUpdate(this, 1, this.hasLens ? 1 : 0);
+    public void addListener(IContainerListener listener) {
+        super.addListener(listener);
+        listener.sendProgressBarUpdate(this, 0, this.sunIsVisible ? 1 : 0);
+        listener.sendProgressBarUpdate(this, 1, this.hasLens ? 1 : 0);
     }
 
     /**
@@ -35,12 +37,12 @@ public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (Object object : this.crafters) {
+        for (IContainerListener listener : this.listeners) {
             if (this.sunIsVisible != this.tile.sunIsVisible) {
-                ((ICrafting) object).sendProgressBarUpdate(this, 0, this.tile.sunIsVisible ? 1 : 0);
+                listener.sendProgressBarUpdate(this, 0, this.tile.sunIsVisible ? 1 : 0);
             }
             if (this.hasLens != this.tile.hasLens) {
-                ((ICrafting) object).sendProgressBarUpdate(this, 1, this.tile.hasLens ? 1 : 0);
+                listener.sendProgressBarUpdate(this, 1, this.tile.hasLens ? 1 : 0);
             }
         }
 
@@ -49,6 +51,7 @@ public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int var) {
         super.updateProgressBar(id, var);
 

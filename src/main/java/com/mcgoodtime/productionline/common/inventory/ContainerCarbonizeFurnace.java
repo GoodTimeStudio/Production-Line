@@ -29,11 +29,11 @@ import com.mcgoodtime.productionline.common.inventory.slot.SlotOutput;
 import com.mcgoodtime.productionline.common.inventory.slot.SlotUpgrade;
 import com.mcgoodtime.productionline.common.tiles.TileCarbonizeFurnace;
 import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlotInput;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.inventory.IContainerListener;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ic2.core.slot.SlotDischarge;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ICrafting;
 
 /*
  * Created by suhao on 2015.7.4.
@@ -55,11 +55,11 @@ public class ContainerCarbonizeFurnace extends ContainerPL<TileCarbonizeFurnace>
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting crafting) {
-        super.addCraftingToCrafters(crafting);
-        crafting.sendProgressBarUpdate(this, 0, this.tile.progress);
-        crafting.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
-        crafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
+    public void addListener(IContainerListener listener) {
+        super.addListener(listener);
+        listener.sendProgressBarUpdate(this, 0, this.tile.progress);
+        listener.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
+        listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
     }
 
     /**
@@ -69,19 +69,17 @@ public class ContainerCarbonizeFurnace extends ContainerPL<TileCarbonizeFurnace>
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (Object crafter : this.crafters) {
-            ICrafting icrafting = (ICrafting) crafter;
-
+        for (IContainerListener listener : this.listeners) {
             if (this.lastProgress != this.tile.progress) {
-                icrafting.sendProgressBarUpdate(this, 0, this.tile.progress);
+                listener.sendProgressBarUpdate(this, 0, this.tile.progress);
             }
 
             if (this.lastRequireEnergy != this.tile.requireEnergy) {
-                icrafting.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
+                listener.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
             }
 
             if (this.lastEnergy != this.tile.energy) {
-                icrafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
+                listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
             }
         }
 

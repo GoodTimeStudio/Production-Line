@@ -4,8 +4,11 @@ import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
 import ic2.core.slot.SlotArmor;
 import ic2.core.slot.SlotDischarge;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Created by BestOwl on 2015.11.28.0028.
@@ -22,15 +25,15 @@ public class ContainerEUStorage<T extends TileEUStorage> extends ContainerPL<T> 
         this.addSlotToContainer(new SlotDischarge(this.tile, this.tile.tier, 0, 56, 53));
         this.addSlotToContainer(new Slot(this.tile, 1, 56, 17));
         for (int i = 0; i < 4; i++) {
-            this.addSlotToContainer(new SlotArmor(player.inventory, i, 8 + i * 18, 84));
+            this.addSlotToContainer(new SlotArmor(player.inventory, EntityEquipmentSlot.values()[i + 2], 8 + i * 18, 84));
         }
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting iCrafting) {
-        super.addCraftingToCrafters(iCrafting);
-        iCrafting.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
-        iCrafting.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
+    public void addListener(IContainerListener listener) {
+        super.addListener(listener);
+        listener.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
+        listener.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
     }
 
     /**
@@ -40,12 +43,12 @@ public class ContainerEUStorage<T extends TileEUStorage> extends ContainerPL<T> 
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (Object object : this.crafters) {
+        for (IContainerListener listener : this.listeners) {
             if (this.lastEnergy != this.tile.energy) {
-                ((ICrafting) object).sendProgressBarUpdate(this, 0, (int) this.tile.energy);
+                listener.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
             }
             if (this.lastMode != this.tile.redstoneMode.ordinal()) {
-                ((ICrafting) object).sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
+                listener.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
             }
         }
 
@@ -54,6 +57,7 @@ public class ContainerEUStorage<T extends TileEUStorage> extends ContainerPL<T> 
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int var) {
         super.updateProgressBar(id, var);
         switch (id) {

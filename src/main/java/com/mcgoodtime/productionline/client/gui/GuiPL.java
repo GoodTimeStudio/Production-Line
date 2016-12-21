@@ -28,11 +28,24 @@ import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.inventory.ContainerPL;
 import ic2.core.IC2;
 import ic2.core.upgrade.IUpgradableBlock;
-import ic2.core.util.GuiTooltipHelper;
+import ic2.core.upgrade.IUpgradeItem;
+import ic2.core.upgrade.UpgradableProperty;
+import ic2.core.upgrade.UpgradeRegistry;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.world.IWorldNameable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by BestOwl on 2015.10.31.0031.
@@ -40,6 +53,7 @@ import org.lwjgl.opengl.GL11;
  * ProductionLine base gui.
  * @author BestOwl
  */
+@SideOnly(Side.CLIENT)
 public abstract class GuiPL<T extends ContainerPL> extends GuiContainer {
     public T container;
     public String name;
@@ -50,17 +64,31 @@ public abstract class GuiPL<T extends ContainerPL> extends GuiContainer {
     public GuiPL(T container) {
         super(container);
         this.container = container;
-        this.name = container.tile.getInventoryName();
+        this.name = ((IWorldNameable) container.tile).getName();
     }
-
-
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        this.fontRendererObj.drawString(StatCollector.translateToLocal(ProductionLine.GUI_PREFIX + this.name), (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
-        if(this.container.tile instanceof IUpgradableBlock) {
-            GuiTooltipHelper.drawUpgradeslotTooltip(x - this.guiLeft, y - this.guiTop, 0, 0, 12, 12, (IUpgradableBlock) this.container.tile, 25, 0);
+        this.fontRendererObj.drawString(I18n.format(ProductionLine.GUI_PREFIX + this.name), (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
+        if (this.container.tile instanceof IUpgradableBlock) {
+            handleUpgradeTooltip(x, y);
         }
+    }
+
+    private void handleUpgradeTooltip(int mouseX, int mouseY) {
+        if(mouseX >= 0 && mouseX <= 12 && mouseY >= 0 && mouseY <= 12) {
+            Stream.Builder<String> builder = Stream.<String>builder().add(I18n.format("ic2.generic.text.upgrade"));
+            getCompatibleUpgrades((IUpgradableBlock)this.container.tile).stream().map(ItemStack::getDisplayName).forEach(builder);
+            this.drawTooltip(mouseX, mouseY, builder.build().collect(Collectors.toList()));
+        }
+    }
+
+    private static List<ItemStack> getCompatibleUpgrades(IUpgradableBlock block) {
+        Set<UpgradableProperty> properties = block.getUpgradableProperties();
+        return StreamSupport
+                .stream(UpgradeRegistry.getUpgrades().spliterator(), false)
+                .filter(stack -> ((IUpgradeItem) stack.getItem()).isSuitableFor(stack, properties))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -72,10 +100,16 @@ public abstract class GuiPL<T extends ContainerPL> extends GuiContainer {
         this.drawTexturedModalRect(this.x, this.y, 0, 0, this.xSize, this.ySize);
 
         if (this.container.tile instanceof IUpgradableBlock) {
-            this.mc.getTextureManager().bindTexture(new ResourceLocation(IC2.textureDomain, "textures/gui/infobutton.png"));
+            this.mc.getTextureManager().bindTexture(new ResourceLocation(IC2.RESOURCE_DOMAIN, "textures/gui/infobutton.png"));
             this.drawTexturedModalRect(this.x + 3, this.y + 3, 0, 0, 10, 10);
             this.mc.getTextureManager().bindTexture(this.getResource());
         }
+    }
+
+    public void drawTooltip(int x, int y, List<String> text) {
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        this.drawHoveringText(text, x, y);
+        GlStateManager.disableLighting();
     }
 
     protected abstract ResourceLocation getResource();

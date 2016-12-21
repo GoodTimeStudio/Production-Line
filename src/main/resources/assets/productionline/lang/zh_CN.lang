@@ -2,137 +2,130 @@
 #zh_CN
 
 [ITEM_GROUP]
-itemGroup.ProductionLine=ProductionLine
+itemGroup.productionline=ProductionLine
 
 [GUI]
-gui.ProductionLine.FluidKineticGenerator=流体动能发生机
-gui.ProductionLine.FluidKineticGenerator.output=输出: %s
-gui.ProductionLine.FluidKineticGenerator.max-output=最大输出: %s
-gui.ProductionLine.CarbonizeFurnace=碳化燃烧炉
-gui.ProductionLine.HeatDryer=干燥机
-gui.ProductionLine.EVSU=EVSU
-gui.ProductionLine.CSEU=CSEU
-gui.ProductionLine.ParallelSpaceSU=平行空间储电盒
-gui.ProductionLine.AdvSolar=聚能太阳能
-gui.ProductionLine.AdvSolar.lens=缺少聚能镜片
+gui.productionline.FluidKineticGenerator=流体动能发生机
+gui.productionline.FluidKineticGenerator.output=输出: %s
+gui.productionline.FluidKineticGenerator.max-output=最大输出: %s
+gui.productionline.CarbonizeFurnace=碳化燃烧炉
+gui.productionline.HeatDryer=干燥机
+gui.productionline.EVSU=EVSU
+gui.productionline.CSEU=CSEU
+gui.productionline.ParallelSpaceSU=平行空间储电盒
+gui.productionline.AdvSolar=聚能太阳能
+gui.productionline.AdvSolar.lens=缺少聚能镜片
 
 [BLOCKS]
-//Fuel
-tile.ProductionLine.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
-tile.ProductionLine.block.DryLog.name=干木
-
-tile.ProductionLine.block.CompressedWaterHyacinth.name=压缩水葫芦
-tile.ProductionLine.block.oreIridium.name=铱矿石
-tile.ProductionLine.block.WaterHyacinth.name=水葫芦
-tile.ProductionLine.block.FluidKineticGenerator.name=流体动能发生机
-tile.ProductionLine.block.CarbonizeFurnace.name=碳化燃烧炉
-tile.ProductionLine.block.HeatDryer.name=干燥机
-tile.ProductionLine.block.EVSU.name=EVSU
-tile.ProductionLine.block.AirBrakeCasing.name=气闸外壳
-tile.ProductionLine.block.CSEU.name=CSEU
-tile.ProductionLine.block.ParallelSpaceSU.name=平行空间储电盒
-tile.ProductionLine.block.AdvSolar.name=聚能太阳能
-tile.ProductionLine.block.Pad.name=瓦块
-
-//tooltip
-tile.ProductionLine.block.ParallelSpaceSU.desc1=§m这个老鼠夹这么的明显老鼠会踩吗？
-tile.ProductionLine.block.ParallelSpaceSU.desc2=§m狗熊你瞎啊，狩猎夹这么大！呸！这个竹筐这么大，鸟儿你制杖吗？
-tile.ProductionLine.block.ParallelSpaceSU.desc3=§m天啊有个250M EU的储电器，我要立马做一个！
+tile.productionline.block.CompressedWaterHyacinth.name=压缩水葫芦
+tile.productionline.block.oreIridium.name=铱矿石
+tile.productionline.block.WaterHyacinth.name=水葫芦
+tile.productionline.block.FluidKineticGenerator.name=流体动能发生机
+tile.productionline.block.CarbonizeFurnace.name=碳化燃烧炉
+tile.productionline.block.HeatDryer.name=干燥机
+tile.productionline.block.DehydratedWaterHyacinthBlock.name=脱水水葫芦块
+tile.productionline.block.EVSU.name=EVSU
+tile.productionline.block.AirBrakeCasing.name=气闸外壳
+tile.productionline.block.CSEU.name=CSEU
+tile.productionline.block.ParallelSpaceSU.name=平行空间储电盒
+tile.productionline.block.AdvSolar.name=聚能太阳能
+tile.productionline.block.HardWood.name=硬质木块
+tile.productionline.block.OpticalGlass=光学玻璃
 
 [ITEMS]
-//fuel
-item.ProductionLine.Firewood.name=干柴
-item.ProductionLine.CoarseBatten.name=粗制板条
-item.ProductionLine.Faggot.name=柴捆
-item.ProductionLine.BioFuel.name=生物燃料
-
-
 //crushed
-item.ProductionLine.CrushedIridium.name=粉碎的铱矿石
-item.ProductionLine.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
+item.productionline.CrushedIridium.name=粉碎的铱矿石
+item.productionline.CleanedCrushedIridium.name=纯净的粉碎的铱矿石
 
 //dust
-item.ProductionLine.DustIridium.name=铱矿石粉
-item.ProductionLine.SmallDustIridium.name=小撮铱矿石粉
-item.ProductionLine.Sawdust.name=木屑
+item.productionline.DustIridium.name=铱矿石粉
+item.productionline.SmallDustIridium.name=小撮铱矿石粉
 
 //ingot
-item.ProductionLine.IngotIridium.name=铱锭
-item.ProductionLine.HeatInsulationMaterial.name=隔热材料
+item.productionline.IngotIridium.name=铱锭
+item.productionline.HeatInsulationMaterial.name=隔热材料
 
 //plate
-item.ProductionLine.HeatInsulationPlate.name=隔热板
-item.ProductionLine.DenseDiamondPlate.name=致密钻石板
-item.ProductionLine.DiamondPlate.name=钻石板
-item.ProductionLine.Tiles.name=瓦片
+item.productionline.HeatInsulationPlate.name=隔热板
+item.productionline.DenseDiamondPlate.name=致密钻石板
+item.productionline.DiamondPlate.name=钻石板
 
 //tool
-item.ProductionLine.IridiumPickaxe.name=铱镐
-item.ProductionLine.IridiumAxe.name=铱斧
-item.ProductionLine.IridiumSpade.name=铱铲
-item.ProductionLine.IridiumSword.name=铱剑
-item.ProductionLine.IronTreetap.name=铁龙头
-item.ProductionLine.BronzeTreetap.name=青铜龙头
-item.ProductionLine.LeadTreetap.name=铅龙头
-item.ProductionLine.RefinedIronTreetap.name=精炼铁龙头
-item.ProductionLine.AdvancedAlloyTreetap.name=高级合金龙头
-item.ProductionLine.CarbonTreetap.name=碳板龙头
-item.ProductionLine.PaperBag.name=纸袋
-item.ProductionLine.WoodenHammer.name=木锤
-item.ProductionLine.Tupid.name=铁锤
-item.ProductionLine.IronCone.name=铁改锥
-item.ProductionLine.SteelCone.name=钢改锥
+item.productionline.IridiumPickaxe.name=铱镐
+item.productionline.IridiumAxe.name=铱斧
+item.productionline.IridiumSpade.name=铱铲
+item.productionline.IridiumSword.name=铱剑
+item.productionline.IronTreetap.name=铁龙头
+item.productionline.BronzeTreetap.name=青铜龙头
+item.productionline.LeadTreetap.name=铅龙头
+item.productionline.RefinedIronTreetap.name=精炼铁龙头
+item.productionline.AdvancedAlloyTreetap.name=高级合金龙头
+item.productionline.CarbonTreetap.name=碳板龙头
 
-item.ProductionLine.BambooCharcoal.name=竹炭
-item.ProductionLine.AirBrakeUnit.name=气闸单元
-item.ProductionLine.Salt.name=食盐
-item.ProductionLine.PackagedSalt.name=一小袋盐
-item.ProductionLine.CarbonTube.name=碳管
-item.ProductionLine.SmallCompressedWaterHyacinth.name=小块压缩水葫芦
-item.ProductionLine.Roller.name=滚轴
-item.ProductionLine.RedstoneModule.name=红石模块
-item.ProductionLine.LazuliModule.name=青金石模块
-item.ProductionLine.ObsidianPlateGravityField.name=重力场黑曜石板
-item.ProductionLine.ElectronicCircuitControl.name=控制电路
-item.ProductionLine.ElectronicCircuitCore.name=电路基座
-item.ProductionLine.PulseElectronicCircuitControl.name=脉冲控制电路
-item.ProductionLine.PulseElectronicCircuitCore.name=脉冲电路基座
-item.ProductionLine.CyclotronParticleAccelerator.name=等离子冲撞通道
-item.ProductionLine.CalculateUnit.name=运算单元
-item.ProductionLine.CalculateChunk.name=运算区块
-item.ProductionLine.CalculateArray.name=运算矩阵
-item.ProductionLine.FloatPointCalculationsRegion.name=浮点运算区
-item.ProductionLine.ParallelSpaceConverter.name=平行空间转换器
-item.ProductionLine.UUMatterCore.name=UU物质生成机核心
-item.ProductionLine.ObsidianMechanicalFrame.name=黑曜石机械框架
-item.ProductionLine.ObsidianMechanicalCasing.name=黑曜石机械外壳
-item.ProductionLine.CarbonCrystal.name=碳元素水晶
-item.ProductionLine.EnderCalculationCrystal.name=末影运算水晶
-item.ProductionLine.MillTeeth.name=磨齿
-item.ProductionLine.MillWheel.name=磨轮
-item.ProductionLine.RigidPaper.name=硬质纸
-item.ProductionLine.RigidPaperPack.name=硬质纸袋
-item.ProductionLine.ItemDryFood.name=干货
-item.ProductionLine.SaltWaterBucket.name=咸水桶
-item.ProductionLine.AdvSolarLensUnit.name=聚能镜片单元
-item.ProductionLine.AdvSolarLensGroup.name=聚能镜片组
-item.ProductionLine.AdvSolarLensCluster.name=聚能镜片簇
-item.ProductionLine.CEU.name=CEU
-item.ProductionLine.GravityRay.name=重力势能
-item.ProductionLine.WoodPulp.name=木浆
-item.ProductionLine.CorrugatPaper.name=瓦楞纸
+//item
+item.productionline.BambooCharcoal.name=竹炭
+item.productionline.AirBrakeUnit.name=气闸单元
+item.productionline.Salt.name=食盐
+item.productionline.PackagedSalt.name=一小袋盐
+item.productionline.CarbonTube.name=碳管
+item.productionline.SmallCompressedWaterHyacinth.name=小块压缩水葫芦
+item.productionline.Roller.name=滚轴
+item.productionline.RedstoneModule.name=红石模块
+item.productionline.LazuliModule.name=青金石模块
+item.productionline.ObsidianPlateGravityField.name=重力场黑曜石板
+item.productionline.ElectronicCircuitControl.name=控制电路
+item.productionline.ElectronicCircuitCore.name=电路基座
+item.productionline.PulseElectronicCircuitControl.name=脉冲控制电路
+item.productionline.PulseElectronicCircuitCore.name=脉冲电路基座
+item.productionline.CyclotronParticleAccelerator.name=等离子冲撞通道
+item.productionline.CalculateUnit.name=运算单元
+item.productionline.CalculateChunk.name=运算区块
+item.productionline.CalculateArray.name=运算矩阵
+item.productionline.FloatPointCalculationsRegion.name=浮点运算区
+item.productionline.ParallelSpaceConverter.name=平行空间转换器
+item.productionline.UUMatterCore.name=UU物质生成机核心
+item.productionline.ObsidianMechanicalFrame.name=黑曜石机械框架
+item.productionline.ObsidianMechanicalCasing.name=黑曜石机械外壳
+item.productionline.CarbonCrystal.name=碳元素水晶
+item.productionline.EnderCalculationCrystal.name=末影运算水晶
+item.productionline.MillTeeth.name=磨齿
+item.productionline.MillWheel.name=磨轮
+item.productionline.RigidPaper.name=硬质纸
+item.productionline.RigidPaperPack.name=硬质纸袋
+item.productionline.ItemDryFood.name=干货
+item.productionline.SaltWaterBucket.name=咸水桶
+item.productionline.AdvSolarLensUnit.name=聚能镜片单元
+item.productionline.AdvSolarLensGroup.name=聚能镜片组
+item.productionline.AdvSolarLensCluster.name=聚能镜片簇
+item.productionline.CEU.name=CEU
+item.productionline.Tiles.name=瓦片
+item.productionline.PaperBag.name=纸袋
+item.productionline.CorrugatedPaper.name=瓦楞纸
+item.productionline.WoodPulp.name=木浆
+item.productionline.SawDust.name=木屑
+item.productionline.Faggot.name=柴捆
+item.productionline.CrudeWood.name=粗制木条
+item.productionline.Batten.name=板条
+item.productionline.ChainPiece.name=链片
+item.productionline.Sprocket.name=链齿
+item.productionline.IronChain.name=铁质链条
+item.productionline.SteelChain.name=钢质链条
+item.productionline.ToothedChain.name=带齿链条
+item.productionline.HeatResistantBrick.name=耐热砖
 
-item.ProductionLine.food.DiamondApple.name=钻石苹果
+//weapon
+item.productionline.GravityRay.name=重力势能
+
+//food
+item.productionline.food.DiamondApple.name=钻石苹果
 
 //record
-item.ProductionLine.record_TheSaltwaterRoom.name=TheSaltwaterRoom
-item.ProductionLine.record_TheSaltwaterRoom.desc=TheSaltwaterRoom -- Owl City
-item.ProductionLine.record_MusicSpring.name=MusicSpring
-item.ProductionLine.record_MusicSpring.desc=MusicSpring -- Seedking
+item.productionline.record_musicspring.name=MusicSpring
+item.productionline.record_musicspring.desc=MusicSpring -- Seedking
 
 [entity]
-entity.ProductionLine.Throwable.name=可投掷实体
-entity.ProductionLine.Ray.name=重力势能
+entity.productionline.Throwable.name=可投掷实体
+entity.productionline.Ray.name=重力势能
 
 [achievement]
 achievement.CarbonizeFurnace=缺氧燃烧技术
@@ -141,28 +134,26 @@ achievement.getIrOre=比钻石更好
 achievement.getIrOre.desc=挖到一个铱矿石
 
 [tooltip]
-ProductionLine.tooltip.CarbonizeFurnace=缺氧燃烧，燃烧能力有限
+productionline.tooltip.CarbonizeFurnace=缺氧燃烧，燃烧能力有限
 
-item.ProductionLine.record_MusicSpring.desc1=乐泉
-item.ProductionLine.record_MusicSpring.desc2=Seedking
+item.productionline.record_musicspring.desc1=乐泉
+item.productionline.record_musicspring.desc2=Seedking
 
-item.ProductionLine.SmallCompressedWaterHyacinth.desc1=不敢想象如此小块居然融合了八棵水葫芦的精华
-item.ProductionLine.HeatInsulationMaterial.desc1=这货的唯一用处就是制作隔热板
-item.ProductionLine.HeatInsulationPlate.desc1=暖暖的，很贴心
-item.ProductionLine.Roller.desc1=看起来并没有什么卵用
-item.ProductionLine.heatInsulationBoard.desc1=有了这个，妈妈再也不用担心岩浆桶烫手了
-item.ProductionLine.thermalInsulationMaterial.desc1=制作隔热板的唯一原料
-item.ProductionLine.DiamondPlate.desc1=纯钻石打造
-item.ProductionLine.DenseDiamondPlate.desc1=更闪，更硬...
-item.ProductionLine.BambooCharcoal.desc1=散发着诡异的绿色
-item.ProductionLine.CarbonTube.desc1=一条黑色而坚韧的细线
-item.ProductionLine.MillTeeth.desc1=摩擦，摩擦
-item.ProductionLine.Tupid.desc1=为了毁灭之锤！！！
+item.productionline.SmallCompressedWaterHyacinth.desc1=不敢想象如此小块居然融合了八棵水葫芦的精华
+item.productionline.HeatInsulationMaterial.desc1=这货的唯一用处就是制作隔热板
+item.productionline.HeatInsulationPlate.desc1=暖暖的，好贴心
+item.productionline.Roller.desc1=看起来并没有什么卵用
+item.productionline.heatInsulationBoard.desc1=有了这个，妈妈再也不用担心岩浆桶烫手了
+item.productionline.thermalInsulationMaterial.desc1=制作隔热板的唯一原料
+item.productionline.DiamondPlate.desc1=纯钻石打造
+item.productionline.DenseDiamondPlate.desc1=更闪，更硬a
+item.productionline.BambooCharcoal.desc1=散发着诡异的绿色
+item.productionline.CarbonTube.desc1=一条黑色而坚韧的细线
 
-item.ProductionLine.food.DiamondApple.desc1=你确定你敢吃？
+item.productionline.food.DiamondApple.desc1=你确定你敢吃？
 
 [POTION]
-ProductionLine.potion.Salty=好咸
+productionline.potion.Salty=好咸
 
 [DEATH]
-death.attack.salty=%1$s 你被咸死了
+death.attack.salty=%1$s 被咸死了

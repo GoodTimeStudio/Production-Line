@@ -25,7 +25,7 @@
 package com.mcgoodtime.productionline.common.entity;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
-import cpw.mods.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraft.entity.Entity;
 
 /**
@@ -37,8 +37,7 @@ public class PLEntity {
     private static int id = 0;
 
     public static void registerEntities(Class<? extends Entity> entity, String name) {
-        id++;
-        EntityRegistry.registerModEntity(entity, name, id, ProductionLine.instance, 64, 1, true);
+        EntityRegistry.registerModEntity(entity, name, id++, ProductionLine.getInstance(), 64, 1, true);
     }
 
     public static void init() {

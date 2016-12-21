@@ -25,13 +25,14 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.blocks.IMultiMetaBlock;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by BestOwl on 2015.11.22.0022.
@@ -49,22 +50,23 @@ public class ItemBlockPL extends ItemBlock {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public String getItemStackDisplayName(ItemStack itemStack) {
-        if (this.field_150939_a instanceof IMultiMetaBlock) {
-            return StatCollector.translateToLocal(((IMultiMetaBlock) field_150939_a).getBlockName(itemStack) + ".name");
+    @Nonnull
+    public String getItemStackDisplayName(@Nonnull ItemStack itemStack) {
+        if (this.block instanceof IMultiMetaBlock) {
+            return I18n.format(((IMultiMetaBlock) block).getBlockName(itemStack) + ".name");
         }
         return super.getItemStackDisplayName(itemStack);
     }
 
-    /**
-     * Gets an icon index based on an item's damage value
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int meta)
-    {
-        return this.field_150939_a.getIcon(2, meta);
-    }
+//    /**
+//     * Gets an icon index based on an item's damage value
+//     */
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public IIcon getIconFromDamage(int meta)
+//    {
+//        return this.field_150939_a.getIcon(2, meta);
+//    }
 
     /**
      * Returns the metadata of the block which this Item (ItemBlock) can place

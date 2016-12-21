@@ -1,3 +1,9 @@
 {
-  "record_MusicSpring": {"category": "master","sounds": [{"name": "record_MusicSpring","stream": true}]}
+  "record_MusicSpring": {
+    "category": "record",
+    "sounds": [{
+      "name": "productionline:record_MusicSpring",
+      "stream": true
+    }]
+  }
 }

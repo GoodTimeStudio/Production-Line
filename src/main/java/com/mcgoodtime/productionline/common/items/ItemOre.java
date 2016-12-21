@@ -1,7 +1,6 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.init.PLItems;
-import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,29 +10,35 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public class ItemOre extends ItemMultiDamage {
+public class ItemOre extends ItemMulti {
 
     public ItemOre() {
-        super("ItemOre");
-        PLItems.ingotIridium = new ItemStack(this, 1, 0);
-        PLItems.diamondPlate = new ItemStack(this, 1, 1);
-        PLItems.denseDiamondPlate = new ItemStack(this, 1, 2);
-        PLItems.crushedIridium = new ItemStack(this, 1, 3);
-        PLItems.cleanedCrushedIridium = new ItemStack(this, 1, 4);
-        PLItems.dustIridium = new ItemStack(this, 1, 5);
-        PLItems.smallDustIridium = new ItemStack(this, 1, 6);
+        super("ore");
+
+        PLItems.ingotIridium = this.next();
+        PLItems.diamondPlate = this.next();
+        PLItems.denseDiamondPlate = this.next();
+        PLItems.crushedIridium = this.next();
+        PLItems.cleanedCrushedIridium = this.next();
+        PLItems.dustIridium = this.next();
+        PLItems.smallDustIridium = this.next();
     }
 
     @Override
     protected List<String> getInternalNameList() {
         List<String> list = new ArrayList<String>();
-        list.add("IngotIridium");
-        list.add("DiamondPlate");
-        list.add("DenseDiamondPlate");
-        list.add("CrushedIridium");
-        list.add("CleanedCrushedIridium");
-        list.add("DustIridium");
-        list.add("SmallDustIridium");
+        list.add("ingot_iridium");
+        list.add("diamond_plate");
+        list.add("dense_diamond_plate");
+        list.add("crushed_iridium");
+        list.add("cleaned_crushed_iridium");
+        list.add("dust_iridium");
+        list.add("small_dust_iridium");
         return list;
+    }
+
+    @Override
+    public String getModelResourcePath() {
+        return "ore";
     }
 }

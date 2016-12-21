@@ -22,17 +22,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.common.tiles.TileContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 /**
@@ -48,9 +52,9 @@ public abstract class BlockContainerPL extends BlockMultiTexture {
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int var) {
-        super.breakBlock(world, x, y, z, block, var);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
+    public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+        super.breakBlock(world, pos, state);
+        TileEntity tileentity = world.getTileEntity(pos);
 
         if (tileentity != null) {
             if (tileentity instanceof TileContainer) {
@@ -71,7 +75,7 @@ public abstract class BlockContainerPL extends BlockMultiTexture {
                             }
 
                             itemstack.stackSize -= j1;
-                            EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+                            EntityItem entityitem = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
                             if (itemstack.hasTagCompound()) {
                                 entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
@@ -86,18 +90,19 @@ public abstract class BlockContainerPL extends BlockMultiTexture {
                     }
                 }
 
-                world.func_147453_f(x, y, z, block);
+                world.destroyBlock(pos, true);
+                //world.func_147453_f(x, y, z, block);
             }
         }
 
-        world.removeTileEntity(x, y, z);
+        world.removeTileEntity(pos);
     }
 
     @Override
-    public boolean onBlockEventReceived(World world, int x, int y, int z, int var1, int var2) {
-        super.onBlockEventReceived(world, x, y, z, var1, var2);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
-        return tileentity != null && tileentity.receiveClientEvent(var1, var2);
+    public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
+        super.eventReceived(state, world, pos, id, param);
+        TileEntity tileentity = world.getTileEntity(pos);
+        return tileentity != null && tileentity.receiveClientEvent(id, param);
     }
 
 }

@@ -2,7 +2,11 @@ package com.mcgoodtime.productionline.common.entity;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by BestOwl on 2015.12.10.0010.
@@ -19,13 +23,20 @@ public class EntityRay extends EntityArrow {
         super(world, x, y, z);
     }
 
-    public EntityRay(World world, EntityLivingBase entityLivingBase, float damage) {
-        super(world, entityLivingBase, damage);
-        this.canBePickedUp = 0;
+    public EntityRay(World world, EntityLivingBase entityLivingBase) {
+        super(world, entityLivingBase);
+        this.pickupStatus = PickupStatus.DISALLOWED;
     }
 
-    public EntityRay(World world, EntityLivingBase entityLivingBase, EntityLivingBase entityLivingBase1, float f, float f1) {
-        super(world, entityLivingBase, entityLivingBase1, f, f1);
+    public EntityRay(World world, EntityLivingBase entity, double damage) {
+        this(world, entity);
+        setDamage(damage);
+    }
+
+    @Override
+    @Nonnull
+    protected ItemStack getArrowStack() {
+        throw new AssertionError("This should not be called");
     }
 
     /**

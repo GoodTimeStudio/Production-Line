@@ -25,49 +25,49 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
+import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
+import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
 import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_NAME;
 import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
 
 /**
  * Created by suhao on 2015.6.29.
- * @author suhao 
+ * @author suhao
  */
 public class ItemPLRecord extends ItemRecord {
 
     private String name;
 
-    public ItemPLRecord(String name) {
-        super(name);
+    public ItemPLRecord(String name, SoundEvent soundEvent) {
+        super(name, soundEvent);
         this.name = name;
         this.setCreativeTab(ProductionLine.creativeTabGti);
-        this.setUnlocalizedName(MOD_NAME + "." + name);
-        this.setTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + name);
-        GameRegistry.registerItem(this, name, MOD_NAME);
+        this.setUnlocalizedName(MOD_ID + "." + name);
+        GameRegistry.<Item>register(this, new ResourceLocation(MOD_ID, name));
     }
 
     @Override
     public String getRecordNameLocal() {
-        return StatCollector.translateToLocal(this.getUnlocalizedName() + ".desc");
+        return net.minecraft.util.text.translation.I18n.translateToLocal(this.getUnlocalizedName() + ".desc");
     }
-
+/*
     @Override
     public ResourceLocation getRecordResource(String name) {
         return new ResourceLocation(ProductionLine.RESOURCE_DOMAIN + ":" + this.name);
     }
-
+*/
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List tooltipList, boolean boo) {
@@ -75,8 +75,8 @@ public class ItemPLRecord extends ItemRecord {
         tooltipList.add(I18n.format(this.getUnlocalizedName() + "." + "desc2"));
     }
 
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(ProductionLine.RESOURCE_DOMAIN + ":" + "record/" + this.name);
-    }
+//    @Override
+//    public void registerIcons(IIconRegister iconRegister) {
+//        this.itemIcon = iconRegister.registerIcon(ProductionLine.RESOURCE_DOMAIN + ":" + "record/" + this.name);
+//    }
 }

@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.mcgoodtime.productionline.common.inventory;
 
 import com.mcgoodtime.productionline.common.inventory.slot.SlotInput;
@@ -31,7 +32,9 @@ import com.mcgoodtime.productionline.common.tiles.TileHeatDryer;
 import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlotInput;
 import ic2.core.slot.SlotDischarge;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /*
  * Created by suhao on 2015.7.10.
@@ -52,10 +55,10 @@ public class ContainerHeatDryer extends ContainerPL<TileHeatDryer> {
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting iCrafting) {
-        super.addCraftingToCrafters(iCrafting);
-        iCrafting.sendProgressBarUpdate(this, 1, lastProgress);
-        iCrafting.sendProgressBarUpdate(this, 2, (int) lastEnergy);
+    public void addListener(IContainerListener listener) {
+        super.addListener(listener);
+        listener.sendProgressBarUpdate(this, 1, lastProgress);
+        listener.sendProgressBarUpdate(this, 2, (int) lastEnergy);
     }
 
     /**
@@ -65,14 +68,12 @@ public class ContainerHeatDryer extends ContainerPL<TileHeatDryer> {
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (Object object : this.crafters) {
-            ICrafting icrafting = (ICrafting) object;
-
+        for (IContainerListener listener : this.listeners) {
             if (this.lastProgress != this.tile.progress) {
-                icrafting.sendProgressBarUpdate(this, 1, this.tile.progress);
+                listener.sendProgressBarUpdate(this, 1, this.tile.progress);
             }
             if (this.lastEnergy != this.tile.energy) {
-                icrafting.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
+                listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
             }
         }
 
@@ -81,6 +82,7 @@ public class ContainerHeatDryer extends ContainerPL<TileHeatDryer> {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int i) {
         super.updateProgressBar(id, i);
         switch (id) {

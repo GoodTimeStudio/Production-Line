@@ -27,11 +27,11 @@ package com.mcgoodtime.productionline.common.tiles;
 import ic2.api.energy.EnergyNet;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergyAcceptor;
 import ic2.api.energy.tile.IEnergySource;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by BestOwl on 2015.10.31.0031.
@@ -56,8 +56,7 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
         if (!this.worldObj.isRemote) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
         }
@@ -70,9 +69,10 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setDouble("energy", this.energy);
+        return nbt;
     }
 
     /**
@@ -110,18 +110,8 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
         return Math.min(this.energy, this.powerTick);
     }
 
-    /**
-     * Determine if this emitter can emit energy to an adjacent receiver.
-     *
-     * The TileEntity in the receiver parameter is what was originally added to the energy net,
-     * which may be normal in-world TileEntity, a delegate or an IMetaDelegate.
-     *
-     * @param receiver receiver, may also be null or an IMetaDelegate
-     * @param direction direction the receiver is from the emitter
-     * @return Whether energy should be emitted
-     */
     @Override
-    public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
+    public boolean emitsEnergyTo(IEnergyAcceptor iEnergyAcceptor, EnumFacing enumFacing) {
         return true;
     }
 

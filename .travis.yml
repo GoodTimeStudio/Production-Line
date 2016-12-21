@@ -1,13 +1,11 @@
 language: java
 jdk:
-  - openjdk7
-  - oraclejdk7
   - oraclejdk8
 before_install: 
   - chmod +x gradlew
   - ./gradlew clean cleanCache
-install: ./gradlew setupCIWorkspace -S -i
-script: ./gradlew build -S -i
+install: ./gradlew setupCIWorkspace -S
+script: ./gradlew build -S
 notifications:
   email: false
 env:

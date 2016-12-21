@@ -31,7 +31,11 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,10 +44,10 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public abstract class TileContainer extends TilePL implements ISidedInventory {
+public abstract class TileContainer extends TilePL implements ISidedInventory, ITickable {
 
     /** The ItemStacks that hold the itemsList in the container */
-    public final List<TileSlot> tileSlots = new ArrayList<TileSlot>();
+    public final List<TileSlot> tileSlots = new ArrayList<>();
 
     protected String name;
 
@@ -53,7 +57,43 @@ public abstract class TileContainer extends TilePL implements ISidedInventory {
     }
 
     @Override
-    public abstract String getInventoryName();
+    @Nonnull
+    public abstract String getName();
+
+    @Nullable
+    @Override
+    public ItemStack removeStackFromSlot(int index) {
+        if (index < 0 || index >= tileSlots.size()) {
+            return null;
+        }
+        TileSlot slot = tileSlots.get(index);
+        if (slot != null) {
+            ItemStack stack = slot.getStack();
+            slot.putStack(null);
+            return stack;
+        }
+        return null;
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+        tileSlots.forEach(slot -> slot.putStack(null));
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
@@ -75,7 +115,8 @@ public abstract class TileContainer extends TilePL implements ISidedInventory {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    @Nonnull
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
 
         NBTTagList slotList = new NBTTagList();
@@ -89,9 +130,10 @@ public abstract class TileContainer extends TilePL implements ISidedInventory {
         }
         nbt.setTag("Items", slotList);
 
-        if (this.hasCustomInventoryName()) {
+        if (this.hasCustomName()) {
             nbt.setString("CustomName", this.name);
         }
+        return nbt;
     }
 
     /**
@@ -99,7 +141,8 @@ public abstract class TileContainer extends TilePL implements ISidedInventory {
      * on the given side of this block.
      */
     @Override
-    public int[] getAccessibleSlotsFromSide(int side) {
+    @Nonnull
+    public int[] getSlotsForFace(EnumFacing side) {
         int[] ret = new int[this.getSizeInventory()];
         for (int i = 0; i < ret.length; i++){
             ret[i] = i;
@@ -112,7 +155,7 @@ public abstract class TileContainer extends TilePL implements ISidedInventory {
      * slot from the given side. Args: Slot, item, side
      */
     @Override
-    public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
+    public boolean canInsertItem(int slot, ItemStack itemStack, EnumFacing side) {
         return this.isItemValidForSlot(slot, itemStack);
     }
 
@@ -121,9 +164,9 @@ public abstract class TileContainer extends TilePL implements ISidedInventory {
      * slot from the given side. Args: Slot, item, side
      */
     @Override
-    public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
+    public boolean canExtractItem(int slot, ItemStack itemStack, EnumFacing side) {
         TileSlot tileSlot = this.tileSlots.get(slot);
-        return tileSlot.slotMode == TileSlot.SlotMode.OUTPUT || tileSlot.slotMode == TileSlot.SlotMode.INOUT || itemStack.getItem() == Items.bucket;
+        return tileSlot.slotMode == TileSlot.SlotMode.OUTPUT || tileSlot.slotMode == TileSlot.SlotMode.INOUT || itemStack.getItem().hasContainerItem(itemStack);
     }
 
 
@@ -165,18 +208,18 @@ public abstract class TileContainer extends TilePL implements ISidedInventory {
         }
     }
 
-    /**
-     * When some containers are closed they call this on each slot, then drop whatever
-     * it returns as an EntityItem like when you close a workbench GUI.
-     */
-    @Override
-    public ItemStack getStackInSlotOnClosing(int index) {
-        ItemStack itemstack = this.tileSlots.get(index).getStack();
-        if (itemstack != null) {
-            this.tileSlots.get(index).putStack(null);
-        }
-        return itemstack;
-    }
+//    /**
+//     * When some containers are closed they call this on each slot, then drop whatever
+//     * it returns as an EntityItem like when you close a workbench GUI.
+//     */
+//    @Override
+//    public ItemStack getStackInSlotOnClosing(int index) {
+//        ItemStack itemstack = this.tileSlots.get(index).getStack();
+//        if (itemstack != null) {
+//            this.tileSlots.get(index).putStack(null);
+//        }
+//        return itemstack;
+//    }
 
     /**
      * Sets the given item stack to the specified slot in the inventory
@@ -195,7 +238,7 @@ public abstract class TileContainer extends TilePL implements ISidedInventory {
      * @return if the inventory is named
      */
     @Override
-    public boolean hasCustomInventoryName() {
+    public boolean hasCustomName() {
         return this.name != null && this.name.length() > 0;
     }
 
@@ -209,14 +252,14 @@ public abstract class TileContainer extends TilePL implements ISidedInventory {
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
-        return !this.isInvalid() && entityPlayer.getDistance((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+        return !this.isInvalid() && entityPlayer.getDistanceSq(pos) <= 4096;
     }
 
     @Override
-    public void openInventory() {}
+    public void openInventory(EntityPlayer player) {}
 
     @Override
-    public void closeInventory() {}
+    public void closeInventory(EntityPlayer player) {}
 
     /**
      * Return true if automation is allowed to insert the given

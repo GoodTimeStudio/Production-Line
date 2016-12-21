@@ -12,7 +12,7 @@ public class TileCSEU extends TileEUStorage {
     }
 
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "CSEU";
     }
 }

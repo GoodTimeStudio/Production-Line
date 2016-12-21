@@ -7,18 +7,26 @@ import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlotDischarge;
 import ic2.api.energy.EnergyNet;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergyAcceptor;
+import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySource;
 import ic2.api.tile.IEnergyStorage;
 import ic2.api.tile.IWrenchable;
 import ic2.core.init.MainConfig;
 import ic2.core.util.ConfigUtil;
 import ic2.core.util.StackUtil;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by BestOwl on 2015.11.27.0027.
@@ -33,15 +41,15 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
     public TileEUStorage(int tier, int maxStorage) {
         super((int) EnergyNet.instance.getPowerFromTier(tier), maxStorage, tier);
         this.redstoneMode = RedstoneMode.NONE;
-        if (!(this instanceof TileParallelSpaceSU)) {
-            this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
-            this.tileSlots.add(new TileSlotCharge(this, TileSlot.SlotMode.INPUT));
-        }
+//        if (!(this instanceof TileParallelSpaceSU)) {
+//            this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
+//            this.tileSlots.add(new TileSlotCharge(this, TileSlot.SlotMode.INPUT));
+//        }
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         if (this.energy > 0) {
             for (TileSlot tileSlot : this.tileSlots) {
                 if (tileSlot instanceof TileSlotCharge) {
@@ -55,11 +63,11 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
         }
 
         if (this.redstoneMode == RedstoneMode.OUTPUT_WHEN_REDSTONEPOWER_AND_FULLENEGRY || this.redstoneMode == RedstoneMode.NO_OUTPUT_WHEN_REDSTONEPOWER) {
-            this.isRedstonePowered = this.worldObj.isBlockIndirectlyGettingPowered(this.xCoord, this.yCoord, this.zCoord);
+            this.isRedstonePowered = this.worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0;
         }
 
         if (this.shouldEmitRedstonePower()) {
-            this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord));
+            this.worldObj.notifyBlockOfStateChange(this.pos, this.worldObj.getBlockState(this.pos).getBlock());
         }
     }
 
@@ -70,28 +78,19 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-        nbt.setShort("redstoneMode", (short) this.redstoneMode.ordinal());
-    }
-
-    /**
-     * Determine if this acceptor can accept current from an adjacent emitter in a direction.
-     * <p/>
-     * The TileEntity in the emitter parameter is what was originally added to the energy net,
-     * which may be normal in-world TileEntity, a delegate or an IMetaDelegate.
-     *
-     * @param emitter   energy emitter, may also be null or an IMetaDelegate
-     * @param direction direction the energy is being received from
-     */
-    @Override
-    public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
-        return direction.ordinal() != this.facing;
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt).setShort("redstoneMode", (short) this.redstoneMode.ordinal());
+        return nbt;
     }
 
     @Override
-    public boolean emitsEnergyTo(TileEntity tileEntity, ForgeDirection forgeDirection) {
-        return forgeDirection.ordinal() == this.facing;
+    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing enumFacing) {
+        return enumFacing != this.facing;
+    }
+
+    @Override
+    public boolean emitsEnergyTo(IEnergyAcceptor iEnergyAcceptor, EnumFacing enumFacing) {
+        return enumFacing == this.facing;
     }
 
     @Override
@@ -112,42 +111,41 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
     }
 
     @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
-        return side != this.facing;
+    public boolean setFacing(World world, BlockPos blockPos, EnumFacing side, EntityPlayer entityPlayer) {
+        if (side == this.facing) {
+            return false;
+        }
+        setFacing(side);
+        return true;
     }
 
     @Override
-    public short getFacing() {
+    public EnumFacing getFacing(World world, BlockPos blockPos) {
         return this.facing;
     }
 
     @Override
-    public void setFacing(short facing) {
+    public void setFacing(EnumFacing facing) {
         MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
         super.setFacing(facing);
         MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
     }
 
     @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+    public boolean wrenchCanRemove(World world, BlockPos blockPos, EntityPlayer entityPlayer) {
         return true;
     }
 
     @Override
-    public float getWrenchDropRate() {
-        return 1.0F;
-    }
-
-    @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        ItemStack ret = new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1,
-                this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
+    public List<ItemStack> getWrenchDrops(World world, BlockPos blockPos, IBlockState iBlockState, TileEntity tileEntity, EntityPlayer entityPlayer, int i) {
+        ItemStack ret = new ItemStack(iBlockState.getBlock(), 1,
+                iBlockState.getBlock().getMetaFromState(iBlockState));
         float energyRetainedInStorageBlockDrops = ConfigUtil.getFloat(MainConfig.get(), "balance/energyRetainedInStorageBlockDrops");
         if (energyRetainedInStorageBlockDrops > 0) {
             NBTTagCompound nbt = StackUtil.getOrCreateNbtData(ret);
             nbt.setDouble("energy", this.energy * (double)energyRetainedInStorageBlockDrops);
         }
-        return ret;
+        return Collections.singletonList(ret);
     }
 
     public boolean shouldEmitRedstonePower() {
@@ -201,7 +199,7 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
     }
 
     @Override
-    public boolean isTeleporterCompatible(ForgeDirection forgeDirection) {
+    public boolean isTeleporterCompatible(EnumFacing enumFacing) {
         return true;
     }
 

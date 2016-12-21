@@ -51,7 +51,7 @@ public class PLConfig extends Configuration {
 
     public static void init(File configFile) {
         instance = new PLConfig(configFile);
-        
+
         if (!configFile.exists()) {
             gtiLogger.log(Level.ERROR, "Cannot create ProductionLine config file");
             gtiLogger.log(Level.INFO, "Skipping config load");
@@ -59,11 +59,11 @@ public class PLConfig extends Configuration {
             instance.load();
 
             Property throwableUran238 = instance.get(CATEGORY_GENERAL, "ThrowableUran238", true);
-            throwableUran238.comment = "Allow throw uranium 238, was hit after the radiation effect";
+            throwableUran238.setComment("Allow throw uranium 238, was hit after the radiation effect");
             instance.throwableUran238 = throwableUran238.getBoolean();
 
             Property throwablePackagedSalt = instance.get(CATEGORY_GENERAL, "ThrowablePackagedSalt", true);
-            throwablePackagedSalt.comment = "Allow throw uranium 238, was hit after the salty effect";
+            throwablePackagedSalt.setComment("Allow throw uranium 238, was hit after the salty effect");
             instance.throwablePackagedSalt = throwablePackagedSalt.getBoolean();
 
             instance.explosiveFurnace = instance.get(CATEGORY_GENERAL, "ExplosiveFurnace", true).getBoolean();

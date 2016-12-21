@@ -12,7 +12,7 @@ public class TileParallelSpaceSU extends TileEUStorage {
     }
 
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "ParallelSpaceSU";
     }
 }

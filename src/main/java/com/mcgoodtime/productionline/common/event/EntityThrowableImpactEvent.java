@@ -25,9 +25,8 @@
 package com.mcgoodtime.productionline.common.event;
 
 import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
-import cpw.mods.fml.common.eventhandler.Event;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 /**
  * Created by BestOwl on 2015.12.10.0010.
@@ -36,13 +35,12 @@ import net.minecraft.util.MovingObjectPosition;
  */
 public class EntityThrowableImpactEvent extends Event {
 
-    public final MovingObjectPosition movingObjectPosition;
+    public final RayTraceResult movingObjectPosition;
     public final EntityThrownItem entityThrownItem;
-    public final ItemStack itemStack;
 
-    public EntityThrowableImpactEvent(EntityThrownItem entityThrownItem, MovingObjectPosition movingObjectPosition) {
+    public EntityThrowableImpactEvent(EntityThrownItem entityThrownItem, RayTraceResult movingObjectPosition) {
+        super();
         this.movingObjectPosition = movingObjectPosition;
         this.entityThrownItem = entityThrownItem;
-        this.itemStack = entityThrownItem.getThrowItem();
     }
 }

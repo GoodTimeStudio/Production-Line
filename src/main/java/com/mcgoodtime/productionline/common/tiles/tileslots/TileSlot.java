@@ -53,12 +53,13 @@ public class TileSlot {
         return this.item;
     }
 
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         NBTTagCompound nbtTagCompound = new NBTTagCompound();
         if (this.item != null) {
             this.item.writeToNBT(nbtTagCompound);
         }
         nbt.setTag("TileSlot", nbtTagCompound);
+        return nbt;
     }
 
     public void readFromNBT(NBTTagCompound nbt) {

@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
@@ -11,52 +11,51 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
     }
 }
 
-apply plugin: 'forge'
-//apply plugin: 'checkstyle'
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
 
-version = "dev.0.3" + getBuildNumber()
+version = "dev.0.4" + getBuildNumber()
 group= "com.mcgoodtime.productionline"
 archivesBaseName = "ProductionLine"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+minecraft {
+    version = "1.10.2-12.18.3.2185"
+    runDir = "run"
+    mappings = "snapshot_20161111"
+}
 
 repositories {
     maven {
         name = "ic2"
-        url = "http://maven.ic2.player.to/"
+        url = "http://maven.ic2.player.to"
     }
     maven {
         name = "sponge"
         url = "http://repo.spongepowered.org/maven"
     }
-    maven {
-        name = "chickenbones"
-        url = "http://chickenbones.net/maven"
-    }
-}
-
-configurations {
-    shade
-    provided
-    compile.extendsFrom configurations.shade
+	maven {
+		name = "jei"
+		url = "http://dvs1.progwml6.com/files/maven"
+	}
 }
 
 dependencies {
-    shade 'org.spongepowered:mixin:0.5.14-SNAPSHOT'
-    compile 'net.industrial-craft:industrialcraft-2:2.2.800-experimental:dev' //adds ic2 to the dev env
-    provided 'codechicken:NotEnoughItems:1.7.10-1.0.4.79:dev'
-    provided 'codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev'
-    provided 'codechicken:CodeChickenLib:1.7.10-1.1.1.99:dev'
-    //checkstyle 'com.puppycrawl.tools:checkstyle:6.7' //GRADLE-3314 gradle bug, not resolved
+    compile ('org.spongepowered:mixin:0.5.+') {
+        exclude module: 'launchwrapper'
+    }
+    compile 'net.industrial-craft:industrialcraft-2:2.6.130-ex110:dev' //adds ic2 to the dev env
+	compile 'mezz.jei:jei_1.10.2:3.12.2.290'
 }
 
 jar {
-	configurations.shade.copyRecursive().setTransitive(false).each { artifact ->
-		from (zipTree(artifact))
-	}
-	
     manifest {
 		attributes (
             'FMLCorePlugin': 'com.mcgoodtime.productionline.common.core.coremod.PLCore',
@@ -70,60 +69,40 @@ jar {
     }
 }
 
-minecraft {
-    version = "1.7.10-10.13.4.1558-1.7.10"
-    runDir = "eclipse"
+mixin {
+    // Specify "notch" or "searge" here
+    defaultObfuscationEnv searge
+    add sourceSets.main, "mixins.forge.refmap.json"
 }
-
 
 compileJava {
 
     options.encoding = 'UTF-8'
-    options.compilerArgs += [
+    /*options.compilerArgs += [
             '-Xlint:-processing',
             "-AreobfSrgFile=${project.file('build/srgs/mcp-srg.srg').canonicalPath}"
-    ]
+    ]*/
 }
 
-task copySrgs(type: Copy, dependsOn: 'genSrgs') {
-    from project.plugins.getPlugin('forge').delayedFile('{SRG_DIR}')
-
-    include '**/*.srg'
-    into 'build/srgs'
+/*task copySrgs(type: Copy, dependsOn: 'genSrgs') {
+    from project.plugins.getPlugin('net.minecraftforge.gradle.forge').delayedFile('{SRG_DIR}')
+*/
+//    include '**/*.srg'
+/*    into 'build/srgs'
 }
-compileJava.dependsOn copySrgs
+compileJava.dependsOn copySrgs*/
 
-sourceSets {
-    main {
-        compileClasspath += configurations.provided
-        java {
-            srcDir 'src/main/java'
-        }
-        resources {
-            srcDir 'src/main/resources'
-        }
-    }
-}
-
-idea { 
-    module {
-        scopes.PROVIDED.plus += [configurations.provided]
-        inheritOutputDirs = true 
-    } 
-}
-
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'dev'
-}
+idea.module.inheritOutputDirs = true
 
 processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
+	
     from (sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
         expand 'version' : project.version, 'mcversion' : project.minecraft.version
     }
+	
     from (sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }

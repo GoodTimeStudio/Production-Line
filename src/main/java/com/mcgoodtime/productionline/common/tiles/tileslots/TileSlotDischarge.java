@@ -50,7 +50,7 @@ public class TileSlotDischarge extends TileSlot {
     @SuppressWarnings("NumericOverflow")
     @Override
     public boolean canInput(ItemStack itemStack) {
-        return itemStack != null && (!(itemStack.getItem() != Items.redstone && !(itemStack.getItem() instanceof ItemBatterySU)) || ElectricItem.manager.discharge(itemStack, 1.0D / 0.0, 1, true, true, true) > 0.0D);
+        return itemStack != null && (!(itemStack.getItem() != Items.REDSTONE && !(itemStack.getItem() instanceof ItemBatterySU)) || ElectricItem.manager.discharge(itemStack, Double.POSITIVE_INFINITY, 1, true, true, true) > 0.0D);
     }
 
     public double discharge(double amount, boolean ignoreLimit) {
@@ -63,7 +63,7 @@ public class TileSlotDischarge extends TileSlot {
             } else {
                 double realAmount = ElectricItem.manager.discharge(stack, amount, ((TileElectricContainer) this.tile).tier, ignoreLimit, true, false);
                 if(realAmount <= 0.0D) {
-                    realAmount = Info.itemEnergy.getEnergyValue(stack);
+                    realAmount = Info.itemInfo.getEnergyValue(stack);
                     if(realAmount <= 0.0D) {
                         return 0.0D;
                     }

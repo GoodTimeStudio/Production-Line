@@ -3,13 +3,20 @@ package com.mcgoodtime.productionline.common.tiles;
 import com.mcgoodtime.productionline.common.init.PLItems;
 import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlot;
 import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlotCharge;
+import ic2.api.energy.tile.IEnergyAcceptor;
 import ic2.api.tile.IWrenchable;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.biome.BiomeGenDesert;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeDesert;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by BestOwl on 2015.12.5.0005.
@@ -30,8 +37,8 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         if (!this.worldObj.isRemote) {
             boolean needUpdate = false;
 
@@ -82,10 +89,10 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
     }
 
     public void updateSunVisible() {
-        int skylight = this.worldObj.getBlockLightValue(this.xCoord, 255, this.zCoord);
-        boolean hasSky = !this.worldObj.provider.hasNoSky;
-        boolean canSeeSky = this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord);
-        boolean isDesert = this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord) instanceof BiomeGenDesert;
+        int skylight = this.worldObj.getBlockLightOpacity(new BlockPos(pos.getX(), 255, pos.getZ()));
+        boolean hasSky = !this.worldObj.provider.getHasNoSky();
+        boolean canSeeSky = this.worldObj.canSeeSky(pos.up());
+        boolean isDesert = this.worldObj.getBiomeForCoordsBody(pos) instanceof BiomeDesert;
         this.sunIsVisible = skylight > 4 && hasSky && canSeeSky && (isDesert || !this.worldObj.isRaining() && !this.worldObj.isThundering());
     }
 
@@ -112,38 +119,33 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
      * @return Whether energy should be emitted
      */
     @Override
-    public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
-        return direction != ForgeDirection.UP;
+    public boolean emitsEnergyTo(IEnergyAcceptor receiver, EnumFacing direction) {
+        return direction != EnumFacing.UP;
     }
 
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "AdvSolar";
     }
 
     @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int i) {
-        return false;
-    }
-
-    @Override
-    public short getFacing() {
+    public EnumFacing getFacing(World world, BlockPos blockPos) {
         return this.facing;
     }
 
     @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+    public boolean setFacing(World world, BlockPos blockPos, EnumFacing enumFacing, EntityPlayer entityPlayer) {
+        setFacing(enumFacing);
         return true;
     }
 
     @Override
-    public float getWrenchDropRate() {
-        return 1.0F;
+    public boolean wrenchCanRemove(World world, BlockPos blockPos, EntityPlayer entityPlayer) {
+        return true;
     }
 
     @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1,
-                this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
+    public List<ItemStack> getWrenchDrops(World world, BlockPos blockPos, IBlockState iBlockState, TileEntity tileEntity, EntityPlayer entityPlayer, int i) {
+        return Collections.singletonList(new ItemStack(iBlockState.getBlock(), 1, iBlockState.getBlock().getMetaFromState(iBlockState)));
     }
 }

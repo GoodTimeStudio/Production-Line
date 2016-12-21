@@ -31,9 +31,9 @@ import com.mcgoodtime.productionline.common.network.message.MessageEUStorage;
 import com.mcgoodtime.productionline.common.network.message.MessageHandlerBase;
 import com.mcgoodtime.productionline.common.tiles.TilePL;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * Created by BestOwl on 2015.10.30.0030.
@@ -57,8 +57,8 @@ public class PLNetwork {
 
     public static void updateBlockDisplayState(TilePL tile) {
         network.sendToAllAround(new MessageBlockDisplayState(tile),
-                new NetworkRegistry.TargetPoint(tile.getWorldObj().getWorldInfo().getVanillaDimension(),
-                tile.xCoord, tile.yCoord, tile.zCoord, 64));
+                new NetworkRegistry.TargetPoint(tile.getWorld().provider.getDimension(),
+                tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 64));
     }
 
     public static void updateTileEUStorage(TileEUStorage tile) {

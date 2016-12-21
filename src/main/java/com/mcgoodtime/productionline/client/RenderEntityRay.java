@@ -25,8 +25,11 @@
 package com.mcgoodtime.productionline.client;
 
 import com.mcgoodtime.productionline.common.core.ProductionLine;
+import com.mcgoodtime.productionline.common.entity.EntityRay;
 import net.minecraft.client.renderer.entity.RenderArrow;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -34,12 +37,20 @@ import net.minecraft.util.ResourceLocation;
  *
  * @author BestOwl
  */
-public class RenderEntityRay extends RenderArrow {
+public class RenderEntityRay<T extends EntityRay> extends RenderArrow<T> {
+
+    public RenderEntityRay(RenderManager renderManagerIn) {
+        super(renderManagerIn);
+    }
+
+
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     *
+     * @param entity
      */
     @Override
-    protected ResourceLocation getEntityTexture(Entity entity) {
+    protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(ProductionLine.RESOURCE_DOMAIN, "textures/entity/ray.png");
     }
 }

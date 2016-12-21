@@ -24,9 +24,10 @@
  */
 package com.mcgoodtime.productionline.common.core.coremod;
 
-import cpw.mods.fml.relauncher.IFMLCallHook;
+import net.minecraftforge.fml.relauncher.IFMLCallHook;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
+import org.spongepowered.asm.mixin.Mixins;
 
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class PLSetup implements IFMLCallHook {
     @Override
     public Void call() throws Exception {
         MixinBootstrap.init();
-        MixinEnvironment.getDefaultEnvironment().addConfiguration("mixins.productionline.core.json");
+        Mixins.addConfiguration("mixins.productionline.core.json");
         return null;
     }
 }

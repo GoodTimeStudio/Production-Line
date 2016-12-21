@@ -1,9 +1,9 @@
 package com.mcgoodtime.productionline.common.network.message;
 
 import com.mcgoodtime.productionline.common.tiles.TilePL;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -20,9 +20,7 @@ public abstract class MessageBase implements IMessage {
 
     public MessageBase(TilePL tile) {
         this.nbt = new NBTTagCompound();
-        this.nbt.setInteger("xPos", tile.xCoord);
-        this.nbt.setInteger("yPos", tile.yCoord);
-        this.nbt.setInteger("zPos", tile.zCoord);
+        this.nbt.setLong("pos", tile.getPos().toLong());
     }
 
     protected abstract IMessage handlerMessage(MessageBase message, MessageContext ctx);

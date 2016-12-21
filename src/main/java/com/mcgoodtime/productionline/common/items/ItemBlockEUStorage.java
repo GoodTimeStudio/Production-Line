@@ -3,13 +3,16 @@ package com.mcgoodtime.productionline.common.items;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import ic2.core.util.StackUtil;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 /**
@@ -26,59 +29,33 @@ public class ItemBlockEUStorage extends ItemBlockPL {
     /**
      * allows items to add custom lines of information to the mouseover description
      */
-    @SuppressWarnings("unchecked")
+    @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
+    public void addInformation(@Nonnull ItemStack itemStack, @Nonnull EntityPlayer player, @Nonnull List<String> list, boolean bool) {
         super.addInformation(itemStack, player, list, bool);
         int meta = itemStack.getItemDamage();
-        String info = StatCollector.translateToLocal("ic2.item.tooltip.Output") + " ";
+        String info = I18n.format("ic2.item.tooltip.Output") + " ";
         switch (meta) {
             case 0:
                 info += "8192EU/t";
-                break;
-            case 1:
-                info += "128EU/t";
-                break;
-            case 2:
-                info += "32768EU/t";
-                break;
         }
-        info += " " + StatCollector.translateToLocal("ic2.item.tooltip.Capacity") + " ";
+        info += " " + I18n.format("ic2.item.tooltip.Capacity") + " ";
         switch (meta) {
             case 0:
                 info += "100m EU";
-                break;
-            case 1:
-                info += "720k EU";
-                break;
-            case 2:
-                info += "250m EU";
-                break;
         }
         list.add(info);
         NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
-        String internalEnergy = StatCollector.translateToLocal("ic2.item.tooltip.Store") + " " + nbt.getInteger("energy") + " EU";
+        String internalEnergy = I18n.format("ic2.item.tooltip.Store") + " " + nbt.getInteger("energy") + " EU";
         list.add(internalEnergy);
-
-        switch (meta) {
-            case 2:
-                int i = 1;
-                String unLocal = "tile.ProductionLine.block.ParallelSpaceSU.desc" + i;
-                list.add(" ");
-                while (StatCollector.canTranslate(unLocal)) {
-                    list.add(StatCollector.translateToLocal(unLocal));
-                    i++;
-                    unLocal = "tile.ProductionLine.block.ParallelSpaceSU.desc" + i;
-                }
-        }
     }
 
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
-    @SuppressWarnings("unchecked")
+    @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+    public void getSubItems(@Nonnull Item item, @Nonnull CreativeTabs creativeTabs, @Nonnull List<ItemStack> list) {
         super.getSubItems(item, creativeTabs, list);
         ItemStack itemStack;
         NBTTagCompound nbt;

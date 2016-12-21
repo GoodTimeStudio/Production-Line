@@ -22,22 +22,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.mcgoodtime.productionline.common.tiles;
 
 import com.mcgoodtime.productionline.common.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.productionline.common.recipes.RecipePart;
 import com.mcgoodtime.productionline.common.tiles.tileslots.*;
+import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.tile.IWrenchable;
 import ic2.core.upgrade.IUpgradableBlock;
 import ic2.core.upgrade.IUpgradeItem;
 import ic2.core.upgrade.UpgradableProperty;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
+import java.util.Collections;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -64,7 +71,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     }
 
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "CarbonizeFurnace";
     }
 
@@ -76,16 +83,16 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setShort("requireEnergy", (short) requireEnergy);
         nbt.setShort("Progress", (short) progress);
+        return nbt;
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-
+    public void update() {
+        super.update();
         if (!this.worldObj.isRemote) {
             boolean needUpdate = false;
 
@@ -185,8 +192,8 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     }
 
     @Override
-    public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
-        return direction != ForgeDirection.UP && super.acceptsEnergyFrom(emitter, direction);
+    public boolean acceptsEnergyFrom(IEnergyEmitter iEnergyEmitter, EnumFacing enumFacing) {
+        return enumFacing != EnumFacing.UP && super.acceptsEnergyFrom(iEnergyEmitter, enumFacing);
     }
 
     @Override
@@ -210,32 +217,23 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     }
 
     @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int i) {
-        return i != this.facing && i != 0 && i != 1;
-    }
-
-    @Override
-    public short getFacing() {
+    public EnumFacing getFacing(World world, BlockPos blockPos) {
         return this.facing;
     }
 
     @Override
-    public void setFacing(short i) {
-        super.setFacing(i);
-    }
-
-    @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+    public boolean setFacing(World world, BlockPos blockPos, EnumFacing enumFacing, EntityPlayer entityPlayer) {
+        setFacing(enumFacing);
         return true;
     }
 
     @Override
-    public float getWrenchDropRate() {
-        return 1.0F;
+    public boolean wrenchCanRemove(World world, BlockPos blockPos, EntityPlayer entityPlayer) {
+        return true;
     }
 
     @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
+    public List<ItemStack> getWrenchDrops(World world, BlockPos blockPos, IBlockState iBlockState, TileEntity tileEntity, EntityPlayer entityPlayer, int i) {
+        return Collections.singletonList(new ItemStack(iBlockState.getBlock(), 1, iBlockState.getBlock().getMetaFromState(iBlockState)));
     }
 }

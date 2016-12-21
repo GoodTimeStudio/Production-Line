@@ -25,10 +25,14 @@
 package com.mcgoodtime.productionline.common.network.message;
 
 import com.mcgoodtime.productionline.common.tiles.TilePL;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Created by BestOwl on 2015.10.18.0018.
@@ -42,21 +46,20 @@ public class MessageBlockDisplayState extends MessageBase {
     public MessageBlockDisplayState(TilePL tile) {
         super(tile);
         nbt.setBoolean("active", tile.active);
-        nbt.setShort("facing", tile.facing);
+        nbt.setShort("facing", (short) tile.facing.ordinal());
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     protected IMessage handlerMessage(MessageBase message, MessageContext ctx) {
-        WorldClient client = Minecraft.getMinecraft().theWorld;
-        int x = message.nbt.getInteger("xPos");
-        int y = message.nbt.getInteger("yPos");
-        int z = message.nbt.getInteger("zPos");
-        TilePL tilePL = (TilePL) client.getTileEntity(x, y, z);
+        WorldClient world = Minecraft.getMinecraft().theWorld;
+        BlockPos pos = BlockPos.fromLong(message.nbt.getLong("pos"));
+        TilePL tilePL = (TilePL) world.getTileEntity(pos);
         if (tilePL != null) {
             tilePL.active = message.nbt.getBoolean("active");
-            tilePL.facing = message.nbt.getShort("facing");
-            client.markBlockForUpdate(x, y, z);
-            client.notifyBlockChange(x, y, z, client.getBlock(x, y, z));
+            tilePL.facing = EnumFacing.VALUES[message.nbt.getShort("facing")];
+            world.scheduleUpdate(pos, world.getBlockState(pos).getBlock(), 0);
+            world.notifyBlockOfStateChange(pos, world.getBlockState(pos).getBlock());
         }
         return null;
     }

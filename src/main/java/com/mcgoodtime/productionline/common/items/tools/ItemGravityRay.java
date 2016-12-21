@@ -1,35 +1,40 @@
 package com.mcgoodtime.productionline.common.items.tools;
 
+import com.mcgoodtime.productionline.client.IItemModelProvider;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.entity.EntityRay;
 import com.mcgoodtime.productionline.common.items.ItemElectricPL;
 import ic2.api.item.ElectricItem;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by BestOwl on 2015.12.7.0007.
  *
  * @author BestOwl
  */
-public class ItemGravityRay extends ItemElectricPL {
-
-    private IIcon[] icons;
+public class ItemGravityRay extends ItemElectricPL implements IItemModelProvider {
 
     public ItemGravityRay() {
-        super("GravityRay", 3, (int) 11E6);
+        super("gravity_ray", 3, (int) 11E6);
     }
 
     /**
      * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
      */
     @Override
-    public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer player, int itemInUseCount) {
-        if (ElectricItem.manager.getCharge(itemStack) >= 100 || player.capabilities.isCreativeMode) {
+    public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityLivingBase player, int itemInUseCount) {
+        if (ElectricItem.manager.getCharge(itemStack) >= 100) {
             int i = this.getMaxItemUseDuration(itemStack) - itemInUseCount;
 
             float damge = (float) i / 20.0F;
@@ -41,8 +46,10 @@ public class ItemGravityRay extends ItemElectricPL {
                 damge = 1.0F;
             }
 
-            world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + damge * 0.5F);
-            if (!player.capabilities.isCreativeMode) {
+            world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT,
+                    SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + damge * 0.5F);
+            if (!(player instanceof EntityPlayer
+                    && ((EntityPlayer) player).capabilities.isCreativeMode)) {
                 ElectricItem.manager.discharge(itemStack, 100, this.tier, false, true, false);
             }
             if (!world.isRemote) {
@@ -55,19 +62,22 @@ public class ItemGravityRay extends ItemElectricPL {
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-        if (entityPlayer.capabilities.isCreativeMode || ElectricItem.manager.getCharge(itemStack) >= 100) {
-            entityPlayer.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
+    @Nonnull
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+        if (player.capabilities.isCreativeMode || ElectricItem.manager.getCharge(stack) >= 100) {
+            player.setActiveHand(hand);
+            return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }
-        return itemStack;
+        return new ActionResult<>(EnumActionResult.PASS, stack);
     }
 
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
     @Override
+    @Nonnull
     public EnumAction getItemUseAction(ItemStack itemStack) {
-        return EnumAction.bow;
+        return EnumAction.BOW;
     }
 
     /**
@@ -78,43 +88,18 @@ public class ItemGravityRay extends ItemElectricPL {
         return 72000;
     }
 
+    @Override
+    public String getModelResourcePath() {
+        return "tool";
+    }
+
     /**
-     * Player, Render pass, and item usage sensitive version of getIconIndex.
+     * Get custom resource name.
+     * To use default resource name, return null.
      *
-     * @param stack        The item stack to get the icon for. (Usually this, and usingItem will be the same if usingItem is not null)
-     * @param renderPass   The pass to get the icon for, 0 is default.
-     * @param player       The player holding the item
-     * @param usingItem    The item the player is actively using. Can be null if not using anything.
-     * @param useRemaining The ticks remaining for the active item.
-     * @return The icon index
      */
     @Override
-    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
-        int i = this.getMaxItemUseDuration(stack) - useRemaining;
-        if (useRemaining == 0) {
-            return this.itemIcon;
-        }
-        else if (i >= 18) {
-            return this.icons[2];
-        }
-        else if (i > 13) {
-            return this.icons[1];
-        }
-        else if (i > 0) {
-            return this.icons[0];
-        }
-        else {
-            return this.itemIcon;
-        }
+    public String getModelResourceName(int meta) {
+        return null;
     }
-
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(ProductionLine.RESOURCE_DOMAIN + ":tools/" + this.getIconName() + "_standby");
-        this.icons = new IIcon[3];
-        for (int i = 0; i < 3; i++) {
-            this.icons[i] = iconRegister.registerIcon(ProductionLine.RESOURCE_DOMAIN + ":tools/" + this.getIconName() + "_pulling_" + i);
-        }
-    }
-
 }

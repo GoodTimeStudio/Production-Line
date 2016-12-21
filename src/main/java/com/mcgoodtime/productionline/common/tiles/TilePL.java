@@ -28,8 +28,14 @@ import com.mcgoodtime.productionline.common.network.PLNetwork;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by suhao on 2015.7.1.
@@ -38,37 +44,41 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TilePL extends TileEntity {
 
-    public short facing;
+    public EnumFacing facing;
     public boolean active;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        facing = nbt.getShort("facing");
+        facing = EnumFacing.VALUES[nbt.getShort("facing")];
         active = nbt.getBoolean("active");
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-        nbt.setShort("facing", facing);
+    @Nonnull
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        nbt = super.writeToNBT(nbt);
+        nbt.setShort("facing", (short) facing.ordinal());
         nbt.setBoolean("active", active);
+        return nbt;
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+    @SideOnly(Side.CLIENT)
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
-        NBTTagCompound nbt = pkt.func_148857_g();
-        this.facing = nbt.getShort("facing");
+        NBTTagCompound nbt = pkt.getNbtCompound();
+        facing = EnumFacing.VALUES[nbt.getShort("facing")];
         this.active = nbt.getBoolean("active");
     }
 
+    @Nullable
     @Override
-    public Packet getDescriptionPacket() {
+    public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound sync = new NBTTagCompound();
-        sync.setShort("facing", this.facing);
+        sync.setShort("facing", (short) facing.ordinal());
         sync.setBoolean("active", this.active);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, sync);
+        return new SPacketUpdateTileEntity(this.pos, 1, sync);
     }
 
     public void setActive(boolean active) {
@@ -76,7 +86,7 @@ public class TilePL extends TileEntity {
         PLNetwork.updateBlockDisplayState(this);
     }
 
-    public void setFacing(short facing) {
+    public void setFacing(EnumFacing facing) {
         this.facing = facing;
         PLNetwork.updateBlockDisplayState(this);
     }

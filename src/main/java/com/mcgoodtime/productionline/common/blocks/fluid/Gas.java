@@ -24,13 +24,16 @@
  */
 package com.mcgoodtime.productionline.common.blocks.fluid;
 
+import static com.mcgoodtime.productionline.common.core.ProductionLine.loc;
 import net.minecraftforge.fluids.Fluid;
 
 public class Gas extends Fluid {
-    public static Fluid gasNatural = new Gas("Natural Gas")
-        .setGaseous(true);
+    public static Fluid gasNatural = new Gas("Natural Gas",
+            "blocks/fluids/Natural Gas_still",
+            "blocks/fluids/Natural Gas_still");
 
-    public Gas(String fluidName) {
-        super(fluidName);
+    public Gas(String name, String locStill, String locFlow) {
+        super(name, loc(locStill), loc(locFlow));
+        setGaseous(true);
     }
 }

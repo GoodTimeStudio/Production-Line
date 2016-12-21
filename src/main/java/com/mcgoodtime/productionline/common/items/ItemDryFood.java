@@ -1,13 +1,14 @@
 package com.mcgoodtime.productionline.common.items;
 
-import cpw.mods.fml.common.registry.GameData;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class ItemDryFood extends ItemPL {
 
-    public List<ItemFood> foodList = new ArrayList<ItemFood>();
+    public List<ItemFood> foodList = new ArrayList<>();
 
     public ItemDryFood() {
         super("ItemDryFood");
@@ -27,7 +28,7 @@ public class ItemDryFood extends ItemPL {
         this.setHasSubtypes(true);
         this.setMaxStackSize(128);
 
-        for (Object item : (Iterable) GameData.getItemRegistry()) {
+        for (Item item : Item.REGISTRY) {
             if (item instanceof ItemFood) {
                 this.foodList.add((ItemFood) item);
             }
@@ -42,17 +43,9 @@ public class ItemDryFood extends ItemPL {
         return this.foodList.size();
     }
 
-    /**
-     * Gets an icon index based on an item's damage value
-     */
+    @SideOnly(Side.CLIENT)
     @Override
-    public IIcon getIconFromDamage(int meta) {
-        return this.foodList.get(meta).getIconFromDamage(0);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean bool) {
         super.addInformation(itemStack, player, list, bool);
         int meta = itemStack.getItemDamage();
         list.add(this.foodList.get(meta).getItemStackDisplayName(itemStack));
@@ -65,8 +58,8 @@ public class ItemDryFood extends ItemPL {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-        for(int meta = 0; meta < this.getMaxDamage(); ++meta) {
+    public void getSubItems(@Nonnull Item item, CreativeTabs creativeTabs, List list) {
+        for (int meta = 0; meta < this.getMaxDamage(); ++meta) {
             ItemStack stack = new ItemStack(this, 1, meta);
             list.add(stack);
         }

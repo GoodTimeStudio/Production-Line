@@ -35,7 +35,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class PLOreDictionary {
 
     public static void init() {
-        OreDictionary.registerOre("paper", Items.paper);
+        OreDictionary.registerOre("paper", Items.PAPER);
         OreDictionary.registerOre("paper", PLItems.rigidPaper);
 
         OreDictionary.registerOre("advTreetap", PLItems.ironTreetap);

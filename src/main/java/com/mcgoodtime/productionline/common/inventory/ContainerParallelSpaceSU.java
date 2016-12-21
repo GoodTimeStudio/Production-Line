@@ -3,7 +3,9 @@ package com.mcgoodtime.productionline.common.inventory;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileParallelSpaceSU;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Created by BestOwl on 2015.11.29.0029.
@@ -20,10 +22,10 @@ public class ContainerParallelSpaceSU extends ContainerPL<TileParallelSpaceSU> {
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting iCrafting) {
-        super.addCraftingToCrafters(iCrafting);
-        iCrafting.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
-        iCrafting.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
+    public void addListener(IContainerListener listener) {
+        super.addListener(listener);
+        listener.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
+        listener.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
     }
 
     /**
@@ -33,12 +35,12 @@ public class ContainerParallelSpaceSU extends ContainerPL<TileParallelSpaceSU> {
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (Object object : this.crafters) {
+        for (IContainerListener object : this.listeners) {
             if (this.lastEnergy != this.tile.energy) {
-                ((ICrafting) object).sendProgressBarUpdate(this, 0, (int) this.tile.energy);
+                object.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
             }
             if (this.lastMode != this.tile.redstoneMode.ordinal()) {
-                ((ICrafting) object).sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
+                object.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
             }
         }
 
@@ -47,6 +49,7 @@ public class ContainerParallelSpaceSU extends ContainerPL<TileParallelSpaceSU> {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int var) {
         super.updateProgressBar(id, var);
         switch (id) {

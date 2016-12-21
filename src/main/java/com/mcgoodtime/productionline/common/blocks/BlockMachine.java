@@ -22,35 +22,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.mcgoodtime.productionline.common.blocks;
 
-import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.core.GuiHandler;
+import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.items.ItemBlockPL;
 import com.mcgoodtime.productionline.common.tiles.TileCarbonizeFurnace;
-import com.mcgoodtime.productionline.common.tiles.TilePL;
 import com.mcgoodtime.productionline.common.tiles.TileHeatDryer;
-import cpw.mods.fml.common.registry.GameRegistry;
+import com.mcgoodtime.productionline.common.tiles.TilePL;
 import ic2.api.item.IC2Items;
-import ic2.core.block.BlockTextureStitched;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_NAME;
-import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
+import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
 
 /**
  * Created by BestOwl on 2015.11.22.0022.
@@ -59,16 +67,17 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_
  * @since 0.2
  */
 public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
-    private static List<String> internalNameList = new ArrayList<String>();
-    public IIcon textures[][];
+    private static List<String> internalNameList = new ArrayList<>();
+    private PropertyEnum<Type> property = PropertyEnum.create("type", Type.class);
 
     static {
-        internalNameList.add("CarbonizeFurnace");
-        internalNameList.add("HeatDryer");
+        for (Type type : Type.values()) {
+            internalNameList.add(type.getName());
+        }
     }
 
     public BlockMachine() {
-        super(Material.iron, "BlockMachine");
+        super(Material.IRON, "BlockMachine");
         this.setHardness(2.0F);
         for (int i = 0; i < this.getMaxMeta(); i++) {
             GameRegistry.registerTileEntity(this.getTileEntityClass(i), internalNameList.get(i));
@@ -76,6 +85,14 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
 
         PLBlocks.carbonizeFurnace = new ItemStack(this, 1, 0);
         PLBlocks.heatDryer = new ItemStack(this, 1, 1);
+    }
+
+    @Override
+    @Nonnull
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer.Builder(this)
+                .add(property)
+                .build();
     }
 
     @Override
@@ -87,112 +104,73 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
      * Called upon block activation (right click on the block.)
      */
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f1, float f2, float f3) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
-            GuiHandler.EnumGui gui = this.getGui(world.getBlockMetadata(x, y, z));
+            GuiHandler.EnumGui gui = this.getGui(state.getValue(property));
             if (gui != null) {
-                player.openGui(ProductionLine.instance, gui.ordinal(), world, x, y, z);
+                player.openGui(ProductionLine.getInstance(), gui.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
             }
-        } else {
-            player.isInvisibleToPlayer(player);
         }
         return true;
     }
 
-    private GuiHandler.EnumGui getGui(int meta) {
-        switch (meta) {
-            case 0: return GuiHandler.EnumGui.CarbonizeFurnace;
-            case 1: return GuiHandler.EnumGui.HeatDryer;
-            default: return null;
+
+    private GuiHandler.EnumGui getGui(Type type) {
+        switch (type) {
+            case CARBONIZE_FURNACE:
+                return GuiHandler.EnumGui.CarbonizeFurnace;
+            case HEAT_DRYER:
+                return GuiHandler.EnumGui.HeatDryer;
+            default:
+                return null;
         }
     }
 
     @Override
     protected Class<? extends TilePL> getTileEntityClass(int meta) {
         switch (meta) {
-            case 0: return TileCarbonizeFurnace.class;
-            case 1: return TileHeatDryer.class;
-            default: return null;
+            case 0:
+                return TileCarbonizeFurnace.class;
+            case 1:
+                return TileHeatDryer.class;
+            default:
+                return null;
         }
     }
 
     @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        switch (world.getBlockMetadata(x, y, z)) {
-            case 0:
-                if ( ((TilePL)world.getTileEntity(x, y, z)).active) {
-                    float f2;
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
+        switch (state.getValue(property)) {
+            case CARBONIZE_FURNACE:
+                TileEntity te = world.getTileEntity(pos);
+                if (!(te instanceof TilePL)) {
+                    return;
+                }
+                if (((TilePL) te).active) {
                     float fmod;
                     float f1mod;
                     float f2mod;
 
-                    float f = (float)x + 1.0F;
-                    float f1 = (float)y + 1.0F;
-                    f2 = (float)z + 1.0F;
+                    float f = (float) pos.getX() + 1.0F;
+                    float f1 = (float) pos.getY() + 1.0F;
+                    float f2 = (float) pos.getZ() + 1.0F;
 
-                    for(int i = 0; i < 4; ++i) {
+                    for (int i = 0; i < 4; ++i) {
                         fmod = -0.2F - random.nextFloat() * 0.6F;
                         f1mod = -0.1F + random.nextFloat() * 0.2F;
                         f2mod = -0.2F - random.nextFloat() * 0.6F;
-                        world.spawnParticle("smoke", (double)(f + fmod), (double)(f1 + f1mod), (double)(f2 + f2mod), 0.0D, 0.0D, 0.0D);
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, (double) (f + fmod), (double) (f1 + f1mod), (double) (f2 + f2mod), 0.0D, 0.0D, 0.0D);
                     }
                 }
-        }
-    }
+                break;
 
-    //-----------------------
-    //-----------------------
-
-    /**
-     * World only
-     */
-    @Override
-    public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
-        if (iBlockAccess.getTileEntity(x, y, z) instanceof TilePL) {
-            int facing = ((TilePL) iBlockAccess.getTileEntity(x, y, z)).facing;
-            boolean isBurn = ((TilePL) iBlockAccess.getTileEntity(x, y, z)).active;
-
-            int i = DIRECTION[facing][side];
-            if (isBurn) {
-                i += 6;
-            }
-
-            return textures[iBlockAccess.getBlockMetadata(x, y, z)][i];
-        }
-        return null;
-    }
-
-    /**
-     * Hand only
-     * side:
-     * 1:top  5:east  3:south
-     * 0:low  4:west  2:north
-     *
-     */
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        return this.textures[meta][DIRECTION[3][side]];
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister iir) {
-        this.textures = new IIcon[this.getMaxMeta()][12];
-
-        for (int meta = 0; meta < this.getMaxMeta(); meta++) {
-            for(int burn = 0; burn < 2; ++burn) {
-                for(int side = 0; side < 6; ++side) {
-                    int subIndex = burn * 6 + side;
-                    String name = RESOURCE_DOMAIN + ":" + "block" + this.getInternalName(meta) + ":" + subIndex;
-                    BlockTextureStitched texture = new BlockTextureStitched(name, subIndex);
-                    this.textures[meta][subIndex] = texture;
-                    ((TextureMap)iir).setTextureEntry(name, texture);
-                }
-            }
+            default:
         }
     }
 
     @Override
-    public Item getItemDropped(int var1, Random random, int var2) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return IC2Items.getItem("machine").getItem();
     }
 
@@ -211,6 +189,7 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
 
     /**
      * Get block's unlocalized name
+     *
      * @return unlocalized name
      */
     @Override
@@ -221,5 +200,23 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
     @Override
     public String getInternalName(int meta) {
         return internalNameList.get(meta);
+    }
+
+    public enum Type implements IStringSerializable {
+        CARBONIZE_FURNACE("CarbonizeFurnace"),
+        HEAT_DRYER("HeatDryer"),
+        ;
+
+        private final String name;
+
+        Type(String name) {
+            this.name = name;
+        }
+
+        @Override
+        @Nonnull
+        public String getName() {
+            return name;
+        }
     }
 }

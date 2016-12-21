@@ -25,15 +25,37 @@
 
 package com.mcgoodtime.productionline.common.core;
 
-import com.mcgoodtime.productionline.client.gui.*;
-import com.mcgoodtime.productionline.common.inventory.*;
-import com.mcgoodtime.productionline.common.tiles.*;
+//import com.mcgoodtime.productionline.client.gui.*;
+//import com.mcgoodtime.productionline.common.inventory.*;
+//import com.mcgoodtime.productionline.common.tiles.*;
+//import com.mcgoodtime.productionline.common.tiles.eustorage.TileCSEU;
+//import com.mcgoodtime.productionline.common.tiles.eustorage.TileEVSU;
+//import com.mcgoodtime.productionline.common.tiles.eustorage.TileParallelSpaceSU;
+import com.mcgoodtime.productionline.client.gui.GuiAdvSolar;
+import com.mcgoodtime.productionline.client.gui.GuiCarbonizeFurnace;
+import com.mcgoodtime.productionline.client.gui.GuiEUStorage;
+import com.mcgoodtime.productionline.client.gui.GuiFluidKineticGenerator;
+import com.mcgoodtime.productionline.client.gui.GuiHeatDryer;
+import com.mcgoodtime.productionline.client.gui.GuiParallelSpaceSU;
+import com.mcgoodtime.productionline.common.inventory.ContainerAdvSolar;
+import com.mcgoodtime.productionline.common.inventory.ContainerCarbonizeFurnace;
+import com.mcgoodtime.productionline.common.inventory.ContainerEUStorage;
+import com.mcgoodtime.productionline.common.inventory.ContainerFluidKineticGenerator;
+import com.mcgoodtime.productionline.common.inventory.ContainerHeatDryer;
+import com.mcgoodtime.productionline.common.inventory.ContainerParallelSpaceSU;
+import com.mcgoodtime.productionline.common.tiles.TileAdvSolar;
+import com.mcgoodtime.productionline.common.tiles.TileCarbonizeFurnace;
+import com.mcgoodtime.productionline.common.tiles.TileFluidKineticGenerator;
+import com.mcgoodtime.productionline.common.tiles.TileHeatDryer;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileCSEU;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEVSU;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileParallelSpaceSU;
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -57,34 +79,37 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         EnumGui gui = EnumGui.values()[id];
+        BlockPos pos = new BlockPos(x, y, z);
         switch (gui) {
-            case FluidKineticGenerator: return new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(x, y, z));
-            case CarbonizeFurnace: return new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(x, y, z));
-            case EVSU: return new ContainerEUStorage<TileEVSU>(player, (TileEVSU)world.getTileEntity(x, y, z));
-            case HeatDryer: return new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z));
-            case CSEU: return new ContainerEUStorage<TileCSEU>(player, (TileCSEU) world.getTileEntity(x, y, z));
-            case ParallelSpaceSU: return new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z));
-            case AdvSolar: return new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(x, y, z));
+            case FluidKineticGenerator: return new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(pos));
+            case CarbonizeFurnace: return new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(pos));
+            case EVSU: return new ContainerEUStorage<>(player, (TileEVSU)world.getTileEntity(pos));
+            case HeatDryer: return new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(pos));
+            case CSEU: return new ContainerEUStorage<>(player, (TileCSEU) world.getTileEntity(pos));
+            case ParallelSpaceSU: return new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(pos));
+            case AdvSolar: return new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(pos));
             default: return null;
         }
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         EnumGui gui = EnumGui.values()[id];
+        BlockPos pos = new BlockPos(x, y, z);
         switch (gui) {
             case FluidKineticGenerator:
-                return new GuiFluidKineticGenerator(new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(x, y, z)));
+                return new GuiFluidKineticGenerator(new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(pos)));
             case CarbonizeFurnace:
-                return new GuiCarbonizeFurnace(new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(x, y, z)));
+                return new GuiCarbonizeFurnace(new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(pos)));
             case EVSU:
-                return new GuiEUStorage(new ContainerEUStorage<TileEVSU>(player, (TileEVSU) world.getTileEntity(x, y, z)));
-            case HeatDryer: return new GuiHeatDryer(new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(x, y, z)));
-            case CSEU: return new GuiEUStorage(new ContainerEUStorage<TileCSEU>(player, (TileCSEU) world.getTileEntity(x, y, z)));
+                return new GuiEUStorage(new ContainerEUStorage<>(player, (TileEVSU) world.getTileEntity(pos)));
+            case HeatDryer: return new GuiHeatDryer(new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(pos)));
+            case CSEU: return new GuiEUStorage(new ContainerEUStorage<>(player, (TileCSEU) world.getTileEntity(pos)));
             case ParallelSpaceSU:
-                return new GuiParallelSpaceSU(new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(x, y, z)));
+                return new GuiParallelSpaceSU(new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(pos)));
             case AdvSolar:
-                return new GuiAdvSolar(new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(x, y, z)));
+                return new GuiAdvSolar(new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(pos)));
             default: return null;
         }
     }

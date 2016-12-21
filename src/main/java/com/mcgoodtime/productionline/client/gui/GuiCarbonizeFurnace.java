@@ -28,8 +28,8 @@ import com.mcgoodtime.productionline.common.PLUtil;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.inventory.ContainerCarbonizeFurnace;
 import com.mcgoodtime.productionline.common.tiles.TileCarbonizeFurnace;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)

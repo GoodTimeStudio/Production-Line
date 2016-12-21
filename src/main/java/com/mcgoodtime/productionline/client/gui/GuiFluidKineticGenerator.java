@@ -28,21 +28,23 @@ import com.mcgoodtime.productionline.common.PLUtil;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.inventory.ContainerFluidKineticGenerator;
 import com.mcgoodtime.productionline.common.tiles.TileFluidKineticGenerator;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import ic2.core.util.GuiTooltipHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.util.IIcon;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static com.mcgoodtime.productionline.common.core.ProductionLine.GUI_PREFIX;
+import java.util.Collections;
+
+import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
+
 /**
  * The Gui.
  *
  * @author liach
- * improve by BestOwl
+ *         improve by BestOwl
  */
 @SideOnly(Side.CLIENT)
 public class GuiFluidKineticGenerator extends GuiPL<ContainerFluidKineticGenerator> {
@@ -62,11 +64,12 @@ public class GuiFluidKineticGenerator extends GuiPL<ContainerFluidKineticGenerat
         }
 
         if (tile.fluidTank.getFluidAmount() > 0) {
-            IIcon fluidIcon = this.container.tile.fluidTank.getFluid().getFluid().getIcon();
-            if(fluidIcon != null) {
-                this.mc.renderEngine.bindTexture(TextureMap.locationBlocksTexture);
+            ResourceLocation fluidIconIdent = this.container.tile.fluidTank.getFluid().getFluid().getStill();
+            TextureAtlasSprite icon = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluidIconIdent.toString());
+            if (icon != null) {
+                this.mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
                 int fy = PLUtil.getGuiScaled(47, tile.fluidTank.getFluidAmount(), tile.fluidTank.getCapacity());
-                this.drawTexturedModelRectFromIcon(this.x + 74, this.y + 24 + 47 - fy, fluidIcon, 12, fy);
+                this.drawTexturedModalRect(this.x + 74, this.y + 24 + 47 - fy, icon, 12, fy);
                 this.mc.renderEngine.bindTexture(this.getResource());
                 this.drawTexturedModalRect(this.x + 74, this.y + 24, 176, 72, 12, 47);
             }
@@ -78,15 +81,15 @@ public class GuiFluidKineticGenerator extends GuiPL<ContainerFluidKineticGenerat
         super.drawGuiContainerForegroundLayer(x, y);
         if (this.container.tile.fluidTank.getFluidAmount() > 0) {
             String tooltip = this.container.tile.fluidTank.getFluid().getLocalizedName() + ": " + this.container.tile.fluidTank.getFluidAmount() + "mB";
-            GuiTooltipHelper.drawAreaTooltip(x - this.guiLeft, y - this.guiTop, tooltip, 73, 23, 83, 71);
+            drawTooltip(x - this.guiLeft, y - this.guiTop, Collections.singletonList(tooltip));
         }
 
-        String output = StatCollector.translateToLocalFormatted(GUI_PREFIX + "FluidKineticGenerator.output",
+        String output = I18n.format(GUI_PREFIX + "FluidKineticGenerator.output",
                 this.container.getTileEntity().maxrequestkineticenergyTick(
-                        ForgeDirection.VALID_DIRECTIONS[this.container.getTileEntity().facing]));
+                        this.container.getTileEntity().facing));
         this.drawString(this.fontRendererObj, output, 96, 33, 2157374);
 
-        String max_output = StatCollector.translateToLocalFormatted(GUI_PREFIX + "FluidKineticGenerator.max-output",
+        String max_output = I18n.format(GUI_PREFIX + "FluidKineticGenerator.max-output",
                 this.container.getTileEntity().kuOutput);
         this.drawString(this.fontRendererObj, max_output, 96, 52, 2157374);
     }

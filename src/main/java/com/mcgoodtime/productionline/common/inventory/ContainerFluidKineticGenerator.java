@@ -28,15 +28,18 @@ package com.mcgoodtime.productionline.common.inventory;
 import com.mcgoodtime.productionline.common.inventory.slot.SlotOutput;
 import com.mcgoodtime.productionline.common.tiles.TileFluidKineticGenerator;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerFluidKineticGenerator extends ContainerPL<TileFluidKineticGenerator> {
 
     public int fluidAmount;
-    public int fluidID;
+    public Fluid fluid;
 
     public ContainerFluidKineticGenerator(EntityPlayer player, TileFluidKineticGenerator tile) {
         super(player, tile);
@@ -46,13 +49,15 @@ public class ContainerFluidKineticGenerator extends ContainerPL<TileFluidKinetic
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting iCrafting) {
-        super.addCraftingToCrafters(iCrafting);
-        iCrafting.sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
+    public void addListener(IContainerListener listener) {
+        super.addListener(listener);
+        listener.sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
         if (this.tile.fluidTank.getFluid() != null) {
-            iCrafting.sendProgressBarUpdate(this, 1, this.tile.fluidTank.getFluid().getFluidID());
+            // TODO Improve
+            listener.sendProgressBarUpdate(this, 1, FluidRegistry.getFluidID(this.tile.fluidTank.getFluid().getFluid()));
         }
     }
+
 
     /**
      * Looks for changes made in the container, sends them to every listener.
@@ -61,31 +66,34 @@ public class ContainerFluidKineticGenerator extends ContainerPL<TileFluidKinetic
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (Object object : this.crafters) {
+        for (IContainerListener listener : this.listeners) {
             if (this.fluidAmount != this.tile.fluidTank.getFluidAmount()) {
-                ((ICrafting) object).sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
+                listener.sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
             }
-            if (this.tile.fluidTank.getFluid() != null && this.fluidID != this.tile.fluidTank.getFluid().getFluidID()) {
-                ((ICrafting) object).sendProgressBarUpdate(this, 1, this.tile.fluidTank.getFluid().getFluidID());
+            if (this.tile.fluidTank.getFluid() != null && this.fluid != this.tile.fluidTank.getFluid().getFluid()) {
+                listener.sendProgressBarUpdate(this, 1, FluidRegistry.getFluidID(this.tile.fluidTank.getFluid().getFluid()));
             }
         }
 
         this.fluidAmount = this.tile.fluidTank.getFluidAmount();
         if (this.tile.fluidTank.getFluid() != null) {
-            this.fluidID = this.tile.fluidTank.getFluid().getFluidID();
+            this.fluid = this.tile.fluidTank.getFluid().getFluid();
         }
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int var) {
         super.updateProgressBar(id, var);
         switch (id) {
-            case 0: if (this.tile.fluidTank.getFluid() != null) {
-                        this.tile.fluidTank.getFluid().amount = var;
-                    }
-            case 1: if (FluidRegistry.getFluid(var) != null) {
-                        this.tile.fluidTank.setFluid(new FluidStack(FluidRegistry.getFluid(var), this.tile.fluidTank.getFluidAmount()));
-                    }
+            case 0:
+                if (this.tile.fluidTank.getFluid() != null) {
+                    this.tile.fluidTank.getFluid().amount = var;
+                }
+            case 1:
+                if (FluidRegistry.getFluid(var) != null) {
+                    this.tile.fluidTank.setFluid(new FluidStack(FluidRegistry.getFluid(var), this.tile.fluidTank.getFluidAmount()));
+                }
         }
     }
 }

@@ -32,18 +32,28 @@ import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlotFluidInput;
 import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlotOutput;
 import ic2.api.energy.tile.IKineticSource;
 import ic2.api.tile.IWrenchable;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.*;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The BlockFluidKineticGenerator tile.
  *
  * @author liach
  */
-public class TileFluidKineticGenerator extends TileContainer implements IKineticSource, IFluidHandler, IWrenchable {
+public class TileFluidKineticGenerator extends TileContainer implements IKineticSource, IWrenchable {
 
     private int timer;
     public final int kuOutput = 32;
@@ -61,18 +71,17 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
 
         NBTTagCompound fluidTag = new NBTTagCompound();
         this.fluidTank.writeToNBT(fluidTag);
         nbt.setTag("fluidTank", fluidTag);
+        return nbt;
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-
+    public void update() {
         if (!this.worldObj.isRemote) {
             boolean needUpdate = false;
 
@@ -86,7 +95,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
             }
 
 
-            if (this.fluidTank.getFluid() != null && this.maxrequestkineticenergyTick(ForgeDirection.VALID_DIRECTIONS[this.facing]) > 0) {
+            if (this.fluidTank.getFluid() != null && this.maxrequestkineticenergyTick(this.facing) > 0) {
                 int amount = 0;
                 for (RecipePart recipePart : FluidKineticGeneratorRecipes.instance.getProcessRecipesList()) {
                     FluidStack fluidStack = ((FluidKineticGeneratorRecipes.RecipePartFluidKineticGenerator) recipePart).fluidStack;
@@ -126,127 +135,55 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
     }
 
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "FluidKineticGenerator";
     }
 
-    /*
-	 *  Return max kinetic energy transmission peer Tick (only theoretical bandwidth not available amount)
-	 */
     @Override
-    public int maxrequestkineticenergyTick(ForgeDirection directionFrom) {
-        return directionFrom.ordinal() != this.facing ? 0 : this.kuOutput;
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+        return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
     }
 
-    /*
-	 * @param requested amount of kinetic energy to transfer
-	 * @return transmitted amount of kineticenergy
-	 *
-	 * example: You Request 100 units of kinetic energy but the Source have only 50 units left
-	 * requestkineticenergy(100) : return 50 : so 50 units of kinetic energy remove from KineticSource
-	 */
     @Override
-    public int requestkineticenergy(ForgeDirection directionFrom, int requestKineticenergy) {
-        return directionFrom.ordinal() != this.facing ? 0 : (this.fluidTank.getFluidAmount() > 0 ? Math.min(this.kuOutput, requestKineticenergy) : 0);
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            return (T) fluidTank;
+        }
+        return super.getCapability(capability, facing);
     }
 
-    /**
-     * Fills fluid into internal tanks, distribution is left entirely to the IFluidHandler.
-     *
-     * @param from     Orientation the Fluid is pumped in from.
-     * @param resource FluidStack representing the Fluid and maximum amount of fluid to be filled.
-     * @param doFill   If false, fill will only be simulated.
-     * @return Amount of resource that was (or would have been, if simulated) filled.
-     */
     @Override
-    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        return this.canFill(from, resource.getFluid()) ? this.fluidTank.fill(resource, doFill) : 0;
+    public int maxrequestkineticenergyTick(EnumFacing from) {
+        return from != this.facing ? 0 : this.kuOutput;
     }
 
-    /**
-     * Drains fluid out of internal tanks, distribution is left entirely to the IFluidHandler.
-     *
-     * @param from     Orientation the Fluid is drained to.
-     * @param resource FluidStack representing the Fluid and maximum amount of fluid to be drained.
-     * @param doDrain  If false, drain will only be simulated.
-     * @return FluidStack representing the Fluid and amount that was (or would have been, if
-     * simulated) drained.
-     */
     @Override
-    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        return resource != null && resource.isFluidEqual(this.fluidTank.getFluid()) ? (!this.canDrain(from, resource.getFluid()) ? null : this.fluidTank.drain(resource.amount, doDrain)) : null;
+    public int requestkineticenergy(EnumFacing from, int i) {
+        return from != this.facing ? 0 : (this.fluidTank.getFluidAmount() > 0 ? Math.min(this.kuOutput, i) : 0);
     }
 
-    /**
-     * Drains fluid out of internal tanks, distribution is left entirely to the IFluidHandler.
-     * <p/>
-     * This method is not Fluid-sensitive.
-     *
-     * @param from     Orientation the fluid is drained to.
-     * @param maxDrain Maximum amount of fluid to drain.
-     * @param doDrain  If false, drain will only be simulated.
-     * @return FluidStack representing the Fluid and amount that was (or would have been, if
-     * simulated) drained.
-     */
     @Override
-    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-        return this.fluidTank.drain(maxDrain, doDrain);
+    public EnumFacing getFacing(World world, BlockPos pos) {
+        return facing;
     }
 
-    /**
-     * Returns true if the given fluid can be inserted into the given direction.
-     * <p/>
-     * More formally, this should return true if fluid is able to enter from the given direction.
-     */
     @Override
-    public boolean canFill(ForgeDirection from, Fluid fluid) {
-        return true;
-    }
-
-    /**
-     * Returns true if the given fluid can be extracted from the given direction.
-     * <p/>
-     * More formally, this should return true if fluid is able to leave from the given direction.
-     */
-    @Override
-    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+    public boolean setFacing(World world, BlockPos pos, EnumFacing facing, EntityPlayer player) {
+        if (facing != this.facing) {
+            this.facing = facing;
+            return true;
+        }
         return false;
     }
 
-    /**
-     * Returns an array of objects which represent the internal tanks. These objects cannot be used
-     * to manipulate the internal tanks. See {@link FluidTankInfo}.
-     *
-     * @param from Orientation determining which tanks should be queried.
-     * @return Info for the relevant internal tanks.
-     */
     @Override
-    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        return new FluidTankInfo[] {new FluidTankInfo(this.fluidTank.getFluid(), this.fluidTank.getCapacity())};
-    }
-
-    @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int i) {
-        return i != this.facing;
-    }
-
-    @Override
-    public short getFacing() {
-        return this.facing;
-    }
-
-    @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+    public boolean wrenchCanRemove(World world, BlockPos blockPos, EntityPlayer entityPlayer) {
         return true;
     }
 
     @Override
-    public float getWrenchDropRate() {
-        return 1.0F;
+    public List<ItemStack> getWrenchDrops(World world, BlockPos blockPos, IBlockState iBlockState, TileEntity tileEntity, EntityPlayer entityPlayer, int i) {
+        return Collections.singletonList(new ItemStack(iBlockState.getBlock(), 1, iBlockState.getBlock().getMetaFromState(iBlockState)));
     }
 
-    @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
-    }
 }

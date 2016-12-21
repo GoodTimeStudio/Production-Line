@@ -1,6 +1,8 @@
 package com.mcgoodtime.productionline.common.mixin;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemFirework;
 import net.minecraft.item.ItemFireworkCharge;
@@ -20,25 +22,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @author BestOwl
  */
 @Mixin(TileEntityFurnace.class)
-public abstract class MixinTileEntityFurnace extends TileEntityFurnace {
+public abstract class MixinTileEntityFurnace extends TileEntity {
 
     @Shadow
-    ItemStack[] furnaceItemStacks;
+    private ItemStack[] furnaceItemStacks;
 
-    @Inject(method = "updateEntity", at = @At("RETURN"))
+    @Shadow
+    public abstract boolean isBurning();
+
+    @Inject(method = "update", at = @At("RETURN"))
     private void onUpdate(CallbackInfo callbackInfo) {
-
         if (!this.worldObj.isRemote) {
             if (this.isBurning()) {
                 ItemStack itemStack = this.furnaceItemStacks[0];
                 if (itemStack != null) {
                     if (itemStack.getItem() instanceof ItemBlock) {
-                        if (((ItemBlock) itemStack.getItem()).field_150939_a.getMaterial() == Material.tnt) {
+                        Block block = ((ItemBlock) itemStack.getItem()).block;
+                        if (block.getMaterial(block.getStateFromMeta(itemStack.getMetadata())) == Material.TNT) {
                             this.doExplosion();
                         }
-                    } else if (itemStack.getItem().getPotionEffect(itemStack).equals(PotionHelper.gunpowderEffect)) {
+                    } else if (itemStack.getItem() == Items.GUNPOWDER) {
                         this.doExplosion();
-
                     } else if (itemStack.getItem() instanceof ItemFirework || itemStack.getItem()
                             instanceof ItemFireworkCharge) {
                         this.doExplosion();
@@ -49,6 +53,6 @@ public abstract class MixinTileEntityFurnace extends TileEntityFurnace {
     }
 
     private void doExplosion() {
-        this.worldObj.createExplosion(null, this.xCoord, this.yCoord, this.zCoord, 4.0F, true);
+        this.worldObj.createExplosion(null, this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), 4.0F, true);
     }
 }

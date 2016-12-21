@@ -24,13 +24,15 @@
  */
 package com.mcgoodtime.productionline.common.entity;
 
+import com.google.common.base.Optional;
 import com.mcgoodtime.productionline.common.event.EntityThrowableImpactEvent;
-import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -39,7 +41,10 @@ import net.minecraftforge.common.MinecraftForge;
  *
  * @author BwstOwl
  */
-public class EntityThrownItem extends EntityThrowable {
+public class EntityThrownItem extends net.minecraft.entity.projectile.EntityThrowable {
+
+    public static final DataParameter<Optional<ItemStack>> PARAMETER = EntityDataManager
+            .createKey(EntityThrownItem.class, DataSerializers.OPTIONAL_ITEM_STACK);
 
     public EntityThrownItem(World world) {
         super(world);
@@ -57,7 +62,7 @@ public class EntityThrownItem extends EntityThrowable {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.getDataWatcher().addObjectByDataType(23, 5);
+        this.dataManager.register(PARAMETER, Optional.<ItemStack>absent());
     }
 
     /**
@@ -66,7 +71,11 @@ public class EntityThrownItem extends EntityThrowable {
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
-        nbt.setTag("throwItem", this.getThrowItem().writeToNBT(nbt.getCompoundTag("throwItem")));
+        Optional<ItemStack> item = getThrowItem();
+        if (item.isPresent()) {
+            nbt.setTag("throwItem", item.get().serializeNBT());
+        }
+
     }
 
     /**
@@ -78,21 +87,19 @@ public class EntityThrownItem extends EntityThrowable {
         this.setThrowItem(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("throwItem")));
     }
 
-    public ItemStack getThrowItem() {
-        return this.getDataWatcher().getWatchableObjectItemStack(23);
+    public Optional<ItemStack> getThrowItem() {
+        return this.dataManager.get(PARAMETER);
     }
 
     public void setThrowItem(ItemStack itemStack) {
-        DataWatcher watcher = this.getDataWatcher();
-        watcher.updateObject(23, itemStack.copy());
-        watcher.setObjectWatched(23);
+        this.dataManager.set(PARAMETER, Optional.of(itemStack));
     }
 
     /**
      * Called when this EntityThrownItem hits a block or entity.
      */
     @Override
-    protected void onImpact(MovingObjectPosition movingObjectPosition) {
-        MinecraftForge.EVENT_BUS.post(new EntityThrowableImpactEvent(this, movingObjectPosition));
+    protected void onImpact(RayTraceResult rayTraceResult) {
+        MinecraftForge.EVENT_BUS.post(new EntityThrowableImpactEvent(this, rayTraceResult));
     }
 }

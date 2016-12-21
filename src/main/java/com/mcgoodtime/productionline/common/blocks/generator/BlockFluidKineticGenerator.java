@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.mcgoodtime.productionline.common.blocks.generator;
 
 import com.mcgoodtime.productionline.common.blocks.BlockContainerPL;
@@ -30,24 +31,26 @@ import com.mcgoodtime.productionline.common.core.GuiHandler;
 import com.mcgoodtime.productionline.common.tiles.TileFluidKineticGenerator;
 import com.mcgoodtime.productionline.common.tiles.TilePL;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class BlockFluidKineticGenerator extends BlockContainerPL {
 
     public BlockFluidKineticGenerator() {
-        super(Material.iron, "FluidKineticGenerator");
+        super(Material.IRON, "FluidKineticGenerator");
     }
 
-    /**
-     * Called upon blocks activation (right click on the blocks.)
-     */
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p1, float p2, float p3, float p4) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
-            entityPlayer.openGui(ProductionLine.instance, GuiHandler.EnumGui.FluidKineticGenerator.ordinal(), world, x, y, z);
-        } else {
-            entityPlayer.isInvisibleToPlayer(entityPlayer);
+            player.openGui(ProductionLine.getInstance(), GuiHandler.EnumGui.FluidKineticGenerator.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }

@@ -25,18 +25,25 @@
 package com.mcgoodtime.productionline.common.items;
 
 import com.mcgoodtime.productionline.common.init.PLBlocks;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.stats.StatList;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.ForgeEventFactory;
+
+import javax.annotation.Nonnull;
 
 /**
  * The item of water hyacinth in GoodTime-Industrial.
@@ -44,52 +51,50 @@ import net.minecraftforge.event.ForgeEventFactory;
  * @author liach
  */
 public class ItemWaterHyacinth extends ItemColored {
+
     public ItemWaterHyacinth(Block block) {
         super(block, false);
-        this.setUnlocalizedName("productionline.item.WaterHyacinth");
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getColorFromItemStack(ItemStack itemStack, int damage) {
-        return PLBlocks.waterHyacinth.getRenderColor(itemStack.getItemDamage());
-    }
+    @Nonnull
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+        RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, true);
 
-    @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, player, true);
-        if (movingobjectposition == null) {
-            return itemStack;
+        if (raytraceresult == null) {
+            return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
         } else {
-            if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                int i = movingobjectposition.blockX;
-                int j = movingobjectposition.blockY;
-                int k = movingobjectposition.blockZ;
+            if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
+                BlockPos blockpos = raytraceresult.getBlockPos();
 
-                if (!world.canMineBlock(player, i, j, k)) {
-                    return itemStack;
+                if (!worldIn.isBlockModifiable(playerIn, blockpos) || !playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemStackIn)) {
+                    return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
                 }
 
-                if (!player.canPlayerEdit(i, j, k, movingobjectposition.sideHit, itemStack)) {
-                    return itemStack;
-                }
+                BlockPos blockpos1 = blockpos.up();
+                IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-                if (world.getBlock(i, j, k).getMaterial() == Material.water && world.getBlockMetadata(i, j, k) == 0
-                        && world.isAirBlock(i, j + 1, k)) {
-                    // special case for handling block placement with water lilies, moved to water hyacinth
-                    BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(world, i, j + 1, k);
-                    world.setBlock(i, j + 1, k, PLBlocks.waterHyacinth);
-                    if (ForgeEventFactory.onPlayerBlockPlace(player, blocksnapshot, ForgeDirection.UP).isCanceled()) {
+                if (iblockstate.getMaterial() == Material.WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0 && worldIn.isAirBlock(blockpos1)) {
+                    // special case for handling block placement with water lilies
+                    net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
+                    worldIn.setBlockState(blockpos1, PLBlocks.waterHyacinth.getDefaultState());
+                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, net.minecraft.util.EnumFacing.UP).isCanceled()) {
                         blocksnapshot.restore(true, false);
-                        return itemStack;
+                        return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
                     }
 
-                    if (!player.capabilities.isCreativeMode) {
-                        itemStack.stackSize -- ;
+                    worldIn.setBlockState(blockpos1, PLBlocks.waterHyacinth.getDefaultState(), 11);
+
+                    if (!playerIn.capabilities.isCreativeMode) {
+                        --itemStackIn.stackSize;
                     }
+
+                    playerIn.addStat(StatList.getObjectUseStats(this));
+                    worldIn.playSound(playerIn, blockpos, SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
                 }
             }
-            return itemStack;
+
+            return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
         }
     }
 }

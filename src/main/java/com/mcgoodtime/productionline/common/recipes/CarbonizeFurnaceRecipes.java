@@ -39,10 +39,10 @@ public class CarbonizeFurnaceRecipes extends RecipeBase {
     public static final CarbonizeFurnaceRecipes instance = new CarbonizeFurnaceRecipes();
 
     private CarbonizeFurnaceRecipes() {
-        register(new ItemStack(Blocks.log), new ItemStack(Items.coal, 2, 1), 2000);
-        register(new ItemStack(Blocks.log2), new ItemStack(Items.coal, 2, 1), 2000);
-        register(new ItemStack(Blocks.planks, 2), new ItemStack(Items.coal, 1, 1), 1500);
-        register(new ItemStack(Items.reeds, 4), PLItems.bambooCharcoal, 1500);
+        register(new ItemStack(Blocks.LOG), new ItemStack(Items.COAL, 2, 1), 2000);
+        register(new ItemStack(Blocks.LOG2), new ItemStack(Items.COAL, 2, 1), 2000);
+        register(new ItemStack(Blocks.PLANKS, 2), new ItemStack(Items.COAL, 1, 1), 1500);
+        register(new ItemStack(Items.REEDS, 4), PLItems.bambooCharcoal, 1500);
         register(new ItemStack(PLItems.saltWaterBucket), new ItemStack(PLItems.salt), 1100);
     }
 

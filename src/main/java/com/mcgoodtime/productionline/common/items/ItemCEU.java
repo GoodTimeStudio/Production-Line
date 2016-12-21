@@ -1,51 +1,19 @@
 package com.mcgoodtime.productionline.common.items;
 
-import com.mcgoodtime.productionline.common.core.ProductionLine;
+import com.mcgoodtime.productionline.client.IItemModelProvider;
 import ic2.api.item.IBoxable;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Created by BestOwl on 2015.12.6.0006.
  *
  * @author BestOwl
  */
-public class ItemCEU extends ItemElectricPL implements IBoxable {
-
-    private IIcon[] icons;
+public class ItemCEU extends ItemElectricPL implements IBoxable, IItemModelProvider {
 
     public ItemCEU() {
-        super("CEU", 1, 20000);
-    }
-
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        this.icons = new IIcon[5];
-        for (int i = 0; i < 5; i++) {
-            this.icons[i] = iconRegister.registerIcon(ProductionLine.RESOURCE_DOMAIN + ":" + "eustorage/itemCEU." + (i + 1));
-        }
-    }
-
-    /**
-     * Gets an icon index based on an item's damage value
-     */
-    @Override
-    public IIcon getIconFromDamage(int meta) {
-        if (meta < 3) {
-            return this.icons[0];
-        }
-        else if (meta < 10) {
-            return this.icons[1];
-        }
-        else if (meta < 17) {
-            return this.icons[2];
-        }
-        else if (meta < 24) {
-            return this.icons[3];
-        } else {
-            return this.icons[4];
-        }
+        super("ceu", 1, 20000);
     }
 
     @Override
@@ -62,5 +30,19 @@ public class ItemCEU extends ItemElectricPL implements IBoxable {
     @Override
     public boolean canBeStoredInToolbox(ItemStack itemstack) {
         return true;
+    }
+
+    @Override
+    public String getModelResourcePath() {
+        return "eustorage";
+    }
+
+    /**
+     * Get custom resource name.
+     * To use default resource name, return null.
+     */
+    @Override
+    public String getModelResourceName(int meta) {
+        return null;
     }
 }
