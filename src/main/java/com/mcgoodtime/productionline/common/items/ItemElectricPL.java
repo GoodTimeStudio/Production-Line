@@ -39,25 +39,22 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
     }
 
     protected void addPropertyOverrides() {
-        this.addPropertyOverride(new ResourceLocation("energy"), new IItemPropertyGetter() {
-            @Override
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
-                int meta = stack.getMetadata();
-                if (meta < 3) {
-                    return 0;
-                }
-                else if (meta < 10) {
-                    return 1;
-                }
-                else if (meta < 17) {
-                    return 2;
-                }
-                else if (meta < 24) {
-                    return 3;
-                }
-                else {
-                    return 4;
-                }
+        this.addPropertyOverride(new ResourceLocation("energy"), (stack, worldIn, entityIn) -> {
+            int meta = stack.getMetadata();
+            if (meta > 24) {
+                return 1;
+            }
+            else if (meta > 17) {
+                return 2;
+            }
+            else if (meta > 10) {
+                return 3;
+            }
+            else if (meta > 3) {
+                return 4;
+            }
+            else {
+                return 0;
             }
         });
     }
