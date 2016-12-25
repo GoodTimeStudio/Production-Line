@@ -114,7 +114,7 @@ public final class ProductionLine {
         PLItems.init();
         PLEntity.init();
         PLPotion.initPotion();
-        new PLModelRegistry();
+        proxy.preInit();
     }
 
     @Mod.EventHandler
@@ -150,6 +150,8 @@ public final class ProductionLine {
     }
 
     public static class CommonProxy {
+        public void preInit() {};
+
         public void init() {}
     }
 
@@ -157,16 +159,17 @@ public final class ProductionLine {
 
     @SideOnly(Side.CLIENT)
     public static class ClientProxy extends CommonProxy {
+
+        @Override
+        public void preInit() {
+            PLModelRegistry.loadBlockModels();
+            PLModelRegistry.loadItemModels();
+        }
+
         @Override
         public void init() {
-//            ModelLoaderRegistry.registerLoader(new PLItemModelLoader());
             RenderingRegistry.registerEntityRenderingHandler(EntityThrownItem.class, manager -> new RenderEntityThrownItem<>(manager, Minecraft.getMinecraft().getRenderItem()));
             RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, RenderEntityRay::new);
-//
-            //new PLModelRegistry();
-//            if (Loader.isModLoaded("NotEnoughItems")) {
-//                new NEIPLConfig().loadConfig();
-//            }
         }
 
     }

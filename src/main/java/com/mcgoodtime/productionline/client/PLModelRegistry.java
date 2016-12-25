@@ -41,23 +41,23 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_
  */
 public class PLModelRegistry {
 
-    public static void registerItemModel(Item item, int metadata, ModelResourceLocation resLoc) {
+    private static void registerItemModel(Item item, int metadata, ModelResourceLocation resLoc) {
         ModelLoader.setCustomModelResourceLocation(item, metadata, resLoc);
     }
 
-    public static void registerItemModel(Item item, ModelResourceLocation resLoc) {
+    private static void registerItemModel(Item item, ModelResourceLocation resLoc) {
         registerItemModel(item, 0, resLoc);
     }
 
-    public static void registerItemModel(Item item) {
+    private static void registerItemModel(Item item) {
         registerItemModel(item, getItemModelResLoc(item, 0));
     }
 
-    public static void registerItemModel(Item item, int metadata) {
+    private static void registerItemModel(Item item, int metadata) {
         registerItemModel(item, metadata, getItemModelResLoc(item, metadata));
     }
 
-    public static ModelResourceLocation getItemModelResLoc(Item item, int meta) {
+    private static ModelResourceLocation getItemModelResLoc(Item item, int meta) {
         String name = item.getRegistryName().getResourcePath();
         String path = "";
         if (item instanceof IItemModelProvider) {
@@ -72,7 +72,11 @@ public class PLModelRegistry {
         return new ModelResourceLocation(ret, "normal");
     }
 
-    static {
+    public static void loadBlockModels() {
+
+    }
+
+    public static void loadItemModels() {
         registerItemModel(PLItems.diamondApple, 0);
         registerItemModel(PLItems.diamondApple, 1);
         registerItemModel(PLItems.ironTreetap);
