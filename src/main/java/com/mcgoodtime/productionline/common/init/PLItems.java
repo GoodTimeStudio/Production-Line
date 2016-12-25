@@ -34,7 +34,6 @@ import com.mcgoodtime.productionline.common.items.tools.ItemPLTreetap;
 //import com.mcgoodtime.productionline.common.items.tools.ItemGravityRay;
 //import com.mcgoodtime.productionline.common.items.tools.ItemPLTreetap;
 //import com.mcgoodtime.productionline.common.items.tools.ToolPL;
-import net.minecraft.entity.Entity;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.*;
 import net.minecraftforge.fml.common.IFuelHandler;
@@ -188,7 +187,7 @@ public class PLItems implements IFuelHandler {
 		};
 
 		saltWaterBucket = new ItemBucket(Blocks.WATER);
-		saltWaterBucket.setCreativeTab(ProductionLine.creativeTabGti)
+		saltWaterBucket.setCreativeTab(ProductionLine.creativeTabPL)
 				.setUnlocalizedName(MOD_ID + ".saltwater_bucket");
 
 //        iridiumPickaxe = ToolPL.registerPickaxe(PLToolMaterial.iridium, "iridium_pickaxe");

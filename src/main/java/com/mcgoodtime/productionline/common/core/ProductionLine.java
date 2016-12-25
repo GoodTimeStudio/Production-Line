@@ -84,12 +84,12 @@ public final class ProductionLine {
     public static final String VERSION = "${version}";
     public static final String RESOURCE_DOMAIN = MOD_ID;
     public static final String GUI_PREFIX = "gui.ProductionLine.";
-    public static final CreativeTabs creativeTabGti = new CreativeTabs(MOD_NAME) {
+    public static final CreativeTabs creativeTabPL = new CreativeTabs(MOD_NAME) {
         @SideOnly(Side.CLIENT)
         @Override
         @Nonnull
         public Item getTabIconItem() {
-            return Items.GOLDEN_APPLE;
+            return PLItems.gravityRay;
         }
     };
     /**

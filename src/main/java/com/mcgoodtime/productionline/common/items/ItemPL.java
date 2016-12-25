@@ -36,7 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
-import static com.mcgoodtime.productionline.common.core.ProductionLine.creativeTabGti;
+import static com.mcgoodtime.productionline.common.core.ProductionLine.creativeTabPL;
 
 /**
  * Created by liach on 5/22/2015.
@@ -50,7 +50,7 @@ public class ItemPL extends Item {
     public ItemPL(String name) {
         this.setUnlocalizedName(MOD_ID + "." + name);
         this.itemName = name;
-        this.setCreativeTab(creativeTabGti);
+        this.setCreativeTab(creativeTabPL);
         GameRegistry.<Item>register(this, new ResourceLocation(MOD_ID, name));
     }
 

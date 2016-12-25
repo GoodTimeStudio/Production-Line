@@ -69,7 +69,7 @@ public class BlockPL extends Block {
         super(material);
         this.setUnlocalizedName(MOD_ID + ".block." + name);
         //this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
-        this.setCreativeTab(creativeTabGti);
+        this.setCreativeTab(creativeTabPL);
         this.internalName = name;
         // TODO register after construction
         PLConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));

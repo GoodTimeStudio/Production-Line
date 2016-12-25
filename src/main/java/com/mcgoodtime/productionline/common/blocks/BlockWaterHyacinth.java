@@ -56,7 +56,7 @@ public class BlockWaterHyacinth extends BlockBush {
     public BlockWaterHyacinth() {
         super(Material.PLANTS);
         this.setUnlocalizedName("productionline.block.WaterHyacinth");
-        this.setCreativeTab(creativeTabGti);
+        this.setCreativeTab(creativeTabPL);
         //this.setBlockTextureName(ProductionLine.RESOURCE_DOMAIN + ":" + "BlockWaterHyacinth");
         this.setHardness(0.0F);
         this.setResistance(0.0F);

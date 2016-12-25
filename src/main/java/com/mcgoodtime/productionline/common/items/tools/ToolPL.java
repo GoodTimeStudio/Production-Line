@@ -62,7 +62,7 @@ public class ToolPL {
     private static void registerItem(String name, Item item) {
         item.setUnlocalizedName(MOD_NAME + "." + name);
 //        item.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
-        item.setCreativeTab(creativeTabGti);
+        item.setCreativeTab(creativeTabPL);
         GameRegistry.<Item>register(item, new ResourceLocation(MOD_ID, name));
     }
 

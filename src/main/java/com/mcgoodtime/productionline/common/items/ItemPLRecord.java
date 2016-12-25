@@ -39,8 +39,6 @@ import net.minecraft.util.ResourceLocation;
 import java.util.List;
 
 import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
-import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_NAME;
-import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
 
 /**
  * Created by suhao on 2015.6.29.
@@ -53,7 +51,7 @@ public class ItemPLRecord extends ItemRecord {
     public ItemPLRecord(String name, SoundEvent soundEvent) {
         super(name, soundEvent);
         this.name = name;
-        this.setCreativeTab(ProductionLine.creativeTabGti);
+        this.setCreativeTab(ProductionLine.creativeTabPL);
         this.setUnlocalizedName(MOD_ID + "." + name);
         GameRegistry.<Item>register(this, new ResourceLocation(MOD_ID, name));
     }
