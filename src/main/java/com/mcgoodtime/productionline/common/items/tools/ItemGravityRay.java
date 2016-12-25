@@ -1,8 +1,8 @@
 package com.mcgoodtime.productionline.common.items.tools;
 
 import com.mcgoodtime.productionline.client.IItemModelProvider;
-import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.entity.EntityRay;
+import com.mcgoodtime.productionline.common.init.PLItems;
 import com.mcgoodtime.productionline.common.items.ItemElectricPL;
 import ic2.api.item.ElectricItem;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,10 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -27,6 +24,23 @@ public class ItemGravityRay extends ItemElectricPL implements IItemModelProvider
 
     public ItemGravityRay() {
         super("gravity_ray", 3, (int) 11E6);
+    }
+
+    @Override
+    protected void addPropertyOverrides() {
+        this.addPropertyOverride(new ResourceLocation("pull"), (stack, worldIn, entityIn) -> {
+            if (entityIn == null)
+            {
+                return 0.0F;
+            }
+            else
+            {
+                ItemStack itemstack = entityIn.getActiveItemStack();
+                return itemstack != null && itemstack.getItem() == PLItems.gravityRay ? (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F : 0.0F;
+            }
+        });
+        this.addPropertyOverride(new ResourceLocation("pulling"),
+                (stack, worldIn, entityIn) -> entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F);
     }
 
     /**
