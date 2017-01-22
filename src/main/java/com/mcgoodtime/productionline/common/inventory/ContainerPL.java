@@ -84,7 +84,7 @@ public abstract class ContainerPL<T extends TileEntity & IInventory> extends Con
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return this.tile.isUseableByPlayer(player);
+        return this.tile.isUsableByPlayer(player);
     }
 
     public T getTileEntity() {
