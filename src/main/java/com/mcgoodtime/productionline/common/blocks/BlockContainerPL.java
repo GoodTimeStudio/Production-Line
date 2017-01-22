@@ -85,7 +85,7 @@ public abstract class BlockContainerPL extends BlockMultiTexture {
                             entityitem.motionX = (double)((float)random.nextGaussian() * f3);
                             entityitem.motionY = (double)((float)random.nextGaussian() * f3 + 0.2F);
                             entityitem.motionZ = (double)((float)random.nextGaussian() * f3);
-                            world.spawnEntityInWorld(entityitem);
+                            world.spawnEntity(entityitem);
                         }
                     }
                 }

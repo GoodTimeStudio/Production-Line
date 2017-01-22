@@ -177,7 +177,7 @@ public class PLItems implements IFuelHandler {
 					}
 					world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 					if (!world.isRemote) {
-						world.spawnEntityInWorld(new EntityThrownItem(world, player, itemStack));
+						world.spawnEntity(new EntityThrownItem(world, player, itemStack));
 					}
 				}
 

@@ -37,7 +37,7 @@ public class GuiAdvSolar extends GuiPL<ContainerAdvSolar> {
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
         super.drawGuiContainerBackgroundLayer(f, x, y);
 
-        if (this.container.tile.sunIsVisible && this.container.tile.hasLens) {
+        if (this.container.tile.underSun && this.container.tile.hasLens) {
             this.drawTexturedModalRect(this.x + 81, this.y + 45, 176, 0, 14, 14);
         }
 

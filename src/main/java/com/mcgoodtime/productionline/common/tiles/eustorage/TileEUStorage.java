@@ -63,11 +63,11 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
         }
 
         if (this.redstoneMode == RedstoneMode.OUTPUT_WHEN_REDSTONEPOWER_AND_FULLENEGRY || this.redstoneMode == RedstoneMode.NO_OUTPUT_WHEN_REDSTONEPOWER) {
-            this.isRedstonePowered = this.worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0;
+            this.isRedstonePowered = this.world.isBlockIndirectlyGettingPowered(this.pos) > 0;
         }
 
         if (this.shouldEmitRedstonePower()) {
-            this.worldObj.notifyBlockOfStateChange(this.pos, this.worldObj.getBlockState(this.pos).getBlock());
+            this.world.notifyBlockOfStateChange(this.pos, this.world.getBlockState(this.pos).getBlock());
         }
     }
 

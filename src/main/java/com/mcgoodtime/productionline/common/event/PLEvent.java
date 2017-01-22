@@ -93,15 +93,15 @@ public class PLEvent {
                 float f1mod = (float) (0.5 - (Math.random() * 1.0));
                 float f2mod = (float) (1.2 - (Math.random() * 2.4));
 
-                event.entityThrownItem.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK,
+                event.entityThrownItem.world.spawnParticle(EnumParticleTypes.ITEM_CRACK,
                         event.entityThrownItem.posX + fmod, event.entityThrownItem.posY + f1mod,
                         event.entityThrownItem.posZ + f2mod, 0.1D, 0.1D, 0.1D, Item.getIdFromItem(PLItems.salt));
 
-                if (!event.entityThrownItem.worldObj.isRemote) {
-                    EntityItem entityItem = new EntityItem(event.entityThrownItem.worldObj,
+                if (!event.entityThrownItem.world.isRemote) {
+                    EntityItem entityItem = new EntityItem(event.entityThrownItem.world,
                             event.entityThrownItem.posX + fmod, event.entityThrownItem.posY + f1mod,
                             event.entityThrownItem.posZ + f2mod, new ItemStack(PLItems.salt));
-                    event.entityThrownItem.worldObj.spawnEntityInWorld(entityItem);
+                    event.entityThrownItem.world.spawnEntity(entityItem);
                 }
             }
             this.onImpact(event.entityThrownItem, event.movingObjectPosition, new PotionEffect(PLPotion.salty, 0, 3));
@@ -121,11 +121,11 @@ public class PLEvent {
                 ((EntityLivingBase) movingObjectPosition.entityHit).addPotionEffect(potionEffect);
             }
         }
-        entity.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, entity.posX, entity.posY, entity.posZ, 0.1D, 0.1D,
+        entity.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, entity.posX, entity.posY, entity.posZ, 0.1D, 0.1D,
                 0.1D, Item.getIdFromItem(entity.getThrowItem().get().getItem()));
-        if (!entity.worldObj.isRemote) {
+        if (!entity.world.isRemote) {
             entity.setDead();
-            entity.worldObj.spawnEntityInWorld(new EntityItem(entity.worldObj, entity.posX, entity.posY, entity.posZ,
+            entity.world.spawnEntity(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ,
                     entity.getThrowItem().get()));
         }
     }

@@ -33,7 +33,7 @@ public class MessageEUStorage extends MessageBase {
         long pos = message.nbt.getLong("pos");
         short modeID = message.nbt.getShort("redstoneMode");
         RedstoneMode mode = RedstoneMode.values()[modeID];
-        TileEUStorage tile = (TileEUStorage) ctx.getServerHandler().playerEntity.worldObj.getTileEntity(BlockPos.fromLong(pos));
+        TileEUStorage tile = (TileEUStorage) ctx.getServerHandler().playerEntity.world.getTileEntity(BlockPos.fromLong(pos));
         tile.redstoneMode = mode;
         PLUtil.messageToPlayer(ctx.getServerHandler().playerEntity, I18n.translateToLocal("ic2.EUStorage.gui.mod.redstone" + modeID));
         return null;

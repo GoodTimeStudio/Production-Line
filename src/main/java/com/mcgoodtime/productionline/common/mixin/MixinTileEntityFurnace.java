@@ -32,7 +32,7 @@ public abstract class MixinTileEntityFurnace extends TileEntity {
 
     @Inject(method = "update", at = @At("RETURN"))
     private void onUpdate(CallbackInfo callbackInfo) {
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             if (this.isBurning()) {
                 ItemStack itemStack = this.furnaceItemStacks[0];
                 if (itemStack != null) {
@@ -53,6 +53,6 @@ public abstract class MixinTileEntityFurnace extends TileEntity {
     }
 
     private void doExplosion() {
-        this.worldObj.createExplosion(null, this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), 4.0F, true);
+        this.world.createExplosion(null, this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), 4.0F, true);
     }
 }

@@ -251,7 +251,7 @@ public abstract class TileContainer extends TilePL implements ISidedInventory, I
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
+    public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
         return !this.isInvalid() && entityPlayer.getDistanceSq(pos) <= 4096;
     }
 

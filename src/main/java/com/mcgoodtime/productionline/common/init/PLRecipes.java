@@ -29,7 +29,6 @@ import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
 //import ic2.core.AdvRecipe;
-import ic2.core.Ic2Items;
 import ic2.core.util.StackUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
