@@ -54,5 +54,7 @@ public abstract class MixinTileEntityFurnace extends TileEntity {
 
     private void doExplosion() {
         this.world.createExplosion(null, this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), 4.0F, true);
+        this.world.destroyBlock(this.getPos(), true);
+        this.invalidate();
     }
 }
