@@ -116,7 +116,6 @@ public final class ProductionLine {
         PLSounds.init();
         FluidRegistry.registerFluid(Gas.gasNatural);
         PLEntity.init();
-        PLPotion.initPotion();
         proxy.preInit();
     }
 
