@@ -22,28 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common;
+package com.mcgoodtime.productionline.common.inventory;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nullable;
 
 /**
- * Created by BestOwl on 2015.11.2.0002.
- *
- * ProductionLine Util
- *
- * @author BestOwl
+ * An unmodifiable item stack.
  */
-public class PLUtil {
+public final class ItemStackView {
 
-    @SideOnly(Side.CLIENT)
-    public static int getGuiScaled(int scale, float min, float max) {
-        return (int) (scale * Math.min(1.0F, min / max));
+    private final ItemStack contained;
+
+    public static ItemStackView of(@Nullable ItemStack stack) {
+        return new ItemStackView(stack.copy());
     }
 
-    public static void messageToPlayer(EntityPlayer player, String message, Object... args) {
-        player.sendMessage(new TextComponentTranslation(message, args));
+    private ItemStackView(ItemStack contained) {
+        this.contained = contained;
+    }
+
+    public ItemStack get() {
+        return contained.copy();
     }
 }

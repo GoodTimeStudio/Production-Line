@@ -25,9 +25,14 @@
 package com.mcgoodtime.productionline.common.init;
 
 import com.mcgoodtime.productionline.common.blocks.*;
+import com.mcgoodtime.productionline.common.blocks.generator.BlockAdvSolar;
+import com.mcgoodtime.productionline.common.blocks.generator.BlockFluidKineticGenerator;
+import com.mcgoodtime.productionline.common.core.ProductionLine;
+import com.mcgoodtime.productionline.common.items.ItemWaterHyacinth;
 //import com.mcgoodtime.productionline.common.blocks.generator.BlockAdvSolar;
 //import com.mcgoodtime.productionline.common.blocks.generator.BlockFluidKineticGenerator;
 //import com.mcgoodtime.productionline.common.items.ItemWaterHyacinth;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -62,15 +67,16 @@ public class PLBlocks {
         pad = new BlockPL(Material.ROCK, "Pad", 1, 0, null, 0);
         dryLog = new BlockPL(Material.ROCK, "DryLog", 3, 0, "axe", 0);
         oreIridium = new BlockPL(Material.ROCK, "oreIridium", 10, 20, "pickaxe", 3);
-//        fluidKineticGenerator = new BlockFluidKineticGenerator();
-//        airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
-//        new BlockMisc();
-//        new BlockMachine();
-//        new BlockEUStorage();
-//        new BlockAdvSolar();
+        fluidKineticGenerator = new BlockFluidKineticGenerator();
+        airBrakeCasing = new BlockMultiTexture(Material.IRON, "AirBrakeCasing");
+        new BlockMisc();
+        new BlockMachine();
+        new BlockEUStorage();
+        new BlockAdvSolar();
 
         // special registry TODO: Better registry system
-//        waterHyacinth = new BlockWaterHyacinth();
-//        GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
+        waterHyacinth = new BlockWaterHyacinth();
+        waterHyacinth.setRegistryName(ProductionLine.loc("waterHyacinth"));
+        ForgeRegistries.BLOCKS.register(waterHyacinth);
     }
 }

@@ -24,22 +24,20 @@
  */
 package com.mcgoodtime.productionline.common.init;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import ic2.api.item.IC2Items;
-import ic2.api.recipe.RecipeInputItemStack;
-import ic2.api.recipe.Recipes;
-//import ic2.core.AdvRecipe;
-import ic2.core.util.StackUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 import java.util.Map;
+
+import ic2.api.item.IC2Items;
+
+//import ic2.core.AdvRecipe;
 
 /**
  * The class for loading all the recipes of GoodTime-Industrial. Migrated from old loaders.
@@ -49,7 +47,9 @@ import java.util.Map;
 public class PLRecipes {
     private static final float XP = 2F;
 
-    /** Load recipes of GoodTime-Industrial.*/
+    /**
+     * Load recipes of GoodTime-Industrial.
+     */
     public static void init() {
         //disable recipes
         //disable();
@@ -68,40 +68,40 @@ public class PLRecipes {
                 'E', IC2Items.getItem("plateiron")
         );
         GameRegistry.addRecipe(
-        		new ItemStack(PLBlocks.opticalGlass,5),
-        		"ABA",
-        		"BAB",
-        		"ABA",
-        		'A',Blocks.QUARTZ_BLOCK,
-        		'B',Blocks.GLASS
+                new ItemStack(PLBlocks.opticalGlass, 5),
+                "ABA",
+                "BAB",
+                "ABA",
+                'A', Blocks.QUARTZ_BLOCK,
+                'B', Blocks.GLASS
         );
         GameRegistry.addRecipe(
-        		PLItems.advSolarLensUnit,
-        		"A A",
-        		"A A",
-        		" A ",
-        		'A',PLBlocks.opticalGlass
+                PLItems.advSolarLensUnit,
+                "A A",
+                "A A",
+                " A ",
+                'A', PLBlocks.opticalGlass
         );
         GameRegistry.addRecipe(
-        		PLItems.advSolarLensGroup,
-        		"A A",
-        		"ABA",
-        		"CAC",
-        		'A',PLItems.advSolarLensUnit,
-        		'B',IC2Items.getItem("dimondPowder"),
-        		'C',IC2Items.getItem("carbonPlate")
+                PLItems.advSolarLensGroup,
+                "A A",
+                "ABA",
+                "CAC",
+                'A', PLItems.advSolarLensUnit,
+                'B', IC2Items.getItem("dimondPowder"),
+                'C', IC2Items.getItem("carbonPlate")
         );
         GameRegistry.addRecipe(PLItems.ironChain,
-        		" AA",
-        		"A A",
-        		" A ",
-        		'A',IC2Items.getItem("ironPlate")
+                " AA",
+                "A A",
+                " A ",
+                'A', IC2Items.getItem("ironPlate")
         );
         GameRegistry.addRecipe(PLItems.steelChain,
-        		" AA",
-        		"A A",
-        		" A ",
-        		'A',IC2Items.getItem("steelPlate")
+                " AA",
+                "A A",
+                " A ",
+                'A', IC2Items.getItem("steelPlate")
         );
         GameRegistry.addRecipe(
                 PLItems.roller,
@@ -553,6 +553,7 @@ public class PLRecipes {
 
     /**
      * Disable recipes.
+     *
      * @param itemStack Disable all recipes of this item.
      */
     @SuppressWarnings("unchecked")

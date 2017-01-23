@@ -22,28 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common;
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+package com.mcgoodtime.productionline.common.inventory;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-/**
- * Created by BestOwl on 2015.11.2.0002.
- *
- * ProductionLine Util
- *
- * @author BestOwl
- */
-public class PLUtil {
-
-    @SideOnly(Side.CLIENT)
-    public static int getGuiScaled(int scale, float min, float max) {
-        return (int) (scale * Math.min(1.0F, min / max));
-    }
-
-    public static void messageToPlayer(EntityPlayer player, String message, Object... args) {
-        player.sendMessage(new TextComponentTranslation(message, args));
-    }
-}
+import mcp.MethodsReturnNonnullByDefault;

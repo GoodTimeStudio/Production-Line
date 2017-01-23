@@ -25,13 +25,13 @@
 package com.mcgoodtime.productionline.common.event;
 
 import com.google.common.base.Optional;
+
 import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import com.mcgoodtime.productionline.common.init.PLAchievement;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.init.PLItems;
 import com.mcgoodtime.productionline.common.potion.PLPotion;
-import ic2.api.item.IC2Items;
-import ic2.core.IC2Potion;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Biomes;
@@ -42,11 +42,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+
+import ic2.api.item.IC2Items;
+import ic2.core.IC2Potion;
 
 /**
  * Production Line event listener.
@@ -105,11 +109,9 @@ public class PLEvent {
                 }
             }
             this.onImpact(event.entityThrownItem, event.movingObjectPosition, new PotionEffect(PLPotion.salty, 0, 3));
-        }
-        else if (stack.isItemEqual(IC2Items.getItem("Uran238"))) {
+        } else if (stack.isItemEqual(IC2Items.getItem("Uran238"))) {
             this.onImpact(event.entityThrownItem, event.movingObjectPosition, new PotionEffect(IC2Potion.radiation, 200, 0));
-        }
-        else {
+        } else {
             this.onImpact(event.entityThrownItem, event.movingObjectPosition, null);
         }
     }

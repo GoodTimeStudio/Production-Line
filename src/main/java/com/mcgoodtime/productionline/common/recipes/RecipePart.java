@@ -24,6 +24,8 @@
  */
 package com.mcgoodtime.productionline.common.recipes;
 
+import com.mcgoodtime.productionline.common.inventory.ItemStackView;
+
 import net.minecraft.item.ItemStack;
 
 /**
@@ -31,7 +33,7 @@ import net.minecraft.item.ItemStack;
  *
  * @author BestOwl
  */
-public class RecipePart {
+public class RecipePart implements RecipeEntry {
     public ItemStack input;
     public ItemStack output;
 
@@ -41,4 +43,14 @@ public class RecipePart {
     }
 
     public RecipePart() {}
+
+    @Override
+    public ItemStackView getInput() {
+        throw new UnsupportedOperationException("not implemented"); //TODO Implement this
+    }
+
+    @Override
+    public ItemStackView getOutput() {
+        throw new UnsupportedOperationException("not implemented"); //TODO Implement this
+    }
 }
