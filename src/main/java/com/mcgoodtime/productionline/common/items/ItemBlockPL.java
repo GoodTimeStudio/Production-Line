@@ -24,7 +24,6 @@
  */
 package com.mcgoodtime.productionline.common.items;
 
-import com.mcgoodtime.productionline.common.blocks.IMultiMetaBlock;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -48,15 +47,15 @@ public class ItemBlockPL extends ItemBlock {
         this.hasSubtypes = true;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    @Nonnull
-    public String getItemStackDisplayName(@Nonnull ItemStack itemStack) {
-        if (this.block instanceof IMultiMetaBlock) {
-            return I18n.format(((IMultiMetaBlock) block).getBlockName(itemStack) + ".name");
-        }
-        return super.getItemStackDisplayName(itemStack);
-    }
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    @Nonnull
+//    public String getItemStackDisplayName(@Nonnull ItemStack itemStack) {
+//        if (this.block instanceof IMultiMetaBlock) {
+//            return I18n.format(((IMultiMetaBlock) block).getBlockName(itemStack) + ".name");
+//        }
+//        return super.getItemStackDisplayName(itemStack);
+//    }
 
 //    /**
 //     * Gets an icon index based on an item's damage value

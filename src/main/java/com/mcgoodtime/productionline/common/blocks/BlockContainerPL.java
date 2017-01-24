@@ -26,27 +26,23 @@
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.common.inventory.Inventories;
-import com.mcgoodtime.productionline.common.tiles.TileContainer;
-import net.minecraft.block.Block;
+import com.mcgoodtime.productionline.common.tiles.TilePL;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
 /**
  * Created by suhao on 2015.6.23.
  *
  * @author suhao
  */
-public abstract class BlockContainerPL extends BlockMultiTexture {
+public abstract class BlockContainerPL extends BlockPL implements ITileEntityProvider {
 
     public BlockContainerPL(Material material, String name) {
         super(material, name);
@@ -55,15 +51,12 @@ public abstract class BlockContainerPL extends BlockMultiTexture {
 
     @Override
     public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-        super.breakBlock(world, pos, state);
         TileEntity tileentity = world.getTileEntity(pos);
-
         if (tileentity != null && tileentity instanceof IInventory) {
             Inventories.spill(world, pos, (IInventory) tileentity);
-            world.destroyBlock(pos, true);
+            world.removeTileEntity(pos);
         }
-
-        world.removeTileEntity(pos);
+        world.destroyBlock(pos, true);
     }
 
     @Override
@@ -73,4 +66,20 @@ public abstract class BlockContainerPL extends BlockMultiTexture {
         return tileentity != null && tileentity.receiveClientEvent(id, param);
     }
 
+    protected abstract Class<? extends TilePL> getTileEntityClass(IBlockState state);
+
+
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        try {
+            return getTileEntityClass(state).newInstance();
+        } catch (Exception e) {
+            throw new UnsupportedOperationException("not supported", e);
+        }
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        throw new UnsupportedOperationException("not supported");
+    }
 }

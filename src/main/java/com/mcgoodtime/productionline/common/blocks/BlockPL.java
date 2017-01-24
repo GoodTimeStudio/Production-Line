@@ -84,10 +84,10 @@ public class BlockPL extends Block {
     @Nonnull
     @Override
     public ItemStack getPickBlock(@Nonnull IBlockState state, RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player) {
-        if (this instanceof IMultiMetaBlock) {
-            Block block = world.getBlockState(pos).getBlock();
-            return new ItemStack(this, 1, block.getMetaFromState(world.getBlockState(pos)));
-        }
+//        if (this instanceof IMultiMetaBlock) {
+//            Block block = world.getBlockState(pos).getBlock();
+//            return new ItemStack(this, 1, block.getMetaFromState(world.getBlockState(pos)));
+//        }
         return super.getPickBlock(state, target, world, pos, player);
     }
 
@@ -115,21 +115,21 @@ public class BlockPL extends Block {
         return super.getItemDropped(state, rand, fortune);
     }
 
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(@Nonnull Item item, CreativeTabs creativeTabs, List<ItemStack> list) {
-        if (this instanceof IMultiMetaBlock) {
-            for(int meta = 0; meta < ((IMultiMetaBlock) this).getMaxMeta(); ++meta) {
-                ItemStack stack = new ItemStack(this, 1, meta);
-                list.add(stack);
-            }
-        } else {
-            super.getSubBlocks(item, creativeTabs, list);
-        }
-    }
+//    /**
+//     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
+//     */
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public void getSubBlocks(@Nonnull Item item, CreativeTabs creativeTabs, List<ItemStack> list) {
+//        if (this instanceof IMultiMetaBlock) {
+//            for(int meta = 0; meta < ((IMultiMetaBlock) this).getMaxMeta(); ++meta) {
+//                ItemStack stack = new ItemStack(this, 1, meta);
+//                list.add(stack);
+//            }
+//        } else {
+//            super.getSubBlocks(item, creativeTabs, list);
+//        }
+//    }
 
     public Class<? extends ItemBlock> getItemBlockClass() {
         return ItemBlock.class;

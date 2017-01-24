@@ -24,7 +24,11 @@
  */
 package com.mcgoodtime.productionline.common.recipes;
 
+import ic2.api.recipe.IMachineRecipeManager;
+import ic2.api.recipe.IRecipeInput;
+import ic2.api.recipe.RecipeOutput;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +38,7 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public abstract class RecipeBase implements IProcessable {
+public abstract class RecipeBase implements IProcessable, IMachineRecipeManager {
 
     /** The list of recipes. */
     protected List<RecipePart> processList = new ArrayList<RecipePart>();
@@ -64,6 +68,7 @@ public abstract class RecipeBase implements IProcessable {
         }
         return false;
     }
+
     /**
      * Get required amount of process
      *
@@ -96,5 +101,26 @@ public abstract class RecipeBase implements IProcessable {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean addRecipe(IRecipeInput iRecipeInput, NBTTagCompound nbtTagCompound, boolean b, ItemStack... itemStacks) {
+        processList.add(new RecipePart(iRecipeInput.getInputs().get(0), itemStacks[0])); //TODO Implement this
+        return true;
+    }
+
+    @Override
+    public RecipeOutput getOutputFor(ItemStack itemStack, boolean b) {
+        return new RecipeOutput(new NBTTagCompound(), getRecipePart(itemStack).output);
+    }
+
+    @Override
+    public Iterable<RecipeIoContainer> getRecipes() {
+        throw new UnsupportedOperationException("not supported");
+    }
+
+    @Override
+    public boolean isIterable() {
+        return false;
     }
 }

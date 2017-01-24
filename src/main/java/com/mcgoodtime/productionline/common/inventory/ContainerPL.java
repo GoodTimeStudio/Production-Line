@@ -60,61 +60,8 @@ public abstract class ContainerPL<T extends IInventory> extends ContainerBase<T>
         this(player, tile, 166);
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    protected final Slot addSlotToContainer(Slot slot) {
-        /*int num = this.tile.getSizeInventory();
-
-        while (this.inventorySlots.size() < num) {
-            this.inventorySlots.add(null);
-            this.inventoryItemStacks.add(null);
-        }
-        if (slot.inventory instanceof TileContainer) {
-            slot.slotNumber = slot.getSlotIndex();
-            this.inventorySlots.set(slot.getSlotIndex(), slot);
-        } else {
-            slot.slotNumber = this.inventorySlots.size();
-            this.inventorySlots.add(slot);
-            this.inventoryItemStacks.add(null);
-        }
-        return slot;*/
-        return super.addSlotToContainer(slot);
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer player) {
-        return this.tile.isUsableByPlayer(player);
-    }
-
     public T getTileEntity() {
         return this.tile;
-    }
-
-    public boolean transferItemStack(ItemStack item, Slot slot) {
-        int max = Math.min(item.getMaxStackSize(), slot.getSlotStackLimit());
-        max = Math.min(max, slot.inventory.getInventoryStackLimit());
-        ItemStack slotItem = slot.getStack();
-
-        if (slotItem != null) {
-            if (!item.isItemEqual(slotItem)) {
-                return false;
-            }
-
-            int i = this.getTransferAmount(item.stackSize, slotItem.stackSize, max);
-            if (i != 0) {
-                slotItem.stackSize += i;
-                item.stackSize -= i;
-                return true;
-            }
-        } else {
-            int i = this.getTransferAmount(item.stackSize, 0, max);
-            if (i != 0) {
-                slot.putStack(StackUtil.copyWithSize(item, i));
-                item.stackSize -= i;
-                return true;
-            }
-        }
-        return false;
     }
 
     private int getTransferAmount(int amount, int currentAmount, int maxAmount) {
