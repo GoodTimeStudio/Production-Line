@@ -36,6 +36,7 @@ import com.mcgoodtime.productionline.common.init.PLAchievement;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.init.PLItems;
 import com.mcgoodtime.productionline.common.init.PLOreDictionary;
+import com.mcgoodtime.productionline.common.init.PLRecipes;
 import com.mcgoodtime.productionline.common.init.PLSounds;
 import com.mcgoodtime.productionline.common.potion.PLPotion;
 import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
@@ -48,6 +49,7 @@ import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -113,7 +115,6 @@ public final class ProductionLine {
     public void preInit(FMLPreInitializationEvent event) {
         setupMeta();
         PLConfig.init(event.getSuggestedConfigurationFile());
-        PLSounds.init();
         FluidRegistry.registerFluid(Gas.gasNatural);
         PLEntity.init();
         proxy.preInit();
@@ -121,7 +122,7 @@ public final class ProductionLine {
 
     @SubscribeEvent
     public void registerBlock(RegistryEvent<Block> event) {
-        PLBlocks.init();
+//        PLBlocks.init();
     }
 
     @SubscribeEvent
@@ -134,11 +135,16 @@ public final class ProductionLine {
         PLPotion.init();
     }
 
+    @SubscribeEvent
+    public void registerSound(RegistryEvent<SoundEvent> event) {
+        PLSounds.init();
+    }
+
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         PLOreDictionary.init();
         // register Recipes. 注册合成
-//        PLRecipes.init();
+        PLRecipes.init();
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
         //register achievement

@@ -91,7 +91,7 @@ public class BlockMachine extends BlockContainerPL implements IMultiMetaBlock {
     @Nonnull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer.Builder(this)
-//                .add(property)
+                .add(property)
                 .build();
     }
 

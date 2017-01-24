@@ -24,15 +24,12 @@
  */
 package com.mcgoodtime.productionline.common.inventory;
 
-import com.mcgoodtime.productionline.common.tiles.TileContainer;
+import ic2.core.ContainerBase;
 import ic2.core.util.StackUtil;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IWorldNameable;
 
 /**
  * Created by BestOwl on 2015.10.31.0031.
@@ -40,11 +37,12 @@ import net.minecraft.world.IWorldNameable;
  * ProductionLine base container.
  * @author BestOwl
  */
-public abstract class ContainerPL<T extends TileEntity & IInventory> extends Container {
+public abstract class ContainerPL<T extends IInventory> extends ContainerBase<T> {
 
-    public T tile;
+    public final T tile;
 
-    public ContainerPL(EntityPlayer player, T tile, int ySide) {
+    protected ContainerPL(EntityPlayer player, T tile, int ySide) {
+        super(tile);
         this.tile = tile;
         int yOffset = ySide - 166;
         int i;
@@ -58,14 +56,14 @@ public abstract class ContainerPL<T extends TileEntity & IInventory> extends Con
         }
     }
 
-    public ContainerPL(EntityPlayer player, T tile) {
+    protected ContainerPL(EntityPlayer player, T tile) {
         this(player, tile, 166);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     protected final Slot addSlotToContainer(Slot slot) {
-        int num = this.tile.getSizeInventory();
+        /*int num = this.tile.getSizeInventory();
 
         while (this.inventorySlots.size() < num) {
             this.inventorySlots.add(null);
@@ -79,7 +77,8 @@ public abstract class ContainerPL<T extends TileEntity & IInventory> extends Con
             this.inventorySlots.add(slot);
             this.inventoryItemStacks.add(null);
         }
-        return slot;
+        return slot;*/
+        return super.addSlotToContainer(slot);
     }
 
     @Override
@@ -107,8 +106,7 @@ public abstract class ContainerPL<T extends TileEntity & IInventory> extends Con
                 item.stackSize -= i;
                 return true;
             }
-        }
-        else {
+        } else {
             int i = this.getTransferAmount(item.stackSize, 0, max);
             if (i != 0) {
                 slot.putStack(StackUtil.copyWithSize(item, i));
@@ -128,91 +126,5 @@ public abstract class ContainerPL<T extends TileEntity & IInventory> extends Con
             }
         }
         return 0;
-    }
-
-    /**
-     * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
-     */
-    @Override
-    public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int index) {
-        ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(index);
-
-        if (slot != null && slot.getHasStack()) {
-            ItemStack stack = slot.getStack();
-            itemstack = stack.copy();
-
-            if (this.tile instanceof TileContainer) {
-                TileContainer container = (TileContainer) this.tile;
-
-                if (index <= container.tileSlots.size()) {
-
-                    boolean flag = false;
-                    for (int i = container.tileSlots.size() + 27; i < this.inventorySlots.size(); i++) {
-                        flag = this.transferItemStack(stack, (Slot) this.inventorySlots.get(i));
-                        if (flag) {
-                            break;
-                        }
-                    }
-
-                    if (!flag) {
-                        for (int i = container.tileSlots.size(); i < this.inventorySlots.size() - 9; i++) {
-                            flag = this.transferItemStack(stack, (Slot) this.inventorySlots.get(i));
-                            if (flag) {
-                                break;
-                            }
-                        }
-                    }
-
-                }
-
-                else {
-                    boolean flag = false;
-                    for (int i = 0; i < container.tileSlots.size(); i++) {
-                        if (container.tileSlots.get(i) != null && container.tileSlots.get(i).canInput(stack)) {
-                            flag = this.transferItemStack(stack, (Slot) this.inventorySlots.get(i));
-                            if (flag) {
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!flag) {
-
-                        if (index >= this.inventorySlots.size() - 9) {
-                            for (int i = container.tileSlots.size(); i < this.inventorySlots.size() - 9; i++) {
-                                if (this.transferItemStack(stack, (Slot) this.inventorySlots.get(i))) {
-                                    break;
-                                }
-                            }
-                        }
-                        else {
-                            for (int i = container.tileSlots.size() + 27; i < this.inventorySlots.size(); i++) {
-                                if (this.transferItemStack(stack, (Slot) this.inventorySlots.get(i))) {
-                                    break;
-                                }
-                            }
-                        }
-
-                    }
-                }
-
-            }
-
-            if (stack.stackSize == 0) {
-                slot.putStack(null);
-            }
-            else {
-                slot.onSlotChanged();
-            }
-
-            if (stack.stackSize == itemstack.stackSize) {
-                return null;
-            }
-
-            slot.onPickupFromSlot(entityPlayer, stack);
-        }
-
-        return itemstack;
     }
 }
