@@ -25,27 +25,26 @@
 package com.mcgoodtime.productionline.common.worldgen;
 
 import com.mcgoodtime.productionline.common.init.PLBlocks;
-import ic2.api.item.IC2Items;
-import ic2.core.block.type.ResourceBlock;
-import ic2.core.ref.BlockName;
+
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraftforge.fml.common.IWorldGenerator;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import ic2.core.Ic2Items;
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Random;
+
+import ic2.core.block.type.ResourceBlock;
+import ic2.core.ref.BlockName;
 
 /**
  * Created by BestOwl on 2015.10.31.0031.
  *
  * ProductionLine world gen.
+ *
  * @author BestOwl
  */
 public class PLWorldGen implements IWorldGenerator {
@@ -59,7 +58,7 @@ public class PLWorldGen implements IWorldGenerator {
 
     public PLWorldGen(IBlockState blockState, int ticket, int maxHeight, int genSize) {
         this.GEN_BLOCK = blockState;
-        this.TICKET  = ticket;
+        this.TICKET = ticket;
         this.MAX_HEIGHT = maxHeight;
         this.GEN_SIZE = genSize;
         GameRegistry.registerWorldGenerator(this, index);
@@ -89,12 +88,13 @@ public class PLWorldGen implements IWorldGenerator {
      * @param chunkZ         the chunk Z coordinate of this chunk.
      * @param world          : additionalData[0] The minecraft {@link World} we're generating for.
      * @param chunkGenerator : additionalData[1] The {@link IChunkProvider} that is generating.
-     * @param chunkProvider  : additionalData[2] {@link IChunkProvider} that is requesting the world generation.
+     * @param chunkProvider  : additionalData[2] {@link IChunkProvider} that is requesting the world
+     *                       generation.
      */
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         //doesWaterVaporize() return isHellWorld
-        if ((!world.provider.doesWaterVaporize()) && (!world.provider.getHasNoSky())) {
+        if ((!world.provider.doesWaterVaporize()) && (!world.provider.hasNoSky())) {
             generateOre(world, random, chunkX, chunkZ);
         }
     }

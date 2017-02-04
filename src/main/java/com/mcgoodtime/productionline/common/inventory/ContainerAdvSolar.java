@@ -38,15 +38,15 @@ public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
         super.detectAndSendChanges();
 
         for (IContainerListener listener : this.listeners) {
-            if (this.sunIsVisible != this.tile.sunIsVisible) {
-                listener.sendProgressBarUpdate(this, 0, this.tile.sunIsVisible ? 1 : 0);
+            if (this.sunIsVisible != this.tile.underSun) {
+                listener.sendProgressBarUpdate(this, 0, this.tile.underSun ? 1 : 0);
             }
             if (this.hasLens != this.tile.hasLens) {
                 listener.sendProgressBarUpdate(this, 1, this.tile.hasLens ? 1 : 0);
             }
         }
 
-        this.sunIsVisible = this.tile.sunIsVisible;
+        this.sunIsVisible = this.tile.underSun;
         this.hasLens = this.tile.hasLens;
     }
 
@@ -59,10 +59,10 @@ public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
             case 0: {
                 switch (var) {
                     case 1:
-                        this.tile.sunIsVisible = true;
+                        this.tile.underSun = true;
                         break;
                     case 0:
-                        this.tile.sunIsVisible = false;
+                        this.tile.underSun = false;
                 }
                 break;
             }

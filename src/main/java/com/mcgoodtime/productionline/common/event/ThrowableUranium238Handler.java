@@ -35,11 +35,11 @@ public class ThrowableUranium238Handler implements ItemMulti.IItemRightClickHand
                     --itemStack.stackSize;
                 }
 
-                entityPlayer.worldObj.playSound(entityPlayer, entityPlayer.getPosition(),
+                entityPlayer.world.playSound(entityPlayer, entityPlayer.getPosition(),
                         SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS,
                         0.5F, 0.4F / (new Random().nextFloat() * 0.4F + 0.8F));
-                if (!entityPlayer.worldObj.isRemote) {
-                    entityPlayer.worldObj.spawnEntityInWorld(new EntityThrownItem(entityPlayer.worldObj, entityPlayer, itemStack));
+                if (!entityPlayer.world.isRemote) {
+                    entityPlayer.world.spawnEntity(new EntityThrownItem(entityPlayer.world, entityPlayer, itemStack));
                 }
             }
             return ActionResult.newResult(EnumActionResult.SUCCESS, itemStack);

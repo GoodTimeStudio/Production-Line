@@ -27,6 +27,7 @@ package com.mcgoodtime.productionline.common.init;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
@@ -44,7 +45,7 @@ public class PLSounds {
         ResourceLocation res;
         res = new ResourceLocation(RESOURCE_DOMAIN, "record_MusicSpring");
         recordMusicSpring = new SoundEvent(res);
-        GameRegistry.register(recordMusicSpring, res);
+        ForgeRegistries.SOUND_EVENTS.register(recordMusicSpring);
     }
 
 }

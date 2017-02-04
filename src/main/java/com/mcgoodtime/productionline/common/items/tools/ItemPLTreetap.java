@@ -134,7 +134,7 @@ public class ItemPLTreetap extends ItemPL implements IBoxable, IItemModelProvide
         for (int i = 0; i < quantity; ++i) {
             EntityItem entityitem = new EntityItem(world, ejectX, ejectY, ejectZ, ItemName.misc_resource.getItemStack(MiscResourceType.resin));
             entityitem.setDefaultPickupDelay();
-            world.spawnEntityInWorld(entityitem);
+            world.spawnEntity(entityitem);
         }
 
     }

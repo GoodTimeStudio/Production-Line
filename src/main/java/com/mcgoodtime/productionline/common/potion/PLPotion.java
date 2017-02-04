@@ -34,6 +34,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -56,11 +57,11 @@ public class PLPotion extends Potion {
         this.curativeItems = Arrays.asList(curativeItems);
     }
 
-    public static void initPotion() {
+    public static void init() {
         salty = new PLPotion(true, 0xFFFFFFF, new ItemStack(Items.WATER_BUCKET), new ItemStack(Items.MILK_BUCKET));
         salty.setPotionName("potion.Salty");
         salty.setRegistryName(ProductionLine.loc(salty.getName()));
-        GameRegistry.register(salty);
+        ForgeRegistries.POTIONS.register(salty);
     }
 
     /**

@@ -22,32 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.mcgoodtime.productionline.common.blocks;
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+package com.mcgoodtime.productionline.common.init;
 
-import net.minecraft.item.ItemStack;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-/**
- * Created by BestOwl on 2015.11.22.0022.
- *
- * @author BestOwl
- * @since 0.2
- */
-public interface IMultiMetaBlock {
-
-    /**
-     * Get block's unlocalized name
-     * @param itemStack item stack
-     * @return unlocalized name
-     */
-    String getBlockName(ItemStack itemStack);
-
-    /**
-     * Get block's unlocalized name
-     * @return unlocalized name
-     */
-    String getBlockName(int meta);
-
-    int getMaxMeta();
-
-    String getInternalName(int meta);
-}
+import mcp.MethodsReturnNonnullByDefault;

@@ -40,7 +40,7 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
  *
  * @author suhao
  */
-public class BlockMisc extends BlockPL implements IMultiMetaBlock {
+public class BlockMisc extends BlockPL {
 
     public static List<String> internalNameList = new ArrayList<String>();
 
@@ -71,15 +71,6 @@ public class BlockMisc extends BlockPL implements IMultiMetaBlock {
     */
     public String getBlockName(ItemStack itemStack) {
         return "tile." + MOD_ID + ".block." + this.getInternalName(itemStack.getItemDamage());
-    }
-
-    /**
-     * Get block's unlocalized name
-     * @return unlocalized name
-     */
-    @Override
-    public String getBlockName(int meta) {
-        return "tile." + MOD_ID + ".block." + this.getInternalName(meta);
     }
 
     public String getInternalName(int meta) {

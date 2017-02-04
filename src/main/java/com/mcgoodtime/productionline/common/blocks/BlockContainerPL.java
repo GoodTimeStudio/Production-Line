@@ -25,26 +25,24 @@
 
 package com.mcgoodtime.productionline.common.blocks;
 
-import com.mcgoodtime.productionline.common.tiles.TileContainer;
-import net.minecraft.block.Block;
+import com.mcgoodtime.productionline.common.inventory.Inventories;
+import com.mcgoodtime.productionline.common.tiles.TilePL;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
 /**
  * Created by suhao on 2015.6.23.
  *
  * @author suhao
  */
-public abstract class BlockContainerPL extends BlockMultiTexture {
+public abstract class BlockContainerPL extends BlockPL implements ITileEntityProvider {
 
     public BlockContainerPL(Material material, String name) {
         super(material, name);
@@ -53,49 +51,12 @@ public abstract class BlockContainerPL extends BlockMultiTexture {
 
     @Override
     public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-        super.breakBlock(world, pos, state);
         TileEntity tileentity = world.getTileEntity(pos);
-
-        if (tileentity != null) {
-            if (tileentity instanceof TileContainer) {
-                for (int i1 = 0; i1 < ((TileContainer) tileentity).getSizeInventory(); ++i1) {
-                    ItemStack itemstack = ((TileContainer) tileentity).getStackInSlot(i1);
-
-                    if (itemstack != null) {
-                        Random random = new Random();
-                        float f = random.nextFloat() * 0.8F + 0.1F;
-                        float f1 = random.nextFloat() * 0.8F + 0.1F;
-                        float f2 = random.nextFloat() * 0.8F + 0.1F;
-
-                        while (itemstack.stackSize > 0) {
-                            int j1 = random.nextInt(21) + 10;
-
-                            if (j1 > itemstack.stackSize) {
-                                j1 = itemstack.stackSize;
-                            }
-
-                            itemstack.stackSize -= j1;
-                            EntityItem entityitem = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-
-                            if (itemstack.hasTagCompound()) {
-                                entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
-                            }
-
-                            float f3 = 0.05F;
-                            entityitem.motionX = (double)((float)random.nextGaussian() * f3);
-                            entityitem.motionY = (double)((float)random.nextGaussian() * f3 + 0.2F);
-                            entityitem.motionZ = (double)((float)random.nextGaussian() * f3);
-                            world.spawnEntityInWorld(entityitem);
-                        }
-                    }
-                }
-
-                world.destroyBlock(pos, true);
-                //world.func_147453_f(x, y, z, block);
-            }
+        if (tileentity != null && tileentity instanceof IInventory) {
+            Inventories.spill(world, pos, (IInventory) tileentity);
+            world.removeTileEntity(pos);
         }
-
-        world.removeTileEntity(pos);
+        world.destroyBlock(pos, true);
     }
 
     @Override
@@ -105,4 +66,20 @@ public abstract class BlockContainerPL extends BlockMultiTexture {
         return tileentity != null && tileentity.receiveClientEvent(id, param);
     }
 
+    protected abstract Class<? extends TilePL> getTileEntityClass(IBlockState state);
+
+
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        try {
+            return getTileEntityClass(state).newInstance();
+        } catch (Exception e) {
+            throw new UnsupportedOperationException("not supported", e);
+        }
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        throw new UnsupportedOperationException("not supported");
+    }
 }

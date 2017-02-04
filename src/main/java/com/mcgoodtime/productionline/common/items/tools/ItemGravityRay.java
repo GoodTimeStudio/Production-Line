@@ -67,7 +67,7 @@ public class ItemGravityRay extends ItemElectricPL implements IItemModelProvider
                 ElectricItem.manager.discharge(itemStack, 100, this.tier, false, true, false);
             }
             if (!world.isRemote) {
-                world.spawnEntityInWorld(new EntityRay(world, player, damge * 2.0F));
+                world.spawnEntity(new EntityRay(world, player, damge * 2.0F));
             }
         }
     }

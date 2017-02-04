@@ -57,7 +57,7 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
 
     @Override
     public void update() {
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
         }
     }
@@ -121,7 +121,7 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
         }
     }
@@ -132,7 +132,7 @@ public abstract class TileElectricGenerator extends TileContainer implements IEn
     @Override
     public void invalidate() {
         super.invalidate();
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
         }
     }

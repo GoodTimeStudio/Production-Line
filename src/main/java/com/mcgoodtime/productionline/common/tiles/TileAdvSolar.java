@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDesert;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -26,7 +27,7 @@ import java.util.List;
 public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
 
     private int timer;
-    public boolean sunIsVisible = false;
+    public boolean underSun = false;
     public boolean hasLens = false;
 
     public TileAdvSolar() {
@@ -39,7 +40,7 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
     @Override
     public void update() {
         super.update();
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             boolean needUpdate = false;
 
             this.updateLensStatus();
@@ -67,7 +68,7 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
                 this.updateSunVisible();
             }
 
-            if (this.hasLens && this.sunIsVisible) {
+            if (this.hasLens && this.underSun) {
                 this.energy += this.powerTick;
             }
             if (this.energy > this.maxEnergy) {
@@ -89,11 +90,11 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
     }
 
     public void updateSunVisible() {
-        int skylight = this.worldObj.getBlockLightOpacity(new BlockPos(pos.getX(), 255, pos.getZ()));
-        boolean hasSky = !this.worldObj.provider.getHasNoSky();
-        boolean canSeeSky = this.worldObj.canSeeSky(pos.up());
-        boolean isDesert = this.worldObj.getBiomeForCoordsBody(pos) instanceof BiomeDesert;
-        this.sunIsVisible = skylight > 4 && hasSky && canSeeSky && (isDesert || !this.worldObj.isRaining() && !this.worldObj.isThundering());
+        int skylight = this.world.getBlockLightOpacity(new BlockPos(pos.getX(), 255, pos.getZ()));
+        boolean hasSky = !this.world.provider.hasNoSky();
+        boolean canSeeSky = this.world.canSeeSky(pos.up());
+        boolean dry = !this.world.getBiomeForCoordsBody(pos).canRain();
+        this.underSun = skylight > 4 && hasSky && canSeeSky && (dry || !this.world.isRaining() && !this.world.isThundering());
     }
 
     public void updateLensStatus() {

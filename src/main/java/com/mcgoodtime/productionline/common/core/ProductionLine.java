@@ -24,17 +24,6 @@
  */
 package com.mcgoodtime.productionline.common.core;
 
-//import com.mcgoodtime.productionline.client.RenderEntityThrownItem;
-//import com.mcgoodtime.productionline.client.RenderEntityRay;
-//import com.mcgoodtime.productionline.common.potion.PLPotion;
-//import com.mcgoodtime.productionline.common.blocks.fluid.Gas;
-//import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
-//import com.mcgoodtime.productionline.common.entity.PLEntity;
-//import com.mcgoodtime.productionline.common.event.PLEvent;
-//import com.mcgoodtime.productionline.common.init.*;
-//import com.mcgoodtime.productionline.common.nei.NEIPLConfig;
-//import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
-
 import com.mcgoodtime.productionline.client.PLModelRegistry;
 import com.mcgoodtime.productionline.client.RenderEntityRay;
 import com.mcgoodtime.productionline.client.RenderEntityThrownItem;
@@ -43,30 +32,45 @@ import com.mcgoodtime.productionline.common.entity.EntityRay;
 import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import com.mcgoodtime.productionline.common.entity.PLEntity;
 import com.mcgoodtime.productionline.common.event.PLEvent;
-import com.mcgoodtime.productionline.common.init.*;
+import com.mcgoodtime.productionline.common.init.PLAchievement;
+import com.mcgoodtime.productionline.common.init.PLBlocks;
+import com.mcgoodtime.productionline.common.init.PLItems;
+import com.mcgoodtime.productionline.common.init.PLOreDictionary;
+import com.mcgoodtime.productionline.common.init.PLRecipes;
+import com.mcgoodtime.productionline.common.init.PLSounds;
 import com.mcgoodtime.productionline.common.potion.PLPotion;
 import com.mcgoodtime.productionline.common.worldgen.PLWorldGen;
+
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
+
+import javax.annotation.Nonnull;
 
 @Mod(
         modid = ProductionLine.MOD_ID,
@@ -103,25 +107,44 @@ public final class ProductionLine {
     public static CommonProxy proxy;
 
     @Mod.EventHandler
+    public void construct(FMLConstructionEvent event) {
+        MinecraftForge.EVENT_BUS.register(INSTANCE);
+    }
+
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         setupMeta();
         PLConfig.init(event.getSuggestedConfigurationFile());
-        PLSounds.init();
-        //register Blocks. 注册方块
-        PLBlocks.init();
         FluidRegistry.registerFluid(Gas.gasNatural);
-        //register Items. 注册物品
-        PLItems.init();
         PLEntity.init();
-        PLPotion.initPotion();
         proxy.preInit();
+    }
+
+    @SubscribeEvent
+    public void registerBlock(RegistryEvent<Block> event) {
+//        PLBlocks.init();
+    }
+
+    @SubscribeEvent
+    public void registerItem(RegistryEvent<Item> event) {
+        PLItems.init();
+    }
+
+    @SubscribeEvent
+    public void registerPotion(RegistryEvent<Potion> event) {
+        PLPotion.init();
+    }
+
+    @SubscribeEvent
+    public void registerSound(RegistryEvent<SoundEvent> event) {
+        PLSounds.init();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         PLOreDictionary.init();
         // register Recipes. 注册合成
-//        PLRecipes.init();
+        PLRecipes.init();
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
         //register achievement
@@ -136,8 +159,8 @@ public final class ProductionLine {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         //register Event. 注册事件
-        PLEvent instance = new PLEvent();
-        MinecraftForge.EVENT_BUS.register(instance);
+        PLEvent plEvent = new PLEvent();
+        MinecraftForge.EVENT_BUS.register(plEvent);
     }
 
     private void setupMeta() {
@@ -149,29 +172,43 @@ public final class ProductionLine {
         this.meta.credits = "GoodTime Studio";
     }
 
-    public static class CommonProxy {
-        public void preInit() {};
+    public abstract static class CommonProxy {
+        void preInit() {
+        }
 
-        public void init() {}
+        void init() {
+        }
+
+        CommonProxy() {
+        }
     }
 
-    public static class ServerProxy extends CommonProxy {}
-
-    @SideOnly(Side.CLIENT)
-    public static class ClientProxy extends CommonProxy {
+    @SuppressWarnings("unused")
+    @SideOnly(Side.SERVER)
+    public static class ServerProxy extends CommonProxy {
+        @Override
+        void preInit() {
+        }
 
         @Override
-        public void preInit() {
+        void init() {
+        }
+    }
+
+    @SuppressWarnings("unused")
+    @SideOnly(Side.CLIENT)
+    public static class ClientProxy extends CommonProxy {
+        @Override
+        void preInit() {
             PLModelRegistry.loadBlockModels();
             PLModelRegistry.loadItemModels();
         }
 
         @Override
-        public void init() {
+        void init() {
             RenderingRegistry.registerEntityRenderingHandler(EntityThrownItem.class, manager -> new RenderEntityThrownItem<>(manager, Minecraft.getMinecraft().getRenderItem()));
             RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, RenderEntityRay::new);
         }
-
     }
 
     @Mod.InstanceFactory

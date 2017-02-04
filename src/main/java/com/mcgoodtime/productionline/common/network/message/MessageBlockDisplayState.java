@@ -52,7 +52,7 @@ public class MessageBlockDisplayState extends MessageBase {
     @Override
     @SideOnly(Side.CLIENT)
     protected IMessage handlerMessage(MessageBase message, MessageContext ctx) {
-        WorldClient world = Minecraft.getMinecraft().theWorld;
+        WorldClient world = Minecraft.getMinecraft().world;
         BlockPos pos = BlockPos.fromLong(message.nbt.getLong("pos"));
         TilePL tilePL = (TilePL) world.getTileEntity(pos);
         if (tilePL != null) {

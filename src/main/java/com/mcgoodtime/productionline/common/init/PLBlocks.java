@@ -25,11 +25,11 @@
 package com.mcgoodtime.productionline.common.init;
 
 import com.mcgoodtime.productionline.common.blocks.*;
+import com.mcgoodtime.productionline.common.core.ProductionLine;
 //import com.mcgoodtime.productionline.common.blocks.generator.BlockAdvSolar;
 //import com.mcgoodtime.productionline.common.blocks.generator.BlockFluidKineticGenerator;
 //import com.mcgoodtime.productionline.common.items.ItemWaterHyacinth;
-import com.mcgoodtime.productionline.common.blocks.generator.BlockFluidKineticGenerator;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
@@ -64,14 +64,13 @@ public class PLBlocks {
         dryLog = new BlockPL(Material.ROCK, "dry_log", 3, 0, "axe", 0);
         oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
 //        fluidKineticGenerator = new BlockFluidKineticGenerator();
-        airBrakeCasing = new BlockMultiTexture(Material.IRON, "air_brake_casing");
-//        new BlockMisc();
-//        new BlockMachine();
-//        new BlockEUStorage();
-//        new BlockAdvSolar();
+//        airBrakeCasing = new BlockMultiTexture(Material.IRON, "air_brake_casing");
+        new BlockMisc();
+        new BlockMachine();
 
         // special registry TODO: Better registry system
-//        waterHyacinth = new BlockWaterHyacinth();
-//        GameRegistry.registerBlock(waterHyacinth, ItemWaterHyacinth.class, "WaterHyacinth");
+        waterHyacinth = new BlockWaterHyacinth();
+        waterHyacinth.setRegistryName(ProductionLine.loc("waterHyacinth"));
+        ForgeRegistries.BLOCKS.register(waterHyacinth);
     }
 }

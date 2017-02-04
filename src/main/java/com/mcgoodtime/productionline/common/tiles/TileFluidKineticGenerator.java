@@ -82,7 +82,7 @@ public class TileFluidKineticGenerator extends TileContainer implements IKinetic
 
     @Override
     public void update() {
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             boolean needUpdate = false;
 
             if (this.fluidTank.getFluidAmount() <= this.fluidTank.getCapacity()) {

@@ -56,7 +56,7 @@ public class BlockFluidKineticGenerator extends BlockContainerPL {
     }
 
     @Override
-    protected Class<? extends TilePL> getTileEntityClass() {
+    protected Class<? extends TilePL> getTileEntityClass(IBlockState state) {
         return TileFluidKineticGenerator.class;
     }
 }

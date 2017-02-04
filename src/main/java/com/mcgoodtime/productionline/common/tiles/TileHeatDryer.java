@@ -70,7 +70,7 @@ public class TileHeatDryer extends TileElectricContainer implements IUpgradableB
     @Override
     public void update() {
         super.update();
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             boolean needUpdate = false;
 
             if (this.canProcess() && this.energy >= this.energyTick) {

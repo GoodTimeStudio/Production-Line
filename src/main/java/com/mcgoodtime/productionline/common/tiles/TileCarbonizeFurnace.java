@@ -93,7 +93,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
     @Override
     public void update() {
         super.update();
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             boolean needUpdate = false;
 
             if (canProcess() && this.energy >= this.energyTick) {
