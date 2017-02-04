@@ -25,8 +25,10 @@
 
 package com.mcgoodtime.productionline.client;
 
+import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.init.PLItems;
 import com.mcgoodtime.productionline.common.items.ItemMulti;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -41,39 +43,9 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_
  */
 public class PLModelRegistry {
 
-    private static void registerItemModel(Item item, int metadata, ModelResourceLocation resLoc) {
-        ModelLoader.setCustomModelResourceLocation(item, metadata, resLoc);
-    }
-
-    private static void registerItemModel(Item item, ModelResourceLocation resLoc) {
-        registerItemModel(item, 0, resLoc);
-    }
-
-    private static void registerItemModel(Item item) {
-        registerItemModel(item, getItemModelResLoc(item, 0));
-    }
-
-    private static void registerItemModel(Item item, int metadata) {
-        registerItemModel(item, metadata, getItemModelResLoc(item, metadata));
-    }
-
-    private static ModelResourceLocation getItemModelResLoc(Item item, int meta) {
-        String name = item.getRegistryName().getResourcePath();
-        String path = "";
-        if (item instanceof IItemModelProvider) {
-            path = ((IItemModelProvider) item).getModelResourcePath() + "/";
-
-            String custom = ((IItemModelProvider) item).getModelResourceName(meta);
-            if (custom != null) {
-                name = custom;
-            }
-        }
-        ResourceLocation ret = new ResourceLocation(RESOURCE_DOMAIN, path + name);
-        return new ModelResourceLocation(ret, "normal");
-    }
-
     public static void loadBlockModels() {
-
+        registerBlockModel(PLBlocks.oreIridium);
+        registerBlockModel(PLBlocks.airBrakeCasing);
     }
 
     public static void loadItemModels() {
@@ -104,4 +76,60 @@ public class PLModelRegistry {
             }
         }
     }
+
+    private static ModelResourceLocation getItemModelResLoc(Item item, int meta) {
+        String name = item.getRegistryName().getResourcePath();
+        String path = "";
+        if (item instanceof IItemModelProvider) {
+            path = ((IItemModelProvider) item).getModelResourcePath() + "/";
+
+            String custom = ((IItemModelProvider) item).getModelResourceName(meta);
+            if (custom != null) {
+                name = custom;
+            }
+        }
+        ResourceLocation ret = new ResourceLocation(RESOURCE_DOMAIN, path + name);
+        return new ModelResourceLocation(ret, "normal");
+    }
+
+    private static ModelResourceLocation getBlockModelResLoc(Block block, int meta) {
+        return getItemModelResLoc(Item.getItemFromBlock(block), meta);
+    }
+
+    //=========================
+    //Block Model Registry
+
+    private static void registerBlockModel(Block block, int metadata, ModelResourceLocation resourceLocation) {
+        registerItemModel(Item.getItemFromBlock(block), metadata, resourceLocation);
+    }
+
+    private static void registerBlockModel(Block block) {
+        registerBlockModel(block, 0, getBlockModelResLoc(block, 0));
+    }
+
+    //=========================
+
+
+
+    //=========================
+    //Item Model Registry
+
+    private static void registerItemModel(Item item, int metadata, ModelResourceLocation resLoc) {
+        ModelLoader.setCustomModelResourceLocation(item, metadata, resLoc);
+    }
+
+    private static void registerItemModel(Item item, ModelResourceLocation resLoc) {
+        registerItemModel(item, 0, resLoc);
+    }
+
+    private static void registerItemModel(Item item) {
+        registerItemModel(item, getItemModelResLoc(item, 0));
+    }
+
+    private static void registerItemModel(Item item, int metadata) {
+        registerItemModel(item, metadata, getItemModelResLoc(item, metadata));
+    }
+
+    //=========================
+
 }

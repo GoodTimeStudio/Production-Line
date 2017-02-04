@@ -25,8 +25,14 @@
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.common.core.PLConfig;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.EnumFaceDirection;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
@@ -39,11 +45,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 //import net.minecraft.util.MovingObjectPositionsition;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nonnull;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Random;
 
@@ -55,6 +63,7 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
  * @author suhao
  */
 public class BlockPL extends Block {
+
     public String internalName;
 
     public BlockPL(Material material, String name, float hardness, float resistance,
@@ -68,11 +77,12 @@ public class BlockPL extends Block {
     public BlockPL(Material material, String name) {
         super(material);
         this.setUnlocalizedName(MOD_ID + ".block." + name);
-        //this.setBlockTextureName(RESOURCE_DOMAIN + ":" + "block" + name);
         this.setCreativeTab(creativeTabPL);
         this.internalName = name;
         // TODO register after construction
-        PLConfig.gtiLogger.log(Level.INFO, name + Integer.toString(Block.getIdFromBlock(this)));
+        GameRegistry.<Block>register(this, new ResourceLocation(MOD_ID, name));
+        this.registerItemBlock();
+        PLConfig.gtiLogger.log(Level.INFO, name + ":" + Integer.toString(Block.getIdFromBlock(this)));
     }
 
     /**
@@ -129,6 +139,15 @@ public class BlockPL extends Block {
         } else {
             super.getSubBlocks(item, creativeTabs, list);
         }
+    }
+
+    /**
+     * Register item block.
+     * Forge recommend register item block separately.
+     * {@link GameRegistry#register(IForgeRegistryEntry, ResourceLocation)}
+      */
+    protected void registerItemBlock() {
+        GameRegistry.<Item>register(new ItemBlock(this), new ResourceLocation(MOD_ID, this.internalName));
     }
 
     public Class<? extends ItemBlock> getItemBlockClass() {

@@ -28,6 +28,7 @@ import com.mcgoodtime.productionline.common.blocks.*;
 //import com.mcgoodtime.productionline.common.blocks.generator.BlockAdvSolar;
 //import com.mcgoodtime.productionline.common.blocks.generator.BlockFluidKineticGenerator;
 //import com.mcgoodtime.productionline.common.items.ItemWaterHyacinth;
+import com.mcgoodtime.productionline.common.blocks.generator.BlockFluidKineticGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -59,11 +60,11 @@ public class PLBlocks {
     public static Block waterHyacinth;
 
     public static void init() {
-        pad = new BlockPL(Material.ROCK, "Pad", 1, 0, null, 0);
-        dryLog = new BlockPL(Material.ROCK, "DryLog", 3, 0, "axe", 0);
-        oreIridium = new BlockPL(Material.ROCK, "oreIridium", 10, 20, "pickaxe", 3);
+        pad = new BlockPL(Material.ROCK, "pad", 1, 0, null, 0);
+        dryLog = new BlockPL(Material.ROCK, "dry_log", 3, 0, "axe", 0);
+        oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
 //        fluidKineticGenerator = new BlockFluidKineticGenerator();
-//        airBrakeCasing = new BlockMultiTexture(Material.iron, "AirBrakeCasing");
+        airBrakeCasing = new BlockMultiTexture(Material.IRON, "air_brake_casing");
 //        new BlockMisc();
 //        new BlockMachine();
 //        new BlockEUStorage();

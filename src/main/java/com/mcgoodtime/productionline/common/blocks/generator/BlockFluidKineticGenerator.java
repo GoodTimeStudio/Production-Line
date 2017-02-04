@@ -44,7 +44,7 @@ import javax.annotation.Nullable;
 public class BlockFluidKineticGenerator extends BlockContainerPL {
 
     public BlockFluidKineticGenerator() {
-        super(Material.IRON, "FluidKineticGenerator");
+        super(Material.IRON, "fluid_kinetic_generator");
     }
 
     @Override

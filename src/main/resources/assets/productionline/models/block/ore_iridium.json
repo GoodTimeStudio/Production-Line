@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "productionline:blocks/ore_iridium"
+  }
+}
