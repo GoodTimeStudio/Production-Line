@@ -51,8 +51,8 @@ dependencies {
     compile ('org.spongepowered:mixin:0.6.+') {
         exclude module: 'launchwrapper'
     }
-    compile 'net.industrial-craft:industrialcraft-2:2.6.159-ex110:dev' //adds ic2 to the dev env
-	compile 'mezz.jei:jei_1.10.2:3.14.3.403'
+    deobfCompile 'net.industrial-craft:industrialcraft-2:2.6.161-ex110' //adds ic2 to the dev env
+	compile 'mezz.jei:jei_1.10.2:3.14.4.404'
 }
 
 jar {

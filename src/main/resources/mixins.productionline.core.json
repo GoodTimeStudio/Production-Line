@@ -4,7 +4,6 @@
   "package": "com.mcgoodtime.productionline.common.mixin",
   "priority": 1111,
   "mixins": [
-    "MixinItemMulti",
     "MixinTileEntityFurnace"
   ],
   "compatibilityLevel": "JAVA_8",
