@@ -29,10 +29,18 @@ import com.mcgoodtime.productionline.common.core.ProductionLine;
 //import com.mcgoodtime.productionline.common.blocks.generator.BlockAdvSolar;
 //import com.mcgoodtime.productionline.common.blocks.generator.BlockFluidKineticGenerator;
 //import com.mcgoodtime.productionline.common.items.ItemWaterHyacinth;
+import com.mcgoodtime.productionline.common.items.ItemBlockPL;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
 
 /**
  * ProductionLine blocks.
@@ -63,8 +71,7 @@ public class PLBlocks {
         pad = new BlockPL(Material.ROCK, "pad", 1, 0, null, 0);
         dryLog = new BlockPL(Material.ROCK, "dry_log", 3, 0, "axe", 0);
         oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
-//        fluidKineticGenerator = new BlockFluidKineticGenerator();
-//        airBrakeCasing = new BlockMultiTexture(Material.IRON, "air_brake_casing");
+        airBrakeCasing = new BlockOrientable(Material.IRON, "air_brake_casing");
         new BlockMisc();
         new BlockMachine();
 

@@ -1,0 +1,11 @@
+{
+  "parent": "productionline:block/machine",
+  "textures": {
+    "up_normal": "#all_normal",
+    "down_normal": "#all_normal",
+    "front_normal": "#all_normal",
+    "left_normal": "#all_normal",
+    "back_normal": "#all_normal",
+    "right_normal": "#all_normal"
+  }
+}

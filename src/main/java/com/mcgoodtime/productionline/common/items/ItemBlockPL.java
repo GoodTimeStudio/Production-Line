@@ -24,14 +24,17 @@
  */
 package com.mcgoodtime.productionline.common.items;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import com.mcgoodtime.productionline.common.blocks.IBlockType;
+import com.mcgoodtime.productionline.common.blocks.IMultiIDBlock;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
+import java.util.List;
+
+import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
 
 /**
  * Created by BestOwl on 2015.11.22.0022.
@@ -47,25 +50,31 @@ public class ItemBlockPL extends ItemBlock {
         this.hasSubtypes = true;
     }
 
-//    @SideOnly(Side.CLIENT)
-//    @Override
-//    @Nonnull
-//    public String getItemStackDisplayName(@Nonnull ItemStack itemStack) {
-//        if (this.block instanceof IMultiMetaBlock) {
-//            return I18n.format(((IMultiMetaBlock) block).getBlockName(itemStack) + ".name");
-//        }
-//        return super.getItemStackDisplayName(itemStack);
-//    }
+    /**
+     * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
+     * different names based on their damage or NBT.
+     *
+     */
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        String internal = null;
+        if (this.block instanceof IMultiIDBlock) {
+            Object objects[] = ((IMultiIDBlock) this.block).getBlockTypeContainer().getAllowedValues().toArray();
+            if (stack.getItemDamage() < objects.length) {
+                Object obj = objects[stack.getItemDamage()];
+                if (obj instanceof IBlockType) {
+                    internal = ((IBlockType) obj).getTypeName();
+                }
+            }
+        }
 
-//    /**
-//     * Gets an icon index based on an item's damage value
-//     */
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public IIcon getIconFromDamage(int meta)
-//    {
-//        return this.field_150939_a.getIcon(2, meta);
-//    }
+        if (internal != null) {
+            return "tile." + MOD_ID + ".block." + internal;
+        }
+        else {
+            return super.getUnlocalizedName(stack);
+        }
+    }
 
     /**
      * Returns the metadata of the block which this Item (ItemBlock) can place
@@ -75,4 +84,17 @@ public class ItemBlockPL extends ItemBlock {
     {
         return meta;
     }
+
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    @Override
+    public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
+        if (this.block instanceof IMultiIDBlock) {
+            for (int i = 0; i < ((IMultiIDBlock) this.block).getBlockTypeContainer().getAllowedValues().size(); i++) {
+                list.add(new ItemStack(this, 1, i));
+            }
+        }
+    }
+
 }

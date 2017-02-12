@@ -24,10 +24,11 @@
  */
 package com.mcgoodtime.productionline.common.tiles;
 
+import com.mcgoodtime.productionline.common.blocks.BlockMachine;
+import com.mcgoodtime.productionline.common.blocks.BlockPL;
 import com.mcgoodtime.productionline.common.network.PLNetwork;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -50,15 +51,19 @@ public class TilePL extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        facing = EnumFacing.VALUES[nbt.getShort("facing")];
-        active = nbt.getBoolean("active");
+        if (!this.world.isRemote) {
+            this.setFacing(EnumFacing.VALUES[nbt.getShort("facing")]);
+            this.setActive(nbt.getBoolean("active"));
+        }
     }
 
     @Override
     @Nonnull
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt = super.writeToNBT(nbt);
-        nbt.setShort("facing", (short) facing.ordinal());
+        if (facing != null) {
+            nbt.setShort("facing", (short) facing.ordinal());
+        }
         nbt.setBoolean("active", active);
         return nbt;
     }
@@ -76,18 +81,20 @@ public class TilePL extends TileEntity {
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound sync = new NBTTagCompound();
-        sync.setShort("facing", (short) facing.ordinal());
+        if (facing != null) {
+            sync.setShort("facing", (short) facing.ordinal());
+        }
         sync.setBoolean("active", this.active);
         return new SPacketUpdateTileEntity(this.pos, 1, sync);
     }
 
     public void setActive(boolean active) {
         this.active = active;
-        PLNetwork.updateBlockDisplayState(this);
+        this.getWorld().setBlockState(this.pos, this.getWorld().getBlockState(this.pos).withProperty(BlockMachine.PROPERTY_ACTIVE, active));
     }
 
     public void setFacing(EnumFacing facing) {
         this.facing = facing;
-        PLNetwork.updateBlockDisplayState(this);
+        this.getWorld().setBlockState(this.pos, this.getWorld().getBlockState(this.pos).withProperty(BlockPL.PROPERTY_FACING, facing));
     }
 }

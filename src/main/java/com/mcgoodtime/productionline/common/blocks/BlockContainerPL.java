@@ -68,7 +68,6 @@ public abstract class BlockContainerPL extends BlockPL implements ITileEntityPro
 
     protected abstract Class<? extends TilePL> getTileEntityClass(IBlockState state);
 
-
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
         try {

@@ -1,0 +1,11 @@
+{
+  "parent": "productionline:block/machine",
+  "textures": {
+    "up_active": "#all_active",
+    "down_active": "#all_active",
+    "front_active": "#all_active",
+    "left_active": "#all_active",
+    "back_active": "#all_active",
+    "right_active": "#all_active"
+  }
+}

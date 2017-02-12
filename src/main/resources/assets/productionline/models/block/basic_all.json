@@ -1,0 +1,11 @@
+{
+  "parent": "productionline:block/basic",
+  "textures": {
+    "up": "#all",
+    "down": "#all",
+    "front": "#all",
+    "left": "#all",
+    "back": "#all",
+    "right": "#all"
+  }
+}

@@ -27,61 +27,100 @@ package com.mcgoodtime.productionline.common.blocks;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.items.ItemBlockPL;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
+import javax.annotation.Nonnull;
 
 /**
  * Created by suhao on 2015.10.18.0018.
  *
  * @author suhao
  */
-public class BlockMisc extends BlockPL {
+public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<BlockMisc.Type>> {
 
-    public static List<String> internalNameList = new ArrayList<String>();
+    public static final PropertyEnum<Type> PROPERTY_TYPE = PropertyEnum.create("type", Type.class);
 
-    static {
-        internalNameList.add("CompressedWaterHyacinth");
-        internalNameList.add("DehydratedWaterHyacinthBlock");
+    public enum Type implements IStringSerializable, IBlockType {
+        COMPRESSED_WATER_HYACINTH("compressed_water_hyacinth"),
+        DEHYDRATED_WATER_HYACINTH_BLOCK("dehydrated_water_hyacinth_block");
+
+        private final String name;
+
+        Type(String name) {
+            this.name = name;
+        }
+
+        @Override
+        @Nonnull
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String getTypeName() {
+            return this.name;
+        }
     }
 
     public BlockMisc() {
-        super(Material.ROCK, "BlockMisc");
+        super(Material.ROCK, "block_misc");
         this.setHardness(1.0F);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_TYPE, Type.COMPRESSED_WATER_HYACINTH));
         PLBlocks.compressedWaterHyacinth = new ItemStack(this, 1, 0);
         PLBlocks.dehydratedWaterHyacinthblock = new ItemStack(this, 1, 1);
     }
 
+    @Nonnull
     @Override
-    public Class<? extends ItemBlock> getItemBlockClass() {
-        return ItemBlockPL.class;
+    public PropertyEnum<Type> getBlockTypeContainer() {
+        return PROPERTY_TYPE;
     }
 
-    public int getMaxMeta() {
-        return internalNameList.size();
+    @Override
+    protected void registerItemBlock() {
+        GameRegistry.<Item>register(new ItemBlockPL(this), this.getRegistryName());
     }
 
     /**
-     * Returns the unlocalized name of this block. This version accepts an ItemStack so different stacks can have
-     * different names based on their meta or NBT.
-    */
-    public String getBlockName(ItemStack itemStack) {
-        return "tile." + MOD_ID + ".block." + this.getInternalName(itemStack.getItemDamage());
+     * Convert the BlockState into the correct metadata value
+     *
+     * @param state
+     */
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(PROPERTY_TYPE).ordinal();
     }
 
-    public String getInternalName(int meta) {
-        return internalNameList.get(meta);
+    /**
+     * Convert the given metadata into a BlockState for this Block
+     *
+     * @param meta
+     */
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(PROPERTY_TYPE, Type.values()[meta]);
     }
 
-//    /**
-//     * Determines the damage on the item the block drops. Used in cloth and wood.
-//     */
-//    @Override
-//    public int damageDropped(int meta) {
-//        return meta;
-//    }
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, PROPERTY_TYPE);
+    }
+
+    /**
+     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
+     */
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        worldIn.setBlockState(pos, state.withProperty(PROPERTY_TYPE, Type.values()[stack.getItemDamage()]));
+    }
 }

@@ -25,15 +25,25 @@
 
 package com.mcgoodtime.productionline.client;
 
+import com.mcgoodtime.productionline.common.blocks.BlockMisc;
+import com.mcgoodtime.productionline.common.blocks.IBlockType;
+import com.mcgoodtime.productionline.common.blocks.IMultiIDBlock;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.init.PLItems;
 import com.mcgoodtime.productionline.common.items.ItemMulti;
 import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
+import java.util.Collection;
+
+import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
 import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
 
 /**
@@ -46,6 +56,9 @@ public class PLModelRegistry {
     public static void loadBlockModels() {
         registerBlockModel(PLBlocks.oreIridium);
         registerBlockModel(PLBlocks.airBrakeCasing);
+        registerBlockModel(PLBlocks.compressedWaterHyacinth);
+        registerBlockModel(PLBlocks.dehydratedWaterHyacinthblock);
+        registerBlockModel(PLBlocks.carbonizeFurnace);
     }
 
     public static void loadItemModels() {
@@ -80,6 +93,8 @@ public class PLModelRegistry {
     private static ModelResourceLocation getItemModelResLoc(Item item, int meta) {
         String name = item.getRegistryName().getResourcePath();
         String path = "";
+        String variant = "inventory";
+
         if (item instanceof IItemModelProvider) {
             path = ((IItemModelProvider) item).getModelResourcePath() + "/";
 
@@ -88,8 +103,18 @@ public class PLModelRegistry {
                 name = custom;
             }
         }
+
+        Block block = Block.getBlockFromItem(item);
+        if (block instanceof IMultiIDBlock) {
+            PropertyEnum propertyEnum = ((IMultiIDBlock) block).getBlockTypeContainer();
+            Object object = propertyEnum.getAllowedValues().toArray()[meta];
+            if (object instanceof IBlockType) {
+                variant = propertyEnum.getName() + "=" +((IBlockType) object).getTypeName();
+            }
+        }
+
         ResourceLocation ret = new ResourceLocation(RESOURCE_DOMAIN, path + name);
-        return new ModelResourceLocation(ret, "normal");
+        return new ModelResourceLocation(ret, variant);
     }
 
     private static ModelResourceLocation getBlockModelResLoc(Block block, int meta) {
@@ -105,6 +130,18 @@ public class PLModelRegistry {
 
     private static void registerBlockModel(Block block) {
         registerBlockModel(block, 0, getBlockModelResLoc(block, 0));
+    }
+
+    private static void registerBlockModel(Block block, int metadata) {
+        registerBlockModel(block, metadata, getBlockModelResLoc(block, metadata));
+    }
+
+    private static void registerBlockModel(ItemStack itemStack) {
+        registerBlockModel(getBlockFromStack(itemStack), itemStack.getMetadata());
+    }
+
+    private static Block getBlockFromStack(ItemStack stackIn) {
+        return Block.getBlockFromItem(stackIn.getItem());
     }
 
     //=========================

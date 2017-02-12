@@ -122,7 +122,7 @@ public final class ProductionLine {
 
     @SubscribeEvent
     public void registerBlock(RegistryEvent<Block> event) {
-//        PLBlocks.init();
+        PLBlocks.init();
     }
 
     @SubscribeEvent

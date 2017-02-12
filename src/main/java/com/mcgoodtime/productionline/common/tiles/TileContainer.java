@@ -26,7 +26,6 @@ package com.mcgoodtime.productionline.common.tiles;
 
 import com.mcgoodtime.productionline.common.tiles.tileslots.TileSlot;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -116,8 +115,8 @@ public abstract class TileContainer extends TilePL implements ISidedInventory, I
 
     @Override
     @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        NBTTagCompound nbt = super.writeToNBT(compound);
 
         NBTTagList slotList = new NBTTagList();
         for (int i = 0; i < this.getSizeInventory(); ++i) {

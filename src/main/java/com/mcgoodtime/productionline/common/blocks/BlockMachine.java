@@ -1,36 +1,28 @@
 package com.mcgoodtime.productionline.common.blocks;
 
-import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
-
 import com.mcgoodtime.productionline.common.core.GuiHandler;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
-import com.mcgoodtime.productionline.common.items.ItemBlockEUStorage;
-import com.mcgoodtime.productionline.common.tiles.TileAdvSolar;
-import com.mcgoodtime.productionline.common.tiles.TileCarbonizeFurnace;
-import com.mcgoodtime.productionline.common.tiles.TileFluidKineticGenerator;
-import com.mcgoodtime.productionline.common.tiles.TileHeatDryer;
+import com.mcgoodtime.productionline.common.items.ItemBlockPL;
+import com.mcgoodtime.productionline.common.tiles.*;
 import com.mcgoodtime.productionline.common.tiles.TilePL;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileCSEU;
-import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEVSU;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileParallelSpaceSU;
 import ic2.api.item.IC2Items;
-import ic2.core.util.StackUtil;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -45,18 +37,19 @@ import javax.annotation.Nullable;
  * @author BestOwl
  * @since 0.2
  */
-public class BlockMachine extends BlockContainerPL {
+public class BlockMachine extends BlockContainerPL implements IOrientableBlock, IMultiIDBlock<PropertyEnum<BlockMachine.Type>> {
 
-    private final PropertyEnum<Type> property = PropertyEnum.create("type", Type.class);
+    private static final PropertyEnum<Type> PROPERTY_TYPE = PropertyEnum.create("type", Type.class);
+    public static final PropertyBool PROPERTY_ACTIVE = PropertyBool.create("active");
 
-    public enum Type implements IStringSerializable {
-        CARBONIZE_FURNACE("CarbonizeFurnace", TileCarbonizeFurnace.class, GuiHandler.EnumGui.CarbonizeFurnace),
-        HEAT_DRYER("HeatDryer", TileHeatDryer.class, GuiHandler.EnumGui.HeatDryer),
-        EVSU("EVSU", TileEVSU.class, GuiHandler.EnumGui.EVSU),
-        CSEU("CSEU", TileCSEU.class, GuiHandler.EnumGui.CSEU),
-        PARALLEL_SPACE_SU("ParallelSpaceSU", TileParallelSpaceSU.class, GuiHandler.EnumGui.ParallelSpaceSU),
-        ADV_SOLAR("AdvSolar", TileAdvSolar.class, GuiHandler.EnumGui.AdvSolar),
-        FLUID_KINETIC_GENERATOR("FluidKineticGenerator", TileFluidKineticGenerator.class, GuiHandler.EnumGui.FluidKineticGenerator);
+    public enum Type implements IStringSerializable, IBlockType {
+        CARBONIZE_FURNACE("carbonize_furnace", TileCarbonizeFurnace.class, GuiHandler.EnumGui.CarbonizeFurnace),
+        HEAT_DRYER("heat_dryer", TileHeatDryer.class, GuiHandler.EnumGui.HeatDryer),
+        EVSU("evsu",TileEVSU.class, GuiHandler.EnumGui.EVSU),
+        CSEU("cseu",TileCSEU.class, GuiHandler.EnumGui.CSEU),
+        PARALLEL_SPACE_SU("parallel_space_su",TileParallelSpaceSU.class, GuiHandler.EnumGui.ParallelSpaceSU),
+        ADV_SOLAR("adv_solar", TileAdvSolar.class, GuiHandler.EnumGui.AdvSolar),
+        FLUID_KINETIC_GENERATOR("fluid_kinetic_generator", TileFluidKineticGenerator.class, GuiHandler.EnumGui.FluidKineticGenerator);
 
         private final String name;
         public final Class<? extends TilePL> tileClass;
@@ -73,23 +66,29 @@ public class BlockMachine extends BlockContainerPL {
         public String getName() {
             return name;
         }
+
+        @Override
+        public String getTypeName() {
+            return this.name;
+        }
     }
 
     public BlockMachine() {
-        super(Material.IRON, "BlockMachine");
+        super(Material.IRON, "machine");
         this.setHardness(2.0F);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_FACING, EnumFacing.NORTH)
+                .withProperty(PROPERTY_ACTIVE, false));
         for (Type t : Type.values()) {
             GameRegistry.registerTileEntity(t.tileClass, t.getName());
         }
 
-//        PLBlocks.evsu = new ItemStack(this, 1, 0);
-//        PLBlocks.cseu = new ItemStack(this, 1, 1);
-//        PLBlocks.parallelSpaceSU = new ItemStack(this, 1, 2);
+        PLBlocks.carbonizeFurnace = new ItemStack(this);
     }
 
+    @Nonnull
     @Override
-    public Class<? extends ItemBlock> getItemBlockClass() {
-        return ItemBlockEUStorage.class;
+    public PropertyEnum<Type> getBlockTypeContainer() {
+        return PROPERTY_TYPE;
     }
 
     /**
@@ -99,26 +98,19 @@ public class BlockMachine extends BlockContainerPL {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem,
             EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
-            player.openGui(ProductionLine.getInstance(), state.getValue(property).gui.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(ProductionLine.getInstance(), state.getValue(PROPERTY_TYPE).gui.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
 
     @Override
     protected Class<? extends TilePL> getTileEntityClass(IBlockState state) {
-        return state.getValue(property).tileClass;
+        return state.getValue(PROPERTY_TYPE).tileClass;
     }
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return IC2Items.getItem("machine").getItem();
-    }
-
-    /**
-     * Returns the unlocalized name of this block.
-     */
-    public String getBlockName(ItemStack itemStack) {
-        return "tile." + MOD_ID + ".block.machine";
     }
 
 //    @Override
@@ -132,11 +124,50 @@ public class BlockMachine extends BlockContainerPL {
 //        return tile != null && tile.shouldEmitRedstonePower() ? 15 : 0;
 //    }
 //
-//    @Override
-//    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    @Override
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 //        super.onBlockPlacedBy(world, pos, state, placer, stack);
+        System.out.println(world.isRemote);
+        if (stack.getMetadata() < Type.values().length) {
+            world.setBlockState(pos, state.withProperty(PROPERTY_TYPE, Type.values()[stack.getMetadata()]), 2);
+        }
+
+        TilePL tile = (TilePL) world.getTileEntity(pos);
+        if (tile != null) {
+            tile.setFacing(placer.getHorizontalFacing().getOpposite());
+        }
+
 //        TileEUStorage tile = (TileEUStorage) world.getTileEntity(pos);
 //        NBTTagCompound nbt = StackUtil.getOrCreateNbtData(stack);
 //        tile.energy = nbt.getDouble("energy");
-//    }
+    }
+
+    /**
+     * Convert the BlockState into the correct metadata value
+     */
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(PROPERTY_TYPE).ordinal();
+    }
+
+    /**
+     * Convert the given metadata into a BlockState for this Block
+     */
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        if (meta < Type.values().length) {
+            return this.getDefaultState().withProperty(PROPERTY_TYPE, Type.values()[meta]);
+        }
+        return null;
+    }
+
+    @Override
+    protected void registerItemBlock() {
+        GameRegistry.<Item>register(new ItemBlockPL(this), this.getRegistryName());
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, PROPERTY_FACING, PROPERTY_TYPE, PROPERTY_ACTIVE);
+    }
 }

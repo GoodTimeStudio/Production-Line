@@ -30,6 +30,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.EnumFaceDirection;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -52,6 +53,7 @@ import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -63,6 +65,8 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
  * @author suhao
  */
 public class BlockPL extends Block {
+
+    public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public String internalName;
 
@@ -82,6 +86,9 @@ public class BlockPL extends Block {
         // TODO register after construction
         GameRegistry.<Block>register(this, new ResourceLocation(MOD_ID, name));
         this.registerItemBlock();
+        if (this instanceof IOrientableBlock) {
+            this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_FACING, EnumFacing.NORTH));
+        }
         PLConfig.gtiLogger.log(Level.INFO, name + ":" + Integer.toString(Block.getIdFromBlock(this)));
     }
 
@@ -150,7 +157,53 @@ public class BlockPL extends Block {
         GameRegistry.<Item>register(new ItemBlock(this), new ResourceLocation(MOD_ID, this.internalName));
     }
 
-    public Class<? extends ItemBlock> getItemBlockClass() {
-        return ItemBlock.class;
+    @Override
+    protected BlockStateContainer createBlockState() {
+        if (this instanceof IOrientableBlock) {
+            return new BlockStateContainer(this, PROPERTY_FACING);
+        }
+        else {
+            return super.createBlockState();
+        }
+    }
+
+    /**
+     * Convert the BlockState into the correct metadata value
+     *
+     * @param state
+     */
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        if (this instanceof IOrientableBlock) {
+            return state.getValue(PROPERTY_FACING).getIndex();
+        }
+        else {
+            return super.getMetaFromState(state);
+        }
+    }
+
+    /**
+     * Convert the given metadata into a BlockState for this Block
+     */
+    public IBlockState getStateFromMeta(int meta) {
+        if (this instanceof IOrientableBlock) {
+            EnumFacing enumfacing = EnumFacing.getFront(meta);
+            if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+                enumfacing = EnumFacing.NORTH;
+            }
+            return this.getDefaultState().withProperty(PROPERTY_FACING, enumfacing);
+        }
+        else {
+            return super.getStateFromMeta(meta);
+        }
+    }
+
+    /**
+     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
+     */
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        if (this instanceof IOrientableBlock) {
+            worldIn.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite()), 2);
+        }
     }
 }

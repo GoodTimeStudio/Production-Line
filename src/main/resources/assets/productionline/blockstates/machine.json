@@ -1,0 +1,58 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all_normal": "productionline:blocks/machine_side"
+    }
+  },
+  "variants": {
+    "inventory": [{}],
+    "type": {
+      "carbonize_furnace": {
+        "textures": {
+          "front_normal": "productionline:blocks/carbonize_furnace_front",
+          "left_normal": "productionline:blocks/carbonize_furnace_left",
+          "up_normal": "productionline:blocks/carbonize_furnace_up",
+          "front_active": "productionline:blocks/carbonize_furnace_front_active",
+          "left_active": "productionline:blocks/carbonize_furnace_left_active",
+          "up_active": "productionline:blocks/carbonize_furnace_up_active"
+        }
+      },
+      "heat_dryer": {
+        "textures": {
+          "front_normal": "productionline:blocks/heat_dryer_front",
+          "left_normal": "productionline:blocks/heat_dryer_side",
+          "right_normal": "productionline:blocks/heat_dryer_side",
+          "up_normal": "productionline:blocks/heat_dryer_up",
+          "front_active": "productionline:blocks/heat_dryer_front_active",
+          "left_active": "productionline:blocks/heat_dryer_side_active",
+          "right_active": "productionline:blocks/heat_dryer_side_active",
+          "up_active": "productionline:blocks/heat_dryer_active"
+        }
+      }
+    },
+    "active": {
+      "false": {
+        "model": "productionline:machine_all"
+      },
+      "true": {
+        "model": "productionline:machine_active_all"
+      }
+    },
+    "facing": {
+      "east": {
+        "y": 90,
+        "uvlock": true
+      },
+      "north": {},
+      "south": {
+        "y": 180,
+        "uvlock": true
+      },
+      "west": {
+        "y": 270,
+        "uvlock": true
+      }
+    }
+  }
+}
