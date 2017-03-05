@@ -25,9 +25,8 @@
 
 package com.mcgoodtime.productionline.client;
 
-import com.mcgoodtime.productionline.common.blocks.BlockMisc;
-import com.mcgoodtime.productionline.common.blocks.IBlockType;
-import com.mcgoodtime.productionline.common.blocks.IMultiIDBlock;
+import com.google.common.collect.ImmutableMap;
+import com.mcgoodtime.productionline.common.blocks.*;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.init.PLItems;
 import com.mcgoodtime.productionline.common.items.ItemMulti;
@@ -35,6 +34,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -58,7 +58,10 @@ public class PLModelRegistry {
         registerBlockModel(PLBlocks.airBrakeCasing);
         registerBlockModel(PLBlocks.compressedWaterHyacinth);
         registerBlockModel(PLBlocks.dehydratedWaterHyacinthblock);
+
+        registerBlockStateMapper(PLBlocks.machine, new MachineStateMapper());
         registerBlockModel(PLBlocks.carbonizeFurnace);
+        registerBlockModel(PLBlocks.heatDryer);
     }
 
     public static void loadItemModels() {
@@ -108,12 +111,24 @@ public class PLModelRegistry {
         if (block instanceof IMultiIDBlock) {
             PropertyEnum propertyEnum = ((IMultiIDBlock) block).getBlockTypeContainer();
             Object object = propertyEnum.getAllowedValues().toArray()[meta];
+
             if (object instanceof IBlockType) {
-                variant = propertyEnum.getName() + "=" +((IBlockType) object).getTypeName();
+                StringBuilder builder = new StringBuilder();
+                builder.append(propertyEnum.getName());
+                builder.append("=");
+                builder.append(((IBlockType) object).getTypeName());
+
+                //// TODO: 2017/3/5 better variant registry
+                if (block instanceof BlockMachine) {
+                    builder.append(",active=false");
+                }
+                variant = builder.toString();
             }
+
         }
 
         ResourceLocation ret = new ResourceLocation(RESOURCE_DOMAIN, path + name);
+        ModelResourceLocation t = new ModelResourceLocation(ret, variant);
         return new ModelResourceLocation(ret, variant);
     }
 
@@ -142,6 +157,10 @@ public class PLModelRegistry {
 
     private static Block getBlockFromStack(ItemStack stackIn) {
         return Block.getBlockFromItem(stackIn.getItem());
+    }
+
+    private static void registerBlockStateMapper(Block block, IStateMapper mapper) {
+        ModelLoader.setCustomStateMapper(block, mapper);
     }
 
     //=========================

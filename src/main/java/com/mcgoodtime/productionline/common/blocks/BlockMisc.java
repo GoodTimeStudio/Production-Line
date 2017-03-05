@@ -75,7 +75,6 @@ public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<Blo
     public BlockMisc() {
         super(Material.ROCK, "block_misc");
         this.setHardness(1.0F);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_TYPE, Type.COMPRESSED_WATER_HYACINTH));
         PLBlocks.compressedWaterHyacinth = new ItemStack(this, 1, 0);
         PLBlocks.dehydratedWaterHyacinthblock = new ItemStack(this, 1, 1);
     }

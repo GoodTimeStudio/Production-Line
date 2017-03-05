@@ -23,7 +23,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ChunkCache;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Random;
@@ -39,7 +42,7 @@ import javax.annotation.Nullable;
  */
 public class BlockMachine extends BlockContainerPL implements IOrientableBlock, IMultiIDBlock<PropertyEnum<BlockMachine.Type>> {
 
-    private static final PropertyEnum<Type> PROPERTY_TYPE = PropertyEnum.create("type", Type.class);
+    public static final PropertyEnum<Type> PROPERTY_TYPE = PropertyEnum.create("type", Type.class);
     public static final PropertyBool PROPERTY_ACTIVE = PropertyBool.create("active");
 
     public enum Type implements IStringSerializable, IBlockType {
@@ -83,6 +86,7 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
         }
 
         PLBlocks.carbonizeFurnace = new ItemStack(this);
+        PLBlocks.heatDryer = new ItemStack(this, 1, 1);
     }
 
     @Nonnull
@@ -127,7 +131,6 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 //        super.onBlockPlacedBy(world, pos, state, placer, stack);
-        System.out.println(world.isRemote);
         if (stack.getMetadata() < Type.values().length) {
             world.setBlockState(pos, state.withProperty(PROPERTY_TYPE, Type.values()[stack.getMetadata()]), 2);
         }
@@ -148,6 +151,23 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
     @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(PROPERTY_TYPE).ordinal();
+    }
+
+    /**
+     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
+     * metadata, such as fence connections.
+     *
+     */
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        // safety check #see https://mcforge-cn.readthedocs.io/zh/latest/blockstates/states/
+        TilePL tile = (TilePL) (worldIn instanceof ChunkCache ? ((ChunkCache)worldIn).getTileEntity(pos,
+                Chunk.EnumCreateEntityType.CHECK) : worldIn.getTileEntity(pos));
+
+        state = state.withProperty(PROPERTY_FACING, tile.facing);
+        state = state.withProperty(PROPERTY_ACTIVE, tile.active);
+
+        return state;
     }
 
     /**

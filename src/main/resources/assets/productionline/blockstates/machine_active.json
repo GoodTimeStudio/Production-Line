@@ -11,17 +11,17 @@
     "type": {
       "carbonize_furnace": {
         "textures": {
-          "front": "productionline:blocks/carbonize_furnace_front",
-          "left": "productionline:blocks/carbonize_furnace_left",
-          "up": "productionline:blocks/carbonize_furnace_up"
+          "front": "productionline:blocks/carbonize_furnace_front_active",
+          "left": "productionline:blocks/carbonize_furnace_left_active",
+          "up": "productionline:blocks/carbonize_furnace_up_active"
         }
       },
       "heat_dryer": {
         "textures": {
-          "front": "productionline:blocks/heat_dryer_front",
-          "left": "productionline:blocks/heat_dryer_side",
-          "right": "productionline:blocks/heat_dryer_side",
-          "up": "productionline:blocks/heat_dryer_up"
+          "front": "productionline:blocks/heat_dryer_front_active",
+          "left": "productionline:blocks/heat_dryer_side_active",
+          "right": "productionline:blocks/heat_dryer_side_active",
+          "up": "productionline:blocks/heat_dryer_active"
         }
       },
       "evsu": {

@@ -48,6 +48,7 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
  * @author liach
  */
 public class PLBlocks {
+    public static BlockPL machine;
     public static ItemStack dehydratedWaterHyacinthblock;
     public static ItemStack compressedWaterHyacinth;
     public static ItemStack carbonizeFurnace;
@@ -73,7 +74,7 @@ public class PLBlocks {
         oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
         airBrakeCasing = new BlockOrientable(Material.IRON, "air_brake_casing");
         new BlockMisc();
-        new BlockMachine();
+        machine = new BlockMachine();
 
         // special registry TODO: Better registry system
         waterHyacinth = new BlockWaterHyacinth();

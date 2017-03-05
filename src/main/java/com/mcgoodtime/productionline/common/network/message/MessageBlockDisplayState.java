@@ -57,9 +57,8 @@ public class MessageBlockDisplayState extends MessageBase {
         TilePL tilePL = (TilePL) world.getTileEntity(pos);
         if (tilePL != null) {
             tilePL.active = message.nbt.getBoolean("active");
-            tilePL.facing = EnumFacing.VALUES[message.nbt.getShort("facing")];
+            tilePL.facing = EnumFacing.getFront(message.nbt.getShort("facing"));
             world.scheduleUpdate(pos, world.getBlockState(pos).getBlock(), 0);
-            world.notifyBlockOfStateChange(pos, world.getBlockState(pos).getBlock());
         }
         return null;
     }

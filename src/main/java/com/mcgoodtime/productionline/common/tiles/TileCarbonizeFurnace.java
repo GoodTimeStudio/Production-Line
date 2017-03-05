@@ -84,7 +84,7 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
+        nbt = super.writeToNBT(nbt);
         nbt.setShort("requireEnergy", (short) requireEnergy);
         nbt.setShort("Progress", (short) progress);
         return nbt;

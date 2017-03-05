@@ -27,11 +27,14 @@ package com.mcgoodtime.productionline.common.tiles;
 import com.mcgoodtime.productionline.common.blocks.BlockMachine;
 import com.mcgoodtime.productionline.common.blocks.BlockPL;
 import com.mcgoodtime.productionline.common.network.PLNetwork;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -51,50 +54,75 @@ public class TilePL extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        if (!this.world.isRemote) {
-            this.setFacing(EnumFacing.VALUES[nbt.getShort("facing")]);
-            this.setActive(nbt.getBoolean("active"));
-        }
+        this.facing = EnumFacing.getFront(nbt.getShort("facing"));
+        this.active = nbt.getBoolean("active");
+
+    }
+
+    /**
+     * Called from Chunk.setBlockIDWithMetadata and Chunk.fillChunk, determines if this tile entity should be re-created when the ID, or Metadata changes.
+     * Use with caution as this will leave straggler TileEntities, or create conflicts with other TileEntities if not used properly.
+     *
+     * @param world    Current world
+     * @param pos      Tile's world position
+     * @param oldState The old ID of the block
+     * @return true forcing the invalidation of the existing TE, false not to invalidate the existing TE
+     */
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return oldState.getBlock() != newSate.getBlock();
     }
 
     @Override
     @Nonnull
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt = super.writeToNBT(nbt);
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        NBTTagCompound nbt = super.writeToNBT(compound);
         if (facing != null) {
-            nbt.setShort("facing", (short) facing.ordinal());
+            nbt.setShort("facing", ((short) facing.getIndex()));
         }
         nbt.setBoolean("active", active);
         return nbt;
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-        super.onDataPacket(net, pkt);
-        NBTTagCompound nbt = pkt.getNbtCompound();
-        facing = EnumFacing.VALUES[nbt.getShort("facing")];
-        this.active = nbt.getBoolean("active");
-    }
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+//        super.onDataPacket(net, pkt);
+//        NBTTagCompound nbt = pkt.getNbtCompound();
+//        this.facing = EnumFacing.getFront(nbt.getShort("facing"));
+//        this.active = nbt.getBoolean("active");
+//    }
+//
+//    @Nullable
+//    @Override
+//    public SPacketUpdateTileEntity getUpdatePacket() {
+//        NBTTagCompound sync = new NBTTagCompound();
+//        if (facing != null) {
+//            sync.setShort("facing", (short) facing.ordinal());
+//        }
+//        sync.setBoolean("active", this.active);
+//        return new SPacketUpdateTileEntity(this.pos, 1, sync);
+//    }
 
-    @Nullable
     @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        NBTTagCompound sync = new NBTTagCompound();
+    public NBTTagCompound getUpdateTag() {
+        NBTTagCompound compound = super.getUpdateTag();
         if (facing != null) {
-            sync.setShort("facing", (short) facing.ordinal());
+            compound.setShort("facing", ((short) facing.getIndex()));
         }
-        sync.setBoolean("active", this.active);
-        return new SPacketUpdateTileEntity(this.pos, 1, sync);
+        compound.setBoolean("active", active);
+        return compound;
     }
 
     public void setActive(boolean active) {
         this.active = active;
+        PLNetwork.updateBlockDisplayState(this);
         this.getWorld().setBlockState(this.pos, this.getWorld().getBlockState(this.pos).withProperty(BlockMachine.PROPERTY_ACTIVE, active));
     }
 
     public void setFacing(EnumFacing facing) {
         this.facing = facing;
+        PLNetwork.updateBlockDisplayState(this);
         this.getWorld().setBlockState(this.pos, this.getWorld().getBlockState(this.pos).withProperty(BlockPL.PROPERTY_FACING, facing));
     }
 }
