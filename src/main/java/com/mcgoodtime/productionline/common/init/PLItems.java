@@ -176,7 +176,6 @@ public class PLItems implements IFuelHandler {
         itemOre = new ItemOre();
         itemCrafting = new ItemCrafting();
 
-		new ItemDryFood();
 
         // special registry TODO: Better registry system
 
