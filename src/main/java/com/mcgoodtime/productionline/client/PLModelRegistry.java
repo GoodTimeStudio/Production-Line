@@ -59,9 +59,14 @@ public class PLModelRegistry {
         registerBlockModel(PLBlocks.compressedWaterHyacinth);
         registerBlockModel(PLBlocks.dehydratedWaterHyacinthblock);
 
-        registerBlockStateMapper(PLBlocks.machine, new MachineStateMapper());
+        ModelLoader.setCustomStateMapper(PLBlocks.machine, new StateMap.Builder().withName(BlockMachine.PROPERTY_TYPE).build());
         registerBlockModel(PLBlocks.carbonizeFurnace);
         registerBlockModel(PLBlocks.heatDryer);
+        registerBlockModel(PLBlocks.evsu);
+        registerBlockModel(PLBlocks.cseu);
+        registerBlockModel(PLBlocks.parallelSpaceSU);
+        registerBlockModel(PLBlocks.advSolar);
+        registerBlockModel(PLBlocks.fluidKineticGenerator);
     }
 
     public static void loadItemModels() {
@@ -94,6 +99,11 @@ public class PLModelRegistry {
     }
 
     private static ModelResourceLocation getItemModelResLoc(Item item, int meta) {
+        Block block = Block.getBlockFromItem(item);
+        if (block instanceof IBlockModelProvider) {
+            return ((IBlockModelProvider) block).getModelResourceLocation(meta);
+        }
+
         String name = item.getRegistryName().getResourcePath();
         String path = "";
         String variant = "inventory";
@@ -107,25 +117,26 @@ public class PLModelRegistry {
             }
         }
 
-        Block block = Block.getBlockFromItem(item);
-        if (block instanceof IMultiIDBlock) {
-            PropertyEnum propertyEnum = ((IMultiIDBlock) block).getBlockTypeContainer();
-            Object object = propertyEnum.getAllowedValues().toArray()[meta];
 
-            if (object instanceof IBlockType) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(propertyEnum.getName());
-                builder.append("=");
-                builder.append(((IBlockType) object).getTypeName());
+//        Block block = Block.getBlockFromItem(item);
+//        if (block instanceof IMultiIDBlock) {
+//            PropertyEnum propertyEnum = ((IMultiIDBlock) block).getBlockTypeContainer();
+//            Object object = propertyEnum.getAllowedValues().toArray()[meta];
+//
+//            if (object instanceof IBlockType) {
+//                StringBuilder builder = new StringBuilder();
+//                builder.append(propertyEnum.getName());
+//                builder.append("=");
+//                builder.append(((IBlockType) object).getTypeName());
 
                 //// TODO: 2017/3/5 better variant registry
-                if (block instanceof BlockMachine) {
-                    builder.append(",active=false");
-                }
-                variant = builder.toString();
-            }
+//                if (block instanceof BlockMachine) {
+//                    builder.append(",active=false");
+//                }
+//                variant = builder.toString();
+//            }
 
-        }
+//        }
 
         ResourceLocation ret = new ResourceLocation(RESOURCE_DOMAIN, path + name);
         ModelResourceLocation t = new ModelResourceLocation(ret, variant);

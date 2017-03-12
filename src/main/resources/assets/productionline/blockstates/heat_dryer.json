@@ -8,15 +8,8 @@
   },
   "variants": {
     "inventory": [{}],
-    "type": {
-      "carbonize_furnace": {
-        "textures": {
-          "front": "productionline:blocks/carbonize_furnace_front",
-          "left": "productionline:blocks/carbonize_furnace_left",
-          "up": "productionline:blocks/carbonize_furnace_up"
-        }
-      },
-      "heat_dryer": {
+    "active": {
+      "false": {
         "textures": {
           "front": "productionline:blocks/heat_dryer_front",
           "left": "productionline:blocks/heat_dryer_side",
@@ -24,20 +17,13 @@
           "up": "productionline:blocks/heat_dryer_up"
         }
       },
-      "evsu": {
-
-      },
-      "cseu": {
-
-      },
-      "parallel_space_su": {
-
-      },
-      "adv_solar": {
-
-      },
-      "fluid_kinetic_generator": {
-
+      "true": {
+        "textures": {
+          "front": "productionline:blocks/heat_dryer_front_active",
+          "left": "productionline:blocks/heat_dryer_side_active",
+          "right": "productionline:blocks/heat_dryer_side_active",
+          "up": "productionline:blocks/heat_dryer_active"
+        }
       }
     },
     "facing": {

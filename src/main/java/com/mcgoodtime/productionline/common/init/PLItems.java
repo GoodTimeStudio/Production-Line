@@ -30,7 +30,6 @@ import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
 import com.mcgoodtime.productionline.common.items.ItemCEU;
 import com.mcgoodtime.productionline.common.items.ItemCrafting;
 import com.mcgoodtime.productionline.common.items.ItemDiamondApple;
-import com.mcgoodtime.productionline.common.items.ItemDryFood;
 import com.mcgoodtime.productionline.common.items.ItemOre;
 import com.mcgoodtime.productionline.common.items.ItemPL;
 import com.mcgoodtime.productionline.common.items.ItemPLFood;

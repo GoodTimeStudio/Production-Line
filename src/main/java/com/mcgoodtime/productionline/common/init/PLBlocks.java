@@ -48,16 +48,18 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
  * @author liach
  */
 public class PLBlocks {
-    public static BlockPL machine;
     public static ItemStack dehydratedWaterHyacinthblock;
     public static ItemStack compressedWaterHyacinth;
+
+    public static BlockPL machine;
     public static ItemStack carbonizeFurnace;
     public static ItemStack heatDryer;
     public static ItemStack evsu;
     public static ItemStack cseu;
     public static ItemStack parallelSpaceSU;
+    public static ItemStack advSolar;
+    public static ItemStack fluidKineticGenerator;
 
-    public static BlockPL fluidKineticGenerator;
     public static BlockPL oreIridium;
     public static BlockPL airBrakeCasing;
     public static BlockPL dryLog;

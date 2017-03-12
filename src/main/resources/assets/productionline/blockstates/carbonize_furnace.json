@@ -1,0 +1,43 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "productionline:basic_all",
+    "textures": {
+      "all": "productionline:blocks/machine_side"
+    }
+  },
+  "variants": {
+    "inventory": [{}],
+    "active": {
+      "false": {
+        "textures": {
+          "front": "productionline:blocks/carbonize_furnace_front",
+          "left": "productionline:blocks/carbonize_furnace_left",
+          "up": "productionline:blocks/carbonize_furnace_up"
+        }
+      },
+      "true": {
+        "textures": {
+          "front": "productionline:blocks/carbonize_furnace_front_active",
+          "left": "productionline:blocks/carbonize_furnace_left_active",
+          "up": "productionline:blocks/carbonize_furnace_up_active"
+        }
+      }
+    },
+    "facing": {
+      "east": {
+        "y": 90,
+        "uvlock": true
+      },
+      "north": {},
+      "south": {
+        "y": 180,
+        "uvlock": true
+      },
+      "west": {
+        "y": 270,
+        "uvlock": true
+      }
+    }
+  }
+}

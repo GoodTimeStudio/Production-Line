@@ -1,0 +1,42 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "productionline:basic_all",
+    "textures": {
+      "up": "productionline:blocks/adv_solar_top",
+      "all": "productionline:blocks/adv_solar_side"
+    }
+  },
+  "variants": {
+    "inventory": [{}],
+    "active": {
+      "false": {},
+      "true": {
+        "textures": {}
+      }
+    },
+    "facing": {
+      "east": {
+        "y": 90,
+        "x": 90,
+        "uvlock": true
+      },
+      "north": {
+        "x": 90
+      },
+      "south": {
+        "y": 180,
+        "x": 90,
+        "uvlock": true
+      },
+      "west": {
+        "y": 270,
+        "x": 90,
+        "uvlock": true
+      },
+      "down": {
+        "x": 180
+      }
+    }
+  }
+}

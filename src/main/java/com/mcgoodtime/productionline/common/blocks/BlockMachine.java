@@ -1,5 +1,6 @@
 package com.mcgoodtime.productionline.common.blocks;
 
+import com.mcgoodtime.productionline.client.IBlockModelProvider;
 import com.mcgoodtime.productionline.common.core.GuiHandler;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
@@ -15,13 +16,14 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
@@ -40,7 +42,7 @@ import javax.annotation.Nullable;
  * @author BestOwl
  * @since 0.2
  */
-public class BlockMachine extends BlockContainerPL implements IOrientableBlock, IMultiIDBlock<PropertyEnum<BlockMachine.Type>> {
+public class BlockMachine extends BlockContainerPL implements IOrientableBlock, IMultiIDBlock<PropertyEnum<BlockMachine.Type>>, IBlockModelProvider {
 
     public static final PropertyEnum<Type> PROPERTY_TYPE = PropertyEnum.create("type", Type.class);
     public static final PropertyBool PROPERTY_ACTIVE = PropertyBool.create("active");
@@ -89,6 +91,36 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
         PLBlocks.heatDryer = new ItemStack(this, 1, 1);
     }
 
+    @Override
+    public ModelResourceLocation getModelResourceLocation(int meta) {
+        ResourceLocation res = new ResourceLocation(ProductionLine.RESOURCE_DOMAIN, BlockMachine.Type.values()[meta].getTypeName());
+        return new ModelResourceLocation(res, "active=false");
+    }
+
+    @Override
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+        TileEntity te = worldIn.getTileEntity(pos);
+        if (te instanceof TileCarbonizeFurnace) {
+            if (((TileCarbonizeFurnace) te).active) {
+                float xmod;
+                float ymod;
+                float zmod;
+
+                float x = (float)pos.getX() + 1.0F;
+                float y = (float)pos.getY() + 1.0F;
+                float z = (float)pos.getZ() + 1.0F;
+
+                for(int i = 0; i < 4; ++i) {
+                    xmod = -0.2F - rand.nextFloat() * 0.6F;
+                    ymod = -0.1F + rand.nextFloat() * 0.2F;
+                    zmod = -0.2F - rand.nextFloat() * 0.6F;
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, (double)(x + xmod), (double)(y + ymod),
+                            (double)(z + zmod), 0.0D, 0.0D, 0.0D);
+                }
+            }
+        }
+    }
+
     @Nonnull
     @Override
     public PropertyEnum<Type> getBlockTypeContainer() {
@@ -130,7 +162,6 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
 //
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-//        super.onBlockPlacedBy(world, pos, state, placer, stack);
         if (stack.getMetadata() < Type.values().length) {
             world.setBlockState(pos, state.withProperty(PROPERTY_TYPE, Type.values()[stack.getMetadata()]), 2);
         }

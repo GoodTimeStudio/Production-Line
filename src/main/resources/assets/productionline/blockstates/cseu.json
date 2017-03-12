@@ -1,0 +1,45 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "productionline:basic_all",
+    "textures": {
+      "front": "productionline:blocks/cseu_front",
+      "up": "productionline:blocks/cseu_top",
+      "down": "productionline:blocks/cseu_top",
+      "back": "productionline:blocks/cseu_back",
+      "all": "productionline:blocks/cseu_side"
+    }
+  },
+  "variants": {
+    "inventory": [{}],
+    "active": {
+      "false": {},
+      "true": {
+        "textures": {}
+      }
+    },
+    "facing": {
+      "east": {
+        "y": 90,
+        "x": 90,
+        "uvlock": true
+      },
+      "north": {
+        "x": 90
+      },
+      "south": {
+        "y": 180,
+        "x": 90,
+        "uvlock": true
+      },
+      "west": {
+        "y": 270,
+        "x": 90,
+        "uvlock": true
+      },
+      "down": {
+        "x": 180
+      }
+    }
+  }
+}

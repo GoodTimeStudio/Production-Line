@@ -24,17 +24,21 @@
  */
 package com.mcgoodtime.productionline.common.blocks;
 
+import com.mcgoodtime.productionline.client.IBlockModelProvider;
+import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.items.ItemBlockPL;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -46,7 +50,7 @@ import javax.annotation.Nonnull;
  *
  * @author suhao
  */
-public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<BlockMisc.Type>> {
+public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<BlockMisc.Type>>, IBlockModelProvider {
 
     public static final PropertyEnum<Type> PROPERTY_TYPE = PropertyEnum.create("type", Type.class);
 
@@ -77,6 +81,12 @@ public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<Blo
         this.setHardness(1.0F);
         PLBlocks.compressedWaterHyacinth = new ItemStack(this, 1, 0);
         PLBlocks.dehydratedWaterHyacinthblock = new ItemStack(this, 1, 1);
+    }
+
+    @Override
+    public ModelResourceLocation getModelResourceLocation(int meta) {
+        ResourceLocation res = new ResourceLocation(ProductionLine.RESOURCE_DOMAIN, "block_misc");
+        return new ModelResourceLocation(res, "type=" + Type.values()[meta]);
     }
 
     @Nonnull
