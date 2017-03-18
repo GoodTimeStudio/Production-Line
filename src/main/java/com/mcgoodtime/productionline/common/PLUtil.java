@@ -24,7 +24,11 @@
  */
 package com.mcgoodtime.productionline.common;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,5 +49,21 @@ public class PLUtil {
 
     public static void messageToPlayer(EntityPlayer player, String message, Object... args) {
         player.sendMessage(new TextComponentTranslation(message, args));
+    }
+
+    public static EnumFacing getFacingFromEntity(BlockPos pos, EntityLivingBase entity) {
+        if (MathHelper.abs((float)entity.posX - (float)pos.getX()) < 2.0F && MathHelper.abs((float)entity.posZ - (float)pos.getZ()) < 2.0F) {
+            double d0 = entity.posY + (double)entity.getEyeHeight();
+
+            if (d0 - (double)pos.getY() > 2.0D) {
+                return EnumFacing.UP;
+            }
+
+            if ((double)pos.getY() - d0 > 0.0D) {
+                return EnumFacing.DOWN;
+            }
+        }
+
+        return entity.getHorizontalFacing().getOpposite();
     }
 }

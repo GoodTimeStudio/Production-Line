@@ -4,10 +4,10 @@
     "model": "productionline:basic_all",
     "textures": {
       "all": "productionline:blocks/machine_side",
-      "front": "productionline:blocks/heat_dryer_front",
-      "left": "productionline:blocks/heat_dryer_side",
-      "right": "productionline:blocks/heat_dryer_side",
-      "up": "productionline:blocks/heat_dryer_up"
+      "front": "productionline:blocks/fluid_kinetic_generator_front",
+      "back": "productionline:blocks/fluid_kinetic_generator_back",
+      "left": "productionline:blocks/fluid_kinetic_generator_side",
+      "right": "productionline:blocks/fluid_kinetic_generator_side"
     }
   },
   "variants": {
@@ -16,10 +16,8 @@
       "false": {},
       "true": {
         "textures": {
-          "front": "productionline:blocks/heat_dryer_front_active",
-          "left": "productionline:blocks/heat_dryer_side_active",
-          "right": "productionline:blocks/heat_dryer_side_active",
-          "up": "productionline:blocks/heat_dryer_active"
+          "left": "productionline:blocks/fluid_kinetic_generator_side_active",
+          "right": "productionline:blocks/fluid_kinetic_generator_side_active"
         }
       }
     },

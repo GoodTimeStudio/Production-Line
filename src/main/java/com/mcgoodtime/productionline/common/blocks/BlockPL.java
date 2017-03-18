@@ -66,7 +66,7 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
  */
 public class BlockPL extends Block {
 
-    public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+    public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing");
 
     public String internalName;
 

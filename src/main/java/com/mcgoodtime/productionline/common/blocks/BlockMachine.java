@@ -1,6 +1,7 @@
 package com.mcgoodtime.productionline.common.blocks;
 
 import com.mcgoodtime.productionline.client.IBlockModelProvider;
+import com.mcgoodtime.productionline.common.PLUtil;
 import com.mcgoodtime.productionline.common.core.GuiHandler;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
@@ -8,6 +9,7 @@ import com.mcgoodtime.productionline.common.items.ItemBlockPL;
 import com.mcgoodtime.productionline.common.tiles.*;
 import com.mcgoodtime.productionline.common.tiles.TilePL;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileCSEU;
+import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEVSU;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileParallelSpaceSU;
 import ic2.api.item.IC2Items;
@@ -89,12 +91,17 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
 
         PLBlocks.carbonizeFurnace = new ItemStack(this);
         PLBlocks.heatDryer = new ItemStack(this, 1, 1);
+        PLBlocks.evsu = new ItemStack(this, 1, 2);
+        PLBlocks.cseu = new ItemStack(this, 1, 3);
+        PLBlocks.parallelSpaceSU = new ItemStack(this, 1, 4);
+        PLBlocks.advSolar = new ItemStack(this, 1, 5);
+        PLBlocks.fluidKineticGenerator = new ItemStack(this, 1, 6);
     }
 
     @Override
     public ModelResourceLocation getModelResourceLocation(int meta) {
         ResourceLocation res = new ResourceLocation(ProductionLine.RESOURCE_DOMAIN, BlockMachine.Type.values()[meta].getTypeName());
-        return new ModelResourceLocation(res, "active=false");
+        return new ModelResourceLocation(res, "inventory");
     }
 
     @Override
@@ -168,7 +175,13 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
 
         TilePL tile = (TilePL) world.getTileEntity(pos);
         if (tile != null) {
-            tile.setFacing(placer.getHorizontalFacing().getOpposite());
+            if (tile instanceof TileEUStorage) {
+                tile.setFacing(PLUtil.getFacingFromEntity(pos, placer));
+            }
+            else {
+                tile.setFacing(placer.getHorizontalFacing().getOpposite());
+            }
+
         }
 
 //        TileEUStorage tile = (TileEUStorage) world.getTileEntity(pos);

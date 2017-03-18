@@ -3,19 +3,16 @@
   "defaults": {
     "model": "productionline:basic_all",
     "textures": {
-      "all": "productionline:blocks/machine_side"
+      "all": "productionline:blocks/machine_side",
+      "front": "productionline:blocks/carbonize_furnace_front",
+      "left": "productionline:blocks/carbonize_furnace_left",
+      "up": "productionline:blocks/carbonize_furnace_up"
     }
   },
   "variants": {
     "inventory": [{}],
     "active": {
-      "false": {
-        "textures": {
-          "front": "productionline:blocks/carbonize_furnace_front",
-          "left": "productionline:blocks/carbonize_furnace_left",
-          "up": "productionline:blocks/carbonize_furnace_up"
-        }
-      },
+      "false": {},
       "true": {
         "textures": {
           "front": "productionline:blocks/carbonize_furnace_front_active",
