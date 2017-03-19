@@ -127,17 +127,13 @@ public final class ProductionLine {
 
     @SubscribeEvent
     public void registerItem(RegistryEvent<Item> event) {
+        PLSounds.loadRecord(); //register record sound event before register record item.
         PLItems.init();
     }
 
     @SubscribeEvent
     public void registerPotion(RegistryEvent<Potion> event) {
         PLPotion.init();
-    }
-
-    @SubscribeEvent
-    public void registerSound(RegistryEvent<SoundEvent> event) {
-        PLSounds.init();
     }
 
     @Mod.EventHandler

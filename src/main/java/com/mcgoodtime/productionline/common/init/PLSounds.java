@@ -41,10 +41,10 @@ public class PLSounds {
 
     public static SoundEvent recordMusicSpring;
 
-    public static void init() {
+    public static void loadRecord() {
         ResourceLocation res;
         res = new ResourceLocation(RESOURCE_DOMAIN, "record_MusicSpring");
-        recordMusicSpring = new SoundEvent(res);
+        recordMusicSpring = new SoundEvent(res).setRegistryName(res);
         ForgeRegistries.SOUND_EVENTS.register(recordMusicSpring);
     }
 
