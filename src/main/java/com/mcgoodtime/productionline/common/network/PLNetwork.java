@@ -29,7 +29,7 @@ import com.mcgoodtime.productionline.common.network.message.MessageBase;
 import com.mcgoodtime.productionline.common.network.message.MessageBlockDisplayState;
 import com.mcgoodtime.productionline.common.network.message.MessageEUStorage;
 import com.mcgoodtime.productionline.common.network.message.MessageHandlerBase;
-import com.mcgoodtime.productionline.common.tiles.TilePL;
+import com.mcgoodtime.productionline.common.tiles.TileFacing;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -55,7 +55,7 @@ public class PLNetwork {
         id++;
     }
 
-    public static void updateBlockDisplayState(TilePL tile) {
+    public static void updateBlockDisplayState(TileFacing tile) {
         network.sendToAllAround(new MessageBlockDisplayState(tile),
                 new NetworkRegistry.TargetPoint(tile.getWorld().provider.getDimension(),
                 tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 64));

@@ -59,10 +59,10 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
         FLUID_KINETIC_GENERATOR("fluid_kinetic_generator", TileFluidKineticGenerator.class, GuiHandler.EnumGui.FluidKineticGenerator);
 
         private final String name;
-        public final Class<? extends TilePL> tileClass;
+        public final Class<? extends TileFacing> tileClass;
         public final GuiHandler.EnumGui gui;
 
-        Type(String name, Class<? extends TilePL> tileClass, GuiHandler.EnumGui gui) {
+        Type(String name, Class<? extends TileFacing> tileClass, GuiHandler.EnumGui gui) {
             this.name = name;
             this.tileClass = tileClass;
             this.gui = gui;
@@ -147,7 +147,7 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
     }
 
     @Override
-    protected Class<? extends TilePL> getTileEntityClass(IBlockState state) {
+    protected Class<? extends TileFacing> getTileEntityClass(IBlockState state) {
         return state.getValue(PROPERTY_TYPE).tileClass;
     }
 
@@ -173,7 +173,7 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
             world.setBlockState(pos, state.withProperty(PROPERTY_TYPE, Type.values()[stack.getMetadata()]), 2);
         }
 
-        TilePL tile = (TilePL) world.getTileEntity(pos);
+        TileFacing tile = (TileFacing) world.getTileEntity(pos);
         if (tile != null) {
             if (tile instanceof TileEUStorage) {
                 tile.setFacing(PLUtil.getFacingFromEntity(pos, placer));
@@ -205,7 +205,7 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         // safety check #see https://mcforge-cn.readthedocs.io/zh/latest/blockstates/states/
-        TilePL tile = (TilePL) (worldIn instanceof ChunkCache ? ((ChunkCache)worldIn).getTileEntity(pos,
+        TileFacing tile = (TileFacing) (worldIn instanceof ChunkCache ? ((ChunkCache)worldIn).getTileEntity(pos,
                 Chunk.EnumCreateEntityType.CHECK) : worldIn.getTileEntity(pos));
 
         state = state.withProperty(PROPERTY_FACING, tile.facing);

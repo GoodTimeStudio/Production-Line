@@ -34,7 +34,7 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
         this.setMaxStackSize(1);
         this.tier = tier;
         this.maxEnergy = maxEnergy;
-        this.maxPowerTick = (int) EnergyNet.instance.getPowerFromTier(tier);
+//        this.maxPowerTick = (int) EnergyNet.instance.getPowerFromTier(tier);
         this.addPropertyOverrides();
     }
 

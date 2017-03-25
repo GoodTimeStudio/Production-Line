@@ -46,7 +46,7 @@ import javax.annotation.Nullable;
  *
  * @author suhao
  */
-public class TilePL extends TileEntity {
+public class TileFacing extends TileEntity {
 
     public EnumFacing facing;
     public boolean active;
@@ -83,26 +83,6 @@ public class TilePL extends TileEntity {
         nbt.setBoolean("active", active);
         return nbt;
     }
-
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-//        super.onDataPacket(net, pkt);
-//        NBTTagCompound nbt = pkt.getNbtCompound();
-//        this.facing = EnumFacing.getFront(nbt.getShort("facing"));
-//        this.active = nbt.getBoolean("active");
-//    }
-//
-//    @Nullable
-//    @Override
-//    public SPacketUpdateTileEntity getUpdatePacket() {
-//        NBTTagCompound sync = new NBTTagCompound();
-//        if (facing != null) {
-//            sync.setShort("facing", (short) facing.ordinal());
-//        }
-//        sync.setBoolean("active", this.active);
-//        return new SPacketUpdateTileEntity(this.pos, 1, sync);
-//    }
 
     @Override
     public NBTTagCompound getUpdateTag() {

@@ -29,7 +29,7 @@ import com.mcgoodtime.productionline.common.blocks.BlockContainerPL;
 import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.core.GuiHandler;
 import com.mcgoodtime.productionline.common.tiles.TileFluidKineticGenerator;
-import com.mcgoodtime.productionline.common.tiles.TilePL;
+import com.mcgoodtime.productionline.common.tiles.TileFacing;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -56,7 +56,7 @@ public class BlockFluidKineticGenerator extends BlockContainerPL {
     }
 
     @Override
-    protected Class<? extends TilePL> getTileEntityClass(IBlockState state) {
+    protected Class<? extends TileFacing> getTileEntityClass(IBlockState state) {
         return TileFluidKineticGenerator.class;
     }
 }

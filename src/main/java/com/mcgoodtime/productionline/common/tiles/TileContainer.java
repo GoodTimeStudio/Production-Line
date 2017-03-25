@@ -43,7 +43,7 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public abstract class TileContainer extends TilePL implements ISidedInventory, ITickable {
+public abstract class TileContainer extends TileFacing implements ISidedInventory, ITickable {
 
     /** The ItemStacks that hold the itemsList in the container */
     public final List<TileSlot> tileSlots = new ArrayList<>();
@@ -206,19 +206,6 @@ public abstract class TileContainer extends TilePL implements ISidedInventory, I
             return null;
         }
     }
-
-//    /**
-//     * When some containers are closed they call this on each slot, then drop whatever
-//     * it returns as an EntityItem like when you close a workbench GUI.
-//     */
-//    @Override
-//    public ItemStack getStackInSlotOnClosing(int index) {
-//        ItemStack itemstack = this.tileSlots.get(index).getStack();
-//        if (itemstack != null) {
-//            this.tileSlots.get(index).putStack(null);
-//        }
-//        return itemstack;
-//    }
 
     /**
      * Sets the given item stack to the specified slot in the inventory

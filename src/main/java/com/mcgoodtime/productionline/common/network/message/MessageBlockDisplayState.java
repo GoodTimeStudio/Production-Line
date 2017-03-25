@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.productionline.common.network.message;
 
-import com.mcgoodtime.productionline.common.tiles.TilePL;
+import com.mcgoodtime.productionline.common.tiles.TileFacing;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -43,7 +43,7 @@ public class MessageBlockDisplayState extends MessageBase {
 
     public MessageBlockDisplayState() {}
 
-    public MessageBlockDisplayState(TilePL tile) {
+    public MessageBlockDisplayState(TileFacing tile) {
         super(tile);
         nbt.setBoolean("active", tile.active);
         nbt.setShort("facing", (short) tile.facing.ordinal());
@@ -54,7 +54,7 @@ public class MessageBlockDisplayState extends MessageBase {
     protected IMessage handlerMessage(MessageBase message, MessageContext ctx) {
         WorldClient world = Minecraft.getMinecraft().world;
         BlockPos pos = BlockPos.fromLong(message.nbt.getLong("pos"));
-        TilePL tilePL = (TilePL) world.getTileEntity(pos);
+        TileFacing tilePL = (TileFacing) world.getTileEntity(pos);
         if (tilePL != null) {
             tilePL.active = message.nbt.getBoolean("active");
             tilePL.facing = EnumFacing.getFront(message.nbt.getShort("facing"));

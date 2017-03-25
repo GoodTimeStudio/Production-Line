@@ -1,6 +1,6 @@
 package com.mcgoodtime.productionline.common.network.message;
 
-import com.mcgoodtime.productionline.common.tiles.TilePL;
+import com.mcgoodtime.productionline.common.tiles.TileFacing;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -18,7 +18,7 @@ public abstract class MessageBase implements IMessage {
 
     public MessageBase() {}
 
-    public MessageBase(TilePL tile) {
+    public MessageBase(TileFacing tile) {
         this.nbt = new NBTTagCompound();
         this.nbt.setLong("pos", tile.getPos().toLong());
     }
