@@ -52,13 +52,13 @@ import java.util.Set;
  *
  * @author BestOwl
  */
-public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgradableBlock, IWrenchable {
-    /** containerItemsList: 0 = input, 1 = power, 2 & 3 = output, 4 & 5 = upgrades */
+public class TileCarbonizeFurnace extends TileMachine {
 
     /** The number of ticks that the furnace will keep burning */
     public double requireEnergy;
     /** The number of ticks that the current item has been process for */
     public int progress;
+    public int requireAmount;
 
     public TileCarbonizeFurnace() {
         super(3, 300, 1);
@@ -135,9 +135,10 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
         if (this.getStackInSlot(0) == null) {
             return false;
         } else {
-            ItemStack itemStack = CarbonizeFurnaceRecipes.instance.getProcessResult(this.getStackInSlot(0));
-            if (itemStack != null) {
-                if (!(itemStack.stackSize > CarbonizeFurnaceRecipes.instance.getRequiredProcessAmount(itemStack))) {
+            ItemStack stack = this.getStackInSlot(0);
+            ItemStack outputItemStack = CarbonizeFurnaceRecipes.instance.getProcessResult(stack);
+            if (outputItemStack != null) {
+                if (!(stack.stackSize >= CarbonizeFurnaceRecipes.instance.getRequiredProcessAmount(stack))) {
                     return false;
                 }
 
@@ -145,15 +146,15 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
                     return true;
                 } else {
 
-                    if (this.getStackInSlot(2).isItemEqual(itemStack)) {
-                        int result = this.getStackInSlot(2).stackSize + itemStack.stackSize;
+                    if (this.getStackInSlot(2).isItemEqual(outputItemStack)) {
+                        int result = this.getStackInSlot(2).stackSize + outputItemStack.stackSize;
                         if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(2).getMaxStackSize()) {
                             return true;
                         }
                     }
 
-                    if (this.getStackInSlot(3).isItemEqual(itemStack)) {
-                        int result = this.getStackInSlot(3).stackSize + itemStack.stackSize;
+                    if (this.getStackInSlot(3).isItemEqual(outputItemStack)) {
+                        int result = this.getStackInSlot(3).stackSize + outputItemStack.stackSize;
                         if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(3).getMaxStackSize()) {
                             return true;
                         }
@@ -196,44 +197,4 @@ public class TileCarbonizeFurnace extends TileElectricContainer implements IUpgr
         return enumFacing != EnumFacing.UP && super.acceptsEnergyFrom(iEnergyEmitter, enumFacing);
     }
 
-    @Override
-    public double getEnergy() {
-        return this.energy;
-    }
-
-    @Override
-    public boolean useEnergy(double amount) {
-        if(this.energy >= amount) {
-            this.energy -= amount;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public Set<UpgradableProperty> getUpgradableProperties() {
-        return EnumSet.of(UpgradableProperty.ItemConsuming, UpgradableProperty.ItemProducing);
-    }
-
-    @Override
-    public EnumFacing getFacing(World world, BlockPos blockPos) {
-        return this.facing;
-    }
-
-    @Override
-    public boolean setFacing(World world, BlockPos blockPos, EnumFacing enumFacing, EntityPlayer entityPlayer) {
-        setFacing(enumFacing);
-        return true;
-    }
-
-    @Override
-    public boolean wrenchCanRemove(World world, BlockPos blockPos, EntityPlayer entityPlayer) {
-        return true;
-    }
-
-    @Override
-    public List<ItemStack> getWrenchDrops(World world, BlockPos blockPos, IBlockState iBlockState, TileEntity tileEntity, EntityPlayer entityPlayer, int i) {
-        return Collections.singletonList(new ItemStack(iBlockState.getBlock(), 1, iBlockState.getBlock().getMetaFromState(iBlockState)));
-    }
 }

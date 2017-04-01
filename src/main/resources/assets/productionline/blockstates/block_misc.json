@@ -15,6 +15,11 @@
         "textures": {
           "all": "productionline:blocks/dehydrated_water_hyacinth_block"
         }
+      },
+      "optical_glass": {
+        "textures": {
+          "all": "productionline:blocks/optical_glass"
+        }
       }
     }
   }

@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.productionline.common.init;
 
+import com.mcgoodtime.productionline.common.items.ItemStacks;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -61,14 +62,14 @@ public class PLRecipes {
                 "ABA",
                 "CDC",
                 "EEE",
-                'A', IC2Items.getItem("electronicCircuit"),
+                'A', IC2Items.getItem("crafting", "circuit"),
                 'B', PLBlocks.airBrakeCasing,
                 'C', PLItems.airBrakeUnit,
-                'D', IC2Items.getItem("electroFurnace"),
-                'E', IC2Items.getItem("plateiron")
+                'D', IC2Items.getItem("te", "electric_furnace"),
+                'E', IC2Items.getItem("plate", "iron")
         );
         GameRegistry.addRecipe(
-                new ItemStack(PLBlocks.opticalGlass, 5),
+                ItemStacks.copyStack(PLBlocks.opticalGlass, 5),
                 "ABA",
                 "BAB",
                 "ABA",
@@ -88,8 +89,17 @@ public class PLRecipes {
                 "ABA",
                 "CAC",
                 'A', PLItems.advSolarLensUnit,
-                'B', IC2Items.getItem("dimondPowder"),
-                'C', IC2Items.getItem("carbonPlate")
+                'B', IC2Items.getItem("dust", "diamond"),
+                'C', IC2Items.getItem("crafting", "carbon_plate")
+        );
+        GameRegistry.addRecipe(
+                PLItems.advSolarLensCluster,
+                "ABA",
+                "ACA",
+                "DAD",
+                'A', PLItems.advSolarLensGroup,
+                'B', PLItems.dustIridium,
+                'C', IC2Items.getItem("dust", "energium")
         );
         GameRegistry.addRecipe(PLItems.ironChain,
                 " AA",
@@ -445,7 +455,8 @@ public class PLRecipes {
                 'B', IC2Items.getItem("lapotronCrystal"),
                 'C', IC2Items.getItem("mfsUnit"),
                 'D', PLItems.pulseElectronicCircuitControl
-        );/*
+        );
+        /*
         AdvRecipe.addAndRegister(
                 new ItemStack(PLItems.ceu),
                 "ABA",

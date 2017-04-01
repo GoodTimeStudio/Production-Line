@@ -7,7 +7,6 @@ import com.mcgoodtime.productionline.common.core.ProductionLine;
 import com.mcgoodtime.productionline.common.init.PLBlocks;
 import com.mcgoodtime.productionline.common.items.ItemBlockPL;
 import com.mcgoodtime.productionline.common.tiles.*;
-import com.mcgoodtime.productionline.common.tiles.TilePL;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileCSEU;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEUStorage;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEVSU;
@@ -21,7 +20,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -56,7 +54,8 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
         CSEU("cseu",TileCSEU.class, GuiHandler.EnumGui.CSEU),
         PARALLEL_SPACE_SU("parallel_space_su",TileParallelSpaceSU.class, GuiHandler.EnumGui.ParallelSpaceSU),
         ADV_SOLAR("adv_solar", TileAdvSolar.class, GuiHandler.EnumGui.AdvSolar),
-        FLUID_KINETIC_GENERATOR("fluid_kinetic_generator", TileFluidKineticGenerator.class, GuiHandler.EnumGui.FluidKineticGenerator);
+        FLUID_KINETIC_GENERATOR("fluid_kinetic_generator", TileFluidKineticGenerator.class, GuiHandler.EnumGui.FluidKineticGenerator),
+        PACKAGER("packager", TilePackager.class, GuiHandler.EnumGui.PACKAGER);
 
         private final String name;
         public final Class<? extends TileFacing> tileClass;
@@ -208,7 +207,9 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
         TileFacing tile = (TileFacing) (worldIn instanceof ChunkCache ? ((ChunkCache)worldIn).getTileEntity(pos,
                 Chunk.EnumCreateEntityType.CHECK) : worldIn.getTileEntity(pos));
 
-        state = state.withProperty(PROPERTY_FACING, tile.facing);
+        if (tile.facing != null) {
+            state = state.withProperty(PROPERTY_FACING, tile.facing);
+        }
         state = state.withProperty(PROPERTY_ACTIVE, tile.active);
 
         return state;

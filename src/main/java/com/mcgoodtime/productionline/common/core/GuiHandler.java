@@ -31,22 +31,9 @@ package com.mcgoodtime.productionline.common.core;
 //import com.mcgoodtime.productionline.common.tiles.eustorage.TileCSEU;
 //import com.mcgoodtime.productionline.common.tiles.eustorage.TileEVSU;
 //import com.mcgoodtime.productionline.common.tiles.eustorage.TileParallelSpaceSU;
-import com.mcgoodtime.productionline.client.gui.GuiAdvSolar;
-import com.mcgoodtime.productionline.client.gui.GuiCarbonizeFurnace;
-import com.mcgoodtime.productionline.client.gui.GuiEUStorage;
-import com.mcgoodtime.productionline.client.gui.GuiFluidKineticGenerator;
-import com.mcgoodtime.productionline.client.gui.GuiHeatDryer;
-import com.mcgoodtime.productionline.client.gui.GuiParallelSpaceSU;
-import com.mcgoodtime.productionline.common.inventory.ContainerAdvSolar;
-import com.mcgoodtime.productionline.common.inventory.ContainerCarbonizeFurnace;
-import com.mcgoodtime.productionline.common.inventory.ContainerEUStorage;
-import com.mcgoodtime.productionline.common.inventory.ContainerFluidKineticGenerator;
-import com.mcgoodtime.productionline.common.inventory.ContainerHeatDryer;
-import com.mcgoodtime.productionline.common.inventory.ContainerParallelSpaceSU;
-import com.mcgoodtime.productionline.common.tiles.TileAdvSolar;
-import com.mcgoodtime.productionline.common.tiles.TileCarbonizeFurnace;
-import com.mcgoodtime.productionline.common.tiles.TileFluidKineticGenerator;
-import com.mcgoodtime.productionline.common.tiles.TileHeatDryer;
+import com.mcgoodtime.productionline.client.gui.*;
+import com.mcgoodtime.productionline.common.inventory.*;
+import com.mcgoodtime.productionline.common.tiles.*;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileCSEU;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileEVSU;
 import com.mcgoodtime.productionline.common.tiles.eustorage.TileParallelSpaceSU;
@@ -88,6 +75,7 @@ public class GuiHandler implements IGuiHandler {
             case CSEU: return new ContainerEUStorage<>(player, (TileCSEU) world.getTileEntity(pos));
             case ParallelSpaceSU: return new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(pos));
             case AdvSolar: return new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(pos));
+            case PACKAGER: return new ContainerPackager(player, ((TilePackager) world.getTileEntity(pos)));
             default: return null;
         }
     }
@@ -110,6 +98,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiParallelSpaceSU(new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(pos)));
             case AdvSolar:
                 return new GuiAdvSolar(new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(pos)));
+            case PACKAGER:
+                return new GuiPackager(new ContainerPackager(player, ((TilePackager) world.getTileEntity(pos))));
             default: return null;
         }
     }
@@ -121,6 +111,7 @@ public class GuiHandler implements IGuiHandler {
         HeatDryer,
         CSEU,
         ParallelSpaceSU,
-        AdvSolar
+        AdvSolar,
+        PACKAGER
     }
 }

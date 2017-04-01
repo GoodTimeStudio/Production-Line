@@ -50,6 +50,7 @@ import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
 public class PLBlocks {
     public static ItemStack dehydratedWaterHyacinthblock;
     public static ItemStack compressedWaterHyacinth;
+    public static ItemStack opticalGlass;
 
     public static BlockPL machine;
     public static ItemStack carbonizeFurnace;
@@ -66,7 +67,6 @@ public class PLBlocks {
     public static BlockPL pad;
     
     public static BlockPL hardWood;
-    public static BlockPL opticalGlass;
     
     public static Block waterHyacinth;
 

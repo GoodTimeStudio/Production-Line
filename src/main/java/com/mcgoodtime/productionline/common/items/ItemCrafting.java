@@ -43,23 +43,23 @@ public class ItemCrafting extends ItemMulti {
         PLItems.bambooCharcoal = this.next();
         PLItems.rigidPaper = this.next();
         PLItems.rigidPaperPack = this.next();
-//        PLItems.coarseBatten = this.next();
-//        PLItems.firewood = this.next();
+        PLItems.coarseBatten = this.next();
+        PLItems.firewood = this.next();
         PLItems.faggot = this.next();
         PLItems.sawdust = this.next();
         PLItems.woodPulp = this.next();
         PLItems.corrugatedPaper = this.next();
         PLItems.paperBag = this.next();
-//        PLItems.bioFuel = this.next();
         PLItems.tiles = this.next();
         PLItems.advSolarLensUnit = this.next();
         PLItems.advSolarLensGroup = this.next();
         PLItems.advSolarLensCluster = this.next();
+        PLItems.opticalGlass = this.next();
     }
 
     @Override
     protected List<String> getInternalNameList() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         list.add("roller");
         list.add("heat_insulation_material");
         list.add("small_compressed_water_hyacinth");
@@ -96,11 +96,11 @@ public class ItemCrafting extends ItemMulti {
         list.add("wood_pulp");
         list.add("corrugated_paper");
         list.add("paper_bag");
-        list.add("bio_fuel");
         list.add("tiles");
         list.add("adv_solar_lens_unit");
         list.add("adv_solar_lens_group");
         list.add("adv_solar_lens_cluster");
+        list.add("optical_glass");
         return list;
     }
 

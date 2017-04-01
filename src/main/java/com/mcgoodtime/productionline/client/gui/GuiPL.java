@@ -69,7 +69,8 @@ public abstract class GuiPL<T extends ContainerPL> extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        this.fontRendererObj.drawString(I18n.format(ProductionLine.GUI_PREFIX + this.name), (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 4210752);
+        String displayName = I18n.format(ProductionLine.GUI_PREFIX + this.name);
+        this.fontRendererObj.drawString(displayName, (this.xSize - this.fontRendererObj.getStringWidth(displayName)) / 2, 6, 4210752);
         if (this.container.tile instanceof IUpgradableBlock) {
             handleUpgradeTooltip(x, y);
         }

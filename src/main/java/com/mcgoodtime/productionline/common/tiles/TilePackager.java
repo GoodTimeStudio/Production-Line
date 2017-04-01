@@ -24,6 +24,11 @@
  */
 package com.mcgoodtime.productionline.common.tiles;
 
+import com.mcgoodtime.productionline.common.recipes.PackagerRecipes;
+import com.mcgoodtime.productionline.common.tiles.tileslots.*;
+import ic2.core.upgrade.IUpgradeItem;
+import net.minecraft.item.ItemStack;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -32,17 +37,104 @@ import javax.annotation.Nonnull;
  * @author BestOwl
  */
 public class TilePackager extends TileMachine {
+
+    public final int requireEnergy = 500;
+    public int progress;
+
+    public TilePackager() {
+        super(3, 300, 1);
+        this.tileSlots.add(new TileSlotInput(this, PackagerRecipes.instance));
+        this.tileSlots.add(new TileSlotPackage(this));
+        this.tileSlots.add(new TileSlotDischarge(this, TileSlot.SlotMode.NULL));
+        this.tileSlots.add(new TileSlotOutput(this));
+        this.tileSlots.add(new TileSlotUpgrade(this, TileSlot.SlotMode.NULL));
+        this.tileSlots.add(new TileSlotUpgrade(this, TileSlot.SlotMode.NULL));
+    }
+
     @Nonnull
     @Override
     public String getName() {
         return "Packager";
     }
 
-    /**
-     * Like the old updateEntity(), except more generic.
-     */
     @Override
     public void update() {
+        super.update();
 
+        if (!this.world.isRemote) {
+            boolean needUpdate = false;
+
+            if (this.canProcess() && this.energy >= this.energyTick) {
+                this.setActive(true);
+                this.energy -= this.energyTick;
+                this.progress += this.energyTick;
+
+                if (this.progress >= this.requireEnergy) {
+                    this.progress = 0;
+                    this.processItem();
+                    needUpdate = true;
+                }
+            } else {
+                this.setActive(false);
+                this.progress = 0;
+            }
+
+            for (TileSlot tileSlot : this.tileSlots) {
+                if (tileSlot instanceof TileSlotUpgrade) {
+                    ItemStack stack = tileSlot.getStack();
+                    if(stack != null && stack.getItem() instanceof IUpgradeItem && ((IUpgradeItem)stack.getItem()).onTick(stack, this)) {
+                        needUpdate = true;
+                    }
+                }
+            }
+
+            if (needUpdate) {
+                this.markDirty();
+            }
+        }
+    }
+
+    private boolean canProcess() {
+        if (this.getStackInSlot(0) == null) {
+            return false;
+        } else {
+            ItemStack itemStack = PackagerRecipes.instance.getProcessResult(this.getStackInSlot(0));
+            if (itemStack != null) {
+                if (!(itemStack.stackSize >= PackagerRecipes.instance.getRequiredProcessAmount(itemStack))) {
+                    return false;
+                }
+                if (this.getStackInSlot(2) == null) {
+                    return true;
+                } else {
+                    if (this.getStackInSlot(2).isItemEqual(itemStack)) {
+                        int result = this.getStackInSlot(2).stackSize + itemStack.stackSize;
+                        if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(2).getMaxStackSize()) {
+                            return true;
+                        }
+                    }
+                }
+
+            }
+            return false;
+        }
+    }
+
+    public void processItem() {
+        if (this.canProcess()) {
+            ItemStack outputItem = PackagerRecipes.instance.getProcessResult(this.getStackInSlot(0));
+
+            if (this.getStackInSlot(2) == null) {
+                this.setInventorySlotContents(2, outputItem.copy());
+            }
+            else if (this.getStackInSlot(2).isItemEqual(outputItem)) {
+                this.getStackInSlot(2).stackSize += outputItem.stackSize;
+            }
+
+            this.getStackInSlot(0).stackSize -= PackagerRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0));
+
+            if (this.getStackInSlot(0).stackSize <= 0) {
+                this.setInventorySlotContents(0, null);
+            }
+        }
     }
 }

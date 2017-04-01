@@ -16,5 +16,11 @@ public final class ItemStacks {
         return new ItemComparableItemStack(stack, false);
     }
 
+    public static ItemStack copyStack(ItemStack in, int amount) {
+        ItemStack ret = in.copy();
+        ret.stackSize = amount;
+        return ret;
+    }
+
     private ItemStacks() {}
 }

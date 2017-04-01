@@ -48,7 +48,7 @@ import java.util.Set;
  * Created by Java0 on 2015/11/18.
  *
  */
-public class TileHeatDryer extends TileElectricContainer implements IUpgradableBlock, IWrenchable {
+public class TileHeatDryer extends TileMachine {
 
     public final int requireEnergy = 500;
     public int progress;
@@ -145,47 +145,6 @@ public class TileHeatDryer extends TileElectricContainer implements IUpgradableB
                 this.setInventorySlotContents(0, null);
             }
         }
-    }
-
-    @Override
-    public double getEnergy() {
-        return this.energy;
-    }
-
-    @Override
-    public boolean useEnergy(double amount) {
-        if(this.energy >= amount) {
-            this.energy -= amount;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public Set<UpgradableProperty> getUpgradableProperties() {
-        return EnumSet.of(UpgradableProperty.ItemConsuming, UpgradableProperty.ItemProducing);
-    }
-
-    @Override
-    public EnumFacing getFacing(World world, BlockPos blockPos) {
-        return this.facing;
-    }
-
-    @Override
-    public boolean setFacing(World world, BlockPos blockPos, EnumFacing enumFacing, EntityPlayer entityPlayer) {
-        setFacing(enumFacing);
-        return true;
-    }
-
-    @Override
-    public boolean wrenchCanRemove(World world, BlockPos blockPos, EntityPlayer entityPlayer) {
-        return true;
-    }
-
-    @Override
-    public List<ItemStack> getWrenchDrops(World world, BlockPos blockPos, IBlockState iBlockState, TileEntity tileEntity, EntityPlayer entityPlayer, int i) {
-        return Collections.singletonList(new ItemStack(iBlockState.getBlock(), 1, iBlockState.getBlock().getMetaFromState(iBlockState)));
     }
 
 }

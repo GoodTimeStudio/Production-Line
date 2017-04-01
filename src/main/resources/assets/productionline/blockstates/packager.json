@@ -1,0 +1,38 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "productionline:basic_all",
+    "textures": {
+      "all": "productionline:blocks/machine_side_1",
+      "front": "productionline:blocks/packager_front",
+      "up": "productionline:blocks/packager_top",
+      "down": "productionline:blocks/machine_side_dark"
+    }
+  },
+  "variants": {
+    "inventory": [{}],
+    "active": {
+      "false": {},
+      "true": {
+        "textures": {
+          "front": "productionline:blocks/packager_front_active"
+        }
+      }
+    },
+    "facing": {
+      "east": {
+        "y": 90,
+        "uvlock": true
+      },
+      "north": {},
+      "south": {
+        "y": 180,
+        "uvlock": true
+      },
+      "west": {
+        "y": 270,
+        "uvlock": true
+      }
+    }
+  }
+}
