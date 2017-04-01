@@ -98,22 +98,25 @@ public class TilePackager extends TileMachine {
         if (this.getStackInSlot(0) == null) {
             return false;
         } else {
-            ItemStack itemStack = PackagerRecipes.instance.getProcessResult(this.getStackInSlot(0));
-            if (itemStack != null) {
-                if (!(itemStack.stackSize >= PackagerRecipes.instance.getRequiredProcessAmount(itemStack))) {
+            ItemStack input = this.getStackInSlot(0);
+            ItemStack outputStack = PackagerRecipes.instance.getProcessResult(input);
+            if (outputStack != null) {
+                if (!(input.stackSize >= PackagerRecipes.instance.getRequiredProcessAmount(input))) {
                     return false;
                 }
-                if (this.getStackInSlot(2) == null) {
-                    return true;
-                } else {
-                    if (this.getStackInSlot(2).isItemEqual(itemStack)) {
-                        int result = this.getStackInSlot(2).stackSize + itemStack.stackSize;
-                        if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(2).getMaxStackSize()) {
-                            return true;
+
+                if (this.getStackInSlot(1) != null) { // check package
+                    if (this.getStackInSlot(3) == null) { // output slot
+                        return true;
+                    } else {
+                        if (this.getStackInSlot(3).isItemEqual(outputStack)) {
+                            int result = this.getStackInSlot(3).stackSize + outputStack.stackSize;
+                            if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(3).getMaxStackSize()) {
+                                return true;
+                            }
                         }
                     }
                 }
-
             }
             return false;
         }
@@ -123,17 +126,23 @@ public class TilePackager extends TileMachine {
         if (this.canProcess()) {
             ItemStack outputItem = PackagerRecipes.instance.getProcessResult(this.getStackInSlot(0));
 
-            if (this.getStackInSlot(2) == null) {
-                this.setInventorySlotContents(2, outputItem.copy());
+            if (this.getStackInSlot(3) == null) {
+                this.setInventorySlotContents(3, outputItem.copy());
             }
-            else if (this.getStackInSlot(2).isItemEqual(outputItem)) {
-                this.getStackInSlot(2).stackSize += outputItem.stackSize;
+            else if (this.getStackInSlot(3).isItemEqual(outputItem)) {
+                this.getStackInSlot(3).stackSize += outputItem.stackSize;
             }
 
             this.getStackInSlot(0).stackSize -= PackagerRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0));
 
             if (this.getStackInSlot(0).stackSize <= 0) {
                 this.setInventorySlotContents(0, null);
+            }
+
+            this.getStackInSlot(1).stackSize--;
+
+            if (this.getStackInSlot(1).stackSize <= 0) {
+                this.setInventorySlotContents(1, null);
             }
         }
     }

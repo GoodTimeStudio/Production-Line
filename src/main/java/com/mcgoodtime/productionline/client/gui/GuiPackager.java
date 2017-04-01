@@ -54,16 +54,20 @@ public class GuiPackager extends GuiPL<ContainerPackager> {
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
         super.drawGuiContainerBackgroundLayer(f, x, y);
         TilePackager tile = this.container.tile;
+
+        //energy bar
         int i1 = PLUtil.getGuiScaled(14, (float) tile.energy, tile.maxEnergy);
         this.drawTexturedModalRect(this.x + 56, this.y + 36 + 14 - i1, 176, 14 - i1, 14, i1 + 1);
+
+        //progress bar
         i1 = PLUtil.getGuiScaled(24, tile.progress, (float) tile.requireEnergy);
-        this.drawTexturedModalRect(this.x + 79, this.y + 34, 176, 14, i1 + 1, 16);
+        this.drawTexturedModalRect(this.x + 79, this.y + 40, 176, 15, i1 + 1, 4);
 
         if (tile.active) {
-            this.drawTexturedModalRect(this.x + 84.5f, this.y + 28f + 12 - i / 100, 176, 31, 12, 12 - i / 100);
+            this.drawTexturedModalRect(this.x + 85, this.y + 45 + 12 - (i / 10), 176, 20 + 12 - (i / 10), 12, i / 10);
             i++;
 
-            if (i >= 1200) {
+            if (i >= 120) {
                 i = 0;
             }
         }

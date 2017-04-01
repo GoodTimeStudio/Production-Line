@@ -51,11 +51,11 @@ public class ContainerPackager extends ContainerPL<TilePackager> {
     public ContainerPackager(EntityPlayer player, TilePackager tile) {
         super(player, tile);
         this.addSlotToContainer(new SlotInput((TileSlotInput) tile.tileSlots.get(0), tile, 0, 56, 16));
-        this.addSlotToContainer(new SlotInput((TileSlotPackage) tile.tileSlots.get(1), tile, 1, 83, 23));
-        this.addSlotToContainer(new SlotDischarge(tile, 1, 1, 56, 53));
-        this.addSlotToContainer(new SlotOutput(player, tile, 2, 107, 35));
-        this.addSlotToContainer(new SlotUpgrade(tile, 3, 153, 26));
-        this.addSlotToContainer(new SlotUpgrade(tile, 4, 153, 44));
+        this.addSlotToContainer(new SlotInput((TileSlotPackage) tile.tileSlots.get(1), tile, 1, 83, 21));
+        this.addSlotToContainer(new SlotDischarge(tile, 1, 2, 56, 53));
+        this.addSlotToContainer(new SlotOutput(player, tile, 3, 107, 35));
+        this.addSlotToContainer(new SlotUpgrade(tile, 4, 153, 26));
+        this.addSlotToContainer(new SlotUpgrade(tile, 5, 153, 44));
     }
 
     @Override
