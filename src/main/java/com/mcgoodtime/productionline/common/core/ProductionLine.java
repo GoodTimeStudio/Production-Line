@@ -140,7 +140,7 @@ public final class ProductionLine {
     public void init(FMLInitializationEvent event) {
         PLOreDictionary.init();
         // register Recipes. 注册合成
-        PLRecipes.init();
+//        PLRecipes.init();
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
         //register achievement

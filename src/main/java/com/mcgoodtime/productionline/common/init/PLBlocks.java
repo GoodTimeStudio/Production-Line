@@ -60,6 +60,7 @@ public class PLBlocks {
     public static ItemStack parallelSpaceSU;
     public static ItemStack advSolar;
     public static ItemStack fluidKineticGenerator;
+    public static ItemStack packager;
 
     public static BlockPL oreIridium;
     public static BlockPL airBrakeCasing;

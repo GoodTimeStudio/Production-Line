@@ -142,6 +142,7 @@ public class PLItems implements IFuelHandler {
     public static ItemStack woodPulp;
     public static ItemStack sawdust;
     public static ItemStack faggot;
+    public static ItemStack opticalGlass;
 
     public static ItemStack firewood;
     public static ItemStack coarseBatten;
@@ -203,10 +204,10 @@ public class PLItems implements IFuelHandler {
         saltWaterBucket.setCreativeTab(ProductionLine.creativeTabPL)
                 .setUnlocalizedName(MOD_ID + ".saltwater_bucket");
 
-        iridiumPickaxe = ToolPL.registerPickaxe(PLToolMaterial.iridium, "iridium_pickaxe");
-        iridiumAxe = ToolPL.registerAxe(PLToolMaterial.iridium, "iridium_axe");
-        iridiumSpade = ToolPL.registerSpade(PLToolMaterial.iridium, "iridium_spade");
-        iridiumSword = ToolPL.registerSword(PLToolMaterial.iridium, "iridium_sword");
+//        iridiumPickaxe = ToolPL.registerPickaxe(PLToolMaterial.iridium, "iridium_pickaxe");
+//        iridiumAxe = ToolPL.registerAxe(PLToolMaterial.iridium, "iridium_axe");
+//        iridiumSpade = ToolPL.registerSpade(PLToolMaterial.iridium, "iridium_spade");
+//        iridiumSword = ToolPL.registerSword(PLToolMaterial.iridium, "iridium_sword");
 
         // TODO: Better registry system
         GameRegistry.<Item>register(saltWaterBucket, new ResourceLocation(MOD_ID, "saltwater_bucket"));

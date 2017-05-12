@@ -67,6 +67,7 @@ public class PLModelRegistry {
         registerBlockModel(PLBlocks.parallelSpaceSU);
         registerBlockModel(PLBlocks.advSolar);
         registerBlockModel(PLBlocks.fluidKineticGenerator);
+        registerBlockModel(PLBlocks.packager);
     }
 
     public static void loadItemModels() {

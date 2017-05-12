@@ -95,6 +95,7 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
         PLBlocks.parallelSpaceSU = new ItemStack(this, 1, 4);
         PLBlocks.advSolar = new ItemStack(this, 1, 5);
         PLBlocks.fluidKineticGenerator = new ItemStack(this, 1, 6);
+        PLBlocks.packager = new ItemStack(this, 1, 7);
     }
 
     @Override
