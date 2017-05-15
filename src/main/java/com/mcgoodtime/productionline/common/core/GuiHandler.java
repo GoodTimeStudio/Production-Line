@@ -112,6 +112,9 @@ public class GuiHandler implements IGuiHandler {
         CSEU,
         ParallelSpaceSU,
         AdvSolar,
-        PACKAGER
+        PACKAGER,
+        Cutter,
+        LiquidExtractor,
+        Mixer
     }
 }

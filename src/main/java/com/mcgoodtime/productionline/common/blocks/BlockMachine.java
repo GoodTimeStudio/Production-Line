@@ -55,7 +55,12 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
         PARALLEL_SPACE_SU("parallel_space_su",TileParallelSpaceSU.class, GuiHandler.EnumGui.ParallelSpaceSU),
         ADV_SOLAR("adv_solar", TileAdvSolar.class, GuiHandler.EnumGui.AdvSolar),
         FLUID_KINETIC_GENERATOR("fluid_kinetic_generator", TileFluidKineticGenerator.class, GuiHandler.EnumGui.FluidKineticGenerator),
-        PACKAGER("packager", TilePackager.class, GuiHandler.EnumGui.PACKAGER);
+        PACKAGER("packager", TilePackager.class, GuiHandler.EnumGui.PACKAGER),
+        CUTTER("cutter", TileCutter.class, GuiHandler.EnumGui.Cutter),
+        LIQUIDEXTRACTOR("liquid_extractor", TileLiquidExtractor.class, GuiHandler.EnumGui.LiquidExtractor),
+        Mixer("mixer", TileMixer.class, GuiHandler.EnumGui.Mixer);
+
+
 
         private final String name;
         public final Class<? extends TileFacing> tileClass;
