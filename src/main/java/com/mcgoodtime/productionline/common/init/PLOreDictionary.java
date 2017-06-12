@@ -36,14 +36,7 @@ public class PLOreDictionary {
 
     public static void init() {
         OreDictionary.registerOre("paper", Items.PAPER);
-        OreDictionary.registerOre("paper", PLItems.rigidPaper);
 
-        OreDictionary.registerOre("advTreetap", PLItems.ironTreetap);
-        OreDictionary.registerOre("advTreetap", PLItems.bronzeTreetap);
-        OreDictionary.registerOre("advTreetap", PLItems.leadTreetap);
-        OreDictionary.registerOre("advTreetap", PLItems.refinedIronTreetap);
-        OreDictionary.registerOre("advTreetap", PLItems.advancedAlloyTreetap);
-        OreDictionary.registerOre("advTreetap", PLItems.carbonTreetap);
 
         OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensUnit);
         OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensGroup);

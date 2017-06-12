@@ -64,16 +64,11 @@ public class PLBlocks {
 
     public static BlockPL oreIridium;
     public static BlockPL airBrakeCasing;
-    public static BlockPL dryLog;
-    public static BlockPL pad;
     
-    public static BlockPL hardWood;
     
     public static Block waterHyacinth;
 
     public static void init() {
-        pad = new BlockPL(Material.ROCK, "pad", 1, 0, null, 0);
-        dryLog = new BlockPL(Material.ROCK, "dry_log", 3, 0, "axe", 0);
         oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
         airBrakeCasing = new BlockOrientable(Material.IRON, "air_brake_casing");
         new BlockMisc();

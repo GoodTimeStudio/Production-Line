@@ -47,8 +47,4 @@ public class TileSlotPackage extends TileSlotInput {
      *
      * @param itemStack Input item.
      */
-    @Override
-    public boolean canInput(ItemStack itemStack) {
-        return itemStack.isItemEqual(PLItems.rigidPaperPack);
-    }
 }

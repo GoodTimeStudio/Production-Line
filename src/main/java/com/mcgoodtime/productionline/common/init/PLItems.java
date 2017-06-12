@@ -68,26 +68,12 @@ public class PLItems implements IFuelHandler {
 
     public static Item diamondApple;
     public static Item packagedSalt;
-    public static Item iridiumAxe;
-    public static Item iridiumSpade;
     public static Item iridiumSword;
-    public static Item iridiumPickaxe;
     public static Item salt;
     public static Item saltWaterBucket;
     public static Item hammer;
 
-    public static Item ironTreetap;
-    public static Item bronzeTreetap;
-    public static Item leadTreetap;
-    public static Item refinedIronTreetap;
-    public static Item advancedAlloyTreetap;
-    public static Item carbonTreetap;
-    public static Item woodenHammer;
-    public static Item tupid;
-    public static Item ironCone;
-    public static Item steelCone;
 
-    public static Item ceu;
     public static Item gravityRay;
 
     public static Item record_MusicSpring;
@@ -95,81 +81,33 @@ public class PLItems implements IFuelHandler {
     public static Item itemCrafting;
     public static Item itemOre;
     //--------------------------------------
-    public static ItemStack crushedIridium;
-    public static ItemStack cleanedCrushedIridium;
     public static ItemStack dustIridium;
-    public static ItemStack smallDustIridium;
     public static ItemStack ingotIridium;
-    public static ItemStack denseDiamondPlate;
-    public static ItemStack diamondPlate;
-
     public static ItemStack yourHouseBombed;
-    public static ItemStack heatInsulationPlate;
-    public static ItemStack roller;
-    public static ItemStack heatInsulationMaterial;
     public static ItemStack smallCompressedWaterHyacinth;
-    public static ItemStack airBrakeUnit;
-    public static ItemStack bambooCharcoal;
-    public static ItemStack carbonTube;
     public static ItemStack redstoneModule;
     public static ItemStack lazuliModule;
-    public static ItemStack obsidianPlateGravityField;
-    public static ItemStack electronicCircuitControl;
-    public static ItemStack electronicCircuitCore;
-    public static ItemStack pulseElectronicCircuitControl;
-    public static ItemStack pulseElectronicCircuitCore;
-    public static ItemStack cyclotronParticleAccelerator;
-    public static ItemStack calculateUnit;
-    public static ItemStack calculateChunk;
-    public static ItemStack calculateArray;
-    public static ItemStack floatPointCalculationsRegion;
-    public static ItemStack parallelSpaceConverter;
-    public static ItemStack uuMatterCore;
-    public static ItemStack obsidianMechanicalFrame;
-    public static ItemStack obsidianMechanicalCasing;
-    public static ItemStack carbonCrystal;
-    public static ItemStack enderCalculationCrystal;
-    public static ItemStack millTeeth;
-    public static ItemStack millWheel;
-    public static ItemStack rigidPaper;
-    public static ItemStack rigidPaperPack;
     public static ItemStack advSolarLensUnit;
     public static ItemStack advSolarLensGroup;
     public static ItemStack advSolarLensCluster;
-    public static ItemStack tiles;
-    public static ItemStack paperBag;
-    public static ItemStack corrugatedPaper;
-    public static ItemStack woodPulp;
-    public static ItemStack sawdust;
-    public static ItemStack faggot;
     public static ItemStack opticalGlass;
+    public static ItemStack sawdust;
+    public static ItemStack rigidPaper;
 
-    public static ItemStack firewood;
-    public static ItemStack coarseBatten;
-    public static ItemStack heatResistantTiles;
-    public static Item chain;
-    public static ItemStack crudeWood;
-    public static ItemStack batten;
-    public static ItemStack chainPiece;
-    public static ItemStack sprocket;
-    public static ItemStack ironChain;
-    public static ItemStack steelChain;
-    public static ItemStack toothedChain;
+    public static ItemStack heatInsulationMaterial;
     public static ItemStack heatResistantBrick;
+    
+    //This is New Plans`s item
+    
+    public ItemStack enderPearlPowder;
+    public ItemStack industrialProcessor;
 
     public static void init() {
         diamondApple = new ItemDiamondApple();
 
-        ironTreetap = new ItemPLTreetap("treetap_iron", 32);
-        bronzeTreetap = new ItemPLTreetap("treetap_bronze", 32);
-        leadTreetap = new ItemPLTreetap("treetap_lead", 48);
-        refinedIronTreetap = new ItemPLTreetap("treetap_steel", 64);
-        advancedAlloyTreetap = new ItemPLTreetap("treetap_alloy", 64);
-        carbonTreetap = new ItemPLTreetap("treetap_carbon", 128);
 
         record_MusicSpring = new ItemPLRecord("record_musicspring", PLSounds.recordMusicSpring);
         salt = new ItemPLFood("salt", 0, 10F, true);
-        ceu = new ItemCEU();
         gravityRay = new ItemGravityRay();
 
         //MultiMetaItem registry
@@ -219,28 +157,12 @@ public class PLItems implements IFuelHandler {
         if (fuel.isItemEqual(sawdust)) {
             return 50;
         }
-        if (fuel.isItemEqual(faggot)) {
-            return 1200;
-        }
-        if (fuel.isItemEqual(crudeWood)) {
-            return 100;
-        }
-        if (fuel.isItemEqual(batten)) {
-            return 100;
-        }
-        if (fuel.isItemEqual(bambooCharcoal)) {
-            return 800;
-        }
         if (fuel.isItemEqual(smallCompressedWaterHyacinth)) {
             return 400;
         }
         if (fuel.getItem().equals(
                 Item.getItemFromBlock(PLBlocks.waterHyacinth))) {
             return 100;
-        }
-        if (fuel.getItem().equals(
-                Item.getItemFromBlock(PLBlocks.dryLog))) {
-            return 300;
         }
         if (fuel.isItemEqual(PLBlocks.compressedWaterHyacinth)) {
             return 800;

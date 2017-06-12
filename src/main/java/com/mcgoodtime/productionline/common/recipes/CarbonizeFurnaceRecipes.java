@@ -42,7 +42,6 @@ public class CarbonizeFurnaceRecipes extends RecipeBase {
         register(new ItemStack(Blocks.LOG), new ItemStack(Items.COAL, 2, 1), 2000);
         register(new ItemStack(Blocks.LOG2), new ItemStack(Items.COAL, 2, 1), 2000);
         register(new ItemStack(Blocks.PLANKS, 2), new ItemStack(Items.COAL, 1, 1), 1500);
-        register(new ItemStack(Items.REEDS, 4), PLItems.bambooCharcoal, 1500);
         register(new ItemStack(PLItems.saltWaterBucket), new ItemStack(PLItems.salt), 1100);
     }
 

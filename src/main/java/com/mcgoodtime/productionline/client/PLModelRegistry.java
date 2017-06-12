@@ -73,15 +73,8 @@ public class PLModelRegistry {
     public static void loadItemModels() {
         registerItemModel(PLItems.diamondApple, 0);
         registerItemModel(PLItems.diamondApple, 1);
-        registerItemModel(PLItems.ironTreetap);
-        registerItemModel(PLItems.bronzeTreetap);
-        registerItemModel(PLItems.leadTreetap);
-        registerItemModel(PLItems.refinedIronTreetap);
-        registerItemModel(PLItems.advancedAlloyTreetap);
-        registerItemModel(PLItems.carbonTreetap);
         registerItemModel(PLItems.record_MusicSpring);
         registerItemModel(PLItems.salt);
-        registerItemModel(PLItems.ceu);
         registerItemModel(PLItems.gravityRay);
         registerItemModel(PLItems.packagedSalt);
         registerItemModel(PLItems.saltWaterBucket);
