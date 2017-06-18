@@ -1,7 +1,7 @@
 package com.mcgoodtime.productionline.client.gui;
 
-import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.inventory.ContainerAdvSolar;
+import com.mcgoodtime.productionline.core.ProductionLine;
+import com.mcgoodtime.productionline.inventory.ContainerAdvSolar;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 

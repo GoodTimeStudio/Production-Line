@@ -1,7 +1,7 @@
 [
 {
-  "modid": "gti",
-  "name": "GoodTime-Industrial",
+  "modid": "productionline",
+  "name": "",
   "description": "",
   "version": "${version}",
   "mcversion": "${mcversion}",

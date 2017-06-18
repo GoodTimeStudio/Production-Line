@@ -24,10 +24,10 @@
  */
 package com.mcgoodtime.productionline.client.gui;
 
-import com.mcgoodtime.productionline.common.PLUtil;
-import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.inventory.ContainerCarbonizeFurnace;
-import com.mcgoodtime.productionline.common.tiles.TileCarbonizeFurnace;
+import com.mcgoodtime.productionline.PLUtil;
+import com.mcgoodtime.productionline.core.ProductionLine;
+import com.mcgoodtime.productionline.inventory.ContainerCarbonizeFurnace;
+import com.mcgoodtime.productionline.tiles.TileCarbonizeFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;

@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.4.4",
-  "package": "com.mcgoodtime.productionline.common.mixin",
+  "package": "com.mcgoodtime.productionline.mixin",
   "priority": 1111,
   "mixins": [
     "MixinTileEntityFurnace"

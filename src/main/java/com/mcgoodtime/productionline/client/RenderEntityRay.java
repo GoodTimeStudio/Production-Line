@@ -24,12 +24,10 @@
  */
 package com.mcgoodtime.productionline.client;
 
-import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.entity.EntityRay;
+import com.mcgoodtime.productionline.core.ProductionLine;
+import com.mcgoodtime.productionline.entity.EntityRay;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.ResourceLocation;
 
 /**

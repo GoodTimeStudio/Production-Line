@@ -24,8 +24,8 @@
  */
 package com.mcgoodtime.productionline.client.gui;
 
-import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.inventory.ContainerPL;
+import com.mcgoodtime.productionline.core.ProductionLine;
+import com.mcgoodtime.productionline.inventory.ContainerPL;
 import ic2.core.IC2;
 import ic2.core.upgrade.IUpgradableBlock;
 import ic2.core.upgrade.IUpgradeItem;

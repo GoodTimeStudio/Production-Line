@@ -19,7 +19,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
 
-version = "dev.0.4" + getBuildNumber()
+version = "dev.0.5" + getBuildNumber()
 group= "com.mcgoodtime.productionline"
 archivesBaseName = "ProductionLine"
 
@@ -58,7 +58,7 @@ dependencies {
 jar {
     manifest {
 		attributes (
-            'FMLCorePlugin': 'com.mcgoodtime.productionline.common.core.coremod.PLCore',
+            'FMLCorePlugin': 'com.mcgoodtime.productionline.core.coremod.PLCore',
 			'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
 			'TweakOrder': 0,
 			'MixinConfigs': 'mixins.productionline.core.json',
@@ -76,21 +76,8 @@ mixin {
 }
 
 compileJava {
-
     options.encoding = 'UTF-8'
-    /*options.compilerArgs += [
-            '-Xlint:-processing',
-            "-AreobfSrgFile=${project.file('build/srgs/mcp-srg.srg').canonicalPath}"
-    ]*/
 }
-
-/*task copySrgs(type: Copy, dependsOn: 'genSrgs') {
-    from project.plugins.getPlugin('net.minecraftforge.gradle.forge').delayedFile('{SRG_DIR}')
-*/
-//    include '**/*.srg'
-/*    into 'build/srgs'
-}
-compileJava.dependsOn copySrgs*/
 
 idea.module.inheritOutputDirs = true
 
@@ -108,7 +95,7 @@ processResources {
     }
 }
 
-def getBuildNumber() {
+static def getBuildNumber() {
 	return "$System.env.BUILD_NUMBER" != "null" ? "." + Integer.parseInt("$System.env.BUILD_NUMBER") : ""
 }
 
