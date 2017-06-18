@@ -25,14 +25,11 @@
 
 package com.mcgoodtime.productionline.client;
 
-import com.google.common.collect.ImmutableMap;
-import com.mcgoodtime.productionline.common.blocks.*;
-import com.mcgoodtime.productionline.common.init.PLBlocks;
-import com.mcgoodtime.productionline.common.init.PLItems;
-import com.mcgoodtime.productionline.common.items.ItemMulti;
+import com.mcgoodtime.productionline.blocks.*;
+import com.mcgoodtime.productionline.init.PLBlocks;
+import com.mcgoodtime.productionline.init.PLItems;
+import com.mcgoodtime.productionline.items.ItemMulti;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -41,10 +38,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
-import java.util.Collection;
-
-import static com.mcgoodtime.productionline.common.core.ProductionLine.MOD_ID;
-import static com.mcgoodtime.productionline.common.core.ProductionLine.RESOURCE_DOMAIN;
+import static com.mcgoodtime.productionline.core.ProductionLine.RESOURCE_DOMAIN;
 
 /**
  * Created by BestOwl on 2016/11/5.

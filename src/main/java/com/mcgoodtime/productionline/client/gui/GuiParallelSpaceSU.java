@@ -1,8 +1,8 @@
 package com.mcgoodtime.productionline.client.gui;
 
-import com.mcgoodtime.productionline.common.PLUtil;
-import com.mcgoodtime.productionline.common.inventory.ContainerParallelSpaceSU;
-import com.mcgoodtime.productionline.common.network.PLNetwork;
+import com.mcgoodtime.productionline.PLUtil;
+import com.mcgoodtime.productionline.inventory.ContainerParallelSpaceSU;
+import com.mcgoodtime.productionline.network.PLNetwork;
 import ic2.core.GuiIconButton;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.init.Items;
@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import java.io.IOException;
 import java.util.Collections;
 
-import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
+import static com.mcgoodtime.productionline.core.ProductionLine.*;
 import static net.minecraft.client.resources.I18n.format;
 
 /**

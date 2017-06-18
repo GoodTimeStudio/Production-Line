@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.productionline.client;
 
-import com.mcgoodtime.productionline.common.entity.EntityThrownItem;
+import com.mcgoodtime.productionline.entity.EntityThrownItem;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;

@@ -24,10 +24,10 @@
  */
 package com.mcgoodtime.productionline.client.gui;
 
-import com.mcgoodtime.productionline.common.PLUtil;
-        import com.mcgoodtime.productionline.common.core.ProductionLine;
-        import com.mcgoodtime.productionline.common.inventory.ContainerHeatDryer;
-        import com.mcgoodtime.productionline.common.tiles.TileHeatDryer;
+import com.mcgoodtime.productionline.PLUtil;
+        import com.mcgoodtime.productionline.core.ProductionLine;
+        import com.mcgoodtime.productionline.inventory.ContainerHeatDryer;
+        import com.mcgoodtime.productionline.tiles.TileHeatDryer;
 import net.minecraft.util.ResourceLocation;
 /*
  * Created by suhao on 2015.7.10.

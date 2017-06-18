@@ -24,10 +24,10 @@
  */
 package com.mcgoodtime.productionline.client.gui;
 
-import com.mcgoodtime.productionline.common.PLUtil;
-import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.inventory.ContainerFluidKineticGenerator;
-import com.mcgoodtime.productionline.common.tiles.TileFluidKineticGenerator;
+import com.mcgoodtime.productionline.PLUtil;
+import com.mcgoodtime.productionline.core.ProductionLine;
+import com.mcgoodtime.productionline.inventory.ContainerFluidKineticGenerator;
+import com.mcgoodtime.productionline.tiles.TileFluidKineticGenerator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -38,7 +38,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collections;
 
-import static com.mcgoodtime.productionline.common.core.ProductionLine.*;
+import static com.mcgoodtime.productionline.core.ProductionLine.*;
 
 /**
  * The Gui.

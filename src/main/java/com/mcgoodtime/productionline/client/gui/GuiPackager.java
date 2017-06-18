@@ -26,10 +26,10 @@
 
 package com.mcgoodtime.productionline.client.gui;
 
-import com.mcgoodtime.productionline.common.PLUtil;
-import com.mcgoodtime.productionline.common.core.ProductionLine;
-import com.mcgoodtime.productionline.common.inventory.ContainerPackager;
-import com.mcgoodtime.productionline.common.tiles.TilePackager;
+import com.mcgoodtime.productionline.PLUtil;
+import com.mcgoodtime.productionline.core.ProductionLine;
+import com.mcgoodtime.productionline.inventory.ContainerPackager;
+import com.mcgoodtime.productionline.tiles.TilePackager;
 import net.minecraft.util.ResourceLocation;
 
 /**
