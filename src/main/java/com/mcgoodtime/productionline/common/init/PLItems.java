@@ -80,6 +80,15 @@ public class PLItems implements IFuelHandler {
 
     public static Item itemCrafting;
     public static Item itemOre;
+    
+    //This is New Pans`s Item
+    public static Item liquidExpBucket;
+    public static Item enderPearlBucket;
+    public static Item brineBucket;
+    public static Item toadCoin;
+    public static Item superTrashBag;
+
+    
     //--------------------------------------
     public static ItemStack dustIridium;
     public static ItemStack ingotIridium;
@@ -97,10 +106,18 @@ public class PLItems implements IFuelHandler {
     public static ItemStack heatInsulationMaterial;
     public static ItemStack heatResistantBrick;
     
-    //This is New Plans`s item
-    
-    public ItemStack enderPearlPowder;
-    public ItemStack industrialProcessor;
+    //This is New Plans`s ItemStack
+    public static ItemStack enderPearlPowder;
+    public static ItemStack CPUmk1;
+    public static ItemStack CPUmk2;
+    public static ItemStack CPUmk3;
+    public static ItemStack fakeHead;
+    public static ItemStack lifeConverter;
+    public static ItemStack condensedImpurities;
+    public static ItemStack heartOfLava;
+    public static ItemStack heartOfPureWhite;
+    public static ItemStack heartOfEnder;
+
 
     public static void init() {
         diamondApple = new ItemDiamondApple();

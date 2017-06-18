@@ -78,7 +78,12 @@ public class PLModelRegistry {
         registerItemModel(PLItems.gravityRay);
         registerItemModel(PLItems.packagedSalt);
         registerItemModel(PLItems.saltWaterBucket);
-
+//        registerItemModel(PLItems.liquidExpBucket);
+//        registerItemModel(PLItems.enderPearlBucket);
+//        registerItemModel(PLItems.brineBucket);
+//        registerItemModel(PLItems.toadCoin);
+//        registerItemModel(PLItems.superTrashBag);
+        
         if (PLItems.itemCrafting instanceof ItemMulti) {
             for (int i = 0; i < ((ItemMulti) PLItems.itemCrafting).getInternalNameSize(); i++) {
                 registerItemModel(PLItems.itemCrafting, i);
