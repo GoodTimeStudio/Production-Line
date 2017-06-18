@@ -20,9 +20,10 @@ public class ItemCrafting extends ItemMulti {
         PLItems.lazuliModule = this.next();
         PLItems.advSolarLensGroup = this.next();
         PLItems.advSolarLensCluster = this.next();
+        PLItems.opticalGlass = this.next();
         PLItems.enderPearlPowder = this.next();
-        PLItems.CPUmk1 = this.next();
         PLItems.heartOfEnder = this.next();
+        PLItems.CPUmk1 = this.next();
         PLItems.CPUmk2 = this.next();
         PLItems.CPUmk3 = this.next();
         PLItems.lifeConverter = this.next();
