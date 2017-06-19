@@ -46,14 +46,14 @@ public class ItemCrafting extends ItemMulti {
         list.add("optical_glass");
         list.add("rigid_paper");
         list.add("ender_pearl_powder");
-        list.add("CPUmk1");
-        list.add("CPUmk2");
-        list.add("CPUmk3");
+        list.add("cpu_mk1");
+        list.add("cpu_mk2");
+        list.add("cpu_mk3");
         list.add("fake_head");
         list.add("life_converter");
         list.add("condensed_impurities");
         list.add("heart_of_lava");
-        list.add("heart_of_pureWhite");
+        list.add("heart_of_pure_white");
         list.add("heart_of_ender");
 
         return list;
