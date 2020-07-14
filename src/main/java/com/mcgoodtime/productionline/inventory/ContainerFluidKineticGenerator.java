@@ -51,10 +51,10 @@ public class ContainerFluidKineticGenerator extends ContainerPL<TileFluidKinetic
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
-        listener.sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
+        //listener.sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
         if (this.tile.fluidTank.getFluid() != null) {
             // TODO Improve
-            listener.sendProgressBarUpdate(this, 1, FluidRegistry.getFluidID(this.tile.fluidTank.getFluid().getFluid()));
+            //listener.sendProgressBarUpdate(this, 1, FluidRegistry.getFluidID(this.tile.fluidTank.getFluid().getFluid()));
         }
     }
 
@@ -68,10 +68,10 @@ public class ContainerFluidKineticGenerator extends ContainerPL<TileFluidKinetic
 
         for (IContainerListener listener : this.listeners) {
             if (this.fluidAmount != this.tile.fluidTank.getFluidAmount()) {
-                listener.sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
+                //listener.sendProgressBarUpdate(this, 0, this.tile.fluidTank.getFluidAmount());
             }
             if (this.tile.fluidTank.getFluid() != null && this.fluid != this.tile.fluidTank.getFluid().getFluid()) {
-                listener.sendProgressBarUpdate(this, 1, FluidRegistry.getFluidID(this.tile.fluidTank.getFluid().getFluid()));
+                //listener.sendProgressBarUpdate(this, 1, FluidRegistry.getFluidID(this.tile.fluidTank.getFluid().getFluid()));
             }
         }
 
@@ -90,10 +90,12 @@ public class ContainerFluidKineticGenerator extends ContainerPL<TileFluidKinetic
                 if (this.tile.fluidTank.getFluid() != null) {
                     this.tile.fluidTank.getFluid().amount = var;
                 }
-            case 1:
+                break;
+            case 1:/*
                 if (FluidRegistry.getFluid(var) != null) {
                     this.tile.fluidTank.setFluid(new FluidStack(FluidRegistry.getFluid(var), this.tile.fluidTank.getFluidAmount()));
-                }
+                }*/
+                break;
         }
     }
 }

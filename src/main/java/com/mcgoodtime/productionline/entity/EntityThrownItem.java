@@ -42,9 +42,9 @@ import net.minecraftforge.common.MinecraftForge;
  * @author BwstOwl
  */
 public class EntityThrownItem extends net.minecraft.entity.projectile.EntityThrowable {
-
+/*
     public static final DataParameter<Optional<ItemStack>> PARAMETER = EntityDataManager
-            .createKey(EntityThrownItem.class, DataSerializers.OPTIONAL_ITEM_STACK);
+            .createKey(EntityThrownItem.class, DataSerializers.OPTIONAL_ITEM_STACK);*/
 
     public EntityThrownItem(World world) {
         super(world);
@@ -56,13 +56,13 @@ public class EntityThrownItem extends net.minecraft.entity.projectile.EntityThro
 
     public EntityThrownItem(World world, EntityLivingBase entityLivingBase, ItemStack itemStack) {
         super(world, entityLivingBase);
-        this.setThrowItem(itemStack);
+        //this.setThrowItem(itemStack);
     }
 
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(PARAMETER, Optional.<ItemStack>absent());
+        //this.dataManager.register(PARAMETER, Optional.<ItemStack>absent());
     }
 
     /**
@@ -70,12 +70,11 @@ public class EntityThrownItem extends net.minecraft.entity.projectile.EntityThro
      */
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
-        super.writeEntityToNBT(nbt);
+        super.writeEntityToNBT(nbt);/*
         Optional<ItemStack> item = getThrowItem();
         if (item.isPresent()) {
             nbt.setTag("throwItem", item.get().serializeNBT());
-        }
-
+        }*/
     }
 
     /**
@@ -84,9 +83,9 @@ public class EntityThrownItem extends net.minecraft.entity.projectile.EntityThro
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
-        this.setThrowItem(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("throwItem")));
+        //this.setThrowItem(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("throwItem")));
     }
-
+/*
     public Optional<ItemStack> getThrowItem() {
         return this.dataManager.get(PARAMETER);
     }
@@ -94,7 +93,7 @@ public class EntityThrownItem extends net.minecraft.entity.projectile.EntityThro
     public void setThrowItem(ItemStack itemStack) {
         this.dataManager.set(PARAMETER, Optional.of(itemStack));
     }
-
+*/
     /**
      * Called when this EntityThrownItem hits a block or entity.
      */

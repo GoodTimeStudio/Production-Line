@@ -57,9 +57,9 @@ public class ContainerCarbonizeFurnace extends ContainerPL<TileCarbonizeFurnace>
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
-        listener.sendProgressBarUpdate(this, 0, this.tile.progress);
-        listener.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
-        listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
+        //listener.sendProgressBarUpdate(this, 0, this.tile.progress);
+        //listener.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
+        //listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
     }
 
     /**
@@ -71,15 +71,15 @@ public class ContainerCarbonizeFurnace extends ContainerPL<TileCarbonizeFurnace>
 
         for (IContainerListener listener : this.listeners) {
             if (this.lastProgress != this.tile.progress) {
-                listener.sendProgressBarUpdate(this, 0, this.tile.progress);
+                //listener.sendProgressBarUpdate(this, 0, this.tile.progress);
             }
 
             if (this.lastRequireEnergy != this.tile.requireEnergy) {
-                listener.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
+                //listener.sendProgressBarUpdate(this, 1, (int) this.tile.requireEnergy);
             }
 
             if (this.lastEnergy != this.tile.energy) {
-                listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
+                //listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
             }
         }
 

@@ -24,8 +24,8 @@ public class ContainerParallelSpaceSU extends ContainerPL<TileParallelSpaceSU> {
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
-        listener.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
-        listener.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
+        //listener.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
+        //listener.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
     }
 
     /**
@@ -37,10 +37,10 @@ public class ContainerParallelSpaceSU extends ContainerPL<TileParallelSpaceSU> {
 
         for (IContainerListener object : this.listeners) {
             if (this.lastEnergy != this.tile.energy) {
-                object.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
+                //object.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
             }
             if (this.lastMode != this.tile.redstoneMode.ordinal()) {
-                object.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
+                //object.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
             }
         }
 

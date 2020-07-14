@@ -59,13 +59,13 @@ public class ItemPLTreetap extends ItemPL implements IBoxable, IItemModelProvide
     }
 
     @Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float xOffset, float yOffset, float zOffset) {
-        IBlockState state = world.getBlockState(pos);
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        IBlockState state = worldIn.getBlockState(pos);
         Block block = state.getBlock();
         if (block == BlockName.rubber_wood.getInstance()) {
-            attemptExtract(player, world, pos, side, state, null);
-            if (!world.isRemote) {
-                stack.damageItem(1, player);
+            attemptExtract(player, worldIn, pos, facing, state, null);
+            if (!worldIn.isRemote) {
+                //stack.damageItem(1, player);
             }
 
             return EnumActionResult.SUCCESS;

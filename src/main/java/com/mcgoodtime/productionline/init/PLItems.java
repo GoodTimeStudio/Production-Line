@@ -48,6 +48,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.IFuelHandler;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static com.mcgoodtime.productionline.core.ProductionLine.MOD_ID;
@@ -131,24 +132,20 @@ public class PLItems implements IFuelHandler {
         // special registry TODO: Better registry system
 
         packagedSalt = new ItemPL("packaged_salt") {
-            /**
-             * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-             */
             @Override
-            public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
+            public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+                ItemStack itemStack = playerIn.getHeldItem(handIn);
                 if (PLConfig.instance.throwablePackagedSalt) {
-                    if (!player.capabilities.isCreativeMode) {
-                        --itemStack.stackSize;
+                    if (!playerIn.capabilities.isCreativeMode) {
+                        itemStack.shrink(1);
                     }
-                    world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-                    if (!world.isRemote) {
-                        world.spawnEntity(new EntityThrownItem(world, player, itemStack));
+                    worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+                    if (!worldIn.isRemote) {
+                        worldIn.spawnEntity(new EntityThrownItem(worldIn, playerIn, itemStack));
                     }
                 }
-
-                return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
+                return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
             }
-
         };
 
         saltWaterBucket = new ItemBucket(Blocks.WATER);
@@ -161,7 +158,7 @@ public class PLItems implements IFuelHandler {
 //        iridiumSword = ToolPL.registerSword(PLToolMaterial.iridium, "iridium_sword");
 
         // TODO: Better registry system
-        GameRegistry.<Item>register(saltWaterBucket, new ResourceLocation(MOD_ID, "saltwater_bucket"));
+        ForgeRegistries.ITEMS.register(saltWaterBucket);
         GameRegistry.registerFuelHandler(new PLItems());
     }
 
@@ -188,7 +185,7 @@ public class PLItems implements IFuelHandler {
 
     public static ItemStack getItems(ItemStack itemStack, int count) {
         ItemStack ret = itemStack.copy();
-        ret.stackSize = count;
+        ret.setCount(count);
         return ret;
     }
 }

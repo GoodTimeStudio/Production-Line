@@ -40,6 +40,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nonnull;
@@ -98,7 +99,7 @@ public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<Blo
 
     @Override
     protected void registerItemBlock() {
-        GameRegistry.<Item>register(new ItemBlockPL(this), this.getRegistryName());
+        ForgeRegistries.ITEMS.register(new ItemBlockPL(this));
     }
 
     /**

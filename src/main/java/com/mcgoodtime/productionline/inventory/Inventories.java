@@ -61,18 +61,18 @@ public final class Inventories {
         float f1 = RANDOM.nextFloat() * 0.8F + 0.1F;
         float f2 = RANDOM.nextFloat() * 0.8F + 0.1F;
 
-        while (stack.stackSize > 0) {
+        while (stack.getCount() > 0) {
             int j1 = RANDOM.nextInt(21) + 10;
 
-            if (j1 > stack.stackSize) {
-                j1 = stack.stackSize;
+            if (j1 > stack.getCount()) {
+                j1 = stack.getCount();
             }
 
-            stack.stackSize -= j1;
+            stack.setCount(stack.getCount() - j1);
             EntityItem entityitem = new EntityItem(world, x + f, y + f1, z + f2, new ItemStack(stack.getItem(), j1, stack.getItemDamage()));
 
             if (stack.hasTagCompound()) {
-                entityitem.getEntityItem().setTagCompound(stack.getTagCompound().copy());
+                entityitem.getItem().setTagCompound(stack.getTagCompound().copy());
             }
 
             float f3 = 0.05F;

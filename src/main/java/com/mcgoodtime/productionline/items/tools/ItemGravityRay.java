@@ -74,16 +74,16 @@ public class ItemGravityRay extends ItemElectricPL implements IItemModelProvider
 
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
+     *//*
     @Override
     @Nonnull
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
-        if (player.capabilities.isCreativeMode || ElectricItem.manager.getCharge(stack) >= 100) {
-            player.setActiveHand(hand);
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        if (playerIn.capabilities.isCreativeMode || ElectricItem.manager.getCharge(stack) >= 100) {
+            playerIn.setActiveHand(handIn);
             return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }
         return new ActionResult<>(EnumActionResult.PASS, stack);
-    }
+    }*/
 
     /**
      * returns the action that specifies what animation to play when the items is being used

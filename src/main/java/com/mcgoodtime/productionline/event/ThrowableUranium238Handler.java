@@ -32,7 +32,7 @@ public class ThrowableUranium238Handler implements ItemMulti.IItemRightClickHand
         if (itemStack.isItemEqual(target)) {
             if (PLConfig.instance.throwableUran238) {
                 if (!entityPlayer.capabilities.isCreativeMode) {
-                    --itemStack.stackSize;
+                    itemStack.shrink(1);
                 }
 
                 entityPlayer.world.playSound(entityPlayer, entityPlayer.getPosition(),

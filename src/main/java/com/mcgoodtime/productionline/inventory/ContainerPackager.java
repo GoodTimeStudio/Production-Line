@@ -61,8 +61,8 @@ public class ContainerPackager extends ContainerPL<TilePackager> {
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
-        listener.sendProgressBarUpdate(this, 1, lastProgress);
-        listener.sendProgressBarUpdate(this, 2, (int) lastEnergy);
+        //listener.sendProgressBarUpdate(this, 1, lastProgress);
+        //listener.sendProgressBarUpdate(this, 2, (int) lastEnergy);
     }
 
     /**
@@ -74,10 +74,10 @@ public class ContainerPackager extends ContainerPL<TilePackager> {
 
         for (IContainerListener listener : this.listeners) {
             if (this.lastProgress != this.tile.progress) {
-                listener.sendProgressBarUpdate(this, 1, this.tile.progress);
+                //listener.sendProgressBarUpdate(this, 1, this.tile.progress);
             }
             if (this.lastEnergy != this.tile.energy) {
-                listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
+                //listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
             }
         }
 

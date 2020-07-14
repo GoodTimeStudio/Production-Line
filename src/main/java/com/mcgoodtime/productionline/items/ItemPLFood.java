@@ -73,7 +73,7 @@ public class ItemPLFood extends ItemPL implements IItemModelProvider {
     @Nullable
     @Override
     public ItemStack onItemUseFinish(@Nonnull ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-        --stack.stackSize;
+        stack.shrink(1);
 
         if (entityLiving instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) entityLiving;

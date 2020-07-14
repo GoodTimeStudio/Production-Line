@@ -26,8 +26,8 @@ public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
-        listener.sendProgressBarUpdate(this, 0, this.sunIsVisible ? 1 : 0);
-        listener.sendProgressBarUpdate(this, 1, this.hasLens ? 1 : 0);
+        //listener.sendProgressBarUpdate(this, 0, this.sunIsVisible ? 1 : 0);
+        //listener.sendProgressBarUpdate(this, 1, this.hasLens ? 1 : 0);
     }
 
     /**
@@ -39,10 +39,10 @@ public class ContainerAdvSolar extends ContainerPL<TileAdvSolar> {
 
         for (IContainerListener listener : this.listeners) {
             if (this.sunIsVisible != this.tile.underSun) {
-                listener.sendProgressBarUpdate(this, 0, this.tile.underSun ? 1 : 0);
+                //listener.sendProgressBarUpdate(this, 0, this.tile.underSun ? 1 : 0);
             }
             if (this.hasLens != this.tile.hasLens) {
-                listener.sendProgressBarUpdate(this, 1, this.tile.hasLens ? 1 : 0);
+                //listener.sendProgressBarUpdate(this, 1, this.tile.hasLens ? 1 : 0);
             }
         }
 

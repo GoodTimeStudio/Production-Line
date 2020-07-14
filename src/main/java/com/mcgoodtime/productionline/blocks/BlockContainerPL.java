@@ -46,7 +46,7 @@ public abstract class BlockContainerPL extends BlockPL implements ITileEntityPro
 
     public BlockContainerPL(Material material, String name) {
         super(material, name);
-        this.isBlockContainer = true;
+        //this.isBlockContainer = true;
     }
 
     @Override

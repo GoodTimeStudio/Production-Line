@@ -82,7 +82,8 @@ public class RenderEntityThrownItem<T extends EntityThrownItem> extends Render<T
     }
 
     protected ItemStack getStackToRender(T entity) {
-        return entity.getThrowItem().orNull();
+        //return entity.getThrowItem().orNull();
+        return null;
     }
 
     /**

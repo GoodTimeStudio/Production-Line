@@ -29,8 +29,8 @@ import com.mcgoodtime.productionline.init.PLBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -94,7 +94,7 @@ public class PLWorldGen implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         //doesWaterVaporize() return isHellWorld
-        if ((!world.provider.doesWaterVaporize()) && (!world.provider.hasNoSky())) {
+        if ((!world.provider.doesWaterVaporize()) && (world.provider.hasSkyLight())) {
             generateOre(world, random, chunkX, chunkZ);
         }
     }

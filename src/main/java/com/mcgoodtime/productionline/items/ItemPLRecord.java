@@ -26,16 +26,20 @@ package com.mcgoodtime.productionline.items;
 
 import com.mcgoodtime.productionline.core.ProductionLine;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static com.mcgoodtime.productionline.core.ProductionLine.MOD_ID;
@@ -53,7 +57,7 @@ public class ItemPLRecord extends ItemRecord {
         this.name = name;
         this.setCreativeTab(ProductionLine.creativeTabPL);
         this.setUnlocalizedName(MOD_ID + "." + name);
-        GameRegistry.<Item>register(this, new ResourceLocation(MOD_ID, name));
+        ForgeRegistries.ITEMS.register(this);
     }
 
     @Override
@@ -61,22 +65,16 @@ public class ItemPLRecord extends ItemRecord {
         return net.minecraft.util.text.translation.I18n.translateToLocal(this.getUnlocalizedName() + ".desc");
     }
 
-    /**
-     * Retrieves the resource location of the sound to play for this record.
-     *
-     * @param name The name of the record to play
-     * @return The resource location for the audio, null to use default.
-     */
+    /*
     @Override
     public ResourceLocation getRecordResource(String name) {
         return new ResourceLocation(ProductionLine.RESOURCE_DOMAIN, this.name);
-    }
+    }*/
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List tooltipList, boolean boo) {
-        tooltipList.add(I18n.format(this.getUnlocalizedName() + "." + "desc1"));
-        tooltipList.add(I18n.format(this.getUnlocalizedName() + "." + "desc2"));
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(I18n.format(this.getUnlocalizedName() + "." + "desc1"));
+        tooltip.add(I18n.format(this.getUnlocalizedName() + "." + "desc2"));
     }
-
 }

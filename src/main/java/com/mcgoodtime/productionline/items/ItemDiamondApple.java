@@ -3,6 +3,7 @@ package com.mcgoodtime.productionline.items;
 import com.mcgoodtime.productionline.client.IItemModelProvider;
 import com.mcgoodtime.productionline.core.ProductionLine;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -11,13 +12,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -33,7 +37,7 @@ public class ItemDiamondApple extends ItemFood implements IItemModelProvider {
         this.setCreativeTab(ProductionLine.creativeTabPL);
         this.setHasSubtypes(true);
         this.setAlwaysEdible();
-        GameRegistry.<Item>register(this, new ResourceLocation(ProductionLine.MOD_ID, "diamond_apple"));
+        ForgeRegistries.ITEMS.register(this);
     }
 
     @Override
@@ -51,17 +55,17 @@ public class ItemDiamondApple extends ItemFood implements IItemModelProvider {
         super.onFoodEaten(itemStack, world, player);
     }
 
-    @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean bool) {
-        list.add(I18n.format(this.getUnlocalizedName() + ".desc1"));
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(I18n.format(this.getUnlocalizedName() + ".desc1"));
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(@Nonnull Item item, CreativeTabs creativeTabs, List<ItemStack> list) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         for (int i = 0; i < 2; i++) {
-            list.add(new ItemStack(this, 1, i));
+            items.add(new ItemStack(this, 1, i));
         }
     }
 

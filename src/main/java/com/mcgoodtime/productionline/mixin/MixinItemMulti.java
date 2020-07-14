@@ -5,17 +5,17 @@ import ic2.core.block.state.EnumProperty;
 import ic2.core.block.state.IIdProvider;
 import ic2.core.item.ItemIC2;
 import ic2.core.item.ItemMulti;
-import ic2.core.item.type.NuclearResourceType;
+import ic2.core.item.type.NuclearResourceType;/*
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;*/
 
 /**
  * ThrowableUranium238Handler registry.
  * Created by BestOwl on 2016-06-01.
- */
+ *//*
 @Mixin(ItemMulti.class)
 public abstract class MixinItemMulti<T extends Enum<T> & IIdProvider> extends ItemIC2 {
 
@@ -37,3 +37,4 @@ public abstract class MixinItemMulti<T extends Enum<T> & IIdProvider> extends It
     @Shadow
     public abstract void setRightClickHandler(T type, ItemMulti.IItemRightClickHandler handler);
 }
+*/

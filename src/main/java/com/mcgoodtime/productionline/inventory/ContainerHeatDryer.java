@@ -57,8 +57,8 @@ public class ContainerHeatDryer extends ContainerPL<TileHeatDryer> {
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
-        listener.sendProgressBarUpdate(this, 1, lastProgress);
-        listener.sendProgressBarUpdate(this, 2, (int) lastEnergy);
+        //listener.sendProgressBarUpdate(this, 1, lastProgress);
+        //listener.sendProgressBarUpdate(this, 2, (int) lastEnergy);
     }
 
     /**
@@ -70,10 +70,10 @@ public class ContainerHeatDryer extends ContainerPL<TileHeatDryer> {
 
         for (IContainerListener listener : this.listeners) {
             if (this.lastProgress != this.tile.progress) {
-                listener.sendProgressBarUpdate(this, 1, this.tile.progress);
+                //listener.sendProgressBarUpdate(this, 1, this.tile.progress);
             }
             if (this.lastEnergy != this.tile.energy) {
-                listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
+                //listener.sendProgressBarUpdate(this, 2, (int) this.tile.energy);
             }
         }
 
@@ -86,8 +86,12 @@ public class ContainerHeatDryer extends ContainerPL<TileHeatDryer> {
     public void updateProgressBar(int id, int i) {
         super.updateProgressBar(id, i);
         switch (id) {
-            case 1: this.tile.progress = i;
-            case 2: this.tile.energy = i;
+            case 1:
+                this.tile.progress = i;
+                break;
+            case 2:
+                this.tile.energy = i;
+                break;
         }
     }
 }

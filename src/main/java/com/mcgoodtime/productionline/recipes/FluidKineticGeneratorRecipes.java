@@ -24,8 +24,9 @@
  */
 package com.mcgoodtime.productionline.recipes;
 
+import ic2.api.recipe.MachineRecipe;
+import ic2.api.recipe.MachineRecipeResult;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -67,7 +68,7 @@ public class FluidKineticGeneratorRecipes extends RecipeBase {
      * @return Whether this item can process
      */
     @Override
-    public boolean canProcess(ItemStack itemStack) {
+    public boolean canProcess(ItemStack itemStack) {/*
         FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(itemStack);
         if (fluidStack != null) {
             for (RecipePart recipePart : this.processList) {
@@ -76,7 +77,7 @@ public class FluidKineticGeneratorRecipes extends RecipeBase {
                 }
             }
         }
-
+    */
         return false;
     }
 
@@ -101,6 +102,16 @@ public class FluidKineticGeneratorRecipes extends RecipeBase {
      */
     @Override
     public RecipePart getRecipePart(ItemStack itemStack) {
+        return null;
+    }
+
+    @Override
+    public MachineRecipeResult apply(Object o, boolean b) {
+        return null;
+    }
+
+    @Override
+    public Iterable<? extends MachineRecipe> getRecipes() {
         return null;
     }
 

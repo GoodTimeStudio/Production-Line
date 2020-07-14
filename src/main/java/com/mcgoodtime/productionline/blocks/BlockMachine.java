@@ -29,6 +29,7 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Random;
@@ -143,10 +144,9 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
      * Called upon block activation (right click on the block.)
      */
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem,
-            EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote) {
-            player.openGui(ProductionLine.getInstance(), state.getValue(PROPERTY_TYPE).gui.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!worldIn.isRemote) {
+            playerIn.openGui(ProductionLine.getInstance(), state.getValue(PROPERTY_TYPE).gui.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
@@ -234,7 +234,7 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
 
     @Override
     protected void registerItemBlock() {
-        GameRegistry.<Item>register(new ItemBlockPL(this), this.getRegistryName());
+        ForgeRegistries.ITEMS.register(new ItemBlockPL(this));
     }
 
     @Override

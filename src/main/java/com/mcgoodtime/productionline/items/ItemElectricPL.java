@@ -6,6 +6,7 @@ import ic2.api.item.IElectricItem;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -56,17 +57,16 @@ public class ItemElectricPL extends ItemPL implements IElectricItem {
         });
     }
 
-    @SuppressWarnings({"NumericOverflow", "unchecked"})
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         ItemStack itemStack = new ItemStack(this, 1);
         ElectricItem.manager.charge(itemStack, 0.0D, Integer.MAX_VALUE, true, false);
-        itemList.add(itemStack);
+        items.add(itemStack);
 
         ItemStack charged = new ItemStack(this, 1);
         ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, Integer.MAX_VALUE, true, false);
-        itemList.add(charged);
+        items.add(charged);
     }
 
     /**

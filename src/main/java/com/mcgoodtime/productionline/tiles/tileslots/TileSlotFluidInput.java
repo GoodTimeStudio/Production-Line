@@ -83,7 +83,7 @@ public class TileSlotFluidInput extends TileSlot {
         }
     }
 
-    private FluidStack drain(Fluid fluid, int amount) {
+    private FluidStack drain(Fluid fluid, int amount) {/*
         if (FluidContainerRegistry.isFilledContainer(this.item)) {
             FluidStack container = FluidContainerRegistry.getFluidForFilledItem(this.item);
 
@@ -112,7 +112,7 @@ public class TileSlotFluidInput extends TileSlot {
 
                 }
             }
-        }
+        }*/
 
         return null;
     }

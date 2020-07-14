@@ -35,6 +35,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -43,7 +44,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 //import net.minecraft.util.MovingObjectPositionsition;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
+//import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
+import net.minecraftforge.registries.ForgeRegistry;
 import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nonnull;
@@ -77,7 +79,7 @@ public class BlockPL extends Block {
         this.setCreativeTab(creativeTabPL);
         this.internalName = name;
         // TODO register after construction
-        GameRegistry.<Block>register(this, new ResourceLocation(MOD_ID, name));
+        ForgeRegistries.BLOCKS.register(this);
         this.registerItemBlock();
         if (this instanceof IOrientableBlock) {
             this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_FACING, EnumFacing.NORTH));
@@ -144,10 +146,9 @@ public class BlockPL extends Block {
     /**
      * Register item block.
      * Forge recommend register item block separately.
-     * {@link GameRegistry#register(IForgeRegistryEntry, ResourceLocation)}
-      */
+     */
     protected void registerItemBlock() {
-        GameRegistry.<Item>register(new ItemBlock(this), new ResourceLocation(MOD_ID, this.internalName));
+        ForgeRegistries.ITEMS.register(new ItemBlock(this));
     }
 
     @Override

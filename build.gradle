@@ -64,7 +64,7 @@ minecraft {
 repositories {
     maven {
         name = "ic2"
-        url = "http://maven.ic2.player.to"
+        url = "https://maven.ic2.player.to"
     }
     maven {
         name = "sponge"
@@ -78,6 +78,7 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
+    compile 'net.industrial-craft:industrialcraft-2:2.8.209-ex112:dev' //adds ic2 to the dev env
     //compile ('org.spongepowered:mixin:0.6.+') {
     //    exclude module: 'launchwrapper'
     //}

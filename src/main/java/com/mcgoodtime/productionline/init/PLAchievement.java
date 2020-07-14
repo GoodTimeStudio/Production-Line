@@ -25,34 +25,31 @@
 package com.mcgoodtime.productionline.init;
 
 import com.mcgoodtime.productionline.core.ProductionLine;
-import net.minecraft.stats.Achievement;
-import net.minecraft.stats.AchievementList;
-import net.minecraftforge.common.AchievementPage;
 
 /*
  * Created by suhao on 2015/5/17.
  */
 
 public class PLAchievement {
-    /** Is the 'ir ore' achievement. */
+    /** Is the 'ir ore' achievement. *//*
     public static Achievement getIrOre = new Achievement("achievement.getIrOre", "getIrOre", 0, 0,
-            PLBlocks.oreIridium, AchievementList.ACQUIRE_IRON).registerStat();
-    /** Just for fun, :) */
+            PLBlocks.oreIridium, AchievementList.ACQUIRE_IRON).registerStat();*/
+    /** Just for fun, :) *//*
     public static Achievement yourHouseBombed = new Achievement("achievement.yourHouseBombed", "yourHouseBombed", 0, 3,
-            PLItems.yourHouseBombed, null).setSpecial().registerStat().initIndependentStat();
+            PLItems.yourHouseBombed, null).setSpecial().registerStat().initIndependentStat();*/
 
-    /** Is the 'getting CarbonizeFurnace' achievement. */
+    /** Is the 'getting CarbonizeFurnace' achievement. *//*
     public static Achievement getCarbonizeFurnace = new Achievement(
             "achievement.getCarbonizeFurnace",
             "getCarbonizeFurnace", 0, 1, PLBlocks.carbonizeFurnace, AchievementList.BUILD_FURNACE
-    ).registerStat();
+    ).registerStat();*/
 
-    /** Is the AchievementPage for ProductionLine */
+    /** Is the AchievementPage for ProductionLine *//*
     public static AchievementPage pagePL = new AchievementPage(
             ProductionLine.MOD_NAME,
             getIrOre,
             getCarbonizeFurnace,
-            yourHouseBombed);
+            yourHouseBombed);*/
 
     /**
      * A stub functions called to make the static initializer for this class run.

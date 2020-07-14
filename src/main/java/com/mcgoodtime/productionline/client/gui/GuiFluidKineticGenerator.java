@@ -87,11 +87,11 @@ public class GuiFluidKineticGenerator extends GuiPL<ContainerFluidKineticGenerat
         String output = I18n.format(GUI_PREFIX + "FluidKineticGenerator.output",
                 this.container.getTileEntity().maxrequestkineticenergyTick(
                         this.container.getTileEntity().facing));
-        this.drawString(this.fontRendererObj, output, 96, 33, 2157374);
+        this.drawString(this.fontRenderer, output, 96, 33, 2157374);
 
         String max_output = I18n.format(GUI_PREFIX + "FluidKineticGenerator.max-output",
                 this.container.getTileEntity().kuOutput);
-        this.drawString(this.fontRendererObj, max_output, 96, 52, 2157374);
+        this.drawString(this.fontRenderer, max_output, 96, 52, 2157374);
     }
 
     @Override

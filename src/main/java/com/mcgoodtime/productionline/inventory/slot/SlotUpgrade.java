@@ -24,8 +24,8 @@
  */
 package com.mcgoodtime.productionline.inventory.slot;
 
-import ic2.core.upgrade.IUpgradableBlock;
-import ic2.core.upgrade.IUpgradeItem;
+import ic2.api.upgrade.IUpgradableBlock;
+import ic2.api.upgrade.IUpgradeItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;

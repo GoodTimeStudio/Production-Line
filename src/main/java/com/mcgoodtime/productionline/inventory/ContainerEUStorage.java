@@ -32,8 +32,8 @@ public class ContainerEUStorage<T extends TileEUStorage> extends ContainerPL<T> 
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
-        listener.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
-        listener.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
+        //listener.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
+        //listener.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
     }
 
     /**
@@ -45,10 +45,10 @@ public class ContainerEUStorage<T extends TileEUStorage> extends ContainerPL<T> 
 
         for (IContainerListener listener : this.listeners) {
             if (this.lastEnergy != this.tile.energy) {
-                listener.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
+                //listener.sendProgressBarUpdate(this, 0, (int) this.tile.energy);
             }
             if (this.lastMode != this.tile.redstoneMode.ordinal()) {
-                listener.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
+                //listener.sendProgressBarUpdate(this, 1, this.tile.redstoneMode.ordinal());
             }
         }
 

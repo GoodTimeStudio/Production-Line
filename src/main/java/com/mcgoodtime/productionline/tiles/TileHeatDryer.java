@@ -27,7 +27,7 @@ package com.mcgoodtime.productionline.tiles;
 
 import com.mcgoodtime.productionline.recipes.HeatDryerRecipes;
 import com.mcgoodtime.productionline.tiles.tileslots.*;
-import ic2.core.upgrade.IUpgradeItem;
+import ic2.api.upgrade.IUpgradeItem;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -95,14 +95,14 @@ public class TileHeatDryer extends TileMachine {
         } else {
             ItemStack itemStack = HeatDryerRecipes.instance.getProcessResult(this.getStackInSlot(0));
             if (itemStack != null) {
-                if (!(itemStack.stackSize >= HeatDryerRecipes.instance.getRequiredProcessAmount(itemStack))) {
+                if (!(itemStack.getCount() >= HeatDryerRecipes.instance.getRequiredProcessAmount(itemStack))) {
                     return false;
                 }
                 if (this.getStackInSlot(2) == null) {
                     return true;
                 } else {
                     if (this.getStackInSlot(2).isItemEqual(itemStack)) {
-                        int result = this.getStackInSlot(2).stackSize + itemStack.stackSize;
+                        int result = this.getStackInSlot(2).getCount() + itemStack.getCount();
                         if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(2).getMaxStackSize()) {
                             return true;
                         }
@@ -122,12 +122,12 @@ public class TileHeatDryer extends TileMachine {
                 this.setInventorySlotContents(2, outputItem.copy());
             }
             else if (this.getStackInSlot(2).isItemEqual(outputItem)) {
-                this.getStackInSlot(2).stackSize += outputItem.stackSize;
+                this.getStackInSlot(2).grow(outputItem.getCount());
             }
 
-            this.getStackInSlot(0).stackSize -= HeatDryerRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0));
+            this.getStackInSlot(0).shrink(HeatDryerRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0)));
 
-            if (this.getStackInSlot(0).stackSize <= 0) {
+            if (this.getStackInSlot(0).getCount() <= 0) {
                 this.setInventorySlotContents(0, null);
             }
         }

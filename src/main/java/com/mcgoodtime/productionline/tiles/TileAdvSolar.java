@@ -89,7 +89,7 @@ public class TileAdvSolar extends TileElectricGenerator implements IWrenchable {
 
     public void updateSunVisible() {
         int skylight = this.world.getBlockLightOpacity(new BlockPos(pos.getX(), 255, pos.getZ()));
-        boolean hasSky = !this.world.provider.hasNoSky();
+        boolean hasSky = this.world.provider.hasSkyLight();
         boolean canSeeSky = this.world.canSeeSky(pos.up());
         boolean dry = !this.world.getBiomeForCoordsBody(pos).canRain();
         this.underSun = skylight > 4 && hasSky && canSeeSky && (dry || !this.world.isRaining() && !this.world.isThundering());

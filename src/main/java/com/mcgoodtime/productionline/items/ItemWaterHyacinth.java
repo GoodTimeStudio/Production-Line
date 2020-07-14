@@ -76,7 +76,7 @@ public class ItemWaterHyacinth extends ItemColored {
                     // special case for handling block placement with water lilies
                     net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
                     worldIn.setBlockState(blockpos1, PLBlocks.waterHyacinth.getDefaultState());
-                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, net.minecraft.util.EnumFacing.UP).isCanceled()) {
+                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, net.minecraft.util.EnumFacing.UP, playerIn.getActiveHand()).isCanceled()) {
                         blocksnapshot.restore(true, false);
                         return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
                     }
@@ -84,7 +84,7 @@ public class ItemWaterHyacinth extends ItemColored {
                     worldIn.setBlockState(blockpos1, PLBlocks.waterHyacinth.getDefaultState(), 11);
 
                     if (!playerIn.capabilities.isCreativeMode) {
-                        --itemStackIn.stackSize;
+                        itemStackIn.shrink(1);
                     }
 
                     playerIn.addStat(StatList.getObjectUseStats(this));

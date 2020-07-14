@@ -66,7 +66,7 @@ public abstract class TileEUStorage extends TileElectricContainer implements IEn
         }
 
         if (this.shouldEmitRedstonePower()) {
-            this.world.notifyBlockOfStateChange(this.pos, this.world.getBlockState(this.pos).getBlock());
+            //this.world.notifyBlockOfStateChange(this.pos, this.world.getBlockState(this.pos).getBlock());
         }
     }
 

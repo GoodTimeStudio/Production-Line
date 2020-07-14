@@ -4,15 +4,19 @@ import com.mcgoodtime.productionline.init.PLBlocks;
 import ic2.core.util.StackUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -31,9 +35,9 @@ public class ItemBlockEUStorage extends ItemBlockPL {
      */
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(@Nonnull ItemStack itemStack, @Nonnull EntityPlayer player, @Nonnull List<String> list, boolean bool) {
-        super.addInformation(itemStack, player, list, bool);
-        int meta = itemStack.getItemDamage();
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        int meta = stack.getItemDamage();
         String info = I18n.format("ic2.item.tooltip.Output") + " ";
         switch (meta) {
             case 0:
@@ -44,35 +48,32 @@ public class ItemBlockEUStorage extends ItemBlockPL {
             case 0:
                 info += "100m EU";
         }
-        list.add(info);
-        NBTTagCompound nbt = StackUtil.getOrCreateNbtData(itemStack);
+        tooltip.add(info);
+        NBTTagCompound nbt = StackUtil.getOrCreateNbtData(stack);
         String internalEnergy = I18n.format("ic2.item.tooltip.Store") + " " + nbt.getInteger("energy") + " EU";
-        list.add(internalEnergy);
+        tooltip.add(internalEnergy);
     }
 
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(@Nonnull Item item, @Nonnull CreativeTabs creativeTabs, @Nonnull List<ItemStack> list) {
-        super.getSubItems(item, creativeTabs, list);
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        super.getSubItems(tab, items);
         ItemStack itemStack;
         NBTTagCompound nbt;
 
         itemStack = PLBlocks.evsu.copy();
         nbt = StackUtil.getOrCreateNbtData(itemStack);
         nbt.setInteger("energy", (int) 1E8);
-        list.add(itemStack);
+        items.add(itemStack);
 
         itemStack = PLBlocks.cseu.copy();
         nbt = StackUtil.getOrCreateNbtData(itemStack);
         nbt.setInteger("energy", (int) 720E3);
-        list.add(itemStack);
+        items.add(itemStack);
 
         itemStack = PLBlocks.parallelSpaceSU.copy();
         nbt = StackUtil.getOrCreateNbtData(itemStack);
         nbt.setInteger("energy", (int) 2E8);
-        list.add(itemStack);
+        items.add(itemStack);
     }
 }

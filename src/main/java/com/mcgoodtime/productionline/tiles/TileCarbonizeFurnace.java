@@ -29,7 +29,7 @@ import com.mcgoodtime.productionline.recipes.CarbonizeFurnaceRecipes;
 import com.mcgoodtime.productionline.recipes.RecipePart;
 import com.mcgoodtime.productionline.tiles.tileslots.*;
 import ic2.api.energy.tile.IEnergyEmitter;
-import ic2.core.upgrade.IUpgradeItem;
+import ic2.api.upgrade.IUpgradeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -125,7 +125,7 @@ public class TileCarbonizeFurnace extends TileMachine {
             ItemStack stack = this.getStackInSlot(0);
             ItemStack outputItemStack = CarbonizeFurnaceRecipes.instance.getProcessResult(stack);
             if (outputItemStack != null) {
-                if (!(stack.stackSize >= CarbonizeFurnaceRecipes.instance.getRequiredProcessAmount(stack))) {
+                if (!(stack.getCount() >= CarbonizeFurnaceRecipes.instance.getRequiredProcessAmount(stack))) {
                     return false;
                 }
 
@@ -134,14 +134,14 @@ public class TileCarbonizeFurnace extends TileMachine {
                 } else {
 
                     if (this.getStackInSlot(2).isItemEqual(outputItemStack)) {
-                        int result = this.getStackInSlot(2).stackSize + outputItemStack.stackSize;
+                        int result = this.getStackInSlot(2).getCount() + outputItemStack.getCount();
                         if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(2).getMaxStackSize()) {
                             return true;
                         }
                     }
 
                     if (this.getStackInSlot(3).isItemEqual(outputItemStack)) {
-                        int result = this.getStackInSlot(3).stackSize + outputItemStack.stackSize;
+                        int result = this.getStackInSlot(3).getCount() + outputItemStack.getCount();
                         if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(3).getMaxStackSize()) {
                             return true;
                         }
@@ -162,18 +162,18 @@ public class TileCarbonizeFurnace extends TileMachine {
                 this.setInventorySlotContents(2, outputItem.copy());
             }
             else if (this.getStackInSlot(2).isItemEqual(outputItem)) {
-                this.getStackInSlot(2).stackSize += outputItem.stackSize;
+                this.getStackInSlot(2).grow(outputItem.getCount());
             }
             else if (this.getStackInSlot(3) == null) {
                 this.setInventorySlotContents(3, outputItem.copy());
             }
             else if (this.getStackInSlot(3).isItemEqual(outputItem)) {
-                this.getStackInSlot(3).stackSize += outputItem.stackSize;
+                this.getStackInSlot(3).grow(outputItem.getCount());
             }
 
-            this.getStackInSlot(0).stackSize -= CarbonizeFurnaceRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0));
+            this.getStackInSlot(0).shrink(CarbonizeFurnaceRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0)));
 
-            if (this.getStackInSlot(0).stackSize <= 0) {
+            if (this.getStackInSlot(0).getCount() <= 0) {
                 this.setInventorySlotContents(0, null);
             }
         }

@@ -55,7 +55,7 @@ public class PLRecipes {
         //disable();
 
         //vanilla recipe registry;
-
+/*
         GameRegistry.addRecipe(
                 ItemStacks.copyStack(PLBlocks.opticalGlass, 5),
                 "ABA",
@@ -104,7 +104,7 @@ public class PLRecipes {
                 "DDD",
                 'D', PLItems.diamondApple,
                 'A', Blocks.DIAMOND_BLOCK
-        );
+        );*/
 
         //smelting registry
         GameRegistry.addSmelting(PLBlocks.oreIridium, PLItems.ingotIridium, XP);
@@ -204,7 +204,7 @@ public class PLRecipes {
      * @param itemStack Disable all recipes of this item.
      */
     @SuppressWarnings("unchecked")
-    public static void disableRecipes(ItemStack itemStack) {
+    public static void disableRecipes(ItemStack itemStack) {/*
         List<IRecipe> recipeList = CraftingManager.getInstance().getRecipeList();
         for (int i = 0; i < recipeList.size(); i++) {
             IRecipe iRecipe = recipeList.get(i);
@@ -212,7 +212,7 @@ public class PLRecipes {
             if (ItemStack.areItemStacksEqual(itemStack, recipesResult)) {
                 recipeList.remove(i--);
             }
-        }
+        }*/
     }
 
     @SuppressWarnings({"unchecked", "SuspiciousMethodCalls"})

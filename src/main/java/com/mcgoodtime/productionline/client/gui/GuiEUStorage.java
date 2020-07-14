@@ -4,7 +4,6 @@ import com.mcgoodtime.productionline.PLUtil;
 import com.mcgoodtime.productionline.inventory.ContainerEUStorage;
 import com.mcgoodtime.productionline.network.PLNetwork;
 import com.mcgoodtime.productionline.tiles.eustorage.TileEUStorage;
-import ic2.core.GuiIconButton;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -35,18 +34,18 @@ public class GuiEUStorage extends GuiPL<ContainerEUStorage> {
     @Override
     public void initGui() {
         super.initGui();
-        this.buttonList.add(new GuiIconButton(0, (this.width - this.xSize) / 2 +
-                152, (this.height - this.ySize) / 2 + 4, 20, 20, new ItemStack(Items.REDSTONE), true));
+        /*this.buttonList.add(new GuiIconButton(0, (this.width - this.xSize) / 2 +
+                152, (this.height - this.ySize) / 2 + 4, 20, 20, new ItemStack(Items.REDSTONE), true));*/
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         super.drawGuiContainerForegroundLayer(x, y);
-        this.fontRendererObj.drawString(format("ic2.EUStorage.gui.info.armor"), 8, this.ySize - 126 + 3, 4210752);
-        this.fontRendererObj.drawString(format("ic2.EUStorage.gui.info.level"), 79, 25, 4210752);
-        this.fontRendererObj.drawString(" " + ((int) ((TileEUStorage) this.container.tile).energy), 110, 35, 4210752);
-        this.fontRendererObj.drawString("/" + ((TileEUStorage) this.container.tile).maxEnergy, 110, 45, 4210752);
-        this.fontRendererObj.drawString(format("ic2.EUStorage.gui.info.output",
+        this.fontRenderer.drawString(format("ic2.EUStorage.gui.info.armor"), 8, this.ySize - 126 + 3, 4210752);
+        this.fontRenderer.drawString(format("ic2.EUStorage.gui.info.level"), 79, 25, 4210752);
+        this.fontRenderer.drawString(" " + ((int) ((TileEUStorage) this.container.tile).energy), 110, 35, 4210752);
+        this.fontRenderer.drawString("/" + ((TileEUStorage) this.container.tile).maxEnergy, 110, 45, 4210752);
+        this.fontRenderer.drawString(format("ic2.EUStorage.gui.info.output",
                 ((TileEUStorage) this.container.tile).energyTick), 85, 60, 4210752);
         drawTooltip(x - this.guiLeft, y - this.guiTop, Collections.singletonList(format("ic2.EUStorage.gui.mod.redstone"
                 + ((TileEUStorage) this.container.tile).redstoneMode.ordinal())));

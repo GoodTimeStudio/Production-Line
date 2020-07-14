@@ -26,7 +26,7 @@ package com.mcgoodtime.productionline.tiles;
 
 import com.mcgoodtime.productionline.recipes.PackagerRecipes;
 import com.mcgoodtime.productionline.tiles.tileslots.*;
-import ic2.core.upgrade.IUpgradeItem;
+import ic2.api.upgrade.IUpgradeItem;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -101,7 +101,7 @@ public class TilePackager extends TileMachine {
             ItemStack input = this.getStackInSlot(0);
             ItemStack outputStack = PackagerRecipes.instance.getProcessResult(input);
             if (outputStack != null) {
-                if (!(input.stackSize >= PackagerRecipes.instance.getRequiredProcessAmount(input))) {
+                if (!(input.getCount() >= PackagerRecipes.instance.getRequiredProcessAmount(input))) {
                     return false;
                 }
 
@@ -110,7 +110,7 @@ public class TilePackager extends TileMachine {
                         return true;
                     } else {
                         if (this.getStackInSlot(3).isItemEqual(outputStack)) {
-                            int result = this.getStackInSlot(3).stackSize + outputStack.stackSize;
+                            int result = this.getStackInSlot(3).getCount() + outputStack.getCount();
                             if (result <= getInventoryStackLimit() && result <= this.getStackInSlot(3).getMaxStackSize()) {
                                 return true;
                             }
@@ -130,18 +130,18 @@ public class TilePackager extends TileMachine {
                 this.setInventorySlotContents(3, outputItem.copy());
             }
             else if (this.getStackInSlot(3).isItemEqual(outputItem)) {
-                this.getStackInSlot(3).stackSize += outputItem.stackSize;
+                this.getStackInSlot(3).grow(outputItem.getCount());
             }
 
-            this.getStackInSlot(0).stackSize -= PackagerRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0));
+            this.getStackInSlot(0).shrink(PackagerRecipes.instance.getRequiredProcessAmount(this.getStackInSlot(0)));
 
-            if (this.getStackInSlot(0).stackSize <= 0) {
+            if (this.getStackInSlot(0).getCount() <= 0) {
                 this.setInventorySlotContents(0, null);
             }
 
-            this.getStackInSlot(1).stackSize--;
+            this.getStackInSlot(1).shrink(1);
 
-            if (this.getStackInSlot(1).stackSize <= 0) {
+            if (this.getStackInSlot(1).getCount() <= 0) {
                 this.setInventorySlotContents(1, null);
             }
         }

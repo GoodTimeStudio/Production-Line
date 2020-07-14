@@ -38,9 +38,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.AchievementPage;
+//import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -65,10 +66,10 @@ import javax.annotation.Nonnull;
         modid = ProductionLine.MOD_ID,
         name = ProductionLine.MOD_NAME,
         version = ProductionLine.VERSION,
-        dependencies = "required-after:"
-                + "Forge@[12.17.0.1976,);"
+        /*dependencies = "required-after:"
+                + "Forge@[14.23.5.2854,);"
                 + "after:"
-                + "IC2@[2.5.52,);",
+                + "IC2@[2.8.209,);",*/
         useMetadata = true
 )
 public final class ProductionLine {
@@ -81,8 +82,8 @@ public final class ProductionLine {
         @SideOnly(Side.CLIENT)
         @Override
         @Nonnull
-        public Item getTabIconItem() {
-            return PLItems.gravityRay;
+        public ItemStack getTabIconItem() {
+            return new ItemStack(PLItems.gravityRay);
         }
     };
     /**
@@ -137,7 +138,7 @@ public final class ProductionLine {
         //register achievement
         PLAchievement.init();
         //register achievement page
-        AchievementPage.registerAchievementPage(PLAchievement.pagePL);
+        //AchievementPage.registerAchievementPage(PLAchievement.pagePL);
         //register ore gen bus. 注册矿石生成总线
         PLWorldGen.init();
         proxy.init();
@@ -186,12 +187,12 @@ public final class ProductionLine {
     public static class ClientProxy extends CommonProxy {
         @Override
         void preInit() {
-            PLModelRegistry.loadBlockModels();
-            PLModelRegistry.loadItemModels();
         }
 
         @Override
         void init() {
+            PLModelRegistry.loadBlockModels();
+            PLModelRegistry.loadItemModels();
             RenderingRegistry.registerEntityRenderingHandler(EntityThrownItem.class, manager -> new RenderEntityThrownItem<>(manager, Minecraft.getMinecraft().getRenderItem()));
             RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, RenderEntityRay::new);
         }

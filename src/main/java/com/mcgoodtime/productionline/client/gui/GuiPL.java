@@ -26,11 +26,11 @@ package com.mcgoodtime.productionline.client.gui;
 
 import com.mcgoodtime.productionline.core.ProductionLine;
 import com.mcgoodtime.productionline.inventory.ContainerPL;
+import ic2.api.upgrade.IUpgradableBlock;
+import ic2.api.upgrade.IUpgradeItem;
+import ic2.api.upgrade.UpgradableProperty;
+import ic2.api.upgrade.UpgradeRegistry;
 import ic2.core.IC2;
-import ic2.core.upgrade.IUpgradableBlock;
-import ic2.core.upgrade.IUpgradeItem;
-import ic2.core.upgrade.UpgradableProperty;
-import ic2.core.upgrade.UpgradeRegistry;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -70,7 +70,7 @@ public abstract class GuiPL<T extends ContainerPL> extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         String displayName = I18n.format(ProductionLine.GUI_PREFIX + this.name);
-        this.fontRendererObj.drawString(displayName, (this.xSize - this.fontRendererObj.getStringWidth(displayName)) / 2, 6, 4210752);
+        this.fontRenderer.drawString(displayName, (this.xSize - this.fontRenderer.getStringWidth(displayName)) / 2, 6, 4210752);
         if (this.container.tile instanceof IUpgradableBlock) {
             handleUpgradeTooltip(x, y);
         }

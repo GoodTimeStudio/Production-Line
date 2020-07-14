@@ -75,6 +75,11 @@ public abstract class TileContainer extends TileFacing implements ISidedInventor
     }
 
     @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
     public int getField(int id) {
         return 0;
     }
@@ -190,13 +195,13 @@ public abstract class TileContainer extends TileFacing implements ISidedInventor
 
             slotItem = this.tileSlots.get(slot).getStack();
 
-            if (slotItem.stackSize <= num) {
+            if (slotItem.getCount() <= num) {
                 this.tileSlots.get(slot).putStack(null);
                 return slotItem;
             } else {
                 itemstack = slotItem.splitStack(num);
 
-                if (slotItem.stackSize == 0) {
+                if (slotItem.getCount() == 0) {
                     this.tileSlots.get(slot).putStack(null);
                 }
 
@@ -214,8 +219,8 @@ public abstract class TileContainer extends TileFacing implements ISidedInventor
     @Override
     public void setInventorySlotContents(int index, ItemStack itemStack) {
         TileSlot slot = this.tileSlots.get(index);
-        if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
-            itemStack.stackSize = this.getInventoryStackLimit();
+        if (itemStack != null && itemStack.getCount() > this.getInventoryStackLimit()) {
+            itemStack.setCount(this.getInventoryStackLimit());
         }
         slot.putStack(itemStack);
     }

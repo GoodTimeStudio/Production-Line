@@ -57,7 +57,7 @@ import ic2.core.IC2Potion;
  * @author BestOwl, liach
  */
 @Mod.EventBusSubscriber
-public class PLEvent {
+public class PLEvent {/*
     @SubscribeEvent
     public void onPlayerCrafting(PlayerEvent.ItemCraftedEvent event) {
         if (event.crafting.getItem().equals(PLBlocks.carbonizeFurnace.getItem())) {
@@ -129,5 +129,5 @@ public class PLEvent {
             entity.world.spawnEntity(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ,
                     entity.getThrowItem().get()));
         }
-    }
+    }*/
 }
