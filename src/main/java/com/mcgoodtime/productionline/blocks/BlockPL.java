@@ -25,6 +25,7 @@
 package com.mcgoodtime.productionline.blocks;
 
 import com.mcgoodtime.productionline.core.PLConfig;
+import com.mcgoodtime.productionline.items.ItemBlockPL;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -78,6 +79,7 @@ public class BlockPL extends Block {
         this.setUnlocalizedName(MOD_ID + ".block." + name);
         this.setCreativeTab(creativeTabPL);
         this.internalName = name;
+        this.setRegistryName(new ResourceLocation(MOD_ID, this.internalName));
         // TODO register after construction
         ForgeRegistries.BLOCKS.register(this);
         this.registerItemBlock();
@@ -148,7 +150,9 @@ public class BlockPL extends Block {
      * Forge recommend register item block separately.
      */
     protected void registerItemBlock() {
-        ForgeRegistries.ITEMS.register(new ItemBlock(this));
+        ItemBlock item = new ItemBlock(this);
+        item.setRegistryName(new ResourceLocation(MOD_ID, this.internalName));
+        ForgeRegistries.ITEMS.register(item);
     }
 
     @Override

@@ -38,8 +38,8 @@ public class PLOreDictionary {
         OreDictionary.registerOre("paper", Items.PAPER);
 
 
-        OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensUnit);
-        OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensGroup);
-        OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensCluster);
+        //OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensUnit);
+        //OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensGroup);
+        //OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensCluster);
     }
 }

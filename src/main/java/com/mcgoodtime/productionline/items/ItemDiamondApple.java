@@ -37,6 +37,7 @@ public class ItemDiamondApple extends ItemFood implements IItemModelProvider {
         this.setCreativeTab(ProductionLine.creativeTabPL);
         this.setHasSubtypes(true);
         this.setAlwaysEdible();
+        this.setRegistryName(new ResourceLocation(ProductionLine.MOD_ID, "diamond_apple"));
         ForgeRegistries.ITEMS.register(this);
     }
 

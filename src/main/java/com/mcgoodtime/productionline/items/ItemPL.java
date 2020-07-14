@@ -55,6 +55,7 @@ public class ItemPL extends Item {
         this.setUnlocalizedName(MOD_ID + "." + name);
         this.itemName = name;
         this.setCreativeTab(creativeTabPL);
+        this.setRegistryName(new ResourceLocation(MOD_ID, name));
         ForgeRegistries.ITEMS.register(this);
     }
 

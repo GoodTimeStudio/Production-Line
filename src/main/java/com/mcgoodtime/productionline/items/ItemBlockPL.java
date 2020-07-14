@@ -49,6 +49,7 @@ public class ItemBlockPL extends ItemBlock {
         super(block);
         this.setMaxDamage(0);
         this.hasSubtypes = true;
+        this.setRegistryName(block.getRegistryName());
     }
 
     /**

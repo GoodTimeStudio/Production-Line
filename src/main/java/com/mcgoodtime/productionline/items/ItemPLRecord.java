@@ -57,6 +57,7 @@ public class ItemPLRecord extends ItemRecord {
         this.name = name;
         this.setCreativeTab(ProductionLine.creativeTabPL);
         this.setUnlocalizedName(MOD_ID + "." + name);
+        this.setRegistryName(new ResourceLocation(MOD_ID, name));
         ForgeRegistries.ITEMS.register(this);
     }
 

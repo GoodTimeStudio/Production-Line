@@ -151,6 +151,7 @@ public class PLItems implements IFuelHandler {
         saltWaterBucket = new ItemBucket(Blocks.WATER);
         saltWaterBucket.setCreativeTab(ProductionLine.creativeTabPL)
                 .setUnlocalizedName(MOD_ID + ".saltwater_bucket");
+        saltWaterBucket.setRegistryName(MOD_ID, "saltwater_bucket");
 
 //        iridiumPickaxe = ToolPL.registerPickaxe(PLToolMaterial.iridium, "iridium_pickaxe");
 //        iridiumAxe = ToolPL.registerAxe(PLToolMaterial.iridium, "iridium_axe");

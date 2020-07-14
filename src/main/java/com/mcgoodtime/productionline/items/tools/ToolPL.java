@@ -64,6 +64,7 @@ public class ToolPL {
         item.setUnlocalizedName(MOD_NAME + "." + name);
 //        item.setTextureName(RESOURCE_DOMAIN + ":" + "item" + name);
         item.setCreativeTab(creativeTabPL);
+        item.setRegistryName(new ResourceLocation(MOD_ID, name));
         ForgeRegistries.ITEMS.register(item);
     }
 
