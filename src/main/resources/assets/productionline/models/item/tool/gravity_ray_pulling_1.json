@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "productionline:item/tool/gravity_ray_pulling_1"
-  }
-}

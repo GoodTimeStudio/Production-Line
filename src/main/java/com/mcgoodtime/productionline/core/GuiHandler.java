@@ -25,18 +25,7 @@
 
 package com.mcgoodtime.productionline.core;
 
-//import com.mcgoodtime.productionline.client.gui.*;
-//import com.mcgoodtime.productionline.inventory.*;
-//import com.mcgoodtime.productionline.tiles.*;
-//import com.mcgoodtime.productionline.tiles.eustorage.TileCSEU;
-//import com.mcgoodtime.productionline.tiles.eustorage.TileEVSU;
-//import com.mcgoodtime.productionline.tiles.eustorage.TileParallelSpaceSU;
 import com.mcgoodtime.productionline.client.gui.*;
-import com.mcgoodtime.productionline.inventory.*;
-import com.mcgoodtime.productionline.tiles.*;
-import com.mcgoodtime.productionline.tiles.eustorage.TileCSEU;
-import com.mcgoodtime.productionline.tiles.eustorage.TileEVSU;
-import com.mcgoodtime.productionline.tiles.eustorage.TileParallelSpaceSU;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,14 +57,6 @@ public class GuiHandler implements IGuiHandler {
         EnumGui gui = EnumGui.values()[id];
         BlockPos pos = new BlockPos(x, y, z);
         switch (gui) {
-            case FluidKineticGenerator: return new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(pos));
-            case CarbonizeFurnace: return new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(pos));
-            case EVSU: return new ContainerEUStorage<>(player, (TileEVSU)world.getTileEntity(pos));
-            case HeatDryer: return new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(pos));
-            case CSEU: return new ContainerEUStorage<>(player, (TileCSEU) world.getTileEntity(pos));
-            case ParallelSpaceSU: return new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(pos));
-            case AdvSolar: return new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(pos));
-            case PACKAGER: return new ContainerPackager(player, ((TilePackager) world.getTileEntity(pos)));
             default: return null;
         }
     }
@@ -86,35 +67,10 @@ public class GuiHandler implements IGuiHandler {
         EnumGui gui = EnumGui.values()[id];
         BlockPos pos = new BlockPos(x, y, z);
         switch (gui) {
-            case FluidKineticGenerator:
-                return new GuiFluidKineticGenerator(new ContainerFluidKineticGenerator(player, (TileFluidKineticGenerator)world.getTileEntity(pos)));
-            case CarbonizeFurnace:
-                return new GuiCarbonizeFurnace(new ContainerCarbonizeFurnace(player, (TileCarbonizeFurnace)world.getTileEntity(pos)));
-            case EVSU:
-                return new GuiEUStorage(new ContainerEUStorage<>(player, (TileEVSU) world.getTileEntity(pos)));
-            case HeatDryer: return new GuiHeatDryer(new ContainerHeatDryer(player, (TileHeatDryer) world.getTileEntity(pos)));
-            case CSEU: return new GuiEUStorage(new ContainerEUStorage<>(player, (TileCSEU) world.getTileEntity(pos)));
-            case ParallelSpaceSU:
-                return new GuiParallelSpaceSU(new ContainerParallelSpaceSU(player, (TileParallelSpaceSU) world.getTileEntity(pos)));
-            case AdvSolar:
-                return new GuiAdvSolar(new ContainerAdvSolar(player, (TileAdvSolar) world.getTileEntity(pos)));
-            case PACKAGER:
-                return new GuiPackager(new ContainerPackager(player, ((TilePackager) world.getTileEntity(pos))));
             default: return null;
         }
     }
 
     public enum EnumGui {
-        FluidKineticGenerator,
-        CarbonizeFurnace,
-        EVSU,
-        HeatDryer,
-        CSEU,
-        ParallelSpaceSU,
-        AdvSolar,
-        PACKAGER,
-        Cutter,
-        LiquidExtractor,
-        Mixer
     }
 }

@@ -16,7 +16,6 @@ public class ItemOre extends ItemMulti {
         super("ore");
 
         PLItems.ingotIridium = this.next();
-        PLItems.dustIridium = this.next();
     }
 
     @Override

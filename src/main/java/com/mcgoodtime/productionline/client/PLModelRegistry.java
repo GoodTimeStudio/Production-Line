@@ -49,34 +49,13 @@ public class PLModelRegistry {
 
     public static void loadBlockModels() {
         registerBlockModel(PLBlocks.oreIridium);
-        registerBlockModel(PLBlocks.airBrakeCasing);
-        registerBlockModel(PLBlocks.compressedWaterHyacinth);
-        registerBlockModel(PLBlocks.dehydratedWaterHyacinthblock);
 
         ModelLoader.setCustomStateMapper(PLBlocks.machine, new StateMap.Builder().withName(BlockMachine.PROPERTY_TYPE).build());
-        registerBlockModel(PLBlocks.carbonizeFurnace);
-        registerBlockModel(PLBlocks.heatDryer);
-        registerBlockModel(PLBlocks.evsu);
-        registerBlockModel(PLBlocks.cseu);
-        registerBlockModel(PLBlocks.parallelSpaceSU);
-        registerBlockModel(PLBlocks.advSolar);
-        registerBlockModel(PLBlocks.fluidKineticGenerator);
-        registerBlockModel(PLBlocks.packager);
     }
 
     public static void loadItemModels() {
         registerItemModel(PLItems.diamondApple, 0);
         registerItemModel(PLItems.diamondApple, 1);
-        registerItemModel(PLItems.record_MusicSpring);
-        registerItemModel(PLItems.salt);
-        registerItemModel(PLItems.gravityRay);
-        registerItemModel(PLItems.packagedSalt);
-        registerItemModel(PLItems.saltWaterBucket);
-//        registerItemModel(PLItems.liquidExpBucket);
-//        registerItemModel(PLItems.enderPearlBucket);
-//        registerItemModel(PLItems.brineBucket);
-//        registerItemModel(PLItems.toadCoin);
-//        registerItemModel(PLItems.superTrashBag);
         
         if (PLItems.itemCrafting instanceof ItemMulti) {
             for (int i = 0; i < ((ItemMulti) PLItems.itemCrafting).getInternalNameSize(); i++) {

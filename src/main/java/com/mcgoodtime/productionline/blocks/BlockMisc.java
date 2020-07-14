@@ -54,10 +54,8 @@ public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<Blo
 
     public static final PropertyEnum<Type> PROPERTY_TYPE = PropertyEnum.create("type", Type.class);
 
-    public enum Type implements IStringSerializable, IBlockType {
-        COMPRESSED_WATER_HYACINTH("compressed_water_hyacinth"),
-        DEHYDRATED_WATER_HYACINTH_BLOCK("dehydrated_water_hyacinth_block"),
-        OPTICAL_GLASS("optical_glass");
+    public enum Type implements IStringSerializable, IBlockType {;
+        //COMPRESSED_WATER_HYACINTH("compressed_water_hyacinth");
 
         private final String name;
 
@@ -80,9 +78,6 @@ public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<Blo
     public BlockMisc() {
         super(Material.ROCK, "block_misc");
         this.setHardness(1.0F);
-        PLBlocks.compressedWaterHyacinth = new ItemStack(this, 1, 0);
-        PLBlocks.dehydratedWaterHyacinthblock = new ItemStack(this, 1, 1);
-        PLBlocks.opticalGlass = new ItemStack(this, 1, 2);
     }
 
     @Override

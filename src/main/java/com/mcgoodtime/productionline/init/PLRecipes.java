@@ -108,7 +108,6 @@ public class PLRecipes {
 
         //smelting registry
         GameRegistry.addSmelting(PLBlocks.oreIridium, PLItems.ingotIridium, XP);
-        GameRegistry.addSmelting(PLItems.dustIridium, PLItems.ingotIridium, XP);
         GameRegistry.addSmelting(IC2Items.getItem("iridiumOre"), PLItems.ingotIridium, XP);
 
         //ic2 recipe registry

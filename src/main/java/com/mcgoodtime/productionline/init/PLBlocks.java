@@ -40,35 +40,13 @@ import net.minecraft.item.ItemStack;
  * @author liach
  */
 public class PLBlocks {
-    public static ItemStack dehydratedWaterHyacinthblock;
-    public static ItemStack compressedWaterHyacinth;
-    public static ItemStack opticalGlass;
-
     public static BlockPL machine;
-    public static ItemStack carbonizeFurnace;
-    public static ItemStack heatDryer;
-    public static ItemStack evsu;
-    public static ItemStack cseu;
-    public static ItemStack parallelSpaceSU;
-    public static ItemStack advSolar;
-    public static ItemStack fluidKineticGenerator;
-    public static ItemStack packager;
 
     public static BlockPL oreIridium;
-    public static BlockPL airBrakeCasing;
-    
-    
-    public static Block waterHyacinth;
 
     public static void init() {
         oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
-        airBrakeCasing = new BlockOrientable(Material.IRON, "air_brake_casing");
         new BlockMisc();
         machine = new BlockMachine();
-
-        // special registry TODO: Better registry system
-        waterHyacinth = new BlockWaterHyacinth();
-        waterHyacinth.setRegistryName(ProductionLine.loc("waterHyacinth"));
-        ForgeRegistries.BLOCKS.register(waterHyacinth);
     }
 }

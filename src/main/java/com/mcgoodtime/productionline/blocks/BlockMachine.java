@@ -7,10 +7,6 @@ import com.mcgoodtime.productionline.core.ProductionLine;
 import com.mcgoodtime.productionline.init.PLBlocks;
 import com.mcgoodtime.productionline.items.ItemBlockPL;
 import com.mcgoodtime.productionline.tiles.*;
-import com.mcgoodtime.productionline.tiles.eustorage.TileCSEU;
-import com.mcgoodtime.productionline.tiles.eustorage.TileEUStorage;
-import com.mcgoodtime.productionline.tiles.eustorage.TileEVSU;
-import com.mcgoodtime.productionline.tiles.eustorage.TileParallelSpaceSU;
 import ic2.api.item.IC2Items;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -48,20 +44,7 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
     public static final PropertyEnum<Type> PROPERTY_TYPE = PropertyEnum.create("type", Type.class);
     public static final PropertyBool PROPERTY_ACTIVE = PropertyBool.create("active");
 
-    public enum Type implements IStringSerializable, IBlockType {
-        CARBONIZE_FURNACE("carbonize_furnace", TileCarbonizeFurnace.class, GuiHandler.EnumGui.CarbonizeFurnace),
-        HEAT_DRYER("heat_dryer", TileHeatDryer.class, GuiHandler.EnumGui.HeatDryer),
-        EVSU("evsu",TileEVSU.class, GuiHandler.EnumGui.EVSU),
-        CSEU("cseu",TileCSEU.class, GuiHandler.EnumGui.CSEU),
-        PARALLEL_SPACE_SU("parallel_space_su",TileParallelSpaceSU.class, GuiHandler.EnumGui.ParallelSpaceSU),
-        ADV_SOLAR("adv_solar", TileAdvSolar.class, GuiHandler.EnumGui.AdvSolar),
-        FLUID_KINETIC_GENERATOR("fluid_kinetic_generator", TileFluidKineticGenerator.class, GuiHandler.EnumGui.FluidKineticGenerator),
-        PACKAGER("packager", TilePackager.class, GuiHandler.EnumGui.PACKAGER);
-//        CUTTER("cutter", TileCutter.class, GuiHandler.EnumGui.Cutter),
-//        LIQUIDEXTRACTOR("liquid_extractor", TileLiquidExtractor.class, GuiHandler.EnumGui.LiquidExtractor),
-//        Mixer("mixer", TileMixer.class, GuiHandler.EnumGui.Mixer);
-
-
+    public enum Type implements IStringSerializable, IBlockType {;
 
         private final String name;
         public final Class<? extends TileFacing> tileClass;
@@ -93,15 +76,6 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
         for (Type t : Type.values()) {
             GameRegistry.registerTileEntity(t.tileClass, t.getName());
         }
-
-        PLBlocks.carbonizeFurnace = new ItemStack(this);
-        PLBlocks.heatDryer = new ItemStack(this, 1, 1);
-        PLBlocks.evsu = new ItemStack(this, 1, 2);
-        PLBlocks.cseu = new ItemStack(this, 1, 3);
-        PLBlocks.parallelSpaceSU = new ItemStack(this, 1, 4);
-        PLBlocks.advSolar = new ItemStack(this, 1, 5);
-        PLBlocks.fluidKineticGenerator = new ItemStack(this, 1, 6);
-        PLBlocks.packager = new ItemStack(this, 1, 7);
     }
 
     @Override
@@ -112,26 +86,7 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
 
     @Override
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        TileEntity te = worldIn.getTileEntity(pos);
-        if (te instanceof TileCarbonizeFurnace) {
-            if (((TileCarbonizeFurnace) te).active) {
-                float xmod;
-                float ymod;
-                float zmod;
 
-                float x = (float)pos.getX() + 1.0F;
-                float y = (float)pos.getY() + 1.0F;
-                float z = (float)pos.getZ() + 1.0F;
-
-                for(int i = 0; i < 4; ++i) {
-                    xmod = -0.2F - rand.nextFloat() * 0.6F;
-                    ymod = -0.1F + rand.nextFloat() * 0.2F;
-                    zmod = -0.2F - rand.nextFloat() * 0.6F;
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, (double)(x + xmod), (double)(y + ymod),
-                            (double)(z + zmod), 0.0D, 0.0D, 0.0D);
-                }
-            }
-        }
     }
 
     @Nonnull
@@ -180,18 +135,8 @@ public class BlockMachine extends BlockContainerPL implements IOrientableBlock, 
 
         TileFacing tile = (TileFacing) world.getTileEntity(pos);
         if (tile != null) {
-            if (tile instanceof TileEUStorage) {
-                tile.setFacing(PLUtil.getFacingFromEntity(pos, placer));
-            }
-            else {
-                tile.setFacing(placer.getHorizontalFacing().getOpposite());
-            }
-
+            tile.setFacing(placer.getHorizontalFacing().getOpposite());
         }
-
-//        TileEUStorage tile = (TileEUStorage) world.getTileEntity(pos);
-//        NBTTagCompound nbt = StackUtil.getOrCreateNbtData(stack);
-//        tile.energy = nbt.getDouble("energy");
     }
 
     /**

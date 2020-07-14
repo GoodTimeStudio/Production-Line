@@ -83,7 +83,7 @@ public final class ProductionLine {
         @Override
         @Nonnull
         public ItemStack getTabIconItem() {
-            return new ItemStack(PLItems.gravityRay);
+            return new ItemStack(PLItems.diamondApple);
         }
     };
     /**
