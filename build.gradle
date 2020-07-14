@@ -1,35 +1,64 @@
 buildscript {
     repositories {
-        jcenter()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "https://files.minecraftforge.net/maven"
         }
+        jcenter()
+        mavenCentral()
+        /*
         maven {
             name = "sponge"
             url = "http://repo.spongepowered.org/maven"
         }
+        */
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
-        classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        //classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'net.minecraftforge.gradle'
+//apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
 
-version = "dev.0.5" + getBuildNumber()
+version = "dev.0.6" + getBuildNumber()
 group= "com.mcgoodtime.productionline"
 archivesBaseName = "ProductionLine"
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    version = "1.10.2-12.18.3.2221"
-    runDir = "run"
-    mappings = "stable_29"
+    // The mappings can be changed at any time, and must be in the following format.
+    // snapshot_YYYYMMDD   Snapshot are built nightly.
+    // stable_#            Stables are built at the discretion of the MCP team.
+    // Use non-default mappings at your own risk. they may not always work.
+    // Simply re-run your setup task after changing the mappings to update your workspace.
+    mappings channel: 'snapshot', version: '20171003-1.12'
+    
+    // Default run configurations.
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
+
+        server {
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
+    }
 }
 
 repositories {
@@ -48,55 +77,57 @@ repositories {
 }
 
 dependencies {
-    compile ('org.spongepowered:mixin:0.6.+') {
-        exclude module: 'launchwrapper'
-    }
-    deobfCompile 'net.industrial-craft:industrialcraft-2:2.6.161-ex110' //adds ic2 to the dev env
-	compile 'mezz.jei:jei_1.10.2:3.14.4.404'
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
+    //compile ('org.spongepowered:mixin:0.6.+') {
+    //    exclude module: 'launchwrapper'
+    //}
 }
 
 jar {
     manifest {
 		attributes (
-            'FMLCorePlugin': 'com.mcgoodtime.productionline.core.coremod.PLCore',
-			'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-			'TweakOrder': 0,
-			'MixinConfigs': 'mixins.productionline.core.json',
-			'FMLCorePluginContainsFMLMod': true,
-			'FMLAT': 'productionline_at.cfg',
-			'ForceLoadAsMod': true
+            "Specification-Title": "Production Line",
+            "Specification-Vendor": "GoodTime Studio",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"GoodTime Studio",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
 		)
     }
 }
 
+// Example configuration to allow publishing using the maven-publish task
+// This is the preferred method to reobfuscate your jar file
+jar.finalizedBy('reobfJar') 
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
+//publish.dependsOn('reobfJar')
+
+/*
 mixin {
     // Specify "notch" or "searge" here
     defaultObfuscationEnv searge
     add sourceSets.main, "mixins.forge.refmap.json"
 }
+*/
 
 compileJava {
     options.encoding = 'UTF-8'
 }
 
-idea.module.inheritOutputDirs = true
-
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-	
-    from (sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version' : project.version, 'mcversion' : project.minecraft.version
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
     }
-	
-    from (sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
     }
 }
 
 static def getBuildNumber() {
 	return "$System.env.BUILD_NUMBER" != "null" ? "." + Integer.parseInt("$System.env.BUILD_NUMBER") : ""
 }
-
-tasks.jar.dependsOn "check"
