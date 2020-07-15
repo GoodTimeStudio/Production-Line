@@ -1,17 +1,19 @@
 #ProductionLine Language file
 #en_US
 
-[Item]
-item.upgradle_card_sand_storm.name =  Upgrade Crad:Sand-Strome;
-item upgradle_card_spring.name = Upgrade Crad:Spring;
-item.upgradle_card_oasis.name = Upgrade Crad:Oasis;
-item.upgradle_card_another_world.name = Upgrade Crad:Another-World;
-item.sheep_crook.name = Sheep-Crook;
+itemGroup.ProductionLine=Production Line
 
-item.aquamarine.name = Aquamarine;
-item.converter_card_black_cat.name = Converter Card:Black-Cat;
-item.desert_eye.name = Desert Eye;
+# Blocks
+tile.productionline.block.ore_iridium.name=Iridium Ore
 
-
-item.iridium_ingot.name=Iridium-Ingot
-item.diamond_apple.name = Diamond Apple;
+# Items
+item.productionline.ingot_iridium.name=Iridium Ingot
+item.productionline.diamond_apple.name=Diamond Apple
+item.productionline.upgradle_card_sand_storm.name=Upgrade Crad: Sand Storm
+item.productionline.upgradle_card_spring.name=Upgrade Crad: Spring
+item.productionline.upgradle_card_oasis.name=Upgrade Crad: Oasis
+item.productionline.upgradle_card_another_world.name=Upgrade Crad: Another World
+item.productionline.sheep_crook.name=Sheep Crook
+item.productionline.aquamarine.name=Aquamarine
+item.productionline.converter_card_black_cat.name=Converter Card: Black-Cat
+item.productionline.desert_eye.name=Desert Eye

@@ -1,16 +1,19 @@
 #ProductionLine Language file
 #zh_CN
 
-[Item]
+itemGroup.ProductionLine=Production Line
 
-item.productionline.iridium_ingot.name=铱锭
+# Blocks
+tile.productionline.block.ore_iridium.name=铱矿石
+
+# Items
+item.productionline.ingot_iridium.name=铱锭
 item.productionline.diamond_apple.name=钻石苹果
-item.productionline.upgradle_card_sand_storm.name = 升级卡：沙暴
-item.productionline.upgradle_card_spring.name = 升级卡：清泉
-item.productionline.upgradle_card_oasis.name = 升级卡：绿洲
-item.productionline.upgradle_card_another_world.name = 升级卡：异界
-item.productionline.sheep_crook.name = 牧羊杖
-
-item.productionline.aquamarine.name = 水结晶
-item.productionline.converter_card_black_cat.name  = 模式转换卡:黑猫
-item.productionline.desert_eye.name = 沙漠之眼
+item.productionline.upgradle_card_sand_storm.name=升级卡：沙暴
+item.productionline.upgradle_card_spring.name=升级卡：清泉
+item.productionline.upgradle_card_oasis.name=升级卡：绿洲
+item.productionline.upgradle_card_another_world.name=升级卡：异界
+item.productionline.sheep_crook.name=牧羊杖
+item.productionline.aquamarine.name=水结晶
+item.productionline.converter_card_black_cat.name=模式转换卡：黑猫
+item.productionline.desert_eye.name=沙漠之眼
