@@ -14,12 +14,17 @@ public class ItemCrafting extends ItemMulti {
 
     public ItemCrafting() {
         super("crafting");
+        PLItems.desertEye = this.next();
+        PLItems.aquamarine = this.next();
+
+
     }
 
     @Override
     protected List<String> getInternalNameList() {
         List<String> list = new ArrayList<>();
-        list.add("small_compressed_water_hyacinth");
+        list.add("desert_eye");
+        list.add("aquarine");
         return list;
     }
 

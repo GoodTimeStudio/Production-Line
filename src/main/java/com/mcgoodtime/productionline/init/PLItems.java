@@ -24,13 +24,12 @@
  */
 package com.mcgoodtime.productionline.init;
 
+import com.mcgoodtime.productionline.items.ItemCard;
 import com.mcgoodtime.productionline.items.ItemCrafting;
 import com.mcgoodtime.productionline.items.ItemDiamondApple;
 import com.mcgoodtime.productionline.items.ItemOre;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.IFuelHandler;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 /**
@@ -38,21 +37,32 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class PLItems {
 
+
+
     public static Item diamondApple;
 
-    public static Item itemCrafting;
-    public static Item itemOre;
 
-    public static Item upgradleCardSandStorm;
-    public static Item upgradleCardSpring;
-    public static Item upgradleCardOasis;
-    public static Item upgradleCardAnotherWorld;
+
+
+
     public static Item sheepCrook;
 
+    //ore
+    public static Item itemOre;
     public static ItemStack ingotIridium;
+
+    //crafting
+    public static Item itemCrafting;
     public static ItemStack aquamarine;
-    public static ItemStack converterCardBlackCat;
     public static ItemStack desertEye;
+
+    //Card
+    public static Item itemCard;
+    public static ItemStack converterCardBlackCat;
+    public static ItemStack upgradleCardSandStorm;
+    public static ItemStack upgradleCardSpring;
+    public static ItemStack upgradleCardOasis;
+    public static ItemStack upgradleCardAnotherWorld;
 
     public static void init() {
         diamondApple = new ItemDiamondApple();
@@ -60,6 +70,7 @@ public class PLItems {
         //MultiMetaItem registry
         itemOre = new ItemOre();
         itemCrafting = new ItemCrafting();
+        itemCard = new ItemCard();
     }
 
 }
