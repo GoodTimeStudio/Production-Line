@@ -2,19 +2,16 @@
 #en_US
 
 [Item]
-item.super_csrashsag.name=super_csrashsag
-item.ender_pearl_powder.name=ender_pearl_powder
-item.cpu_mk1.name=cpu_mk1
-item.cpu_mk2.name=cpu_mk2
-item.cpu_mk3.name=cpu_mk3
-item.fake_head.name=fake_head
-item.toad_coin.name=toad_coin
-item.life_converter.name=life_converter
-item.condensed_impurities.name=condensed_impurities
-item.heart_of_lava.name=heart_of_lava
-item.heart_of_pure_white.name=heart_of_pure_white
-item.heart_of_ender.name=heart_of_ender
-item.liquid_exp_bucket.name=liquid_exp_bucket
-item.ender_pearl_bucket.name=ender_pearl_bucket
-item.brine_bucket.name=brine_bucket
-item.iridium_ingot.name=iridium_ingot
+item.upgradle_card_sand_storm.name =  Upgrade Crad:Sand-Strome;
+item upgradle_card_spring.name = Upgrade Crad:Spring;
+item.upgradle_card_oasis.name = Upgrade Crad:Oasis;
+item.upgradle_card_another_world.name = Upgrade Crad:Another-World;
+item.sheep_crook.name = Sheep-Crook;
+
+item.aquamarine.name = Aquamarine;
+item.converter_card_black_cat.name = Converter Card:Black-Cat;
+item.desert_eye.name = Desert Eye;
+
+
+item.iridium_ingot.name=Iridium-Ingot
+item.diamond_apple.name = Diamond Apple;

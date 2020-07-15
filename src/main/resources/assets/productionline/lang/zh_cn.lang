@@ -2,19 +2,15 @@
 #zh_CN
 
 [Item]
-item.productionline.super_csrashsag.name=超凡垃圾袋
-item.productionline.ender_pearl_powder.name=末影珍珠粉
-item.productionline.cpu_mk1.name=工业级处理器
-item.productionline.cpu_mk2.name=信息级处理器
-item.productionline.cpu_mk3.name=末影级处理器
-item.productionline.fake_head.name=假的头
-item.productionline.toad_coin.name=虾蟆硬币
-item.productionline.life_converter.name=生命信息超次元转换芯片
-item.productionline.condensed_impurities.name=凝结杂质
-item.productionline.heart_of_lava.name=熔岩之心
-item.productionline.heart_of_pure_white.name=洁白之心
-item.productionline.heart_of_ender.name=末影之心
-item.productionline.liquid_exp_bucket.name=经验液体桶
-item.productionline.ender_pearl_bucket.name=熔融末影珍珠桶
-item.productionline.brine_bucket.name=盐水桶
+
 item.productionline.iridium_ingot.name=铱锭
+item.productionline.diamond_apple.name=钻石苹果
+item.productionline.upgradle_card_sand_storm.name = 升级卡：沙暴
+item.productionline.upgradle_card_spring.name = 升级卡：清泉
+item.productionline.upgradle_card_oasis.name = 升级卡：绿洲
+item.productionline.upgradle_card_another_world.name = 升级卡：异界
+item.productionline.sheep_crook.name = 牧羊杖
+
+item.productionline.aquamarine.name = 水结晶
+item.productionline.converter_card_black_cat.name  = 模式转换卡:黑猫
+item.productionline.desert_eye.name = 沙漠之眼

@@ -50,7 +50,7 @@ public class PLModelRegistry {
     public static void loadBlockModels() {
         registerBlockModel(PLBlocks.oreIridium);
 
-        ModelLoader.setCustomStateMapper(PLBlocks.machine, new StateMap.Builder().withName(BlockMachine.PROPERTY_TYPE).build());
+       // ModelLoader.setCustomStateMapper(PLBlocks.machine, new StateMap.Builder().withName(BlockMachine.PROPERTY_TYPE).build());
     }
 
     public static void loadItemModels() {

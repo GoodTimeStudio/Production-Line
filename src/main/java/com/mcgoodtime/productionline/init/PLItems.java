@@ -34,7 +34,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 /**
- * The list of all those items in GoodTime-Industrial.
+ * The list of all those items in Production_Line.
  */
 public class PLItems {
 
@@ -43,7 +43,16 @@ public class PLItems {
     public static Item itemCrafting;
     public static Item itemOre;
 
+    public static Item upgradleCardSandStorm;
+    public static Item upgradleCardSpring;
+    public static Item upgradleCardOasis;
+    public static Item upgradleCardAnotherWorld;
+    public static Item sheepCrook;
+
     public static ItemStack ingotIridium;
+    public static ItemStack aquamarine;
+    public static ItemStack converterCardBlackCat;
+    public static ItemStack desertEye;
 
     public static void init() {
         diamondApple = new ItemDiamondApple();
