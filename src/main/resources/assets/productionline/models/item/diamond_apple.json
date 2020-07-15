@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "productionline:item/food/diamond_apple"
+    "layer0": "productionline:item/diamond_apple"
   }
 }

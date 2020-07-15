@@ -43,7 +43,11 @@ public abstract class ItemMulti extends ItemPL implements IItemModelProvider {
      */
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        return "item." + MOD_ID + "." + this.getInternalName(itemStack.getItemDamage());
+        if (internalNameList.size() > 0) {
+            return "item." + MOD_ID + "." + this.getInternalName(itemStack.getItemDamage());
+        } else {
+            return super.getUnlocalizedName(itemStack);
+        }
     }
 
     public String getInternalName(int meta) {

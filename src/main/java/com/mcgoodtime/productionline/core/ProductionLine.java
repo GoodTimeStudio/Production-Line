@@ -33,7 +33,6 @@ import com.mcgoodtime.productionline.entity.PLEntity;
 import com.mcgoodtime.productionline.event.PLEvent;
 import com.mcgoodtime.productionline.init.*;
 import com.mcgoodtime.productionline.potion.PLPotion;
-import com.mcgoodtime.productionline.worldgen.PLWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
@@ -41,7 +40,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-//import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -119,8 +118,15 @@ public final class ProductionLine {
 
     @SubscribeEvent
     public void registerItem(RegistryEvent<Item> event) {
-        PLSounds.loadRecord(); //register record sound event before register record item.
+        //PLSounds.loadRecord(); //register record sound event before register record item.
         PLItems.init();
+    }
+
+    @SubscribeEvent
+    public void registerModel(ModelRegistryEvent event)
+    {
+        PLModelRegistry.loadBlockModels();
+        PLModelRegistry.loadItemModels();
     }
 
     @SubscribeEvent
@@ -136,11 +142,11 @@ public final class ProductionLine {
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
         //register achievement
-        PLAchievement.init();
+        //PLAchievement.init();
         //register achievement page
         //AchievementPage.registerAchievementPage(PLAchievement.pagePL);
         //register ore gen bus. 注册矿石生成总线
-        PLWorldGen.init();
+        //PLWorldGen.init();
         proxy.init();
     }
 
@@ -160,11 +166,9 @@ public final class ProductionLine {
     }
 
     public abstract static class CommonProxy {
-        void preInit() {
-        }
+        abstract void preInit();
 
-        void init() {
-        }
+        abstract void init();
 
         CommonProxy() {
         }
@@ -191,8 +195,6 @@ public final class ProductionLine {
 
         @Override
         void init() {
-            PLModelRegistry.loadBlockModels();
-            PLModelRegistry.loadItemModels();
             RenderingRegistry.registerEntityRenderingHandler(EntityThrownItem.class, manager -> new RenderEntityThrownItem<>(manager, Minecraft.getMinecraft().getRenderItem()));
             RenderingRegistry.registerEntityRenderingHandler(EntityRay.class, RenderEntityRay::new);
         }

@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-TweakClass: org.spongepowered.asm.launch.MixinTweaker
-TweakOrder: 0
-MixinConfigs: mixins.productionline.core.json
-FMLCorePlugin: com.mcgoodtime.productionline.core.coremod.PLCore
-FMLCorePluginContainsFMLMod: true
-FMLAT: gti_at.cfg
-
