@@ -24,7 +24,7 @@ public class ItemCrafting extends ItemMulti {
     protected List<String> getInternalNameList() {
         List<String> list = new ArrayList<>();
         list.add("desert_eye");
-        list.add("aquarine");
+        list.add("aquamarine");
         return list;
     }
 
