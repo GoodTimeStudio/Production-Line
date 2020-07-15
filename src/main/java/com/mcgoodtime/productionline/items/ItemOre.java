@@ -22,7 +22,6 @@ public class ItemOre extends ItemMulti {
     protected List<String> getInternalNameList() {
         List<String> list = new ArrayList<String>();
         list.add("ingot_iridium");
-        list.add("dust_iridium");
         return list;
     }
 

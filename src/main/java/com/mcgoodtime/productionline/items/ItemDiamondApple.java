@@ -29,7 +29,7 @@ import java.util.List;
  *
  * @author BestOwl
  */
-public class ItemDiamondApple extends ItemFood implements IItemModelProvider {
+public class ItemDiamondApple extends ItemFood {
 
     public ItemDiamondApple() {
         super(1000, 10F, false);
@@ -83,18 +83,4 @@ public class ItemDiamondApple extends ItemFood implements IItemModelProvider {
         return itemStack.getItemDamage() >= 1;
     }
 
-    @Override
-    public String getModelResourcePath() {
-        return "food";
-    }
-
-    /**
-     * Get custom resource name.
-     * To use default resource name, return null.
-     *
-     */
-    @Override
-    public String getModelResourceName(int meta) {
-        return null;
-    }
 }

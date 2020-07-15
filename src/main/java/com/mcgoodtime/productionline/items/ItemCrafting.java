@@ -19,7 +19,6 @@ public class ItemCrafting extends ItemMulti {
     @Override
     protected List<String> getInternalNameList() {
         List<String> list = new ArrayList<>();
-        list.add("small_compressed_water_hyacinth");
         return list;
     }
 
