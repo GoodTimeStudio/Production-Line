@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "yzy",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "block": "minecraft:sand",
+      "data": 0
+    },
+    "y":
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    "z":
+    {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result":
+  {
+    "item": "productionline:crafting",
+    "count": 1,
+    "data": 0
+  }
+}

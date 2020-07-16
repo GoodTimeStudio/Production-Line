@@ -14,7 +14,7 @@ public class ItemCrafting extends ItemMulti {
 
     public ItemCrafting() {
         super("crafting");
-        PLItems.desertEye = this.next();
+        PLItems.eyeOfTheDesert = this.next();
         PLItems.aquamarine = this.next();
 
 
@@ -23,7 +23,7 @@ public class ItemCrafting extends ItemMulti {
     @Override
     protected List<String> getInternalNameList() {
         List<String> list = new ArrayList<>();
-        list.add("desert_eye");
+        list.add("eye_of_the_desert");
         list.add("aquamarine");
         return list;
     }

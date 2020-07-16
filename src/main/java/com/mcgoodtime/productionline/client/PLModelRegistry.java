@@ -68,6 +68,12 @@ public class PLModelRegistry {
                 registerItemModel(PLItems.itemOre, i);
             }
         }
+
+        if(PLItems.itemSeal instanceof ItemMulti){
+            for(int i =0; i<((ItemMulti)PLItems.itemSeal).getInternalNameSize();i++){
+                registerItemModel(PLItems.itemSeal, i);
+            }
+        }
     }
 
     private static ModelResourceLocation getItemModelResLoc(Item item, int meta) {

@@ -24,7 +24,7 @@
  */
 package com.mcgoodtime.productionline.init;
 
-import com.mcgoodtime.productionline.items.ItemCard;
+import com.mcgoodtime.productionline.items.ItemSeal;
 import com.mcgoodtime.productionline.items.ItemCrafting;
 import com.mcgoodtime.productionline.items.ItemDiamondApple;
 import com.mcgoodtime.productionline.items.ItemOre;
@@ -37,13 +37,7 @@ import net.minecraft.item.ItemStack;
  */
 public class PLItems {
 
-
-
     public static Item diamondApple;
-
-
-
-
 
     public static Item sheepCrook;
 
@@ -54,15 +48,17 @@ public class PLItems {
     //crafting
     public static Item itemCrafting;
     public static ItemStack aquamarine;
-    public static ItemStack desertEye;
+    public static ItemStack eyeOfTheDesert;
 
-    //Card
-    public static Item itemCard;
-    public static ItemStack converterCardBlackCat;
-    public static ItemStack upgradleCardSandStorm;
-    public static ItemStack upgradleCardSpring;
-    public static ItemStack upgradleCardOasis;
-    public static ItemStack upgradleCardAnotherWorld;
+    //seal
+    public static Item itemSeal;
+
+    public static Item cconvertingSealBlackCat;
+
+    public static ItemStack enchantingSealSandStorm;
+    public static ItemStack enchantingSealSpring;
+    public static ItemStack enchantingSealOasis;
+    public static ItemStack enchantingSealAnotherWorld;
 
     public static void init() {
         diamondApple = new ItemDiamondApple();
@@ -70,7 +66,7 @@ public class PLItems {
         //MultiMetaItem registry
         itemOre = new ItemOre();
         itemCrafting = new ItemCrafting();
-        itemCard = new ItemCard();
+        itemSeal = new ItemSeal();
     }
 
 }

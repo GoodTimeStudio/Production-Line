@@ -9,10 +9,10 @@ tile.productionline.block.ore_iridium.name=铱矿石
 # Items
 item.productionline.ingot_iridium.name=铱锭
 item.productionline.diamond_apple.name=钻石苹果
-item.productionline.upgradle_card_sand_storm.name=升级卡：沙暴
-item.productionline.upgradle_card_spring.name=升级卡：清泉
-item.productionline.upgradle_card_oasis.name=升级卡：绿洲
-item.productionline.upgradle_card_another_world.name=升级卡：异界
+item.productionline.enchanting_seal_sand_storm.name=增幅法印：沙暴
+item.productionline.enchanting_seal_spring.name=增幅法印：清泉
+item.productionline.enchanting_seal_oasis.name=增幅法印：绿洲
+item.productionline.enchanting_seal_another_world.name=增幅法印：异界
 item.productionline.sheep_crook.name=牧羊杖
 item.productionline.aquamarine.name=水结晶
 item.productionline.converter_card_black_cat.name=模式转换卡：黑猫

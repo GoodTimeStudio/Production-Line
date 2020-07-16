@@ -9,11 +9,11 @@ tile.productionline.block.ore_iridium.name=Iridium Ore
 # Items
 item.productionline.ingot_iridium.name=Iridium Ingot
 item.productionline.diamond_apple.name=Diamond Apple
-item.productionline.upgradle_card_sand_storm.name=Upgrade Crad: Sand Storm
-item.productionline.upgradle_card_spring.name=Upgrade Crad: Spring
-item.productionline.upgradle_card_oasis.name=Upgrade Crad: Oasis
-item.productionline.upgradle_card_another_world.name=Upgrade Crad: Another World
+item.productionline.enchanting_seal_sand_storm.name=Enchanting Seal: Sand-Storm
+item.productionline.enchanting_seal_spring.name=Enchanting Seal: Spring
+item.productionline.enchanting_seal_oasis.name=Enchanting Seal: Oasis
+item.productionline.enchanting_seal_another_world.name=Enchanting Seal: Another-World
 item.productionline.sheep_crook.name=Sheep Crook
 item.productionline.aquamarine.name=Aquamarine
-item.productionline.converter_card_black_cat.name=Converter Card: Black-Cat
+item.productionline.converting_seal_black_cat.name=Converting Seal: Black-Cat
 item.productionline.desert_eye.name=Desert Eye
