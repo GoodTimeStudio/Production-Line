@@ -90,62 +90,6 @@ public class BlockPL extends Block {
     }
 
     /**
-     * Called when a user uses the creative pick block button on this block
-     *
-     * @param target The full target the player is looking at
-     * @param player @return A ItemStack to add to the player's inventory, Null if nothing should be added.
-     */
-    @Nonnull
-    @Override
-    public ItemStack getPickBlock(@Nonnull IBlockState state, RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player) {
-//        if (this instanceof IMultiMetaBlock) {
-//            Block block = world.getBlockState(pos).getBlock();
-//            return new ItemStack(this, 1, block.getMetaFromState(world.getBlockState(pos)));
-//        }
-        return super.getPickBlock(state, target, world, pos, player);
-    }
-
-    /**
-     * This returns a complete list of items dropped from this block.
-     *
-     * @param world   The current world
-     * @param pos     Block position in world
-     * @param state   Current state
-     * @param fortune Breakers fortune level
-     * @return A ArrayList containing all items this block drops
-     */
-    @Override
-    @Nonnull
-    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
-        return super.getDrops(world, pos, state, fortune);
-    }
-
-    /**
-     * Get the Item that this Block should drop when harvested.
-     *
-     */
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return super.getItemDropped(state, rand, fortune);
-    }
-
-//    /**
-//     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-//     */
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public void getSubBlocks(@Nonnull Item item, CreativeTabs creativeTabs, List<ItemStack> list) {
-//        if (this instanceof IMultiMetaBlock) {
-//            for(int meta = 0; meta < ((IMultiMetaBlock) this).getMaxMeta(); ++meta) {
-//                ItemStack stack = new ItemStack(this, 1, meta);
-//                list.add(stack);
-//            }
-//        } else {
-//            super.getSubBlocks(item, creativeTabs, list);
-//        }
-//    }
-
-    /**
      * Register item block.
      * Forge recommend register item block separately.
      */

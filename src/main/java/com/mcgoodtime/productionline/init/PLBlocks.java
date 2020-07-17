@@ -43,9 +43,11 @@ public class PLBlocks {
     public static BlockPL machine;
 
     public static BlockPL oreIridium;
+    public static Block generator;
 
     public static void init() {
         oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
+        generator = new BlockGenerator();
         //new BlockMisc();
         //machine = new BlockMachine();
     }

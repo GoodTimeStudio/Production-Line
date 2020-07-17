@@ -66,7 +66,7 @@ public abstract class BlockContainerPL extends BlockPL implements ITileEntityPro
         return tileentity != null && tileentity.receiveClientEvent(id, param);
     }
 
-    protected abstract Class<? extends TileFacing> getTileEntityClass(IBlockState state);
+    protected abstract Class<? extends TileEntity> getTileEntityClass(IBlockState state);
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
