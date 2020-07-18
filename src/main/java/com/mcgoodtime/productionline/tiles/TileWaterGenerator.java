@@ -51,23 +51,27 @@ public class TileWaterGenerator extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!this.world.isRemote) {
-            // for better performance, wait 20 ticks before checking water environment
+            // for better performance, wait 300 ticks before checking water environment
             if (timer == 0) {
                 energyOutput = 0;
+
                 BlockPos pos = this.getPos();
-                pos = pos.down();
 
-                isWater(pos);
-                isWater(pos.east());
-                isWater(pos.south());
-                isWater(pos.west());
-                isWater(pos.north());
-                isWater(pos.north().east());
-                isWater(pos.north().west());
-                isWater(pos.south().east());
-                isWater(pos.south().west());
+                if(isNotWater(pos.east()) && isNotWater(pos.south()) && isNotWater(pos.west()) && isNotWater(pos.north()))
+                {
+                    BlockPos down = this.getPos().down();
+                    isWater(down);
+                    isWater(down.east());
+                    isWater(down.south());
+                    isWater(down.west());
+                    isWater(down.north());
+                    isWater(down.north().east());
+                    isWater(down.north().west());
+                    isWater(down.south().east());
+                    isWater(down.south().west());
+                }
 
-            } else if (timer == 20) {
+            } else if (timer == 300) {
                 timer = -1;
             }
             timer += 1;
@@ -76,7 +80,7 @@ public class TileWaterGenerator extends TileEntity implements ITickable {
             if (te == null) {
                 return;
             }
-            if (te.hasCapability(CapabilityEnergy.ENERGY, EnumFacing.DOWN)) {
+            if (te.hasCapability(CapabilityEnergy.ENERGY, EnumFacing.DOWN)&&energyOutput>0) {
                 IEnergyStorage storage = te.getCapability(CapabilityEnergy.ENERGY, EnumFacing.DOWN);
                 storage.receiveEnergy(energyOutput, false);
             }
@@ -86,6 +90,15 @@ public class TileWaterGenerator extends TileEntity implements ITickable {
     private void isWater(BlockPos pos) {
         if (this.world.getBlockState(pos).getBlock() == Blocks.WATER) {
             energyOutput += 1;
+        }
+    }
+
+    private boolean isNotWater(BlockPos pos){
+        if (this.world.getBlockState(pos).getBlock() == Blocks.WATER) {
+            energyOutput = 0;
+            return true;
+        }else{
+            return false;
         }
     }
 
