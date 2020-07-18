@@ -137,8 +137,6 @@ public final class ProductionLine {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         PLOreDictionary.init();
-        // register Recipes. 注册合成
-//        PLRecipes.init();
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
         //register achievement
