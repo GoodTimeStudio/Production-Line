@@ -24,6 +24,7 @@
  */
 package com.mcgoodtime.productionline.worldgen;
 
+import com.mcgoodtime.productionline.core.ProductionLine;
 import com.mcgoodtime.productionline.init.PLBlocks;
 
 import net.minecraft.block.state.IBlockState;
@@ -67,7 +68,10 @@ public class PLWorldGen implements IWorldGenerator {
 
     public static void init() {
         new PLWorldGen(PLBlocks.oreIridium.getDefaultState(), 1, 16, 3);
-        new PLWorldGen(BlockName.resource.getBlockState(ResourceBlock.basalt), 5, 27, 10);
+        if (ProductionLine.isIC2Loaded)
+        {
+            new PLWorldGen(BlockName.resource.getBlockState(ResourceBlock.basalt), 5, 27, 10);
+        }
     }
 
     private void generateOre(World world, Random rand, int chunkX, int chunkZ) {

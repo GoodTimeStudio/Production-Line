@@ -33,6 +33,7 @@ import com.mcgoodtime.productionline.entity.PLEntity;
 import com.mcgoodtime.productionline.event.PLEvent;
 import com.mcgoodtime.productionline.init.*;
 import com.mcgoodtime.productionline.potion.PLPotion;
+import com.mcgoodtime.productionline.worldgen.PLWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
@@ -139,12 +140,8 @@ public final class ProductionLine {
         PLOreDictionary.init();
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
-        //register achievement
-        //PLAchievement.init();
-        //register achievement page
-        //AchievementPage.registerAchievementPage(PLAchievement.pagePL);
-        //register ore gen bus. 注册矿石生成总线
-        //PLWorldGen.init();
+        //register ore gen bus.
+        PLWorldGen.init();
         proxy.init();
     }
 

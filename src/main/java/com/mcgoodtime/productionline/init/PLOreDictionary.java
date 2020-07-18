@@ -35,11 +35,6 @@ import net.minecraftforge.oredict.OreDictionary;
 public class PLOreDictionary {
 
     public static void init() {
-        OreDictionary.registerOre("paper", Items.PAPER);
 
-
-        //OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensUnit);
-        //OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensGroup);
-        //OreDictionary.registerOre("advSolarLens", PLItems.advSolarLensCluster);
     }
 }
