@@ -94,12 +94,7 @@ public class TileWaterGenerator extends TileEntity implements ITickable {
     }
 
     private boolean isNotWater(BlockPos pos){
-        if (this.world.getBlockState(pos).getBlock() == Blocks.WATER) {
-            energyOutput = 0;
-            return true;
-        }else{
-            return false;
-        }
+        return this.world.getBlockState(pos).getBlock() != Blocks.WATER;
     }
 
 }
