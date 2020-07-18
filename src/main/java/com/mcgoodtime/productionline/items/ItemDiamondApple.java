@@ -62,11 +62,17 @@ public class ItemDiamondApple extends ItemFood {
         tooltip.add(I18n.format(this.getUnlocalizedName() + ".desc1"));
     }
 
+    /**
+     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
+     */
     @SideOnly(Side.CLIENT)
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        for (int i = 0; i < 2; i++) {
-            items.add(new ItemStack(this, 1, i));
+        if (tab == ProductionLine.creativeTabPL)
+        {
+            for (int i = 0; i < 2; i++) {
+                items.add(new ItemStack(this, 1, i));
+            }
         }
     }
 

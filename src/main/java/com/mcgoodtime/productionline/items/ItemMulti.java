@@ -1,6 +1,7 @@
 package com.mcgoodtime.productionline.items;
 
 import com.mcgoodtime.productionline.client.IItemModelProvider;
+import com.mcgoodtime.productionline.core.ProductionLine;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -60,11 +61,17 @@ public abstract class ItemMulti extends ItemPL implements IItemModelProvider {
 
     protected abstract List<String> getInternalNameList();
 
+    /**
+     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
+     */
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        for(int meta = 0; meta < this.internalNameList.size(); ++meta) {
-            ItemStack stack = new ItemStack(this, 1, meta);
-            items.add(stack);
+        if (tab == ProductionLine.creativeTabPL)
+        {
+            for(int meta = 0; meta < this.internalNameList.size(); ++meta) {
+                ItemStack stack = new ItemStack(this, 1, meta);
+                items.add(stack);
+            }
         }
     }
 
