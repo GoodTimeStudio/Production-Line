@@ -27,7 +27,6 @@ package com.mcgoodtime.productionline.event;
 import com.google.common.base.Optional;
 
 import com.mcgoodtime.productionline.entity.EntityThrownItem;
-import com.mcgoodtime.productionline.init.PLAchievement;
 import com.mcgoodtime.productionline.init.PLBlocks;
 import com.mcgoodtime.productionline.init.PLItems;
 import com.mcgoodtime.productionline.potion.PLPotion;

@@ -50,6 +50,14 @@ repositories {
         name = "sponge"
         url = "http://repo.spongepowered.org/maven"
     }
+    maven {
+        name = "botania"
+        url = "https://maven.blamejared.com/"
+    }
+    maven  {
+        name = "baubles"
+        url = "https://maven.thiakil.com"
+    }
 	maven {
 		name = "jei"
 		url = "http://dvs1.progwml6.com/files/maven"
@@ -58,6 +66,8 @@ repositories {
 
 dependencies {
     compile 'net.industrial-craft:industrialcraft-2:2.8.209-ex112:dev' //adds ic2 to the dev env
+    deobfCompile "vazkii.botania:Botania:r1.10-363.148"
+    deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
     //compile ('org.spongepowered:mixin:0.6.+') {
     //    exclude module: 'launchwrapper'
     //}
