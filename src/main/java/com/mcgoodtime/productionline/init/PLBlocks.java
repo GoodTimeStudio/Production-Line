@@ -29,10 +29,14 @@ import com.mcgoodtime.productionline.core.ProductionLine;
 //import com.mcgoodtime.productionline.blocks.generator.BlockAdvSolar;
 //import com.mcgoodtime.productionline.blocks.generator.BlockFluidKineticGenerator;
 //import com.mcgoodtime.productionline.items.ItemWaterHyacinth;
+import com.mcgoodtime.productionline.tiles.subtile.functional.SubTileFlowerOfOsiris;
+import lib.LibBlockNames;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
+import vazkii.botania.api.BotaniaAPI;
+import vazkii.botania.api.subtile.SubTileEntity;
 
 /**
  * ProductionLine blocks.
@@ -44,11 +48,30 @@ public class PLBlocks {
 
     public static BlockPL oreIridium;
     public static Block generator;
+    public static Block flower;
 
     public static void init() {
         oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
         generator = new BlockGenerator();
+        flower = new FlowerPL();
+
+        initTileEntities();
         //new BlockMisc();
         //machine = new BlockMachine();
     }
+
+    private static void initTileEntities() {
+        BotaniaAPI.registerSubTile(LibBlockNames.THE_FLOWER_OF_OSIRIS, SubTileFlowerOfOsiris.class);
+        registerSubTileWithMini(LibBlockNames.THE_FLOWER_OF_OSIRIS, SubTileFlowerOfOsiris.class);
+    }
+
+    private static void registerSubTileWithMini(String key, Class<? extends SubTileEntity> clazz) {
+        BotaniaAPI.registerSubTile(key, clazz);
+
+        for(Class innerClazz : clazz.getDeclaredClasses())
+            if(innerClazz.getSimpleName().equals("Mini"))
+                BotaniaAPI.registerMiniSubTile(key + "Chibi", innerClazz, key);
+    }
+
+
 }

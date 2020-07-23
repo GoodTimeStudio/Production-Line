@@ -59,6 +59,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.annotation.Nonnull;
 
@@ -78,6 +80,13 @@ public final class ProductionLine {
     public static final String VERSION = "${version}";
     public static final String RESOURCE_DOMAIN = MOD_ID;
     public static final String GUI_PREFIX = "gui.ProductionLine.";
+
+    public static Set<String> subtilesForCreativeMenu = new LinkedHashSet();
+
+    public static void addSubTileToCreativeMenu(String key) {
+        subtilesForCreativeMenu.add(key);
+    }
+    
     public static final CreativeTabs creativeTabPL = new CreativeTabs(MOD_NAME) {
         @SideOnly(Side.CLIENT)
         @Override
