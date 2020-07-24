@@ -1,7 +1,7 @@
 /*
- * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ * This file is part of Production Line, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
+ * Copyright (c) 2020 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -68,10 +68,9 @@ import javax.annotation.Nonnull;
         modid = ProductionLine.MOD_ID,
         name = ProductionLine.MOD_NAME,
         version = ProductionLine.VERSION,
-        /*dependencies = "required-after:"
-                + "Forge@[14.23.5.2854,);"
-                + "after:"
-                + "IC2@[2.8.209,);",*/
+        dependencies = "required:forge@[14.23.5.2847,);"
+                + "after:ic2;"
+                + "after:botania;",
         useMetadata = true
 )
 public final class ProductionLine {
@@ -103,6 +102,7 @@ public final class ProductionLine {
     private static final ProductionLine INSTANCE = new ProductionLine();
 
     public static boolean isIC2Loaded;
+    public static boolean isBotaniaLoaded;
 
     @SidedProxy
     public static CommonProxy proxy;
@@ -114,7 +114,8 @@ public final class ProductionLine {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        isIC2Loaded = Loader.isModLoaded("IndustrialCraft 2");
+        isIC2Loaded = Loader.isModLoaded("ic2");
+        isBotaniaLoaded = Loader.isModLoaded("botania");
         setupMeta();
         PLConfig.init(event.getSuggestedConfigurationFile());
         PLEntity.init();

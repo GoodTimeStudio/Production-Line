@@ -80,7 +80,6 @@ public class BlockPL extends Block {
         this.setCreativeTab(creativeTabPL);
         this.internalName = name;
         this.setRegistryName(new ResourceLocation(MOD_ID, this.internalName));
-        // TODO register after construction
         ForgeRegistries.BLOCKS.register(this);
         this.registerItemBlock();
         if (this instanceof IOrientableBlock) {
