@@ -26,17 +26,10 @@ package com.mcgoodtime.productionline.init;
 
 import com.mcgoodtime.productionline.blocks.*;
 import com.mcgoodtime.productionline.core.ProductionLine;
-//import com.mcgoodtime.productionline.blocks.generator.BlockAdvSolar;
-//import com.mcgoodtime.productionline.blocks.generator.BlockFluidKineticGenerator;
-//import com.mcgoodtime.productionline.items.ItemWaterHyacinth;
-import com.mcgoodtime.productionline.tiles.subtile.functional.SubTileFlowerOfOsiris;
-import lib.LibBlockNames;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import com.mcgoodtime.productionline.tiles.SubTileFlowerOfOsiris;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
 import vazkii.botania.api.BotaniaAPI;
-import vazkii.botania.api.subtile.SubTileEntity;
 
 /**
  * ProductionLine blocks.
@@ -48,30 +41,25 @@ public class PLBlocks {
 
     public static BlockPL oreIridium;
     public static Block generator;
-    public static Block flower;
+
+    /**
+     * The internal name of the flower of osiris, used for registration
+     * This will be null if Botania is not loaded
+     * */
+    public static String flowerOfOsiris;
 
     public static void init() {
         oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
         generator = new BlockGenerator();
-        flower = new FlowerPL();
 
-        initTileEntities();
+        if (ProductionLine.isBotaniaLoaded)
+        {
+            flowerOfOsiris = "the_flower_of_osiris";
+            BotaniaAPI.registerSubTile(flowerOfOsiris, SubTileFlowerOfOsiris.class);
+            BotaniaAPI.addSubTileToCreativeMenu(flowerOfOsiris);
+        }
+
         //new BlockMisc();
         //machine = new BlockMachine();
     }
-
-    private static void initTileEntities() {
-        BotaniaAPI.registerSubTile(LibBlockNames.THE_FLOWER_OF_OSIRIS, SubTileFlowerOfOsiris.class);
-        registerSubTileWithMini(LibBlockNames.THE_FLOWER_OF_OSIRIS, SubTileFlowerOfOsiris.class);
-    }
-
-    private static void registerSubTileWithMini(String key, Class<? extends SubTileEntity> clazz) {
-        BotaniaAPI.registerSubTile(key, clazz);
-
-        for(Class innerClazz : clazz.getDeclaredClasses())
-            if(innerClazz.getSimpleName().equals("Mini"))
-                BotaniaAPI.registerMiniSubTile(key + "Chibi", innerClazz, key);
-    }
-
-
 }

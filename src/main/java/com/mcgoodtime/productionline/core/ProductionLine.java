@@ -31,7 +31,9 @@ import com.mcgoodtime.productionline.entity.EntityRay;
 import com.mcgoodtime.productionline.entity.EntityThrownItem;
 import com.mcgoodtime.productionline.entity.PLEntity;
 import com.mcgoodtime.productionline.event.PLEvent;
-import com.mcgoodtime.productionline.init.*;
+import com.mcgoodtime.productionline.init.PLBlocks;
+import com.mcgoodtime.productionline.init.PLItems;
+import com.mcgoodtime.productionline.init.PLOreDictionary;
 import com.mcgoodtime.productionline.potion.PLPotion;
 import com.mcgoodtime.productionline.worldgen.PLWorldGen;
 import net.minecraft.block.Block;
@@ -58,19 +60,14 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 @Mod(
         modid = ProductionLine.MOD_ID,
         name = ProductionLine.MOD_NAME,
         version = ProductionLine.VERSION,
-        dependencies = "required:forge@[14.23.5.2847,);"
-                + "after:ic2;"
-                + "after:botania;",
+        dependencies = "required:forge@[14.23.5.2847,);",
         useMetadata = true
 )
 public final class ProductionLine {
@@ -79,12 +76,6 @@ public final class ProductionLine {
     public static final String VERSION = "${version}";
     public static final String RESOURCE_DOMAIN = MOD_ID;
     public static final String GUI_PREFIX = "gui.ProductionLine.";
-
-    public static Set<String> subtilesForCreativeMenu = new LinkedHashSet();
-
-    public static void addSubTileToCreativeMenu(String key) {
-        subtilesForCreativeMenu.add(key);
-    }
     
     public static final CreativeTabs creativeTabPL = new CreativeTabs(MOD_NAME) {
         @SideOnly(Side.CLIENT)
