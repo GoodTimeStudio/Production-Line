@@ -27,6 +27,7 @@ package com.mcgoodtime.productionline.blocks;
 
 import com.mcgoodtime.productionline.core.GuiHandler;
 import com.mcgoodtime.productionline.core.ProductionLine;
+import com.mcgoodtime.productionline.init.PLItems;
 import com.mcgoodtime.productionline.tiles.TileFacing;
 import com.mcgoodtime.productionline.tiles.TileWaterGenerator;
 import net.minecraft.block.material.Material;
@@ -34,8 +35,11 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -127,5 +131,18 @@ public class BlockGenerator extends BlockContainerPL implements IMultiIDBlock<Pr
             return this.getDefaultState().withProperty(PROPERTY_TYPE, BlockGenerator.Type.values()[meta]);
         }
         return null;
+    }
+
+    //Open GUI when player rightClick with sheepCrook
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
+
+        if(worldIn.isRemote){
+            if(playerIn.getHeldItemMainhand().getItem() == PLItems.sheepCrook){
+                //TODO addGUI
+//                playerIn.openGui();
+            }
+        }
+        return true;
     }
 }
