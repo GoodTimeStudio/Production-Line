@@ -5,6 +5,7 @@ itemGroup.ProductionLine=Production Line
 
 # Blocks
 tile.productionline.block.ore_iridium.name=铱矿石
+tile.productionline.block.generator.tefnut_tear.name=泰芙努特之泪
 
 # Items
 item.productionline.ingot_iridium.name=铱锭
@@ -16,4 +17,4 @@ item.productionline.enchanting_seal_another_world.name=增幅法印：异界
 item.productionline.sheep_crook.name=牧羊杖
 item.productionline.aquamarine.name=水结晶
 item.productionline.converter_card_black_cat.name=模式转换卡：黑猫
-item.productionline.desert_eye.name=沙漠之眼
+item.productionline.eye_of_the_desert.name=沙漠之眼

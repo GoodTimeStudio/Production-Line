@@ -40,7 +40,7 @@ import javax.annotation.Nullable;
  *
  * @author NightOwl
  */
-public class TileWaterGenerator extends TileEntity implements ITickable {
+public class TefnutTear extends TileEntity implements ITickable {
 
     private int energyOutput;
     private int timer;

@@ -28,8 +28,7 @@ package com.mcgoodtime.productionline.blocks;
 import com.mcgoodtime.productionline.core.GuiHandler;
 import com.mcgoodtime.productionline.core.ProductionLine;
 import com.mcgoodtime.productionline.init.PLItems;
-import com.mcgoodtime.productionline.tiles.TileFacing;
-import com.mcgoodtime.productionline.tiles.TileWaterGenerator;
+import com.mcgoodtime.productionline.tiles.TefnutTear;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -60,7 +59,7 @@ public class BlockGenerator extends BlockContainerPL implements IMultiIDBlock<Pr
     public static final PropertyEnum<BlockGenerator.Type> PROPERTY_TYPE = PropertyEnum.create("type", BlockGenerator.Type.class);
 
     public enum Type implements IStringSerializable, IBlockType {
-        WATER_GENERATOR("water_generator", TileWaterGenerator.class, null);
+        WATER_GENERATOR("tefnut_tear", TefnutTear.class, null);
 
         private final String name;
         public final Class<? extends TileEntity> tileClass;
