@@ -59,6 +59,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -76,6 +78,8 @@ public final class ProductionLine {
     public static final String VERSION = "${version}";
     public static final String RESOURCE_DOMAIN = MOD_ID;
     public static final String GUI_PREFIX = "gui.ProductionLine.";
+
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     
     public static final CreativeTabs creativeTabPL = new CreativeTabs(MOD_NAME) {
         @SideOnly(Side.CLIENT)
