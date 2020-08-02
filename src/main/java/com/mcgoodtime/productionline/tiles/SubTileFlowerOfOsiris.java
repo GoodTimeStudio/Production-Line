@@ -2,6 +2,8 @@ package com.mcgoodtime.productionline.tiles;
 
 
 import com.mcgoodtime.productionline.core.ProductionLine;
+import com.mcgoodtime.productionline.mixin.ISubTileGenerating;
+import com.mcgoodtime.productionline.mixin.MixinSubTileGenerating;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import vazkii.botania.api.subtile.SubTileEntity;
@@ -24,7 +26,9 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
         for(BlockPos pos:BlockPos.getAllInBox(getPos().add(-range,0,-range),getPos().add(range,0,range))){
             SubTileGenerating tile = getManaGenerator(pos);
             if(tile!=null){
-                enhance(tile);
+                if(((ISubTileGenerating)tile).canEnhance()){
+                    enhance(tile);
+                }
             }
         }
 
@@ -42,10 +46,10 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
     }
 
     private void enhance(SubTileGenerating stg){
-        for(int i=0;i<growthData(growthLevel);i++){
-            stg.onUpdate();
-        }
+        ProductionLine.LOGGER.info("我运行了");
+        ((ISubTileGenerating)stg).setGrowth(growthData(growthLevel));
     }
+
 
     private int growthData(int growthLevel){
         return (int)Math.ceil((Math.log((5*(growthLevel-0.5)))*1.4));
