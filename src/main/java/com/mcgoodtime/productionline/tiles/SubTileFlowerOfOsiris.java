@@ -2,10 +2,12 @@ package com.mcgoodtime.productionline.tiles;
 
 
 import com.mcgoodtime.productionline.core.ProductionLine;
-import com.mcgoodtime.productionline.mixin.ISubTileGenerating;
-import com.mcgoodtime.productionline.mixin.MixinSubTileGenerating;
+import ic2.core.energy.grid.Tile;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import org.spongepowered.asm.mixin.Overwrite;
 import vazkii.botania.api.subtile.SubTileEntity;
 import vazkii.botania.api.subtile.SubTileFunctional;
 import vazkii.botania.api.subtile.SubTileGenerating;
@@ -25,14 +27,15 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
         }
         for(BlockPos pos:BlockPos.getAllInBox(getPos().add(-range,0,-range),getPos().add(range,0,range))){
             SubTileGenerating tile = getManaGenerator(pos);
-            if(tile!=null){
-                if(((ISubTileGenerating)tile).canEnhance()){
-                    enhance(tile);
+            if(tile!=null) {
+//                isNotSameFlower(tile);
+                hasMultiOsiris(tile);
+                enhance(tile);
                 }
             }
         }
 
-    }
+
 
     private SubTileGenerating getManaGenerator(BlockPos pos) {
        if(supertile.getWorld().getBlockState(pos).getBlock() instanceof BlockSpecialFlower){
@@ -46,13 +49,39 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
     }
 
     private void enhance(SubTileGenerating stg){
-        ProductionLine.LOGGER.info("我运行了");
-        ((ISubTileGenerating)stg).setGrowth(growthData(growthLevel));
+
+        for(int i=0;i<growthData(growthLevel);i++){
+            stg.onUpdate();
+        }
     }
 
 
     private int growthData(int growthLevel){
         return (int)Math.ceil((Math.log((5*(growthLevel-0.5)))*1.4));
     }
+
+    private boolean hasMultiOsiris(SubTileGenerating GeneratingTile){
+        int count=1;
+        for(BlockPos pos:BlockPos.getAllInBox(getPos().add(-range*2,0,-range*2),getPos().add(range*2,0,range*2))){
+
+            if(!pos.equals(this.getPos())){
+                TileEntity tile=supertile.getWorld().getTileEntity(pos);
+
+                if(tile != null){
+                    SubTileEntity subTile=((TileSpecialFlower) tile).getSubTile();
+                    if(subTile instanceof SubTileFlowerOfOsiris){
+                        count++;
+                    }
+                }
+            }
+        }
+
+        if(count >=4){
+            GeneratingTile.getWorld().setBlockState(GeneratingTile.getPos(),Blocks.DEADBUSH.getDefaultState(),3);
+            return true;
+        }else return false;
+
+    }
+
 
 }
