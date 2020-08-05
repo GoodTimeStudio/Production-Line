@@ -18,6 +18,8 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
     private int consume;
     private int growthLevel = 10;
 
+    private int growthData;
+
     private int range = 3;
 
     @Override
@@ -28,14 +30,12 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
         for(BlockPos pos:BlockPos.getAllInBox(getPos().add(-range,0,-range),getPos().add(range,0,range))){
             SubTileGenerating tile = getManaGenerator(pos);
             if(tile!=null) {
-//                isNotSameFlower(tile);
-                hasMultiOsiris(tile);
-                enhance(tile);
+                if(!hasMultiOsiris(tile)){
+                    enhance(tile);
                 }
             }
         }
-
-
+    }
 
     private SubTileGenerating getManaGenerator(BlockPos pos) {
        if(supertile.getWorld().getBlockState(pos).getBlock() instanceof BlockSpecialFlower){
@@ -49,24 +49,17 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
     }
 
     private void enhance(SubTileGenerating stg){
-
-        for(int i=0;i<growthData(growthLevel);i++){
+        calculateGrowthData(growthLevel);
+        for(int i=0;i<growthData;i++){
             stg.onUpdate();
         }
-    }
-
-
-    private int growthData(int growthLevel){
-        return (int)Math.ceil((Math.log((5*(growthLevel-0.5)))*1.4));
     }
 
     private boolean hasMultiOsiris(SubTileGenerating GeneratingTile){
         int count=1;
         for(BlockPos pos:BlockPos.getAllInBox(getPos().add(-range*2,0,-range*2),getPos().add(range*2,0,range*2))){
-
             if(!pos.equals(this.getPos())){
                 TileEntity tile=supertile.getWorld().getTileEntity(pos);
-
                 if(tile != null){
                     SubTileEntity subTile=((TileSpecialFlower) tile).getSubTile();
                     if(subTile instanceof SubTileFlowerOfOsiris){
@@ -75,13 +68,19 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
                 }
             }
         }
-
-        if(count >=4){
+        if(count >=2){
             GeneratingTile.getWorld().setBlockState(GeneratingTile.getPos(),Blocks.DEADBUSH.getDefaultState(),3);
             return true;
-        }else return false;
-
+        }else
+            return false;
     }
 
+    private void calculateGrowthData(int growthLevel){
+        this.growthData=(int)Math.ceil((Math.log((5*(growthLevel-0.5)))*1.4));
+    }
 
+    @Override
+    public int getMaxMana() {
+        return 0;
+    }
 }
