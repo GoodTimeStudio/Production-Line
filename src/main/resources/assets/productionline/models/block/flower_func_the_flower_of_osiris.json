@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "productionline:blocks/flower_func_the_flower_of_osiris"
+  }
+}
