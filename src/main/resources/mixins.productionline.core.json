@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.mcgoodtime.productionline.mixin",
+  "priority": 1111,
+  "mixins": [
+    "MixinSubTileGenerating"
+  ],
+  "compatibilityLevel": "JAVA_8",
+  "client": [],
+  "server": []
+}

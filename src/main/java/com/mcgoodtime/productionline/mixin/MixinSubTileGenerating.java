@@ -11,8 +11,8 @@ import vazkii.botania.api.subtile.SubTileEntity;
 import vazkii.botania.api.subtile.SubTileGenerating;
 
 
-/*
-@Mixin(value=SubTileGenerating.class,remap = false)
+
+@Mixin(SubTileGenerating.class)
 public abstract class MixinSubTileGenerating extends SubTileEntity implements ISubTileGenerating{
 
     @Shadow
@@ -22,13 +22,18 @@ public abstract class MixinSubTileGenerating extends SubTileEntity implements IS
     protected int mana;
 
     private int growth;
+    private boolean canEnhance;
 
     @Shadow
     public abstract boolean isValidBinding();
 
     @Inject(method = "update",at=@At("HEAD"))
     public void onUpdate() {
-        canEnhance();
+        if(this.mana > 0) {
+            this.canEnhance = true;
+        } else {
+            this.canEnhance = false;
+        }
     }
 
     @Overwrite
@@ -44,11 +49,7 @@ public abstract class MixinSubTileGenerating extends SubTileEntity implements IS
     }
 
     public boolean canEnhance(){
-        if(this.mana>0){
-            return true;
-        }else{
-            return false;
-        }
+        return this.canEnhance;
     }
 
     public void setGrowth(int growth){
@@ -57,4 +58,3 @@ public abstract class MixinSubTileGenerating extends SubTileEntity implements IS
 
 
 }
- */

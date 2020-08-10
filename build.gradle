@@ -6,21 +6,19 @@ buildscript {
         }
         jcenter()
         mavenCentral()
-        /*
         maven {
             name = "sponge"
-            url = "http://repo.spongepowered.org/maven"
+            url = "https://repo.spongepowered.org/maven"
         }
-        */
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        //classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-//apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'org.spongepowered.mixin'
 
 version = "dev.0.6" + getBuildNumber()
 group= "com.mcgoodtime.productionline"
@@ -68,9 +66,19 @@ dependencies {
     compile 'net.industrial-craft:industrialcraft-2:2.8.209-ex112:dev' //adds ic2 to the dev env
     deobfCompile "vazkii.botania:Botania:r1.10-363.148"
     deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
-    //compile ('org.spongepowered:mixin:0.6.+') {
-    //    exclude module: 'launchwrapper'
-    //}
+    compile ('org.spongepowered:mixin:0.8') {
+        exclude module: 'launchwrapper'
+    }
+}
+
+mixin {
+    // Specify "notch" or "searge" here
+    defaultObfuscationEnv searge
+    add sourceSets.main, "mixins.forge.refmap.json"
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
 }
 
 processResources {
