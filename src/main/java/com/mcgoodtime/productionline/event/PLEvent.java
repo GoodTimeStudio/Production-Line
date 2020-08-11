@@ -24,31 +24,23 @@
  */
 package com.mcgoodtime.productionline.event;
 
-import com.google.common.base.Optional;
 
-import com.mcgoodtime.productionline.entity.EntityThrownItem;
-import com.mcgoodtime.productionline.init.PLBlocks;
-import com.mcgoodtime.productionline.init.PLItems;
-import com.mcgoodtime.productionline.potion.PLPotion;
-
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Biomes;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
+import ic2.core.item.capability.CapabilityFluidHandlerItem;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-
-import ic2.api.item.IC2Items;
-import ic2.core.IC2Potion;
+import net.minecraftforge.items.CapabilityItemHandler;
+import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * Production Line event listener.
@@ -129,4 +121,27 @@ public class PLEvent {/*
                     entity.getThrowItem().get()));
         }
     }*/
+
+    public Boolean canLogistics;
+    public BlockPos pos;
+
+    @SubscribeEvent
+    public void onBlockPlayerPlaced(BlockEvent.EntityPlaceEvent event) {
+        TileEntity te = event.getWorld().getTileEntity(event.getPos());
+        if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+            canLogistics = true;
+        }else if(te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,null) && te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)){
+            canLogistics = true;
+        }else if(te.hasCapability(CapabilityEnergy.ENERGY,null)){
+            canLogistics = true;
+        }else{
+            canLogistics = false;
+        }
+        if(canLogistics){
+            this.pos=te.getPos();
+        }
+
+    }
+
+
 }
