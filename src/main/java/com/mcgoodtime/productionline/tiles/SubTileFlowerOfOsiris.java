@@ -1,13 +1,10 @@
 package com.mcgoodtime.productionline.tiles;
 
 
-import com.mcgoodtime.productionline.core.ProductionLine;
-import ic2.core.energy.grid.Tile;
-import net.minecraft.block.state.IBlockState;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import org.spongepowered.asm.mixin.Overwrite;
 import vazkii.botania.api.subtile.SubTileEntity;
 import vazkii.botania.api.subtile.SubTileFunctional;
 import vazkii.botania.api.subtile.SubTileGenerating;

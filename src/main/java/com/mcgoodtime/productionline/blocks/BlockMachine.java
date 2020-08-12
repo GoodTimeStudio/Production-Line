@@ -1,10 +1,8 @@
 package com.mcgoodtime.productionline.blocks;
 
 import com.mcgoodtime.productionline.client.IBlockModelProvider;
-import com.mcgoodtime.productionline.PLUtil;
 import com.mcgoodtime.productionline.core.GuiHandler;
 import com.mcgoodtime.productionline.core.ProductionLine;
-import com.mcgoodtime.productionline.init.PLBlocks;
 import com.mcgoodtime.productionline.items.ItemBlockPL;
 import com.mcgoodtime.productionline.tiles.*;
 import ic2.api.item.IC2Items;
@@ -18,7 +16,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCache;
@@ -31,7 +28,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.Random;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Created by BestOwl on 2015.11.25.0025.

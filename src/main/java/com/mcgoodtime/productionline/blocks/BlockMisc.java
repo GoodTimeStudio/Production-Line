@@ -26,7 +26,6 @@ package com.mcgoodtime.productionline.blocks;
 
 import com.mcgoodtime.productionline.client.IBlockModelProvider;
 import com.mcgoodtime.productionline.core.ProductionLine;
-import com.mcgoodtime.productionline.init.PLBlocks;
 import com.mcgoodtime.productionline.items.ItemBlockPL;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -34,14 +33,12 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nonnull;
 

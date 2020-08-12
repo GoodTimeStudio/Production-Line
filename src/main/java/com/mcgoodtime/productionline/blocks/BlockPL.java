@@ -25,33 +25,20 @@
 package com.mcgoodtime.productionline.blocks;
 
 import com.mcgoodtime.productionline.core.PLConfig;
-import com.mcgoodtime.productionline.items.ItemBlockPL;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-//import net.minecraft.util.MovingObjectPositionsition;
 import net.minecraft.world.World;
-//import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
-import net.minecraftforge.registries.ForgeRegistry;
 import org.apache.logging.log4j.Level;
-
-import javax.annotation.Nonnull;
-import java.util.List;
-import java.util.Random;
 
 import static com.mcgoodtime.productionline.core.ProductionLine.*;
 

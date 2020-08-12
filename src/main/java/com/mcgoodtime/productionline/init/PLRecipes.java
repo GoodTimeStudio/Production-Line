@@ -24,20 +24,16 @@
  */
 package com.mcgoodtime.productionline.init;
 
-import com.mcgoodtime.productionline.items.ItemStacks;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 import java.util.Map;
 
 import ic2.api.item.IC2Items;
+import net.minecraftforge.oredict.OreDictionary;
 
-//import ic2.core.AdvRecipe;
 
 /**
  * The class for loading all the recipes of GoodTime-Industrial. Migrated from old loaders.
@@ -51,14 +47,12 @@ public class PLRecipes {
      * Load recipes of GoodTime-Industrial.
      */
     public static void init() {
-
         //smelting registry
         GameRegistry.addSmelting(PLBlocks.oreIridium, PLItems.ingotIridium, XP);
-        GameRegistry.addSmelting(IC2Items.getItem("iridiumOre"), PLItems.ingotIridium, XP);
-
-
+        for(ItemStack oreIridium:OreDictionary.getOres("oreIridium")){
+            GameRegistry.addSmelting(oreIridium, PLItems.ingotIridium, XP);
+        }
     }
-
 
     /**
      * Disable recipes.

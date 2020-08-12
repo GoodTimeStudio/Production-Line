@@ -24,14 +24,11 @@
  */
 package com.mcgoodtime.productionline.entity;
 
-import com.google.common.base.Optional;
 import com.mcgoodtime.productionline.event.EntityThrowableImpactEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;

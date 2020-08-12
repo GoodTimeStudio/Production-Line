@@ -26,7 +26,6 @@
 package com.mcgoodtime.productionline.blocks;
 
 import com.mcgoodtime.productionline.inventory.Inventories;
-import com.mcgoodtime.productionline.tiles.TileFacing;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
