@@ -16,6 +16,4 @@ public interface IWireless {
 
     BlockPos getPos();
 
-    List<TileEntity> getLinkedBlocks();
-
 }
