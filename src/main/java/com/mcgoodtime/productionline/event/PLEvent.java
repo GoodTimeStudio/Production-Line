@@ -24,16 +24,14 @@
  */
 package com.mcgoodtime.productionline.event;
 
-import com.mcgoodtime.productionline.tiles.TileTefnutTear;
-import com.mcgoodtime.productionline.tiles.tilewireless.IWireless;
+import com.mcgoodtime.productionline.tiles.tilewireless.TileWireless;
+import ibxm.Player;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 /**
  * Production Line event listener.
@@ -50,15 +48,24 @@ public class PLEvent {/*
     }
 */
 
-
-    public BlockPos wireLessPos;
-
     @SubscribeEvent
     public void onBlockPlayerPlaced(BlockEvent.EntityPlaceEvent event) {
-        Boolean canLogistics;
         TileEntity te = event.getWorld().getTileEntity(event.getPos());
-        if(te instanceof IWireless){
-            wireLessPos = te.getPos();
+        if(te instanceof TileWireless){
+            TileWireless tw = (TileWireless) te;
+
+            if(!(event.getWorld().isRemote)){
+                if(event.getEntity()instanceof EntityPlayer){
+                    tw.setOwner(event.getEntity());
+                }
+            }
+
+            if(tw.inRange(tw.getPos()) && tw.sameOwner(event.getEntity())){
+                tw.link(tw);
+            }else {
+                return;
+            }
+
         }
 
         /*

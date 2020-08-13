@@ -60,8 +60,7 @@ public class BlockWirelessMachine extends BlockContainerPL implements IOrientabl
         super(Material.IRON, "wireless_machine");
         this.setHardness(2.0F);
         this.setLightLevel(10.0F);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_FACING, EnumFacing.NORTH)
-                .withProperty(PROPERTY_ACTIVE, false));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_FACING, EnumFacing.NORTH).withProperty(PROPERTY_ACTIVE, false));
         for (BlockWirelessMachine.Type t : BlockWirelessMachine.Type.values()) {
             GameRegistry.registerTileEntity(t.tileClass, t.getName());
         }

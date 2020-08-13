@@ -24,15 +24,18 @@
  */
 package com.mcgoodtime.productionline.init;
 
+import com.mcgoodtime.productionline.core.ProductionLine;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.util.List;
 import java.util.Map;
 
-import ic2.api.item.IC2Items;
 import net.minecraftforge.oredict.OreDictionary;
+import vazkii.botania.api.BotaniaAPI;
+import vazkii.botania.api.recipe.RecipePetals;
+import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
+import vazkii.botania.common.lib.LibOreDict;
 
 
 /**
@@ -40,8 +43,17 @@ import net.minecraftforge.oredict.OreDictionary;
  *
  * @author liach
  */
+
 public class PLRecipes {
     private static final float XP = 2F;
+
+    static RecipePetals flowerOfOsirisRecipe;
+
+    static final String GREEN = LibOreDict.PETAL[13], RUNESPRING = LibOreDict.RUNE[4], RUNEPRIDE = LibOreDict.RUNE[15];
+
+    static final ItemStack EYE_OF_THE_DESERT = PLItems.eyeOfTheDesert;
+
+    static final ItemStack AQUAMARINE = PLItems.aquamarine;
 
     /**
      * Load recipes of GoodTime-Industrial.
@@ -52,7 +64,15 @@ public class PLRecipes {
         for(ItemStack oreIridium:OreDictionary.getOres("oreIridium")){
             GameRegistry.addSmelting(oreIridium, PLItems.ingotIridium, XP);
         }
+        if(ProductionLine.isBotaniaLoaded){
+            flowerOfOsirisRecipe = BotaniaAPI.registerPetalRecipe(ItemBlockSpecialFlower.ofType(PLBlocks.flowerOfOsiris),
+                    GREEN, GREEN, GREEN, RUNESPRING,
+                    RUNEPRIDE, EYE_OF_THE_DESERT, EYE_OF_THE_DESERT, AQUAMARINE,
+                    AQUAMARINE, AQUAMARINE, AQUAMARINE, AQUAMARINE,
+                    AQUAMARINE, AQUAMARINE );
+        }
     }
+
 
     /**
      * Disable recipes.

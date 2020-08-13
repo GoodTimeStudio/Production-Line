@@ -5,33 +5,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-public class TileWaterSource extends TileEntity implements IWireless,ITickable {
+public class TileWaterSource extends TileWireless {
 
     @Override
     public void update() {
 
     }
 
-    @Override
-    public String getTerminalName() {
-        return null;
-    }
-
-    @Override
-    public Player getOwner() {
-        return null;
-    }
-
-    @Override
-    public int getRange() {
-        return 0;
-    }
-
-    @Override
-    public BlockPos getPos() {
-        return null;
-    }
 
 }
