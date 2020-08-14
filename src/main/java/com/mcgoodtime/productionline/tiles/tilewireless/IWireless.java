@@ -11,4 +11,6 @@ public interface IWireless {
 
     void link(TileWireless tile);
 
+    void unlink(TileWireless tile);
+
 }

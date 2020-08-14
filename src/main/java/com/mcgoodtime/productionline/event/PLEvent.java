@@ -47,37 +47,51 @@ public class PLEvent {/*
     }
 */
 
-    private TileWireless temp ;
+    private TileWireless lastDecive ;
 
     @SubscribeEvent
     public void onBlockPlayerPlaced(BlockEvent.EntityPlaceEvent event) {
-        TileEntity te = event.getWorld().getTileEntity(event.getPos());
+        TileEntity currentPlacedBlock = event.getWorld().getTileEntity(event.getPos());
 
-        if (te instanceof ITileEntityProvider && te instanceof  TileWireless){
-            TileWireless tw = (TileWireless) te;
-            if(!(event.getWorld().isRemote)){
-                if(event.getEntity()instanceof EntityPlayer){
-                    tw.setOwner(event.getEntity());
-                }
+        if (event.getPlacedBlock().getBlock() instanceof ITileEntityProvider && currentPlacedBlock instanceof  TileWireless){
+            TileWireless currentDecive = (TileWireless) currentPlacedBlock;
+            if(!(event.getWorld().isRemote) && event.getEntity()instanceof EntityPlayer){
+                currentDecive.setOwner(event.getEntity());
             }
-            if(temp!=null && temp.sameOwner(event.getEntity())){
-                if(tw.inRange(temp.getPos())){
-                    tw.link(temp);
-                    temp.link(tw);
-                    for(TileWireless deciveInOtherTile : temp.getLinkedWirelessDecives()){
-                        if(tw.inRange(deciveInOtherTile.getPos())){
-                            tw.link(deciveInOtherTile);
-                            deciveInOtherTile.link(tw);
+            if(lastDecive!=null && lastDecive.sameOwner(event.getEntity())){
+                if(currentDecive.inRange(lastDecive.getPos())){
+                    currentDecive.link(lastDecive);
+                    lastDecive.link(currentDecive);
+                    for(TileWireless deciveInOtherTiles : lastDecive.getLinkedWirelessDecives()){
+                        if(currentDecive.inRange(deciveInOtherTiles.getPos())){
+                            currentDecive.link(deciveInOtherTiles);
+                            deciveInOtherTiles.link(currentDecive);
                         }
                     }
                 }
             }
-            temp = tw;
+            lastDecive = currentDecive;
 
         }else {
             return;
         }
 
+    }
+
+    @SubscribeEvent
+    public void onPlayerBreaked(BlockEvent.BreakEvent event){
+        TileEntity curretBreakedBlock = event.getWorld().getTileEntity(event.getPos());
+
+        if(curretBreakedBlock != null && curretBreakedBlock.isInvalid()){
+            if(event.getState().getBlock() instanceof ITileEntityProvider && curretBreakedBlock instanceof TileWireless){
+                TileWireless curretDecive = (TileWireless) curretBreakedBlock;
+                for(TileWireless deciveInOtherTiles : curretDecive.getLinkedWirelessDecives()){
+                    deciveInOtherTiles.unlink(curretDecive);
+                }
+            }
+        }else {
+            return;
+        }
     }
 
 

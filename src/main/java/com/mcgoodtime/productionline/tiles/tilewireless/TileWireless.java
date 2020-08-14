@@ -56,6 +56,12 @@ public class TileWireless extends TileEntity implements IWireless, ITickable {
         this.linkedWirelessDecives.add(tile);
     }
 
+    @Override
+    public void unlink(TileWireless tile) {
+        linkedWirelessDecives.remove(tile);
+    }
+
+
     public List<TileWireless> getLinkedWirelessDecives(){
         return linkedWirelessDecives;
     }
