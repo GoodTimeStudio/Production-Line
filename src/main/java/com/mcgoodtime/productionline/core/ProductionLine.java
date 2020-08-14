@@ -34,6 +34,7 @@ import com.mcgoodtime.productionline.event.PLEvent;
 import com.mcgoodtime.productionline.init.PLBlocks;
 import com.mcgoodtime.productionline.init.PLItems;
 import com.mcgoodtime.productionline.init.PLOreDictionary;
+import com.mcgoodtime.productionline.init.PLRecipes;
 import com.mcgoodtime.productionline.potion.PLPotion;
 import com.mcgoodtime.productionline.worldgen.PLWorldGen;
 import net.minecraft.block.Block;
@@ -143,6 +144,7 @@ public final class ProductionLine {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         PLOreDictionary.init();
+        PLRecipes.init();
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
         //register ore gen bus.
