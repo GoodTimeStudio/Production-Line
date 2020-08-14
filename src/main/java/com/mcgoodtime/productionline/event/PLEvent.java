@@ -25,10 +25,9 @@
 package com.mcgoodtime.productionline.event;
 
 import com.mcgoodtime.productionline.tiles.tilewireless.TileWireless;
-import ibxm.Player;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -48,25 +47,39 @@ public class PLEvent {/*
     }
 */
 
+    private TileWireless temp ;
+
     @SubscribeEvent
     public void onBlockPlayerPlaced(BlockEvent.EntityPlaceEvent event) {
         TileEntity te = event.getWorld().getTileEntity(event.getPos());
-        if(te instanceof TileWireless){
-            TileWireless tw = (TileWireless) te;
 
+        if (te instanceof ITileEntityProvider && te instanceof  TileWireless){
+            TileWireless tw = (TileWireless) te;
             if(!(event.getWorld().isRemote)){
                 if(event.getEntity()instanceof EntityPlayer){
                     tw.setOwner(event.getEntity());
                 }
             }
-
-            if(tw.inRange(tw.getPos()) && tw.sameOwner(event.getEntity())){
-                tw.link(tw);
-            }else {
-                return;
+            if(temp!=null && temp.sameOwner(event.getEntity())){
+                if(tw.inRange(temp.getPos())){
+                    tw.link(temp);
+                    temp.link(tw);
+                    for(TileWireless deciveInOtherTile : temp.getLinkedWirelessDecives()){
+                        if(tw.inRange(deciveInOtherTile.getPos())){
+                            tw.link(deciveInOtherTile);
+                            deciveInOtherTile.link(tw);
+                        }
+                    }
+                }
             }
+            temp = tw;
 
+        }else {
+            return;
         }
+
+    }
+
 
         /*
         if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
@@ -85,7 +98,4 @@ public class PLEvent {/*
             this.pos=te.getPos();
         }
 */
-    }
-
-
 }

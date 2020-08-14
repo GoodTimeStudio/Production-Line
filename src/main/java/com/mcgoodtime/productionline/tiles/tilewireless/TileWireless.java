@@ -5,12 +5,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
 
 public class TileWireless extends TileEntity implements IWireless, ITickable {
 
-    Map<UUID,TileEntity> linkedWirelessDecives;
+    List<TileWireless> linkedWirelessDecives;
 
     private final int X = this.pos.getX();
     private final int Y = this.pos.getY();
@@ -34,7 +33,7 @@ public class TileWireless extends TileEntity implements IWireless, ITickable {
     }
 
     public boolean sameOwner(Entity player){
-        return player.equals(this.owner)?true:false;
+        return player.equals(this.owner) ? true : false;
     }
 
     public boolean inRange(BlockPos pos) {
@@ -43,22 +42,23 @@ public class TileWireless extends TileEntity implements IWireless, ITickable {
         boolean z_InRange = pos.getZ() <= Z+getRange(2) && pos.getZ()>=Z-getRange(2);
         boolean notSelf = pos.getX() != X && pos.getY() != Y && pos.getZ() != Z;
 
-        if(x_InRange && y_InRange && z_InRange && notSelf){
-            return true;
-        }
-        return false;
+        return x_InRange && y_InRange && z_InRange && notSelf ? true : false;
+
     }
 
-    private int getRange(int index){
+    private int getRange(int xyz){
         int[] range = {(17-1)/2,(9-1)/2,(17-1)/2};
-        return range[index];
+        return range[xyz];
     }
 
     @Override
-    public void link(TileEntity tile) {
-        this.linkedWirelessDecives.put(UUID.randomUUID(), tile);
+    public void link(TileWireless tile) {
+        this.linkedWirelessDecives.add(tile);
     }
 
+    public List<TileWireless> getLinkedWirelessDecives(){
+        return linkedWirelessDecives;
+    }
 
 
 }

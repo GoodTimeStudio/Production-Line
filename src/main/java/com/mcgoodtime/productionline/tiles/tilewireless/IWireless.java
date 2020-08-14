@@ -9,6 +9,6 @@ public interface IWireless {
 
     void setOwner(Entity player);
 
-    void link(TileEntity tile);
+    void link(TileWireless tile);
 
 }
