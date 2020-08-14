@@ -4,7 +4,7 @@
   "package": "com.mcgoodtime.productionline.mixin",
   "priority": 1111,
   "mixins": [
-    "MixinSubTileGenerating"
+    ""
   ],
   "compatibilityLevel": "JAVA_8",
   "client": [],
