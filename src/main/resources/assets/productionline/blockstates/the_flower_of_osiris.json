@@ -1,5 +1,18 @@
 {
+  "forge_marker": 1,
   "variants": {
-    "normal": { "model": "productionline:the_flower_of_osiris" }
+    "normal": [{
+      "model": "botania:shapes/cross_tinted",
+      "textures": {
+        "cross": "productionline:blocks/the_flower_of_osiris"
+      }
+    }],
+    "inventory": [{
+      "model": "builtin/generated",
+      "transform": "forge:default-item",
+      "textures": {
+        "layer0": "productionline:blocks/the_flower_of_osiris"
+      }
+    }]
   }
 }

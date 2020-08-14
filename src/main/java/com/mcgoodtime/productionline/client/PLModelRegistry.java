@@ -25,6 +25,7 @@
 
 package com.mcgoodtime.productionline.client;
 
+import com.mcgoodtime.productionline.core.ProductionLine;
 import com.mcgoodtime.productionline.init.PLBlocks;
 import com.mcgoodtime.productionline.init.PLItems;
 import com.mcgoodtime.productionline.items.ItemMulti;
@@ -35,6 +36,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import vazkii.botania.api.BotaniaAPIClient;
 
 import static com.mcgoodtime.productionline.core.ProductionLine.RESOURCE_DOMAIN;
 
@@ -47,6 +49,13 @@ public class PLModelRegistry {
 
     public static void loadBlockModels() {
         registerBlockModel(PLBlocks.oreIridium);
+
+        if (ProductionLine.isBotaniaLoaded)
+        {
+            BotaniaAPIClient.registerSubtileModel(PLBlocks.flowerOfOsiris, new ModelResourceLocation(
+                    new ResourceLocation(RESOURCE_DOMAIN, PLBlocks.flowerOfOsiris), ""
+            ));
+        }
 
        // ModelLoader.setCustomStateMapper(PLBlocks.machine, new StateMap.Builder().withName(BlockMachine.PROPERTY_TYPE).build());
     }
@@ -115,7 +124,6 @@ public class PLModelRegistry {
 //        }
 
         ResourceLocation ret = new ResourceLocation(RESOURCE_DOMAIN, path + name);
-        ModelResourceLocation t = new ModelResourceLocation(ret, variant);
         return new ModelResourceLocation(ret, variant);
     }
 
