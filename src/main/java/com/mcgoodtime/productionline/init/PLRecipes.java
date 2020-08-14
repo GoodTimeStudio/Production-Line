@@ -37,7 +37,6 @@ import vazkii.botania.api.recipe.RecipePetals;
 import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
 import vazkii.botania.common.lib.LibOreDict;
 
-
 /**
  * The class for loading all the recipes of GoodTime-Industrial. Migrated from old loaders.
  *
@@ -49,14 +48,8 @@ public class PLRecipes {
 
     static RecipePetals flowerOfOsirisRecipe;
 
-    static final String GREEN = LibOreDict.PETAL[13], RUNESPRING = LibOreDict.RUNE[4], RUNEPRIDE = LibOreDict.RUNE[15];
-
-    static final ItemStack EYE_OF_THE_DESERT = PLItems.eyeOfTheDesert;
-
-    static final ItemStack AQUAMARINE = PLItems.aquamarine;
-
     /**
-     * Load recipes of GoodTime-Industrial.
+     * Load recipes of Production Line.
      */
     public static void init() {
         //smelting registry
@@ -64,12 +57,13 @@ public class PLRecipes {
         for(ItemStack oreIridium:OreDictionary.getOres("oreIridium")){
             GameRegistry.addSmelting(oreIridium, PLItems.ingotIridium, XP);
         }
-        if(ProductionLine.isBotaniaLoaded){
+        if(ProductionLine.isBotaniaLoaded) {
+            String GREEN = LibOreDict.PETAL[13], RUNESPRING = LibOreDict.RUNE[4], RUNEPRIDE = LibOreDict.RUNE[15];
             flowerOfOsirisRecipe = BotaniaAPI.registerPetalRecipe(ItemBlockSpecialFlower.ofType(PLBlocks.flowerOfOsiris),
                     GREEN, GREEN, GREEN, RUNESPRING,
-                    RUNEPRIDE, EYE_OF_THE_DESERT, EYE_OF_THE_DESERT, AQUAMARINE,
-                    AQUAMARINE, AQUAMARINE, AQUAMARINE, AQUAMARINE,
-                    AQUAMARINE, AQUAMARINE );
+                    RUNEPRIDE, PLItems.eyeOfTheDesert, PLItems.eyeOfTheDesert, PLItems.aquamarine,
+                    PLItems.aquamarine, PLItems.aquamarine, PLItems.aquamarine, PLItems.aquamarine,
+                    PLItems.aquamarine, PLItems.aquamarine );
         }
     }
 

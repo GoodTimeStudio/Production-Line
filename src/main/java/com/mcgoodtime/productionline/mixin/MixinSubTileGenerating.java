@@ -35,8 +35,7 @@ public abstract class MixinSubTileGenerating extends SubTileEntity implements IS
             this.canEnhance = false;
         }
     }
-
-    @Overwrite
+    
     public void emptyManaIntoCollector() {
         if(linkedCollector != null && isValidBinding()) {
             IManaCollector collector = (IManaCollector) linkedCollector;
