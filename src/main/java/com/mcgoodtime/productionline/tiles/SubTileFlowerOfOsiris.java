@@ -11,11 +11,16 @@ import vazkii.botania.api.subtile.SubTileGenerating;
 import vazkii.botania.common.block.BlockSpecialFlower;
 import vazkii.botania.common.block.tile.TileSpecialFlower;
 
-public class SubTileFlowerOfOsiris extends SubTileFunctional{
-    private int consume;
-    private int growthLevel = 10;
+    /*
+        Consume the energy in the network to accelerate the surrounding flowers
+        Energy consume unfinished
+     */
 
-    private int growthData;
+public class SubTileFlowerOfOsiris extends SubTileFunctional{
+
+    private int consume;
+
+    private int accelerateLevel = 10;
 
     private int range = 3;
 
@@ -28,7 +33,7 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
             SubTileGenerating tile = getManaGenerator(pos);
             if(tile!=null) {
                 if(!hasMultiOsiris(tile)){
-                    enhance(tile);
+                    accelerate(tile);
                 }
             }
         }
@@ -45,9 +50,9 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
         return null;
     }
 
-    private void enhance(SubTileGenerating stg){
-        calculateGrowthData(growthLevel);
-        for(int i=0;i<growthData;i++){
+    private void accelerate(SubTileGenerating stg){
+        calculateConsume(accelerateLevel);
+        for(int i=0;i<=Math.min(accelerateLevel,getMaxAccelerateLevel());i++){
             stg.onUpdate();
         }
     }
@@ -72,9 +77,14 @@ public class SubTileFlowerOfOsiris extends SubTileFunctional{
             return false;
     }
 
-    private void calculateGrowthData(int growthLevel){
-        this.growthData=(int)Math.ceil((Math.log((5*(growthLevel-0.5)))*1.4));
+    private void calculateConsume(int growthLevel){
+        this.consume = (int)Math.ceil(64*(((Math.log(growthLevel)/Math.log(5))+((1/3*Math.pow(growthLevel,2))+2))*(1+(0.1*range))));
     }
+
+    private int getMaxAccelerateLevel(){
+        return 10;
+    }
+
 
     @Override
     public int getMaxMana() {
