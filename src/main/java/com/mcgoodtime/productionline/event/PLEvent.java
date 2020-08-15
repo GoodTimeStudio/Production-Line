@@ -24,13 +24,19 @@
  */
 package com.mcgoodtime.productionline.event;
 
+import com.mcgoodtime.productionline.tiles.tilewireless.TileTributary;
+import com.mcgoodtime.productionline.tiles.tilewireless.TileWaterSource;
 import com.mcgoodtime.productionline.tiles.tilewireless.TileWireless;
+import gnu.trove.map.custom_hash.TObjectByteCustomHashMap;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Production Line event listener.
@@ -47,31 +53,31 @@ public class PLEvent {/*
     }
 */
 
-    private TileWireless lastDecive ;
+    List<TileWaterSource> playerWaterSources;
 
     @SubscribeEvent
     public void onBlockPlayerPlaced(BlockEvent.EntityPlaceEvent event) {
         TileEntity currentPlacedBlock = event.getWorld().getTileEntity(event.getPos());
 
-        if (event.getPlacedBlock().getBlock() instanceof ITileEntityProvider && currentPlacedBlock instanceof  TileWireless){
-            TileWireless currentDecive = (TileWireless) currentPlacedBlock;
+        if (event.getPlacedBlock().getBlock() instanceof ITileEntityProvider && currentPlacedBlock instanceof TileWireless){
+            TileWireless currentDevice = (TileWireless) currentPlacedBlock;
             if(!(event.getWorld().isRemote) && event.getEntity()instanceof EntityPlayer){
-                currentDecive.setOwner(event.getEntity());
+                currentDevice.setOwner(event.getEntity());
             }
-            if(lastDecive!=null && lastDecive.sameOwner(event.getEntity())){
-                if(currentDecive.inRange(lastDecive.getPos())){
-                    currentDecive.link(lastDecive);
-                    lastDecive.link(currentDecive);
-                    for(TileWireless deciveInOtherTiles : lastDecive.getLinkedWirelessDecives()){
-                        if(currentDecive.inRange(deciveInOtherTiles.getPos())){
-                            currentDecive.link(deciveInOtherTiles);
-                            deciveInOtherTiles.link(currentDecive);
+
+            if(currentDevice instanceof TileWaterSource){
+               playerWaterSources.add((TileWaterSource) currentDevice);
+            }
+            if(currentDevice instanceof TileTributary){
+                if(!playerWaterSources.isEmpty()){
+                    for (TileWaterSource waterSource : playerWaterSources){
+                        if(waterSource.sameOwner(currentDevice.getOwner()) && waterSource.inRange(currentDevice.getPos())){
+                            currentDevice.link(waterSource);
+                            waterSource.link(currentDevice);
                         }
                     }
                 }
             }
-            lastDecive = currentDecive;
-
         }else {
             return;
         }
@@ -81,12 +87,14 @@ public class PLEvent {/*
     @SubscribeEvent
     public void onPlayerBreaked(BlockEvent.BreakEvent event){
         TileEntity curretBreakedBlock = event.getWorld().getTileEntity(event.getPos());
-
         if(curretBreakedBlock != null && curretBreakedBlock.isInvalid()){
             if(event.getState().getBlock() instanceof ITileEntityProvider && curretBreakedBlock instanceof TileWireless){
-                TileWireless curretDecive = (TileWireless) curretBreakedBlock;
-                for(TileWireless deciveInOtherTiles : curretDecive.getLinkedWirelessDecives()){
-                    deciveInOtherTiles.unlink(curretDecive);
+                TileWireless curretDevice = (TileWireless) curretBreakedBlock;
+                if(curretBreakedBlock instanceof TileWaterSource){
+                    playerWaterSources.remove(curretDevice);
+                }
+                for(TileWireless deviceInOtherTiles : curretDevice.getLinkedWirelessDecives()){
+                    deviceInOtherTiles.unlink(curretDevice);
                 }
             }
         }else {

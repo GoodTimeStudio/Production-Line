@@ -9,6 +9,8 @@ public interface IWireless {
 
     void setOwner(Entity player);
 
+    Entity getOwner();
+
     void link(TileWireless tile);
 
     void unlink(TileWireless tile);

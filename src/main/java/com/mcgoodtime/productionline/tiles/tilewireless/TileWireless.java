@@ -6,6 +6,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TileWireless extends TileEntity implements IWireless, ITickable {
 
@@ -15,7 +16,7 @@ public class TileWireless extends TileEntity implements IWireless, ITickable {
     private final int Y = this.pos.getY();
     private final int Z = this.pos.getZ();
 
-    Entity owner;
+    private Entity owner;
 
     @Override
     public void update() {
@@ -32,17 +33,24 @@ public class TileWireless extends TileEntity implements IWireless, ITickable {
         this.owner = player;
     }
 
+    @Override
+    public Entity getOwner() {
+        return owner;
+    }
+
     public boolean sameOwner(Entity player){
-        return player.equals(this.owner) ? true : false;
+        return Objects.equals(owner.getUniqueID(),player.getUniqueID());
     }
 
     public boolean inRange(BlockPos pos) {
+
+        boolean isSelf = pos.getX() != X && pos.getY() != Y && pos.getZ() != Z;
         boolean x_InRange = pos.getX() <= X+getRange(0) && pos.getX()>=X-getRange(0);
         boolean y_InRange = pos.getY() <= Y+getRange(1) && pos.getY()>=Y-getRange(1);
         boolean z_InRange = pos.getZ() <= Z+getRange(2) && pos.getZ()>=Z-getRange(2);
-        boolean notSelf = pos.getX() != X && pos.getY() != Y && pos.getZ() != Z;
 
-        return x_InRange && y_InRange && z_InRange && notSelf ? true : false;
+
+        return isSelf && x_InRange && y_InRange && z_InRange  ? true : false;
 
     }
 
