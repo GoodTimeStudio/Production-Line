@@ -63,7 +63,7 @@ public class TileSlot {
     }
 
     public void readFromNBT(NBTTagCompound nbt) {
-        this.item = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("TileSlot"));
+        //this.item = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("TileSlot"));
     }
 
     /**

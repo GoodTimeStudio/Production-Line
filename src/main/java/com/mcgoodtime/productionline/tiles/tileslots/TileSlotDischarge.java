@@ -68,8 +68,8 @@ public class TileSlotDischarge extends TileSlot {
                         return 0.0D;
                     }
 
-                    --stack.stackSize;
-                    if(stack.stackSize <= 0) {
+                    stack.shrink(1);
+                    if(stack.getCount() <= 0) {
                         this.putStack(null);
                     }
                 }

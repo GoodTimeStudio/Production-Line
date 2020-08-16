@@ -6,21 +6,7 @@
   "variants": {
     "inventory": [{}],
     "type": {
-      "compressed_water_hyacinth": {
-        "textures": {
-          "all": "productionline:blocks/compressed_water_hyacinth"
-        }
-      },
-      "dehydrated_water_hyacinth_block": {
-        "textures": {
-          "all": "productionline:blocks/dehydrated_water_hyacinth_block"
-        }
-      },
-      "optical_glass": {
-        "textures": {
-          "all": "productionline:blocks/optical_glass"
-        }
-      }
+
     }
   }
 }

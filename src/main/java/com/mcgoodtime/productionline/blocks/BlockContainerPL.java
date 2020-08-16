@@ -26,7 +26,6 @@
 package com.mcgoodtime.productionline.blocks;
 
 import com.mcgoodtime.productionline.inventory.Inventories;
-import com.mcgoodtime.productionline.tiles.TileFacing;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -46,7 +45,7 @@ public abstract class BlockContainerPL extends BlockPL implements ITileEntityPro
 
     public BlockContainerPL(Material material, String name) {
         super(material, name);
-        this.isBlockContainer = true;
+        //this.isBlockContainer = true;
     }
 
     @Override
@@ -66,7 +65,7 @@ public abstract class BlockContainerPL extends BlockPL implements ITileEntityPro
         return tileentity != null && tileentity.receiveClientEvent(id, param);
     }
 
-    protected abstract Class<? extends TileFacing> getTileEntityClass(IBlockState state);
+    protected abstract Class<? extends TileEntity> getTileEntityClass(IBlockState state);
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {

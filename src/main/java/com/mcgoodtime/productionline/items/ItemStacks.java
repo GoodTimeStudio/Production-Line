@@ -18,7 +18,7 @@ public final class ItemStacks {
 
     public static ItemStack copyStack(ItemStack in, int amount) {
         ItemStack ret = in.copy();
-        ret.stackSize = amount;
+        //ret.stackSize = amount;
         return ret;
     }
 

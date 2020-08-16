@@ -24,32 +24,19 @@
  */
 package com.mcgoodtime.productionline.event;
 
-import com.google.common.base.Optional;
-
-import com.mcgoodtime.productionline.entity.EntityThrownItem;
-import com.mcgoodtime.productionline.init.PLAchievement;
-import com.mcgoodtime.productionline.init.PLBlocks;
-import com.mcgoodtime.productionline.init.PLItems;
-import com.mcgoodtime.productionline.potion.PLPotion;
-
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Biomes;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
+import com.mcgoodtime.productionline.tiles.tilewireless.TileTributary;
+import com.mcgoodtime.productionline.tiles.tilewireless.TileWaterSource;
+import com.mcgoodtime.productionline.tiles.tilewireless.TileWireless;
+import gnu.trove.map.custom_hash.TObjectByteCustomHashMap;
+import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-import ic2.api.item.IC2Items;
-import ic2.core.IC2Potion;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Production Line event listener.
@@ -57,77 +44,80 @@ import ic2.core.IC2Potion;
  * @author BestOwl, liach
  */
 @Mod.EventBusSubscriber
-public class PLEvent {
+public class PLEvent {/*
     @SubscribeEvent
     public void onPlayerCrafting(PlayerEvent.ItemCraftedEvent event) {
         if (event.crafting.getItem().equals(PLBlocks.carbonizeFurnace.getItem())) {
             event.player.addStat(PLAchievement.getCarbonizeFurnace, 1);
         }
     }
+*/
+
+    List<TileWaterSource> playerWaterSources = new ArrayList<>();
 
     @SubscribeEvent
-    public void onPlayerPickup(PlayerEvent.ItemPickupEvent event) {
-        if (event.pickedUp.getEntityItem().isItemEqual(new ItemStack(PLBlocks.oreIridium))) {
-            event.player.addStat(PLAchievement.getIrOre, 1);
-        }
-    }
+    public void onBlockPlayerPlaced(BlockEvent.EntityPlaceEvent event) {
+        TileEntity currentPlacedBlock = event.getWorld().getTileEntity(event.getPos());
 
-    @SubscribeEvent
-    public void onBucketFill(FillBucketEvent event) {
-        if (event.getEntityPlayer() != null) {
-            Biome biome = event.getWorld().getBiomeForCoordsBody(event.getTarget().getBlockPos());
-            if (biome == Biomes.OCEAN || biome == Biomes.DEEP_OCEAN || biome == Biomes.FROZEN_OCEAN) {
-                event.setResult(Event.Result.ALLOW);
-                event.setFilledBucket(new ItemStack(PLItems.saltWaterBucket));
+        if (event.getPlacedBlock().getBlock() instanceof ITileEntityProvider && currentPlacedBlock instanceof TileWireless){
+            TileWireless currentDevice = (TileWireless) currentPlacedBlock;
+            if(!(event.getWorld().isRemote) && event.getEntity()instanceof EntityPlayer){
+                currentDevice.setOwner(event.getEntity());
             }
-        }
-    }
 
-    @SubscribeEvent
-    public void onEntityThrowableImpact(EntityThrowableImpactEvent event) {
-        Optional<ItemStack> optItemStack = event.entityThrownItem.getThrowItem();
-        if (!optItemStack.isPresent()) {
-            return;
-        }
-        ItemStack stack = optItemStack.get();
-        if (stack.getItem().equals(PLItems.packagedSalt)) {
-            for (int i = 0; i < 8; ++i) {
-                float fmod = (float) (1.2 - (Math.random() * 2.4));
-                float f1mod = (float) (0.5 - (Math.random() * 1.0));
-                float f2mod = (float) (1.2 - (Math.random() * 2.4));
-
-                event.entityThrownItem.world.spawnParticle(EnumParticleTypes.ITEM_CRACK,
-                        event.entityThrownItem.posX + fmod, event.entityThrownItem.posY + f1mod,
-                        event.entityThrownItem.posZ + f2mod, 0.1D, 0.1D, 0.1D, Item.getIdFromItem(PLItems.salt));
-
-                if (!event.entityThrownItem.world.isRemote) {
-                    EntityItem entityItem = new EntityItem(event.entityThrownItem.world,
-                            event.entityThrownItem.posX + fmod, event.entityThrownItem.posY + f1mod,
-                            event.entityThrownItem.posZ + f2mod, new ItemStack(PLItems.salt));
-                    event.entityThrownItem.world.spawnEntity(entityItem);
+            if(currentDevice instanceof TileWaterSource){
+               playerWaterSources.add((TileWaterSource) currentDevice);
+            }
+            if(currentDevice instanceof TileTributary){
+                if(!playerWaterSources.isEmpty()){
+                    for (TileWaterSource waterSource : playerWaterSources){
+                        if(waterSource.sameOwner(currentDevice.getOwner()) && waterSource.inRange(currentDevice.getPos())){
+                            currentDevice.link(waterSource);
+                            waterSource.link(currentDevice);
+                        }
+                    }
                 }
             }
-            this.onImpact(event.entityThrownItem, event.movingObjectPosition, new PotionEffect(PLPotion.salty, 0, 3));
-        } else if (stack.isItemEqual(IC2Items.getItem("Uran238"))) {
-            this.onImpact(event.entityThrownItem, event.movingObjectPosition, new PotionEffect(IC2Potion.radiation, 200, 0));
-        } else {
-            this.onImpact(event.entityThrownItem, event.movingObjectPosition, null);
+        }else {
+            return;
+        }
+
+    }
+
+    @SubscribeEvent
+    public void onPlayerBreaked(BlockEvent.BreakEvent event){
+        TileEntity curretBreakedBlock = event.getWorld().getTileEntity(event.getPos());
+        if(curretBreakedBlock != null && curretBreakedBlock.isInvalid()){
+            if(event.getState().getBlock() instanceof ITileEntityProvider && curretBreakedBlock instanceof TileWireless){
+                TileWireless curretDevice = (TileWireless) curretBreakedBlock;
+                if(curretBreakedBlock instanceof TileWaterSource){
+                    playerWaterSources.remove(curretDevice);
+                }
+                for(TileWireless deviceInOtherTiles : curretDevice.getLinkedWirelessDecives()){
+                    deviceInOtherTiles.unlink(curretDevice);
+                }
+            }
+        }else {
+            return;
         }
     }
 
-    private void onImpact(EntityThrownItem entity, RayTraceResult movingObjectPosition, PotionEffect potionEffect) {
-        if (movingObjectPosition.entityHit != null) {
-            movingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(entity, entity.getThrower()), 3F);
-            if (movingObjectPosition.entityHit instanceof EntityLivingBase && potionEffect != null) {
-                ((EntityLivingBase) movingObjectPosition.entityHit).addPotionEffect(potionEffect);
-            }
+
+        /*
+        if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+            canLogistics = true;
+        }else if(te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY,null) && te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)){
+            canLogistics = true;
+        }else if(te.hasCapability(CapabilityEnergy.ENERGY,null)){
+            canLogistics = true;
+        }else if(te instanceof TileTefnutTear){
+            canLogistics = true;
         }
-        entity.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, entity.posX, entity.posY, entity.posZ, 0.1D, 0.1D,
-                0.1D, Item.getIdFromItem(entity.getThrowItem().get().getItem()));
-        if (!entity.world.isRemote) {
-            entity.setDead();
-            entity.world.spawnEntity(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ,
-                    entity.getThrowItem().get()));
+        else{
+            canLogistics = false;
         }
-    }
+        if(canLogistics){
+            this.pos=te.getPos();
+        }
+*/
 }

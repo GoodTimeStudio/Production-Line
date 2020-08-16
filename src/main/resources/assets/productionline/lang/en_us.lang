@@ -1,0 +1,22 @@
+#ProductionLine Language file
+#en_US
+
+itemGroup.ProductionLine=Production Line
+
+# Blocks
+tile.productionline.block.ore_iridium.name=Iridium Ore
+tile.productionline.block.generator.tefnut_tear.name=Tefnut's Tear
+
+# Items
+item.productionline.ingot_iridium.name=Iridium Ingot
+item.productionline.diamond_apple.name=Diamond Apple
+item.productionline.enchanting_seal_sand_storm.name=Enchanting Seal: Sand-Storm
+item.productionline.enchanting_seal_spring.name=Enchanting Seal: Spring
+item.productionline.enchanting_seal_oasis.name=Enchanting Seal: Oasis
+item.productionline.enchanting_seal_another_world.name=Enchanting Seal: Another-World
+item.productionline.sheep_crook.name=Sheep Crook
+item.productionline.aquamarine.name=Aquamarine
+item.productionline.converting_seal_black_cat.name=Converting Seal: Black-Cat
+item.productionline.eye_of_the_desert.name=Desert Eye
+
+tile.botania:flower.the_flower_of_osiris.name=The Flower Of OSIRIS

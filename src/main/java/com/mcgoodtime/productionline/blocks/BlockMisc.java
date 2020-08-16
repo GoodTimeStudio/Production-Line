@@ -26,7 +26,6 @@ package com.mcgoodtime.productionline.blocks;
 
 import com.mcgoodtime.productionline.client.IBlockModelProvider;
 import com.mcgoodtime.productionline.core.ProductionLine;
-import com.mcgoodtime.productionline.init.PLBlocks;
 import com.mcgoodtime.productionline.items.ItemBlockPL;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -34,13 +33,12 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
@@ -53,10 +51,8 @@ public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<Blo
 
     public static final PropertyEnum<Type> PROPERTY_TYPE = PropertyEnum.create("type", Type.class);
 
-    public enum Type implements IStringSerializable, IBlockType {
-        COMPRESSED_WATER_HYACINTH("compressed_water_hyacinth"),
-        DEHYDRATED_WATER_HYACINTH_BLOCK("dehydrated_water_hyacinth_block"),
-        OPTICAL_GLASS("optical_glass");
+    public enum Type implements IStringSerializable, IBlockType {;
+        //COMPRESSED_WATER_HYACINTH("compressed_water_hyacinth");
 
         private final String name;
 
@@ -79,9 +75,6 @@ public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<Blo
     public BlockMisc() {
         super(Material.ROCK, "block_misc");
         this.setHardness(1.0F);
-        PLBlocks.compressedWaterHyacinth = new ItemStack(this, 1, 0);
-        PLBlocks.dehydratedWaterHyacinthblock = new ItemStack(this, 1, 1);
-        PLBlocks.opticalGlass = new ItemStack(this, 1, 2);
     }
 
     @Override
@@ -98,7 +91,7 @@ public class BlockMisc extends BlockPL implements IMultiIDBlock<PropertyEnum<Blo
 
     @Override
     protected void registerItemBlock() {
-        GameRegistry.<Item>register(new ItemBlockPL(this), this.getRegistryName());
+        ForgeRegistries.ITEMS.register(new ItemBlockPL(this));
     }
 
     /**

@@ -25,8 +25,8 @@
 package com.mcgoodtime.productionline.tiles.tileslots;
 
 import com.mcgoodtime.productionline.tiles.TileContainer;
-import ic2.core.upgrade.IUpgradableBlock;
-import ic2.core.upgrade.IUpgradeItem;
+import ic2.api.upgrade.IUpgradableBlock;
+import ic2.api.upgrade.IUpgradeItem;
 import net.minecraft.item.ItemStack;
 
 /**

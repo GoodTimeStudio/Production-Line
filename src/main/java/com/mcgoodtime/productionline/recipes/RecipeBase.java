@@ -24,9 +24,7 @@
  */
 package com.mcgoodtime.productionline.recipes;
 
-import ic2.api.recipe.IMachineRecipeManager;
-import ic2.api.recipe.IRecipeInput;
-import ic2.api.recipe.RecipeOutput;
+import ic2.api.recipe.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -79,7 +77,7 @@ public abstract class RecipeBase implements IProcessable, IMachineRecipeManager 
     public int getRequiredProcessAmount(ItemStack itemStack) {
         for (RecipePart recipes : this.processList) {
             if (recipes.input.isItemEqual(itemStack)) {
-                return recipes.input.stackSize;
+                return recipes.input.getMaxStackSize();
             }
         }
         return 1;
@@ -104,19 +102,18 @@ public abstract class RecipeBase implements IProcessable, IMachineRecipeManager 
     }
 
     @Override
-    public boolean addRecipe(IRecipeInput iRecipeInput, NBTTagCompound nbtTagCompound, boolean b, ItemStack... itemStacks) {
-        processList.add(new RecipePart(iRecipeInput.getInputs().get(0), itemStacks[0])); //TODO Implement this
-        return true;
+    public boolean addRecipe(Object o, Object o2, NBTTagCompound nbtTagCompound, boolean b) {
+        return false;
     }
 
     @Override
-    public RecipeOutput getOutputFor(ItemStack itemStack, boolean b) {
-        return new RecipeOutput(new NBTTagCompound(), getRecipePart(itemStack).output);
+    public MachineRecipeResult apply(Object o, boolean b) {
+        return null;
     }
 
     @Override
-    public Iterable<RecipeIoContainer> getRecipes() {
-        throw new UnsupportedOperationException("not supported");
+    public Iterable<? extends MachineRecipe> getRecipes() {
+        return null;
     }
 
     @Override

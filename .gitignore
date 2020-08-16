@@ -16,8 +16,6 @@ mods/
 saves/
 logs/
 
-/gradle.properties
-
 CREDITS-fml.txt
 LICENSE-fml.txt
 MinecraftForge-Credits.txt

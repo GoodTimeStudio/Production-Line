@@ -25,10 +25,13 @@
 package com.mcgoodtime.productionline.core.coremod;
 
 import net.minecraftforge.fml.relauncher.IFMLCallHook;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixins;
-
 import java.util.Map;
+
+import static com.mcgoodtime.productionline.core.ProductionLine.MOD_NAME;
 
 /**
  * Created by suhao on 2015.10.24.0024.
@@ -41,8 +44,11 @@ public class PLSetup implements IFMLCallHook {
 
     @Override
     public Void call() throws Exception {
+        Logger logger = LogManager.getLogger(MOD_NAME + " Core");
+        logger.info("Initializing Mixins");
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.productionline.core.json");
+        logger.info("Mixins config loaded");
         return null;
     }
 }

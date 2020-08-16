@@ -31,6 +31,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class ItemBlockPL extends ItemBlock {
         super(block);
         this.setMaxDamage(0);
         this.hasSubtypes = true;
+        this.setRegistryName(block.getRegistryName());
     }
 
     /**
@@ -85,16 +87,12 @@ public class ItemBlockPL extends ItemBlock {
         return meta;
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.block instanceof IMultiIDBlock) {
             for (int i = 0; i < ((IMultiIDBlock) this.block).getBlockTypeContainer().getAllowedValues().size(); i++) {
-                list.add(new ItemStack(this, 1, i));
+                items.add(new ItemStack(this, 1, i));
             }
         }
     }
-
 }

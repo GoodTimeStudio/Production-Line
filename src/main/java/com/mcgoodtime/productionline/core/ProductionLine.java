@@ -1,7 +1,7 @@
 /*
- * This file is part of GoodTime-Industrial, licensed under MIT License (MIT).
+ * This file is part of Production Line, licensed under MIT License (MIT).
  *
- * Copyright (c) 2015 GoodTime Studio <https://github.com/GoodTimeStudio>
+ * Copyright (c) 2020 GoodTime Studio <https://github.com/GoodTimeStudio>
  * Copyright (c) contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,16 +31,20 @@ import com.mcgoodtime.productionline.entity.EntityRay;
 import com.mcgoodtime.productionline.entity.EntityThrownItem;
 import com.mcgoodtime.productionline.entity.PLEntity;
 import com.mcgoodtime.productionline.event.PLEvent;
-import com.mcgoodtime.productionline.init.*;
+import com.mcgoodtime.productionline.init.PLBlocks;
+import com.mcgoodtime.productionline.init.PLItems;
+import com.mcgoodtime.productionline.init.PLOreDictionary;
+import com.mcgoodtime.productionline.init.PLRecipes;
 import com.mcgoodtime.productionline.potion.PLPotion;
 import com.mcgoodtime.productionline.worldgen.PLWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -56,19 +60,17 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.Arrays;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 @Mod(
         modid = ProductionLine.MOD_ID,
         name = ProductionLine.MOD_NAME,
         version = ProductionLine.VERSION,
-        dependencies = "required-after:"
-                + "Forge@[12.17.0.1976,);"
-                + "after:"
-                + "IC2@[2.5.52,);",
+        dependencies = "required:forge@[14.23.5.2847,);",
         useMetadata = true
 )
 public final class ProductionLine {
@@ -77,12 +79,15 @@ public final class ProductionLine {
     public static final String VERSION = "${version}";
     public static final String RESOURCE_DOMAIN = MOD_ID;
     public static final String GUI_PREFIX = "gui.ProductionLine.";
+
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+    
     public static final CreativeTabs creativeTabPL = new CreativeTabs(MOD_NAME) {
         @SideOnly(Side.CLIENT)
         @Override
         @Nonnull
-        public Item getTabIconItem() {
-            return PLItems.gravityRay;
+        public ItemStack getTabIconItem() {
+            return new ItemStack(PLItems.diamondApple);
         }
     };
     /**
@@ -93,6 +98,7 @@ public final class ProductionLine {
     private static final ProductionLine INSTANCE = new ProductionLine();
 
     public static boolean isIC2Loaded;
+    public static boolean isBotaniaLoaded;
 
     @SidedProxy
     public static CommonProxy proxy;
@@ -104,7 +110,8 @@ public final class ProductionLine {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        isIC2Loaded = Loader.isModLoaded("IndustrialCraft 2");
+        isIC2Loaded = Loader.isModLoaded("ic2");
+        isBotaniaLoaded = Loader.isModLoaded("botania");
         setupMeta();
         PLConfig.init(event.getSuggestedConfigurationFile());
         PLEntity.init();
@@ -118,8 +125,15 @@ public final class ProductionLine {
 
     @SubscribeEvent
     public void registerItem(RegistryEvent<Item> event) {
-        PLSounds.loadRecord(); //register record sound event before register record item.
+        //PLSounds.loadRecord(); //register record sound event before register record item.
         PLItems.init();
+    }
+
+    @SubscribeEvent
+    public void registerModel(ModelRegistryEvent event)
+    {
+        PLModelRegistry.loadBlockModels();
+        PLModelRegistry.loadItemModels();
     }
 
     @SubscribeEvent
@@ -130,15 +144,10 @@ public final class ProductionLine {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         PLOreDictionary.init();
-        // register Recipes. 注册合成
-//        PLRecipes.init();
+        PLRecipes.init();
         //register gui handler
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandler.getInstance());
-        //register achievement
-        PLAchievement.init();
-        //register achievement page
-        AchievementPage.registerAchievementPage(PLAchievement.pagePL);
-        //register ore gen bus. 注册矿石生成总线
+        //register ore gen bus.
         PLWorldGen.init();
         proxy.init();
     }
@@ -159,11 +168,9 @@ public final class ProductionLine {
     }
 
     public abstract static class CommonProxy {
-        void preInit() {
-        }
+        abstract void preInit();
 
-        void init() {
-        }
+        abstract void init();
 
         CommonProxy() {
         }
@@ -186,8 +193,6 @@ public final class ProductionLine {
     public static class ClientProxy extends CommonProxy {
         @Override
         void preInit() {
-            PLModelRegistry.loadBlockModels();
-            PLModelRegistry.loadItemModels();
         }
 
         @Override

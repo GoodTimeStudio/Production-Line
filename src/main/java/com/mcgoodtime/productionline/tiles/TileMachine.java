@@ -27,8 +27,8 @@
 package com.mcgoodtime.productionline.tiles;
 
 import ic2.api.tile.IWrenchable;
-import ic2.core.upgrade.IUpgradableBlock;
-import ic2.core.upgrade.UpgradableProperty;
+import ic2.api.upgrade.IUpgradableBlock;
+import ic2.api.upgrade.UpgradableProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -25,18 +25,18 @@
 
 package com.mcgoodtime.productionline.client;
 
-import com.mcgoodtime.productionline.blocks.*;
+import com.mcgoodtime.productionline.core.ProductionLine;
 import com.mcgoodtime.productionline.init.PLBlocks;
 import com.mcgoodtime.productionline.init.PLItems;
 import com.mcgoodtime.productionline.items.ItemMulti;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import vazkii.botania.api.BotaniaAPIClient;
 
 import static com.mcgoodtime.productionline.core.ProductionLine.RESOURCE_DOMAIN;
 
@@ -49,34 +49,20 @@ public class PLModelRegistry {
 
     public static void loadBlockModels() {
         registerBlockModel(PLBlocks.oreIridium);
-        registerBlockModel(PLBlocks.airBrakeCasing);
-        registerBlockModel(PLBlocks.compressedWaterHyacinth);
-        registerBlockModel(PLBlocks.dehydratedWaterHyacinthblock);
 
-        ModelLoader.setCustomStateMapper(PLBlocks.machine, new StateMap.Builder().withName(BlockMachine.PROPERTY_TYPE).build());
-        registerBlockModel(PLBlocks.carbonizeFurnace);
-        registerBlockModel(PLBlocks.heatDryer);
-        registerBlockModel(PLBlocks.evsu);
-        registerBlockModel(PLBlocks.cseu);
-        registerBlockModel(PLBlocks.parallelSpaceSU);
-        registerBlockModel(PLBlocks.advSolar);
-        registerBlockModel(PLBlocks.fluidKineticGenerator);
-        registerBlockModel(PLBlocks.packager);
+        if (ProductionLine.isBotaniaLoaded)
+        {
+            BotaniaAPIClient.registerSubtileModel(PLBlocks.flowerOfOsiris, new ModelResourceLocation(
+                    new ResourceLocation(RESOURCE_DOMAIN, PLBlocks.flowerOfOsiris), ""
+            ));
+        }
+
+       // ModelLoader.setCustomStateMapper(PLBlocks.machine, new StateMap.Builder().withName(BlockMachine.PROPERTY_TYPE).build());
     }
 
     public static void loadItemModels() {
         registerItemModel(PLItems.diamondApple, 0);
         registerItemModel(PLItems.diamondApple, 1);
-        registerItemModel(PLItems.record_MusicSpring);
-        registerItemModel(PLItems.salt);
-        registerItemModel(PLItems.gravityRay);
-        registerItemModel(PLItems.packagedSalt);
-        registerItemModel(PLItems.saltWaterBucket);
-//        registerItemModel(PLItems.liquidExpBucket);
-//        registerItemModel(PLItems.enderPearlBucket);
-//        registerItemModel(PLItems.brineBucket);
-//        registerItemModel(PLItems.toadCoin);
-//        registerItemModel(PLItems.superTrashBag);
         
         if (PLItems.itemCrafting instanceof ItemMulti) {
             for (int i = 0; i < ((ItemMulti) PLItems.itemCrafting).getInternalNameSize(); i++) {
@@ -87,6 +73,12 @@ public class PLModelRegistry {
         if (PLItems.itemOre instanceof ItemMulti) {
             for (int i = 0; i < ((ItemMulti) PLItems.itemOre).getInternalNameSize(); i++) {
                 registerItemModel(PLItems.itemOre, i);
+            }
+        }
+
+        if(PLItems.itemSeal instanceof ItemMulti){
+            for(int i =0; i<((ItemMulti)PLItems.itemSeal).getInternalNameSize();i++){
+                registerItemModel(PLItems.itemSeal, i);
             }
         }
     }
@@ -132,7 +124,6 @@ public class PLModelRegistry {
 //        }
 
         ResourceLocation ret = new ResourceLocation(RESOURCE_DOMAIN, path + name);
-        ModelResourceLocation t = new ModelResourceLocation(ret, variant);
         return new ModelResourceLocation(ret, variant);
     }
 

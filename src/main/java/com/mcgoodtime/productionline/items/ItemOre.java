@@ -16,14 +16,12 @@ public class ItemOre extends ItemMulti {
         super("ore");
 
         PLItems.ingotIridium = this.next();
-        PLItems.dustIridium = this.next();
     }
 
     @Override
     protected List<String> getInternalNameList() {
         List<String> list = new ArrayList<String>();
         list.add("ingot_iridium");
-        list.add("dust_iridium");
         return list;
     }
 

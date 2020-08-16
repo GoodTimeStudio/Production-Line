@@ -25,14 +25,16 @@
 package com.mcgoodtime.productionline.items;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static com.mcgoodtime.productionline.core.ProductionLine.MOD_ID;
@@ -51,17 +53,18 @@ public class ItemPL extends Item {
         this.setUnlocalizedName(MOD_ID + "." + name);
         this.itemName = name;
         this.setCreativeTab(creativeTabPL);
-        GameRegistry.<Item>register(this, new ResourceLocation(MOD_ID, name));
+        this.setRegistryName(new ResourceLocation(MOD_ID, name));
+        ForgeRegistries.ITEMS.register(this);
     }
 
-    @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean bool) {
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         int i = 1;
         String unLocal = this.getUnlocalizedName() + ".desc" + i;
 
         while (I18n.hasKey(unLocal)) {
-            list.add(I18n.format(unLocal));
+            tooltip.add(I18n.format(unLocal));
             i++;
             unLocal = this.getUnlocalizedName() + ".desc" + i;
         }

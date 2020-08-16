@@ -26,13 +26,10 @@ package com.mcgoodtime.productionline.init;
 
 import com.mcgoodtime.productionline.blocks.*;
 import com.mcgoodtime.productionline.core.ProductionLine;
-//import com.mcgoodtime.productionline.blocks.generator.BlockAdvSolar;
-//import com.mcgoodtime.productionline.blocks.generator.BlockFluidKineticGenerator;
-//import com.mcgoodtime.productionline.items.ItemWaterHyacinth;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import com.mcgoodtime.productionline.tiles.SubTileFlowerOfOsiris;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
+import vazkii.botania.api.BotaniaAPI;
 
 /**
  * ProductionLine blocks.
@@ -40,35 +37,29 @@ import net.minecraft.item.ItemStack;
  * @author liach
  */
 public class PLBlocks {
-    public static ItemStack dehydratedWaterHyacinthblock;
-    public static ItemStack compressedWaterHyacinth;
-    public static ItemStack opticalGlass;
-
     public static BlockPL machine;
-    public static ItemStack carbonizeFurnace;
-    public static ItemStack heatDryer;
-    public static ItemStack evsu;
-    public static ItemStack cseu;
-    public static ItemStack parallelSpaceSU;
-    public static ItemStack advSolar;
-    public static ItemStack fluidKineticGenerator;
-    public static ItemStack packager;
 
     public static BlockPL oreIridium;
-    public static BlockPL airBrakeCasing;
-    
-    
-    public static Block waterHyacinth;
+    public static Block generator;
+
+    /**
+     * The internal name of the flower of osiris, used for registration
+     * This will be null if Botania is not loaded
+     * */
+    public static String flowerOfOsiris;
 
     public static void init() {
         oreIridium = new BlockPL(Material.ROCK, "ore_iridium", 10, 20, "pickaxe", 3);
-        airBrakeCasing = new BlockOrientable(Material.IRON, "air_brake_casing");
-        new BlockMisc();
-        machine = new BlockMachine();
+        generator = new BlockGenerator();
 
-        // special registry TODO: Better registry system
-        waterHyacinth = new BlockWaterHyacinth();
-        waterHyacinth.setRegistryName(ProductionLine.loc("waterHyacinth"));
-        ForgeRegistries.BLOCKS.register(waterHyacinth);
+        if (ProductionLine.isBotaniaLoaded)
+        {
+            flowerOfOsiris = "the_flower_of_osiris";
+            BotaniaAPI.registerSubTile(flowerOfOsiris, SubTileFlowerOfOsiris.class);
+            BotaniaAPI.addSubTileToCreativeMenu(flowerOfOsiris);
+        }
+
+        //new BlockMisc();
+        //machine = new BlockMachine();
     }
 }

@@ -24,13 +24,14 @@
  */
 package com.mcgoodtime.productionline.worldgen;
 
+import com.mcgoodtime.productionline.core.ProductionLine;
 import com.mcgoodtime.productionline.init.PLBlocks;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -67,7 +68,10 @@ public class PLWorldGen implements IWorldGenerator {
 
     public static void init() {
         new PLWorldGen(PLBlocks.oreIridium.getDefaultState(), 1, 16, 3);
-        new PLWorldGen(BlockName.resource.getBlockState(ResourceBlock.basalt), 5, 27, 10);
+        if (ProductionLine.isIC2Loaded)
+        {
+            new PLWorldGen(BlockName.resource.getBlockState(ResourceBlock.basalt), 5, 27, 10);
+        }
     }
 
     private void generateOre(World world, Random rand, int chunkX, int chunkZ) {
@@ -94,7 +98,7 @@ public class PLWorldGen implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         //doesWaterVaporize() return isHellWorld
-        if ((!world.provider.doesWaterVaporize()) && (!world.provider.hasNoSky())) {
+        if ((!world.provider.doesWaterVaporize()) && (world.provider.hasSkyLight())) {
             generateOre(world, random, chunkX, chunkZ);
         }
     }
