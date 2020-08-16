@@ -5,12 +5,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class TileWireless extends TileEntity implements IWireless, ITickable {
 
-    List<TileWireless> linkedWirelessDecives;
+    List<TileWireless> linkedWirelessDecives = new ArrayList<>();
 
     private final int X = this.pos.getX();
     private final int Y = this.pos.getY();

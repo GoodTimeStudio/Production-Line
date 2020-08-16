@@ -53,7 +53,7 @@ public class PLEvent {/*
     }
 */
 
-    List<TileWaterSource> playerWaterSources;
+    List<TileWaterSource> playerWaterSources = new ArrayList<>();
 
     @SubscribeEvent
     public void onBlockPlayerPlaced(BlockEvent.EntityPlaceEvent event) {
